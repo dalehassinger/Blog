@@ -259,7 +259,7 @@
                 
                         <article class="mini-post">
                             <header>
-                                <h3><a href="https://www.vcrocs.info/blog/log-files/">PowerShell Log Files</a></h3>
+                                <h3><a href="https://www.vcrocs.info/blog/add-drives/">Add disk</a></h3>
                                 
                                 <time class="published" datetime=
                                     '2020-04-19'>
@@ -271,7 +271,19 @@
                 
                         <article class="mini-post">
                             <header>
-                                <h3><a href="https://www.vcrocs.info/blog/random-password/">Randon Password</a></h3>
+                                <h3><a href="https://www.vcrocs.info/blog/add-registry-vales/">Add Registry Values</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-04-19'>
+                                    April 19, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.vcrocs.info/blog/clay-thrower/">Automated Clay Thrower</a></h3>
                                 
                                 <time class="published" datetime=
                                     '2020-04-19'>
@@ -282,6 +294,12 @@
                         </article>
                 
 
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">View more posts</a>
                 
             </div>
         </section>
@@ -421,7 +439,8 @@
     <h2 id="powershell-code">PowerShell Code</h2>
 <p>I use this code to create a log file during a VM build using vRealize Automation</p>
 <p>Here&rsquo;s an example:</p>
-<pre><code>$VMname = 'ServerName'
+<pre><code>
+$VMname = 'ServerName'
 
 #The next line defines where to save the log file
 $LOGFILENAME = &quot;C:\vRA-Install-Logs\vRA-Install-Log-&quot; + $VMname + &quot;.log&quot;
@@ -444,8 +463,10 @@ Add-Content $LOGFILENAME $LOG
 $LOGDATETIME = Get-Date -Format G
 $LOG = $LOGDATETIME + ' - The Templete Clone process completed...'
 Add-Content $LOGFILENAME $LOG
+
 </code></pre><p>Sample Output:</p>
-<pre><code>7/18/2019 7:56:23 AM - The vRA Server Install Started...
+<pre><code>
+7/18/2019 7:56:23 AM - The vRA Server Install Started...
 7/18/2019 7:56:23 AM - AD Computer Object: VM-Name already exists in: OU=Systems,DC=Domain-Name,DC=org.
 7/18/2019 7:56:23 AM - AD Group Object: svr-VM-Name already exists in: OU=Groups,DC=Domain-Name,DC=org.
 7/18/2019 7:56:24 AM - Email sent...
@@ -454,6 +475,7 @@ Add-Content $LOGFILENAME $LOG
 7/18/2019 8:04:55 AM - Connected to vCenter to Create VM Drives...
 7/18/2019 8:05:13 AM - Added Tag &quot;TAG-vRA-VM&quot; to VM...
 7/18/2019 8:05:18 AM - E: Drive size received - 100GB...
+
 </code></pre>
   </div>
 
@@ -468,6 +490,9 @@ Add-Content $LOGFILENAME $LOG
                 
                 
                 <li><a class="article-category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vra">vRA</a></li>
                 
             
         
@@ -491,6 +516,9 @@ Add-Content $LOGFILENAME $LOG
                 class="button big previous">Randon Password</a></li>
     
 
+    
+        <li><a href="https://www.vcrocs.info/blog/powercli-getting-started/"
+                class="button big next">PowerCLI Basics</a></li>
     
 </ul>
 
@@ -630,7 +658,7 @@ Add-Content $LOGFILENAME $LOG
           <article class="mini-post">
             <header>
               <h3>
-                <a href="https://www.vcrocs.info/blog/log-files/">PowerShell Log Files</a>
+                <a href="https://www.vcrocs.info/blog/add-drives/">Add disk</a>
               </h3>
               
               <time class="published" datetime='2020-04-19'>
@@ -644,7 +672,21 @@ Add-Content $LOGFILENAME $LOG
           <article class="mini-post">
             <header>
               <h3>
-                <a href="https://www.vcrocs.info/blog/random-password/">Randon Password</a>
+                <a href="https://www.vcrocs.info/blog/add-registry-vales/">Add Registry Values</a>
+              </h3>
+              
+              <time class="published" datetime='2020-04-19'>
+                April 19, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.vcrocs.info/blog/clay-thrower/">Automated Clay Thrower</a>
               </h3>
               
               <time class="published" datetime='2020-04-19'>
@@ -657,6 +699,12 @@ Add-Content $LOGFILENAME $LOG
         
       </div>
 
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">View more posts</a>
       
     </div>
   </section>
@@ -682,7 +730,7 @@ Add-Content $LOGFILENAME $LOG
             <header>
               
                 <a href="https://www.vcrocs.info/categories/powershell/">powershell</a>
-                <span style="float:right;">2</span>
+                <span style="float:right;">7</span>
               
             </header>
           </article>
@@ -693,6 +741,50 @@ Add-Content $LOGFILENAME $LOG
             <header>
               
                 <a href="https://www.vcrocs.info/categories/vra/">vra</a>
+                <span style="float:right;">5</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/nsx/">nsx</a>
+                <span style="float:right;">3</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/powercli/">powercli</a>
+                <span style="float:right;">3</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/raspberry-pi/">raspberry-pi</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/rvtools/">rvtools</a>
                 <span style="float:right;">1</span>
               
             </header>

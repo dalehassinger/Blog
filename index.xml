@@ -12,6 +12,78 @@
     
     
     <item>
+      <title>Add disk</title>
+      <link>https://www.vcrocs.info/blog/add-drives/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/add-drives/</guid>
+      <description>PowerShell Code Powershell code to add disk to a Remote Windows Server VMware VM
+ #The Following code shows how to add a New Drive, bring drive online, initialize and format: #Connect to vCenter Connect-VIServer vcsa.domain.org #Add new drive to VM New-HardDisk -VM $VMNAME -CapacityGB $DISKSIZEGB -StorageFormat Thin -Controller ‘SCSI Controller 1’ #Make disk online invoke-command -computername $VMNAME -scriptblock {Set-Disk 2 -isOffline $false} #Initialize disk invoke-command -computername $VMNAME -scriptblock {Initialize-Disk 2 -PartitionStyle GPT} #Create Partition invoke-command -computername $VMNAME -scriptblock {New-Partition -DiskNumber 2 -UseMaximumSize -DriveLetter E} #Format drive invoke-command -computername $VMNAME -scriptblock {Format-Volume -DriveLetter E -FileSystem NTFS -NewFileSystemLabel ‘Data’ -AllocationUnitSize 16384 -Confirm:$false} #------------------------------------------------------------------------- #The Following Code will show disk “Allocation Unit Size” on a remote Windows Server: $C = Invoke-Command -ComputerName $VMname {Get-WmiObject -Class Win32_Volume -Filter “DriveLetter = ‘C:&#39;” | Select-Object BLOCKSIZE} $C_AllocationUnitSize = ($C.</description>
+    </item>
+    
+    <item>
+      <title>Add Registry Values</title>
+      <link>https://www.vcrocs.info/blog/add-registry-vales/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/add-registry-vales/</guid>
+      <description>PowerShell Code Add Registry Values to Windows Server
+ #vCrocs Registry Changes invoke-command -computername $FQDNVMname -ScriptBlock {new-Item HKLM:\SOFTWARE\vCrocs -f } invoke-command -computername $FQDNVMname -ScriptBlock {param ($SG) Set-ItemProperty hklm:\software\vCrocs -Name SupportGroup -Value &amp;quot;$SG&amp;quot; -Force} -ArgumentList $SG invoke-command -computername $FQDNVMname -ScriptBlock {param ($APP) Set-ItemProperty hklm:\software\vCrocs -Name Application -Value &amp;quot;$APP&amp;quot; -Force} -ArgumentList $APP invoke-command -computername $FQDNVMname -ScriptBlock {param ($LOC) Set-ItemProperty hklm:\software\vCrocs -Name Location -Value &amp;quot;$LOC&amp;quot; -Force} -ArgumentList $LOC invoke-command -computername $FQDNVMname -ScriptBlock {param ($SL) Set-ItemProperty hklm:\software\vCrocs -Name ServiceLevel -Value &amp;quot;$SL&amp;quot; -Force} -ArgumentList $SL </description>
+    </item>
+    
+    <item>
+      <title>Automated Clay Thrower</title>
+      <link>https://www.vcrocs.info/blog/clay-thrower/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/clay-thrower/</guid>
+      <description>Raspberry PI Powered Clay Thrower Link to my Raspberry PI powered Clay Thrower. The first project I ever did with a PI. My first project using Python and PHP.
+  </description>
+    </item>
+    
+    <item>
+      <title>Automation with Zero Trust</title>
+      <link>https://www.vcrocs.info/blog/automation-zero-trust/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/automation-zero-trust/</guid>
+      <description>PowerShell Code There are two PowerCLI commands that have become my best freinds in a Zero Trust Environment.
+ Invoke-VMScript - Use to run scripts on VMs. Copy-VMGuestFile - Use to copy files to/from VMs.  In this example you can use Invoke-VMScript to run commands on a VM to install Trend Deep Security. All commands run with VM in a zero trust state.
+ $VMName = &#39;VM Name&#39; #Copy file to the VM $PSText = &#39;wget https://server01.</description>
+    </item>
+    
+    <item>
+      <title>NSX PowerCLI Basics</title>
+      <link>https://www.vcrocs.info/blog/powercli-nsx/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/powercli-nsx/</guid>
+      <description>NSX PowerCLI Code Some basic PowerCLI commands with NSX
+Included some examples of code to Automate adding/remving NSX Security Tags from VMs. Show Security TAGs. Shows Secuirty TAGs assigned to a sepcific VM. Hope you find these snippets of code usefull.
+ # Need to install PowerShell Module PowerNSX # Connect to vCenter $vCenterName = &#39;vCenter.vCrocs.info&#39; Connect-VIServer $vCenterName -Credential $cred # Connect to NSX Server Connect-NsxServer -vCenterServer &#39;vCenter.vCrocs.info&#39; -Credential $cred # Show all Secuirty Tags Get-NsxSecurityTag | Select-Object Name | Sort-Object Name # Info about one specific Secuirty TAG Get-NsxSecurityTag -Name NSX.</description>
+    </item>
+    
+    <item>
+      <title>Open Ports</title>
+      <link>https://www.vcrocs.info/blog/check-ports/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/check-ports/</guid>
+      <description>PowerShell Code Use PowerShell to see if ports are open to a remote server.
+ $PortNumber = &#39;443&#39; $Destination = &#39;Server.vCrocs.info&#39; $socket = New-Object Net.Sockets.TcpClient $socket.Connect($Destination,$PortNumber) if($socket.Connected){ $PortOpened = &#39;Port: &#39; + $PortNumber + &#39; to &#39; + $Destination +&#39; is Open! :)&#39; $socket.Close() }else{ $PortOpened = &#39;Port: &#39; + $PortNumber + &#39; to &#39; + $Destination +&#39; IS NOT Open! :(&#39; } Write-Host $PortOpened Living in a zero trust environment can be challenging.</description>
+    </item>
+    
+    <item>
+      <title>PowerCLI Basics</title>
+      <link>https://www.vcrocs.info/blog/powercli-getting-started/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/powercli-getting-started/</guid>
+      <description>PowerCLI Code Some basic PowerCLI commands
+ #Here are some basic commands that you can keep adding additional code #and get more precise on what you want to see. #Connect to a vCenter Connect-VIServer vcsa.domain.org #Disconnect from vCenter and not be prompted Disconnect-VIServer vcsa.domain.org -confirm:$false #Get VM Listing #Shows all VMs Get-VM #Shows all VMs sorted by Name Get-VM | Sort-Object Name #Shows all VMs sorted by Name that are Powered On Get-VM | Where-Object {$_.</description>
+    </item>
+    
+    <item>
       <title>PowerShell Log Files</title>
       <link>https://www.vcrocs.info/blog/log-files/</link>
       <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
@@ -19,7 +91,7 @@
       <guid>https://www.vcrocs.info/blog/log-files/</guid>
       <description>PowerShell Code I use this code to create a log file during a VM build using vRealize Automation
 Here&amp;rsquo;s an example:
-$VMname = &#39;ServerName&#39; #The next line defines where to save the log file $LOGFILENAME = &amp;quot;C:\vRA-Install-Logs\vRA-Install-Log-&amp;quot; + $VMname + &amp;quot;.log&amp;quot; #Check to see if file already exists. If it does delete it. if (Test-Path $LOGFILENAME) { Remove-Item -Path $LOGFILENAME } #Creates the Log File New-Item $LOGFILENAME -ItemType File #Update Log File.</description>
+ $VMname = &#39;ServerName&#39; #The next line defines where to save the log file $LOGFILENAME = &amp;quot;C:\vRA-Install-Logs\vRA-Install-Log-&amp;quot; + $VMname + &amp;quot;.log&amp;quot; #Check to see if file already exists. If it does delete it. if (Test-Path $LOGFILENAME) { Remove-Item -Path $LOGFILENAME } #Creates the Log File New-Item $LOGFILENAME -ItemType File #Update Log File.</description>
     </item>
     
     <item>
@@ -29,7 +101,17 @@ $VMname = &#39;ServerName&#39; #The next line defines where to save the log file
       
       <guid>https://www.vcrocs.info/blog/random-password/</guid>
       <description>PowerShell Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
-#Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) &#39;!&#39;,&#39;#&#39;,&#39;(&#39;,&#39;)&#39; | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join &#39;&#39; </description>
+ #Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) &#39;!&#39;,&#39;#&#39;,&#39;(&#39;,&#39;)&#39; | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join &#39;&#39; </description>
+    </item>
+    
+    <item>
+      <title>Schedule RVTools</title>
+      <link>https://www.vcrocs.info/blog/schedule-rvtools/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/blog/schedule-rvtools/</guid>
+      <description>PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVtools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotations of files and automaticaly deletes old files.
+ Start-Process -FilePath &amp;quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&amp;quot; -ArgumentList &#39;-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &amp;quot;Enter RVTools encrypted Passed between the double quotes&amp;quot; -c Exportall2xls -d &amp;quot;G:\RVTools\vCenter01&amp;quot;&#39; -Wait Start-Process -FilePath &amp;quot;C:\Program Files (x86)\Robware\RVTools\RVtools.</description>
     </item>
     
     <item>
