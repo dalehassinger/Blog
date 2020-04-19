@@ -17,7 +17,7 @@
       <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://dalehassinger.github.io/Blog/blog/log-files/</guid>
-      <description>Code I use this code to create a log file during a VM build using vRealize Automation
+      <description>PowerShell Code I use this code to create a log file during a VM build using vRealize Automation
 Here&amp;rsquo;s an example:
 $VMname = &#39;ServerName&#39; #The next line defines where to save the log file $LOGFILENAME = &amp;quot;C:\vRA-Install-Logs\vRA-Install-Log-&amp;quot; + $VMname + &amp;quot;.log&amp;quot; #Check to see if file already exists. If it does delete it. if (Test-Path $LOGFILENAME) { Remove-Item -Path $LOGFILENAME } #Creates the Log File New-Item $LOGFILENAME -ItemType File #Update Log File.</description>
     </item>
@@ -28,7 +28,7 @@ $VMname = &#39;ServerName&#39; #The next line defines where to save the log file
       <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://dalehassinger.github.io/Blog/blog/random-password/</guid>
-      <description>Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
+      <description>PowerShell Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
 #Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) &#39;!&#39;,&#39;#&#39;,&#39;(&#39;,&#39;)&#39; | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join &#39;&#39; </description>
     </item>
     

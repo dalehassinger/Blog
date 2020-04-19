@@ -13,7 +13,7 @@
         "articleSection" : "blog",
         "name" : "Randon Password",
         "headline" : "Randon Password",
-        "description" : "Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.\n#Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) \x27!\x27,\x27#\x27,\x27(\x27,\x27)\x27 | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join \x27\x27 ",
+        "description" : "PowerShell Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.\n#Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) \x27!\x27,\x27#\x27,\x27(\x27,\x27)\x27 | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join \x27\x27 ",
         "inLanguage" : "en",
         "author" : "",
         "creator" : "",
@@ -24,7 +24,7 @@
         "datePublished": "2020-04-19 00:00:00 \x2b0000 UTC",
         "dateModified" : "2020-04-19 00:00:00 \x2b0000 UTC",
         "url" : "https:\/\/dalehassinger.github.io\/Blog\/blog\/random-password\/",
-        "wordCount" : "68",
+        "wordCount" : "69",
         "keywords" : [ "Blog" ]
     }
     </script>
@@ -51,12 +51,12 @@
 
         <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Randon Password"/>
-<meta name="twitter:description" content="Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
+<meta name="twitter:description" content="PowerShell Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
 #Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) &#39;!&#39;,&#39;#&#39;,&#39;(&#39;,&#39;)&#39; | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join &#39;&#39; "/>
 <meta name="twitter:site" content="@DaleHassinger"/>
 
         <meta property="og:title" content="Randon Password" />
-<meta property="og:description" content="Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
+<meta property="og:description" content="PowerShell Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
 #Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) &#39;!&#39;,&#39;#&#39;,&#39;(&#39;,&#39;)&#39; | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join &#39;&#39; " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://dalehassinger.github.io/Blog/blog/random-password/" />
@@ -68,11 +68,11 @@
         <meta property="og:image:width" content="512">
         <meta property="og:image:height" content="512">
         <meta itemprop="name" content="Randon Password">
-<meta itemprop="description" content="Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
+<meta itemprop="description" content="PowerShell Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
 #Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) &#39;!&#39;,&#39;#&#39;,&#39;(&#39;,&#39;)&#39; | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join &#39;&#39; ">
 <meta itemprop="datePublished" content="2020-04-19T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-04-19T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="68">
+<meta itemprop="wordCount" content="69">
 
 
 
@@ -407,7 +407,7 @@
   
 
   <div id="content">
-    <h2 id="code">Code</h2>
+    <h2 id="powershell-code">PowerShell Code</h2>
 <p>I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.</p>
 <pre><code>#Generate Random text to use for Password
     $SQLPassword =@(
@@ -432,6 +432,9 @@
                 
                 <li><a class="article-category-link" href="https://dalehassinger.github.io/Blog/categories/powershell">PowerShell</a></li>
                 
+                
+                <li><a class="article-category-link" href="https://dalehassinger.github.io/Blog/categories/vra">vRA</a></li>
+                
             
         
     </ul>
@@ -446,29 +449,6 @@
   </footer>
 
 </article>
-
-    <article class="post">
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "shortname" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    </article>
 
 
 <ul class="actions pagination">
@@ -490,7 +470,7 @@
     
     
       
-        <a href='https://dalehassinger.github.io/Blog/' class="logo"><img src="https://dalehassinger.github.io/Blog/img/main/logo.jpg" alt="Hugo Future Imperfect" /></a>
+        <a href='https://dalehassinger.github.io/Blog/' class="logo"><img src="https://dalehassinger.github.io/Blog/img/main/logo.png" alt="vCrocs.info" /></a>
       
     
     
@@ -669,6 +649,17 @@
               
                 <a href="https://dalehassinger.github.io/Blog/categories/powershell/">powershell</a>
                 <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://dalehassinger.github.io/Blog/categories/vra/">vra</a>
+                <span style="float:right;">1</span>
               
             </header>
           </article>
