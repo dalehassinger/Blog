@@ -1,0 +1,2 @@
+# Blog
+Dale Hassinger Blog
