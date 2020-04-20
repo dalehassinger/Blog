@@ -439,9 +439,9 @@
     <h2 id="powershell-code">PowerShell Code</h2>
 <p>I like to create a Scheduled Task in vRealize Orchestrator to create RVtools files everyday.  Here is a sample script that could be used. The script is also on a 7 day rotation of files and automaticaly deletes old files.</p>
 <pre><code>
-Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Passed between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait
+Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait
 
-Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter02.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Passed between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter02&quot;' -Wait
+Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter02.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter02&quot;' -Wait
 
 # Delete all RVTools Files in older than 7 day(s)
 $Path = &quot;G:\RVTools&quot;
