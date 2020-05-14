@@ -21,8 +21,8 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2020",
-        "datePublished": "2020-05-08 00:00:00 \x2b0000 UTC",
-        "dateModified" : "2020-05-08 00:00:00 \x2b0000 UTC",
+        "datePublished": "2020-05-14 00:00:00 \x2b0000 UTC",
+        "dateModified" : "2020-05-14 00:00:00 \x2b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -56,7 +56,7 @@
 <meta property="og:description" content="PowerShell PowerCLI VMware vRealize vRA NSX RVTools Automation Hugo Raspberry PI Log Insight" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2020-05-08T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-05-14T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -264,6 +264,18 @@ if (!doNotTrack) {
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/coffee-talk-05-15-2020/">Coffee Talk Tip of the week - 05/15/2020</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-05-14'>
+                                    May 14, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/coffee-talk-05-08-2020/">Coffee Talk Tip of the week - 05/08/2020</a></h3>
                                 
                                 <time class="published" datetime=
@@ -281,18 +293,6 @@ if (!doNotTrack) {
                                 <time class="published" datetime=
                                     '2020-04-30'>
                                     April 30, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/hugo/">Hugo</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-04-26'>
-                                    April 26, 2020</time>
                             </header>
                             
 
@@ -320,21 +320,21 @@ if (!doNotTrack) {
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/coffee-talk-05-08-2020/">Coffee Talk Tip of the week - 05/08/2020</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/coffee-talk-05-15-2020/">Coffee Talk Tip of the week - 05/15/2020</a></h2>
         
         
-            <p>Update ESXi Syslog.global.logHost setting with PowerCLI</p>
+            <p>ESXi PSOD and vRealize Log Insight</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2020-05-08'>
-            May 8, 2020</time>
+            datetime='2020-05-14'>
+            May 14, 2020</time>
         <span class="author">Dale Hassinger</span>
         
-            <p>2 minute read</p>
+            <p>1 minute read</p>
         
         
     </div>
@@ -346,81 +346,13 @@ if (!doNotTrack) {
   
 
   <div id="content">
-    <p>If you need to set the ESXi Host Advanced System Setting Syslog.global.logHost on every ESXI Host in your environment here is some sample PowerCLI code to set the values. Connect to all your vCenters. Get all your hosts. Set the value and then it will reload the syslog service.</p>
-<p>The second PowerCLI code example is to get the ESXi Host Advanced System Setting Syslog.global.logHost value on every ESXI Host in your environment.</p>
-<p>A use case for this code is if the name/ip would change on your Log Insight Server or if you were asked to add a second syslog server. For my examples I wrote the values to the screen but the code could easily be changed to write the values to a csv file.</p>
-<p><strong>PowerCLI code to set the Syslog.global.logHost setting on every ESXi Host:</strong></p>
-<pre><code># 
-#-------[Set Host Syslog.global.logHost Setting]------------------------------------------------------------------
-#
-
-# Connect to vcenter(s)
-
-$vCenterName = 'vCenter01.vCrocs.info'
-Connect-VIServer $vCenterName -Credential $cred
-
-$vCenterName = 'vCenter01.vCrocs.info'
-connect-viserver $vCenterName -Credential $cred
-
-# Get all Host Names
-$Hosts = Get-VMHost | Sort-Object Name
-
-#Sets Syslog.global.logHost value and reloads syslog service
-foreach($HostName in $Hosts){
-
-    Write-Host 'ESXi Host: ' $HostName.Name
-    
-    #Set Syslog.global.logHost values on ESXi Host
-    Set-VMHostSysLogServer -VMHost $HostName.Name -SysLogServer 'udp://loginsight.vCrocs.info:514,udp://splunk.vCrocs.info:514'
-    
-    #This command connects and make connection to specific server
-    $esxcli =  Get-EsxCli -VMHost $HostName.Name -V2
-
-    #Reload server syslog service
-    $esxcli.system.syslog.reload.invoke()
-    
-} # end foreach
-
-Disconnect-VIServer * -Confirm:$false
-
-#
-</code></pre>
-<hr>
-<p><strong>PowerCLI code to get the Syslog.global.logHost setting from every ESXi Host:</strong></p>
-<pre><code>#
-#-------[Get Host Syslog.global.logHost Setting]------------------------------------------------------------------
-#
-
-# Connect to vcenter(s)
-
-$vCenterName = 'vCenter01.vCrocs.info'
-Connect-VIServer $vCenterName -Credential $cred
-
-$vCenterName = 'vCenter01.vCrocs.info'
-connect-viserver $vCenterName -Credential $cred
-
-# Get all Host Names
-$Hosts = Get-VMHost | Sort-Object Name
-
-#Get Syslog.global.logHost info
-foreach($HostName in $Hosts){
-
-    Write-Host 'ESXi Host: ' $HostName.Name
-    
-    $LogHosts = Get-VMHostSysLogServer -VMHost $HostName.Name
-
-    foreach($LogHost in $LogHosts){
-
-        Write-Host 'LogHost:   '$LogHost.Host
-
-    } # end foreach
-
-} # end foreach
-
-Disconnect-VIServer * -Confirm:$false
-
-#
-</code></pre>
+    <p>If you have vRealize Log Insight installed in your environment you need to setup at least one alert that works awesome. When an ESXi has an PSOD it is hard in vCenter to capture all the VMs that restarted because of the HA event.  In Log Insight it is very easy to get alerted of the event and receive an email of all the VMs that restarted. You can then provide your applications Teams with a list of VMs that should be reviewed. There are many different alerts that can be setup in Log Insight but this is always the first one that I make sure is done.</p>
+<p>The Log Insight query is (text contains &ldquo;vsphere ha restarted virtual machine&rdquo;). See first screen shot.</p>
+<p>The second screen shot shows how to setup the alert.</p>
+<p><strong>Log Insight Query:</strong></p>
+<p><strong><img src="https://www.vcrocs.info/images/log-insight-01.png" alt=""></strong></p>
+<p><strong>Alert Setup screen:</strong></p>
+<p><strong><img src="https://www.vcrocs.info/images/log-insight-02.png" alt=""></strong></p>
 
   </div>
 
@@ -437,7 +369,7 @@ Disconnect-VIServer * -Confirm:$false
                 <li><a class="article-category-link" href="https://www.vcrocs.info/categories/esxi">ESXi</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/powercli">PowerCLI</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/log-insight">Log Insight</a></li>
                 
                 
                 <li><a class="article-category-link" href="https://www.vcrocs.info/categories/coffee-talk">Coffee Talk</a></li>
@@ -483,8 +415,8 @@ Disconnect-VIServer * -Confirm:$false
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/coffee-talk-05-01-2020/"
-                class="button big previous">Coffee Talk Tip of the week - 05/01/2020</a></li>
+        <li><a href="https://www.vcrocs.info/blog/coffee-talk-05-08-2020/"
+                class="button big previous">Coffee Talk Tip of the week - 05/08/2020</a></li>
     
 
     
@@ -503,7 +435,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f&amp;text=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f08%2f2020&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f&amp;text=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f15%2f2020&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -513,7 +445,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -524,7 +456,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -534,7 +466,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f&amp;title=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f08%2f2020" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f&amp;title=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f15%2f2020" target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -544,7 +476,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f&amp;title=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f08%2f2020" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f&amp;title=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f15%2f2020" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -554,7 +486,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f&amp;title=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f08%2f2020" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f&amp;title=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f15%2f2020" target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -564,7 +496,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f&amp;description=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f08%2f2020" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f&amp;description=Coffee%20Talk%20Tip%20of%20the%20week%20-%2005%2f15%2f2020" target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -574,7 +506,7 @@ Disconnect-VIServer * -Confirm:$false
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-08-2020%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fcoffee-talk-05-15-2020%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -723,6 +655,20 @@ Disconnect-VIServer * -Confirm:$false
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/coffee-talk-05-15-2020/">Coffee Talk Tip of the week - 05/15/2020</a>
+              </h3>
+              
+              <time class="published" datetime='2020-05-14'>
+                May 14, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/coffee-talk-05-08-2020/">Coffee Talk Tip of the week - 05/08/2020</a>
               </h3>
               
@@ -742,20 +688,6 @@ Disconnect-VIServer * -Confirm:$false
               
               <time class="published" datetime='2020-04-30'>
                 April 30, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/hugo/">Hugo</a>
-              </h3>
-              
-              <time class="published" datetime='2020-04-26'>
-                April 26, 2020
               </time>
             </header>
             
@@ -839,7 +771,7 @@ Disconnect-VIServer * -Confirm:$false
             <header>
               
                 <a href="https://www.vcrocs.info/categories/coffee-talk/">coffee-talk</a>
-                <span style="float:right;">2</span>
+                <span style="float:right;">3</span>
               
             </header>
           </article>
@@ -850,7 +782,7 @@ Disconnect-VIServer * -Confirm:$false
             <header>
               
                 <a href="https://www.vcrocs.info/categories/esxi/">esxi</a>
-                <span style="float:right;">1</span>
+                <span style="float:right;">2</span>
               
             </header>
           </article>
@@ -861,6 +793,17 @@ Disconnect-VIServer * -Confirm:$false
             <header>
               
                 <a href="https://www.vcrocs.info/categories/hugo/">hugo</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/log-insight/">log-insight</a>
                 <span style="float:right;">1</span>
               
             </header>
