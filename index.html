@@ -21,8 +21,8 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2020",
-        "datePublished": "2020-05-17 00:00:00 \x2b0000 UTC",
-        "dateModified" : "2020-05-17 00:00:00 \x2b0000 UTC",
+        "datePublished": "2020-05-29 00:00:00 \x2b0000 UTC",
+        "dateModified" : "2020-05-29 00:00:00 \x2b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -56,7 +56,7 @@
 <meta property="og:description" content="PowerShell PowerCLI VMware vRealize vRA NSX RVTools Automation Hugo Raspberry PI Log Insight" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2020-05-17T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-05-29T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -264,6 +264,18 @@ if (!doNotTrack) {
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-05-29'>
+                                    May 29, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/vra81-abx-ps/">vRealize Automation 8.1 - PowerShell ABX</a></h3>
                                 
                                 <time class="published" datetime=
@@ -281,18 +293,6 @@ if (!doNotTrack) {
                                 <time class="published" datetime=
                                     '2020-05-14'>
                                     May 14, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/coffee-talk-05-08-2020/">Coffee Talk Tip of the week - 05/08/2020</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-05-08'>
-                                    May 8, 2020</time>
                             </header>
                             
 
@@ -320,21 +320,21 @@ if (!doNotTrack) {
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/vra81-abx-ps/">vRealize Automation 8.1 - PowerShell ABX</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a></h2>
         
         
-            <p>Creating PowerSell ABX for the Windows Admin using vRA</p>
+            <p>IT Reality Podcast</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2020-05-17'>
-            May 17, 2020</time>
+            datetime='2020-05-29'>
+            May 29, 2020</time>
         <span class="author">Dale Hassinger</span>
         
-            <p>4 minute read</p>
+            <p>2 minute read</p>
         
         
     </div>
@@ -346,108 +346,21 @@ if (!doNotTrack) {
   
 
   <div id="content">
-    <p>I wanted to review VMware vRA (vRealize Automation) 8.x as a Microsoft Windows Server Admin.  Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I am going to create Windows Server VMs and customize the OS using a new feature added to vRA 8.1, Action Based Extensibility (ABX) with PowerShell. No vRO (Orchestrator) Workflows will be used. This is completely different compared to how I create Windows Servers with vRA 7.6.</p>
-<p>The enterprise organizations that I have worked for are 90%+ Microsoft Windows Servers.  It is important for me to have vRA be able to create Windows Servers and make all configuration changes using PowerShell.</p>
-<p>You could also use this technique to make changes to a Linux VM using the PowerCLI commands Invoke-VMscript and Copy-VMGuestFile. I did create a <a href="https://www.vcrocs.info/blog/automation-zero-trust/">Blog Post</a> on this topic.</p>
-<h3 id="blueprint-requirements">BluePrint Requirements:</h3>
-<p>I want to manually enter the VM Name.  I don’t want an auto generated name. After the Windows Server VM is created I want to to able to add vCenter TAGS to VM, make some OS changes, and install software based on values entered on the BluePrint.</p>
-<h3 id="what-i-created-to-accomplish-the-requirements">What I created to accomplish the requirements:</h3>
-<p>Created a BluePrint. See included code and screen shot.</p>
-<p>Created a PowerShell Action. See included code and screen shot.</p>
-<p>Created a Subscription. See Screenshot.</p>
-<h3 id="---sample-code-and-screen-shots---">&mdash;Sample Code and Screen Shots:&mdash;</h3>
-<h4 id="---blueprint">&mdash;BluePrint:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/vra81-01.jpg" alt=""></strong></p>
-<p>The properties under resources in the yaml code can be used like parameters in a PowerShell script. Since I have a background in PowerShell that is how I am using the properties. When you deploy the BluePrint the values entered that I defined will not be used until the Action runs. The Action will run after the “Compute post provision” event is triggered with the subscription. Those values will be passed from the BluePrint to the Action.  Just like passing parameters to a PS script.</p>
-<pre><code># This is the yaml code for the BluePrint
-# Created by vCrocs.info
-formatVersion: 1
-inputs:
-  cpuCount:
-    type: integer
-    description: Number of virtual processors
-    default: 2
-  totalMemoryMB:
-    type: integer
-    description: Machine virtual memory size in Megabytes
-    default: 2048
-  VMname:
-    type: string
-    default: DBH00
-  SQL:
-    type: boolean
-    description: Is this a SQL Server?
-    default: false
-  D-Drive-Size:
-    type: integer
-    description: 'Enter D:\ Size in GB'
-    default: 10
-    minimum: 5
-    maximum: 50
-  TEST:
-    type: string
-    enum:
-      - 'Yes'
-      - 'No'
-resources:
-  Cloud_vSphere_Machine_1:
-    type: Cloud.vSphere.Machine
-    properties:
-      name: '${input.VMname}'
-      SQL: '${input.SQL}'
-      DDRive: '${input.D-Drive-Size}'
-      imageRef: 2019-TEMPLATE
-      cpuCount: '${input.cpuCount}'
-      totalMemoryMB: '${input.totalMemoryMB}'
-      TEST: '${input.TEST}'
-      constraints:
-        - tag: 'quick_start_run:1'
-
-</code></pre><p>&mdash;Using the Inputs Screen helps you build the BluePrint yaml code.  I found this very useful since I am still learning the proper yaml formatting.</p>
-<p><strong><img src="https://www.vcrocs.info/images/vra81-04.png" alt=""></strong></p>
-<h4 id="---action">&mdash;Action:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/vra81-02.jpg" alt=""></strong></p>
-<p>In my PowerShell code I am using Write-Host to help me understand how the BluePrint passes values to the Action. I use to troubleshoot and understand how it is working. I am able to take values from the payload customProperties and assign to variables. The customProperties are defined in the BluePrint yaml code as resources/properties. I can then make decisions in the code based on these values.</p>
-<pre><code># This is the PowerShell code for the Action
-function handler($context, $payload) {
-    Write-Host &quot;VM Name Created: &quot; $payload.resourceNames[0]
-    Write-Host &quot;D-DRive Size: &quot; $payload.customProperties.DDRive
-    Write-Host &quot;SQL: &quot; $payload.customProperties.SQL
-    
-    $VMname = $payload.resourceNames[0]
-    Write-Host &quot;VM Name Variable: &quot; $VMname
-
-    $SQL = $payload.customProperties.SQL
-    $DDrive = $payload.customProperties.DDRive
-
-    #Connect to vCenter
-    Connect-VIServer -server 192.168.1.1 -User &quot;administrator@vsphere.local&quot; -Password &quot;VMware#1&quot; -Protocol https -Force
-    
-    #Assign Tag to new VM
-    New-TagAssignment -Tag 'TAG-vRA-Built' -Entity $VMname
-    
-    if($SQL -eq 'true'){
-        New-TagAssignment -Tag 'TAG-SQL-Server' -Entity $VMname
-    } # End if
-
-
-  return $payload
-}
-
-</code></pre><h4 id="---subscription">&mdash;Subscription:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/vra81-03.png" alt=""></strong></p>
-<h3 id="lets-compare-vra-76-vs-81">Lets compare vRA 7.6 vs 8.1</h3>
-<p>vRA 7.6:</p>
-<p>I would create a BluePrint with a custom form in vRA 7.6. I would pass the field values from the custom form as parameters to a PowerShell script on a PowerShell Host.</p>
-<p>vRA 8.1:</p>
-<p>Using ABX and a subscription in vRA 8.1 eliminates the need to have a Windows PowerShell host and the PowerShell script has no parameters. The vRA 8.x appliance is the PowerShell Host. Less moving parts to complete a Windows Server Build in vRA 8.1.</p>
-<h3 id="lessons-learned">Lessons Learned:</h3>
+    <p>I have been listening to Podcasts for many years.  Everyday while driving to and from work I would listen to a Podcast. Anytime I traveled to a conference I would download hours worth of Podcasts to listen to while flying. Most of the Podcasts I listen to are Technology related. Here are some of my favorites:</p>
 <ul>
-<li>I will need to learn yaml.</li>
-<li>The process to Create BluePrints will be much different in vRA 8.x.</li>
-<li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused.</li>
-<li>I will not need as many VMs for the installation and administration of vRA 8.x.</li>
+<li>IT Reality</li>
+<li>Virtual Speaking Podcast</li>
+<li>Develop Great Managers</li>
+<li>vBrown Bag</li>
+<li>Automators</li>
+<li>Mac Power Users</li>
+<li>Twit Network of Podcasts</li>
 </ul>
+<p>I always had an interest to be a guest on a Podcast.  I always thought to myself that when I get to a point in my career that I could share my knowledge I would try and be a guest on a Podcast.  After doing several presentations about VMware vRealize Automation I wanted the next step to be a guest spot on a Podcast to reach a larger audience.  When I saw a post on Twitter that the IT Reality Podcast was looking for everyday Technology people passionate about a topic and willing to share the knowledge, I reached out to them to show my interest in appearing on their Podcast.  We had a meeting and the Hosts felt I had a good story to tell and we scheduled a time to record the Podcast.  The hosts, Vince Wood and Sam Larch, were awesome to work with. They also invited Nathan Bennett to be on the episode as a guest and he was also great to talk with.  The experience to talk with these guys was a good way for me to appear on a Podcast. While recording the Podcast I learned some knowledge from Nathan that I will use in my current Automation environment.</p>
+<p>If it wasn’t for other people sharing knowledge by creating Blogging web sites or appearing on Podcasts, I wouldn’t have the knowledge that I do today.  I hope that I can give back to the vCommunity like they have done for me. I would encourage anyone who wants to share their knowledge to Just Do It!  Create a Blogging Web Site or start attending local User Groups and “Little Hacks”. It can be very rewarding.</p>
+<p><strong><img src="https://www.vcrocs.info/images/it-reality.png" alt=""></strong></p>
+<p>Here is the link to the IT Reality Podcast that I appeared on <a href="https://itr-it-reality.zencast.website/episodes/21">What is vRealize Automation - Episode 21</a></p>
+<p>Enjoy!</p>
 
   </div>
 
@@ -461,10 +374,13 @@ function handler($context, $payload) {
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a></li>
-                
-                
                 <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vra">vRA</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/powershell">Powershell</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/podcast">podcast</a></li>
                 
             
         
@@ -507,8 +423,8 @@ function handler($context, $payload) {
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/coffee-talk-05-15-2020/"
-                class="button big previous">Coffee Talk Tip of the week - 05/15/2020</a></li>
+        <li><a href="https://www.vcrocs.info/blog/vra81-abx-ps/"
+                class="button big previous">vRealize Automation 8.1 - PowerShell ABX</a></li>
     
 
     
@@ -527,7 +443,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f&amp;text=vRealize%20Automation%208.1%20-%20PowerShell%20ABX&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;text=What%20is%20vRealize%20Automation%20-%20Episode%2021&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -537,7 +453,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -548,7 +464,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -558,7 +474,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f&amp;title=vRealize%20Automation%208.1%20-%20PowerShell%20ABX" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;title=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -568,7 +484,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f&amp;title=vRealize%20Automation%208.1%20-%20PowerShell%20ABX" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;title=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -578,7 +494,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f&amp;title=vRealize%20Automation%208.1%20-%20PowerShell%20ABX" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;title=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -588,7 +504,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f&amp;description=vRealize%20Automation%208.1%20-%20PowerShell%20ABX" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;description=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -598,7 +514,7 @@ function handler($context, $payload) {
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra81-abx-ps%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -747,6 +663,20 @@ function handler($context, $payload) {
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a>
+              </h3>
+              
+              <time class="published" datetime='2020-05-29'>
+                May 29, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/vra81-abx-ps/">vRealize Automation 8.1 - PowerShell ABX</a>
               </h3>
               
@@ -766,20 +696,6 @@ function handler($context, $payload) {
               
               <time class="published" datetime='2020-05-14'>
                 May 14, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/coffee-talk-05-08-2020/">Coffee Talk Tip of the week - 05/08/2020</a>
-              </h3>
-              
-              <time class="published" datetime='2020-05-08'>
-                May 8, 2020
               </time>
             </header>
             
@@ -819,7 +735,7 @@ function handler($context, $payload) {
             <header>
               
                 <a href="https://www.vcrocs.info/categories/powershell/">powershell</a>
-                <span style="float:right;">9</span>
+                <span style="float:right;">10</span>
               
             </header>
           </article>
@@ -830,7 +746,7 @@ function handler($context, $payload) {
             <header>
               
                 <a href="https://www.vcrocs.info/categories/vra/">vra</a>
-                <span style="float:right;">6</span>
+                <span style="float:right;">7</span>
               
             </header>
           </article>
@@ -896,6 +812,17 @@ function handler($context, $payload) {
             <header>
               
                 <a href="https://www.vcrocs.info/categories/log-insight/">log-insight</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/podcast/">podcast</a>
                 <span style="float:right;">1</span>
               
             </header>
