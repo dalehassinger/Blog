@@ -21,8 +21,8 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2020",
-        "datePublished": "2020-05-29 00:00:00 \x2b0000 UTC",
-        "dateModified" : "2020-05-29 00:00:00 \x2b0000 UTC",
+        "datePublished": "2020-06-14 00:00:00 \u002b0000 UTC",
+        "dateModified" : "2020-06-14 00:00:00 \u002b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.71.0" />
+        <meta name="generator" content="Hugo 0.72.0" />
         
 
 
@@ -56,7 +56,7 @@
 <meta property="og:description" content="PowerShell PowerCLI VMware vRealize vRA NSX RVTools Automation Hugo Raspberry PI Log Insight" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2020-05-29T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-06-14T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -264,6 +264,18 @@ if (!doNotTrack) {
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-06-14'>
+                                    June 14, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a></h3>
                                 
                                 <time class="published" datetime=
@@ -281,18 +293,6 @@ if (!doNotTrack) {
                                 <time class="published" datetime=
                                     '2020-05-17'>
                                     May 17, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/coffee-talk-05-15-2020/">Coffee Talk Tip of the week - 05/15/2020</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-05-14'>
-                                    May 14, 2020</time>
                             </header>
                             
 
@@ -320,21 +320,21 @@ if (!doNotTrack) {
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a></h2>
         
         
-            <p>IT Reality Podcast</p>
+            <p>Infoblox IPAM integration</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2020-05-29'>
-            May 29, 2020</time>
-        <span class="author">Dale Hassinger</span>
+            datetime='2020-06-14'>
+            June 14, 2020</time>
+        <span class="author">Dan Grove</span>
         
-            <p>2 minute read</p>
+            <p>1 minute read</p>
         
         
     </div>
@@ -346,21 +346,18 @@ if (!doNotTrack) {
   
 
   <div id="content">
-    <p>I have been listening to Podcasts for many years.  Everyday while driving to and from work I would listen to a Podcast. Anytime I traveled to a conference I would download hours worth of Podcasts to listen to while flying. Most of the Podcasts I listen to are Technology related. Here are some of my favorites:</p>
-<ul>
-<li>IT Reality</li>
-<li>Virtual Speaking Podcast</li>
-<li>Develop Great Managers</li>
-<li>vBrown Bag</li>
-<li>Automators</li>
-<li>Mac Power Users</li>
-<li>Twit Network of Podcasts</li>
-</ul>
-<p>I have had an interest to be a guest on a Podcast for several years.  I always thought to myself that when I get to a point in my career that I could share my knowledge I would try and be a guest on a Podcast.  After doing several presentations about VMware vRealize Automation I wanted the next step to be a guest spot on a Podcast to reach a larger audience.  When I saw a post on Twitter that the IT Reality Podcast was looking for everyday Technology people passionate about a topic and willing to share the knowledge, I reached out to them to show my interest in appearing on their Podcast.  We had a meeting and the Hosts felt I had a good story to tell and we scheduled a time to record the Podcast.  The hosts, Vince Wood and Sam Larch, were awesome to work with. They also invited Nathan Bennett to be on the episode as a guest and he was also great to talk with.  The experience to talk with these guys was a good way for me to appear on a Podcast. While recording the Podcast I learned some knowledge from Nathan that I will use in my current Automation environment.</p>
-<p>If it wasn’t for other people sharing knowledge by creating Blogging web sites or appearing on Podcasts, I wouldn’t have the knowledge that I do today.  I hope that I can give back to the vCommunity like they have done for me. I would encourage anyone who wants to share their knowledge to Just Do It!  Create a Blogging Web Site or start attending local User Groups and “Little Hacks”. It can be very rewarding.</p>
-<p><strong><img src="https://www.vcrocs.info/images/it-reality.png" alt=""></strong></p>
-<p>Here is the link to the IT Reality Podcast that I appeared on <a href="https://itr-it-reality.zencast.website/episodes/21">What is vRealize Automation - Episode 21</a></p>
-<p>Enjoy!</p>
+    <p>I recently setup the Infoblox 1.1 plugin for vRA 8.1 and ran into an interesting challenge that I thought I would share. The setup of the plugin is straight forward; follow the documentation and you’ll likely be set. However, if you use custom DNS views in Infoblox (internal, external, etc.) then some additional configuration is required that’s not easily identified. Out of the box, the Infoblox IPAM integration comes with only a few default properties. I left these values in place when creating my first VM build blueprint but the <strong>Infoblox_AllocateIP</strong> action would always fail. Action Run logs under the Extensibility tab are a great way to troubleshoot. They were displaying the following error:</p>
+<p><strong><img src="https://www.vcrocs.info/images/infoblox-01.png" alt=""></strong></p>
+<p>The fix for this issue is to add a custom property called <strong>Infoblox.IPAM.Newtork.dnsView</strong> and set the appropriate value. This property needs to be added in both the integration settings as well as in the blueprint.</p>
+<p><strong>Integration Settings:</strong></p>
+<p><strong><img src="https://www.vcrocs.info/images/infoblox-02.png" alt=""></strong></p>
+<p><strong>Blueprint:</strong></p>
+<p><strong><img src="https://www.vcrocs.info/images/infoblox-03.png" alt=""></strong></p>
+<p>Once you complete these steps, you’ll find that the <strong>Infoblox_AllocateIP</strong> action will successfully complete.</p>
+<p><strong><img src="https://www.vcrocs.info/images/infoblox-04.png" alt=""></strong></p>
+<p>For the record, the ability to test deployments without actually kicking off a build is fantastic. I confirmed that the test was accurate by running a deployment and verifying that an IP was assigned and a DNS record was registered.</p>
+<p>Hope this helps.</p>
+<p>Dan Grove</p>
 
   </div>
 
@@ -377,10 +374,10 @@ if (!doNotTrack) {
                 <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vra">vRA</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/powershell">Powershell</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/infoblox">Infoblox</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/podcast">podcast</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/dan-grove">Dan Grove</a></li>
                 
             
         
@@ -423,8 +420,8 @@ if (!doNotTrack) {
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/vra81-abx-ps/"
-                class="button big previous">vRealize Automation 8.1 - PowerShell ABX</a></li>
+        <li><a href="https://www.vcrocs.info/blog/it-reality/"
+                class="button big previous">What is vRealize Automation - Episode 21</a></li>
     
 
     
@@ -443,7 +440,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;text=What%20is%20vRealize%20Automation%20-%20Episode%2021&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;text=Infoblox%201.1%20plugin%20for%20vRA%208.1&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -453,7 +450,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -464,7 +461,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -474,7 +471,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;title=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;title=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -484,7 +481,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;title=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;title=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -494,7 +491,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;title=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;title=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -504,7 +501,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f&amp;description=What%20is%20vRealize%20Automation%20-%20Episode%2021" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;description=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -514,7 +511,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fit-reality%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dan%20Grove&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -663,6 +660,20 @@ if (!doNotTrack) {
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a>
+              </h3>
+              
+              <time class="published" datetime='2020-06-14'>
+                June 14, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a>
               </h3>
               
@@ -682,20 +693,6 @@ if (!doNotTrack) {
               
               <time class="published" datetime='2020-05-17'>
                 May 17, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/coffee-talk-05-15-2020/">Coffee Talk Tip of the week - 05/15/2020</a>
-              </h3>
-              
-              <time class="published" datetime='2020-05-14'>
-                May 14, 2020
               </time>
             </header>
             
@@ -746,7 +743,7 @@ if (!doNotTrack) {
             <header>
               
                 <a href="https://www.vcrocs.info/categories/vra/">vra</a>
-                <span style="float:right;">7</span>
+                <span style="float:right;">8</span>
               
             </header>
           </article>
@@ -800,7 +797,29 @@ if (!doNotTrack) {
           <article>
             <header>
               
+                <a href="https://www.vcrocs.info/categories/dan-grove/">dan-grove</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
                 <a href="https://www.vcrocs.info/categories/hugo/">hugo</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/infoblox/">infoblox</a>
                 <span style="float:right;">1</span>
               
             </header>
