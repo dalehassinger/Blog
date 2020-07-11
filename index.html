@@ -21,8 +21,8 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2020",
-        "datePublished": "2020-06-14 00:00:00 \u002b0000 UTC",
-        "dateModified" : "2020-06-14 00:00:00 \u002b0000 UTC",
+        "datePublished": "2020-07-11 00:00:00 \u002b0000 UTC",
+        "dateModified" : "2020-07-11 00:00:00 \u002b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -36,7 +36,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="generator" content="Hugo 0.72.0" />
+        <meta name="generator" content="Hugo 0.73.0" />
         
 
 
@@ -56,7 +56,7 @@
 <meta property="og:description" content="PowerShell PowerCLI VMware vRealize vRA NSX RVTools Automation Hugo Raspberry PI Log Insight" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2020-06-14T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-07-11T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -264,6 +264,18 @@ if (!doNotTrack) {
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/standup-desk/">Smart Desk and Homelab.</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-07-11'>
+                                    July 11, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a></h3>
                                 
                                 <time class="published" datetime=
@@ -281,18 +293,6 @@ if (!doNotTrack) {
                                 <time class="published" datetime=
                                     '2020-05-29'>
                                     May 29, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/vra81-abx-ps/">vRealize Automation 8.1 - PowerShell ABX</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-05-17'>
-                                    May 17, 2020</time>
                             </header>
                             
 
@@ -320,21 +320,21 @@ if (!doNotTrack) {
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/standup-desk/">Smart Desk and Homelab.</a></h2>
         
         
-            <p>Infoblox IPAM integration</p>
+            <p>Working from Home and My New Homelab.</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2020-06-14'>
-            June 14, 2020</time>
-        <span class="author">Dan Grove</span>
+            datetime='2020-07-11'>
+            July 11, 2020</time>
+        <span class="author">Dale Hassinger</span>
         
-            <p>1 minute read</p>
+            <p>4 minute read</p>
         
         
     </div>
@@ -346,18 +346,17 @@ if (!doNotTrack) {
   
 
   <div id="content">
-    <p>I recently setup the Infoblox 1.1 plugin for vRA 8.1 and ran into an interesting challenge that I thought I would share. The setup of the plugin is straight forward; follow the documentation and you’ll likely be set. However, if you use custom DNS views in Infoblox (internal, external, etc.) then some additional configuration is required that’s not easily identified. Out of the box, the Infoblox IPAM integration comes with only a few default properties. I left these values in place when creating my first VM build blueprint but the <strong>Infoblox_AllocateIP</strong> action would always fail. Action Run logs under the Extensibility tab are a great way to troubleshoot. They were displaying the following error:</p>
-<p><strong><img src="https://www.vcrocs.info/images/infoblox-01.png" alt=""></strong></p>
-<p>The fix for this issue is to add a custom property called <strong>Infoblox.IPAM.Network.dnsView</strong> and set the appropriate value. This property needs to be added in both the integration settings as well as in the blueprint.</p>
-<p><strong>Integration Settings:</strong></p>
-<p><strong><img src="https://www.vcrocs.info/images/infoblox-02.png" alt=""></strong></p>
-<p><strong>Blueprint:</strong></p>
-<p><strong><img src="https://www.vcrocs.info/images/infoblox-03.png" alt=""></strong></p>
-<p>Once you complete these steps, you’ll find that the <strong>Infoblox_AllocateIP</strong> action will successfully complete.</p>
-<p><strong><img src="https://www.vcrocs.info/images/infoblox-04.png" alt=""></strong></p>
-<p>For the record, the ability to test deployments without actually kicking off a build is fantastic. I confirmed that the test was accurate by running a deployment and verifying that an IP was assigned and a DNS record was registered.</p>
-<p>Hope this helps.</p>
-<p>Dan Grove</p>
+    <h3 id="smart-desk">Smart Desk:</h3>
+<p>Like most people that work in the Technology Field I have been &ldquo;WFH&rdquo; (Working From Home) since the beginning of March. I already had a dedicated office area but it wasn’t setup for full time employment. I always liked a L-Shaped desk and I had this layout by pushing to straight desks together. Worked OK but could use improvement.</p>
+<p>So I started looking at new desks.  I had two requirements, L-Shaped and I also wanted my next desk to be a standup Desk. I reviewed a lot of desks online and I decided to go with the <a href="https://www.autonomous.ai/standing-desks/l-shaped-smartdesk">L-Shaped Smart Desk from Autonomous</a>. I am the type of person that usually likes to “touch and feel” this type of purchase to make sure the quality is good but after reviewing what other people were saying about <a href="https://www.autonomous.ai">Autonomous</a> I decided to make the purchase. My biggest concern was damage during shipping.</p>
+<p><strong><img src="https://www.vcrocs.info/images/smartdesk01.png" alt=""></strong></p>
+<p>When the desk was delivered I was impressed by how well the desk was packaged.  <a href="https://www.autonomous.ai">Autonomous</a> does a great job making sure nothing gets damaged.  Everything arrived OK and there was no damage or missing pieces. The desk is heavy to put together by yourself.  I took my time so I wouldn’t damage anything and the process to assemble was very easy.  The directions were good. All the holes in the top are pre-drilled which make it very nice to align all the pieces. The corners on the top are all slightly rounded and the edges are all eased.  That really adds to the look and feel.  I was impressed. I’m sure this also helps in shipping so that the top doesn’t get damaged. The quality of the top is so nice that a mouse does not work without a mouse pad.  I did have to purchase a mouse pad to use with this desk. A black mouse pad on a black top looks good.  I like the wire management included with the desk. I think I will be ordering a couple of the <a href="https://www.autonomous.ai/office-accessories/power-outlet">Autonomous Desk Clamp Power Outlets</a> to make wire management even better. All my Apple Space Grey items look good on the Black top. I am anxious to see how often I will use the desk while standing and if I will like to be standing while programming. There is enough room on the L-Shaped desk to hold (3) monitors, (2) Mac Mini’s, external drives, iPAd, iPhone, MacBook Pro, AirPods, HomePod, Microsoft Surface Pro, Dell Work Laptop, Shure Mic and a Google Home (Yes I am an Apple Fanboy).  Happy with my Smart Desk decision.</p>
+<p><strong><img src="https://www.vcrocs.info/images/smartdesk02.png" alt=""></strong></p>
+<h3 id="vmware-home-lab">VMware Home Lab:</h3>
+<p>In addition to upgrading my Home Office Desk it was time to upgrade my VMware Home Lab. My HPE GEN 6 DL380 was not on the VMware supported hardware list anymore and generated a lot of heat and noise in the Home Office.
+I already had an Apple Mac Mini with VMware Fusion installed but it didn’t have a lot of memory installed.  I used it to run some small VMs but mainly used the DL380 for my Homelab. So I upgraded the memory on the Mac mini to 64 GB. I also purchased a second Mac Mini and upgraded the memory to 64 GB. So now my Homelab consists of (2) Mac Mini’s with a total of 128 GB memory.  I have multiple nested ESXi 7.0 Hosts installed on each Mac Mini using VMware Fusion. The setup has worked well for me so far.  No noise and heat like I had with the DL380. Plus I can use the Mac Mini’s for more than just a Homelab.  Turn on the ESXi Hosts when needed and then just power off to do my normal everyday computing. If I don’t want to run the VMs on ESXi I can also just run VMs directly on Fusion.</p>
+<p><strong><img src="https://www.vcrocs.info/images/homelab01.png" alt=""></strong></p>
+<p>So a month after making my Home Lab work with Apple Mac Mini’s Apple decides to make all new Apple computers with ARM processors. I guess my next Home Lab upgrade will not be Apple Computers. I will probably look at using Intel NUCs or something like the NUC for my next Home Lab.</p>
 
   </div>
 
@@ -371,13 +370,10 @@ if (!doNotTrack) {
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vra">vRA</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/wfh">WFH</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/infoblox">Infoblox</a></li>
-                
-                
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/dan-grove">Dan Grove</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/home-lab">Home LAb</a></li>
                 
             
         
@@ -420,8 +416,8 @@ if (!doNotTrack) {
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/it-reality/"
-                class="button big previous">What is vRealize Automation - Episode 21</a></li>
+        <li><a href="https://www.vcrocs.info/blog/infoblox-01/"
+                class="button big previous">Infoblox 1.1 plugin for vRA 8.1</a></li>
     
 
     
@@ -440,7 +436,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;text=Infoblox%201.1%20plugin%20for%20vRA%208.1&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f&amp;text=Smart%20Desk%20and%20Homelab.&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -450,7 +446,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -461,7 +457,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -471,7 +467,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;title=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f&amp;title=Smart%20Desk%20and%20Homelab." target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -481,7 +477,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;title=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f&amp;title=Smart%20Desk%20and%20Homelab." target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -491,7 +487,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;title=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f&amp;title=Smart%20Desk%20and%20Homelab." target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -501,7 +497,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f&amp;description=Infoblox%201.1%20plugin%20for%20vRA%208.1" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f&amp;description=Smart%20Desk%20and%20Homelab." target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -511,7 +507,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dan%20Grove&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2finfoblox-01%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fstandup-desk%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -660,6 +656,20 @@ if (!doNotTrack) {
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/standup-desk/">Smart Desk and Homelab.</a>
+              </h3>
+              
+              <time class="published" datetime='2020-07-11'>
+                July 11, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a>
               </h3>
               
@@ -679,20 +689,6 @@ if (!doNotTrack) {
               
               <time class="published" datetime='2020-05-29'>
                 May 29, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/vra81-abx-ps/">vRealize Automation 8.1 - PowerShell ABX</a>
-              </h3>
-              
-              <time class="published" datetime='2020-05-17'>
-                May 17, 2020
               </time>
             </header>
             
@@ -808,6 +804,17 @@ if (!doNotTrack) {
           <article>
             <header>
               
+                <a href="https://www.vcrocs.info/categories/home-lab/">home-lab</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
                 <a href="https://www.vcrocs.info/categories/hugo/">hugo</a>
                 <span style="float:right;">1</span>
               
@@ -864,6 +871,17 @@ if (!doNotTrack) {
             <header>
               
                 <a href="https://www.vcrocs.info/categories/rvtools/">rvtools</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/wfh/">wfh</a>
                 <span style="float:right;">1</span>
               
             </header>
