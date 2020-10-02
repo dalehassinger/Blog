@@ -21,8 +21,8 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2020",
-        "datePublished": "2020-07-17 00:00:00 \u002b0000 UTC",
-        "dateModified" : "2020-07-17 00:00:00 \u002b0000 UTC",
+        "datePublished": "2020-10-01 00:00:00 \u002b0000 UTC",
+        "dateModified" : "2020-10-01 00:00:00 \u002b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -56,7 +56,7 @@
 <meta property="og:description" content="vexpert, PowerShell, PowerCLI, VMware, vRealize Automation, vRA, NSX, RVTools, Automation, Hugo, Raspberry PI, Log Insight, vRealize Operations, vrops, Infrastucture as code" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2020-07-17T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-10-01T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -264,6 +264,18 @@ if (!doNotTrack) {
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-10-01'>
+                                    October 1, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/text-display-widget/">vRealize Operations - Dashboards</a></h3>
                                 
                                 <time class="published" datetime=
@@ -310,18 +322,6 @@ if (!doNotTrack) {
 
                         </article>
                 
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/vra81-abx-ps/">vRealize Automation 8.1 - PowerShell ABX</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-05-17'>
-                                    May 17, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
 
                 
                     <a href=
@@ -344,21 +344,21 @@ if (!doNotTrack) {
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/text-display-widget/">vRealize Operations - Dashboards</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a></h2>
         
         
-            <p>Text Display Widget - More Powerful than just displaying text on a Dashboard...</p>
+            <p>vRealize Operations</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2020-07-17'>
-            July 17, 2020</time>
+            datetime='2020-10-01'>
+            October 1, 2020</time>
         <span class="author">Dale Hassinger</span>
         
-            <p>3 minute read</p>
+            <p>2 minute read</p>
         
         
     </div>
@@ -370,25 +370,26 @@ if (!doNotTrack) {
   
 
   <div id="content">
-    <p>I was recently reviewing some sample custom vRealize Operations Dashboards and I seen where some of the Dashboards had custom text and images.  I reviewed how they included the text and images and in some of the sample Dashboards they used the “Text Display” Widget and used a url for the content. They would display images saved on a web server. I thought this was interesting and started reviewing what else could be displayed by using a url with the &ldquo;Text Display&rdquo; Widget.</p>
-<p>The first thought I had was to display the weather for both the data center locations where I work.  This could be used with a NOC type Dashboard.  I looked online for a weather widget site and got the code to display the weather for the specific locations. If you go to Administration/Configuration/Metric Configurations/TxtWidgetContent you can create html files to save the widget code. See examples in images below. You can display any Widget data from any web site that provides widgets using the &ldquo;Text Display&rdquo; Widget.</p>
-<p>After I successfully added weather widgets I wanted to get more serious and show data from a SQL Database. I use a SQL database to store data from some vRealize Automation Day 2 BluePrints that I created. Some example BluePrints where I store data in a SQL DB are Server Builds and Server Decomissions. I created a web page that displayed the SQL Data and added another “Text Display” widget to the Dashboard.  I used the url of the web page and assigned it to the widget and now I am also able to show SQL Data on a Dashboard.</p>
-<p>The reason I wanted to show Weather and SQL data is to use vRealize Operations Dashboards as the “Single Pane of Glass” for all monitoring. I have never seen a demo from VMware to use the “Text Display” Widget this way but I think this is awesome. This could completely change the way I use vRealize Operations Dashboards. There are not always vRealize Operations Management Packs available and this provides a cool way to show any data on a Dashboard.  The data will be for reference only but it does allow the &ldquo;Single Pane of Glass&rdquo;.</p>
-<h4 id="---vrealize-operations-dashboard">&mdash;vRealize Operations Dashboard:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/vrops01-1.png" alt=""></strong></p>
-<p>Here is a closeup of the Dashboard so you can see the details.</p>
-<p><strong><img src="https://www.vcrocs.info/images/vrops01-2.png" alt=""></strong></p>
-<h4 id="---widget-code">&mdash;Widget Code:</h4>
-<p>Administration/Configuration/Metric Configurations/TxtWidgetContent</p>
-<p><strong><img src="https://www.vcrocs.info/images/vrops02-1.png" alt=""></strong></p>
-<p>Here is a closeup. Create a html file and paste the Widget Code.</p>
-<p><strong><img src="https://www.vcrocs.info/images/vrops02-2.png" alt=""></strong></p>
-<p>Select the html file created to show the widget data</p>
-<p><strong><img src="https://www.vcrocs.info/images/vrops04.png" alt=""></strong></p>
-<h4 id="---url-page">&mdash;url Page:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/vrops03.png" alt=""></strong></p>
-<p>The url web page could be a static or dynamic page. Use whatever works best for you.  I think this opens up so many possibilities of what you can display on a Custom Dashboard. If you want to take it a step further you could publish the Custom vRealize Operations Dashboard with Workspace One and provide the data to anyone in your organization even if they are not a vRealize Operations user.  Cool Shit!</p>
-<p>The &ldquo;Text Display&rdquo; Widget should be renamed to the &ldquo;Cool Shit&rdquo; Widget!</p>
+    <h2 id="how-to-use-vrealize-operations-as-your-monitoring-single-pane-of-glass">How to use vRealize Operations as your monitoring &ldquo;Single Pane of Glass&rdquo;</h2>
+<p>For the 2020 VMware VMworld my presentation for the vBrownbag TechTalks was selected.</p>
+<p>Learn how to use the &ldquo;Text Display&rdquo; Widget on Dashboards to display data that is not within vRealize Operations. Display Weather Forecasts, Radar Maps, Data from SQL DBs on your next NOC Dashboard.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/lNN4JNF3diU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h4 id="socials">Socials:</h4>
+<ul>
+<li>Twitter: <a href="https://twitter.com/vBrownBag">https://twitter.com/vBrownBag</a></li>
+<li>Facebook: <a href="https://facebook.com/vBrownBag">https://facebook.com/vBrownBag</a></li>
+<li>iTunes: <a href="http://bit.ly/vbrownbagitunes">http://bit.ly/vbrownbagitunes</a></li>
+</ul>
+<p><a href="https://vBrownBag.com">https://vBrownBag.com</a> is a community of people who believe in helping other people. Specifically we work in IT infrastructure and we help other people in the IT industry to better their carreers by educating. Most frequent activity is producing the vBrownBag podcast. vBrownBag also attends global conferences to produce TechTalks and theater sessions.</p>
+<h4 id="about-vbrownbag-podcasts">About vBrownBag Podcasts</h4>
+<p>The vBrownBag crew host podcasts where community members present on topics that will help others in the community. Some podcast series are aimed at helping people achieve certifications.
+Other podcasts help community members learn an entirely new subject area. We also cover areas like storage or automation. The podcast has been running weekly since 2010.</p>
+<h4 id="vbrownbag-techtalks">vBrownBag TechTalks</h4>
+<p>The vBrownBag crew love IT conferences, the only place where we actually see each other, the awesome people who are our presenters and the community members who follow the podcast. The conferences are also a great place to generate some more community learning content.</p>
 
   </div>
 
@@ -402,7 +403,7 @@ if (!doNotTrack) {
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vrealize-operations">vRealize Operations</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vbrownbag">vBrownbag</a></li>
                 
             
         
@@ -410,6 +411,21 @@ if (!doNotTrack) {
   </li>
   <li class="tags">
     <ul>
+        
+            
+            
+                <i class="fa fa-tags"></i>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/tags/vbrownbag">vBrownbag</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/tags/vrealize-operations">vRealize Operations</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/tags/vmworld">VMworld</a></li>
+                
+            
         
     </ul>
   </li>
@@ -445,8 +461,8 @@ if (!doNotTrack) {
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/standup-desk/"
-                class="button big previous">Smart Desk and Homelab.</a></li>
+        <li><a href="https://www.vcrocs.info/blog/text-display-widget/"
+                class="button big previous">vRealize Operations - Dashboards</a></li>
     
 
     
@@ -465,7 +481,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f&amp;text=vRealize%20Operations%20-%20Dashboards&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;text=vBrownbag%20VMworld%20Presentation&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -475,7 +491,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -486,7 +502,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -496,7 +512,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f&amp;title=vRealize%20Operations%20-%20Dashboards" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;title=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -506,7 +522,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f&amp;title=vRealize%20Operations%20-%20Dashboards" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;title=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -516,7 +532,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f&amp;title=vRealize%20Operations%20-%20Dashboards" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;title=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -526,7 +542,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f&amp;description=vRealize%20Operations%20-%20Dashboards" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;description=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -536,7 +552,7 @@ if (!doNotTrack) {
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2ftext-display-widget%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -685,6 +701,20 @@ if (!doNotTrack) {
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a>
+              </h3>
+              
+              <time class="published" datetime='2020-10-01'>
+                October 1, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/text-display-widget/">vRealize Operations - Dashboards</a>
               </h3>
               
@@ -732,20 +762,6 @@ if (!doNotTrack) {
               
               <time class="published" datetime='2020-05-29'>
                 May 29, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/vra81-abx-ps/">vRealize Automation 8.1 - PowerShell ABX</a>
-              </h3>
-              
-              <time class="published" datetime='2020-05-17'>
-                May 17, 2020
               </time>
             </header>
             
@@ -928,6 +944,17 @@ if (!doNotTrack) {
             <header>
               
                 <a href="https://www.vcrocs.info/categories/rvtools/">rvtools</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/vbrownbag/">vbrownbag</a>
                 <span style="float:right;">1</span>
               
             </header>
