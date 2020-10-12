@@ -21,8 +21,8 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2020",
-        "datePublished": "2020-10-01 00:00:00 \u002b0000 UTC",
-        "dateModified" : "2020-10-01 00:00:00 \u002b0000 UTC",
+        "datePublished": "2020-10-11 00:00:00 \u002b0000 UTC",
+        "dateModified" : "2020-10-11 00:00:00 \u002b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -56,7 +56,7 @@
 <meta property="og:description" content="vexpert, PowerShell, PowerCLI, VMware, vRealize Automation, vRA, NSX, RVTools, Automation, Hugo, Raspberry PI, Log Insight, vRealize Operations, vrops, Infrastucture as code" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2020-10-01T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-10-11T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -264,6 +264,18 @@ if (!doNotTrack) {
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-10-11'>
+                                    October 11, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a></h3>
                                 
                                 <time class="published" datetime=
@@ -310,18 +322,6 @@ if (!doNotTrack) {
 
                         </article>
                 
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-05-29'>
-                                    May 29, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
 
                 
                     <a href=
@@ -344,18 +344,18 @@ if (!doNotTrack) {
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a></h2>
         
         
-            <p>vRealize Operations</p>
+            <p>Running ESXi on Raspberry PI...</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2020-10-01'>
-            October 1, 2020</time>
+            datetime='2020-10-11'>
+            October 11, 2020</time>
         <span class="author">Dale Hassinger</span>
         
             <p>2 minute read</p>
@@ -370,26 +370,29 @@ if (!doNotTrack) {
   
 
   <div id="content">
-    <h2 id="how-to-use-vrealize-operations-as-your-monitoring-single-pane-of-glass">How to use vRealize Operations as your monitoring &ldquo;Single Pane of Glass&rdquo;</h2>
-<p>For the 2020 VMware VMworld my presentation for the vBrownbag TechTalks was selected.</p>
-<p>Learn how to use the &ldquo;Text Display&rdquo; Widget on Dashboards to display data that is not within vRealize Operations. Display Weather Forecasts, Radar Maps, Data from SQL DBs on your next NOC Dashboard.</p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/lNN4JNF3diU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-<h4 id="socials">Socials:</h4>
+    <p>I have always be fascinated with everything that you can do with a Raspberry PI.  When VMware released their Fling to install ESXi on the Raspberry PI I have become even more fascinated. An ESXi Host for the Home Lab for $50. Sign me up.</p>
+<p>During VMworld 2020, VMware announced that they would be releasing a Fling to install ESXi on the Raspberry PI.  Before the VMworld session was over I had a new Raspberry PI ordered and it was delivered the next day, ahead of the Fling release, so that I would be ready.</p>
+<p>I downloaded the ESXi Arm Edition Fling as soon as I seen it was available.</p>
+<p>Lessons Learned:</p>
 <ul>
-<li>Twitter: <a href="https://twitter.com/vBrownBag">https://twitter.com/vBrownBag</a></li>
-<li>Facebook: <a href="https://facebook.com/vBrownBag">https://facebook.com/vBrownBag</a></li>
-<li>iTunes: <a href="http://bit.ly/vbrownbagitunes">http://bit.ly/vbrownbagitunes</a></li>
+<li>Read all the documentation on how to install ESXi on Raspberry PI.  Very important steps need to be followed.</li>
+<li>If you want to use more than one USB drive for storage use this ESXi Host advanced setting - USB.arbitratorAutoStartDisabled Set to 1</li>
+<li>Use a minimum size of 256 GB for the USB drive. Read the Fling Documentation for preferred USB drive to use.</li>
+<li>The ARM version of Ubuntu server installed without any issues.  I installed the Apache Web Server and Samba on the ARM Ubuntu Server and had no issues.</li>
+<li>Hugo Blog files run GREAT on ARM version of Ubuntu Server, with Apache web server, running on ESXi, installed on Raspberry PI.</li>
 </ul>
-<p><a href="https://vBrownBag.com">https://vBrownBag.com</a> is a community of people who believe in helping other people. Specifically we work in IT infrastructure and we help other people in the IT industry to better their carreers by educating. Most frequent activity is producing the vBrownBag podcast. vBrownBag also attends global conferences to produce TechTalks and theater sessions.</p>
-<h4 id="about-vbrownbag-podcasts">About vBrownBag Podcasts</h4>
-<p>The vBrownBag crew host podcasts where community members present on topics that will help others in the community. Some podcast series are aimed at helping people achieve certifications.
-Other podcasts help community members learn an entirely new subject area. We also cover areas like storage or automation. The podcast has been running weekly since 2010.</p>
-<h4 id="vbrownbag-techtalks">vBrownBag TechTalks</h4>
-<p>The vBrownBag crew love IT conferences, the only place where we actually see each other, the awesome people who are our presenters and the community members who follow the podcast. The conferences are also a great place to generate some more community learning content.</p>
+<p>I am going to be adding information to this Blog post as I discover more cool information with running ESXi on Raspberry PI.  Check back often.</p>
+<p><a href="https://flings.vmware.com/esxi-arm-edition">Link to ESXi Arm Edition - VMware Fling</a></p>
+<h4 id="esxi-70-on-raspberry-pi---cool-host-name-">ESXi 7.0 on RAspberry PI - Cool Host Name :)</h4>
+<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_02.jpeg" alt=""></strong></p>
+<h4 id="esxi-70-on-raspberry-pi-login-screen">ESXi 7.0 on RAspberry PI Login Screen:</h4>
+<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_03.png" alt=""></strong></p>
+<h4 id="esxi-managemnet-screen">ESXi Managemnet Screen:</h4>
+<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_04.png" alt=""></strong></p>
+<h4 id="esxi-on-raspberry-pi-added-to-vcenter">ESXi on Raspberry PI added to vCenter:</h4>
+<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_05.png" alt=""></strong></p>
+<h4 id="esxi-on-raspbeery-pi-added-to-vrealize-operations-82">ESXi on Raspbeery PI added to vRealize Operations 8.2:</h4>
+<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_01.png" alt=""></strong></p>
 
   </div>
 
@@ -403,13 +406,16 @@ Other podcasts help community members learn an entirely new subject area. We als
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vbrownbag">vBrownbag</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/esxi">ESXi</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/raspberry-pi">Raspberry PI</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/arm">ARM</a></li>
                 
                 
                 <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vrealize-operations">vRealize Operations</a></li>
-                
-                
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vmworld">VMworld</a></li>
                 
             
         
@@ -417,9 +423,6 @@ Other podcasts help community members learn an entirely new subject area. We als
   </li>
   <li class="tags">
     <ul>
-        
-            
-            
         
     </ul>
   </li>
@@ -455,8 +458,8 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/text-display-widget/"
-                class="button big previous">vRealize Operations - Dashboards</a></li>
+        <li><a href="https://www.vcrocs.info/blog/vbrownbag-presentation/"
+                class="button big previous">vBrownbag VMworld Presentation</a></li>
     
 
     
@@ -475,7 +478,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;text=vBrownbag%20VMworld%20Presentation&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;text=ESXi%20on%20Raspberry%20PI&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -485,7 +488,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -496,7 +499,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -506,7 +509,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;title=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;title=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -516,7 +519,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;title=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;title=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -526,7 +529,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;title=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;title=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -536,7 +539,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f&amp;description=vBrownbag%20VMworld%20Presentation" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;description=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -546,7 +549,7 @@ Other podcasts help community members learn an entirely new subject area. We als
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvbrownbag-presentation%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -695,6 +698,20 @@ Other podcasts help community members learn an entirely new subject area. We als
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a>
+              </h3>
+              
+              <time class="published" datetime='2020-10-11'>
+                October 11, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a>
               </h3>
               
@@ -742,20 +759,6 @@ Other podcasts help community members learn an entirely new subject area. We als
               
               <time class="published" datetime='2020-06-14'>
                 June 14, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/it-reality/">What is vRealize Automation - Episode 21</a>
-              </h3>
-              
-              <time class="published" datetime='2020-05-29'>
-                May 29, 2020
               </time>
             </header>
             
@@ -850,7 +853,7 @@ Other podcasts help community members learn an entirely new subject area. We als
             <header>
               
                 <a href="https://www.vcrocs.info/categories/esxi/">esxi</a>
-                <span style="float:right;">2</span>
+                <span style="float:right;">3</span>
               
             </header>
           </article>
@@ -861,7 +864,29 @@ Other podcasts help community members learn an entirely new subject area. We als
             <header>
               
                 <a href="https://www.vcrocs.info/categories/vrealize-operations/">vrealize-operations</a>
+                <span style="float:right;">3</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/raspberry-pi/">raspberry-pi</a>
                 <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/arm/">arm</a>
+                <span style="float:right;">1</span>
               
             </header>
           </article>
@@ -927,17 +952,6 @@ Other podcasts help community members learn an entirely new subject area. We als
             <header>
               
                 <a href="https://www.vcrocs.info/categories/podcast/">podcast</a>
-                <span style="float:right;">1</span>
-              
-            </header>
-          </article>
-        </p>
-        
-        <p>
-          <article>
-            <header>
-              
-                <a href="https://www.vcrocs.info/categories/raspberry-pi/">raspberry-pi</a>
                 <span style="float:right;">1</span>
               
             </header>
