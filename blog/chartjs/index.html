@@ -1,0 +1,1271 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <script type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "BlogPosting",
+        "mainEntityOfPage": {
+             "@type": "WebPage",
+             "@id": "https:\/\/www.vcrocs.info\/"
+        },
+        "articleSection" : "blog",
+        "name" : "ChartJS",
+        "headline" : "ChartJS",
+        "description" : "Creating Charts with ChartJS and displaying in vRealize Operations...",
+        "inLanguage" : "en",
+        "author" : "",
+        "creator" : "",
+        "publisher": "",
+        "accountablePerson" : "",
+        "copyrightHolder" : "",
+        "copyrightYear" : "2021",
+        "datePublished": "2021-01-03 00:00:00 \u002b0000 UTC",
+        "dateModified" : "2021-01-03 00:00:00 \u002b0000 UTC",
+        "url" : "https:\/\/www.vcrocs.info\/blog\/chartjs\/",
+        "wordCount" : "476",
+        "keywords" : [ "Blog" ]
+    }
+    </script>
+        
+            
+                <title>ChartJS</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.73.0" />
+        
+
+
+        
+            <meta name="author" content="Dale Hassinger">
+        
+        
+            <meta name="description" content="Creating Charts with ChartJS and displaying in vRealize Operations...">
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ChartJS"/>
+<meta name="twitter:description" content="Creating Charts with ChartJS and displaying in vRealize Operations..."/>
+<meta name="twitter:site" content="@DaleHassinger"/>
+
+        <meta property="og:title" content="ChartJS" />
+<meta property="og:description" content="Creating Charts with ChartJS and displaying in vRealize Operations..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/blog/chartjs/" />
+<meta property="article:published_time" content="2021-01-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-03T00:00:00+00:00" />
+
+        <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="512">
+        <meta itemprop="name" content="ChartJS">
+<meta itemprop="description" content="Creating Charts with ChartJS and displaying in vRealize Operations...">
+<meta itemprop="datePublished" content="2021-01-03T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2021-01-03T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="476">
+
+
+
+<meta itemprop="keywords" content="" />
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="https://www.vcrocs.info/css/main.css">
+            <link rel="stylesheet" href="https://www.vcrocs.info/css/add-on.css">
+            <link rel="stylesheet" href="https://www.vcrocs.info/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+      
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166234216-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166234216-1');
+    </script>
+
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      <h1><a href="https://www.vcrocs.info/">blog</a></h1>
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="https://www.vcrocs.info/">
+                            <i class="fa fa-home">&nbsp;</i>Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.vcrocs.info/about/">
+                            <i class="fa fa-id-card-o">&nbsp;</i>About
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.vcrocs.info/blog/">
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.vcrocs.info/categories/">
+                            <i class="fa fa-sitemap">&nbsp;</i>Categories
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.vcrocs.info/contact/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="https://www.vcrocs.info/pictures/">
+                            <i class="fa fa-image">&nbsp;</i>Pictures
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="as_sitesearch" value="https://www.vcrocs.info/">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="as_sitesearch" value="https://www.vcrocs.info/">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="https://www.vcrocs.info/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Home
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.vcrocs.info/about/">
+                            <h3>
+                                <i class="fa fa-id-card-o">&nbsp;</i>About
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.vcrocs.info/blog/">
+                            <h3>
+                                <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.vcrocs.info/categories/">
+                            <h3>
+                                <i class="fa fa-sitemap">&nbsp;</i>Categories
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.vcrocs.info/contact/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contact
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.vcrocs.info/pictures/">
+                            <h3>
+                                <i class="fa fa-image">&nbsp;</i>Pictures
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section class="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Recent Posts</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2021-01-03'>
+                                    January 3, 2021</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-10-11'>
+                                    October 11, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-10-01'>
+                                    October 1, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.vcrocs.info/blog/text-display-widget/">vRealize Operations - Dashboards</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-07-17'>
+                                    July 17, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="https://www.vcrocs.info/blog/standup-desk/">Smart Desk and Homelab.</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2020-07-11'>
+                                    July 11, 2020</time>
+                            </header>
+                            
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">View more posts</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;text=ChartJS&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn stumbleupon">
+    <i class="fa fa-stumbleupon"></i>
+    <p>StumbleUpon</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;description=ChartJS" target="_blank" class="share-btn pinterest">
+    <i class="fa fa-pinterest-p"></i>
+    <p>Pinterest</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a></h1>
+            
+        
+        
+            <p>Creating Charts with ChartJS and displaying in vRealize Operations...</p>
+        
+    </div>
+    <div class="meta">
+        
+
+        <time class="published"
+            datetime='2021-01-03'>
+            January 3, 2021</time>
+        <span class="author">Dale Hassinger</span>
+        
+            <p>3 minute read</p>
+        
+        
+    </div>
+</header>
+
+
+  
+
+  
+
+  <div id="content">
+    <p>I like the idea of using VMware vRealize Operations as the “Single Pane of Glass” for all monitoring.  The Citrix Team recently asked me if I could show license usage within vRealize Operations. They wanted to see the highest usage in the last 30 days, 10 days and 24 hours. Citrix license usage is not built into vROPS but I have used the “Text Display Widget” to show other information within vROPS.</p>
+<p>I wanted to create a half donut chart to show the highest license usage in the last 30 days, a horizontal bar chart to show the last 10 days and a table to show the last 24 hours.  I reviewed to see what “Open Source” Javascript options were available and I found ChartJS. After reviewing how to program the files to create charts with ChartJS I liked the solution.</p>
+<h4 id="chartjs-displayed-in-vrealize-operations-using-the-text-display-widget">ChartJS Displayed in vRealize Operations using the &ldquo;Text Display Widget&rdquo;</h4>
+<p><strong><img src="https://www.vcrocs.info/images/chartjs01.jpg" alt=""></strong></p>
+<h4 id="chartjs-half-donut">ChartJS Half Donut.</h4>
+<p><strong><img src="https://www.vcrocs.info/images/chartjs02.jpg" alt=""></strong></p>
+<p>When you hold the mouse over the chart you will see the values.</p>
+<h4 id="chartjs-half-donut-code">ChartJS Half Donut code:</h4>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Citrix Licensing Count&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;body&gt;
+    &lt;div style=&quot;width:95%&quot;&gt;
+    &lt;canvas id=&quot;doughnut-chart&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+	&lt;script&gt;
+		new Chart(document.getElementById(&quot;doughnut-chart&quot;), {
+			type: 'doughnut',
+			data: {
+			labels: [&quot;Used&quot;,&quot;Total&quot;],
+			datasets: [
+				{
+        label: &quot;Peak Usage&quot;,
+				backgroundColor: [&quot;#28B463&quot;,&quot;#808B96&quot;],
+				data: [1682,8000]
+				}
+			]
+			},
+			options: {
+			title: {
+				display: true,
+				text: 'Citrix License Usage (MPS_PLT_CCU)',
+			},
+			rotation: 1 * Math.PI,
+			circumference: 1 * Math.PI
+			}
+		});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="chartjs-horizintal-bar-chart">ChartJS Horizintal Bar Chart.</h4>
+<p><strong><img src="https://www.vcrocs.info/images/chartjs03.jpg" alt=""></strong></p>
+<h4 id="chartjs-horizintal-bar-chart-code">ChartJS Horizintal Bar Chart code:</h4>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Citrix Licensing Count&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div style=&quot;width:95%&quot;&gt;
+    &lt;canvas id=&quot;bar-chart-horizontal&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+		new Chart(document.getElementById(&quot;bar-chart-horizontal&quot;), {
+			type: &quot;horizontalBar&quot;,
+			data: {
+			labels: [&quot;01/03/2021&quot;,&quot;01/02/2021&quot;,&quot;01/01/2021&quot;,&quot;12/31/2020&quot;,&quot;12/30/2020&quot;,&quot;12/29/2020&quot;,&quot;12/28/2020&quot;,&quot;12/27/2020&quot;,&quot;12/26/2020&quot;,&quot;12/25/2020&quot;,&quot;Total Licences&quot;],
+			datasets: [
+				{
+				label: &quot;Peak Usage&quot;,
+				backgroundColor: [&quot;#28B463&quot;, &quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#808B96&quot;],
+				data: [249,318,302,1402,1535,1498,1516,271,273,269,8000]
+				}
+			]
+			},
+			options: {
+			legend: { display: false },
+			title: {
+				display: true,
+				text: &quot;Citrix License Usage (MPS_PLT_CCU)&quot;
+			}
+			}
+		});	
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul>
+<li>Read all the documentation on how to create ChartJS files.  Very important steps need to be followed.</li>
+<li>All the Web pages to show Citrix Licence counts are updated very hour.</li>
+<li>The process to update the Web Pages is scheduled with vRealize Automation Orchestrator.</li>
+<li>The code to get the license information and create the web pages is all done with PowerShell.</li>
+<li>The License values collected every hour are saved in a Microsoft SQL Database.</li>
+</ul>
+<p>The process to save the data and create the web pages can be done many different ways. I outlined how I do it in my environment. What I feel was important to show was the finished HTML code to create the ChartJS Web Pages that I display in vRealize Operations.  The data could be from any source that makes sense in your environment. This makes a great way to graphically show data within vROPS from data that is saved outside of vROPS.</p>
+<p><a href="https://www.vcrocs.info/blog/text-display-widget">Link to my blog post that shows how to use the &ldquo;Test Display Widget&rdquo;</a></p>
+<p><a href="https://www.chartjs.org">Link to ChartJS</a></p>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+  <li class="categories">
+    <ul>
+        
+            
+            
+                <i class="fa fa-folder"></i>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/citrix">Citrix</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/chartjs">ChartJS</a></li>
+                
+                
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vrealize-operations">vRealize Operations</a></li>
+                
+            
+        
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+        
+    </ul>
+  </li>
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "vcrocs" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/"
+                class="button big previous">ESXi on Raspberry PI</a></li>
+    
+
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+      
+        <a href='https://www.vcrocs.info/' class="logo"><img src="https://www.vcrocs.info/img/main/logo.png" alt="vCrocs.info" /></a>
+      
+    
+    
+      <header>
+        <h2>Dale Hassinger</h2>
+        <p>Sharing content with the vCommunity and anyone else that finds my content interesting...</p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://www.vcrocs.info/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/dalehassinger" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//linkedin.com/in/dale-hassinger-5712301b" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//youtube.com/dale17h" target="_blank" title="YouTube" class="fa fa-youtube"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//instagram.com/DaleHassinger" target="_blank" title="Instagram" class="fa fa-instagram"></a></li>
+
+
+
+
+
+  <li><a href="//twitter.com/DaleHassinger" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:Dale.Hassinger@vCrocs.info" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section class="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Recent Posts</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a>
+              </h3>
+              
+              <time class="published" datetime='2021-01-03'>
+                January 3, 2021
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a>
+              </h3>
+              
+              <time class="published" datetime='2020-10-11'>
+                October 11, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.vcrocs.info/blog/vbrownbag-presentation/">vBrownbag VMworld Presentation</a>
+              </h3>
+              
+              <time class="published" datetime='2020-10-01'>
+                October 1, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.vcrocs.info/blog/text-display-widget/">vRealize Operations - Dashboards</a>
+              </h3>
+              
+              <time class="published" datetime='2020-07-17'>
+                July 17, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="https://www.vcrocs.info/blog/standup-desk/">Smart Desk and Homelab.</a>
+              </h3>
+              
+              <time class="published" datetime='2020-07-11'>
+                July 11, 2020
+              </time>
+            </header>
+            
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">View more posts</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="https://www.vcrocs.info/categories/">Categories</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/powershell/">powershell</a>
+                <span style="float:right;">10</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/vra/">vra</a>
+                <span style="float:right;">8</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/nsx/">nsx</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/powercli/">powercli</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/vrealize-operations/">vrealize-operations</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/coffee-talk/">coffee-talk</a>
+                <span style="float:right;">3</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/esxi/">esxi</a>
+                <span style="float:right;">3</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/raspberry-pi/">raspberry-pi</a>
+                <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/arm/">arm</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/chartjs/">chartjs</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/citrix/">citrix</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/dan-grove/">dan-grove</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/home-lab/">home-lab</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/hugo/">hugo</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/infoblox/">infoblox</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/log-insight/">log-insight</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/podcast/">podcast</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/rvtools/">rvtools</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/vbrownbag/">vbrownbag</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/vmworld/">vmworld</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/wfh/">wfh</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+  
+  
+    <section id="mini-bio">
+      <h3>About</h3>
+      <p>vCommunity, VMware, PowerShell, PowerCLI, vRealize Automation, vRealize Operations, vRealize Log Insight</p>
+      <a href="https://www.vcrocs.info/about/" class="button">Learn More</a>
+    </section>
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="https://www.vcrocs.info/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/dalehassinger" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//linkedin.com/in/dale-hassinger-5712301b" target="_blank" title="LinkedIn" class="fa fa-linkedin"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//youtube.com/dale17h" target="_blank" title="YouTube" class="fa fa-youtube"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="//instagram.com/DaleHassinger" target="_blank" title="Instagram" class="fa fa-instagram"></a></li>
+
+
+
+
+
+  <li><a href="//twitter.com/DaleHassinger" target="_blank" title="Twitter" class="fa fa-twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li><a href="mailto:Dale.Hassinger@vCrocs.info" title="Email" class="fa fa-envelope"></a></li>
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2021
+        
+          www.vCrocs.info
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/css.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="https://www.vcrocs.info/js/util.js"></script>
+      <script src="https://www.vcrocs.info/js/main.js"></script>
+      <script src="https://www.vcrocs.info/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+      <script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+  </body>
+</html>
+

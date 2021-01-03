@@ -20,9 +20,9 @@
         "publisher": "",
         "accountablePerson" : "",
         "copyrightHolder" : "",
-        "copyrightYear" : "2020",
-        "datePublished": "2020-10-11 00:00:00 \u002b0000 UTC",
-        "dateModified" : "2020-10-11 00:00:00 \u002b0000 UTC",
+        "copyrightYear" : "2021",
+        "datePublished": "2021-01-03 00:00:00 \u002b0000 UTC",
+        "dateModified" : "2021-01-03 00:00:00 \u002b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -56,7 +56,7 @@
 <meta property="og:description" content="vexpert, PowerShell, PowerCLI, VMware, vRealize Automation, vRA, NSX, RVTools, Automation, Hugo, Raspberry PI, Log Insight, vRealize Operations, vrops, Infrastucture as code" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2020-10-11T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-01-03T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -262,6 +262,18 @@
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2021-01-03'>
+                                    January 3, 2021</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a></h3>
                                 
                                 <time class="published" datetime=
@@ -308,18 +320,6 @@
 
                         </article>
                 
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-06-14'>
-                                    June 14, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
 
                 
                     <a href=
@@ -342,21 +342,21 @@
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a></h2>
         
         
-            <p>Running ESXi on Raspberry PI...</p>
+            <p>Creating Charts with ChartJS and displaying in vRealize Operations...</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2020-10-11'>
-            October 11, 2020</time>
+            datetime='2021-01-03'>
+            January 3, 2021</time>
         <span class="author">Dale Hassinger</span>
         
-            <p>2 minute read</p>
+            <p>3 minute read</p>
         
         
     </div>
@@ -368,30 +368,95 @@
   
 
   <div id="content">
-    <p>I have always be fascinated with everything that you can do with a Raspberry PI.  When VMware released their Fling to install ESXi on the Raspberry PI I have become even more fascinated. An ESXi Host for the Home Lab for $50. Sign me up.</p>
-<p>During VMworld 2020, VMware announced that they would be releasing a Fling to install ESXi on the Raspberry PI.  Before the VMworld session was over I had a new Raspberry PI ordered and it was delivered the next day, ahead of the Fling release, so that I would be ready.</p>
-<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_06.png" alt=""></strong></p>
-<p>I downloaded the ESXi Arm Edition Fling as soon as I seen it was available.</p>
-<p>Lessons Learned:</p>
-<ul>
-<li>Read all the documentation on how to install ESXi on Raspberry PI.  Very important steps need to be followed.</li>
-<li>If you want to use more than one USB drive for storage use this ESXi Host advanced setting - USB.arbitratorAutoStartDisabled Set to 1</li>
-<li>Use a minimum size of 256 GB for the USB drive. Read the Fling Documentation for preferred USB drive to use.</li>
-<li>The ARM version of Ubuntu server installed without any issues.  I installed the Apache Web Server and Samba on the ARM Ubuntu Server and had no issues.</li>
-<li>Hugo Blog files run GREAT on ARM version of Ubuntu Server, with Apache web server, running on ESXi, installed on Raspberry PI.</li>
+    <p>I like the idea of using VMware vRealize Operations as the “Single Pane of Glass” for all monitoring.  The Citrix Team recently asked me if I could show license usage within vRealize Operations. They wanted to see the highest usage in the last 30 days, 10 days and 24 hours. Citrix license usage is not built into vROPS but I have used the “Text Display Widget” to show other information within vROPS.</p>
+<p>I wanted to create a half donut chart to show the highest license usage in the last 30 days, a horizontal bar chart to show the last 10 days and a table to show the last 24 hours.  I reviewed to see what “Open Source” Javascript options were available and I found ChartJS. After reviewing how to program the files to create charts with ChartJS I liked the solution.</p>
+<h4 id="chartjs-displayed-in-vrealize-operations-using-the-text-display-widget">ChartJS Displayed in vRealize Operations using the &ldquo;Text Display Widget&rdquo;</h4>
+<p><strong><img src="https://www.vcrocs.info/images/chartjs01.jpg" alt=""></strong></p>
+<h4 id="chartjs-half-donut">ChartJS Half Donut.</h4>
+<p><strong><img src="https://www.vcrocs.info/images/chartjs02.jpg" alt=""></strong></p>
+<p>When you hold the mouse over the chart you will see the values.</p>
+<h4 id="chartjs-half-donut-code">ChartJS Half Donut code:</h4>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Citrix Licensing Count&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;body&gt;
+    &lt;div style=&quot;width:95%&quot;&gt;
+    &lt;canvas id=&quot;doughnut-chart&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+	&lt;script&gt;
+		new Chart(document.getElementById(&quot;doughnut-chart&quot;), {
+			type: 'doughnut',
+			data: {
+			labels: [&quot;Used&quot;,&quot;Total&quot;],
+			datasets: [
+				{
+        label: &quot;Peak Usage&quot;,
+				backgroundColor: [&quot;#28B463&quot;,&quot;#808B96&quot;],
+				data: [1682,8000]
+				}
+			]
+			},
+			options: {
+			title: {
+				display: true,
+				text: 'Citrix License Usage (MPS_PLT_CCU)',
+			},
+			rotation: 1 * Math.PI,
+			circumference: 1 * Math.PI
+			}
+		});
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h4 id="chartjs-horizintal-bar-chart">ChartJS Horizintal Bar Chart.</h4>
+<p><strong><img src="https://www.vcrocs.info/images/chartjs03.jpg" alt=""></strong></p>
+<h4 id="chartjs-horizintal-bar-chart-code">ChartJS Horizintal Bar Chart code:</h4>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Citrix Licensing Count&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div style=&quot;width:95%&quot;&gt;
+    &lt;canvas id=&quot;bar-chart-horizontal&quot;&gt;&lt;/canvas&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+		new Chart(document.getElementById(&quot;bar-chart-horizontal&quot;), {
+			type: &quot;horizontalBar&quot;,
+			data: {
+			labels: [&quot;01/03/2021&quot;,&quot;01/02/2021&quot;,&quot;01/01/2021&quot;,&quot;12/31/2020&quot;,&quot;12/30/2020&quot;,&quot;12/29/2020&quot;,&quot;12/28/2020&quot;,&quot;12/27/2020&quot;,&quot;12/26/2020&quot;,&quot;12/25/2020&quot;,&quot;Total Licences&quot;],
+			datasets: [
+				{
+				label: &quot;Peak Usage&quot;,
+				backgroundColor: [&quot;#28B463&quot;, &quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#808B96&quot;],
+				data: [249,318,302,1402,1535,1498,1516,271,273,269,8000]
+				}
+			]
+			},
+			options: {
+			legend: { display: false },
+			title: {
+				display: true,
+				text: &quot;Citrix License Usage (MPS_PLT_CCU)&quot;
+			}
+			}
+		});	
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><ul>
+<li>Read all the documentation on how to create ChartJS files.  Very important steps need to be followed.</li>
+<li>All the Web pages to show Citrix Licence counts are updated very hour.</li>
+<li>The process to update the Web Pages is scheduled with vRealize Automation Orchestrator.</li>
+<li>The code to get the license information and create the web pages is all done with PowerShell.</li>
+<li>The License values collected every hour are saved in a Microsoft SQL Database.</li>
 </ul>
-<p>I am going to be adding information to this Blog post as I discover more cool information with running ESXi on Raspberry PI.  Check back often.</p>
-<p><a href="https://flings.vmware.com/esxi-arm-edition">Link to ESXi Arm Edition - VMware Fling</a></p>
-<h4 id="esxi-70-on-raspberry-pi---cool-host-name-">ESXi 7.0 on RAspberry PI - Cool Host Name :)</h4>
-<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_02.jpeg" alt=""></strong></p>
-<h4 id="esxi-70-on-raspberry-pi-login-screen">ESXi 7.0 on RAspberry PI Login Screen:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_03.png" alt=""></strong></p>
-<h4 id="esxi-managemnet-screen">ESXi Managemnet Screen:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_04.png" alt=""></strong></p>
-<h4 id="esxi-on-raspberry-pi-added-to-vcenter">ESXi on Raspberry PI added to vCenter:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_05.png" alt=""></strong></p>
-<h4 id="esxi-on-raspbeery-pi-added-to-vrealize-operations-82">ESXi on Raspbeery PI added to vRealize Operations 8.2:</h4>
-<p><strong><img src="https://www.vcrocs.info/images/esxi_raspberry_pi_01.png" alt=""></strong></p>
+<p>The process to save the data and create the web pages can be done many different ways. I outlined how I do it in my environment. What I feel was important to show was the finished HTML code to create the ChartJS Web Pages that I display in vRealize Operations.  The data could be from any source that makes sense in your environment. This makes a great way to graphically show data within vROPS from data that is saved outside of vROPS.</p>
+<p><a href="https://www.vcrocs.info/blog/text-display-widget">Link to my blog post that shows how to use the &ldquo;Test Display Widget&rdquo;</a></p>
+<p><a href="https://www.chartjs.org">Link to ChartJS</a></p>
 
   </div>
 
@@ -405,13 +470,10 @@
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/esxi">ESXi</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/citrix">Citrix</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/raspberry-pi">Raspberry PI</a></li>
-                
-                
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/arm">ARM</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/chartjs">ChartJS</a></li>
                 
                 
                 <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vrealize-operations">vRealize Operations</a></li>
@@ -457,8 +519,8 @@
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/vbrownbag-presentation/"
-                class="button big previous">vBrownbag VMworld Presentation</a></li>
+        <li><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/"
+                class="button big previous">ESXi on Raspberry PI</a></li>
     
 
     
@@ -477,7 +539,7 @@
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;text=ESXi%20on%20Raspberry%20PI&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;text=ChartJS&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -487,7 +549,7 @@
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -498,7 +560,7 @@
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -508,7 +570,7 @@
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;title=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -518,7 +580,7 @@
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;title=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -528,7 +590,7 @@
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;title=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -538,7 +600,7 @@
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f&amp;description=ESXi%20on%20Raspberry%20PI" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;description=ChartJS" target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -548,7 +610,7 @@
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fesxi_arm_raspberry-pi%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -697,6 +759,20 @@
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a>
+              </h3>
+              
+              <time class="published" datetime='2021-01-03'>
+                January 3, 2021
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/">ESXi on Raspberry PI</a>
               </h3>
               
@@ -744,20 +820,6 @@
               
               <time class="published" datetime='2020-07-11'>
                 July 11, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/infoblox-01/">Infoblox 1.1 plugin for vRA 8.1</a>
-              </h3>
-              
-              <time class="published" datetime='2020-06-14'>
-                June 14, 2020
               </time>
             </header>
             
@@ -840,6 +902,17 @@
           <article>
             <header>
               
+                <a href="https://www.vcrocs.info/categories/vrealize-operations/">vrealize-operations</a>
+                <span style="float:right;">4</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
                 <a href="https://www.vcrocs.info/categories/coffee-talk/">coffee-talk</a>
                 <span style="float:right;">3</span>
               
@@ -862,17 +935,6 @@
           <article>
             <header>
               
-                <a href="https://www.vcrocs.info/categories/vrealize-operations/">vrealize-operations</a>
-                <span style="float:right;">3</span>
-              
-            </header>
-          </article>
-        </p>
-        
-        <p>
-          <article>
-            <header>
-              
                 <a href="https://www.vcrocs.info/categories/raspberry-pi/">raspberry-pi</a>
                 <span style="float:right;">2</span>
               
@@ -885,6 +947,28 @@
             <header>
               
                 <a href="https://www.vcrocs.info/categories/arm/">arm</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/chartjs/">chartjs</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="https://www.vcrocs.info/categories/citrix/">citrix</a>
                 <span style="float:right;">1</span>
               
             </header>
@@ -1118,7 +1202,7 @@
     
     <p class="copyright">
       
-        &copy; 2020
+        &copy; 2021
         
           www.vCrocs.info
         
