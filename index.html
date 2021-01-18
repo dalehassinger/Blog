@@ -21,8 +21,8 @@
         "accountablePerson" : "",
         "copyrightHolder" : "",
         "copyrightYear" : "2021",
-        "datePublished": "2021-01-03 00:00:00 \u002b0000 UTC",
-        "dateModified" : "2021-01-03 00:00:00 \u002b0000 UTC",
+        "datePublished": "2021-01-18 00:00:00 \u002b0000 UTC",
+        "dateModified" : "2021-01-18 00:00:00 \u002b0000 UTC",
         "url" : "https:\/\/www.vcrocs.info\/",
         "wordCount" : "0",
         "keywords" : [ "Blog" ]
@@ -56,7 +56,7 @@
 <meta property="og:description" content="vexpert, PowerShell, PowerCLI, VMware, vRealize Automation, vRA, NSX, RVTools, Automation, Hugo, Raspberry PI, Log Insight, vRealize Operations, vrops, Infrastucture as code" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.vcrocs.info/" />
-<meta property="og:updated_time" content="2021-01-03T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-01-18T00:00:00+00:00" />
 
         <meta property="og:image" content="https://www.vcrocs.info//images/logo.png">
         <meta property="og:image:type" content="image/png">
@@ -262,6 +262,18 @@
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="https://www.vcrocs.info/blog/vra82-ps-host/">How to use PowerShell Modules with vRA 8.2</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2021-01-18'>
+                                    January 18, 2021</time>
+                            </header>
+                            
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a></h3>
                                 
                                 <time class="published" datetime=
@@ -308,18 +320,6 @@
 
                         </article>
                 
-                        <article class="mini-post">
-                            <header>
-                                <h3><a href="https://www.vcrocs.info/blog/standup-desk/">Smart Desk and Homelab.</a></h3>
-                                
-                                <time class="published" datetime=
-                                    '2020-07-11'>
-                                    July 11, 2020</time>
-                            </header>
-                            
-
-                        </article>
-                
 
                 
                     <a href=
@@ -342,21 +342,21 @@
   <header>
     <div class="title">
         
-            <h2><a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a></h2>
+            <h2><a href="https://www.vcrocs.info/blog/vra82-ps-host/">How to use PowerShell Modules with vRA 8.2</a></h2>
         
         
-            <p>Creating Charts with ChartJS and displaying in vRealize Operations...</p>
+            <p>Options to use PowerShell Modules</p>
         
     </div>
     <div class="meta">
         
 
         <time class="published"
-            datetime='2021-01-03'>
-            January 3, 2021</time>
+            datetime='2021-01-18'>
+            January 18, 2021</time>
         <span class="author">Dale Hassinger</span>
         
-            <p>3 minute read</p>
+            <p>7 minute read</p>
         
         
     </div>
@@ -368,95 +368,221 @@
   
 
   <div id="content">
-    <p>I like the idea of using VMware vRealize Operations as the “Single Pane of Glass” for all monitoring.  The Citrix Team recently asked me if I could show license usage within vRealize Operations. They wanted to see the highest usage in the last 30 days, 10 days and 24 hours. Citrix license usage is not built into vROPS but I have used the “Text Display Widget” to show other information within vROPS.</p>
-<p>I wanted to create a half donut chart to show the highest license usage in the last 30 days, a horizontal bar chart to show the last 10 days and a table to show the last 24 hours.  I reviewed to see what “Open Source” Javascript options were available and I found ChartJS. After reviewing how to program the files to create charts with ChartJS I liked the solution.</p>
-<h4 id="chartjs-displayed-in-vrealize-operations-using-the-text-display-widget">ChartJS Displayed in vRealize Operations using the &ldquo;Text Display Widget&rdquo;</h4>
-<p><strong><img src="https://www.vcrocs.info/images/chartjs01.jpg" alt=""></strong></p>
-<h4 id="chartjs-half-donut">ChartJS Half Donut.</h4>
-<p><strong><img src="https://www.vcrocs.info/images/chartjs02.jpg" alt=""></strong></p>
-<p>When you hold the mouse over the chart you will see the values.</p>
-<h4 id="chartjs-half-donut-code">ChartJS Half Donut code:</h4>
-<pre><code>&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Citrix Licensing Count&lt;/title&gt;
-  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;body&gt;
-    &lt;div style=&quot;width:95%&quot;&gt;
-    &lt;canvas id=&quot;doughnut-chart&quot;&gt;&lt;/canvas&gt;
-    &lt;/div&gt;
-	&lt;script&gt;
-		new Chart(document.getElementById(&quot;doughnut-chart&quot;), {
-			type: 'doughnut',
-			data: {
-			labels: [&quot;Used&quot;,&quot;Total&quot;],
-			datasets: [
-				{
-        label: &quot;Peak Usage&quot;,
-				backgroundColor: [&quot;#28B463&quot;,&quot;#808B96&quot;],
-				data: [1682,8000]
-				}
-			]
-			},
-			options: {
-			title: {
-				display: true,
-				text: 'Citrix License Usage (MPS_PLT_CCU)',
-			},
-			rotation: 1 * Math.PI,
-			circumference: 1 * Math.PI
-			}
-		});
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre><h4 id="chartjs-horizintal-bar-chart">ChartJS Horizintal Bar Chart.</h4>
-<p><strong><img src="https://www.vcrocs.info/images/chartjs03.jpg" alt=""></strong></p>
-<h4 id="chartjs-horizintal-bar-chart-code">ChartJS Horizintal Bar Chart code:</h4>
-<pre><code>&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Citrix Licensing Count&lt;/title&gt;
-  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div style=&quot;width:95%&quot;&gt;
-    &lt;canvas id=&quot;bar-chart-horizontal&quot;&gt;&lt;/canvas&gt;
-    &lt;/div&gt;
-    &lt;script&gt;
-		new Chart(document.getElementById(&quot;bar-chart-horizontal&quot;), {
-			type: &quot;horizontalBar&quot;,
-			data: {
-			labels: [&quot;01/03/2021&quot;,&quot;01/02/2021&quot;,&quot;01/01/2021&quot;,&quot;12/31/2020&quot;,&quot;12/30/2020&quot;,&quot;12/29/2020&quot;,&quot;12/28/2020&quot;,&quot;12/27/2020&quot;,&quot;12/26/2020&quot;,&quot;12/25/2020&quot;,&quot;Total Licences&quot;],
-			datasets: [
-				{
-				label: &quot;Peak Usage&quot;,
-				backgroundColor: [&quot;#28B463&quot;, &quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#28B463&quot;,&quot;#808B96&quot;],
-				data: [249,318,302,1402,1535,1498,1516,271,273,269,8000]
-				}
-			]
-			},
-			options: {
-			legend: { display: false },
-			title: {
-				display: true,
-				text: &quot;Citrix License Usage (MPS_PLT_CCU)&quot;
-			}
-			}
-		});	
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre><ul>
-<li>Read all the documentation on how to create ChartJS files.  Very important steps need to be followed.</li>
-<li>All the Web pages to show Citrix Licence counts are updated very hour.</li>
-<li>The process to update the Web Pages is scheduled with vRealize Automation Orchestrator.</li>
-<li>The code to get the license information and create the web pages is all done with PowerShell.</li>
-<li>The License values collected every hour are saved in a Microsoft SQL Database.</li>
+    <p>I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin.  Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.</p>
+<p>In my vRA 7.6 environment I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use. When I started looking at how to use PowerShell with vRA 8.2 the one item that I needed to understand was how to use PowerShell Modules. VMware does have a Blog Post on how to include PowerShell modules with ABX Actions/vRO Work Flows - <a href="https://blogs.vmware.com/management/2020/07/how-to-abx-vro-powershell-additional-modules.html">Click Here to see the Blog Post</a>. After doing some testing and reviewing my options I decided to continue to use a PowerShell Host with vRA 8.2. What this allows me to do is use the same exact PowerShell Host for 7.6 and 8.2. The existing PS scripts that I have also work with both 7.6 and 8.2. No changes to any scripts and the PS Host. I like how VMware included PS as an options for all scripts within vRA 8.2. Hopefully in the future VMware will allow you to install your own PS Modules directly in the vRA Appliance. The one item that some people may not like about this setup is it does require an additional Windows Server that a standard vRA setup does not require. But to be able to use an existing Windows PS Host that can be shared between vRA 7.6 and 8.2 until I get my environment to 100% vRA 8.2 also has it positives. With Automation there is always many ways to complete the same task.</p>
+<p>I wrote a Blog Post previously that describes how to pass Cloud Template inputs/properties to ABX Actions. This Post is really using that same technique but instead of only running an ABX Action, this ABX Action Script is passing the inputs/customproperties onto a PowerShell Host. Here is link to previous post: <a href="https://www.vcrocs.info/blog/vra81-abx-ps/">VREALIZE AUTOMATION 8.2 - POWERSHELL ABX</a>. By passing the customproperties as parameters to a PS Host I can also use PS Modules to connect to SQL servers and many other options. Basically any PS Module that is available can be used.</p>
+<h3 id="details-on-how-to-use-a-abx-script-with-a-powershell-host">Details on how to use a ABX Script with a PowerShell Host:</h3>
+<p>Step 1:</p>
+<ul>
+<li>Create a Cloud Template. (See included yaml code and screen shot).</li>
+<li>Create inputs for the parameters you need to send to a PS script that will run on the PS Host. The inputs are the values that are used for the resource/properties. (See included yaml code)</li>
+<li>Create Properties in the resources section of the yaml for the inputs you just created. These properties will be the parameters that get passed to the PS Script. The properties get passed to the ABX script using $payload. (See included PS code)</li>
 </ul>
-<p>The process to save the data and create the web pages can be done many different ways. I outlined how I do it in my environment. What I feel was important to show was the finished HTML code to create the ChartJS Web Pages that I display in vRealize Operations.  The data could be from any source that makes sense in your environment. This makes a great way to graphically show data within vROPS from data that is saved outside of vROPS.</p>
-<p><a href="https://www.vcrocs.info/blog/text-display-widget">Link to my blog post that shows how to use the &ldquo;Test Display Widget&rdquo;</a></p>
-<p><a href="https://www.chartjs.org">Link to ChartJS</a></p>
+<p>Step 2:</p>
+<ul>
+<li>Create a PowerShell ABX Action. (See included PS code and screen shot)</li>
+<li>To get the custom properties from the Cloud Template you need to use $payload.</li>
+<li>$payload.customProperties.&ldquo;Properties Name&rdquo; is how you get the values from the $payload.</li>
+<li>You can assign the custom properties to a variable within the ABX PS code.</li>
+<li>I use Invoke-VMScript to run the PS Script on the PS Host because my environment is also a Zero Trust Environment. Invoke-VMScript allows me to run PS scripts on remote servers without opening ports to the remote servers.</li>
+</ul>
+<p>Step 3:</p>
+<ul>
+<li>Create a Subscription. See Screenshot.</li>
+<li>The subscription is want runs the ABX scripts.</li>
+<li>A subscription can be Fired before or after a compute resource gets provisioned.  I create a subscription for both in my environment.</li>
+<li>Within the subscription is where you define which ABX script is run. If you would want to string several ABX scripts together, the subscription could also run a ABX Flow.</li>
+</ul>
+<h3 id="---sample-code-and-screen-shots---">&mdash;Sample Code and Screen Shots:&mdash;</h3>
+<h4 id="---cloud-template">&mdash;Cloud Template:</h4>
+<p><strong><img src="https://www.vcrocs.info/images/pshost-01.PNG" alt=""></strong></p>
+<p>The properties under resources in the yaml code will be used like parameters in a PS Script. Since I have a background in PowerShell that is how I am using the properties. When you deploy the Cloud Template, the values entered that I defined will not be used until the ABX script runs. The ABX Script will run after the subscription is triggered. The values will be passed from the Cloud Template to the ABX Script using $payload.  Just like passing parameters to a PS script.</p>
+<pre><code># Created by Dale Hassinger - vCrocs.info
+# Date: 01/14/2021
+# Send Property Values to ABX Script that runs script on PS Host with all Zero Trust Permissions and Modules
+# Version: 1
+formatVersion: 1
+# ---------- [ Inputs ] ---------- #
+inputs:
+  cpu:
+    type: integer
+    description: CPUs
+    default: 2
+  mem:
+    type: integer
+    description: Memory(MB)
+    default: 8192
+  VMName:
+    type: string
+    title: Enter VM Name
+    minLength: 1
+    maxLength: 15
+    default: DBH-001
+  TemplateName:
+    type: string
+    description: &lt;b&gt; Select Windows or Ubuntu.&lt;/b&gt; &lt;br&gt;
+    default: vRA_Ubuntu_18.04.4
+    title: OS
+    oneOf:
+      - title: Ubuntu
+        const: vRA_Ubuntu_18.04.4
+      - title: Windows 2016
+        const: vRA_TEMPLATE_2016
+      - title: Windows 2019
+        const: vRA_TEMPLATE_2019
+  CustomizationSpec:
+    type: string
+    default: vRA_Ubuntu
+  description:
+    type: string
+    default: vRA 8.2 TEST VM
+  environment:
+    type: string
+    description: '&lt;b&gt; Select Environment.&lt;/b&gt; &lt;br&gt;'
+    default: 'environment:Management'
+    title: Environment
+    oneOf:
+      - title: Compute
+        const: 'environment:Compute'
+      - title: Management
+        const: 'environment:Management'
+      - title: DevTest
+        const: 'environment:DevTest'
+  department:
+    type: string
+    description: &lt;b&gt; Select Application Team.&lt;/b&gt; &lt;br&gt;
+    default: 'department:APP Team 1'
+    title: Application Team
+    oneOf:
+      - title: APP Team 1
+        const: 'department:APP Team 1'
+      - title: APP Team 2
+        const: 'department:APP Team 2'
+      - title: APP Team 3
+        const: 'department:APP Team 3'
+  IP:
+    type: string
+    default: 192.168.86.200
+  emailAddress:
+    type: string
+    default: Dale.Hassinger@vCROCS.info
+  RootPartition:
+    type: integer
+    default: 20
+  BuildBY:
+    type: string
+    default: DaleHassinger
+  BuildRequestor:
+    type: string
+    default: KirkShaffer
+  OSVersion:
+    type: string
+    default: Ubuntu18044
+# ---------- [ Resources ] ---------- #
+resources:
+  Cloud_Network_1:
+    type: Cloud.Network
+    properties:
+      networkType: existing
+      address: '${input.IP}'
+      constraints:
+        - tag: '${input.environment}'
+        - tag: '${input.department}'
+  Cloud_vSphere_Machine_1:
+    type: Cloud.vSphere.Machine
+    properties:
+      image: '${input.TemplateName}'
+      flavor: std
+      cpu: '${input.cpu}'
+      mem: '${input.mem}'
+      customizationSpec: '${input.CustomizationSpec}'
+      emailAddress: '${input.emailAddress}'
+      RootPartition: '${input.RootPartition}'
+      BuildBY: '${input.BuildBY}'
+      BuildRequestor: '${input.BuildRequestor}'
+      OSVersion: '${input.OSVersion}'
+      constraints:
+        - tag: '${input.environment}'
+      networks:
+        - network: '${resource.Cloud_Network_1.id}'
+          assignment: static
+          address: '${input.IP}'
+      name: '${input.VMName}'
+      description: '${input.description}'
+
+</code></pre><h4 id="---abx-action-script">&mdash;ABX Action Script:</h4>
+<p><strong><img src="https://www.vcrocs.info/images/pshost-02.PNG" alt=""></strong></p>
+<p>In my PowerShell code I am using Write-Host to help show how the Cloud Template passes values to the ABX Action using the $payload. I use the code to troubleshoot and understand how it is working. I am able to take values from the payload customProperties and assign to variables. The customProperties are defined in the Cloud Template yaml code as resources/properties. I can then make decisions in the code based on these values. For production the write-host lines could be removed.</p>
+<pre><code>function handler($context, $payload) {
+
+  # Build PowerShell variables
+  $VMName = $payload.resourceNames
+  $cpu = $payload.customProperties.cpu
+  $mem = $payload.customProperties.mem
+  $description = $payload.customProperties.description
+  $IPaddress = $payload.addresses
+  $emailAddress = $payload.customProperties.emailAddress
+  $RootPartition = $payload.customProperties.RootPartition
+  $BuildBY = $payload.customProperties.BuildBY
+  $BuildRequestor = $payload.customProperties.BuildRequestor
+  $OSVersion = $payload.customProperties.OSVersion
+    
+  # Show PS variables
+  Write-Host 'VMName:' $VMName
+  Write-Host 'CPU:' $cpu
+  Write-Host 'Memory:' $mem
+  Write-Host 'Description:' $description
+  Write-Host 'IPaddress:' $IPaddress
+  Write-Host 'Email:' $emailAddress
+  Write-Host 'Root:' $RootPartition
+  Write-Host 'Build By:' $BuildBY
+  Write-Host 'Build BuildRequestor:' $BuildRequestor
+  Write-Host 'OS Version:' $OSVersion
+
+  # ----- [ Define Username/ Get Password ] ------------------------------------------------------------------
+
+  $HashiVaultPW = 'vCROCS#1'
+  Write-Host $HashiVaultPW
+
+  $username = 'administrator@vsphere.local'
+  Write-Host $username
+
+  # ----- [ Connect vCenter and run PS Script on PS Host ] ------------------------------------------------------------------
+  
+  # Connect to vCenter to be able to connect to PS Host
+  Connect-VIServer -Server vCenter01.vCROCS.info -User $username -Password $HashiVaultPW -Protocol https -Force
+  
+  # PS Host Name
+  $PSHost = 'vCROCSPSHost'
+  Write-Host 'PS Host:'$PSHost
+  
+  # PS Script text
+  $PSParameters = &quot;-VMNAME '&quot; + $VMName + &quot;' -emailAddress '&quot; + $emailAddress + &quot;' -RootPartition '&quot; + $RootPartition + &quot;'&quot;
+  Write-Host 'PS Parameters:'$PSParameters
+  
+  $PSScript = 'G:\Scripts\Create-Linux-Server-Step-3-v01.ps1'
+  Write-Host 'PS Script:'$PSScript
+  
+  $PSText = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe &quot;' + $PSScript + '&quot; ' + $PSParameters
+  Write-Host 'Complete PS String:'$PSText
+  
+  # Run PS Script on PS Host
+  $result = Invoke-VMScript -VM $PSHost -ScriptType Bat -ScriptText $PSText -GuestUser $username -GuestPassword $HashiVaultPW
+  Write-Host $result.ScriptOutput
+  
+  return $LASTEXITCODE
+}
+
+</code></pre><h4 id="---subscription">&mdash;Subscription:</h4>
+<p><strong><img src="https://www.vcrocs.info/images/pshost-03.PNG" alt=""></strong></p>
+<h3 id="lessons-learned">Lessons Learned:</h3>
+<ul>
+<li>vRA 7.6 and 8.2 can share the same PS Host and Scripts.</li>
+<li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused/shared.</li>
+<li>Using a PS Host does require an additional VM.</li>
+<li>Within ABX scripts I have always changed the default &ldquo;Custom limits and retry options&rdquo;. I set the &ldquo;Memory Limit&rdquo; to 1024 and &ldquo;Timeouts&rdquo; to 900.</li>
+<li>Anytime I speak to others about Automation the one item I stress is there is no right way or wrong way to accomplish your tasks. Build on the skills that your Team already has. The environment I work in is 90% Windows Servers so we use PowerShell a lot. That is why I needed to be able to use all the PS Modules that I have installed on the PS Host.</li>
+</ul>
 
   </div>
 
@@ -470,13 +596,10 @@
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/citrix">Citrix</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a></li>
                 
                 
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/chartjs">ChartJS</a></li>
-                
-                
-                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vrealize-operations">vRealize Operations</a></li>
+                <li><a class="article-category-link" href="https://www.vcrocs.info/categories/vra">vRA</a></li>
                 
             
         
@@ -519,8 +642,8 @@
 
 <ul class="actions pagination">
     
-        <li><a href="https://www.vcrocs.info/blog/esxi_arm_raspberry-pi/"
-                class="button big previous">ESXi on Raspberry PI</a></li>
+        <li><a href="https://www.vcrocs.info/blog/chartjs/"
+                class="button big previous">ChartJS</a></li>
     
 
     
@@ -539,7 +662,7 @@
 
 
 <li>
-  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;text=ChartJS&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
+  <a href="//twitter.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f&amp;text=How%20to%20use%20PowerShell%20Modules%20with%20vRA%208.2&amp;via=DaleHassinger" target="_blank" class="share-btn twitter">
     <i class="fa fa-twitter"></i>
     <p>Twitter</p>
     </a>
@@ -549,7 +672,7 @@
 
 
 <li>
-  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn google-plus">
+  <a href="//plus.google.com/share?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f" target="_blank" class="share-btn google-plus">
     <i class="fa fa-google-plus"></i>
     <p>Google+</p>
   </a>
@@ -560,7 +683,7 @@
 
 
 <li>
-  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn facebook">
+  <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f" target="_blank" class="share-btn facebook">
     <i class="fa fa-facebook"></i>
     <p>Facebook</p>
     </a>
@@ -570,7 +693,7 @@
 
 
 <li>
-  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn reddit">
+  <a href="//reddit.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f&amp;title=How%20to%20use%20PowerShell%20Modules%20with%20vRA%208.2" target="_blank" class="share-btn reddit">
     <i class="fa fa-reddit-alien"></i>
     <p>Reddit</p>
   </a>
@@ -580,7 +703,7 @@
 
 
 <li>
-  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn linkedin">
+  <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f&amp;title=How%20to%20use%20PowerShell%20Modules%20with%20vRA%208.2" target="_blank" class="share-btn linkedin">
       <i class="fa fa-linkedin"></i>
       <p>LinkedIn</p>
     </a>
@@ -590,7 +713,7 @@
 
 
 <li>
-  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;title=ChartJS" target="_blank" class="share-btn stumbleupon">
+  <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f&amp;title=How%20to%20use%20PowerShell%20Modules%20with%20vRA%208.2" target="_blank" class="share-btn stumbleupon">
     <i class="fa fa-stumbleupon"></i>
     <p>StumbleUpon</p>
   </a>
@@ -600,7 +723,7 @@
 
 
 <li>
-  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f&amp;description=ChartJS" target="_blank" class="share-btn pinterest">
+  <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f&amp;description=How%20to%20use%20PowerShell%20Modules%20with%20vRA%208.2" target="_blank" class="share-btn pinterest">
     <i class="fa fa-pinterest-p"></i>
     <p>Pinterest</p>
   </a>
@@ -610,7 +733,7 @@
 
 
 <li>
-  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fchartjs%2f" target="_blank" class="share-btn email">
+  <a href="mailto:?subject=Check out this post by Dale%20Hassinger&amp;body=https%3a%2f%2fwww.vcrocs.info%2fblog%2fvra82-ps-host%2f" target="_blank" class="share-btn email">
     <i class="fa fa-envelope"></i>
     <p>Email</p>
   </a>
@@ -759,6 +882,20 @@
           <article class="mini-post">
             <header>
               <h3>
+                <a href="https://www.vcrocs.info/blog/vra82-ps-host/">How to use PowerShell Modules with vRA 8.2</a>
+              </h3>
+              
+              <time class="published" datetime='2021-01-18'>
+                January 18, 2021
+              </time>
+            </header>
+            
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="https://www.vcrocs.info/blog/chartjs/">ChartJS</a>
               </h3>
               
@@ -812,20 +949,6 @@
 
           </article>
         
-          <article class="mini-post">
-            <header>
-              <h3>
-                <a href="https://www.vcrocs.info/blog/standup-desk/">Smart Desk and Homelab.</a>
-              </h3>
-              
-              <time class="published" datetime='2020-07-11'>
-                July 11, 2020
-              </time>
-            </header>
-            
-
-          </article>
-        
       </div>
 
       
@@ -859,7 +982,7 @@
             <header>
               
                 <a href="https://www.vcrocs.info/categories/powershell/">powershell</a>
-                <span style="float:right;">10</span>
+                <span style="float:right;">11</span>
               
             </header>
           </article>
@@ -870,7 +993,7 @@
             <header>
               
                 <a href="https://www.vcrocs.info/categories/vra/">vra</a>
-                <span style="float:right;">8</span>
+                <span style="float:right;">9</span>
               
             </header>
           </article>
