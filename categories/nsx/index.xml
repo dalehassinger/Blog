@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>NSX on www.vCrocs.info</title>
+    <title>NSX on vCROCS.info</title>
     <link>https://www.vcrocs.info/categories/nsx/</link>
-    <description>Recent content in NSX on www.vCrocs.info</description>
+    <description>Recent content in NSX on vCROCS.info</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Apr 2020 00:00:00 +0000</lastBuildDate>
@@ -13,19 +13,19 @@
     
     <item>
       <title>Coffee Talk Tip of the week - 05/01/2020</title>
-      <link>https://www.vcrocs.info/blog/coffee-talk-05-01-2020/</link>
+      <link>https://www.vcrocs.info/2020/04/coffee-talk-tip-of-the-week-05/01/2020/</link>
       <pubDate>Thu, 30 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.vcrocs.info/blog/coffee-talk-05-01-2020/</guid>
+      <guid>https://www.vcrocs.info/2020/04/coffee-talk-tip-of-the-week-05/01/2020/</guid>
       <description>When working in a Zero Trust Environment and programs are not working the way they should it is nice to have some Tools available to do troubleshooting. When new applications are installed and not working you can be asking yourself is it my issue with the application or is the firewall blocking ports. I recently had a support call with VMware and they showed me two commands that work awesome to test to see if ports are open to a destination IP on a specific port.</description>
     </item>
     
     <item>
       <title>Automation with Zero Trust</title>
-      <link>https://www.vcrocs.info/blog/automation-zero-trust/</link>
+      <link>https://www.vcrocs.info/2020/04/automation-with-zero-trust/</link>
       <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.vcrocs.info/blog/automation-zero-trust/</guid>
+      <guid>https://www.vcrocs.info/2020/04/automation-with-zero-trust/</guid>
       <description>PowerShell Code There are two PowerCLI commands that have become my best friends in a Zero Trust Environment.
  Invoke-VMScript - Use to run scripts on VMs. Copy-VMGuestFile - Use to copy files to/from VMs.  In this example you can use Invoke-VMScript to run commands on a VM to install Trend Deep Security. All commands run with VM in a zero trust state.
  $VMName = &#39;VM Name&#39; #Copy file to the VM $PSText = &#39;wget https://server01.</description>
@@ -33,21 +33,22 @@
     
     <item>
       <title>NSX PowerCLI Basics</title>
-      <link>https://www.vcrocs.info/blog/powercli-nsx/</link>
+      <link>https://www.vcrocs.info/2020/04/nsx-powercli-basics/</link>
       <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.vcrocs.info/blog/powercli-nsx/</guid>
+      <guid>https://www.vcrocs.info/2020/04/nsx-powercli-basics/</guid>
       <description>NSX PowerCLI Code Some basic PowerCLI commands with NSX
-Included some examples of code to Automate adding/removing NSX Security Tags from VMs. Show Security TAGs. Shows Secuirty TAGs assigned to a sepcific VM. Hope you find these snippets of code useful.
- # Need to install PowerShell Module PowerNSX # Connect to vCenter $vCenterName = &#39;vCenter.vCrocs.info&#39; Connect-VIServer $vCenterName -Credential $cred # Connect to NSX Server Connect-NsxServer -vCenterServer &#39;vCenter.vCrocs.info&#39; -Credential $cred # Show all Secuirty Tags Get-NsxSecurityTag | Select-Object Name | Sort-Object Name # Info about one specific Secuirty TAG Get-NsxSecurityTag -Name NSX.</description>
+Included some examples of code to Automate adding/removing NSX Security Tags from VMs.
+ Show Security TAGs. Show Security TAGs assigned to a specific VM.  Hope you find these snippets of code useful.
+ # Need to install PowerShell Module PowerNSX # Connect to vCenter $vCenterName = &#39;vCenter.vCrocs.info&#39; Connect-VIServer $vCenterName -Credential $cred # Connect to NSX Server Connect-NsxServer -vCenterServer &#39;vCenter.vCrocs.info&#39; -Credential $cred # Show all Security Tags Get-NsxSecurityTag | Select-Object Name | Sort-Object Name # Info about one specific Security TAG Get-NsxSecurityTag -Name NSX.</description>
     </item>
     
     <item>
       <title>Open Ports</title>
-      <link>https://www.vcrocs.info/blog/check-ports/</link>
+      <link>https://www.vcrocs.info/2020/04/open-ports/</link>
       <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.vcrocs.info/blog/check-ports/</guid>
+      <guid>https://www.vcrocs.info/2020/04/open-ports/</guid>
       <description>PowerShell Code Use PowerShell to see if ports are open to a remote server.
  $PortNumber = &#39;443&#39; $Destination = &#39;Server.vCrocs.info&#39; $socket = New-Object Net.Sockets.TcpClient $socket.Connect($Destination,$PortNumber) if($socket.Connected){ $PortOpened = &#39;Port: &#39; + $PortNumber + &#39; to &#39; + $Destination +&#39; is Open! :)&#39; $socket.Close() }else{ $PortOpened = &#39;Port: &#39; + $PortNumber + &#39; to &#39; + $Destination +&#39; IS NOT Open! :(&#39; } Write-Host $PortOpened Living in a zero trust environment can be challenging.</description>
     </item>
