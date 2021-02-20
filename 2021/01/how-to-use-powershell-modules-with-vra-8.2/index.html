@@ -319,6 +319,7 @@ if (!doNotTrack) {
 <h3 id="---sample-code-and-screen-shots---">&mdash;Sample Code and Screen Shots:&mdash;</h3>
 <h4 id="---cloud-template">&mdash;Cloud Template:</h4>
 <p><strong><img src="https://www.vcrocs.info/img/pshost-01.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgpshost-01png"><a href="https://www.vcrocs.info/img/pshost-01.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
 <p>The properties under resources in the yaml code will be used like parameters in a PS Script. Since I have a background in PowerShell that is how I am using the properties. When you deploy the Cloud Template, the values entered that I defined will not be used until the ABX script runs. The ABX Script will run after the subscription is triggered. The values will be passed from the Cloud Template to the ABX Script using $payload.  Just like passing parameters to a PS script.</p>
 <pre><code># Created by Dale Hassinger - vCrocs.info
 # Date: 01/14/2021
@@ -435,6 +436,7 @@ resources:
 
 </code></pre><h4 id="---abx-action-script">&mdash;ABX Action Script:</h4>
 <p><strong><img src="https://www.vcrocs.info/img/pshost-02.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgpshost-02png"><a href="https://www.vcrocs.info/img/pshost-02.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
 <p>In my PowerShell code I am using Write-Host to help show how the Cloud Template passes values to the ABX Action using the $payload. I use the code to troubleshoot and understand how it is working. I am able to take values from the payload customProperties and assign to variables. The customProperties are defined in the Cloud Template yaml code as resources/properties. I can then make decisions in the code based on these values. For production the write-host lines could be removed.</p>
 <pre><code>function handler($context, $payload) {
 
@@ -498,6 +500,7 @@ resources:
 
 </code></pre><h4 id="---subscription">&mdash;Subscription:</h4>
 <p><strong><img src="https://www.vcrocs.info/img/pshost-03.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgpshost-03png"><a href="https://www.vcrocs.info/img/pshost-03.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
 <h3 id="lessons-learned">Lessons Learned:</h3>
 <ul>
 <li>vRA 7.6 and 8.2 can share the same PS Host and Scripts.</li>
