@@ -9,12 +9,12 @@
 <meta name="author" content="Dale Hassinger">
 <meta name="keywords" content="">
 <meta name="description" content="I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but not a lot of details on how to get and use variables, sdk-objects and bearer token for permission. Here is how I made the vRO REST API calls with PowerShell using vRealize Orchestrator built-into vRA.
-Steps:
+ Steps:
  Permission:  Need to get a Bearer Token from vRO to make REST API Call to execute Workflow.">
 
 
 <meta property="og:description" content="I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but not a lot of details on how to get and use variables, sdk-objects and bearer token for permission. Here is how I made the vRO REST API calls with PowerShell using vRealize Orchestrator built-into vRA.
-Steps:
+ Steps:
  Permission:  Need to get a Bearer Token from vRO to make REST API Call to execute Workflow.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Automating Automation">
@@ -23,10 +23,10 @@ Steps:
 <meta property="twitter:url" content="https://www.vcrocs.info/2021/03/automating-automation/">
 <meta property="og:site_name" content="vCROCS.info">
 <meta property="og:description" content="I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but not a lot of details on how to get and use variables, sdk-objects and bearer token for permission. Here is how I made the vRO REST API calls with PowerShell using vRealize Orchestrator built-into vRA.
-Steps:
+ Steps:
  Permission:  Need to get a Bearer Token from vRO to make REST API Call to execute Workflow.">
 <meta name="twitter:description" content="I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but not a lot of details on how to get and use variables, sdk-objects and bearer token for permission. Here is how I made the vRO REST API calls with PowerShell using vRealize Orchestrator built-into vRA.
-Steps:
+ Steps:
  Permission:  Need to get a Bearer Token from vRO to make REST API Call to execute Workflow.">
 <meta property="og:locale" content="en-us">
 
@@ -302,6 +302,7 @@ if (!doNotTrack) {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but not a lot of details on how to get and use variables, sdk-objects and bearer token for permission. Here is how I made the vRO REST API calls with PowerShell using vRealize Orchestrator built-into vRA.</p>
+<hr>
 <p>Steps:</p>
 <ol>
 <li>Permission:
@@ -320,6 +321,7 @@ if (!doNotTrack) {
 </li>
 <li>Run the Workflow you want to use REST API with manually at least one time successfully. When you look at the variables of a successful Workflow run it shows you what the Workflow is expecting for variables and sdk-objects. See Screen Shots.</li>
 </ol>
+<hr>
 <h6 id="code-to-get-bearer-token-powershell">Code to get bearer Token (PowerShell):</h6>
 <p>You can&rsquo;t use vRO REST API without getting bearer token first.</p>
 <pre><code># Get Bearer Token from vRA REST API Call
@@ -398,7 +400,7 @@ $body = '
 '
 
 # $body
-# I define the Body format and then replace stings of text that I define with variables
+# I define the Body format and then replace strings of text that I define with variables
 # in the code.
 
 $body = $body -Replace(&quot;vmPassword_string&quot;,$password)
@@ -456,7 +458,7 @@ $body = '
 '
 
 $body
-# I define the Body format and then replace stings of text that I define with variables
+# I define the Body format and then replace strings of text that I define with variables
 # in the code.
 
 $body = $body -Replace(&quot;vmstring&quot;,$vmMoref)
