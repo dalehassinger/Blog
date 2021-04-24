@@ -248,6 +248,125 @@ if (!doNotTrack) {
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2021/04/open-ports-zero-trust/">
+          Open Ports - Zero Trust
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-24T00:00:00Z">
+        
+  April 24, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/-how-to-check-if-ports-are-open-to-a-remote-server"> - &#34;How to check if ports are open to a remote server&#34;</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        PowerShell Code Use PowerShell to see if ports are open to a remote server.
+Living in a zero trust environment can be challenging. Here is some code that I have been using to test for open ports from a Windows server to any type of destination. Just change PortNumber and Destination for your use case.
+ $PortNumber = '443' $Destination = 'Server.vCrocs.info' $socket = New-Object Net.Sockets.TcpClient $socket.Connect($Destination,$PortNumber) if($socket.Connected){ $PortOpened = 'Port: ' + $PortNumber + ' to ' + $Destination +' is Open!
+      
+      <p>
+        <a href="https://www.vcrocs.info/2021/04/open-ports-zero-trust/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="https://www.vcrocs.info/2021/04/open-ports-zero-trust/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://www.vcrocs.info/img/port-check.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/">
+          Schedule RVTools Data Export
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-24T00:00:00Z">
+        
+  April 24, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/-export-rvtools-xls-files-everyday"> - &#34;Export RVTools xls Files Everyday&#34;</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
+ Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.
+      
+      <p>
+        <a href="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://www.vcrocs.info/img/rvtools.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="https://www.vcrocs.info/2021/03/automating-automation/">
           Automating Automation
         </a>

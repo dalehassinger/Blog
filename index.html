@@ -245,6 +245,125 @@ if (!doNotTrack) {
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2021/04/open-ports-zero-trust/">
+          Open Ports - Zero Trust
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-24T00:00:00Z">
+        
+  April 24, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/-how-to-check-if-ports-are-open-to-a-remote-server"> - &#34;How to check if ports are open to a remote server&#34;</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        PowerShell Code Use PowerShell to see if ports are open to a remote server.
+Living in a zero trust environment can be challenging. Here is some code that I have been using to test for open ports from a Windows server to any type of destination. Just change PortNumber and Destination for your use case.
+ $PortNumber = '443' $Destination = 'Server.vCrocs.info' $socket = New-Object Net.Sockets.TcpClient $socket.Connect($Destination,$PortNumber) if($socket.Connected){ $PortOpened = 'Port: ' + $PortNumber + ' to ' + $Destination +' is Open!
+      
+      <p>
+        <a href="https://www.vcrocs.info/2021/04/open-ports-zero-trust/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="https://www.vcrocs.info/2021/04/open-ports-zero-trust/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://www.vcrocs.info/img/port-check.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/">
+          Schedule RVTools Data Export
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-24T00:00:00Z">
+        
+  April 24, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/-export-rvtools-xls-files-everyday"> - &#34;Export RVTools xls Files Everyday&#34;</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
+ Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.
+      
+      <p>
+        <a href="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://www.vcrocs.info/img/rvtools.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="https://www.vcrocs.info/2021/04/vexpert-cloud-management-2021/">
           vExpert Cloud Management - 2021
         </a>
@@ -698,125 +817,6 @@ Ingredients:  Enjoy what you do.
     <a href="https://www.vcrocs.info/2021/01/creating-charts-with-chartjs-and-displaying-in-vrealize-operations/">
       <div class="postShorten-thumbnailimg">
         <img alt="" itemprop="image" src="https://www.vcrocs.info/img/chartjs.png"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://www.vcrocs.info/2020/10/esxi-on-raspberry-pi/">
-          ESXi on Raspberry PI
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2020-10-11T00:00:00Z">
-        
-  October 11, 2020
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/-running-esxi-on-raspberry-pi..."> - &#34;Running ESXi on Raspberry PI...&#34;</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        I have always be fascinated with everything that you can do with a Raspberry PI. When VMware released their Fling to install ESXi on the Raspberry PI I have become even more fascinated. An ESXi Host for the Home Lab for $50. Sign me up.
-During VMworld 2020, VMware announced that they would be releasing a Fling to install ESXi on the Raspberry PI. Before the VMworld session was over I had a new Raspberry PI ordered and it was delivered the next day, ahead of the Fling release, so that I would be ready.
-      
-      <p>
-        <a href="https://www.vcrocs.info/2020/10/esxi-on-raspberry-pi/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://www.vcrocs.info/2020/10/esxi-on-raspberry-pi/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://www.vcrocs.info/img/raspberry-pi.png"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://www.vcrocs.info/2020/10/vbrownbag-vmworld-presentation/">
-          vBrownbag VMworld Presentation
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2020-10-01T00:00:00Z">
-        
-  October 1, 2020
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/-vrealize-operations"> - &#34;vRealize Operations&#34;</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        How to use vRealize Operations as your monitoring &ldquo;Single Pane of Glass&rdquo; For the 2020 VMware VMworld my presentation for the vBrownbag TechTalks was selected.
-Learn how to use the &ldquo;Text Display&rdquo; Widget on Dashboards to display data that is not within vRealize Operations. Display Weather Forecasts, Radar Maps, Data from SQL DBs on your next NOC Dashboard.
-  Socials:  Twitter: https://twitter.com/vBrownBag Facebook: https://facebook.com/vBrownBag iTunes: http://bit.ly/vbrownbagitunes  https://vBrownBag.com is a community of people who believe in helping other people.
-      
-      <p>
-        <a href="https://www.vcrocs.info/2020/10/vbrownbag-vmworld-presentation/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://www.vcrocs.info/2020/10/vbrownbag-vmworld-presentation/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://www.vcrocs.info/img/vbrownbag.jpg"/>
       </div>
     </a>
   

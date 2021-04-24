@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.81.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Dale Hassinger">
+<meta name="keywords" content="">
+<meta name="description" content="I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin. Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.
+In my vRA 7.6 environment I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use.">
+
+
+<meta property="og:description" content="I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin. Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.
+In my vRA 7.6 environment I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to use PowerShell Modules with vRA 8.2">
+<meta name="twitter:title" content="How to use PowerShell Modules with vRA 8.2">
+<meta property="og:url" content="https://www.vcrocs.info/2021/01/how-to-use-powershell-modules-with-vra-8.2/">
+<meta property="twitter:url" content="https://www.vcrocs.info/2021/01/how-to-use-powershell-modules-with-vra-8.2/">
+<meta property="og:site_name" content="vCROCS.info">
+<meta property="og:description" content="I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin. Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.
+In my vRA 7.6 environment I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use.">
+<meta name="twitter:description" content="I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin. Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.
+In my vRA 7.6 environment I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2021-01-18T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2021-01-18T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content=" - &#34;Options to use PowerShell Modules&#34;">
+    
+  
+  
+    
+      <meta property="article:tag" content="PowerShell">
+    
+      <meta property="article:tag" content="vRA">
+    
+      <meta property="article:tag" content="ABX">
+    
+      <meta property="article:tag" content="vRealize Automation">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@dalehassinger">
+
+
+  <meta name="twitter:creator" content="@dalehassinger">
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.vcrocs.info/img/powershell.png">
+  <meta property="twitter:image" content="https://www.vcrocs.info/img/powershell.png">
+
+
+
+
+
+  <meta property="og:image" content="https://www.vcrocs.info/img/dbh.jpg">
+  <meta property="twitter:image" content="https://www.vcrocs.info/img/dbh.jpg">
+
+
+    <title>How to use PowerShell Modules with vRA 8.2</title>
+
+    <link rel="icon" href="https://www.vcrocs.info/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://www.vcrocs.info/2021/01/how-to-use-powershell-modules-with-vra-8.2/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://www.vcrocs.info/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-166234216-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://www.vcrocs.info/">vCROCS.info</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://www.vcrocs.info/">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.vcrocs.info/img/dbh.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://www.vcrocs.info/">
+          <img class="sidebar-profile-picture" src="https://www.vcrocs.info/img/dbh.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Dale Hassinger</h4>
+        
+          <h5 class="sidebar-profile-bio">Sharing Content with the vCommunity and anyone else that finds my content interesting&hellip;</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.vcrocs.info/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.vcrocs.info/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.vcrocs.info/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-newspaper-o"></i>
+      
+      <span class="sidebar-button-desc">Posts</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.vcrocs.info/2020/01/about-dale-hassinger/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-address-card"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.vcrocs.info/2020/01/image-gallery-dale-favorites/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-file-image-o"></i>
+      
+      <span class="sidebar-button-desc">Images</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/dalehassinger" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.youtube.com/c/DaleHassinger/videos" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-youtube"></i>
+      
+      <span class="sidebar-button-desc">Youtube</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/dale17h" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/dale-hassinger-5712301b" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">Linkedin</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaOut
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      How to use PowerShell Modules with vRA 8.2
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-01-18T00:00:00Z">
+        
+  January 18, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/-options-to-use-powershell-modules"> - &#34;Options to use PowerShell Modules&#34;</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin.  Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.</p>
+<p>In my vRA 7.6 environment I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use. When I started looking at how to use PowerShell with vRA 8.2 the one item that I needed to understand was how to use PowerShell Modules. VMware does have a Blog Post on how to include PowerShell modules with ABX Actions/vRO Work Flows - <a href="https://blogs.vmware.com/management/2020/07/how-to-abx-vro-powershell-additional-modules.html">Click Here to see the Blog Post</a>. After doing some testing and reviewing my options I decided to continue to use a PowerShell Host with vRA 8.2. What this allows me to do is use the same exact PowerShell Host for 7.6 and 8.2. The existing PS scripts that I have also work with both 7.6 and 8.2. No changes to any scripts and the PS Host. I like how VMware included PS as an options for all scripts within vRA 8.2. Hopefully in the future VMware will allow you to install your own PS Modules directly in the vRA Appliance. The one item that some people may not like about this setup is it does require an additional Windows Server that a standard vRA setup does not require. But to be able to use an existing Windows PS Host that can be shared between vRA 7.6 and 8.2 until I get my environment to 100% vRA 8.2 also has it positives. With Automation there is always many ways to complete the same task.</p>
+<p>I wrote a Blog Post previously that describes how to pass Cloud Template inputs/properties to ABX Actions. This Post is really using that same technique but instead of only running an ABX Action, this ABX Action Script is passing the inputs/customproperties onto a PowerShell Host. Here is link to previous post: <a href="https://www.vcrocs.info/blog/vra81-abx-ps/">VREALIZE AUTOMATION 8.2 - POWERSHELL ABX</a>. By passing the customproperties as parameters to a PS Host I can also use PS Modules to connect to SQL servers and many other options. Basically any PS Module that is available can be used.</p>
+<h3 id="details-on-how-to-use-a-abx-script-with-a-powershell-host">Details on how to use a ABX Script with a PowerShell Host:</h3>
+<p>Step 1:</p>
+<ul>
+<li>Create a Cloud Template. (See included yaml code and screen shot).</li>
+<li>Create inputs for the parameters you need to send to a PS script that will run on the PS Host. The inputs are the values that are used for the resource/properties. (See included yaml code)</li>
+<li>Create Properties in the resources section of the yaml for the inputs you just created. These properties will be the parameters that get passed to the PS Script. The properties get passed to the ABX script using $payload. (See included PS code)</li>
+</ul>
+<p>Step 2:</p>
+<ul>
+<li>Create a PowerShell ABX Action. (See included PS code and screen shot)</li>
+<li>To get the custom properties from the Cloud Template you need to use $payload.</li>
+<li>$payload.customProperties.&ldquo;Properties Name&rdquo; is how you get the values from the $payload.</li>
+<li>You can assign the custom properties to a variable within the ABX PS code.</li>
+<li>I use Invoke-VMScript to run the PS Script on the PS Host because my environment is also a Zero Trust Environment. Invoke-VMScript allows me to run PS scripts on remote servers without opening ports to the remote servers.</li>
+</ul>
+<p>Step 3:</p>
+<ul>
+<li>Create a Subscription. See Screenshot.</li>
+<li>The subscription is want runs the ABX scripts.</li>
+<li>A subscription can be Fired before or after a compute resource gets provisioned.  I create a subscription for both in my environment.</li>
+<li>Within the subscription is where you define which ABX script is run. If you would want to string several ABX scripts together, the subscription could also run a ABX Flow.</li>
+</ul>
+<h3 id="---sample-code-and-screen-shots---">&mdash;Sample Code and Screen Shots:&mdash;</h3>
+<h4 id="---cloud-template">&mdash;Cloud Template:</h4>
+<p><strong><img src="https://www.vcrocs.info/img/pshost-01.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgpshost-01png"><a href="https://www.vcrocs.info/img/pshost-01.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>The properties under resources in the yaml code will be used like parameters in a PS Script. Since I have a background in PowerShell that is how I am using the properties. When you deploy the Cloud Template, the values entered that I defined will not be used until the ABX script runs. The ABX Script will run after the subscription is triggered. The values will be passed from the Cloud Template to the ABX Script using $payload.  Just like passing parameters to a PS script.</p>
+<pre><code># Created by Dale Hassinger - vCrocs.info
+# Date: 01/14/2021
+# Send Property Values to ABX Script that runs script on PS Host with all Zero Trust Permissions and Modules
+# Version: 1
+formatVersion: 1
+# ---------- [ Inputs ] ---------- #
+inputs:
+  cpu:
+    type: integer
+    description: CPUs
+    default: 2
+  mem:
+    type: integer
+    description: Memory(MB)
+    default: 8192
+  VMName:
+    type: string
+    title: Enter VM Name
+    minLength: 1
+    maxLength: 15
+    default: DBH-001
+  TemplateName:
+    type: string
+    description: &lt;b&gt; Select Windows or Ubuntu.&lt;/b&gt; &lt;br&gt;
+    default: vRA_Ubuntu_18.04.4
+    title: OS
+    oneOf:
+      - title: Ubuntu
+        const: vRA_Ubuntu_18.04.4
+      - title: Windows 2016
+        const: vRA_TEMPLATE_2016
+      - title: Windows 2019
+        const: vRA_TEMPLATE_2019
+  CustomizationSpec:
+    type: string
+    default: vRA_Ubuntu
+  description:
+    type: string
+    default: vRA 8.2 TEST VM
+  environment:
+    type: string
+    description: '&lt;b&gt; Select Environment.&lt;/b&gt; &lt;br&gt;'
+    default: 'environment:Management'
+    title: Environment
+    oneOf:
+      - title: Compute
+        const: 'environment:Compute'
+      - title: Management
+        const: 'environment:Management'
+      - title: DevTest
+        const: 'environment:DevTest'
+  department:
+    type: string
+    description: &lt;b&gt; Select Application Team.&lt;/b&gt; &lt;br&gt;
+    default: 'department:APP Team 1'
+    title: Application Team
+    oneOf:
+      - title: APP Team 1
+        const: 'department:APP Team 1'
+      - title: APP Team 2
+        const: 'department:APP Team 2'
+      - title: APP Team 3
+        const: 'department:APP Team 3'
+  IP:
+    type: string
+    default: 192.168.86.200
+  emailAddress:
+    type: string
+    default: Dale.Hassinger@vCROCS.info
+  RootPartition:
+    type: integer
+    default: 20
+  BuildBY:
+    type: string
+    default: DaleHassinger
+  BuildRequestor:
+    type: string
+    default: KirkShaffer
+  OSVersion:
+    type: string
+    default: Ubuntu18044
+# ---------- [ Resources ] ---------- #
+resources:
+  Cloud_Network_1:
+    type: Cloud.Network
+    properties:
+      networkType: existing
+      address: '${input.IP}'
+      constraints:
+        - tag: '${input.environment}'
+        - tag: '${input.department}'
+  Cloud_vSphere_Machine_1:
+    type: Cloud.vSphere.Machine
+    properties:
+      image: '${input.TemplateName}'
+      flavor: std
+      cpu: '${input.cpu}'
+      mem: '${input.mem}'
+      customizationSpec: '${input.CustomizationSpec}'
+      emailAddress: '${input.emailAddress}'
+      RootPartition: '${input.RootPartition}'
+      BuildBY: '${input.BuildBY}'
+      BuildRequestor: '${input.BuildRequestor}'
+      OSVersion: '${input.OSVersion}'
+      constraints:
+        - tag: '${input.environment}'
+      networks:
+        - network: '${resource.Cloud_Network_1.id}'
+          assignment: static
+          address: '${input.IP}'
+      name: '${input.VMName}'
+      description: '${input.description}'
+
+</code></pre><h4 id="---abx-action-script">&mdash;ABX Action Script:</h4>
+<p><strong><img src="https://www.vcrocs.info/img/pshost-02.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgpshost-02png"><a href="https://www.vcrocs.info/img/pshost-02.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>In my PowerShell code I am using Write-Host to help show how the Cloud Template passes values to the ABX Action using the $payload. I use the code to troubleshoot and understand how it is working. I am able to take values from the payload customProperties and assign to variables. The customProperties are defined in the Cloud Template yaml code as resources/properties. I can then make decisions in the code based on these values. For production the write-host lines could be removed.</p>
+<pre><code>function handler($context, $payload) {
+
+  # Build PowerShell variables
+  $VMName = $payload.resourceNames
+  $cpu = $payload.customProperties.cpu
+  $mem = $payload.customProperties.mem
+  $description = $payload.customProperties.description
+  $IPaddress = $payload.addresses
+  $emailAddress = $payload.customProperties.emailAddress
+  $RootPartition = $payload.customProperties.RootPartition
+  $BuildBY = $payload.customProperties.BuildBY
+  $BuildRequestor = $payload.customProperties.BuildRequestor
+  $OSVersion = $payload.customProperties.OSVersion
+    
+  # Show PS variables
+  Write-Host 'VMName:' $VMName
+  Write-Host 'CPU:' $cpu
+  Write-Host 'Memory:' $mem
+  Write-Host 'Description:' $description
+  Write-Host 'IPaddress:' $IPaddress
+  Write-Host 'Email:' $emailAddress
+  Write-Host 'Root:' $RootPartition
+  Write-Host 'Build By:' $BuildBY
+  Write-Host 'Build BuildRequestor:' $BuildRequestor
+  Write-Host 'OS Version:' $OSVersion
+
+  # ----- [ Define Username/ Get Password ] ------------------------------------------------------------------
+
+  $HashiVaultPW = 'vCROCS#1'
+  Write-Host $HashiVaultPW
+
+  $username = 'administrator@vsphere.local'
+  Write-Host $username
+
+  # ----- [ Connect vCenter and run PS Script on PS Host ] ------------------------------------------------------------------
+  
+  # Connect to vCenter to be able to connect to PS Host
+  Connect-VIServer -Server vCenter01.vCROCS.info -User $username -Password $HashiVaultPW -Protocol https -Force
+  
+  # PS Host Name
+  $PSHost = 'vCROCSPSHost'
+  Write-Host 'PS Host:'$PSHost
+  
+  # PS Script text
+  $PSParameters = &quot;-VMNAME '&quot; + $VMName + &quot;' -emailAddress '&quot; + $emailAddress + &quot;' -RootPartition '&quot; + $RootPartition + &quot;'&quot;
+  Write-Host 'PS Parameters:'$PSParameters
+  
+  $PSScript = 'G:\Scripts\Create-Linux-Server-Step-3-v01.ps1'
+  Write-Host 'PS Script:'$PSScript
+  
+  $PSText = 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe &quot;' + $PSScript + '&quot; ' + $PSParameters
+  Write-Host 'Complete PS String:'$PSText
+  
+  # Run PS Script on PS Host
+  $result = Invoke-VMScript -VM $PSHost -ScriptType Bat -ScriptText $PSText -GuestUser $username -GuestPassword $HashiVaultPW
+  Write-Host $result.ScriptOutput
+  
+  return $LASTEXITCODE
+}
+
+</code></pre><h4 id="---subscription">&mdash;Subscription:</h4>
+<p><strong><img src="https://www.vcrocs.info/img/pshost-03.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgpshost-03png"><a href="https://www.vcrocs.info/img/pshost-03.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<h3 id="lessons-learned">Lessons Learned:</h3>
+<ul>
+<li>vRA 7.6 and 8.2 can share the same PS Host and Scripts.</li>
+<li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused/shared.</li>
+<li>Using a PS Host does require an additional VM.</li>
+<li>Within ABX scripts I have always changed the default &ldquo;Custom limits and retry options&rdquo;. I set the &ldquo;Memory Limit&rdquo; to 1024 and &ldquo;Timeouts&rdquo; to 900.</li>
+<li>Anytime I speak to others about Automation the one item I stress is there is no right way or wrong way to accomplish your tasks. Build on the skills that your Team already has. The environment I work in is 90% Windows Servers so we use PowerShell a lot. That is why I needed to be able to use all the PS Modules that I have installed on the PS Host.</li>
+</ul>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/powershell/">PowerShell</a>
+
+  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/vra/">vRA</a>
+
+  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/abx/">ABX</a>
+
+  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/vrealize-automation/">vRealize Automation</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/02/new-hugo-theme-for-blog/" data-tooltip="New Hugo Theme for Blog">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/01/how-to-be-successful-with-vmware-vrealize-products-in-your-environment/" data-tooltip="How to be successful with VMware vRealize Products in your environment">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/01/how-to-use-powershell-modules-with-vra-8.2/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 Dale Hassinger. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/02/new-hugo-theme-for-blog/" data-tooltip="New Hugo Theme for Blog">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/01/how-to-be-successful-with-vmware-vrealize-products-in-your-environment/" data-tooltip="How to be successful with VMware vRealize Products in your environment">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/01/how-to-use-powershell-modules-with-vra-8.2/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fwww.vcrocs.info%2F2021%2F01%2Fhow-to-use-powershell-modules-with-vra-8.2%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.vcrocs.info/img/dbh.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Dale Hassinger</h4>
+    
+      <div id="about-card-bio">Sharing Content with the vCommunity and anyone else that finds my content interesting&hellip;</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Lead Systems Engineer - SME
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Mechanicsburg, PA
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://www.vcrocs.info/img/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://www.vcrocs.info/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/www.vcrocs.info\/2021\/01\/how-to-use-powershell-modules-with-vra-8.2\/';
+          
+            this.page.identifier = '\/2021\/01\/how-to-use-powershell-modules-with-vra-8.2\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'vcrocs';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

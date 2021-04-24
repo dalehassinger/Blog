@@ -249,6 +249,123 @@ if (!doNotTrack) {
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/hugo/">
+          Hugo
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-04-26T00:00:00Z">
+        
+  April 26, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/hugo">Hugo</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        I have reviewed and tried a lot of different ways to create a personal Blog so that I can share Code, Knowledge, Pictures and do Reviews. After spending some time with Hugo it has become the framework that I have liked the most. The Theme &ldquo;Hugo Future Imperfect&rdquo; is also the Hugo Theme that I have liked the most.
+
+Some of the ways I have reviewed creating a Blog require a monthly fee to host the web site for you.
+      
+      <p>
+        <a href="https://www.vcrocs.info/2020/04/hugo/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/add-disk/">
+          Add disk
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-04-19T00:00:00Z">
+        
+  April 19, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a>, 
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/vra">vRA</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        PowerShell Code Powershell code to add disk to a Remote Windows Server VMware VM
+ #The Following code shows how to add a New Drive, bring drive online, initialize and format: #Connect to vCenter Connect-VIServer vcsa.domain.org #Add new drive to VM New-HardDisk -VM $VMNAME -CapacityGB $DISKSIZEGB -StorageFormat Thin -Controller ‘SCSI Controller 1’ #Make disk online invoke-command -computername $VMNAME -scriptblock {Set-Disk 2 -isOffline $false} #Initialize disk invoke-command -computername $VMNAME -scriptblock {Initialize-Disk 2 -PartitionStyle GPT} #Create Partition invoke-command -computername $VMNAME -scriptblock {New-Partition -DiskNumber 2 -UseMaximumSize -DriveLetter E} #Format drive invoke-command -computername $VMNAME -scriptblock {Format-Volume -DriveLetter E -FileSystem NTFS -NewFileSystemLabel ‘Data’ -AllocationUnitSize 16384 -Confirm:$false} #------------------------------------------------------------------------- #The Following Code will show disk “Allocation Unit Size” on a remote Windows Server: $C = Invoke-Command -ComputerName $VMname {Get-WmiObject -Class Win32_Volume -Filter “DriveLetter = ‘C:'” | Select-Object BLOCKSIZE} $C_AllocationUnitSize = ($C.
+      
+      <p>
+        <a href="https://www.vcrocs.info/2020/04/add-disk/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/add-registry-values/">
           Add Registry Values
         </a>
@@ -406,65 +523,6 @@ Included some examples of code to Automate adding/removing NSX Security Tags fro
       
       <p>
         <a href="https://www.vcrocs.info/2020/04/nsx-powercli-basics/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-          
-            
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/open-ports/">
-          Open Ports
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2020-04-19T00:00:00Z">
-        
-  April 19, 2020
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/nsx">NSX</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        PowerShell Code Use PowerShell to see if ports are open to a remote server.
- $PortNumber = '443' $Destination = 'Server.vCrocs.info' $socket = New-Object Net.Sockets.TcpClient $socket.Connect($Destination,$PortNumber) if($socket.Connected){ $PortOpened = 'Port: ' + $PortNumber + ' to ' + $Destination +' is Open! :)' $socket.Close() }else{ $PortOpened = 'Port: ' + $PortNumber + ' to ' + $Destination +' IS NOT Open! :(' } Write-Host $PortOpened Living in a zero trust environment can be challenging.
-      
-      <p>
-        <a href="https://www.vcrocs.info/2020/04/open-ports/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
@@ -698,67 +756,6 @@ Here&rsquo;s an example:
       
       <p>
         <a href="https://www.vcrocs.info/2020/04/raspberry-pi-powered-clay-thrower/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-          
-            
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/schedule-rvtools/">
-          Schedule RVTools
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2020-04-19T00:00:00Z">
-        
-  April 19, 2020
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/vra">vRA</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/rvtools">RVTools</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVtools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automaticaly deletes old files.
- Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.
-      
-      <p>
-        <a href="https://www.vcrocs.info/2020/04/schedule-rvtools/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>

@@ -492,65 +492,6 @@ if (!doNotTrack) {
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/open-ports/">
-          Open Ports
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2020-04-19T00:00:00Z">
-        
-  April 19, 2020
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/nsx">NSX</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        PowerShell Code Use PowerShell to see if ports are open to a remote server.
- $PortNumber = '443' $Destination = 'Server.vCrocs.info' $socket = New-Object Net.Sockets.TcpClient $socket.Connect($Destination,$PortNumber) if($socket.Connected){ $PortOpened = 'Port: ' + $PortNumber + ' to ' + $Destination +' is Open! :)' $socket.Close() }else{ $PortOpened = 'Port: ' + $PortNumber + ' to ' + $Destination +' IS NOT Open! :(' } Write-Host $PortOpened Living in a zero trust environment can be challenging.
-      
-      <p>
-        <a href="https://www.vcrocs.info/2020/04/open-ports/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-            
-              
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/powershell-log-files/">
           PowerShell Log Files
         </a>
@@ -645,67 +586,6 @@ Here&rsquo;s an example:
       
       <p>
         <a href="https://www.vcrocs.info/2020/04/randon-password/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-            
-              
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/schedule-rvtools/">
-          Schedule RVTools
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2020-04-19T00:00:00Z">
-        
-  April 19, 2020
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/vra">vRA</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/rvtools">RVTools</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVtools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automaticaly deletes old files.
- Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.
-      
-      <p>
-        <a href="https://www.vcrocs.info/2020/04/schedule-rvtools/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>

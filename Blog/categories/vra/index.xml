@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vRA on vCROCS.info</title>
+    <link>https://www.vcrocs.info/categories/vra/</link>
+    <description>Recent content in vRA on vCROCS.info</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://www.vcrocs.info/categories/vra/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Add disk</title>
+      <link>https://www.vcrocs.info/2020/04/add-disk/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/2020/04/add-disk/</guid>
+      <description>PowerShell Code Powershell code to add disk to a Remote Windows Server VMware VM
+ #The Following code shows how to add a New Drive, bring drive online, initialize and format: #Connect to vCenter Connect-VIServer vcsa.domain.org #Add new drive to VM New-HardDisk -VM $VMNAME -CapacityGB $DISKSIZEGB -StorageFormat Thin -Controller ‘SCSI Controller 1’ #Make disk online invoke-command -computername $VMNAME -scriptblock {Set-Disk 2 -isOffline $false} #Initialize disk invoke-command -computername $VMNAME -scriptblock {Initialize-Disk 2 -PartitionStyle GPT} #Create Partition invoke-command -computername $VMNAME -scriptblock {New-Partition -DiskNumber 2 -UseMaximumSize -DriveLetter E} #Format drive invoke-command -computername $VMNAME -scriptblock {Format-Volume -DriveLetter E -FileSystem NTFS -NewFileSystemLabel ‘Data’ -AllocationUnitSize 16384 -Confirm:$false} #------------------------------------------------------------------------- #The Following Code will show disk “Allocation Unit Size” on a remote Windows Server: $C = Invoke-Command -ComputerName $VMname {Get-WmiObject -Class Win32_Volume -Filter “DriveLetter = ‘C:&#39;” | Select-Object BLOCKSIZE} $C_AllocationUnitSize = ($C.</description>
+    </item>
+    
+    <item>
+      <title>Automation with Zero Trust</title>
+      <link>https://www.vcrocs.info/2020/04/automation-with-zero-trust/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/2020/04/automation-with-zero-trust/</guid>
+      <description>PowerShell Code There are two PowerCLI commands that have become my best friends in a Zero Trust Environment.
+ Invoke-VMScript - Use to run scripts on VMs. Copy-VMGuestFile - Use to copy files to/from VMs.  In this example you can use Invoke-VMScript to run commands on a VM to install Trend Deep Security. All commands run with VM in a zero trust state.
+ $VMName = &#39;VM Name&#39; #Copy file to the VM $PSText = &#39;wget https://server01.</description>
+    </item>
+    
+    <item>
+      <title>PowerShell Log Files</title>
+      <link>https://www.vcrocs.info/2020/04/powershell-log-files/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/2020/04/powershell-log-files/</guid>
+      <description>PowerShell Code I use this code to create a log file during a VM build using vRealize Automation
+Here&amp;rsquo;s an example:
+ $VMname = &#39;ServerName&#39; #The next line defines where to save the log file $LOGFILENAME = &amp;quot;C:\vRA-Install-Logs\vRA-Install-Log-&amp;quot; + $VMname + &amp;quot;.log&amp;quot; #Check to see if file already exists. If it does delete it. if (Test-Path $LOGFILENAME) { Remove-Item -Path $LOGFILENAME } #Creates the Log File New-Item $LOGFILENAME -ItemType File #Update Log File.</description>
+    </item>
+    
+    <item>
+      <title>Randon Password</title>
+      <link>https://www.vcrocs.info/2020/04/randon-password/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/2020/04/randon-password/</guid>
+      <description>PowerShell Code I use this code to generate a random password during the automation process of creating a new Server VM. I then add the password to Password Manager with Powershell.
+ #Generate Random text to use for Password $SQLPassword =@( [char[]](65..91 | Get-Random -Count 5) [char[]](97..123 | Get-Random -Count 5) &#39;!&#39;,&#39;#&#39;,&#39;(&#39;,&#39;)&#39; | Get-Random -Count 2 0..9 | Get-Random -Count 4 ) | Sort-Object {Get-Random} $Password = $SQLPassword -join &#39;&#39; </description>
+    </item>
+    
+    <item>
+      <title>Schedule RVTools</title>
+      <link>https://www.vcrocs.info/2020/04/schedule-rvtools/</link>
+      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.vcrocs.info/2020/04/schedule-rvtools/</guid>
+      <description>PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVtools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automaticaly deletes old files.
+ Start-Process -FilePath &amp;quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&amp;quot; -ArgumentList &#39;-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &amp;quot;Enter RVTools encrypted Password between the double quotes&amp;quot; -c Exportall2xls -d &amp;quot;G:\RVTools\vCenter01&amp;quot;&#39; -Wait Start-Process -FilePath &amp;quot;C:\Program Files (x86)\Robware\RVTools\RVtools.</description>
+    </item>
+    
+  </channel>
+</rss>

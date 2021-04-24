@@ -39,15 +39,5 @@ Included some examples of code to Automate adding/removing NSX Security Tags fro
  # Need to install PowerShell Module PowerNSX # Connect to vCenter $vCenterName = &#39;vCenter.vCrocs.info&#39; Connect-VIServer $vCenterName -Credential $cred # Connect to NSX Server Connect-NsxServer -vCenterServer &#39;vCenter.vCrocs.info&#39; -Credential $cred # Show all Security Tags Get-NsxSecurityTag | Select-Object Name | Sort-Object Name # Info about one specific Security TAG Get-NsxSecurityTag -Name NSX.</description>
     </item>
     
-    <item>
-      <title>Open Ports</title>
-      <link>https://www.vcrocs.info/2020/04/open-ports/</link>
-      <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.vcrocs.info/2020/04/open-ports/</guid>
-      <description>PowerShell Code Use PowerShell to see if ports are open to a remote server.
- $PortNumber = &#39;443&#39; $Destination = &#39;Server.vCrocs.info&#39; $socket = New-Object Net.Sockets.TcpClient $socket.Connect($Destination,$PortNumber) if($socket.Connected){ $PortOpened = &#39;Port: &#39; + $PortNumber + &#39; to &#39; + $Destination +&#39; is Open! :)&#39; $socket.Close() }else{ $PortOpened = &#39;Port: &#39; + $PortNumber + &#39; to &#39; + $Destination +&#39; IS NOT Open! :(&#39; } Write-Host $PortOpened Living in a zero trust environment can be challenging.</description>
-    </item>
-    
   </channel>
 </rss>
