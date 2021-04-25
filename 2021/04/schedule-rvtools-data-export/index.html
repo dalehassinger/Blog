@@ -257,8 +257,10 @@ if (!doNotTrack) {
       <div id="main" data-behavior="5"
         class="
                hasCoverMetaOut
-               ">
+               hasCoverCaption">
         <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+            <span class="post-header-cover-caption caption">A beautiful sunrise</span>
           
           
             <div class="post-header main-content-wrap text-center">
@@ -291,7 +293,7 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <h2 id="powershell-code">PowerShell Code</h2>
+              <h4 id="powershell-code">PowerShell Code</h4>
 <p>I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday.  Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.</p>
 <pre><code>
 Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait
