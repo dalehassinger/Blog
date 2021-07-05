@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.81.0 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="generator" content="Hugo 0.85.0 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Dale Hassinger">
 <meta name="keywords" content="">
-<meta name="description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
+<meta name="description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample PowerShell script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
  Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList &#39;-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;&#39; -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.">
 
 
-<meta property="og:description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
+<meta property="og:description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample PowerShell script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
  Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList &#39;-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;&#39; -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Schedule RVTools Data Export">
@@ -20,9 +20,9 @@
 <meta property="og:url" content="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/">
 <meta property="twitter:url" content="https://www.vcrocs.info/2021/04/schedule-rvtools-data-export/">
 <meta property="og:site_name" content="vCROCS.info">
-<meta property="og:description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
+<meta property="og:description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample PowerShell script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
  Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList &#39;-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;&#39; -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.">
-<meta name="twitter:description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
+<meta name="twitter:description" content="PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample PowerShell script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.
  Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList &#39;-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;&#39; -Wait Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.">
 <meta property="og:locale" content="en-us">
 
@@ -107,7 +107,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     
     
   </head>
@@ -302,7 +301,7 @@ if (!doNotTrack) {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <h4 id="powershell-code">PowerShell Code</h4>
-<p>I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday.  Here is a sample script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.</p>
+<p>I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday.  Here is a sample PowerShell script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files.</p>
 <pre><code>
 Start-Process -FilePath &quot;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&quot; -ArgumentList '-s vCenter01.vCrocs.info -u administrator@vsphere.local -p &quot;Enter RVTools encrypted Password between the double quotes&quot; -c Exportall2xls -d &quot;G:\RVTools\vCenter01&quot;' -Wait
 
