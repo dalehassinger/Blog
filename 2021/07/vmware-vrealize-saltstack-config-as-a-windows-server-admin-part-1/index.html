@@ -320,7 +320,7 @@ if (!doNotTrack) {
 <h5 id="the-first-step-minions">The first step (minions):</h5>
 </blockquote>
 <p>After you get a working SaltStack Config Server setup, the first item you need to do is add the salt agent to some &ldquo;Test&rdquo; servers. Servers that have the salt agent installed are called minions. There is the option to not add the salt agent to servers but then you need to use SSH to connect.  Windows Servers do not have SSH available as default so you would need to install an SSH server like OpenSSH on your servers. My thoughts are I need to add something for the minions to communicate with the salt-master. Instead of adding OpenSSH to every Windows Server I chose to install and use the salt agent.</p>
-<p>For testing you can manually install the minion agent on a server to become familiar with how the salt commands work. During the install there are two values you need to enter. The name of the master and the name you want to use for the minion. I did that on my first couple test servers but then I created some PowerShell code to install the salt minion.</p>
+<p>For testing you can manually install the minion agent on a server to become familiar with how the salt commands work. During the install there are two values you need to enter. The name of the master and the name you want to use for the minion. I did that on my first couple test servers but then I created some PowerShell code to install the salt minion agent.</p>
 <pre><code># ----- [ Install minion ] -----------------------------------------------
 
 # Define Username/Password
@@ -336,6 +336,8 @@ $cred = new-object -typename System.Management.Automation.PSCredential -argument
 # Connect to vCenter
 vCenterName = 'vCenter.vCROCS.info'
 Connect-VIServer $vCenterName -Credential $cred
+
+# ----- [ Install Salt Agent ] -------------------------------------------
 
 # Name of Server to install the salt minion agent
 $vmName = 'DBH-217'
