@@ -8,33 +8,33 @@
 <meta name="generator" content="Hugo 0.85.0 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Dale Hassinger">
 <meta name="keywords" content="">
-<meta name="description" content="Part 1:
-I have recently started looking at using VMware vRealize SaltStack Config. This blog is a work in progress on my journey with Salt. I started at zero and let&rsquo;s see what I discover as I work towards getting to PROD. So if this topic is interesting to you, check back often.
-I wanted to learn one of the server configuration products that are available like Salt, Puppet, Chef, Ansible, etc&hellip; but I wasn&rsquo;t sure which would be the best choice long term.">
+<meta name="description" content="Part 2:
+I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
 
 
-<meta property="og:description" content="Part 1:
-I have recently started looking at using VMware vRealize SaltStack Config. This blog is a work in progress on my journey with Salt. I started at zero and let&rsquo;s see what I discover as I work towards getting to PROD. So if this topic is interesting to you, check back often.
-I wanted to learn one of the server configuration products that are available like Salt, Puppet, Chef, Ansible, etc&hellip; but I wasn&rsquo;t sure which would be the best choice long term.">
+<meta property="og:description" content="Part 2:
+I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 1">
-<meta name="twitter:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 1">
-<meta property="og:url" content="https://www.vcrocs.info/2021/07/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1/">
-<meta property="twitter:url" content="https://www.vcrocs.info/2021/07/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1/">
+<meta property="og:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 2">
+<meta name="twitter:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 2">
+<meta property="og:url" content="https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/">
+<meta property="twitter:url" content="https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/">
 <meta property="og:site_name" content="vCROCS.info">
-<meta property="og:description" content="Part 1:
-I have recently started looking at using VMware vRealize SaltStack Config. This blog is a work in progress on my journey with Salt. I started at zero and let&rsquo;s see what I discover as I work towards getting to PROD. So if this topic is interesting to you, check back often.
-I wanted to learn one of the server configuration products that are available like Salt, Puppet, Chef, Ansible, etc&hellip; but I wasn&rsquo;t sure which would be the best choice long term.">
-<meta name="twitter:description" content="Part 1:
-I have recently started looking at using VMware vRealize SaltStack Config. This blog is a work in progress on my journey with Salt. I started at zero and let&rsquo;s see what I discover as I work towards getting to PROD. So if this topic is interesting to you, check back often.
-I wanted to learn one of the server configuration products that are available like Salt, Puppet, Chef, Ansible, etc&hellip; but I wasn&rsquo;t sure which would be the best choice long term.">
+<meta property="og:description" content="Part 2:
+I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
+<meta name="twitter:description" content="Part 2:
+I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2021-07-16T00:00:00">
+    <meta property="article:published_time" content="2021-08-05T00:00:00">
   
   
-    <meta property="article:modified_time" content="2021-07-16T00:00:00">
+    <meta property="article:modified_time" content="2021-08-05T00:00:00">
   
   
   
@@ -88,14 +88,14 @@ I wanted to learn one of the server configuration products that are available li
   <meta property="twitter:image" content="https://www.vcrocs.info/img/dbh.jpg">
 
 
-    <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 1</title>
+    <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 2</title>
 
     <link rel="icon" href="https://www.vcrocs.info/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://www.vcrocs.info/2021/07/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1/">
+    <link rel="canonical" href="https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -287,15 +287,15 @@ if (!doNotTrack) {
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      VMware vRealize SaltStack Config as a Windows Server Admin - Part 1
+      VMware vRealize SaltStack Config as a Windows Server Admin - Part 2
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2021-07-16T00:00:00Z">
+      <time itemprop="datePublished" datetime="2021-08-05T00:00:00Z">
         
-  July 16, 2021
+  August 5, 2021
 
       </time>
     
@@ -314,109 +314,74 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p><strong>Part 1:</strong></p>
-<p>I have recently started looking at using <strong>VMware vRealize SaltStack Config</strong>. This blog is a work in progress on my journey with Salt. I started at <strong>zero</strong> and let&rsquo;s see what I discover as I work towards getting to <strong>PROD</strong>. So if this topic is interesting to you, check back often.</p>
-<p>I wanted to learn one of the server configuration products that are available like Salt, Puppet, Chef, Ansible, etc&hellip; but I wasn&rsquo;t sure which would be the best choice long term.  When VMware purchased SaltStack Config the product to choose became a lot easier for me. SaltStack Config is included with vRealize Suite for licensing and I can call VMware support for help, SaltStack Config became the obvious product to pick.</p>
-<p>I like to show how to use VMware vRealize Products from a <strong>Windows Server Admin</strong> point of view.  I do work with both Windows Servers and Linux Servers but most information you see online with Salt is using Linux Servers. I also do most of my current automation with PowerShell scripts. I do not want to lose all the time invested into the logic with my current PowerShell scripts.</p>
-<hr>
-<p>I am not going to go thru the process to install SaltStack Config.  There is already some very good blogs written on installing SaltStack Config. One item I would recommend with installing Salt-Stack Config is to use VMware vRealize Life Cycle Manager (&ldquo;LCM&rdquo;). LCM makes the process to install SaltStack Config a lot easier. This Blog is assuming you already installed SaltStack Config, now how do I use salt and what do I use salt for.</p>
-<h6 id="installing-and-configuring-saltstack-confighttpsdocsvmwarecomenvrealize-automation84install-configure-saltstack-configguid-dbe6d84b-0d4b-4747-8291-b0d80851ce62html"><a href="https://docs.vmware.com/en/vRealize-Automation/8.4/install-configure-saltstack-config/GUID-DBE6D84B-0D4B-4747-8291-B0D80851CE62.html" target="_blank">Installing and Configuring SaltStack Config</a></h6>
+              <p><strong>Part 2:</strong></p>
+<p>I have been able to spend more time with <strong>VMware vRealize SaltStack Config</strong>. Here are some updates on my journey with SaltStack as a <strong>Windows Server Admin</strong>.</p>
 <hr>
 <blockquote>
-<h5 id="the-first-step-minions">The first step (minions):</h5>
+<h5 id="auto-accept-new-minions">Auto-Accept new minions:</h5>
 </blockquote>
-<p>After you get a working SaltStack Config Server setup, the first item you need to do is add the salt agent to some &ldquo;Test&rdquo; servers. Servers that have the salt agent installed are called minions. There is the option to not add the salt agent to servers but then you need to use SSH to connect.  Windows Servers do not have SSH available as default so you would need to install an SSH server like OpenSSH on your servers. My thoughts are I need to add something for the minions to communicate with the salt-master. Instead of adding OpenSSH to every Windows Server I chose to install and use the salt agent.</p>
-<p>For testing you can manually install the minion agent on a server to become familiar with how the salt commands work. During the install there are two values you need to enter. The name of the master and the name you want to use for the minion. I did that on my first couple test servers but then I created some PowerShell code to install the salt minion agent.</p>
-<pre><code># ----- [ Install minion ] -----------------------------------------------
-
-# Define Username/Password
-$username = 'username@vCROCS.info'
-
-# The next line is how to create the encrypted password
-# Read-Host -Prompt &quot;Enter your password - username&quot; -AsSecureString | ConvertFrom-SecureString | Out-File &quot;C:\PWkey\username.key&quot;
-$password = Get-Content &quot;C:\PWkey\username.key&quot; | ConvertTo-SecureString
-$cred = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $password
-
-# ----- [ This section connects you to vCenter where VM is located ] -----
-
-# Connect to vCenter
-vCenterName = 'vCenter.vCROCS.info'
-Connect-VIServer $vCenterName -Credential $cred
-
-# ----- [ Install Salt Agent ] -------------------------------------------
-
-# Name of Server to install the salt minion agent
-$vmName = 'DBH-217'
-
-# Copy the minion agent file to your windows server
-Copy-VMGuestFile -Source G:\Salt-Minion-2019.2.4-Py3-AMD64-Setup.exe -Destination 'C:\vCROCS' -VM $vmName -LocalToGuest -GuestCredential $cred
-
-# command string to install the Salt Minion Agent
-$PSText = 'C:\vCROCS\Salt-Minion-2019.2.4-Py3-AMD64-Setup.exe /S /master=salt /minion-name=' + $vmName
-
-# Run the command on remote Server
-Invoke-VMScript -VM $VMName -ScriptType bat -ScriptText $PSText -GuestCredential $cred
-
-</code></pre><p>After the minion agent is installed on your server you need to accept the key on the salt master. From the CLI you can run these commands.</p>
-<p>List all keys. You should see you new minion listed in the Unaccepted Keys:</p>
-<pre><code>salt-key -L
-</code></pre><p>Accept the new minion key on the salt master:</p>
-<pre><code>salt-key --accept=&quot;DBH-217&quot;
-</code></pre><p>If you list all keys again you should see you new minion listed in the Accepted Keys:</p>
-<pre><code>salt-key -L
-</code></pre><p>My next update will include information on how to auto accept new minions.</p>
-<hr>
-<blockquote>
-<h5 id="here-are-some-basic-salt-commands-from-cli-that-i-have-been-using">Here are some basic salt commands from CLI that I have been using:</h5>
-</blockquote>
-<p><strong>Show all events:</strong></p>
-<pre><code>salt-run state.event
-</code></pre><p><strong><img src="https://www.vcrocs.info/img/salt-03.png" alt=""></strong></p>
-<p><strong>Show all events with a &ldquo;Pretty&rdquo; view:</strong></p>
-<pre><code>salt-run state.event pretty=true
-</code></pre><p><strong><img src="https://www.vcrocs.info/img/salt-02.png" alt=""></strong></p>
-<p><strong>List keys:</strong></p>
-<pre><code>salt-key -L
-</code></pre><p><strong>Accept Key:</strong></p>
-<pre><code>salt-key --accept=&quot;DBH-214&quot;
-</code></pre><p><strong>Delete Key:</strong></p>
-<pre><code>salt-key -d &quot;DBH-211,DBH-212&quot;
-</code></pre><p><strong>Run a function on one minion:</strong></p>
-<pre><code>salt &quot;DBH-217&quot; disk.usage
-</code></pre><p><strong>Run a function on multiple minions:</strong></p>
-<pre><code>salt &quot;DBH-217,DBH-218&quot; test.ping
-</code></pre><p><strong>Run a function on all minions:</strong></p>
-<pre><code>salt &quot;*&quot; test.ping
-</code></pre><p><strong>Create a file:</strong></p>
-<pre><code>salt &quot;DBH-214&quot; file.touch C:\vCROCS\salt.tst
-</code></pre><p><strong>Copy a file:</strong></p>
-<pre><code>salt &quot;DBH-214&quot; cp.get_file salt://vCROCS/vCROCSTEST.ps1 &quot;C:\vCROCS\vCROCSTEST.ps1&quot;
-</code></pre><p><strong>Delete a file:</strong></p>
-<pre><code>salt &quot;DBH-214&quot; file.remove &quot;C:\vCROCS\vCROCSTEST.ps1&quot;
-</code></pre><p><strong>Run a PowerShell Script:</strong></p>
-<pre><code>salt &quot;DBH-214&quot; cmd.script source=&quot;salt://vCROCS/vCROCSTEST.ps1&quot; shell=powershell
-</code></pre><p><strong>Restart the Salt Master Service:</strong></p>
+<p>I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions.  To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.conf (See Code below). You also need to create a reactor.conf file in /etc/salt/master.d on the salt master. I use vi to create and edit the reactor.conf file. Anytime you make changes to the /etc/salt/master.d/reactor.conf file you need to restart the salt-master service.</p>
+<p>In addition to the reactor file you need to create a state file. I located the file in /reactor/accept-key.sls (See Code below). I specified what the name of the new server starts with so that not all new minions get auto accepted. If the Naming Standard that I use is not what the new Server is named it will not be auto accepted. This is one way to have some rules on which new Servers are auto accepted.</p>
+<p><strong>File: base/reactor/reactor.conf</strong></p>
+<pre><code>reactor:
+  - 'salt/auth':                              # React to a new minion
+    - salt://reactor/accept-key.sls           # Run this state to auto accept new minion
+</code></pre><p><strong>Location of the Reactor File:</strong>
+<strong><img src="https://www.vcrocs.info/img/Salt-26.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-26png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-26.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p><strong>File: base/reactor/accept-key.sls</strong></p>
+<pre><code>{% if 'act' in data and data['act'] == 'pend' and data['id'].startswith('DBH') %}
+minion_add:
+  wheel.key.accept:
+    - args:
+      - match: {{ data['id']}}
+{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('vCROCS') %}
+minion_add:
+  wheel.key.accept:
+    - args:
+      - match: {{ data['id']}}
+{% endif %}
+</code></pre><p><strong>Location of the State File:</strong>
+<strong><img src="https://www.vcrocs.info/img/Salt-27.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-27png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-27.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p><strong>To restart the salt-master service run this command from the salt-master cli.</strong></p>
 <pre><code>service salt-master restart
-</code></pre><p><strong>Show the status of the raas and salt-master services:</strong></p>
-<pre><code>systemctl status raas
-systemctl status salt-master
-</code></pre><p><strong>Stop and start the salt-master service:</strong></p>
-<pre><code>systemctl stop salt-master
-systemctl start salt-master
-</code></pre><p><strong>Get IP address of all minions:</strong></p>
-<pre><code>salt '*' network.ip_addrs
-</code></pre><p><strong>Ping All Minions:</strong></p>
-<pre><code>salt &quot;*&quot; test.ping
-</code></pre><p><strong>Disk Space Usage on all Minions:</strong></p>
-<pre><code>salt &quot;*&quot; disk.usage
+</code></pre><p><strong>To check the status of the salt-master service run this command from the salt-master cli.</strong></p>
+<pre><code>systemctl status salt-minion.service
 </code></pre><hr>
+<blockquote>
+<h5 id="jobs">Jobs:</h5>
+</blockquote>
+<p>I think a good way to get Started with SaltStack Config after you have some minions added is to create some Jobs. You can create Jobs in the SaltStack Config UI. Go to Config/Jobs. You can manually run these Jobs on the minions.</p>
+<p>Here are some screen shots of jobs that can be useful.  To run a job on a single minion go to minions and find the minion you want to run the job on, Select the minion, Select Run Job, Select the Job you want to run, select Run Now.  If you select multiple minions the Job will run on all minions selected.</p>
+<p>That is where you start to see the True Power of Salt. If you Select one, ten, a hundred or a thousand minions, the time to complete the selected job is very quick. As a Windows Admin and using PowerShell, it would not be as easy to run a script on a 1,000 Servers at the exact same time.</p>
+<p><strong>List of all the Jobs:</strong>
+<strong><img src="https://www.vcrocs.info/img/Salt-20.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-20png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-20.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p><strong>Job to stop the Print Spooler Service:</strong><br>
+<strong><img src="https://www.vcrocs.info/img/Salt-21.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-21png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-21.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p><strong>Job to stop the Print Spooler Service using a PowerShell Command:</strong><br>
+<strong><img src="https://www.vcrocs.info/img/Salt-22.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-22png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-22.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p><strong>Job to stop and disable the Print Spooler Service using a PowerShell script:</strong><br>
+<strong><img src="https://www.vcrocs.info/img/Salt-23.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-23png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-23.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p><strong>Job to copy a file to a minion:</strong><br>
+<strong><img src="https://www.vcrocs.info/img/Salt-24.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-24png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-24.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p><strong>Job to reboot a minion:</strong><br>
+<strong><img src="https://www.vcrocs.info/img/Salt-25.PNG" alt=""></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimghttpswwwvcrocsinfoimgsalt-25png"><a href="[/img/]%28https://www.vcrocs.info/img/%29Salt-25.PNG">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>If you noticed I have some jobs doing the same process but one is using a salt function and one is using a PowerShell command. I wanted to show you how your existing PowerShell skills as a Windows Server Admin can be used in SaltStack Config.  You don&rsquo;t need to re-learn everything.  Using PowerShell with a job is also very helpful when there is not a salt function to do what you need to accomplish. I have been trying to use the built-in salt functions whenever possible to get more familiar with the product.</p>
+<p>Here is a saying that someone wrote or said that I seen online about salt. When in doubt, command out.</p>
+<hr>
 <blockquote>
 <h5 id="lessons-learned">Lessons Learned:</h5>
 </blockquote>
 <ul>
-<li>Anything you can do in the SaltStack Config GUI you can do in CLI. I find myself using the CLI for most testing. After I have the commands correct I will then add into the GUI.</li>
-<li>DO NOT have the minion agent version newer than the Salt-Master. I am going to try and keep the salt-master and minions always at the same version. The minion can be at an older version than the salt-master.</li>
-<li>During my upgrade from SaltStack Config 8.3 to 8.4 the Salt API did not upgrade. I didn&rsquo;t remember seeing any errors in LCM after the upgrade. The raas service was at version 8.4 and the salt API was at 8.3.  I had authentication issues, I could not accept keys, etc&hellip; I opened an SR with VMware and they helped me fix the issue. The support I received from VMware with Salt was probably the best support I received on any VMware product.</li>
+<li>Auto Accepting Minions is a nice start to using SaltStack Config with new vRealize Automation Server Builds. The new server will get auto accepted and you can then setup a State to install software like the Carbon Black Agent on every new Server.</li>
+<li>Running a job on a 1,000 Servers is just as easy as running a job on a single server.</li>
 </ul>
 <hr>
 <blockquote>
@@ -432,11 +397,14 @@ systemctl start salt-master
 <li>
 <h6 id="saltstack-documentationhttpsdocssaltprojectioenlatestcontentshtml"><a href="https://docs.saltproject.io/en/latest/contents.html" target="_blank">SaltStack Documentation</a></h6>
 </li>
+<li>
+<h6 id="saltstack-community-slack-channelhttpssaltstackcommunityslackcom"><a href="https://saltstackcommunity.slack.com" target="_blank">SaltStack Community Slack Channel</a></h6>
+</li>
 </ul>
 <hr>
 <p>When I write about <strong>vRealize Automation</strong> (&ldquo;vRA&rdquo;) I always say there are many ways to accomplish the same task.  <strong>SaltStack Config</strong> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <strong>GREAT Tool</strong> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.</p>
 <blockquote>
-<p>Last Update: 07/17/2021</p>
+<p>Last Update: 08/06/2021</p>
 </blockquote>
 
               
@@ -479,7 +447,7 @@ systemctl start salt-master
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 2">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/08/welcome-to-www.vcrocs.info/" data-tooltip="Welcome to www.vCROCS.info">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -487,7 +455,7 @@ systemctl start salt-master
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/05/how-vrealize-operations-can-help-with-right-sizing-vms/" data-tooltip="How vRealize Operations can help with Right Sizing VMs">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/07/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 1">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -505,7 +473,7 @@ systemctl start salt-master
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/07/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -553,7 +521,7 @@ systemctl start salt-master
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 2">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/08/welcome-to-www.vcrocs.info/" data-tooltip="Welcome to www.vCROCS.info">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -561,7 +529,7 @@ systemctl start salt-master
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/05/how-vrealize-operations-can-help-with-right-sizing-vms/" data-tooltip="How vRealize Operations can help with Right Sizing VMs">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/07/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 1">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -579,7 +547,7 @@ systemctl start salt-master
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/07/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -609,7 +577,7 @@ systemctl start salt-master
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fwww.vcrocs.info%2F2021%2F07%2Fvmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fwww.vcrocs.info%2F2021%2F08%2Fvmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
@@ -701,9 +669,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/www.vcrocs.info\/2021\/07\/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1\/';
+          this.page.url = 'https:\/\/www.vcrocs.info\/2021\/08\/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2\/';
           
-            this.page.identifier = '\/2021\/07\/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1\/'
+            this.page.identifier = '\/2021\/08\/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2\/'
           
         };
         (function() {
