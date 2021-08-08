@@ -9,13 +9,13 @@
 <meta name="author" content="Dale Hassinger">
 <meta name="keywords" content="">
 <meta name="description" content="Part 2:
-I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
-  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
+ I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds (minions) to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
 
 
 <meta property="og:description" content="Part 2:
-I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
-  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
+ I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds (minions) to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 2">
 <meta name="twitter:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 2">
@@ -23,11 +23,11 @@ I have been able to spend more time with VMware vRealize SaltStack Config. Here 
 <meta property="twitter:url" content="https://www.vcrocs.info/2021/08/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-2/">
 <meta property="og:site_name" content="vCROCS.info">
 <meta property="og:description" content="Part 2:
-I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
-  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
+ I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds (minions) to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
 <meta name="twitter:description" content="Part 2:
-I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
-  Auto-Accept new minions:  I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
+ I have been able to spend more time with VMware vRealize SaltStack Config. Here are some updates on my journey with SaltStack as a Windows Server Admin.
+  Auto-Accept new minions:  I wanted new Windows Server builds (minions) to be auto accepted into SaltStack Config instead of someone manually approving new minions. To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.">
 <meta property="og:locale" content="en-us">
 
   
@@ -315,21 +315,24 @@ if (!doNotTrack) {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p><strong>Part 2:</strong></p>
+<hr>
 <p>I have been able to spend more time with <strong>VMware vRealize SaltStack Config</strong>. Here are some updates on my journey with SaltStack as a <strong>Windows Server Admin</strong>.</p>
 <hr>
 <blockquote>
 <h5 id="auto-accept-new-minions">Auto-Accept new minions:</h5>
 </blockquote>
-<p>I wanted new Windows Server builds to be auto accepted into SaltStack Config instead of someone manually approving new minions.  To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.conf (See Code below). You also need to create a reactor.conf file in /etc/salt/master.d on the salt master. I use vi to create and edit the reactor.conf file. Anytime you make changes to the /etc/salt/master.d/reactor.conf file you need to restart the salt-master service.</p>
+<p>I wanted new Windows Server builds (minions) to be auto accepted into SaltStack Config instead of someone manually approving new minions.  To do this you need to have a reactor.conf file. I created the file in SaltStack Config File Server in base/reactor/reactor.conf (See Code below). You also need to create a reactor.conf file in /etc/salt/master.d on the salt master. I use vi to create and edit the reactor.conf file. Anytime you make changes to the /etc/salt/master.d/reactor.conf file you need to restart the salt-master service.</p>
 <p>In addition to the reactor file you need to create a state file. I located the file in /reactor/accept-key.sls (See Code below). I specified what the name of the new server starts with so that not all new minions get auto accepted. If the Naming Standard that I use is not what the new Server is named it will not be auto accepted. This is one way to have some rules on which new Servers are auto accepted.</p>
-<p><strong>File: base/reactor/reactor.conf</strong></p>
+<hr>
+<p><strong>Reactor File: base/reactor/reactor.conf</strong></p>
 <pre><code>reactor:
   - 'salt/auth':                              # React to a new minion
     - salt://reactor/accept-key.sls           # Run this state to auto accept new minion
 </code></pre><p><strong>Location of the Reactor File:</strong>
 <strong><img src="https://www.vcrocs.info/img/Salt-26.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-26png"><a href="https://www.vcrocs.info/img/Salt-26.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
-<p><strong>File: base/reactor/accept-key.sls</strong></p>
+<hr>
+<p><strong>State File: base/reactor/accept-key.sls</strong></p>
 <pre><code>{% if 'act' in data and data['act'] == 'pend' and data['id'].startswith('DBH') %}
 minion_add:
   wheel.key.accept:
@@ -344,6 +347,7 @@ minion_add:
 </code></pre><p><strong>Location of the State File:</strong>
 <strong><img src="https://www.vcrocs.info/img/Salt-27.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-27png"><a href="https://www.vcrocs.info/img/Salt-27.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
+<hr>
 <p><strong>To restart the salt-master service run this command from the salt-master cli.</strong></p>
 <pre><code>service salt-master restart
 </code></pre><p><strong>To check the status of the salt-master service run this command from the salt-master cli.</strong></p>
@@ -355,24 +359,36 @@ minion_add:
 <p>I think a good way to get Started with SaltStack Config after you have some minions added is to create some Jobs. You can create Jobs in the SaltStack Config UI. Go to Config/Jobs. You can manually run these Jobs on the minions.</p>
 <p>Here are some screen shots of jobs that can be useful.  To run a job on a single minion go to minions and find the minion you want to run the job on, Select the minion, Select Run Job, Select the Job you want to run, select Run Now.  If you select multiple minions the Job will run on all minions selected.</p>
 <p>That is where you start to see the True Power of Salt. If you Select one, ten, a hundred or a thousand minions, the time to complete the selected job is very quick. As a Windows Admin and using PowerShell, it would not be as easy to run a script on a 1,000 Servers at the exact same time.</p>
+<hr>
 <p><strong>List of all the Jobs:</strong>
 <strong><img src="https://www.vcrocs.info/img/Salt-20.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-20png"><a href="https://www.vcrocs.info/img/Salt-20.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
+<hr>
 <p><strong>Job to stop the Print Spooler Service:</strong><br>
 <strong><img src="https://www.vcrocs.info/img/Salt-21.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-21png"><a href="https://www.vcrocs.info/img/Salt-21.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>This job I am using a salt function service.stop. Pass the Service name as a argument.</p>
+<hr>
 <p><strong>Job to stop the Print Spooler Service using a PowerShell Command:</strong><br>
 <strong><img src="https://www.vcrocs.info/img/Salt-22.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-22png"><a href="https://www.vcrocs.info/img/Salt-22.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>This job I am using a salt function cmd.run. Pass the PowerShell code and type of cmd as arguments.</p>
+<hr>
 <p><strong>Job to stop and disable the Print Spooler Service using a PowerShell script:</strong><br>
 <strong><img src="https://www.vcrocs.info/img/Salt-23.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-23png"><a href="https://www.vcrocs.info/img/Salt-23.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>This job I am using a salt function cmd.script. Pass the PowerShell script path and type of cmd as arguments.</p>
+<hr>
 <p><strong>Job to copy a file to a minion:</strong><br>
 <strong><img src="https://www.vcrocs.info/img/Salt-24.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-24png"><a href="https://www.vcrocs.info/img/Salt-24.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>This job I am using a salt function cp.get_file. Pass the file source path and destination path as arguments.</p>
+<hr>
 <p><strong>Job to reboot a minion:</strong><br>
 <strong><img src="https://www.vcrocs.info/img/Salt-25.PNG" alt=""></strong></p>
 <h6 id="click-here-to-see-larger-image-of-screen-shothttpswwwvcrocsinfoimgsalt-25png"><a href="https://www.vcrocs.info/img/Salt-25.PNG" target="_blank">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>This job I am using a salt function system.reboot. Pass the wait time to reboot and wait_for_reboot as arguments.</p>
+<hr>
 <p>If you noticed I have some jobs doing the same process but one is using a salt function and one is using a PowerShell command. I wanted to show you how your existing PowerShell skills as a Windows Server Admin can be used in SaltStack Config.  You don&rsquo;t need to re-learn everything.  Using PowerShell with a job is also very helpful when there is not a salt function to do what you need to accomplish. I have been trying to use the built-in salt functions whenever possible to get more familiar with the product.</p>
 <p>Here is a saying that someone wrote or said that I seen online about salt. When in doubt, command out.</p>
 <hr>
