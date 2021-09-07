@@ -390,7 +390,7 @@ $allVMsTagInfo | Select-Object -Skip 1 | Set-Content $allvmstaginfoFile
 
 # ----- [ End Create CSV File with all VMs/TAGs Assigned ] ----------------------------
 </code></pre><p><strong>Step 2: Copy the csv file to the salt master</strong></p>
-<p>After I create the csv file I copy to the StackStack Config Server (Salt Master) in the folder /var/svr/salt.  This is where all files need to be saved when you use function cp.get_file.</p>
+<p>After I create the csv file I copy to the StackStack Config Server (Salt Master) in the folder /var/srv/salt.  This is where all files need to be saved when you use function cp.get_file.</p>
 <hr>
 <p><strong>Step 3: Copy the csv file to the salt minions</strong></p>
 <p>You may be wondering why I copy the file to the minion and not copy to a central share. My environment has NSX-T with zero trust. Most of my automation I do not open ports to servers that are not needed permanently. So the concept of using salt to copy files to minions, use the files to make changes and then delete the files when processes are complete works well in a zero trust environment.</p>
