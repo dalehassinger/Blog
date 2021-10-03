@@ -258,6 +258,122 @@ if (!doNotTrack) {
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/add-disk/">
+          Add disk
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-04-19T00:00:00Z">
+        
+  April 19, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a>, 
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/vra">vRA</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        PowerShell Code Powershell code to add disk to a Remote Windows Server VMware VM
+ #The Following code shows how to add a New Drive, bring drive online, initialize and format: #Connect to vCenter Connect-VIServer vcsa.domain.org #Add new drive to VM New-HardDisk -VM $VMNAME -CapacityGB $DISKSIZEGB -StorageFormat Thin -Controller ‘SCSI Controller 1’ #Make disk online invoke-command -computername $VMNAME -scriptblock {Set-Disk 2 -isOffline $false} #Initialize disk invoke-command -computername $VMNAME -scriptblock {Initialize-Disk 2 -PartitionStyle GPT} #Create Partition invoke-command -computername $VMNAME -scriptblock {New-Partition -DiskNumber 2 -UseMaximumSize -DriveLetter E} #Format drive invoke-command -computername $VMNAME -scriptblock {Format-Volume -DriveLetter E -FileSystem NTFS -NewFileSystemLabel ‘Data’ -AllocationUnitSize 16384 -Confirm:$false} #------------------------------------------------------------------------- #The Following Code will show disk “Allocation Unit Size” on a remote Windows Server: $C = Invoke-Command -ComputerName $VMname {Get-WmiObject -Class Win32_Volume -Filter “DriveLetter = ‘C:'” | Select-Object BLOCKSIZE} $C_AllocationUnitSize = ($C.
+      
+      <p>
+        <a href="https://www.vcrocs.info/2020/04/add-disk/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/add-registry-values/">
+          Add Registry Values
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-04-19T00:00:00Z">
+        
+  April 19, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://www.vcrocs.info/categories/powershell">PowerShell</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        PowerShell Code Add Registry Values to Windows Server
+ #vCrocs Registry Changes invoke-command -computername $FQDNVMname -ScriptBlock {new-Item HKLM:\SOFTWARE\vCrocs -f } invoke-command -computername $FQDNVMname -ScriptBlock {param ($SG) Set-ItemProperty hklm:\software\vCrocs -Name SupportGroup -Value &quot;$SG&quot; -Force} -ArgumentList $SG invoke-command -computername $FQDNVMname -ScriptBlock {param ($APP) Set-ItemProperty hklm:\software\vCrocs -Name Application -Value &quot;$APP&quot; -Force} -ArgumentList $APP invoke-command -computername $FQDNVMname -ScriptBlock {param ($LOC) Set-ItemProperty hklm:\software\vCrocs -Name Location -Value &quot;$LOC&quot; -Force} -ArgumentList $LOC invoke-command -computername $FQDNVMname -ScriptBlock {param ($SL) Set-ItemProperty hklm:\software\vCrocs -Name ServiceLevel -Value &quot;$SL&quot; -Force} -ArgumentList $SL 
+      
+      <p>
+        <a href="https://www.vcrocs.info/2020/04/add-registry-values/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="https://www.vcrocs.info/2020/04/automation-with-zero-trust/">
           Automation with Zero Trust
         </a>
@@ -641,7 +757,7 @@ Here&rsquo;s an example:
       
         Lead Systems Engineer, SME, vExpert 2020, 2021, vExpert Cloud Management 2021 If you can script it, You can Automate it&hellip;           VMware vExpert 2020/21 2021    Email: Dale.Hassinger@vCrocs.info
 Location: Dillsburg, PA
-My current focus is Enterprise Automation, Monitoring and Logging. I am using VMware vRealize Automation to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes&hellip; For monitoring I use vRealize Operations for the &ldquo;Single Pane of Glass&rdquo; experience.
+My current focus is Enterprise Automation, Monitoring and Logging. I am using VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes&hellip; For monitoring I use vRealize Operations for the &ldquo;Single Pane of Glass&rdquo; experience.
       
       <p>
         <a href="https://www.vcrocs.info/2020/01/about-dale-hassinger/" class="postShorten-excerpt_link link">Continue reading</a>
@@ -717,68 +833,6 @@ My current focus is Enterprise Automation, Monitoring and Logging. I am using VM
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://www.vcrocs.info/2020/01/image-gallery-dale-favorites/">
-          Image Gallery - Dale Favorites
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2020-01-01T00:00:00Z">
-        
-  January 1, 2020
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/images">Images</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/dale-hassinger">Dale Hassinger</a>, 
-    
-      <a class="category-link" href="https://www.vcrocs.info/categories/belle">Belle</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        <p><strong>Image Gallery</strong></p>
-      
-      <p>
-        <a href="https://www.vcrocs.info/2020/01/image-gallery-dale-favorites/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="https://www.vcrocs.info/2020/01/image-gallery-dale-favorites/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://www.vcrocs.info/img/pic06.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -792,8 +846,15 @@ My current focus is Enterprise Automation, Monitoring and Logging. I am using VM
           </li>
         
         
+          <li class="pagination-next">
+            <a class="btn btn--default btn--small" href="https://www.vcrocs.info/page/5/">
+              <span>OLDER POSTS</span>
+              <i class="fa fa-angle-right text-base icon-ml"></i>
+            </a>
+          </li>
+        
       
-      <li class="pagination-number">page 4 of 4</li>
+      <li class="pagination-number">page 4 of 5</li>
     </ul>
   </div>
 
