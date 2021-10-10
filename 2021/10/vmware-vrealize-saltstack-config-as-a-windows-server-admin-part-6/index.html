@@ -8,34 +8,34 @@
 <meta name="generator" content="Hugo 0.85.0 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Dale Hassinger">
 <meta name="keywords" content="">
-<meta name="description" content="I will be doing a SaltConf presentation for the first time at SaltConf 2021. I attended SaltConf 2020 for the first time after VMware purchased SaltStack Config. This past year I have spent a lot of time reviewing SaltStack Config as a Windows Admin and I am excited to share what I have learned to hopefully help some Windows Server Admins get started.
-I wanted to learn one of the configuration Management products for a couple of years and after VMware purchased SaltStack Config the decision became obvious to me which one I should learn since I live in VMware vRealize Products all day every day.">
+<meta name="description" content="Part 6:
+        The latest item on my journey with VMware vRealize SaltStack Config as a Windows Server Admin is going to be a lot PowerShell. I use PowerShell for a lot of Automation, Windows Server and Linux Server. When working with VMware vRealize SaltStack Config I constantly found myself going to the CLI to test and learn how the salt functions work.">
 
 
-<meta property="og:description" content="I will be doing a SaltConf presentation for the first time at SaltConf 2021. I attended SaltConf 2020 for the first time after VMware purchased SaltStack Config. This past year I have spent a lot of time reviewing SaltStack Config as a Windows Admin and I am excited to share what I have learned to hopefully help some Windows Server Admins get started.
-I wanted to learn one of the configuration Management products for a couple of years and after VMware purchased SaltStack Config the decision became obvious to me which one I should learn since I live in VMware vRealize Products all day every day.">
+<meta property="og:description" content="Part 6:
+        The latest item on my journey with VMware vRealize SaltStack Config as a Windows Server Admin is going to be a lot PowerShell. I use PowerShell for a lot of Automation, Windows Server and Linux Server. When working with VMware vRealize SaltStack Config I constantly found myself going to the CLI to test and learn how the salt functions work.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SaltConf 2021 - SaltStack Config Session">
-<meta name="twitter:title" content="SaltConf 2021 - SaltStack Config Session">
-<meta property="og:url" content="https://www.vcrocs.info/2021/10/saltconf-2021-saltstack-config-session/">
-<meta property="twitter:url" content="https://www.vcrocs.info/2021/10/saltconf-2021-saltstack-config-session/">
+<meta property="og:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 6">
+<meta name="twitter:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 6">
+<meta property="og:url" content="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6/">
+<meta property="twitter:url" content="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6/">
 <meta property="og:site_name" content="vCROCS.info">
-<meta property="og:description" content="I will be doing a SaltConf presentation for the first time at SaltConf 2021. I attended SaltConf 2020 for the first time after VMware purchased SaltStack Config. This past year I have spent a lot of time reviewing SaltStack Config as a Windows Admin and I am excited to share what I have learned to hopefully help some Windows Server Admins get started.
-I wanted to learn one of the configuration Management products for a couple of years and after VMware purchased SaltStack Config the decision became obvious to me which one I should learn since I live in VMware vRealize Products all day every day.">
-<meta name="twitter:description" content="I will be doing a SaltConf presentation for the first time at SaltConf 2021. I attended SaltConf 2020 for the first time after VMware purchased SaltStack Config. This past year I have spent a lot of time reviewing SaltStack Config as a Windows Admin and I am excited to share what I have learned to hopefully help some Windows Server Admins get started.
-I wanted to learn one of the configuration Management products for a couple of years and after VMware purchased SaltStack Config the decision became obvious to me which one I should learn since I live in VMware vRealize Products all day every day.">
+<meta property="og:description" content="Part 6:
+        The latest item on my journey with VMware vRealize SaltStack Config as a Windows Server Admin is going to be a lot PowerShell. I use PowerShell for a lot of Automation, Windows Server and Linux Server. When working with VMware vRealize SaltStack Config I constantly found myself going to the CLI to test and learn how the salt functions work.">
+<meta name="twitter:description" content="Part 6:
+        The latest item on my journey with VMware vRealize SaltStack Config as a Windows Server Admin is going to be a lot PowerShell. I use PowerShell for a lot of Automation, Windows Server and Linux Server. When working with VMware vRealize SaltStack Config I constantly found myself going to the CLI to test and learn how the salt functions work.">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2021-10-02T00:00:00">
+    <meta property="article:published_time" content="2021-10-09T00:00:00">
   
   
-    <meta property="article:modified_time" content="2021-10-02T00:00:00">
+    <meta property="article:modified_time" content="2021-10-09T00:00:00">
   
   
   
     
-      <meta property="article:section" content=" - &#34;Manage Windows Workloads Through vRealize Automation SaltStack Config&#34;">
+      <meta property="article:section" content=" - &#34;How to use SaltStack Config with Windows Server and PowerShell&#34;">
     
   
   
@@ -58,11 +58,11 @@ I wanted to learn one of the configuration Management products for a couple of y
     
       <meta property="article:tag" content="Automation">
     
-      <meta property="article:tag" content="vRealize Automation">
+      <meta property="article:tag" content="grains">
     
-      <meta property="article:tag" content="vRA">
+      <meta property="article:tag" content="POSH-SSH">
     
-      <meta property="article:tag" content="SaltConf 2021">
+      <meta property="article:tag" content="PowerShell Module">
     
   
 
@@ -79,8 +79,8 @@ I wanted to learn one of the configuration Management products for a couple of y
 
 
 
-  <meta property="og:image" content="https://www.vcrocs.info/img/saltconf21-01.png">
-  <meta property="twitter:image" content="https://www.vcrocs.info/img/saltconf21-01.png">
+  <meta property="og:image" content="https://www.vcrocs.info/img/salt.png">
+  <meta property="twitter:image" content="https://www.vcrocs.info/img/salt.png">
 
 
 
@@ -90,14 +90,14 @@ I wanted to learn one of the configuration Management products for a couple of y
   <meta property="twitter:image" content="https://www.vcrocs.info/img/dbh.jpg">
 
 
-    <title>SaltConf 2021 - SaltStack Config Session</title>
+    <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 6</title>
 
     <link rel="icon" href="https://www.vcrocs.info/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://www.vcrocs.info/2021/10/saltconf-2021-saltstack-config-session/">
+    <link rel="canonical" href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -289,15 +289,15 @@ if (!doNotTrack) {
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      SaltConf 2021 - SaltStack Config Session
+      VMware vRealize SaltStack Config as a Windows Server Admin - Part 6
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2021-10-02T00:00:00Z">
+      <time itemprop="datePublished" datetime="2021-10-09T00:00:00Z">
         
-  October 2, 2021
+  October 9, 2021
 
       </time>
     
@@ -306,7 +306,7 @@ if (!doNotTrack) {
   
     <span>in</span>
     
-      <a class="category-link" href="https://www.vcrocs.info/categories/-manage-windows-workloads-through-vrealize-automation-saltstack-config"> - &#34;Manage Windows Workloads Through vRealize Automation SaltStack Config&#34;</a>
+      <a class="category-link" href="https://www.vcrocs.info/categories/-how-to-use-saltstack-config-with-windows-server-and-powershell"> - &#34;How to use SaltStack Config with Windows Server and PowerShell&#34;</a>
     
   
 
@@ -316,22 +316,310 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>I will be doing a SaltConf presentation for the first time at SaltConf 2021. I attended SaltConf 2020 for the first time after VMware purchased SaltStack Config.  This past year I have spent a lot of time reviewing SaltStack Config as a Windows Admin and I am excited to share what I have learned to hopefully help some Windows Server Admins get started.</p>
-<p>I wanted to learn one of the configuration Management products for a couple of years and after VMware purchased SaltStack Config the decision became obvious to me which one I should learn since I live in VMware vRealize Products all day every day.</p>
-<p>So register today for SaltConf 2021 and attend my session.</p>
-<h6 id="--link-to-saltconf21--httpssaltconfcom"><a href="https://saltconf.com" target="_blank">- Link to SaltConf21 -</a></h6>
+              <p><strong>Part 6:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><img src="https://www.vcrocs.info/img/ps.png" alt=""></th>
+<th style="text-align:center"><img src="https://www.vcrocs.info/img/powercli.png" alt=""></th>
+</tr>
+</thead>
+</table>
+<p>The latest item on my journey with <strong>VMware vRealize SaltStack Config</strong> as a <strong>Windows Server Admin</strong> is going to be a lot PowerShell. I use PowerShell for a lot of Automation, Windows Server and Linux Server. When working with <strong>VMware vRealize SaltStack Config</strong> I constantly found myself going to the CLI to test and learn how the salt functions work.</p>
+<p>In the <a href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5/" target="_blank">Part 5 Blog</a> of this series I showed how I am using the PowerShell module POSH-SSH to connect to the <strong>VMware vRealize SaltStack Config</strong> Server to run salt commands remotely. So I started writing some PowerShell functions to run remote salt commands on the Salt Master. The end goal might be to turn this script into a Salt PowerShell Module. To start it will only have the functions that I find myself using the most. I could turn this into a community Github Project and see if there would be any interest. If anyone reading this blog post has any interest please reach out to me. (<a href="mailto:Dale.Hassinger@vCROCS.info">Dale.Hassinger@vCROCS.info</a>)</p>
+<p>My goal is to make all these PowerShell Salt functions work with <strong>VMware vRealize SaltStack Config</strong> like PowerCLI works with <strong>VMware vCenter</strong>. Use same verb/noun terminology. I use PowerCLI for all my VMware Automation. Works awesome! So to create these PowerShell Functions to work with my existing automation scripts is a win win in my book.</p>
+<p>Normally I will use a Products APIs to do all these types of processes. I looked at <strong>VMware vRealize SaltStack Config</strong> APIs and to the best of my knowledge I can not use them like I can the PS functions that I created. That may change in a future release of <strong>VMware vRealize SaltStack Config</strong>. Fingers crossed.</p>
 <hr>
-<p><strong>Session Details:</strong></p>
+<blockquote>
+<h5 id="salt-powershell-functions">Salt PowerShell Functions:</h5>
+</blockquote>
+<pre><code>
+# ----- [ Start of Functions ] --------------------------------------------------------------------------------------------------------------
+# The POSH-SSH PS module MUST be installed to use these functions.
+
+# Function to Connect to SSC Server
+function Connect-SSCServer 
+{
+    param(
+
+        [parameter(mandatory = $true)]
+        [string]$Server,
+        [parameter(mandatory = $true)]
+        [string]$userName,
+        [parameter(mandatory = $true)]
+        [string]$Password
+
+    ) # End Parameters
+
+    # The next line is how to create the encrypted password
+    $psPassword = ConvertTo-SecureString -String $global:HashiPW -AsPlainText -Force
+    $creds = new-object -typename System.Management.Automation.PSCredential -argumentlist $username, $psPassword
+
+    $Params = @{
+        &quot;ComputerName&quot; = $Server
+        &quot;Credential&quot;   = $creds
+    } # End Params
+      
+    # SSH Connection to SaltStack Server
+    New-SSHSession @Params
+
+} # End Function
+
+
+
+
+
+# Function to Disconnect from SSC Server
+function Disconnect-SSCServer
+{
+    Remove-SSHSession -SessionId 0
+} # End Function
+
+
+
+
+
+# Sync Minion grains
+function invoke-SSC.sync.grains
+{
+    param(
+    [parameter(mandatory = $true)]
+    [string]$minion
+    )
+
+    # Sync Grains after adding new grain information
+    $sshCommand = 'salt &quot;' + $minion + '&quot; saltutil.sync_grains --output=json'
+    #$sshCommand
+
+
+    $Params = @{
+        &quot;SessionId&quot; = 0
+        &quot;Command&quot;   = $sshCommand
+    } # End Params
+
+    $results = Invoke-SSHCommand @Params
+
+    return $results.Output
+    
+} # End Function
+
+
+
+
+
+# Minion Grain Append
+function set-SSC.grains.append
+{
+    param(
+        [parameter(mandatory = $true)]
+        [string]$minion,
+        [parameter(mandatory = $true)]
+        [string]$grainkey,
+        [parameter(mandatory = $true)]
+        [string]$grainval
+    ) # End Parameters
+
+    # Grains Append
+    $sshCommand = 'salt &quot;' + $minion + '&quot; grains.append &quot;' + $grainkey + '&quot; &quot;' + $grainval + '&quot;'
+    #$sshCommand
+
+    $Params = @{
+        &quot;SessionId&quot; = 0
+        &quot;Command&quot;   = $sshCommand
+    } # End Params
+
+    $results = Invoke-SSHCommand @Params
+
+} # End Function
+
+
+
+
+
+# Minion Grain DelKey
+function set-SSC.grains.delkey
+{
+    param(
+        [parameter(mandatory = $true)]
+        [string]$minion,
+        [parameter(mandatory = $true)]
+        [string]$grainkey
+    ) # End Parameters
+
+    $sshCommand = 'salt &quot;' + $minion + '&quot; grains.delkey &quot;' + $grainkey + '&quot; force=True'
+    #$sshCommand
+
+    $Params = @{
+        &quot;SessionId&quot; = 0
+        &quot;Command&quot;   = $sshCommand
+    } # End Params
+
+    $results = Invoke-SSHCommand @Params
+
+} # End Function
+
+
+
+
+
+# Minion Test Ping
+function invoke-SSC.test.ping
+{
+    param(
+        [parameter(mandatory = $true)]
+        [string]$minion
+    ) # End Parameters
+
+    $sshCommand = 'salt &quot;' + $minion + '&quot; test.ping --output=json'
+    #$sshCommand
+
+    $results = Invoke-SSHCommand -SessionId 0 -Command $sshCommand
+    return $results.Output[1].Trim()
+
+} # End Function
+
+
+
+
+# ----- [ End of Functions ] --------------------------------------------------------------------------------------------------------------
+
+
+</code></pre><hr>
+<blockquote>
+<h5 id="examples-to-show-how-to-use-the-salt-powershell-functions-above">Examples to show how to use the Salt PowerShell Functions above:</h5>
+</blockquote>
+<hr>
+<pre><code>
+# ----- [ Connect to SSC Server ] --------------------------------------------------
+
+# DO NOT use plain text PW's in your Code. I am only showing PW to make it easier to understand the code. 
+
+# Set Parameter Values
+$Server   = 'smssmgmtd01.select.corp.sem'
+$User     = 'root'
+$Password = 'VMware1!'
+
+# Define Parameters (Splatting)
+$Params = @{
+    &quot;Server&quot;   = $Server
+    &quot;User&quot;     = $User
+    &quot;Password&quot; = $Password
+}
+
+# Connect to SSC
+Connect-SSCServer @Params
+
+
+
+# ----- [ Disconnect to SSC Server ] -----------------------------------------------
+Disconnect-SSCServer
+
+
+
+# ----- [ Sync Minion grains ] -------------------------------------------------------
+# Set Parameter Values
+$minion = 'DBH-211'
+
+# Define Parameters (Splatting)
+$Params = @{
+    &quot;minion&quot; = $minion
+}
+
+# Run Function
+invoke-SSC.sync.grains @Params
+
+
+
+# ----- [ Minion grain append ] ----------------------------------------------------
+# Set Parameter Values
+$minion = 'DBH-211'
+$grainkey = 'PS_Module'
+$grainval = 'Works great for Windows Server'
+
+# Define Parameters (Splatting)
+$Params = @{
+    &quot;minion&quot;   = $minion
+    &quot;grainkey&quot; = $grainkey
+    &quot;grainval&quot; = $grainval
+}
+
+# Run Function
+set-SSC.grains.append @Params
+
+# Define Parameters (Splatting)
+$Params = @{
+    &quot;minion&quot; = $minion
+}
+
+# Run Function
+invoke-SSC.sync.grains @Params
+
+
+
+# ----- [ Minion grain DelKey ] ----------------------------------------------------
+# Set Parameter Values
+$minion = 'DBH-211'
+$grainkey = 'PS_Module'
+
+# Define Parameters (Splatting)
+$Params = @{
+    minion   = $minion
+    grainkey = $grainkey
+}
+
+# Run Function
+set-SSC.grains.delkey @Params
+
+# Define Parameters (Splatting)
+$Params = @{
+    &quot;minion&quot; = $minion
+}
+
+# Run Function
+invoke-SSC.sync.grains @Params
+
+
+
+# ----- [ Minion test.ping ] ----------------------------------------------------
+# Set Paramter Values
+$minion = 'DBH-211'
+
+# Define Parameters (Splatting)
+$Params = @{
+    &quot;minion&quot; = $minion
+}
+
+# Run Function
+invoke-SSC.test.ping @Params
+
+</code></pre><blockquote>
+<h5 id="lessons-learned">Lessons Learned:</h5>
+</blockquote>
 <ul>
-<li>Date: November 4th.</li>
-<li>Time: 10:00 am - 10:50 am</li>
-<li>Details: Track 1 - Managing Windows with SaltStack Config</li>
-<li>Presenters: Vincent Riccio and Dale Hassinger</li>
+<li>Adding the POSH-SSH PowerShell module so you can create a SSH connection to the salt master opens up a lot of possibilities for your PowerShell Automation as a Windows Server Admin.</li>
+<li>Using the PowerShell Functions above as a Windows admin makes it very easy to add this code to existing scripts and use the Power of SaltStack without completely changing your processes.</li>
+<li>Creating a SSH Connection to a remote Salt Master and running commands works well in a &ldquo;Zero Trust&rdquo; environment. With NSX-T all you need to do is setup allow rules between the minions and the master on ports 4505,4506.</li>
 </ul>
-<h6 id="--link-to-saltconf21-agenda--httpssaltconfcomsaltconf21agenda"><a href="https://saltconf.com/saltconf21/agenda/" target="_blank">- Link to SaltConf21 Agenda -</a></h6>
 <hr>
-<p>In our Presentation we wil show how to use SaltStack Config to manage Microsoft Windows Servers. How to use Salt to install software, work with Windows Services, make Registry changes, configuration management, how to add vCenter TAGs as minion grain information, and other normal day to day Windows Server administration.</p>
+<blockquote>
+<h5 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h5>
+</blockquote>
+<ul>
+<li>
+<h6 id="saltstack-cheat-sheethttpssitesgooglecomsitemrxpalmeirassaltstacksalt-cheat-sheet"><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></h6>
+</li>
+<li>
+<h6 id="saltstack-tutorialshttpsdocssaltprojectioengetstarted"><a href="https://docs.saltproject.io/en/getstarted/" target="_blank">SaltStack Tutorials</a></h6>
+</li>
+<li>
+<h6 id="saltstack-documentationhttpsdocssaltprojectioenlatestcontentshtml"><a href="https://docs.saltproject.io/en/latest/contents.html" target="_blank">SaltStack Documentation</a></h6>
+</li>
+<li>
+<h6 id="saltstack-community-slack-channelhttpssaltstackcommunityslackcom"><a href="https://saltstackcommunity.slack.com" target="_blank">SaltStack Community Slack Channel</a></h6>
+</li>
+</ul>
 <hr>
+<p>When I write about <strong>vRealize Automation</strong> (&ldquo;vRA&rdquo;) I always say there are many ways to accomplish the same task.  <strong>SaltStack Config</strong> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <strong>GREAT Tool</strong> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.</p>
 
               
             </div>
@@ -362,11 +650,11 @@ if (!doNotTrack) {
 
   <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/automation/">Automation</a>
 
-  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/vrealize-automation/">vRealize Automation</a>
+  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/grains/">grains</a>
 
-  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/vra/">vRA</a>
+  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/posh-ssh/">POSH-SSH</a>
 
-  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/saltconf-2021/">SaltConf 2021</a>
+  <a class="tag tag--primary tag--small" href="https://www.vcrocs.info/tags/powershell-module/">PowerShell Module</a>
 
                   </div>
                 
@@ -379,7 +667,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 6">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/welcome-to-www.vcrocs.info/" data-tooltip="Welcome to www.vCROCS.info">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -387,7 +675,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 5">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/saltconf-2021-saltstack-config-session/" data-tooltip="SaltConf 2021 - SaltStack Config Session">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -405,7 +693,7 @@ if (!doNotTrack) {
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/10/saltconf-2021-saltstack-config-session/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -453,7 +741,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 6">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/welcome-to-www.vcrocs.info/" data-tooltip="Welcome to www.vCROCS.info">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -461,7 +749,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5/" data-tooltip="VMware vRealize SaltStack Config as a Windows Server Admin - Part 5">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://www.vcrocs.info/2021/10/saltconf-2021-saltstack-config-session/" data-tooltip="SaltConf 2021 - SaltStack Config Session">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -479,7 +767,7 @@ if (!doNotTrack) {
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/10/saltconf-2021-saltstack-config-session/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
@@ -509,7 +797,7 @@ if (!doNotTrack) {
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fwww.vcrocs.info%2F2021%2F10%2Fsaltconf-2021-saltstack-config-session%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fwww.vcrocs.info%2F2021%2F10%2Fvmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
@@ -601,9 +889,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/www.vcrocs.info\/2021\/10\/saltconf-2021-saltstack-config-session\/';
+          this.page.url = 'https:\/\/www.vcrocs.info\/2021\/10\/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6\/';
           
-            this.page.identifier = '\/2021\/10\/saltconf-2021-saltstack-config-session\/'
+            this.page.identifier = '\/2021\/10\/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-6\/'
           
         };
         (function() {
