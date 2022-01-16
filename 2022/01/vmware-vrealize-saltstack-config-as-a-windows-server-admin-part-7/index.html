@@ -376,22 +376,17 @@ $results = Invoke-SSHCommand @Params
 
 $features = $results.Output
 $features = $results.Output | ConvertFrom-Json
-$features = $results.Output | ConvertFrom-Json
-$features = $features.$minion
-$features = $features -split(&quot;:&quot;)
-$features = $features -split(&quot;;&quot;)
-$features = $features -replace(&quot;@{&quot;,&quot;&quot;)
-$features = $features -replace(&quot;}&quot;,&quot;&quot;)
-$features = $features.trim()
-$features = $features -replace(&quot;=&quot;,&quot; | &quot;)
-$features = $features | Sort-Object
-
-$grainsKey = 'vCROCS_Windows_Feature'
+$features = $features.PsObject.Properties.Value
+$features = $features | ConvertTo-Xml
 
 # Append Each Feature|Role information to grains
 Write-Host 'Appending Windows Server Features|Roles Installed to grains...'
 
-foreach($grainsValue in $features){
+$grainsKey = 'vCROCS_Windows_Feature'
+
+foreach($feature in $features.Objects.Object.Property){
+    $grainsValue = $feature.Name + ' | ' + $feature.'#text'
+
     # Grains Append
     $sshCommand = 'salt &quot;' + $minion + '&quot; grains.append ' + $grainsKey + ' &quot;' + $grainsValue + '&quot;'
     #$sshCommand
@@ -402,6 +397,7 @@ foreach($grainsValue in $features){
     } # End Params
 
     Invoke-SSHCommand @Params
+    
 } # End Foreach
 
 
@@ -419,23 +415,20 @@ $Params = @{
 } # End Params
 
 $results = Invoke-SSHCommand @Params
+
 $installedPackages = $results.Output
 $installedPackages = $installedPackages | ConvertFrom-Json
-$installedPackages = $installedPackages.$minion
-$installedPackages = $installedPackages -split(&quot;:&quot;)
-$installedPackages = $installedPackages -split(&quot;;&quot;)
-$installedPackages = $installedPackages -replace(&quot;@{&quot;,&quot;&quot;)
-$installedPackages = $installedPackages -replace(&quot;}&quot;,&quot;&quot;)
-$installedPackages = $installedPackages.trim()
-$installedPackages = $installedPackages -replace(&quot;=&quot;,&quot; | &quot;)
-$installedPackages = $installedPackages | Sort-Object
+$installedPackages = $installedPackages.PsObject.Properties.Value
+$installedPackages = $installedPackages | ConvertTo-Xml
 
 $grainsKey = 'vCROCS_Windows_Installed_Software'
 
 # Append Windows Server Installed Software to grains
 Write-Host 'Appending Windows Server Installed Software to grains...'
 
-foreach($grainsValue in $installedPackages){
+foreach($installedPackage in $installedPackages.Objects.Object.Property){
+    $grainsValue = $installedPackage.Name + ' | ' + $installedPackage.'#text'
+
     # Grains Append
     $sshCommand = 'salt &quot;' + $minion + '&quot; grains.append ' + $grainsKey + ' &quot;' + $grainsValue + '&quot;'
     #$sshCommand
@@ -446,6 +439,7 @@ foreach($grainsValue in $installedPackages){
     } # End Params
 
     Invoke-SSHCommand @Params
+
 } # End Foreach
 
 
