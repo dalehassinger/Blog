@@ -661,6 +661,11 @@ salt &#34;vCROCS01&#34; system.reboot 0
 vCROCS01:
     True
  </code></pre></div>
+<h6 id="join-domain">Join Domain:</h6>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> 
+&gt; Command join minion to a Windows Domain. You can also specify OU that computer object will be located:
+salt &#34;vCROCS01&#34; system.join_domain domain=&#39;vcrocs.info&#39; username=&#39;vcrocs\administrator&#39; password=&#39;VMware1!&#39; account_ou=&#39;OU=Dev,OU=Servers,DC=vcrocs,DC=info&#39; account_exists=False restart=True
+ </code></pre></div>
 <h6 id="windows-registry">Windows Registry:</h6>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> 
 &gt; Command add a registry key to minion or change value of an existing registry key:
