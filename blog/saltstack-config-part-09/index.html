@@ -473,7 +473,7 @@ if (!doNotTrack) {
 </div>
 <p>This post is to show how to use PowerShell to make RESTful API calls to SaltStack Config. This is something that I have wanted to do for awhile. I could never find any examples in my Google searches, so I took the time to learn how the examples that use curl work and translated that into PowerShell Code. I hope some Windows Admins will find this post helpful. I like using salt to do Windows Server Configuration Management more than remote PowerShell. You can run changes against many servers at the exact same time instead of looping thru a list of servers names.</p>
 <p>I am also going to look at use salt-api with vRealize Automation ABX action scripts.</p>
-<p>In some previous posts I used the PSH-SSH module but when you use the salt-api, the PowerShell Module POSH-SSH is no longer needed.</p>
+<p>In some previous posts I used the POSH-SSH module but when you use the salt-api, the PowerShell Module POSH-SSH is no longer needed.</p>
 <hr>
 <h6 id="configuration-changes-to-the--saltstack-config-server">Configuration Changes to the  SaltStack Config Server:</h6>
 <div>
@@ -537,7 +537,7 @@ if (!doNotTrack) {
 <ul>
 <li>I did all this PowerShell code from my mac.  To use self-signed certs I use -SkipCertificateCheck. On a Windows OS the code is different.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># --- PowerShell Code</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># --- PowerShell Code ---</span>
 </span></span><span style="display:flex;"><span>Invoke-WebRequest -Uri <span style="color:#e6db74">&#39;https://192.168.86.141:8000&#39;</span> -SkipCertificateCheck
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Results<span style="color:#960050;background-color:#1e0010">:</span>
@@ -567,7 +567,7 @@ if (!doNotTrack) {
 <p>Next step is to make sure you get a token:</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># --- PowerShell Code</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#75715e"># --- PowerShell Code ---</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># --- In my code I show the PassWord. In Production DO NOT DO THIS.</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># --- There are so many different ways to include encrypted PWs in the code. </span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Use what works best in your environment.</span>
