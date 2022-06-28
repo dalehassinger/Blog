@@ -544,51 +544,68 @@ I create a job named &ldquo;vRA | Server Reboot&rdquo;. This job will be used fo
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sseapiclient.tornado <span style="color:#f92672">import</span> SyncClient
 </span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> SyncClient<span style="color:#f92672">.</span>connect(host, user, password, ssl_validate_cert<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Create Target ID | Name</span>
-</span></span><span style="display:flex;"><span>targetID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;id:&#39;</span> <span style="color:#f92672">+</span> argName
-</span></span><span style="display:flex;"><span>targetName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vRA | Reboot | &#34;</span> <span style="color:#f92672">+</span> argName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | &#39;</span> <span style="color:#f92672">+</span> argDate <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | ID:&#39;</span> <span style="color:#f92672">+</span> randomNumber
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Target ID:&#39;</span>,targetID)
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Target Name:&#39;</span>,targetName)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Check to make sure minion exists</span>
+</span></span><span style="display:flex;"><span>minionName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>minionReturn <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>minions<span style="color:#f92672">.</span>get_minion_presence(minion_id <span style="color:#f92672">=</span> argName)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#print(targetReturn)</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Create New SSC Target</span>
-</span></span><span style="display:flex;"><span>client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>tgt<span style="color:#f92672">.</span>save_target_group(tgt<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;*&#39;</span>: {<span style="color:#e6db74">&#39;tgt_type&#39;</span>: <span style="color:#e6db74">&#39;grain&#39;</span>, <span style="color:#e6db74">&#39;tgt&#39;</span>:targetID}}, name<span style="color:#f92672">=</span>targetName)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Get UUID of new Target Created</span>
-</span></span><span style="display:flex;"><span>targetReturn <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>tgt<span style="color:#f92672">.</span>get_target_group(name<span style="color:#f92672">=</span>targetName)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> targetReturn<span style="color:#f92672">.</span>ret[<span style="color:#e6db74">&#39;results&#39;</span>]:
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> minionReturn<span style="color:#f92672">.</span>ret[<span style="color:#e6db74">&#39;results&#39;</span>]:
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print(x)</span>
-</span></span><span style="display:flex;"><span>    targetUUID <span style="color:#f92672">=</span> x[<span style="color:#e6db74">&#39;uuid&#39;</span>]
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Target UUID:&#39;</span>, targetUUID)
+</span></span><span style="display:flex;"><span>    minionName <span style="color:#f92672">=</span> x[<span style="color:#e6db74">&#39;minion&#39;</span>]
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;minionName:&#39;</span>, minionName)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> minionName <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&#39;</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Minion not found!&#39;</span>)
+</span></span><span style="display:flex;"><span>    minionExists <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;false&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Minion found!&#39;</span>)
+</span></span><span style="display:flex;"><span>    minionExists <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;true&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># --- Create Target ID | Name</span>
+</span></span><span style="display:flex;"><span>    targetID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;id:&#39;</span> <span style="color:#f92672">+</span> argName
+</span></span><span style="display:flex;"><span>    targetName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vRA | Reboot | &#34;</span> <span style="color:#f92672">+</span> argName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | &#39;</span> <span style="color:#f92672">+</span> argDate <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | ID:&#39;</span> <span style="color:#f92672">+</span> randomNumber
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Target ID:&#39;</span>,targetID)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Target Name:&#39;</span>,targetName)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># --- Create New SSC Target</span>
+</span></span><span style="display:flex;"><span>    client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>tgt<span style="color:#f92672">.</span>save_target_group(tgt<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;*&#39;</span>: {<span style="color:#e6db74">&#39;tgt_type&#39;</span>: <span style="color:#e6db74">&#39;grain&#39;</span>, <span style="color:#e6db74">&#39;tgt&#39;</span>:targetID}}, name<span style="color:#f92672">=</span>targetName)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># --- Get UUID of new Target Created</span>
+</span></span><span style="display:flex;"><span>    targetReturn <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>tgt<span style="color:#f92672">.</span>get_target_group(name<span style="color:#f92672">=</span>targetName)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> targetReturn<span style="color:#f92672">.</span>ret[<span style="color:#e6db74">&#39;results&#39;</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#print(x)</span>
+</span></span><span style="display:flex;"><span>        targetUUID <span style="color:#f92672">=</span> x[<span style="color:#e6db74">&#39;uuid&#39;</span>]
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Target UUID:&#39;</span>, targetUUID)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Get UUID of Job to run in Schedule</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#jobReturn=client.api.job.get_jobs()</span>
-</span></span><span style="display:flex;"><span>jobName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;vRA | Server Reboot&#39;</span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Job Name: &#39;</span>,jobName)
-</span></span><span style="display:flex;"><span>jobReturn <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>job<span style="color:#f92672">.</span>get_jobs(name<span style="color:#f92672">=</span>jobName)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># --- Get UUID of Job to run in Schedule</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#jobReturn=client.api.job.get_jobs()</span>
+</span></span><span style="display:flex;"><span>    jobName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;vRA | Server Reboot&#39;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Job Name: &#39;</span>,jobName)
+</span></span><span style="display:flex;"><span>    jobReturn <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>job<span style="color:#f92672">.</span>get_jobs(name<span style="color:#f92672">=</span>jobName)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> jobReturn<span style="color:#f92672">.</span>ret[<span style="color:#e6db74">&#39;results&#39;</span>]:
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#print(x)</span>
-</span></span><span style="display:flex;"><span>    jobUUID <span style="color:#f92672">=</span> x[<span style="color:#e6db74">&#39;uuid&#39;</span>]
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Job UUID:&#39;</span>, jobUUID)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> jobReturn<span style="color:#f92672">.</span>ret[<span style="color:#e6db74">&#39;results&#39;</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#print(x)</span>
+</span></span><span style="display:flex;"><span>        jobUUID <span style="color:#f92672">=</span> x[<span style="color:#e6db74">&#39;uuid&#39;</span>]
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Job UUID:&#39;</span>, jobUUID)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># -- Create a run once Schedule</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2022-06-21T13:21 - Date|Time format from vRA</span>
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Schedule Time:&#39;</span>,argDateTime)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># -- Create a run once Schedule</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 2022-06-21T13:21 - Date|Time format from vRA</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Schedule Time:&#39;</span>,argDateTime)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Create Schedule Name</span>
-</span></span><span style="display:flex;"><span>scheduleName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;vRA | Reboot | &#39;</span> <span style="color:#f92672">+</span> argName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | &#39;</span> <span style="color:#f92672">+</span> argDate <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | ID:&#39;</span> <span style="color:#f92672">+</span> randomNumber
-</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Schedule Name:&#39;</span>, scheduleName)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># --- Create Schedule Name</span>
+</span></span><span style="display:flex;"><span>    scheduleName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;vRA | Reboot | &#39;</span> <span style="color:#f92672">+</span> argName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | &#39;</span> <span style="color:#f92672">+</span> argDate <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; | ID:&#39;</span> <span style="color:#f92672">+</span> randomNumber
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Schedule Name:&#39;</span>, scheduleName)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Create Run Once Schedule</span>
-</span></span><span style="display:flex;"><span>scheduleReturn <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>schedule<span style="color:#f92672">.</span>save(
-</span></span><span style="display:flex;"><span>    name<span style="color:#f92672">=</span>scheduleName,
-</span></span><span style="display:flex;"><span>    schedule<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;once&#39;</span>: argDateTime, <span style="color:#e6db74">&#39;timezone&#39;</span>: <span style="color:#e6db74">&#39;America/New_York&#39;</span>},
-</span></span><span style="display:flex;"><span>    cmd<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;local&#34;</span>,
-</span></span><span style="display:flex;"><span>    tgt_uuid<span style="color:#f92672">=</span>targetUUID,
-</span></span><span style="display:flex;"><span>    job_uuid<span style="color:#f92672">=</span>jobUUID
-</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># --- Create Run Once Schedule</span>
+</span></span><span style="display:flex;"><span>    scheduleReturn <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>api<span style="color:#f92672">.</span>schedule<span style="color:#f92672">.</span>save(
+</span></span><span style="display:flex;"><span>        name<span style="color:#f92672">=</span>scheduleName,
+</span></span><span style="display:flex;"><span>        schedule<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;once&#39;</span>: argDateTime, <span style="color:#e6db74">&#39;timezone&#39;</span>: <span style="color:#e6db74">&#39;America/New_York&#39;</span>},
+</span></span><span style="display:flex;"><span>        cmd<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;local&#34;</span>,
+</span></span><span style="display:flex;"><span>        tgt_uuid<span style="color:#f92672">=</span>targetUUID,
+</span></span><span style="display:flex;"><span>        job_uuid<span style="color:#f92672">=</span>jobUUID
+</span></span><span style="display:flex;"><span>    )
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Send Email about vRA Request using gmail.</span>
 </span></span><span style="display:flex;"><span>sender_email   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;dale.hassinger@gmail.com&#34;</span>
@@ -601,23 +618,41 @@ I create a job named &ldquo;vRA | Server Reboot&rdquo;. This job will be used fo
 </span></span><span style="display:flex;"><span>message[<span style="color:#e6db74">&#34;To&#34;</span>]      <span style="color:#f92672">=</span> receiver_email
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># --- Create HTML Body</span>
-</span></span><span style="display:flex;"><span>html <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;html&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;body&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;A Request to reboot a AWS EC2 was run from vRA.&lt;/b&gt;&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;EC2 Information:&lt;/b&gt;&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;ul style=&#34;list-style-type:disc&#34;&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;&lt;b&gt;EC2 Name: &#34;&#34;&#34;</span>         <span style="color:#f92672">+</span> argName      <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/b&gt;&lt;/li&gt;&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Target Created: &#34;&#34;&#34;</span>      <span style="color:#f92672">+</span> targetName   <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Schedule Created: &#34;&#34;&#34;</span>    <span style="color:#f92672">+</span> scheduleName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Reboot Date | Time: &#34;&#34;&#34;</span>  <span style="color:#f92672">+</span> argDateTime  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/ul&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 11px;&#34;&gt;&lt;b&gt;vCROCS - Automated IT &lt;/b&gt;&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;div style=&#34;font-family: Arial, sans-serif; font-size: 10px;&#34;&gt;#VMware #vRealize #SaltStackConfig&lt;/div&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/body&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&lt;/html&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> minionExists <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;true&#39;</span>:
+</span></span><span style="display:flex;"><span>    html <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;html&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;body&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;A Request to reboot a AWS EC2 was run from vRA.&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;EC2 Information:&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;ul style=&#34;list-style-type:disc&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;&lt;b&gt;EC2 Name: &#34;&#34;&#34;</span>         <span style="color:#f92672">+</span> argName      <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/b&gt;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Target Created: &#34;&#34;&#34;</span>      <span style="color:#f92672">+</span> targetName   <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Schedule Created: &#34;&#34;&#34;</span>    <span style="color:#f92672">+</span> scheduleName <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Reboot Date | Time: &#34;&#34;&#34;</span>  <span style="color:#f92672">+</span> argDateTime  <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/ul&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 11px;&#34;&gt;&lt;b&gt;vCROCS - Automated IT &lt;/b&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 10px;&#34;&gt;#VMware #vRealize #SaltStackConfig&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/body&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/html&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> minionExists <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;false&#39;</span>:
+</span></span><span style="display:flex;"><span>    html <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;html&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;body&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;A Request to reboot a AWS EC2 was run from vRA.&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;EC2 Information:&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;ul style=&#34;list-style-type:disc&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;&lt;b&gt;EC2 Name: &#34;&#34;&#34;</span>         <span style="color:#f92672">+</span> argName      <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;&#34;&lt;/b&gt;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/ul&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;The Server Name was not found in Salt! Please double check name and try again!&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 11px;&#34;&gt;&lt;b&gt;vCROCS - Automated IT &lt;/b&gt;&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 10px;&#34;&gt;#VMware #vRealize #SaltStackConfig&lt;/div&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/body&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &lt;/html&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># --- HTML MIMEText objects</span>
 </span></span><span style="display:flex;"><span>emailHTML <span style="color:#f92672">=</span> MIMEText(html, <span style="color:#e6db74">&#34;html&#34;</span>)
