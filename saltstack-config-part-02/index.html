@@ -207,17 +207,17 @@ I have been able to spend more time with <b>VMware vRealize SaltStack Config</b>
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">{%</span> <span class="k">if</span> <span class="s1">&#39;act&#39;</span> <span class="k">in</span> <span class="n">data</span> <span class="n">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;act&#39;</span><span class="p">]</span> <span class="p">==</span> <span class="s1">&#39;pend&#39;</span> <span class="n">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">].</span><span class="py">startswith</span><span class="p">(</span><span class="s1">&#39;DBH&#39;</span><span class="p">)</span> <span class="p">%}</span>
-</span></span><span class="line"><span class="cl"><span class="n">minion_add</span><span class="err">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">wheel</span><span class="p">.</span><span class="py">key</span><span class="p">.</span><span class="n">accept</span><span class="err">:</span>
-</span></span><span class="line"><span class="cl">    <span class="p">-</span> <span class="n">args</span><span class="err">:</span>
-</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">match</span><span class="err">:</span> <span class="p">{{</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]}}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{%</span> <span class="n">elif</span> <span class="s1">&#39;act&#39;</span> <span class="k">in</span> <span class="n">data</span> <span class="n">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;act&#39;</span><span class="p">]</span> <span class="p">==</span> <span class="s1">&#39;pend&#39;</span> <span class="n">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">].</span><span class="py">startswith</span><span class="p">(</span><span class="s1">&#39;vCROCS&#39;</span><span class="p">)</span> <span class="p">%}</span>
-</span></span><span class="line"><span class="cl"><span class="n">minion_add</span><span class="err">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">wheel</span><span class="p">.</span><span class="py">key</span><span class="p">.</span><span class="n">accept</span><span class="err">:</span>
-</span></span><span class="line"><span class="cl">    <span class="p">-</span> <span class="n">args</span><span class="err">:</span>
-</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">match</span><span class="err">:</span> <span class="p">{{</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]}}</span>
-</span></span><span class="line"><span class="cl"><span class="p">{%</span> <span class="n">endif</span> <span class="p">%}</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Yaml" data-lang="Yaml"><span class="line"><span class="cl">{<span class="l">% if &#39;act&#39; in data and data[&#39;act&#39;] == &#39;pend&#39; and data[&#39;id&#39;].startswith(&#39;DBH&#39;) %}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">minion_add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wheel.key.accept</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">match</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">data[&#39;id&#39;]}}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>{<span class="l">% elif &#39;act&#39; in data and data[&#39;act&#39;] == &#39;pend&#39; and data[&#39;id&#39;].startswith(&#39;vCROCS&#39;) %}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">minion_add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wheel.key.accept</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">match</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">data[&#39;id&#39;]}}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>{<span class="l">% endif %}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <div><b>Location of the State File:</b></div>
