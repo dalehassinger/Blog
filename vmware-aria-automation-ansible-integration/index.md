@@ -7,7 +7,7 @@ How to setup and configure your VMware Aria Automation environment to work with 
 
 ---
 
-## 1 Use Case
+###### Use Case
 I was recently asked how the VMware Aria Automation | Ansible Integration worked. I never used Ansible before so I thought this would be great time to learn Ansible and demo the integration with VMware Aria Automation. If you look at some of my previous blog posts I wrote about SaltStack Config a lot. I thought this would be a good time for myself to learn Ansible and compare the two products.  
 
 When I started reading about the VMware Aria Automation and Ansible Integration, I didn't find a single blog post or article that covered everything from installing Ansible to creating a new Server Build in Aria Automation. I am going to document all the steps that it took for me to do a complete Aria Automation | Ansible integration. I hope that someone will find this blog post useful on their Automation journey.
@@ -20,7 +20,7 @@ To use the details in this blog post you will need a working install of VMware A
 
 ---
 
-## 2 Create a Ansible Control Server and install Ansible:
+###### Create a Ansible Control Server and install Ansible:
 
 - [x] Create a new Server. I created a clean Rocky Linux VM.  
 - [x] This server will be used as the Ansible Control Node.  
@@ -60,7 +60,7 @@ ansible [core 2.13.3]
 
 ---  
 
-## 3 Edit the hosts file:
+###### Edit the hosts file:
 
 - [x] Edit the /etc/ansible/hosts file:
 - [x] I like to use nano to edit files. To save file changes in Nano use cntrl-o. To exit Nano use cntrl-x.
@@ -85,7 +85,7 @@ ansible_password='VMware1!'
 
 ---
 
-## 4 Edit the ansible.cfg file:
+###### Edit the ansible.cfg file:
 
 - [x] Edit the /etc/ansible/ansible.cfg file:
 
@@ -108,7 +108,7 @@ vault_password_file = /etc/ansible/vault-pass.txt
 
 ---
 
-## 5 Test Ansible Install
+###### Test Ansible Install
 
 **To test the Ansible install you can do a ping:**
 
@@ -121,7 +121,7 @@ ansible rocky -m ping
 
 ---
 
-## 6 VMware Aria Automation Configuration
+###### VMware Aria Automation Configuration
 
 **Add Ansible Integration to VMware Aria Automation:**
 
@@ -141,7 +141,7 @@ vault_password_file = /etc/ansible/vault-pass.txt
 
 {{< image src="ansible-vra-integration-details.png" caption="Click to see Larger Image of Screen Shot">}}  
 
-## 7 VMware Aria Automation Cloud Template
+###### VMware Aria Automation Cloud Template
 
 **Add Ansible to Cloud Template**
 
@@ -279,7 +279,7 @@ resources:
 
 ---
 
-## 8 Lessons Learned
+###### Lessons Learned
 
 {{< admonition type=info title="Lessons Learned:" open=true >}}
 * The VMware Aria Automation | Ansible Integration works well if you follow all the configuration steps.
@@ -287,7 +287,7 @@ resources:
 {{< /admonition >}}
 
 ---
-## 9 Helpful Links
+###### Helpful Links
 
 {{< admonition type=info title="VMware Aria Automation | Ansible Links I found to be very helpful:" open=true >}}
 * [Red Hat Ansible Web Site](https://www.ansible.com)
