@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>How to use PowerShell Modules with vRA 8.2 - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="How to use PowerShell Modules with vRA 8.2" />
+<meta property="og:description" content="Options to use PowerShell Modules" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dalehassinger.github.io/hugo-loveit/vra-82-powershell-host/" /><meta property="og:image" content="https://dalehassinger.github.io/hugo-loveit/vra-82-powershell-host/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-01-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-18T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dalehassinger.github.io/hugo-loveit/vra-82-powershell-host/featured-image.png"/>
+<meta name="twitter:title" content="How to use PowerShell Modules with vRA 8.2"/>
+<meta name="twitter:description" content="Options to use PowerShell Modules"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://dalehassinger.github.io/hugo-loveit/vra-82-powershell-host/" /><link rel="prev" href="https://dalehassinger.github.io/hugo-loveit/recipe-for-success/" /><link rel="next" href="https://dalehassinger.github.io/hugo-loveit/vrops8-new-features/" /><link rel="stylesheet" href="/hugo-loveit/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How to use PowerShell Modules with vRA 8.2",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/dalehassinger.github.io\/hugo-loveit\/vra-82-powershell-host\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/vra-82-powershell-host\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "PowerShell, vRA, ABX, vRealize Automation, VMware Aria","wordcount":  1664 ,
+        "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/vra-82-powershell-host\/","datePublished": "2021-01-18T00:00:00+00:00","dateModified": "2021-01-18T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/hugo-loveit/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/hugo-loveit/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/hugo-loveit/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/hugo-loveit/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/hugo-loveit/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/hugo-loveit/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/hugo-loveit/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/hugo-loveit/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/hugo-loveit/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/hugo-loveit/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/hugo-loveit/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/hugo-loveit/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">How to use PowerShell Modules with vRA 8.2</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/hugo-loveit/categories/vrealize-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>vRealize Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-01-18">2021-01-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1664 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/hugo-loveit/svg/loading.min.svg"
+        data-src="/hugo-loveit/vra-82-powershell-host/featured-image.png"
+        data-srcset="/hugo-loveit/vra-82-powershell-host/featured-image.png, /hugo-loveit/vra-82-powershell-host/featured-image.png 1.5x, /hugo-loveit/vra-82-powershell-host/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/hugo-loveit/vra-82-powershell-host/featured-image.png"
+        title="/hugo-loveit/vra-82-powershell-host/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#details-on-how-to-use-a-abx-script-with-a-powershell-host">Details on how to use a ABX Script with a PowerShell Host:</a></li>
+                    <li><a href="#sample-code-and-screen-shots">Sample Code and Screen Shots:</a></li>
+                    <li><a href="#cloud-template">Cloud Template:</a></li>
+                    <li><a href="#abx-action-script">ABX Action Script:</a></li>
+                    <li><a href="#subscription">Subscription:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Options to use PowerShell Modules</strong></p>
+<hr>
+<p>I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin.  Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.</p>
+<p>In my vRA 7.6 environment, I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use. When I started looking at how to use PowerShell with vRA 8.2 the one item that I needed to understand was how to use PowerShell Modules. VMware does have a Blog Post on how to include PowerShell modules with ABX Actions/vRO Work Flows - <a href="https://blogs.vmware.com/management/2020/07/how-to-abx-vro-powershell-additional-modules.html" target="_blank">Click Here to see the Blog Post</a>. After doing some testing and reviewing my options I decided to continue to use a PowerShell Host with vRA 8.2. What this allows me to do is use the same exact PowerShell Host for 7.6 and 8.2. The existing PS scripts that I have also work with both 7.6 and 8.2. No changes to any scripts and the PS Host. I like how VMware included PS as an options for all scripts within vRA 8.2. Hopefully in the future VMware will allow you to install your own PS Modules directly in the vRA Appliance. The one item that some people may not like about this setup is it does require an additional Windows Server that a standard vRA setup does not require. But to be able to use an existing Windows PS Host that can be shared between vRA 7.6 and 8.2 until I get my environment to 100% vRA 8.2 also has it positives. With Automation there is always many ways to complete the same task.</p>
+<p>I wrote a Blog Post previously that describes how to pass Cloud Template inputs/properties to ABX Actions. This Post is really using that same technique but instead of only running an ABX Action, this ABX Action Script is passing the inputs/customproperties onto a PowerShell Host. Here is link to previous post: <a href="https://www.vcrocs.info/blog/vra81-abx-ps/" target="_blank">VREALIZE AUTOMATION 8.2 - POWERSHELL ABX</a>. By passing the custom properties as parameters to a PS Host I can also use PS Modules to connect to SQL servers and many other options. Basically any PS Module that is available can be used.</p>
+<hr>
+<h6 id="details-on-how-to-use-a-abx-script-with-a-powershell-host">Details on how to use a ABX Script with a PowerShell Host:</h6>
+<div style="background-color:#d9d9d9; Padding:20px;" >
+<b>Step 1:</b>
+<ul>
+  <li>Create a Cloud Template. (See included yaml code and screen shot).</li>
+  <li>Create inputs for the parameters you need to send to a PS script that will run on the PS Host. The inputs are the values that are used for the resource/properties. (See included yaml code)</li>
+  <li>Create Properties in the resources section of the yaml for the inputs you just created. These properties will be the parameters that get passed to the PS Script. The properties get passed to the ABX script using $payload. (See included PS code)</li>
+</ul>
+<ul>
+<b>Step 2:</b>
+  <li>Create a PowerShell ABX Action. (See included PS code and screen shot)</li>
+  <li>To get the custom properties from the Cloud Template you need to use $payload.</li>
+  <li>$payload.customProperties."Properties Name" is how you get the values from the $payload.</li>
+  <li>You can assign the custom properties to a variable within the ABX PS code.</li>
+  <li>I use Invoke-VMScript to run the PS Script on the PS Host because my environment is also a Zero Trust Environment. Invoke-VMScript allows me to run PS scripts on remote servers without opening ports to the remote servers.</li>
+</ul>
+<ul>
+<b>Step 3:</b>
+  <li>Create a Subscription. See Screenshot.</li>
+  <li>The subscription is want runs the ABX scripts.</li>
+  <li>A subscription can be Fired before or after a compute resource gets provisioned.  I create a subscription for both in my environment.</li>
+  <li>Within the subscription is where you define which ABX script is run. If you would want to string several ABX scripts together, the subscription could also run a ABX Flow.</li>
+</ul>
+</div>
+<h6 id="sample-code-and-screen-shots">Sample Code and Screen Shots:</h6>
+<h6 id="cloud-template">Cloud Template:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/vra-82-powershell-host/pshost-01.PNG" title="/hugo-loveit/vra-82-powershell-host/pshost-01.PNG" data-thumbnail="/hugo-loveit/vra-82-powershell-host/pshost-01.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/vra-82-powershell-host/pshost-01.PNG"
+            data-srcset="/hugo-loveit/vra-82-powershell-host/pshost-01.PNG, /hugo-loveit/vra-82-powershell-host/pshost-01.PNG 1.5x, /hugo-loveit/vra-82-powershell-host/pshost-01.PNG 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/vra-82-powershell-host/pshost-01.PNG" width="1465" height="1142" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>The properties under resources in the yaml code will be used like parameters in a PS Script. Since I have a background in PowerShell that is how I am using the properties. When you deploy the Cloud Template, the values entered that I defined will not be used until the ABX script runs. The ABX Script will run after the subscription is triggered. The values will be passed from the Cloud Template to the ABX Script using $payload.  Just like passing parameters to a PS script.</p>
+<hr>
+<p>Click to expand code:<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Created by Dale Hassinger - vCrocs.info</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Date: 01/14/2021</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Send Property Values to ABX Script that runs script on PS Host with all Zero Trust Permissions and Modules</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Version: 1</span>
+</span></span><span class="line"><span class="cl"><span class="n">formatVersion</span><span class="err">:</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="c"># ---------- [ Inputs ] ---------- #</span>
+</span></span><span class="line"><span class="cl"><span class="n">inputs</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cpu</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">integer</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="err">:</span> <span class="n">CPUs</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mem</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">integer</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="err">:</span> <span class="n">Memory</span><span class="p">(</span><span class="n">MB</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="mf">8192</span>
+</span></span><span class="line"><span class="cl">  <span class="n">VMName</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="err">:</span> <span class="n">Enter</span> <span class="n">VM</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minLength</span><span class="err">:</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl">    <span class="n">maxLength</span><span class="err">:</span> <span class="mf">15</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">DBH</span><span class="p">-</span><span class="mf">001</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TemplateName</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="err">:</span> <span class="p">&lt;</span><span class="n">b</span><span class="p">&gt;</span> <span class="nb">Select </span><span class="n">Windows</span> <span class="n">or</span> <span class="n">Ubuntu</span><span class="p">.&lt;/</span><span class="n">b</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">br</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">vRA_Ubuntu_18</span><span class="p">.</span><span class="py">04</span><span class="p">.</span><span class="py">4</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="err">:</span> <span class="n">OS</span>
+</span></span><span class="line"><span class="cl">    <span class="n">oneOf</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">Ubuntu</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="n">vRA_Ubuntu_18</span><span class="p">.</span><span class="py">04</span><span class="p">.</span><span class="py">4</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">Windows</span> <span class="mf">2016</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="n">vRA_TEMPLATE_2016</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">Windows</span> <span class="mf">2019</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="n">vRA_TEMPLATE_2019</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CustomizationSpec</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">vRA_Ubuntu</span>
+</span></span><span class="line"><span class="cl">  <span class="n">description</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">vRA</span> <span class="mf">8.2</span> <span class="n">TEST</span> <span class="n">VM</span>
+</span></span><span class="line"><span class="cl">  <span class="n">environment</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="err">:</span> <span class="s1">&#39;&lt;b&gt; Select Environment.&lt;/b&gt; &lt;br&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="s1">&#39;environment:Management&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="err">:</span> <span class="n">Environment</span>
+</span></span><span class="line"><span class="cl">    <span class="n">oneOf</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">Compute</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="s1">&#39;environment:Compute&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">Management</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="s1">&#39;environment:Management&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">DevTest</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="s1">&#39;environment:DevTest&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">department</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="err">:</span> <span class="p">&lt;</span><span class="n">b</span><span class="p">&gt;</span> <span class="nb">Select </span><span class="n">Application</span> <span class="n">Team</span><span class="p">.&lt;/</span><span class="n">b</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">br</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="s1">&#39;department:APP Team 1&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="err">:</span> <span class="n">Application</span> <span class="n">Team</span>
+</span></span><span class="line"><span class="cl">    <span class="n">oneOf</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">APP</span> <span class="n">Team</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="s1">&#39;department:APP Team 1&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">APP</span> <span class="n">Team</span> <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="s1">&#39;department:APP Team 2&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="n">title</span><span class="err">:</span> <span class="n">APP</span> <span class="n">Team</span> <span class="mf">3</span>
+</span></span><span class="line"><span class="cl">        <span class="n">const</span><span class="err">:</span> <span class="s1">&#39;department:APP Team 3&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">IP</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="mf">192.168</span><span class="p">.</span><span class="py">86</span><span class="p">.</span><span class="py">200</span>
+</span></span><span class="line"><span class="cl">  <span class="n">emailAddress</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">Dale</span><span class="p">.</span><span class="n">Hassinger</span><span class="nv">@vCROCS</span><span class="p">.</span><span class="py">info</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RootPartition</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">integer</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="mf">20</span>
+</span></span><span class="line"><span class="cl">  <span class="n">BuildBY</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">DaleHassinger</span>
+</span></span><span class="line"><span class="cl">  <span class="n">BuildRequestor</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">KirkShaffer</span>
+</span></span><span class="line"><span class="cl">  <span class="n">OSVersion</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="err">:</span> <span class="n">Ubuntu18044</span>
+</span></span><span class="line"><span class="cl"><span class="c"># ---------- [ Resources ] ---------- #</span>
+</span></span><span class="line"><span class="cl"><span class="n">resources</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Cloud_Network_1</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">Cloud</span><span class="p">.</span><span class="py">Network</span>
+</span></span><span class="line"><span class="cl">    <span class="n">properties</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">      <span class="n">networkType</span><span class="err">:</span> <span class="n">existing</span>
+</span></span><span class="line"><span class="cl">      <span class="n">address</span><span class="err">:</span> <span class="s1">&#39;${input.IP}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constraints</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">        <span class="p">-</span> <span class="n">tag</span><span class="err">:</span> <span class="s1">&#39;${input.environment}&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">-</span> <span class="n">tag</span><span class="err">:</span> <span class="s1">&#39;${input.department}&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Cloud_vSphere_Machine_1</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="err">:</span> <span class="n">Cloud</span><span class="p">.</span><span class="py">vSphere</span><span class="p">.</span><span class="py">Machine</span>
+</span></span><span class="line"><span class="cl">    <span class="n">properties</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">      <span class="n">image</span><span class="err">:</span> <span class="s1">&#39;${input.TemplateName}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">flavor</span><span class="err">:</span> <span class="n">std</span>
+</span></span><span class="line"><span class="cl">      <span class="n">cpu</span><span class="err">:</span> <span class="s1">&#39;${input.cpu}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">mem</span><span class="err">:</span> <span class="s1">&#39;${input.mem}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">customizationSpec</span><span class="err">:</span> <span class="s1">&#39;${input.CustomizationSpec}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">emailAddress</span><span class="err">:</span> <span class="s1">&#39;${input.emailAddress}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">RootPartition</span><span class="err">:</span> <span class="s1">&#39;${input.RootPartition}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">BuildBY</span><span class="err">:</span> <span class="s1">&#39;${input.BuildBY}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">BuildRequestor</span><span class="err">:</span> <span class="s1">&#39;${input.BuildRequestor}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">OSVersion</span><span class="err">:</span> <span class="s1">&#39;${input.OSVersion}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constraints</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">        <span class="p">-</span> <span class="n">tag</span><span class="err">:</span> <span class="s1">&#39;${input.environment}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">networks</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">        <span class="p">-</span> <span class="n">network</span><span class="err">:</span> <span class="s1">&#39;${resource.Cloud_Network_1.id}&#39;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">assignment</span><span class="err">:</span> <span class="n">static</span>
+</span></span><span class="line"><span class="cl">          <span class="n">address</span><span class="err">:</span> <span class="s1">&#39;${input.IP}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">name</span><span class="err">:</span> <span class="s1">&#39;${input.VMName}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">description</span><span class="err">:</span> <span class="s1">&#39;${input.description}&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<h6 id="abx-action-script">ABX Action Script:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/vra-82-powershell-host/pshost-02.PNG" title="/hugo-loveit/vra-82-powershell-host/pshost-02.PNG" data-thumbnail="/hugo-loveit/vra-82-powershell-host/pshost-02.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/vra-82-powershell-host/pshost-02.PNG"
+            data-srcset="/hugo-loveit/vra-82-powershell-host/pshost-02.PNG, /hugo-loveit/vra-82-powershell-host/pshost-02.PNG 1.5x, /hugo-loveit/vra-82-powershell-host/pshost-02.PNG 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/vra-82-powershell-host/pshost-02.PNG" width="1463" height="1136" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>In my PowerShell code I am using Write-Host to help show how the Cloud Template passes values to the ABX Action using the $payload. I use the code to troubleshoot and understand how it is working. I am able to take values from the payload customProperties and assign to variables. The customProperties are defined in the Cloud Template yaml code as resources/properties. I can then make decisions in the code based on these values. For production the write-host lines could be removed.</p>
+<hr>
+<p>Click to expand code:<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">handler($context</span><span class="p">,</span> <span class="nv">$payload</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Build PowerShell variables</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$VMName</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">resourceNames</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$cpu</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">cpu</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$mem</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">mem</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$description</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">description</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$IPaddress</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">addresses</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$emailAddress</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">emailAddress</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$RootPartition</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">RootPartition</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$BuildBY</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">BuildBY</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$BuildRequestor</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">BuildRequestor</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$OSVersion</span> <span class="p">=</span> <span class="nv">$payload</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">OSVersion</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="c"># Show PS variables</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;VMName:&#39;</span> <span class="nv">$VMName</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;CPU:&#39;</span> <span class="nv">$cpu</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;Memory:&#39;</span> <span class="nv">$mem</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;Description:&#39;</span> <span class="nv">$description</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;IPaddress:&#39;</span> <span class="nv">$IPaddress</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;Email:&#39;</span> <span class="nv">$emailAddress</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;Root:&#39;</span> <span class="nv">$RootPartition</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;Build By:&#39;</span> <span class="nv">$BuildBY</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;Build BuildRequestor:&#39;</span> <span class="nv">$BuildRequestor</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;OS Version:&#39;</span> <span class="nv">$OSVersion</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># ----- [ Define Username/ Get Password ] ------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$HashiVaultPW</span> <span class="p">=</span> <span class="s1">&#39;vCROCS#1&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="nv">$HashiVaultPW</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$username</span> <span class="p">=</span> <span class="s1">&#39;administrator@vsphere.local&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="nv">$username</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># ----- [ Connect vCenter and run PS Script on PS Host ] ------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c"># Connect to vCenter to be able to connect to PS Host</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="n">vCenter01</span><span class="p">.</span><span class="py">vCROCS</span><span class="p">.</span><span class="py">info</span> <span class="n">-User</span> <span class="nv">$username</span> <span class="n">-Password</span> <span class="nv">$HashiVaultPW</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c"># PS Host Name</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$PSHost</span> <span class="p">=</span> <span class="s1">&#39;vCROCSPSHost&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;PS Host:&#39;</span><span class="nv">$PSHost</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c"># PS Script text</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$PSParameters</span> <span class="p">=</span> <span class="s2">&#34;-VMNAME &#39;&#34;</span> <span class="p">+</span> <span class="nv">$VMName</span> <span class="p">+</span> <span class="s2">&#34;&#39; -emailAddress &#39;&#34;</span> <span class="p">+</span> <span class="nv">$emailAddress</span> <span class="p">+</span> <span class="s2">&#34;&#39; -RootPartition &#39;&#34;</span> <span class="p">+</span> <span class="nv">$RootPartition</span> <span class="p">+</span> <span class="s2">&#34;&#39;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;PS Parameters:&#39;</span><span class="nv">$PSParameters</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nv">$PSScript</span> <span class="p">=</span> <span class="s1">&#39;G:\Scripts\Create-Linux-Server-Step-3-v01.ps1&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;PS Script:&#39;</span><span class="nv">$PSScript</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe &#34;&#39;</span> <span class="p">+</span> <span class="nv">$PSScript</span> <span class="p">+</span> <span class="s1">&#39;&#34; &#39;</span> <span class="p">+</span> <span class="nv">$PSParameters</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="s1">&#39;Complete PS String:&#39;</span><span class="nv">$PSText</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c"># Run PS Script on PS Host</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$result</span> <span class="p">=</span> <span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$PSHost</span> <span class="n">-ScriptType</span> <span class="n">Bat</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestUser</span> <span class="nv">$username</span> <span class="n">-GuestPassword</span> <span class="nv">$HashiVaultPW</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Host</span> <span class="nv">$result</span><span class="p">.</span><span class="py">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nv">$LASTEXITCODE</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<h6 id="subscription">Subscription:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/vra-82-powershell-host/pshost-03.PNG" title="/hugo-loveit/vra-82-powershell-host/pshost-03.PNG" data-thumbnail="/hugo-loveit/vra-82-powershell-host/pshost-03.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/vra-82-powershell-host/pshost-03.PNG"
+            data-srcset="/hugo-loveit/vra-82-powershell-host/pshost-03.PNG, /hugo-loveit/vra-82-powershell-host/pshost-03.PNG 1.5x, /hugo-loveit/vra-82-powershell-host/pshost-03.PNG 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/vra-82-powershell-host/pshost-03.PNG" width="1465" height="1137" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<div style="background-color:#9ae59a; Padding:20px;" ><b>Lessons Learned:</b>
+<ul>
+  <li>vRA 7.6 and 8.2 can share the same PS Host and Scripts.</li>
+  <li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused/shared.</li>
+  <li>Using a PS Host does require an additional VM.</li>
+  <li>Within ABX scripts I have always changed the default "Custom limits and retry options". I set the "Memory Limit" to 1024 and "Timeouts" to 900.</li>
+  <li>Anytime I speak to others about Automation the one item I stress is there is no right way or wrong way to accomplish your tasks. Build on the skills that your Team already has. The environment I work in is 90% Windows Servers so we use PowerShell a lot. That is why I needed to be able to use all the PS Modules that I have installed on the PS Host.</li>
+</ul>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-01-18</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/hugo-loveit/vra-82-powershell-host/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://dalehassinger.github.io/hugo-loveit/vra-82-powershell-host/" data-title="How to use PowerShell Modules with vRA 8.2" data-via="dalehassinger" data-hashtags="PowerShell,vRA,ABX,vRealize Automation,VMware Aria"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://dalehassinger.github.io/hugo-loveit/vra-82-powershell-host/" data-hashtag="PowerShell"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://dalehassinger.github.io/hugo-loveit/vra-82-powershell-host/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/hugo-loveit/tags/powershell/">PowerShell</a>,&nbsp;<a href="/hugo-loveit/tags/vra/">vRA</a>,&nbsp;<a href="/hugo-loveit/tags/abx/">ABX</a>,&nbsp;<a href="/hugo-loveit/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/hugo-loveit/tags/vmware-aria/">VMware Aria</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/hugo-loveit/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/hugo-loveit/recipe-for-success/" class="prev" rel="prev" title="How to be successful with VMware vRealize Products in your environment"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>How to be successful with VMware vRealize Products in your environment</a>
+            <a href="/hugo-loveit/vrops8-new-features/" class="next" rel="next" title="vRealize Operations 8.x - New Features">vRealize Operations 8.x - New Features<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/hugo-loveit/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/hugo-loveit/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/hugo-loveit/js/theme.min.js"></script></body>
+</html>

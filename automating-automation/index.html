@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Automating Automation (Updated) - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="Automating Automation (Updated)" />
+<meta property="og:description" content="Using vRO REST API. - (Updated for vRA 8.4)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dalehassinger.github.io/hugo-loveit/automating-automation/" /><meta property="og:image" content="https://dalehassinger.github.io/hugo-loveit/automating-automation/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-29T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dalehassinger.github.io/hugo-loveit/automating-automation/featured-image.png"/>
+<meta name="twitter:title" content="Automating Automation (Updated)"/>
+<meta name="twitter:description" content="Using vRO REST API. - (Updated for vRA 8.4)"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://dalehassinger.github.io/hugo-loveit/automating-automation/" /><link rel="prev" href="https://dalehassinger.github.io/hugo-loveit/check-ports/" /><link rel="next" href="https://dalehassinger.github.io/hugo-loveit/vrealize-operations-right-size/" /><link rel="stylesheet" href="/hugo-loveit/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Automating Automation (Updated)",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/dalehassinger.github.io\/hugo-loveit\/automating-automation\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/automating-automation\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "vRO, vRealize Orchestrator, vRA, vRealize Automation, API, PowerShell, Automation","wordcount":  933 ,
+        "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/automating-automation\/","datePublished": "2021-04-29T00:00:00+00:00","dateModified": "2021-04-29T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/hugo-loveit/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/hugo-loveit/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/hugo-loveit/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/hugo-loveit/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/hugo-loveit/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/hugo-loveit/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/hugo-loveit/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/hugo-loveit/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/hugo-loveit/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/hugo-loveit/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/hugo-loveit/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/hugo-loveit/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Automating Automation (Updated)</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/hugo-loveit/categories/powercli/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>PowerCLI</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-29">2021-04-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;933 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/hugo-loveit/svg/loading.min.svg"
+        data-src="/hugo-loveit/automating-automation/featured-image.png"
+        data-srcset="/hugo-loveit/automating-automation/featured-image.png, /hugo-loveit/automating-automation/featured-image.png 1.5x, /hugo-loveit/automating-automation/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/hugo-loveit/automating-automation/featured-image.png"
+        title="/hugo-loveit/automating-automation/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#code-to-get-bearer-token-powershell">Code to get bearer Token (PowerShell):</a></li>
+                    <li><a href="#note-when-vrealize-automation-84-was-released-there-was-a-small-change-to-api-to-get-bearer-token--see-the-changes-in-the-code-area-everything-else-has-stayed-the-same-for-my-processes">(Note: When vRealize Automation 8.4 was released there was a small change to api to get Bearer Token.  See the changes in the code area. Everything else has stayed the same for my processes.)</a></li>
+                    <li><a href="#code-to-get-execute-a-vro-workflow-using-api-call-powershell">Code to get execute a vRO Workflow using API Call (PowerShell):</a></li>
+                    <li><a href="#orchestrator-workflow">Orchestrator Workflow:</a></li>
+                    <li><a href="#click-here-to-see-larger-image-of-screen-shotimgvro-ss-06png"><a href="/img/vro-ss-06.png">Click Here to see Larger Image of Screen Shot</a></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Using vRO REST API. - (Updated for vRA 8.4)</strong></p>
+<hr>
+<p>I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but not a lot of details on how to get and use variables, sdk-objects and bearer token for permission. Here is how I made the vRO REST API calls with PowerShell using vRealize Orchestrator built-into vRA.</p>
+<hr>
+<p>Steps:</p>
+<ol>
+<li>Permission:
+<ul>
+<li>Need to get a Bearer Token from vRO to make REST API Call to execute Workflow.</li>
+<li>To get a Bearer Token you need to make an REST API Call with username/password. See example code.</li>
+</ul>
+</li>
+<li>Workflow Information:
+<ul>
+<li>Get Workflow ID.</li>
+<li>Get Workflow variable inputs.</li>
+<li>Get sdk-object names from a successful Workflow run.</li>
+<li>See Screen Shots and sample code.</li>
+</ul>
+</li>
+<li>Run the Workflow you want to use REST API with manually at least one time successfully. When you look at the variables of a successful Workflow run it shows you what the Workflow is expecting for variables and sdk-objects. See Screen Shots.</li>
+</ol>
+<hr>
+<h6 id="code-to-get-bearer-token-powershell">Code to get bearer Token (PowerShell):</h6>
+<p>You can&rsquo;t use vRO REST API without getting bearer token first.</p>
+<h6 id="note-when-vrealize-automation-84-was-released-there-was-a-small-change-to-api-to-get-bearer-token--see-the-changes-in-the-code-area-everything-else-has-stayed-the-same-for-my-processes">(Note: When vRealize Automation 8.4 was released there was a small change to api to get Bearer Token.  See the changes in the code area. Everything else has stayed the same for my processes.)</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Get Bearer Token from vRA REST API Call</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Some of the commented lines are in the code for testing.  I use to check variable</span>
+</span></span><span class="line"><span class="cl"><span class="c"># values when building the Automation.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># I am showing password in this example. In Production I get the Password from a Hashi</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Secret Server and DO NOT have the password Hard Coded.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Variables ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="p">=</span> <span class="s1">&#39;VMware1&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Headers ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="s2">&#34;System.Collections.Generic.Dictionary[[String],[String]]&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Accept&#34;</span><span class="p">,</span> <span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Body ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">`n</span><span class="s2">    </span><span class="se">`&#34;</span><span class="s2">password</span><span class="se">`&#34;</span><span class="s2">:  </span><span class="se">`&#34;</span><span class="s2">passwordString</span><span class="se">`&#34;</span><span class="s2">,
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">`n</span><span class="s2">    </span><span class="se">`&#34;</span><span class="s2">username</span><span class="se">`&#34;</span><span class="s2">:  </span><span class="se">`&#34;</span><span class="s2">administrator</span><span class="se">`&#34;</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">`n</span><span class="s2">}&#34;</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-Replace</span><span class="p">(</span><span class="s2">&#34;passwordString&#34;</span><span class="p">,</span><span class="nv">$password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Invoke REST API ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.3 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-SkipCertificateCheck</span> <span class="s1">&#39;https://vRA-FQDN.domain.name/csp/gateway/am/api/login?access_token&#39;</span> <span class="n">-Method</span> <span class="s1">&#39;POST&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.4 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-SkipCertificateCheck</span> <span class="s1">&#39;https://vRA-FQDN.domain.name/csp/gateway/am/api/login?cspAuthToken&#39;</span> <span class="n">-Method</span> <span class="s1">&#39;POST&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.3 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response.access_token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.4 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response.cspAuthToken</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.3 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bearer_token</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$response</span><span class="p">.</span><span class="py">access_token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.4 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bearer_token</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$response</span><span class="p">.</span><span class="py">cspAuthToken</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># $bearer_token</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="code-to-get-execute-a-vro-workflow-using-api-call-powershell">Code to get execute a vRO Workflow using API Call (PowerShell):</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Run vRA Workflow using API Call</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Variables ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmName</span> <span class="p">=</span> <span class="s1">&#39;DBH-1234&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailAddress</span> <span class="p">=</span> <span class="n">Dale</span><span class="p">.</span><span class="n">Hassinger</span><span class="nv">@vCROCS</span><span class="p">.</span><span class="n">info</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">$OSVersion = &#39;</span><span class="n">Ubuntu18044</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">$PSText = &#39;</span><span class="n">G:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="nb">Create-Linux</span><span class="n">-Server-Step</span><span class="p">-</span><span class="mf">1</span><span class="n">-v01-PROD</span><span class="p">.</span><span class="py">ps1</span> <span class="n">-vmNAME</span> <span class="nv">$vmName</span> <span class="n">-emailAddress</span> <span class="nv">$emailAddress</span> <span class="n">-OSVersion</span> <span class="nv">$OSVersion</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># --- [ Headers ] ---
+</span></span></span><span class="line"><span class="cl"><span class="s1">$headers = New-Object &#34;System.Collections.Generic.Dictionary[[String],[String]]&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">$headers.Add(&#34;Content-Type&#34;, &#34;application/xml&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s1">$headers.Add(&#34;Authorization&#34;, $bearer_token)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># --- [ Body ] ---
+</span></span></span><span class="line"><span class="cl"><span class="s1">$body = &#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nb">execution-context</span> <span class="n">xmlns</span><span class="p">=</span><span class="s2">&#34;http://www.vmware.com/vco&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;</span><span class="n">parameters</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vm&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="nb">sdk-object</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">id</span><span class="p">=</span><span class="s2">&#34;vCenter.FQDN,id:vm-12345&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vmUsername&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">username</span><span class="nv">@domain</span><span class="p">.</span><span class="n">name</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vmPassword&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;SecureString&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">vmPassword_string</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;programPath&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">System32</span><span class="p">\</span><span class="n">WindowsPowerShell</span><span class="p">\</span><span class="n">v1</span><span class="p">.</span><span class="mf">0</span><span class="p">\</span><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;arguments&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">arguments_string</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;workingDirectory&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">G:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;/</span><span class="n">parameters</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nb">execution-context</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># $body
+</span></span></span><span class="line"><span class="cl"><span class="s1"># I define the Body format and then replace strings of text that I define with variables
+</span></span></span><span class="line"><span class="cl"><span class="s1"># in the code.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">$body = $body -Replace(&#34;vmPassword_string&#34;,$password)
+</span></span></span><span class="line"><span class="cl"><span class="s1">$body = $body -Replace(&#34;arguments_string&#34;,$PSText)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># --- [ Invoke REST API ] ---
+</span></span></span><span class="line"><span class="cl"><span class="s1">$response = Invoke-RestMethod -SkipCertificateCheck &#39;</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="nb">vRA-FQDN</span><span class="p">.</span><span class="py">domain</span><span class="p">.</span><span class="n">name</span><span class="p">/</span><span class="n">vco</span><span class="p">/</span><span class="n">api</span><span class="p">/</span><span class="n">workflows</span><span class="p">/</span><span class="n">9cc3ac9d</span><span class="p">-</span><span class="n">062b</span><span class="p">-</span><span class="mf">4e98</span><span class="n">-aa9d-e781e47f1234</span><span class="p">/</span><span class="n">executions</span><span class="s1">&#39; -Method &#39;</span><span class="n">POST</span><span class="err">&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="orchestrator-workflow">Orchestrator Workflow:</h6>
+<p>This is where you get the Workflow ID value. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/hugo-loveit/automating-automation/vro-ss-01.png" title="/hugo-loveit/automating-automation/vro-ss-01.png" data-thumbnail="/hugo-loveit/automating-automation/vro-ss-01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/automating-automation/vro-ss-01.png"
+            data-srcset="/hugo-loveit/automating-automation/vro-ss-01.png, /hugo-loveit/automating-automation/vro-ss-01.png 1.5x, /hugo-loveit/automating-automation/vro-ss-01.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/automating-automation/vro-ss-01.png" width="1054" height="867" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Sample Code to use Workflow ID:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-SkipCertificateCheck</span> <span class="s1">&#39;https://vRA-FQDN.domain.name/vco/api/workflows/7452cce6-c715-482d-9127-1f3aa11523ba/executions&#39;</span> <span class="n">-Method</span> <span class="s1">&#39;POST&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This is where you get the input variable values. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/hugo-loveit/automating-automation/vro-ss-02.png" title="/hugo-loveit/automating-automation/vro-ss-02.png" data-thumbnail="/hugo-loveit/automating-automation/vro-ss-02.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/automating-automation/vro-ss-02.png"
+            data-srcset="/hugo-loveit/automating-automation/vro-ss-02.png, /hugo-loveit/automating-automation/vro-ss-02.png 1.5x, /hugo-loveit/automating-automation/vro-ss-02.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/automating-automation/vro-ss-02.png" width="1054" height="867" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>This is where you get the sdk-object variable values. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/hugo-loveit/automating-automation/vro-ss-03.png" title="/hugo-loveit/automating-automation/vro-ss-03.png" data-thumbnail="/hugo-loveit/automating-automation/vro-ss-03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/automating-automation/vro-ss-03.png"
+            data-srcset="/hugo-loveit/automating-automation/vro-ss-03.png, /hugo-loveit/automating-automation/vro-ss-03.png 1.5x, /hugo-loveit/automating-automation/vro-ss-03.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/automating-automation/vro-ss-03.png" width="1054" height="867" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>This is where you get the sdk-object/input variable values. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/hugo-loveit/automating-automation/vro-ss-04.png" title="/hugo-loveit/automating-automation/vro-ss-04.png" data-thumbnail="/hugo-loveit/automating-automation/vro-ss-04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/automating-automation/vro-ss-04.png"
+            data-srcset="/hugo-loveit/automating-automation/vro-ss-04.png, /hugo-loveit/automating-automation/vro-ss-04.png 1.5x, /hugo-loveit/automating-automation/vro-ss-04.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/automating-automation/vro-ss-04.png" width="1054" height="867" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/hugo-loveit/automating-automation/vro-ss-05.png" title="/hugo-loveit/automating-automation/vro-ss-05.png" data-thumbnail="/hugo-loveit/automating-automation/vro-ss-05.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/automating-automation/vro-ss-05.png"
+            data-srcset="/hugo-loveit/automating-automation/vro-ss-05.png, /hugo-loveit/automating-automation/vro-ss-05.png 1.5x, /hugo-loveit/automating-automation/vro-ss-05.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/automating-automation/vro-ss-05.png" width="1054" height="867" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Sample Code to specify &ldquo;VC:HostSystem&rdquo; and ID value:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vm&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:HostSystem&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;</span><span class="nb">sdk-object</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">id</span><span class="p">=</span><span class="s2">&#34;192.168.86.200,id:host-14&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong><img
+        class="lazyload"
+        src="/hugo-loveit/svg/loading.min.svg"
+        data-src="/img/vro-ss-06.png"
+        data-srcset="/img/vro-ss-06.png, /img/vro-ss-06.png 1.5x, /img/vro-ss-06.png 2x"
+        data-sizes="auto"
+        alt="/img/vro-ss-06.png"
+        title="/img/vro-ss-06.png" /></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgvro-ss-06png"><a href="/img/vro-ss-06.png" rel="">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>Sample Code to specify &ldquo;VC:VirtualMachine&rdquo; and ID value (VM.ExtensionData.MoRef.Value):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vm&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;</span><span class="nb">sdk-object</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">id</span><span class="p">=</span><span class="s2">&#34;192.168.86.200,id:vm-3006&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Example of how to build the body. </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenter</span> <span class="p">=</span> <span class="s1">&#39;192.168.86.200&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmInfo</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="n">-Name</span> <span class="s1">&#39;administrator-904&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmMoref</span> <span class="p">=</span> <span class="nv">$vmInfo</span><span class="p">.</span><span class="py">ExtensionData</span><span class="p">.</span><span class="py">MoRef</span><span class="p">.</span><span class="py">Value</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Body ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&lt;execution-context xmlns=&#34;http://www.vmware.com/vco&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">   &lt;parameters&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">      &lt;parameter name=&#34;vm&#34; type=&#34;VC:VirtualMachine&#34; scope=&#34;local&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">         &lt;sdk-object type=&#34;VC:VirtualMachine&#34; id=&#34;vCenterString,id:vmString&#34;/&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">      &lt;/parameter&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">   &lt;/parameters&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&lt;/execution-context&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span>
+</span></span><span class="line"><span class="cl"><span class="c"># I define the Body format and then replace strings of text that I define with variables</span>
+</span></span><span class="line"><span class="cl"><span class="c"># in the code.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-Replace</span><span class="p">(</span><span class="s2">&#34;vmstring&#34;</span><span class="p">,</span><span class="nv">$vmMoref</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-Replace</span><span class="p">(</span><span class="s2">&#34;vCenterstring&#34;</span><span class="p">,</span><span class="nv">$vCenter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>I hope this helps you understand how to automate running vRO Workflows using REST API with PowerShell.</p>
+<p>Happy Automating&hellip;</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-04-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/hugo-loveit/automating-automation/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://dalehassinger.github.io/hugo-loveit/automating-automation/" data-title="Automating Automation (Updated)" data-via="dalehassinger" data-hashtags="vRO,vRealize Orchestrator,vRA,vRealize Automation,API,PowerShell,Automation"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://dalehassinger.github.io/hugo-loveit/automating-automation/" data-hashtag="vRO"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://dalehassinger.github.io/hugo-loveit/automating-automation/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/hugo-loveit/tags/vro/">vRO</a>,&nbsp;<a href="/hugo-loveit/tags/vrealize-orchestrator/">vRealize Orchestrator</a>,&nbsp;<a href="/hugo-loveit/tags/vra/">vRA</a>,&nbsp;<a href="/hugo-loveit/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/hugo-loveit/tags/api/">API</a>,&nbsp;<a href="/hugo-loveit/tags/powershell/">PowerShell</a>,&nbsp;<a href="/hugo-loveit/tags/automation/">Automation</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/hugo-loveit/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/hugo-loveit/check-ports/" class="prev" rel="prev" title="Open Ports | Zero Trust"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Open Ports | Zero Trust</a>
+            <a href="/hugo-loveit/vrealize-operations-right-size/" class="next" rel="next" title="How vRealize Operations can help with Right Sizing VMs">How vRealize Operations can help with Right Sizing VMs<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/hugo-loveit/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/hugo-loveit/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/hugo-loveit/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ESXi on Raspberry PI - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="ESXi on Raspberry PI" />
+<meta property="og:description" content="ESXi on Raspberry PI" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dalehassinger.github.io/hugo-loveit/esxi_arm_raspberry-pi/" /><meta property="og:image" content="https://dalehassinger.github.io/hugo-loveit/esxi_arm_raspberry-pi/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-10-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-11T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dalehassinger.github.io/hugo-loveit/esxi_arm_raspberry-pi/featured-image.png"/>
+<meta name="twitter:title" content="ESXi on Raspberry PI"/>
+<meta name="twitter:description" content="ESXi on Raspberry PI"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://dalehassinger.github.io/hugo-loveit/esxi_arm_raspberry-pi/" /><link rel="prev" href="https://dalehassinger.github.io/hugo-loveit/vbrownbag-presentation/" /><link rel="next" href="https://dalehassinger.github.io/hugo-loveit/chartjs/" /><link rel="stylesheet" href="/hugo-loveit/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ESXi on Raspberry PI",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/dalehassinger.github.io\/hugo-loveit\/esxi_arm_raspberry-pi\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/esxi_arm_raspberry-pi\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "ESXi, Raspberry PI, ARM, vRealize Operations","wordcount":  328 ,
+        "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/esxi_arm_raspberry-pi\/","datePublished": "2020-10-11T00:00:00+00:00","dateModified": "2020-10-11T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/hugo-loveit/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/hugo-loveit/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/hugo-loveit/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/hugo-loveit/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/hugo-loveit/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/hugo-loveit/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/hugo-loveit/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/hugo-loveit/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/hugo-loveit/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/hugo-loveit/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/hugo-loveit/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/hugo-loveit/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ESXi on Raspberry PI</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/hugo-loveit/categories/raspberry-pi/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Raspberry PI</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-10-11">2020-10-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;328 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/hugo-loveit/svg/loading.min.svg"
+        data-src="/hugo-loveit/esxi_arm_raspberry-pi/featured-image.png"
+        data-srcset="/hugo-loveit/esxi_arm_raspberry-pi/featured-image.png, /hugo-loveit/esxi_arm_raspberry-pi/featured-image.png 1.5x, /hugo-loveit/esxi_arm_raspberry-pi/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/hugo-loveit/esxi_arm_raspberry-pi/featured-image.png"
+        title="/hugo-loveit/esxi_arm_raspberry-pi/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#esxi-70-on-raspberry-pi---cool-host-name-">ESXi 7.0 on RAspberry PI - Cool Host Name :)</a></li>
+                    <li><a href="#esxi-70-on-raspberry-pi-login-screen">ESXi 7.0 on RAspberry PI Login Screen:</a></li>
+                    <li><a href="#esxi-managemnet-screen">ESXi Managemnet Screen:</a></li>
+                    <li><a href="#esxi-on-raspberry-pi-added-to-vcenter">ESXi on Raspberry PI added to vCenter:</a></li>
+                    <li><a href="#esxi-on-raspbeery-pi-added-to-vrealize-operations-82">ESXi on Raspbeery PI added to vRealize Operations 8.2:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>ESXi on Raspberry PI</strong></p>
+<hr>
+<p>I have always be fascinated with everything that you can do with a Raspberry PI.  When VMware released their Fling to install ESXi on the Raspberry PI I have become even more fascinated. An ESXi Host for the Home Lab for $50. Sign me up.</p>
+<p>During VMworld 2020, VMware announced that they would be releasing a Fling to install ESXi on the Raspberry PI.  Before the VMworld session was over I had a new Raspberry PI ordered and it was delivered the next day, ahead of the Fling release, so that I would be ready.</p>
+<figure><a class="lightgallery" href="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png" title="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png" data-thumbnail="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png"
+            data-srcset="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png 1.5x, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_06.png" width="200" height="144" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>I downloaded the ESXi Arm Edition Fling as soon as I seen it was available.</p>
+<p><strong>Lessons Learned:</strong></p>
+<ul>
+<li>Read all the documentation on how to install ESXi on Raspberry PI.  Very important steps need to be followed.</li>
+<li>If you want to use more than one USB drive for storage use this ESXi Host advanced setting - USB.arbitratorAutoStartDisabled Set to 1</li>
+<li>Use a minimum size of 256 GB for the USB drive. Read the Fling Documentation for preferred USB drive to use.</li>
+<li>The ARM version of Ubuntu server installed without any issues.  I installed the Apache Web Server and Samba on the ARM Ubuntu Server and had no issues.</li>
+<li>Hugo Blog files run GREAT on ARM version of Ubuntu Server, with Apache web server, running on ESXi, installed on Raspberry PI.</li>
+</ul>
+<p>I am going to be adding information to this Blog post as I discover more cool information with running ESXi on Raspberry PI.  Check back often.</p>
+<p><a href="https://flings.vmware.com/esxi-arm-edition" target="_blank" rel="noopener noreffer ">Link to ESXi Arm Edition - VMware Fling</a></p>
+<h6 id="esxi-70-on-raspberry-pi---cool-host-name-">ESXi 7.0 on RAspberry PI - Cool Host Name :)</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg" title="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg" data-thumbnail="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg"
+            data-srcset="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg 1.5x, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_02.jpeg" width="4032" height="3024" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="esxi-70-on-raspberry-pi-login-screen">ESXi 7.0 on RAspberry PI Login Screen:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png" title="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png" data-thumbnail="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png"
+            data-srcset="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png 1.5x, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_03.png" width="1306" height="859" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="esxi-managemnet-screen">ESXi Managemnet Screen:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png" title="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png" data-thumbnail="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png"
+            data-srcset="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png 1.5x, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_04.png" width="1792" height="828" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="esxi-on-raspberry-pi-added-to-vcenter">ESXi on Raspberry PI added to vCenter:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png" title="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png" data-thumbnail="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png"
+            data-srcset="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png 1.5x, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_05.png" width="2553" height="1181" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="esxi-on-raspbeery-pi-added-to-vrealize-operations-82">ESXi on Raspbeery PI added to vRealize Operations 8.2:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png" title="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png" data-thumbnail="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png"
+            data-srcset="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png 1.5x, /hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/esxi_arm_raspberry-pi/esxi_raspberry_pi_01.png" width="1879" height="1057" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-10-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/hugo-loveit/esxi_arm_raspberry-pi/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://dalehassinger.github.io/hugo-loveit/esxi_arm_raspberry-pi/" data-title="ESXi on Raspberry PI" data-via="dalehassinger" data-hashtags="ESXi,Raspberry PI,ARM,vRealize Operations"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://dalehassinger.github.io/hugo-loveit/esxi_arm_raspberry-pi/" data-hashtag="ESXi"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://dalehassinger.github.io/hugo-loveit/esxi_arm_raspberry-pi/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/hugo-loveit/tags/esxi/">ESXi</a>,&nbsp;<a href="/hugo-loveit/tags/raspberry-pi/">Raspberry Pi</a>,&nbsp;<a href="/hugo-loveit/tags/arm/">ARM</a>,&nbsp;<a href="/hugo-loveit/tags/vrealize-operations/">vRealize Operations</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/hugo-loveit/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/hugo-loveit/vbrownbag-presentation/" class="prev" rel="prev" title="vBrownbag VMworld Presentation"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>vBrownbag VMworld Presentation</a>
+            <a href="/hugo-loveit/chartjs/" class="next" rel="next" title="Creating Charts with ChartJS and displaying in vRealize Operations">Creating Charts with ChartJS and displaying in vRealize Operations<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/hugo-loveit/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/hugo-loveit/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/hugo-loveit/js/theme.min.js"></script></body>
+</html>

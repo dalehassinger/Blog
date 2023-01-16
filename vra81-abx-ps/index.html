@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>vRealize Automation 8.1 - PowerShell ABX - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="vRealize Automation 8.1 - PowerShell ABX" />
+<meta property="og:description" content="Options to use PowerShell Modules" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dalehassinger.github.io/hugo-loveit/vra81-abx-ps/" /><meta property="og:image" content="https://dalehassinger.github.io/hugo-loveit/vra81-abx-ps/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-05-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-17T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://dalehassinger.github.io/hugo-loveit/vra81-abx-ps/featured-image.png"/>
+<meta name="twitter:title" content="vRealize Automation 8.1 - PowerShell ABX"/>
+<meta name="twitter:description" content="Options to use PowerShell Modules"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://dalehassinger.github.io/hugo-loveit/vra81-abx-ps/" /><link rel="prev" href="https://dalehassinger.github.io/hugo-loveit/hugo/" /><link rel="next" href="https://dalehassinger.github.io/hugo-loveit/it-reality/" /><link rel="stylesheet" href="/hugo-loveit/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "vRealize Automation 8.1 - PowerShell ABX",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/dalehassinger.github.io\/hugo-loveit\/vra81-abx-ps\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/vra81-abx-ps\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "PowerShell, vRA, ABX, vRealize Automation, VMware Aria","wordcount":  822 ,
+        "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/vra81-abx-ps\/","datePublished": "2020-05-17T00:00:00+00:00","dateModified": "2020-05-17T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/dalehassinger.github.io\/hugo-loveit\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/hugo-loveit/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/hugo-loveit/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/hugo-loveit/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/hugo-loveit/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/hugo-loveit/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/hugo-loveit/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/hugo-loveit/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/hugo-loveit/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/hugo-loveit/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/hugo-loveit/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/hugo-loveit/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/hugo-loveit/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/hugo-loveit/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">vRealize Automation 8.1 - PowerShell ABX</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/hugo-loveit/categories/vrealize-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>vRealize Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-05-17">2020-05-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;822 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/hugo-loveit/svg/loading.min.svg"
+        data-src="/hugo-loveit/vra81-abx-ps/featured-image.png"
+        data-srcset="/hugo-loveit/vra81-abx-ps/featured-image.png, /hugo-loveit/vra81-abx-ps/featured-image.png 1.5x, /hugo-loveit/vra81-abx-ps/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/hugo-loveit/vra81-abx-ps/featured-image.png"
+        title="/hugo-loveit/vra81-abx-ps/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#blueprint-requirements">BluePrint Requirements:</a></li>
+                    <li><a href="#what-i-created-to-accomplish-the-requirements">What I created to accomplish the requirements:</a></li>
+                    <li><a href="#sample-code-and-screen-shots---">Sample Code and Screen Shots:&mdash;</a></li>
+                    <li><a href="#blueprint">BluePrint:</a></li>
+                    <li><a href="#action">Action:</a></li>
+                    <li><a href="#subscription">Subscription:</a></li>
+                    <li><a href="#lets-compare-vra-76-vs-81">Lets compare vRA 7.6 vs 8.1</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Options to use PowerShell Modules</strong></p>
+<hr>
+<p>I wanted to review VMware vRA (vRealize Automation) 8.x as a Microsoft Windows Server Admin.  Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I am going to create Windows Server VMs and customize the OS using a new feature added to vRA 8.1, Action Based Extensibility (ABX) with PowerShell. No vRO (Orchestrator) Workflows will be used. This is completely different compared to how I create Windows Servers with vRA 7.6.</p>
+<p>The enterprise organizations that I have worked for are 90%+ Microsoft Windows Servers.  It is important for me to have vRA be able to create Windows Servers and make all configuration changes using PowerShell.</p>
+<p>You could also use this technique to make changes to a Linux VM using the PowerCLI commands Invoke-VMscript and Copy-VMGuestFile. I did create a <a href="../automation-zero-trust/" rel="">Blog Post</a> on this topic.</p>
+<h6 id="blueprint-requirements">BluePrint Requirements:</h6>
+<p>I want to manually enter the VM Name.  I don’t want an auto generated name. After the Windows Server VM is created I want to to able to add vCenter TAGS to VM, make some OS changes, and install software based on values entered on the BluePrint.</p>
+<h6 id="what-i-created-to-accomplish-the-requirements">What I created to accomplish the requirements:</h6>
+<p>Created a BluePrint. See included code and screen shot.</p>
+<p>Created a PowerShell Action. See included code and screen shot.</p>
+<p>Created a Subscription. See Screenshot.</p>
+<h6 id="sample-code-and-screen-shots---">Sample Code and Screen Shots:&mdash;</h6>
+<h6 id="blueprint">BluePrint:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/vra81-abx-ps/vra81-01.jpg" title="/hugo-loveit/vra81-abx-ps/vra81-01.jpg" data-thumbnail="/hugo-loveit/vra81-abx-ps/vra81-01.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/vra81-abx-ps/vra81-01.jpg"
+            data-srcset="/hugo-loveit/vra81-abx-ps/vra81-01.jpg, /hugo-loveit/vra81-abx-ps/vra81-01.jpg 1.5x, /hugo-loveit/vra81-abx-ps/vra81-01.jpg 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/vra81-abx-ps/vra81-01.jpg" width="1101" height="1070" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>The properties under resources in the yaml code can be used like parameters in a PowerShell script. Since I have a background in PowerShell that is how I am using the properties. When you deploy the BluePrint the values entered that I defined will not be used until the Action runs. The Action will run after the “Compute post provision” event is triggered with the subscription. Those values will be passed from the BluePrint to the Action.  Just like passing parameters to a PS script.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># This is the yaml code for the BluePrint
+</span></span><span class="line"><span class="cl"># Created by vCrocs.info
+</span></span><span class="line"><span class="cl">formatVersion: 1
+</span></span><span class="line"><span class="cl">inputs:
+</span></span><span class="line"><span class="cl">  cpuCount:
+</span></span><span class="line"><span class="cl">    type: integer
+</span></span><span class="line"><span class="cl">    description: Number of virtual processors
+</span></span><span class="line"><span class="cl">    default: 2
+</span></span><span class="line"><span class="cl">  totalMemoryMB:
+</span></span><span class="line"><span class="cl">    type: integer
+</span></span><span class="line"><span class="cl">    description: Machine virtual memory size in Megabytes
+</span></span><span class="line"><span class="cl">    default: 2048
+</span></span><span class="line"><span class="cl">  VMname:
+</span></span><span class="line"><span class="cl">    type: string
+</span></span><span class="line"><span class="cl">    default: DBH00
+</span></span><span class="line"><span class="cl">  SQL:
+</span></span><span class="line"><span class="cl">    type: boolean
+</span></span><span class="line"><span class="cl">    description: Is this a SQL Server?
+</span></span><span class="line"><span class="cl">    default: false
+</span></span><span class="line"><span class="cl">  D-Drive-Size:
+</span></span><span class="line"><span class="cl">    type: integer
+</span></span><span class="line"><span class="cl">    description: &#39;Enter D:\ Size in GB&#39;
+</span></span><span class="line"><span class="cl">    default: 10
+</span></span><span class="line"><span class="cl">    minimum: 5
+</span></span><span class="line"><span class="cl">    maximum: 50
+</span></span><span class="line"><span class="cl">  TEST:
+</span></span><span class="line"><span class="cl">    type: string
+</span></span><span class="line"><span class="cl">    enum:
+</span></span><span class="line"><span class="cl">      - &#39;Yes&#39;
+</span></span><span class="line"><span class="cl">      - &#39;No&#39;
+</span></span><span class="line"><span class="cl">resources:
+</span></span><span class="line"><span class="cl">  Cloud_vSphere_Machine_1:
+</span></span><span class="line"><span class="cl">    type: Cloud.vSphere.Machine
+</span></span><span class="line"><span class="cl">    properties:
+</span></span><span class="line"><span class="cl">      name: &#39;${input.VMname}&#39;
+</span></span><span class="line"><span class="cl">      SQL: &#39;${input.SQL}&#39;
+</span></span><span class="line"><span class="cl">      DDRive: &#39;${input.D-Drive-Size}&#39;
+</span></span><span class="line"><span class="cl">      imageRef: 2019-TEMPLATE
+</span></span><span class="line"><span class="cl">      cpuCount: &#39;${input.cpuCount}&#39;
+</span></span><span class="line"><span class="cl">      totalMemoryMB: &#39;${input.totalMemoryMB}&#39;
+</span></span><span class="line"><span class="cl">      TEST: &#39;${input.TEST}&#39;
+</span></span><span class="line"><span class="cl">      constraints:
+</span></span><span class="line"><span class="cl">        - tag: &#39;quick_start_run:1&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>&mdash;Using the Inputs Screen helps you build the BluePrint yaml code.  I found this very useful since I am still learning the proper yaml formatting.</p>
+<figure><a class="lightgallery" href="/hugo-loveit/vra81-abx-ps/vra81-04.png" title="/hugo-loveit/vra81-abx-ps/vra81-04.png" data-thumbnail="/hugo-loveit/vra81-abx-ps/vra81-04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/vra81-abx-ps/vra81-04.png"
+            data-srcset="/hugo-loveit/vra81-abx-ps/vra81-04.png, /hugo-loveit/vra81-abx-ps/vra81-04.png 1.5x, /hugo-loveit/vra81-abx-ps/vra81-04.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/vra81-abx-ps/vra81-04.png" width="1101" height="1070" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="action">Action:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/vra81-abx-ps/vra81-02.jpg" title="/hugo-loveit/vra81-abx-ps/vra81-02.jpg" data-thumbnail="/hugo-loveit/vra81-abx-ps/vra81-02.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/vra81-abx-ps/vra81-02.jpg"
+            data-srcset="/hugo-loveit/vra81-abx-ps/vra81-02.jpg, /hugo-loveit/vra81-abx-ps/vra81-02.jpg 1.5x, /hugo-loveit/vra81-abx-ps/vra81-02.jpg 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/vra81-abx-ps/vra81-02.jpg" width="1101" height="1070" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>In my PowerShell code I am using Write-Host to help me understand how the BluePrint passes values to the Action. I use to troubleshoot and understand how it is working. I am able to take values from the payload customProperties and assign to variables. The customProperties are defined in the BluePrint yaml code as resources/properties. I can then make decisions in the code based on these values.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># This is the PowerShell code for the Action
+</span></span><span class="line"><span class="cl">function handler($context, $payload) {
+</span></span><span class="line"><span class="cl">    Write-Host &#34;VM Name Created: &#34; $payload.resourceNames[0]
+</span></span><span class="line"><span class="cl">    Write-Host &#34;D-DRive Size: &#34; $payload.customProperties.DDRive
+</span></span><span class="line"><span class="cl">    Write-Host &#34;SQL: &#34; $payload.customProperties.SQL
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    $VMname = $payload.resourceNames[0]
+</span></span><span class="line"><span class="cl">    Write-Host &#34;VM Name Variable: &#34; $VMname
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    $SQL = $payload.customProperties.SQL
+</span></span><span class="line"><span class="cl">    $DDrive = $payload.customProperties.DDRive
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    #Connect to vCenter
+</span></span><span class="line"><span class="cl">    Connect-VIServer -server 192.168.1.1 -User &#34;administrator@vsphere.local&#34; -Password &#34;VMware#1&#34; -Protocol https -Force
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    #Assign Tag to new VM
+</span></span><span class="line"><span class="cl">    New-TagAssignment -Tag &#39;TAG-vRA-Built&#39; -Entity $VMname
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    if($SQL -eq &#39;true&#39;){
+</span></span><span class="line"><span class="cl">        New-TagAssignment -Tag &#39;TAG-SQL-Server&#39; -Entity $VMname
+</span></span><span class="line"><span class="cl">    } # End if
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  return $payload
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="subscription">Subscription:</h6>
+<figure><a class="lightgallery" href="/hugo-loveit/vra81-abx-ps/vra81-03.png" title="/hugo-loveit/vra81-abx-ps/vra81-03.png" data-thumbnail="/hugo-loveit/vra81-abx-ps/vra81-03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/hugo-loveit/svg/loading.min.svg"
+            data-src="/hugo-loveit/vra81-abx-ps/vra81-03.png"
+            data-srcset="/hugo-loveit/vra81-abx-ps/vra81-03.png, /hugo-loveit/vra81-abx-ps/vra81-03.png 1.5x, /hugo-loveit/vra81-abx-ps/vra81-03.png 2x"
+            data-sizes="auto"
+            alt="/hugo-loveit/vra81-abx-ps/vra81-03.png" width="1101" height="1070" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="lets-compare-vra-76-vs-81">Lets compare vRA 7.6 vs 8.1</h6>
+<p>vRA 7.6:</p>
+<p>I would create a BluePrint with a custom form in vRA 7.6. I would pass the field values from the custom form as parameters to a PowerShell script on a PowerShell Host.</p>
+<p>vRA 8.1:</p>
+<p>Using ABX and a subscription in vRA 8.1 eliminates the need to have a Windows PowerShell host and the PowerShell script has no parameters. The vRA 8.x appliance is the PowerShell Host. Less moving parts to complete a Windows Server Build in vRA 8.1.</p>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>I will need to learn yaml.</li>
+<li>The process to Create BluePrints will be much different in vRA 8.x.</li>
+<li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused.</li>
+<li>I will not need as many VMs for the installation and administration of vRA 8.x.</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-05-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/hugo-loveit/vra81-abx-ps/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://dalehassinger.github.io/hugo-loveit/vra81-abx-ps/" data-title="vRealize Automation 8.1 - PowerShell ABX" data-via="dalehassinger" data-hashtags="PowerShell,vRA,ABX,vRealize Automation,VMware Aria"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://dalehassinger.github.io/hugo-loveit/vra81-abx-ps/" data-hashtag="PowerShell"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://dalehassinger.github.io/hugo-loveit/vra81-abx-ps/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/hugo-loveit/tags/powershell/">PowerShell</a>,&nbsp;<a href="/hugo-loveit/tags/vra/">vRA</a>,&nbsp;<a href="/hugo-loveit/tags/abx/">ABX</a>,&nbsp;<a href="/hugo-loveit/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/hugo-loveit/tags/vmware-aria/">VMware Aria</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/hugo-loveit/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/hugo-loveit/hugo/" class="prev" rel="prev" title="Hugo | Static Site Generator"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Hugo | Static Site Generator</a>
+            <a href="/hugo-loveit/it-reality/" class="next" rel="next" title="What is vRealize Automation - Episode 21">What is vRealize Automation - Episode 21<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/hugo-loveit/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/hugo-loveit/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/hugo-loveit/js/theme.min.js"></script></body>
+</html>
