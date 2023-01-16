@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware vRealize SaltStack Config API - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="VMware vRealize SaltStack Config API" />
+<meta property="og:description" content="Using SaltStack Config api for Automation from vRA Catalog or cmd" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/saltstack-config-api/" /><meta property="og:image" content="https://www.vcrocs.info/saltstack-config-api/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-01T22:02:16-05:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/saltstack-config-api/featured-image.png"/>
+<meta name="twitter:title" content="VMware vRealize SaltStack Config API"/>
+<meta name="twitter:description" content="Using SaltStack Config api for Automation from vRA Catalog or cmd"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.vcrocs.info/saltstack-config-api/" /><link rel="prev" href="https://www.vcrocs.info/saltstack-config-part-09/" /><link rel="next" href="https://www.vcrocs.info/vmware-powerblock-08-2022/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware vRealize SaltStack Config API",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/saltstack-config-api\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/saltstack-config-api\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, Python, salt-api","wordcount":  1446 ,
+        "url": "https:\/\/www.vcrocs.info\/saltstack-config-api\/","datePublished": "2022-06-26T00:00:00+00:00","dateModified": "2023-01-01T22:02:16-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware vRealize SaltStack Config API</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-26">2022-06-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1446 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/saltstack-config-api/featured-image.png"
+        data-srcset="/saltstack-config-api/featured-image.png, /saltstack-config-api/featured-image.png 1.5x, /saltstack-config-api/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/saltstack-config-api/featured-image.png"
+        title="/saltstack-config-api/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#saltstack-config-server">SaltStack Config Server:</a></li>
+                    <li><a href="#python-code">Python Code:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                    <li><a href="#salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Using SaltStack Config api for Automation from vRA Catalog or cmd</p>
+<hr>
+<p>A personal goal of mine for 2022 was to start doing more with Python when working with VMware SaltStack Config. As a Windows Admin most of my automation was done with PowerShell. All the examples you see in the salt documentation are written in Python, so to use Python for some processes makes sense.</p>
+<p>I had a use case that made sense to use Python. I want to schedule reboots of AWS EC2 instances using SaltStack Config. For Servers that are on-prem I would always automate the process to create a server reboot scheduled task in vCenter.  With AWS I want to use VMware SaltStack Config to schedule the Server Reboot.</p>
+<p>Manual Steps:</p>
+<ul>
+<li>Create a SaltStack Config Job to do the reboot.<br>
+I create a job named &ldquo;vRA | Server Reboot&rdquo;. This job will be used for all scheduled server reboots.</li>
+<li>Copy the Python Code below and create a ScheduleServerReboot.py file that will be copied to the SSC server.</li>
+</ul>
+<p>The Python Code completes the following steps:</p>
+<ul>
+<li>Creates a Target that uses the grain &ldquo;id&rdquo; and will only target the Server that you want to reboot.</li>
+<li>Creates a Run Once Schedule to use the job and new target that was created.</li>
+<li>Sends an email to show that the run once schedule to reboot server  was created.</li>
+</ul>
+<hr>
+<h6 id="saltstack-config-server">SaltStack Config Server:</h6>
+<div>
+  <b>My SaltStack Config Server (SSC) is what VMware provides when using Life Cycle Manager (LCM) running Photon OS.</b>
+</div>
+<div>
+  <br>
+</div>
+<hr>
+<h6 id="python-code">Python Code:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># --- Python Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --- In my code I show the Password. In Production DO NOT DO THIS.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --- There are so many different ways to include encrypted PWs in the code. </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Use what works best in your environment.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># example to run the script</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># python3 /scripts/ScheduleServerReboot.py -name &#39;2019DC&#39; -dateTime &#39;2022-06-25T23:00&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pprint</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">smtplib</span><span class="o">,</span> <span class="nn">ssl</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Generate a random ID number</span>
+</span></span><span class="line"><span class="cl"><span class="n">randomNumber</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">randomNumber</span> <span class="o">=</span> <span class="s1">&#39;0000&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">randomNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">randomNumber</span> <span class="o">=</span> <span class="n">randomNumber</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ID:&#39;</span><span class="p">,</span><span class="n">randomNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- parse arguments</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&#34;Create Targets&#34;</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;-name&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Target Name&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;-dateTime&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Schedule Date | Time&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Set up variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">argName</span>     <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">argDateTime</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&#34;dateTime&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">argDate</span>     <span class="o">=</span> <span class="n">argDateTime</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Print the variables</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Server Name: &#39;</span><span class="p">,</span><span class="n">argName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Date | Time: &#39;</span><span class="p">,</span><span class="n">argDateTime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Connect to SSC Server</span>
+</span></span><span class="line"><span class="cl"><span class="n">host</span>     <span class="o">=</span> <span class="s1">&#39;https://192.168.86.110&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">user</span>     <span class="o">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;HackMe!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sseapiclient.tornado</span> <span class="kn">import</span> <span class="n">SyncClient</span>
+</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">SyncClient</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">ssl_validate_cert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Check to make sure minion exists</span>
+</span></span><span class="line"><span class="cl"><span class="n">minionName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">minionReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">minions</span><span class="o">.</span><span class="n">get_minion_presence</span><span class="p">(</span><span class="n">minion_id</span> <span class="o">=</span> <span class="n">argName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#print(targetReturn)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">minionReturn</span><span class="o">.</span><span class="n">ret</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#print(x)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minionName</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;minion&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;minionName:&#39;</span><span class="p">,</span> <span class="n">minionName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">minionName</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minion not found!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minionExists</span> <span class="o">=</span> <span class="s1">&#39;false&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minion found!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minionExists</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create Target ID | Name</span>
+</span></span><span class="line"><span class="cl">    <span class="n">targetID</span> <span class="o">=</span> <span class="s1">&#39;id:&#39;</span> <span class="o">+</span> <span class="n">argName</span>
+</span></span><span class="line"><span class="cl">    <span class="n">targetName</span> <span class="o">=</span> <span class="s2">&#34;vRA | Reboot | &#34;</span> <span class="o">+</span> <span class="n">argName</span> <span class="o">+</span> <span class="s1">&#39; | &#39;</span> <span class="o">+</span> <span class="n">argDate</span> <span class="o">+</span> <span class="s1">&#39; | ID:&#39;</span> <span class="o">+</span> <span class="n">randomNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target ID:&#39;</span><span class="p">,</span><span class="n">targetID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target Name:&#39;</span><span class="p">,</span><span class="n">targetName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create New SSC Target</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">tgt</span><span class="o">.</span><span class="n">save_target_group</span><span class="p">(</span><span class="n">tgt</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tgt_type&#39;</span><span class="p">:</span> <span class="s1">&#39;grain&#39;</span><span class="p">,</span> <span class="s1">&#39;tgt&#39;</span><span class="p">:</span><span class="n">targetID</span><span class="p">}},</span> <span class="n">name</span><span class="o">=</span><span class="n">targetName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Get UUID of new Target Created</span>
+</span></span><span class="line"><span class="cl">    <span class="n">targetReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">tgt</span><span class="o">.</span><span class="n">get_target_group</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">targetName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">targetReturn</span><span class="o">.</span><span class="n">ret</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(x)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetUUID</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target UUID:&#39;</span><span class="p">,</span> <span class="n">targetUUID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Get UUID of Job to run in Schedule</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#jobReturn=client.api.job.get_jobs()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jobName</span> <span class="o">=</span> <span class="s1">&#39;vRA | Server Reboot&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Job Name: &#39;</span><span class="p">,</span><span class="n">jobName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jobReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">jobName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">jobReturn</span><span class="o">.</span><span class="n">ret</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(x)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jobUUID</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Job UUID:&#39;</span><span class="p">,</span> <span class="n">jobUUID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># -- Create a run once Schedule</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 2022-06-21T13:21 - Date|Time format from vRA</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Schedule Time:&#39;</span><span class="p">,</span><span class="n">argDateTime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create Schedule Name</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scheduleName</span> <span class="o">=</span> <span class="s1">&#39;vRA | Reboot | &#39;</span> <span class="o">+</span> <span class="n">argName</span> <span class="o">+</span> <span class="s1">&#39; | &#39;</span> <span class="o">+</span> <span class="n">argDate</span> <span class="o">+</span> <span class="s1">&#39; | ID:&#39;</span> <span class="o">+</span> <span class="n">randomNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Schedule Name:&#39;</span><span class="p">,</span> <span class="n">scheduleName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create Run Once Schedule</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scheduleReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="o">=</span><span class="n">scheduleName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;once&#39;</span><span class="p">:</span> <span class="n">argDateTime</span><span class="p">,</span> <span class="s1">&#39;timezone&#39;</span><span class="p">:</span> <span class="s1">&#39;America/New_York&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cmd</span><span class="o">=</span><span class="s2">&#34;local&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tgt_uuid</span><span class="o">=</span><span class="n">targetUUID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">job_uuid</span><span class="o">=</span><span class="n">jobUUID</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Send Email about vRA Request using gmail.</span>
+</span></span><span class="line"><span class="cl"><span class="n">sender_email</span>   <span class="o">=</span> <span class="s2">&#34;dale.hassinger@gmail.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">receiver_email</span> <span class="o">=</span> <span class="s2">&#34;dale.hassinger@vcrocs.info&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password</span>       <span class="o">=</span> <span class="s2">&#34;HackMe!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s2">&#34;alternative&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="p">[</span><span class="s2">&#34;Subject&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;vRA Scheduled EC2 Reboot | &#34;</span> <span class="o">+</span> <span class="n">argName</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="p">[</span><span class="s2">&#34;From&#34;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">sender_email</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="p">[</span><span class="s2">&#34;To&#34;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">receiver_email</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Create HTML Body</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">minionExists</span> <span class="o">==</span> <span class="s1">&#39;true&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">html</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;A Request to reboot a AWS EC2 was run from vRA.&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;EC2 Information:&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;ul style=&#34;list-style-type:disc&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;&lt;b&gt;EC2 Name: &#34;&#34;&#34;</span>         <span class="o">+</span> <span class="n">argName</span>      <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/b&gt;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Target Created: &#34;&#34;&#34;</span>      <span class="o">+</span> <span class="n">targetName</span>   <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Schedule Created: &#34;&#34;&#34;</span>    <span class="o">+</span> <span class="n">scheduleName</span> <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Reboot Date | Time: &#34;&#34;&#34;</span>  <span class="o">+</span> <span class="n">argDateTime</span>  <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 11px;&#34;&gt;&lt;b&gt;vCROCS - Automated IT &lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 10px;&#34;&gt;#VMware #vRealize #SaltStackConfig&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="n">minionExists</span> <span class="o">==</span> <span class="s1">&#39;false&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">html</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;A Request to reboot a AWS EC2 was run from vRA.&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;EC2 Information:&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;ul style=&#34;list-style-type:disc&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;&lt;b&gt;EC2 Name: &#34;&#34;&#34;</span>         <span class="o">+</span> <span class="n">argName</span>      <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/b&gt;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;The Server Name was not found in Salt! Please double check name and try again!&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 11px;&#34;&gt;&lt;b&gt;vCROCS - Automated IT &lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 10px;&#34;&gt;#VMware #vRealize #SaltStackConfig&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- HTML MIMEText objects</span>
+</span></span><span class="line"><span class="cl"><span class="n">emailHTML</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&#34;html&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Add the HTML part to MIMEMultipart message</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">emailHTML</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Create secure connection and send HTML email</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s2">&#34;smtp.gmail.com&#34;</span><span class="p">,</span> <span class="mi">465</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">sender_email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sender_email</span><span class="p">,</span> <span class="n">receiver_email</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>Example of email that is sent when process completes.</p>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-53.PNG" title="/saltstack-config-api/Salt-53.PNG" data-thumbnail="/saltstack-config-api/Salt-53.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-53.PNG"
+            data-srcset="/saltstack-config-api/Salt-53.PNG, /saltstack-config-api/Salt-53.PNG 1.5x, /saltstack-config-api/Salt-53.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-53.PNG" width="756" height="370" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<p>Screen Shots of the SaltStack Config Job, Target and Schedule:</p>
+<p>SSC Job:</p>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-58.PNG" title="/saltstack-config-api/Salt-58.PNG" data-thumbnail="/saltstack-config-api/Salt-58.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-58.PNG"
+            data-srcset="/saltstack-config-api/Salt-58.PNG, /saltstack-config-api/Salt-58.PNG 1.5x, /saltstack-config-api/Salt-58.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-58.PNG" width="1009" height="555" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-59.PNG" title="/saltstack-config-api/Salt-59.PNG" data-thumbnail="/saltstack-config-api/Salt-59.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-59.PNG"
+            data-srcset="/saltstack-config-api/Salt-59.PNG, /saltstack-config-api/Salt-59.PNG 1.5x, /saltstack-config-api/Salt-59.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-59.PNG" width="1434" height="764" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>SSC Target:</p>
+<p><figure><a class="lightgallery" href="/saltstack-config-api/Salt-60.PNG" title="/saltstack-config-api/Salt-60.PNG" data-thumbnail="/saltstack-config-api/Salt-60.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-60.PNG"
+            data-srcset="/saltstack-config-api/Salt-60.PNG, /saltstack-config-api/Salt-60.PNG 1.5x, /saltstack-config-api/Salt-60.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-60.PNG" width="1489" height="592" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-61.PNG" title="/saltstack-config-api/Salt-61.PNG" data-thumbnail="/saltstack-config-api/Salt-61.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-61.PNG"
+            data-srcset="/saltstack-config-api/Salt-61.PNG, /saltstack-config-api/Salt-61.PNG 1.5x, /saltstack-config-api/Salt-61.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-61.PNG" width="893" height="539" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-62.PNG" title="/saltstack-config-api/Salt-62.PNG" data-thumbnail="/saltstack-config-api/Salt-62.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-62.PNG"
+            data-srcset="/saltstack-config-api/Salt-62.PNG, /saltstack-config-api/Salt-62.PNG 1.5x, /saltstack-config-api/Salt-62.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-62.PNG" width="1236" height="574" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-63.PNG" title="/saltstack-config-api/Salt-63.PNG" data-thumbnail="/saltstack-config-api/Salt-63.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-63.PNG"
+            data-srcset="/saltstack-config-api/Salt-63.PNG, /saltstack-config-api/Salt-63.PNG 1.5x, /saltstack-config-api/Salt-63.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-63.PNG" width="1122" height="845" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure></p>
+<hr>
+<p>To run this process to reboot an AWS EC2 from the vRA catalog for Day 2 operations I used the OOTB (Out of The Box) orchestrator workflow named &ldquo;Run SSH command&rdquo;.  I never modify the OOTB workflows.  I cloned this Workflow and named it &ldquo;Schedule EC2 Reboot&rdquo;.</p>
+<p>Original OOTB Workflow from vRO:</p>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-54.PNG" title="/saltstack-config-api/Salt-54.PNG" data-thumbnail="/saltstack-config-api/Salt-54.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-54.PNG"
+            data-srcset="/saltstack-config-api/Salt-54.PNG, /saltstack-config-api/Salt-54.PNG 1.5x, /saltstack-config-api/Salt-54.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-54.PNG" width="316" height="316" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Cloned Worked in vRO:</p>
+<p><figure><a class="lightgallery" href="/saltstack-config-api/Salt-55.PNG" title="/saltstack-config-api/Salt-55.PNG" data-thumbnail="/saltstack-config-api/Salt-55.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-55.PNG"
+            data-srcset="/saltstack-config-api/Salt-55.PNG, /saltstack-config-api/Salt-55.PNG 1.5x, /saltstack-config-api/Salt-55.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-55.PNG" width="316" height="316" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-56.PNG" title="/saltstack-config-api/Salt-56.PNG" data-thumbnail="/saltstack-config-api/Salt-56.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-56.PNG"
+            data-srcset="/saltstack-config-api/Salt-56.PNG, /saltstack-config-api/Salt-56.PNG 1.5x, /saltstack-config-api/Salt-56.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-56.PNG" width="634" height="540" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-57.PNG" title="/saltstack-config-api/Salt-57.PNG" data-thumbnail="/saltstack-config-api/Salt-57.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-api/Salt-57.PNG"
+            data-srcset="/saltstack-config-api/Salt-57.PNG, /saltstack-config-api/Salt-57.PNG 1.5x, /saltstack-config-api/Salt-57.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-api/Salt-57.PNG" width="632" height="315" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure></p>
+<p>Very simple form to fill out. Enter EC2 name and Date|Time.</p>
+<p>The Workflow takes the data from the vRA custom form and does an SSH Connection to the SSC server and runs a single line command using the data from the form as arguments:</p>
+<p>python3 /scripts/ScheduleServerReboot.py -name &lsquo;2019DC&rsquo; -dateTime 2022-06-25T23:00&rsquo;</p>
+<hr>
+<ul>
+<li>I hope the provided code and screenshots were helpful to get you started.</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>If you are a Windows Server Admin that knows PowerShell, to start using Python will take some time but the languages are similar.</li>
+<li>SaltStack Config api is a great way to create Day 2 automation processes in vRA.</li>
+<li><a href="https://developer.vmware.com/apis/1179/saltstack-config-raas" target="_blank">SaltStack Config - RaaS API Documentation</a></li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
+<li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
+<li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
+</ul>
+<div style="background-color:#ccffcc; Padding:20px;" >
+When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/saltstack-config-api/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/saltstack-config-api/" data-title="VMware vRealize SaltStack Config API" data-via="dalehassinger" data-hashtags="SaltStack Config,VMware Aria Automation,vRealize Automation,Python,salt-api"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/saltstack-config-api/" data-hashtag="SaltStack Config"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/saltstack-config-api/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/saltstack-config/">SaltStack Config</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/salt-api/">salt-api</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/saltstack-config-part-09/" class="prev" rel="prev" title="VMware vRealize SaltStack Config as a Windows Server Admin - Part 9"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware vRealize SaltStack Config as a Windows Server Admin - Part 9</a>
+            <a href="/vmware-powerblock-08-2022/" class="next" rel="next" title="VMware PowerBlock | August 2022">VMware PowerBlock | August 2022<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

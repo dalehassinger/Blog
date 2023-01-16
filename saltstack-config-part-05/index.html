@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 5 - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 5" />
+<meta property="og:description" content="Part 5: How to use SaltStack Config with Windows Server and PowerShell" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/saltstack-config-part-05/" /><meta property="og:image" content="https://www.vcrocs.info/saltstack-config-part-05/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-10-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-15T22:11:05-05:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/saltstack-config-part-05/featured-image.png"/>
+<meta name="twitter:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 5"/>
+<meta name="twitter:description" content="Part 5: How to use SaltStack Config with Windows Server and PowerShell"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.vcrocs.info/saltstack-config-part-05/" /><link rel="prev" href="https://www.vcrocs.info/saltstack-config-part-04/" /><link rel="next" href="https://www.vcrocs.info/saltconf-2021/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware vRealize SaltStack Config as a Windows Server Admin - Part 5",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/saltstack-config-part-05\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-05\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Windows Server, Configuration Management, Grains, POSH-SSH","wordcount":  1038 ,
+        "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-05\/","datePublished": "2021-10-01T00:00:00+00:00","dateModified": "2023-01-15T22:11:05-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware vRealize SaltStack Config as a Windows Server Admin - Part 5</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/saltstack-config/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>SaltStack Config</a>&nbsp;<a href="/categories/vmware-aria/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-10-01">2021-10-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1038 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/saltstack-config-part-05/featured-image.png"
+        data-srcset="/saltstack-config-part-05/featured-image.png, /saltstack-config-part-05/featured-image.png 1.5x, /saltstack-config-part-05/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/saltstack-config-part-05/featured-image.png"
+        title="/saltstack-config-part-05/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#grains-file">Grains File:</a></li>
+                    <li><a href="#example-grains-file">Example grains file:</a></li>
+                    <li><a href="#saltstack-config-targets">SaltStack Config Targets:</a></li>
+                    <li><a href="#saltstack-config-targets-1">SaltStack Config Targets:</a></li>
+                    <li><a href="#saltstack-config-target-definition">SaltStack Config Target Definition:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                    <li><a href="#salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Part 5: How to use SaltStack Config with Windows Server and PowerShell</strong></p>
+<hr>
+<p>The latest item on my journey with <b>VMware vRealize SaltStack Config</b> as a <b>Windows Server Admin</b> will be an update to some items that I have talked about in previous posts. I have been spending more time with <b>VMware vRealize SaltStack Config</b> and I have learned some better ways to do some of the processes that I have talked about already. My goal to to learn and use the built-in functions that are already in the product. I found that using the salt functions require less coding and better logging.</p>
+<p>First example of changing how I am going to use <b>VMware vRealize SaltStack Config</b>. When I first started looking at grains I thought I would edit the grains file with PowerShell and add the grains content to the file.  What I did worked but I think I learned a better way. There is a function grains.append that will append grains data to the grains file on the minion. This works much better and when I run a job to add grains information it is listed in Activity Completed within <b>VMware vRealize SaltStack Config</b>. I like to be able to see when changes are made by the jobs that are run.</p>
+<p>The code that I have listed below to get vCenter TAGs assigned to a VM and add the information to the minion is using PowerShell. To use this script you <b>MUST</b> install the PowerShell Module POSH-SSH. The process I am showing connects to a vCenter, creates a SSH Connection to the Salt Server, gets all assigned vCenter TAGs for a VM, , runs salt commands to add grain information to the grains file of a minion, and then runs a minion grains sync. This concept can be used for a lot of different systems. If you want to add NSX-T Security TAGs as grain information (Thanks Karl Hauck for this idea), AD (Active Directory) OU of the Windows Server, or anything you think would be useful to Target minions within <b>VMware vRealize SaltStack Config</b>.</p>
+<p>I really like the idea of using POSH-SSH to make the SSH connection to the Salt Master Server and running commands. I do a lot of Automation within vRA (vRealize Automation) with PowerShell and I can use this same concept to use <b>VMware vRealize SaltStack Config</b> to complete the processes that need run. I can also create Catalog items within vRA that you can make available to APP Teams to use. The Catalog item could be running salt jobs in  <b>VMware vRealize SaltStack Config</b>. Cool Stuff!</p>
+<hr>
+<h6 id="grains-file">Grains File:</h6>
+<p>This is what I learned about salt grains when using with a Windows OS.</p>
+<ul>
+<li>The default location of the grains file is in directory &ldquo;C:\salt\conf&quot;.</li>
+<li>The grains file is named grains with no extension.</li>
+</ul>
+<h6 id="example-grains-file">Example grains file:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">NSXSecurityTAGs</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl"><span class="p">-</span> <span class="n">vCROCS</span><span class="p">.</span><span class="py">Apps</span><span class="p">.</span><span class="py">VMware</span><span class="p">.</span><span class="py">SaltStack</span><span class="p">.</span><span class="py">Minion</span>
+</span></span><span class="line"><span class="cl"><span class="n">vCenterTAGs</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl"><span class="p">-</span> <span class="nb">TAG-VM</span><span class="n">-WebServer</span>
+</span></span><span class="line"><span class="cl"><span class="p">-</span> <span class="nb">TAG-VM</span><span class="n">-vCROCS</span>
+</span></span><span class="line"><span class="cl"><span class="p">-</span> <span class="nb">TAG-App</span><span class="n">-Hugo</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>&ldquo;Grain Name&rdquo;: &ldquo;The value of the grain&rdquo;.</li>
+<li>In my example I wanted the grain to be named &ldquo;vCenterTags&rdquo; and the values will be the vCenter TAG names &ldquo;TAG-VM-vCROCS, TAG-VM-WebServer, TAG-App-Hugo&rdquo;. I have (3) vCenter TAGs assigned to this VM.  I will be able to create a SaltStack Config Target based on any of the TAGs.</li>
+<li>I like the formatting that is used for the grains file by using the function grains.append.</li>
+</ul>
+<hr>
+<h6 id="saltstack-config-targets">SaltStack Config Targets:</h6>
+<p>When I add the vCenter TAG information to the grains file I am then able to create SaltStack Config Targets based on the grain &ldquo;vCenterTags&rdquo;.</p>
+<h6 id="saltstack-config-targets-1">SaltStack Config Targets:</h6>
+<figure><a class="lightgallery" href="/saltstack-config-part-05/Salt-42.PNG" title="/saltstack-config-part-05/Salt-42.PNG" data-thumbnail="/saltstack-config-part-05/Salt-42.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-05/Salt-42.PNG"
+            data-srcset="/saltstack-config-part-05/Salt-42.PNG, /saltstack-config-part-05/Salt-42.PNG 1.5x, /saltstack-config-part-05/Salt-42.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-05/Salt-42.PNG" width="1644" height="517" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="saltstack-config-target-definition">SaltStack Config Target Definition:</h6>
+<figure><a class="lightgallery" href="/saltstack-config-part-05/Salt-41.PNG" title="/saltstack-config-part-05/Salt-41.PNG" data-thumbnail="/saltstack-config-part-05/Salt-41.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-05/Salt-41.PNG"
+            data-srcset="/saltstack-config-part-05/Salt-41.PNG, /saltstack-config-part-05/Salt-41.PNG 1.5x, /saltstack-config-part-05/Salt-41.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-05/Salt-41.PNG" width="867" height="517" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>How to add the vCenter TAGs to the grains file on all your VMs in SaltStack Config:</p>
+<p>Get the VM Names and All Assigned vCenter TAGs</p>
+<p>PowerShell Script:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># ----- [ SSH SaltStack Config Server - Add vCenter TAGs to Minion Grains ] --------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to vCenter before running this code</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Define your Credentials</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># SSH to SaltStack Server - MUST HAVE POSH-SSH PowerShell Module Installed </span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-SSHSession</span> <span class="n">-ComputerName</span> <span class="s1">&#39;SaltServer.vCROCS.info&#39;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Test SSH Connection</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$CheckSSHConnection</span> <span class="p">=</span> <span class="nb">Get-SSHSession</span> <span class="n">-SessionId</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$CheckSSHConnection</span><span class="p">.</span><span class="py">Connected</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmNames</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="n">-Name</span> <span class="nb">vCROCS-VM</span><span class="p">-*</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmNames</span> <span class="p">=</span> <span class="nv">$vmNames</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$vmName</span> <span class="k">in</span> <span class="nv">$VMNames</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vmName</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">#Get VM Tag(s)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$VMTags</span> <span class="p">=</span> <span class="nb">Get-TagAssignment</span> <span class="n">-Entity</span> <span class="nv">$vmName</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$VMTags</span><span class="p">.</span><span class="py">Tag</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span><span class="p">(</span><span class="nv">$vmTAG</span> <span class="k">in</span> <span class="nv">$VMTags</span><span class="p">.</span><span class="py">Tag</span><span class="p">.</span><span class="n">Name</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$vmName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s1">&#39;&#34; grains.append vCenterTAGs &#34;&#39;</span> <span class="p">+</span> <span class="nv">$vmTAG</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="n">-SessionId</span> <span class="mf">0</span> <span class="n">-Command</span> <span class="nv">$sshCommand</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Sync Grains after adding new grain information</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$vmName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s1">&#39;&#34; saltutil.sync_grains&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="n">-SessionId</span> <span class="mf">0</span> <span class="n">-Command</span> <span class="nv">$sshCommand</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Terminate SSH Session ] -----------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Remove-SSHSession</span> <span class="n">-SessionId</span> <span class="mf">0</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>Adding the POSH-SSH PowerShell module so you can create a SSH connection to the salt master opens up a lot of possibilities for your PowerShell Automation as a Windows Server Admin.</li>
+<li>Grains are a good way to create SaltStack Config Targets. Allows you to group VMs together the same way you can in vCenter.</li>
+<li>The Grains file is basically a Database that can be any information that you want to show about your VMs. In this Blog post I am adding vCenter TAGs to the minions but the information could be anything that helps you target VMs.</li>
+<li>If the default list of grains OOTB doesn&rsquo;t show the information you want to see, you can easily add your own gains with a little bit of code.</li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
+<li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
+<li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
+</ul>
+<div style="background-color:#ccffcc; Padding:20px;" >
+When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/saltstack-config-part-05/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/saltstack-config-part-05/" data-title="VMware vRealize SaltStack Config as a Windows Server Admin - Part 5" data-via="dalehassinger" data-hashtags="SaltStack Config,VMware Aria Automation,vRealize Automation,PowerShell,Windows Server,Configuration Management,Grains,POSH-SSH"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/saltstack-config-part-05/" data-hashtag="SaltStack Config"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/saltstack-config-part-05/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/saltstack-config/">SaltStack Config</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/windows-server/">Windows Server</a>,&nbsp;<a href="/tags/configuration-management/">Configuration Management</a>,&nbsp;<a href="/tags/grains/">Grains</a>,&nbsp;<a href="/tags/posh-ssh/">POSH-SSH</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/saltstack-config-part-04/" class="prev" rel="prev" title="VMware vRealize SaltStack Config as a Windows Server Admin - Part 4"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware vRealize SaltStack Config as a Windows Server Admin - Part 4</a>
+            <a href="/saltconf-2021/" class="next" rel="next" title="SaltConf 2021 | SaltStack Config Session">SaltConf 2021 | SaltStack Config Session<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

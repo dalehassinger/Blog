@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 8 - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 8" />
+<meta property="og:description" content="Part 8: Pouring the salt grains" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/saltstack-config-part-08/" /><meta property="og:image" content="https://www.vcrocs.info/saltstack-config-part-08/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-07T22:37:59-05:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/saltstack-config-part-08/featured-image.png"/>
+<meta name="twitter:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 8"/>
+<meta name="twitter:description" content="Part 8: Pouring the salt grains"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.vcrocs.info/saltstack-config-part-08/" /><link rel="prev" href="https://www.vcrocs.info/saltstack-config-part-07/" /><link rel="next" href="https://www.vcrocs.info/vexpert-2022/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware vRealize SaltStack Config as a Windows Server Admin - Part 8",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/saltstack-config-part-08\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-08\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Windows Server, Configuration Management, grains","wordcount":  1586 ,
+        "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-08\/","datePublished": "2022-02-12T00:00:00+00:00","dateModified": "2023-01-07T22:37:59-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware vRealize SaltStack Config as a Windows Server Admin - Part 8</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/saltstack-config/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>SaltStack Config</a>&nbsp;<a href="/categories/vmware-aria/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-02-12">2022-02-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1586 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/saltstack-config-part-08/featured-image.png"
+        data-srcset="/saltstack-config-part-08/featured-image.png, /saltstack-config-part-08/featured-image.png 1.5x, /saltstack-config-part-08/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/saltstack-config-part-08/featured-image.png"
+        title="/saltstack-config-part-08/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#step-1---add-script-to-saltstack-config-file-manager">Step 1 - Add script to SaltStack Config File Manager:</a></li>
+                    <li><a href="#step-3---create-saltstack-config-schedule">Step 3 - Create SaltStack Config Schedule:</a></li>
+                    <li><a href="#code-examples">Code Examples:</a></li>
+                    <li><a href="#--add-windows-features--roles-as-grain-data">- Add Windows Features | Roles as grain data:</a></li>
+                    <li><a href="#--add-windows-server-installed-packagessoftware-as-grain-data">- Add Windows Server Installed Packages|Software as grain data:</a></li>
+                    <li><a href="#--add-windows-running-services-as-grain-data">- Add Windows Running Services as grain data:</a></li>
+                    <li><a href="#saltstack-config-target-using-windows-server-running-service-sql-server">SaltStack Config Target using Windows Server Running Service (SQL Server):</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                    <li><a href="#salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Part 8: Pouring the salt grains</p>
+<hr>
+<p>My previous posts about grain data were to show how to add minion grain data during the creation of a new server with vRA using PowerShell. This post I want to show how I&rsquo;m going to maintain the grain data that is not default out of the box grain data.</p>
+<hr>
+<p>Windows Server grain data not available out of the of box that I want to add to every minion AND make sure the grain data stays up to date:</p>
+<ul>
+<li>Windows Server Features | Roles</li>
+<li>Windows Server Installed Software</li>
+<li>Windows Server Running Services</li>
+</ul>
+<hr>
+<p>These are the steps that I use to maintain custom grain data with a Windows Server:</p>
+<ul>
+<li>Create a PowerShell Script that can run locally on a minion. Add the script to the SaltStack Config File Manager. Use salt-call to run salt.functions locally on a minion. See screen shot and my code examples below.</li>
+<li>Create a SaltStack Config Job to execute the PowerShell Script remotely on the minion. See Screen Shot.</li>
+<li>Create a SaltStack Config Schedule to run the job that you create. The job can run every day, once a week, every 4 hours. Whatever makes sense for your use case. See Screen Shot.</li>
+</ul>
+<hr>
+<p>If you want to run a script locally on a minion and use salt functions that is where you use the salt-call command. After you learn the salt-functions and are logged into a Windows Server locally, you can still use salt commands by using salt-call.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- example code</span>
+</span></span><span class="line"><span class="cl"><span class="nb">salt-call</span> <span class="p">-</span><span class="n">-version</span>
+</span></span><span class="line"><span class="cl"><span class="nb">salt-call</span> <span class="n">test</span><span class="p">.</span><span class="py">ping</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Show Disk Usage</span>
+</span></span><span class="line"><span class="cl"><span class="nb">salt-call</span> <span class="n">disk</span><span class="p">.</span><span class="py">usage</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Show Installed Features|Roles</span>
+</span></span><span class="line"><span class="cl"><span class="nb">salt-call</span> <span class="n">win_servermanager</span><span class="p">.</span><span class="py">list_installed</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Show Installed Sofwtare</span>
+</span></span><span class="line"><span class="cl"><span class="nb">salt-call</span> <span class="n">pkg</span><span class="p">.</span><span class="n">list_pkgs</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p><a href="https://docs.saltproject.io/en/latest/ref/cli/salt-call.html" target="_blank" rel="noopener noreffer ">Link to salt-call Documentation</a></p>
+<hr>
+<h6 id="step-1---add-script-to-saltstack-config-file-manager">Step 1 - Add script to SaltStack Config File Manager:</h6>
+<p>See code examples below to add Windows Server Features|Roles, Installed Software, and Runnings Services as grain data.</p>
+<p><figure><a class="lightgallery" href="/saltstack-config-part-08/Salt-49.PNG" title="/saltstack-config-part-08/Salt-49.PNG" data-thumbnail="/saltstack-config-part-08/Salt-49.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-08/Salt-49.PNG"
+            data-srcset="/saltstack-config-part-08/Salt-49.PNG, /saltstack-config-part-08/Salt-49.PNG 1.5x, /saltstack-config-part-08/Salt-49.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-08/Salt-49.PNG" width="1527" height="1050" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-part-08/Salt-50.PNG" title="/saltstack-config-part-08/Salt-50.PNG" data-thumbnail="/saltstack-config-part-08/Salt-50.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-08/Salt-50.PNG"
+            data-srcset="/saltstack-config-part-08/Salt-50.PNG, /saltstack-config-part-08/Salt-50.PNG 1.5x, /saltstack-config-part-08/Salt-50.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-08/Salt-50.PNG" width="1366" height="919" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure></p>
+<h6 id="step-3---create-saltstack-config-schedule">Step 3 - Create SaltStack Config Schedule:</h6>
+<figure><a class="lightgallery" href="/saltstack-config-part-08/Salt-51.PNG" title="/saltstack-config-part-08/Salt-51.PNG" data-thumbnail="/saltstack-config-part-08/Salt-51.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-08/Salt-51.PNG"
+            data-srcset="/saltstack-config-part-08/Salt-51.PNG, /saltstack-config-part-08/Salt-51.PNG 1.5x, /saltstack-config-part-08/Salt-51.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-08/Salt-51.PNG" width="1460" height="1013" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<h6 id="code-examples">Code Examples:</h6>
+<h6 id="--add-windows-features--roles-as-grain-data">- Add Windows Features | Roles as grain data:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="cm">&lt;#
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">SYNOPSIS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  This Script is used to Get Windows Servers Features and add as Grain Data
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">DESCRIPTION</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Windows Servers Features
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">PARAMETER</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  No Parameters
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">INPUTS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  No inputs
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">OUTPUTS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  salt grain data
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">NOTES</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Version:        1.00
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Author:         Dale Hassinger
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Creation Date:  04/20/2022
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Purpose/Change: Initial script development
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Revisions:
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">EXAMPLE</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">    N/A
+</span></span></span><span class="line"><span class="cl"><span class="cm">#&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start of Code ] ---------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Minion Get Windows Server Features Installed</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Delete existing grains features data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.delkey sem_Windows_Feature force=True&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call win_servermanager.list_installed --output=json&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="p">=</span><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$results</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$results</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$features</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span><span class="p">.</span><span class="py">local</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$features</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span> <span class="n">-split</span><span class="p">(</span><span class="s2">&#34;:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span> <span class="n">-split</span><span class="p">(</span><span class="s2">&#34;;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span> <span class="o">-replace</span><span class="p">(</span><span class="s2">&#34;@{&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span> <span class="o">-replace</span><span class="p">(</span><span class="s2">&#34;}&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span><span class="p">.</span><span class="py">trim</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span> <span class="o">-replace</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="p">,</span><span class="s2">&#34; | &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$features</span> <span class="p">=</span> <span class="nv">$features</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$features</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$feature</span> <span class="k">in</span> <span class="nv">$features</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Grains Append</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.append sem_Windows_Feature &#34;&#39;</span> <span class="p">+</span> <span class="nv">$feature</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Delete existing grains last update data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.delkey sem_last_grains_update force=True&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Add a Date that grains last updated</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainsupdateDate</span> <span class="p">=</span> <span class="nb">Get-Date</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainsupdateDate</span> <span class="p">=</span> <span class="nv">$grainsupdateDate</span><span class="p">.</span><span class="py">ToString</span><span class="p">(</span><span class="s2">&#34;MM/dd/yyyy | hh:mm&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$grainsupdateDate</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Grains Append</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.append sem_last_grains_update &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainsupdateDate</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Grains Sync</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call saltutil.sync_grains&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End of Code ] ---------------------------------------------------------------------------</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="--add-windows-server-installed-packagessoftware-as-grain-data">- Add Windows Server Installed Packages|Software as grain data:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="cm">&lt;#
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">SYNOPSIS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  This Script is used to Get Windows Installed Packages and add as Grain Data
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">DESCRIPTION</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Windows Servers Installed Packages
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">PARAMETER</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  No Parameters
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">INPUTS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  No inputs
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">OUTPUTS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  salt grain data
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">NOTES</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Version:        1.00
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Author:         Dale Hassinger
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Creation Date:  04/20/2022
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Purpose/Change: Initial script development
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Revisions:
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">EXAMPLE</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">    N/A
+</span></span></span><span class="line"><span class="cl"><span class="cm">#&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start of Code ] ---------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Minion Get Windows Server Installed Packages|Software</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Delete existing grains features data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.delkey sem_Windows_Installed_Software force=True&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call pkg.list_pkgs --output=json&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="p">=</span><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$results</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$results</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span><span class="p">.</span><span class="py">local</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span> <span class="n">-split</span><span class="p">(</span><span class="s2">&#34;:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span> <span class="n">-split</span><span class="p">(</span><span class="s2">&#34;;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span> <span class="o">-replace</span><span class="p">(</span><span class="s2">&#34;@{&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span> <span class="o">-replace</span><span class="p">(</span><span class="s2">&#34;}&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span><span class="p">.</span><span class="py">trim</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span> <span class="o">-replace</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="p">,</span><span class="s2">&#34; | &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$installedPackages</span> <span class="p">=</span> <span class="nv">$installedPackages</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$installedPackages</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$installedPackage</span> <span class="k">in</span> <span class="nv">$installedPackages</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Grains Append</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.append sem_Windows_Installed_Software &#34;&#39;</span> <span class="p">+</span> <span class="nv">$installedPackage</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Delete existing grains last update data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.delkey sem_last_grains_update force=True&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Add a Date that grains last updated</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainsupdateDate</span> <span class="p">=</span> <span class="nb">Get-Date</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainsupdateDate</span> <span class="p">=</span> <span class="nv">$grainsupdateDate</span><span class="p">.</span><span class="py">ToString</span><span class="p">(</span><span class="s2">&#34;MM/dd/yyyy | hh:mm&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$grainsupdateDate</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Grains Append</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.append sem_last_grains_update &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainsupdateDate</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Grains Sync</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call saltutil.sync_grains&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End of Code ] ---------------------------------------------------------------------------</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="--add-windows-running-services-as-grain-data">- Add Windows Running Services as grain data:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="cm">&lt;#
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">SYNOPSIS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  This Script is used to Get Windows Servers Running Services and add as Grain Data
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">DESCRIPTION</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Windows Servers Running Services
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">PARAMETER</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  No Parameters
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">INPUTS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  No inputs
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">OUTPUTS</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  salt grain data
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">NOTES</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Version:        1.00
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Author:         Dale Hassinger
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Creation Date:  04/20/2022
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Purpose/Change: Initial script development
+</span></span></span><span class="line"><span class="cl"><span class="cm">  Revisions:
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">.</span><span class="sd">EXAMPLE</span><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">    N/A
+</span></span></span><span class="line"><span class="cl"><span class="cm">#&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start of Code ] ---------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Minion Get Windows Server Running Services</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Delete existing grains running services data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.delkey sem_Windows_Services_Running force=True&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Get all Running Services</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$serviceNames</span> <span class="p">=</span> <span class="nb">Get-Service</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Status</span> <span class="o">-eq</span> <span class="s1">&#39;Running&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create Array</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servicesGrains</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Add Service data to the array</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$serviceName</span> <span class="k">in</span> <span class="nv">$serviceNames</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$grainString</span> <span class="p">=</span> <span class="nv">$serviceName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s1">&#39; | &#39;</span> <span class="p">+</span> <span class="nv">$serviceName</span><span class="p">.</span><span class="py">DisplayName</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$servicesGrains</span> <span class="p">=</span> <span class="nv">$servicesGrains</span> <span class="p">+</span> <span class="nv">$grainString</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Foreach</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$servicesGrains</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Add Windows Running Services as Grain Data</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$servicesGrain</span> <span class="k">in</span> <span class="nv">$servicesGrains</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Grains Append</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.append sem_Windows_Services_Running &#34;&#39;</span> <span class="p">+</span> <span class="nv">$servicesGrain</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Delete existing grains last update data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.delkey sem_last_grains_update force=True&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Add a Date that grains last updated</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainsupdateDate</span> <span class="p">=</span> <span class="nb">Get-Date</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainsupdateDate</span> <span class="p">=</span> <span class="nv">$grainsupdateDate</span><span class="p">.</span><span class="py">ToString</span><span class="p">(</span><span class="s2">&#34;MM/dd/yyyy | hh:mm&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$grainsupdateDate</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Grains Append</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call grains.append sem_last_grains_update &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainsupdateDate</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Grains Sync</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltCommand</span> <span class="p">=</span> <span class="s1">&#39;salt-call saltutil.sync_grains&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Run Salt Command</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-Expression</span> <span class="n">-Command</span> <span class="nv">$saltCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End of Code ] ---------------------------------------------------------------------------</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="saltstack-config-target-using-windows-server-running-service-sql-server">SaltStack Config Target using Windows Server Running Service (SQL Server):</h6>
+<figure><a class="lightgallery" href="/saltstack-config-part-08/Salt-52.PNG" title="/saltstack-config-part-08/Salt-52.PNG" data-thumbnail="/saltstack-config-part-08/Salt-52.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-08/Salt-52.PNG"
+            data-srcset="/saltstack-config-part-08/Salt-52.PNG, /saltstack-config-part-08/Salt-52.PNG 1.5x, /saltstack-config-part-08/Salt-52.PNG 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-08/Salt-52.PNG" width="1699" height="717" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>Windows Server Features|Roles make a great way to target minions.</li>
+<li>Windows Server installed software also makes a great way to target minions.</li>
+<li>Windows Server Running Services is a good way to target minions.</li>
+<li>If you add custom grain data when the server is created you also need a way to maintain the grain data so it stays up to date and is current.</li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
+<li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
+<li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
+</ul>
+<div style="background-color:#ccffcc; Padding:20px;" >
+When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/saltstack-config-part-08/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/saltstack-config-part-08/" data-title="VMware vRealize SaltStack Config as a Windows Server Admin - Part 8" data-via="dalehassinger" data-hashtags="SaltStack Config,VMware Aria Automation,vRealize Automation,PowerShell,Windows Server,Configuration Management,grains"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/saltstack-config-part-08/" data-hashtag="SaltStack Config"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/saltstack-config-part-08/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/saltstack-config/">SaltStack Config</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/windows-server/">Windows Server</a>,&nbsp;<a href="/tags/configuration-management/">Configuration Management</a>,&nbsp;<a href="/tags/grains/">Grains</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/saltstack-config-part-07/" class="prev" rel="prev" title="VMware vRealize SaltStack Config as a Windows Server Admin - Part 7"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware vRealize SaltStack Config as a Windows Server Admin - Part 7</a>
+            <a href="/vexpert-2022/" class="next" rel="next" title="vExpert 2022 | vExpert Cloud Management">vExpert 2022 | vExpert Cloud Management<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

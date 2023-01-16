@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware vRealize SaltStack Config cheat sheet for a Windows Server Admin - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="VMware vRealize SaltStack Config cheat sheet for a Windows Server Admin" />
+<meta property="og:description" content="Salt functions that I find myself using the most." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/saltstack-cheatsheet/" /><meta property="og:image" content="https://www.vcrocs.info/saltstack-cheatsheet/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-01T22:02:16-05:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/saltstack-cheatsheet/featured-image.png"/>
+<meta name="twitter:title" content="VMware vRealize SaltStack Config cheat sheet for a Windows Server Admin"/>
+<meta name="twitter:description" content="Salt functions that I find myself using the most."/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.vcrocs.info/saltstack-cheatsheet/" /><link rel="prev" href="https://www.vcrocs.info/vexpert-2022/" /><link rel="next" href="https://www.vcrocs.info/saltstack-config-part-09/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware vRealize SaltStack Config cheat sheet for a Windows Server Admin",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/saltstack-cheatsheet\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/saltstack-cheatsheet\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Grains","wordcount":  995 ,
+        "url": "https:\/\/www.vcrocs.info\/saltstack-cheatsheet\/","datePublished": "2022-03-06T00:00:00+00:00","dateModified": "2023-01-01T22:02:16-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware vRealize SaltStack Config cheat sheet for a Windows Server Admin</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-03-06">2022-03-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;995 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/saltstack-cheatsheet/featured-image.png"
+        data-srcset="/saltstack-cheatsheet/featured-image.png, /saltstack-cheatsheet/featured-image.png 1.5x, /saltstack-cheatsheet/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/saltstack-cheatsheet/featured-image.png"
+        title="/saltstack-cheatsheet/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#ping---make-sure-server-responds">Ping - Make sure server responds:</a></li>
+                    <li><a href="#windows-disk-usage">Windows Disk Usage:</a></li>
+                    <li><a href="#windows-services">Windows Services:</a></li>
+                    <li><a href="#copy-files-to--delete-files-from--windows-server">Copy files to | Delete files from | Windows Server:</a></li>
+                    <li><a href="#minion-grain-data">minion grain data:</a></li>
+                    <li><a href="#powershell">PowerShell:</a></li>
+                    <li><a href="#minion-reboot">Minion Reboot:</a></li>
+                    <li><a href="#join-domain">Join Domain:</a></li>
+                    <li><a href="#windows-registry">Windows Registry:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Salt functions that I find myself using the most.</p>
+<hr>
+<p>I have been using VMware vRealize SaltStack Config for several months and I thought I would share and create my own cheat sheet to show which functions I use the most as a Windows Server admin and how to format the syntax. I still feel that I barely use all the capabilities that salt has to offer. SaltStack Config is a very Powerful tool to have available for anyone that has a vRealize Suite License. As a Windows Server admin don&rsquo;t be afraid of salt because you feel it was made for Linux admins.  That is NOT the case. I will be managing all Windows Server in my environment with salt.  That includes VMs in vCenter and cloud native Azure VMs.</p>
+<p>This cheat sheet will be updated often to show examples as my journey into the salt world continues. Check back often.</p>
+<p><a href="https://docs.saltproject.io/en/latest/py-modindex.html" target="_blank" rel="noopener noreffer ">Link to salt module Documentation</a></p>
+<hr>
+<h6 id="ping---make-sure-server-responds">Ping - Make sure server responds:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> test.ping OR salt <span class="s2">&#34;*&#34;</span> test.ping OR salt <span class="s2">&#34;vC*&#34;</span> test.ping
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command using --output<span class="o">=</span>json:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> test.ping --output<span class="o">=</span>json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;vCROCS01&#34;</span>: <span class="nb">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="windows-disk-usage">Windows Disk Usage:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> disk.usage
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    ----------
+</span></span><span class="line"><span class="cl">    C:<span class="se">\:</span>
+</span></span><span class="line"><span class="cl">        ----------
+</span></span><span class="line"><span class="cl">        1K-blocks:
+</span></span><span class="line"><span class="cl">            67642364.0
+</span></span><span class="line"><span class="cl">        available:
+</span></span><span class="line"><span class="cl">            15229492.0
+</span></span><span class="line"><span class="cl">        capacity:
+</span></span><span class="line"><span class="cl">            77%
+</span></span><span class="line"><span class="cl">        filesystem:
+</span></span><span class="line"><span class="cl">            C:<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        used:
+</span></span><span class="line"><span class="cl">            52412872.0
+</span></span><span class="line"><span class="cl">    E:<span class="se">\:</span>
+</span></span><span class="line"><span class="cl">        ----------
+</span></span><span class="line"><span class="cl">        1K-blocks:
+</span></span><span class="line"><span class="cl">            41809856.0
+</span></span><span class="line"><span class="cl">        available:
+</span></span><span class="line"><span class="cl">            38486208.0
+</span></span><span class="line"><span class="cl">        capacity:
+</span></span><span class="line"><span class="cl">            8%
+</span></span><span class="line"><span class="cl">        filesystem:
+</span></span><span class="line"><span class="cl">            E:<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        used:
+</span></span><span class="line"><span class="cl">            3323648.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> disk.usage --output<span class="o">=</span>json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;vCROCS01&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;C:\\&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;filesystem&#34;</span>: <span class="s2">&#34;C:\\&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;1K-blocks&#34;</span>: 67642364.0,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;used&#34;</span>: 52424392.0,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;available&#34;</span>: 15217972.0,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;capacity&#34;</span>: <span class="s2">&#34;78%&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;E:\\&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;filesystem&#34;</span>: <span class="s2">&#34;E:\\&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;1K-blocks&#34;</span>: 41809856.0,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;used&#34;</span>: 3323648.0,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;available&#34;</span>: 38486208.0,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;capacity&#34;</span>: <span class="s2">&#34;8%&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="windows-services">Windows Services:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command stop a Windows Service:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> service.stop <span class="s2">&#34;spooler&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command disable a Windows Service:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> service.disable <span class="s2">&#34;spooler&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command get status of a Windows Service:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> service.status <span class="s2">&#34;spooler&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    False
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command see <span class="k">if</span> a Windows Service is enabled:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> service.enabled <span class="s2">&#34;spooler&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    False
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="copy-files-to--delete-files-from--windows-server">Copy files to | Delete files from | Windows Server:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command Copy a file to a Windows Service - Source File <span class="p">|</span> Destination File:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> cp.get_file <span class="s2">&#34;salt://installer_file.msi&#34;</span> <span class="s2">&#34;C:\install_files\installer_file.msi&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    C:<span class="se">\i</span>nstall_files<span class="se">\i</span>nstaller_file.msi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command Delete a file from a Windows Service:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> file.remove <span class="s1">&#39;C:\install_files\installer_file.msi&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    True
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="minion-grain-data">minion grain data:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command add grain data to a minion:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> grains.append azure_vm <span class="s2">&#34;True&#34;</span>
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    ----------
+</span></span><span class="line"><span class="cl">    azure_vm:
+</span></span><span class="line"><span class="cl">        - True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command get grain custom data from a minion:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> grains.get azure_vm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    - True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command get grain os data from a minion:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> grains.get os
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    Windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command get grain os data from a minion:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> grains.get osfullname
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    Microsoft Windows Server <span class="m">2016</span> Datacenter
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command get grain domain data from a minion:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> grains.get domain
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    vcrocs.info
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command get grain IP data from a minion:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> grains.get fqdn_ip4
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    - 192.168.99.99
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command sync minion grain data with salt master:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> saltutil.sync_grains
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="powershell">PowerShell:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command run powershell command:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> cmd.run <span class="s1">&#39;Get-Service | Where-Object {$_.Status -eq &#34;Running&#34;}&#39;</span> <span class="nv">shell</span><span class="o">=</span>PowerShell
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Status   Name               DisplayName
+</span></span><span class="line"><span class="cl">    ------   ----               -----------
+</span></span><span class="line"><span class="cl">    Running  AppHostSvc         Application Host Helper Service
+</span></span><span class="line"><span class="cl">    Running  BFE                Base Filtering Engine
+</span></span><span class="line"><span class="cl">    Running  BrokerInfrastru... Background Tasks Infrastructure Ser...
+</span></span><span class="line"><span class="cl">    Running  CbDefense          CB Defense
+</span></span><span class="line"><span class="cl">    Running  CDPSvc             Connected Devices Platform Service
+</span></span><span class="line"><span class="cl">    Running  CertPropSvc        Certificate Propagation
+</span></span><span class="line"><span class="cl">    Running  COMSysApp          COM+ System Application
+</span></span><span class="line"><span class="cl">    Running  CoreMessagingRe... CoreMessaging
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Command run powershell script with script saved on salt master File Server: 
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> cmd.script <span class="nv">source</span><span class="o">=</span><span class="s2">&#34;salt://dev/qualys_install_azure.ps1&#34;</span> <span class="nv">shell</span><span class="o">=</span>powershell
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">Runs all line of code in script the same as <span class="k">if</span> script was saved <span class="nb">local</span> on minion.
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="minion-reboot">Minion Reboot:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command minion reboot:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> system.reboot <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    True
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="join-domain">Join Domain:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command join minion to a Windows Domain. You can also specify OU that computer object will be located:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> system.join_domain <span class="nv">domain</span><span class="o">=</span><span class="s1">&#39;vcrocs.info&#39;</span> <span class="nv">username</span><span class="o">=</span><span class="s1">&#39;vcrocs\administrator&#39;</span> <span class="nv">password</span><span class="o">=</span><span class="s1">&#39;VMware1!&#39;</span> <span class="nv">account_ou</span><span class="o">=</span><span class="s1">&#39;OU=Dev,OU=Servers,DC=vcrocs,DC=info&#39;</span> <span class="nv">account_exists</span><span class="o">=</span>False <span class="nv">restart</span><span class="o">=</span>True
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="windows-registry">Windows Registry:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">&gt; Command add a registry key to minion or change value of an existing registry key:
+</span></span><span class="line"><span class="cl">salt <span class="s2">&#34;vCROCS01&#34;</span> reg.set_value HKEY_LOCAL_MACHINE <span class="s1">&#39;SYSTEM\vCROCS&#39;</span> <span class="s1">&#39;Created_by_User&#39;</span> <span class="s1">&#39;dhassinger&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; Results:
+</span></span><span class="line"><span class="cl">vCROCS01:
+</span></span><span class="line"><span class="cl">    True
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><figure><a class="lightgallery" href="/saltstack-cheatsheet/registry01.png" title="/saltstack-cheatsheet/registry01.png" data-thumbnail="/saltstack-cheatsheet/registry01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-cheatsheet/registry01.png"
+            data-srcset="/saltstack-cheatsheet/registry01.png, /saltstack-cheatsheet/registry01.png 1.5x, /saltstack-cheatsheet/registry01.png 2x"
+            data-sizes="auto"
+            alt="/saltstack-cheatsheet/registry01.png" width="616" height="626" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<div><br></div>
+<div style="background-color:#fff5e6; Padding:20px; color: black;" >
+    <b>Salt Links I found to be very helpful:</b>
+        <ul>
+          <li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
+          <li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
+          <li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
+          <li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
+          <li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
+          <li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
+        </ul>
+</div>
+<div style="background-color:#ccffcc; Padding:20px;" >
+When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task. <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/saltstack-cheatsheet/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/saltstack-cheatsheet/" data-title="VMware vRealize SaltStack Config cheat sheet for a Windows Server Admin" data-via="dalehassinger" data-hashtags="SaltStack Config,VMware Aria Automation,vRealize Automation,PowerShell,Grains"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/saltstack-cheatsheet/" data-hashtag="SaltStack Config"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/saltstack-cheatsheet/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/saltstack-config/">SaltStack Config</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/grains/">Grains</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vexpert-2022/" class="prev" rel="prev" title="vExpert 2022 | vExpert Cloud Management"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>vExpert 2022 | vExpert Cloud Management</a>
+            <a href="/saltstack-config-part-09/" class="next" rel="next" title="VMware vRealize SaltStack Config as a Windows Server Admin - Part 9">VMware vRealize SaltStack Config as a Windows Server Admin - Part 9<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

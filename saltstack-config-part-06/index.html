@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 6 - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 6" />
+<meta property="og:description" content="Part 6: How to use SaltStack Config with Windows Server and PowerShell" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/saltstack-config-part-06/" /><meta property="og:image" content="https://www.vcrocs.info/saltstack-config-part-06/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-10-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-07T22:37:59-05:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/saltstack-config-part-06/featured-image.png"/>
+<meta name="twitter:title" content="VMware vRealize SaltStack Config as a Windows Server Admin - Part 6"/>
+<meta name="twitter:description" content="Part 6: How to use SaltStack Config with Windows Server and PowerShell"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.vcrocs.info/saltstack-config-part-06/" /><link rel="prev" href="https://www.vcrocs.info/saltconf-2021/" /><link rel="next" href="https://www.vcrocs.info/powershell-nsx-t/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware vRealize SaltStack Config as a Windows Server Admin - Part 6",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/saltstack-config-part-06\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-06\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Windows Server, Configuration Management, POSH SSH","wordcount":  1358 ,
+        "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-06\/","datePublished": "2021-10-09T00:00:00+00:00","dateModified": "2023-01-07T22:37:59-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"><i class='fab fa-address-card fa-regular' aria-hidden='true'></i>  - About </a><a class="menu-item" href="/posts/"><i class='fab fa-blog fa-solid' aria-hidden='true'></i>  - Posts </a><a class="menu-item" href="/tags/"><i class='fab fa-tag fa-solid' aria-hidden='true'></i>  - Tags </a><a class="menu-item" href="/categories/"><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i>  - Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title=""><i class='fab fa-address-card fa-regular' aria-hidden='true'></i> - About</a><a class="menu-item" href="/posts/" title=""><i class='fab fa-blog fa-solid' aria-hidden='true'></i> - Posts</a><a class="menu-item" href="/tags/" title=""><i class='fab fa-tag fa-solid' aria-hidden='true'></i> - Tags</a><a class="menu-item" href="/categories/" title=""><i class='fab fa-pen-to-square fa-solid' aria-hidden='true'></i> - Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware vRealize SaltStack Config as a Windows Server Admin - Part 6</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/saltstack-config/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>SaltStack Config</a>&nbsp;<a href="/categories/vmware-aria/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-10-09">2021-10-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1358 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/saltstack-config-part-06/featured-image.png"
+        data-srcset="/saltstack-config-part-06/featured-image.png, /saltstack-config-part-06/featured-image.png 1.5x, /saltstack-config-part-06/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/saltstack-config-part-06/featured-image.png"
+        title="/saltstack-config-part-06/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#salt-powershell-functions">Salt PowerShell Functions:</a></li>
+                    <li><a href="#examples-to-show-how-to-use-the-salt-powershell-functions-above">Examples to show how to use the Salt PowerShell Functions above:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                    <li><a href="#salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Part 6: How to use SaltStack Config with Windows Server and PowerShell</p>
+<hr>
+<p><a class="lightgallery" href="/saltstack-config-part-06/ps.png" title="/saltstack-config-part-06/ps.png" data-thumbnail="/saltstack-config-part-06/ps.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-06/ps.png"
+            data-srcset="/saltstack-config-part-06/ps.png, /saltstack-config-part-06/ps.png 1.5x, /saltstack-config-part-06/ps.png 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-06/ps.png" width="256" height="256" />
+    </a><br>
+<a class="lightgallery" href="/saltstack-config-part-06/powercli.png" title="/saltstack-config-part-06/powercli.png" data-thumbnail="/saltstack-config-part-06/powercli.png">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/saltstack-config-part-06/powercli.png"
+            data-srcset="/saltstack-config-part-06/powercli.png, /saltstack-config-part-06/powercli.png 1.5x, /saltstack-config-part-06/powercli.png 2x"
+            data-sizes="auto"
+            alt="/saltstack-config-part-06/powercli.png" width="184" height="160" />
+    </a></p>
+<div>
+The latest item on my journey with <b>VMware vRealize SaltStack Config</b> as a <b>Windows Server Admin</b> is going to be a lot PowerShell. I use PowerShell for a lot of Automation, Windows Server and Linux Server. When working with <b>VMware vRealize SaltStack Config</b> I constantly found myself going to the CLI to test and learn how the salt functions work.  
+<p>In the <a href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5/" target="_blank">Part 5 Blog</a> of this series I showed how I am using the PowerShell module POSH-SSH to connect to the <b>VMware vRealize SaltStack Config</b> Server to run salt commands remotely. So I started writing some PowerShell functions to run remote salt commands on the Salt Master. The end goal might be to turn this script into a Salt PowerShell Module. To start it will only have the functions that I find myself using the most. I could turn this into a community Github Project and see if there would be any interest. If anyone reading this blog post has any interest please reach out to me. (<a href="mailto:Dale.Hassinger@vCROCS.info" rel="">Dale.Hassinger@vCROCS.info</a>)</p>
+<p>My goal is to make all these PowerShell Salt functions work with <b>VMware vRealize SaltStack Config</b> like PowerCLI works with <b>VMware vCenter</b>. Use same verb/noun terminology. I use PowerCLI for all my VMware Automation. Works awesome! So to create these PowerShell Functions to work with my existing automation scripts is a win win in my book.</p>
+<p>Normally I will use a Products APIs to do all these types of processes. I looked at <b>VMware vRealize SaltStack Config</b> APIs and to the best of my knowledge I can not use them like I can the PS functions that I created. That may change in a future release of <b>VMware vRealize SaltStack Config</b>. Fingers crossed.</p>
+</div>
+<hr>
+<h6 id="salt-powershell-functions">Salt PowerShell Functions:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># ----- [ Start of Functions ] --------------------------------------------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c"># The POSH-SSH PS module MUST be installed to use these functions.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Function to Connect to SSC Server</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Connect-SSCServer</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Server</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$userName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Password</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># The next line is how to create the encrypted password</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$psPassword</span> <span class="p">=</span> <span class="nb">ConvertTo-SecureString</span> <span class="n">-String</span> <span class="nv">$global:HashiPW</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$creds</span> <span class="p">=</span> <span class="nb">new-object</span> <span class="n">-typename</span> <span class="n">System</span><span class="p">.</span><span class="py">Management</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">PSCredential</span> <span class="n">-argumentlist</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$psPassword</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ComputerName&#34;</span> <span class="p">=</span> <span class="nv">$Server</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Credential&#34;</span>   <span class="p">=</span> <span class="nv">$creds</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">    <span class="c"># SSH Connection to SaltStack Server</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">New-SSHSession</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Function to Disconnect from SSC Server</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Disconnect-SSCServer</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Remove-SSHSession</span> <span class="n">-SessionId</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Sync Minion grains</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">invoke-SSC.sync.grains</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Sync Grains after adding new grain information</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; saltutil.sync_grains --output=json&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;SessionId&#34;</span> <span class="p">=</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Command&#34;</span>   <span class="p">=</span> <span class="nv">$sshCommand</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$results</span><span class="p">.</span><span class="py">Output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Minion Grain Append</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">set-SSC.grains.append</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$grainkey</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$grainval</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Grains Append</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; grains.append &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainkey</span> <span class="p">+</span> <span class="s1">&#39;&#34; &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainval</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;SessionId&#34;</span> <span class="p">=</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Command&#34;</span>   <span class="p">=</span> <span class="nv">$sshCommand</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Minion Grain DelKey</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">set-SSC.grains.delkey</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$grainkey</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; grains.delkey &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainkey</span> <span class="p">+</span> <span class="s1">&#39;&#34; force=True&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;SessionId&#34;</span> <span class="p">=</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Command&#34;</span>   <span class="p">=</span> <span class="nv">$sshCommand</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Minion Test Ping</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">invoke-SSC.test.ping</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; test.ping --output=json&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="n">-SessionId</span> <span class="mf">0</span> <span class="n">-Command</span> <span class="nv">$sshCommand</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$results</span><span class="p">.</span><span class="n">Output</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="py">Trim</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End of Functions ] --------------------------------------------------------------------------------------------------------------</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="examples-to-show-how-to-use-the-salt-powershell-functions-above">Examples to show how to use the Salt PowerShell Functions above:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># ----- [ Connect to SSC Server ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># DO NOT use plain text PW&#39;s in your Code. I am only showing PW to make it easier to understand the code. </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Server</span>   <span class="p">=</span> <span class="s1">&#39;SaltMaster.vCROCS.local&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$User</span>     <span class="p">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Password</span> <span class="p">=</span> <span class="s1">&#39;VMware1!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Server&#34;</span>   <span class="p">=</span> <span class="nv">$Server</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;User&#34;</span>     <span class="p">=</span> <span class="nv">$User</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Password&#34;</span> <span class="p">=</span> <span class="nv">$Password</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to SSC</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-SSCServer</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Disconnect to SSC Server ] -----------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-SSCServer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Sync Minion grains ] -------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">sync</span><span class="p">.</span><span class="py">grains</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Minion grain append ] ----------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainkey</span> <span class="p">=</span> <span class="s1">&#39;PS_Module&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainval</span> <span class="p">=</span> <span class="s1">&#39;Works great for Windows Server&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span>   <span class="p">=</span> <span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;grainkey&#34;</span> <span class="p">=</span> <span class="nv">$grainkey</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;grainval&#34;</span> <span class="p">=</span> <span class="nv">$grainval</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set-SSC</span><span class="p">.</span><span class="py">grains</span><span class="p">.</span><span class="py">append</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">sync</span><span class="p">.</span><span class="py">grains</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Minion grain DelKey ] ----------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$grainkey</span> <span class="p">=</span> <span class="s1">&#39;PS_Module&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minion</span>   <span class="p">=</span> <span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grainkey</span> <span class="p">=</span> <span class="nv">$grainkey</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set-SSC</span><span class="p">.</span><span class="py">grains</span><span class="p">.</span><span class="py">delkey</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">sync</span><span class="p">.</span><span class="py">grains</span> <span class="nv">@Params</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Minion test.ping ] ----------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Set Paramter Values</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">test</span><span class="p">.</span><span class="py">ping</span> <span class="nv">@Params</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>Adding the POSH-SSH PowerShell module so you can create a SSH connection to the salt master opens up a lot of possibilities for your PowerShell Automation as a Windows Server Admin.</li>
+<li>Using the PowerShell Functions above as a Windows admin makes it very easy to add this code to existing scripts and use the Power of SaltStack without completely changing your processes.</li>
+<li>Creating a SSH Connection to a remote Salt Master and running commands works well in a &ldquo;Zero Trust&rdquo; environment. With NSX-T all you need to do is setup allow rules between the minions and the master on ports 4505,4506.</li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
+<li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
+<li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
+</ul>
+<div style="background-color:#ccffcc; Padding:20px;" >
+When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/saltstack-config-part-06/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/saltstack-config-part-06/" data-title="VMware vRealize SaltStack Config as a Windows Server Admin - Part 6" data-via="dalehassinger" data-hashtags="SaltStack Config,VMware Aria Automation,vRealize Automation,PowerShell,Windows Server,Configuration Management,POSH SSH"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/saltstack-config-part-06/" data-hashtag="SaltStack Config"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/saltstack-config-part-06/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/saltstack-config/">SaltStack Config</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/windows-server/">Windows Server</a>,&nbsp;<a href="/tags/configuration-management/">Configuration Management</a>,&nbsp;<a href="/tags/posh-ssh/">POSH-SSH</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/saltconf-2021/" class="prev" rel="prev" title="SaltConf 2021 | SaltStack Config Session"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>SaltConf 2021 | SaltStack Config Session</a>
+            <a href="/powershell-nsx-t/" class="next" rel="next" title="NSX-T security Tags and PowerShell">NSX-T security Tags and PowerShell<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
