@@ -37,7 +37,8 @@ reactor:
 
 <div><b>State File: base/reactor/accept-key.sls</b></div>
 
-{{< highlight Yaml >}}
+```
+
 {% if 'act' in data and data['act'] == 'pend' and data['id'].startswith('DBH') %}
 minion_add:
   wheel.key.accept:
@@ -49,7 +50,8 @@ minion_add:
     - args:
       - match: {{ data['id']}}
 {% endif %}
-{{< /highlight >}}
+
+```
 
 <div><b>Location of the State File:</b></div>
 

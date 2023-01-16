@@ -33,7 +33,7 @@
                             "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-02\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Windows Server, Configuration Management","wordcount":  957 ,
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Windows Server, Configuration Management","wordcount":  958 ,
         "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-02\/","datePublished": "2021-08-05T00:00:00+00:00","dateModified": "2023-01-15T22:11:05-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -112,7 +112,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware vRealize SaltStack Config as a Windows Server Admin - Part 2</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/saltstack-config/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>SaltStack Config</a>&nbsp;<a href="/categories/vmware-aria/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-08-05">2021-08-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;957 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-08-05">2021-08-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;958 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -205,22 +205,24 @@ I have been able to spend more time with <b>VMware vRealize SaltStack Config</b>
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Yaml" data-lang="Yaml"><span class="line"><span class="cl">{<span class="l">% if &#39;act&#39; in data and data[&#39;act&#39;] == &#39;pend&#39; and data[&#39;id&#39;].startswith(&#39;DBH&#39;) %}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">minion_add</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wheel.key.accept</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">match</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">data[&#39;id&#39;]}}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span>{<span class="l">% elif &#39;act&#39; in data and data[&#39;act&#39;] == &#39;pend&#39; and data[&#39;id&#39;].startswith(&#39;vCROCS&#39;) %}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">minion_add</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wheel.key.accept</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">match</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">data[&#39;id&#39;]}}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span>{<span class="l">% endif %}</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{% if &#39;act&#39; in data and data[&#39;act&#39;] == &#39;pend&#39; and data[&#39;id&#39;].startswith(&#39;DBH&#39;) %}
+</span></span><span class="line"><span class="cl">minion_add:
+</span></span><span class="line"><span class="cl">  wheel.key.accept:
+</span></span><span class="line"><span class="cl">    - args:
+</span></span><span class="line"><span class="cl">      - match: {{ data[&#39;id&#39;]}}
+</span></span><span class="line"><span class="cl">{% elif &#39;act&#39; in data and data[&#39;act&#39;] == &#39;pend&#39; and data[&#39;id&#39;].startswith(&#39;vCROCS&#39;) %}
+</span></span><span class="line"><span class="cl">minion_add:
+</span></span><span class="line"><span class="cl">  wheel.key.accept:
+</span></span><span class="line"><span class="cl">    - args:
+</span></span><span class="line"><span class="cl">      - match: {{ data[&#39;id&#39;]}}
+</span></span><span class="line"><span class="cl">{% endif %}
+</span></span></code></pre></td></tr></table>
 </div>
-</div>
-<div><b>Location of the State File:</b></div>
+</div><div><b>Location of the State File:</b></div>
 <figure><a class="lightgallery" href="/saltstack-config-part-02/Salt-27.PNG" title="/saltstack-config-part-02/Salt-27.PNG" data-thumbnail="/saltstack-config-part-02/Salt-27.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
         <img
             class="lazyload"
