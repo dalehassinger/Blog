@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Use vCenter TAGs to maintain VM Storage Placement - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="Use vCenter TAGs to maintain VM Storage Placement" />
+<meta property="og:description" content="Use vCenter TAGs to maintain VM Storage Placement." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/" /><meta property="og:image" content="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-01-27T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png"/>
+<meta name="twitter:title" content="Use vCenter TAGs to maintain VM Storage Placement"/>
+<meta name="twitter:description" content="Use vCenter TAGs to maintain VM Storage Placement."/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/" /><link rel="prev" href="https://www.vcrocs.info/vmware-aria-automation-ansible-integration/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Use vCenter TAGs to maintain VM Storage Placement",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/use-vcenter-tags-to-maintain-vm-storage-placement\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/use-vcenter-tags-to-maintain-vm-storage-placement\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "PowerCLI, VMware Aria Automation, vRealize Automation, PowerShell, vCenter, Storage","wordcount":  1548 ,
+        "url": "https:\/\/www.vcrocs.info\/use-vcenter-tags-to-maintain-vm-storage-placement\/","datePublished": "2023-01-27T00:00:00+00:00","dateModified": "2023-01-27T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Use vCenter TAGs to maintain VM Storage Placement</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-27">2023-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1548 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png"
+        data-srcset="/use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png, /use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png 1.5x, /use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png"
+        title="/use-vcenter-tags-to-maintain-vm-storage-placement/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#use-case">Use Case:</a></li>
+                    <li><a href="#solution">Solution:</a></li>
+                    <li><a href="#code-to-create-a-vcenter-tag-category">Code to create a vCenter TAG Category:</a></li>
+                    <li><a href="#code-to-create-a-vcenter-tag-for-every-datastore-cluster">Code to create a vCenter TAG for every Datastore Cluster:</a></li>
+                    <li><a href="#code-to-add-datastore-cluster-vcenter-tag-to-vms-for-a-specific-datastore-cluster">Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:</a></li>
+                    <li><a href="#code-to-verify-that-each-vm-only-has-1-datastore-cluster-tag-assigned">Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:</a></li>
+                    <li><a href="#code-to-verify-that-each-vm-is-located-in-the-correct-datastore-cluster-based-in-vcenter-tag">Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:</a></li>
+                    <li><a href="#code-to-disconnect-cd-from-all-vms">Code to Disconnect CD from all VMs:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Use vCenter TAGs to maintain VM Storage Placement.</strong></p>
+<hr>
+<p>A questions was recently asked, How can we specify and maintain which DataStore Cluster a VM should use within the VMware vCenter UI? I like using vCenter TAGs for specifying details about VMs, so I thought I would use vCenter TAGs to specify which DataStore Cluster to place a VM.</p>
+<p>I looked at using a Configuration management tool like salt but one of the requirements was to make it easy for the VMware Admin to specify and maintain VM DataStore placement within the vCenter UI.</p>
+<p>I have included sample code that will:</p>
+<ul>
+<li>Create a vCenter TAG Category</li>
+<li>Create a vCenter TAG based on DataStore Cluster Name</li>
+<li>Add the DataStore Cluster vCenter TAG to all VMs within a DataStore cluster</li>
+<li>Verify that each VM has only (1) vCenter DataStore Cluster TAG</li>
+<li>Verify that the VM is in the correct DataStore Cluster. Do a VM move if it is not in correct DataStore Cluster.</li>
+</ul>
+<hr>
+<h6 id="use-case">Use Case:</h6>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a way to specify which DataStore Cluster the VM will use within vCenter UI.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a process in place that will maintain which DataStore Cluster will be used with each VM within vCenter.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> If a user moves a VM to a DataStore Cluster that it shouldn&rsquo;t be located, move it back.</li>
+</ul>
+<h6 id="solution">Solution:</h6>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Create a vCenter TAG for every DataStore Cluster within vCenter.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Assign a vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches vCenter TAG assigned.</li>
+</ul>
+<hr>
+<p><strong>All the steps require a connection to VMware vCenter:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Script created by: Dale Hassinger</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Script provided for Demo Use Only</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Date: 2023-01-27</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Purpose: Create vCenter TAGs to be used for VM Storage placement</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Notes: VMs with ISOs attached and Snap Shots may be listed in more than 1 Datastore Cluster</span>
+</span></span><span class="line"><span class="cl"><span class="c">#        In my lab I made sure there were no SNAPs or ISOs attached before applying TAGs with Automation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Connect to vCenter ] -----</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="s1">&#39;vCenter.vCROCS.info&#39;</span> <span class="n">-User</span> <span class="s1">&#39;administrator@vCROCS.info&#39;</span> <span class="n">-Password</span> <span class="s1">&#39;HackMe1!&#39;</span> <span class="n">-Force</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-create-a-vcenter-tag-category">Code to create a vCenter TAG Category:</h6>
+<ul>
+<li>For any custom TAGs that I create to use with Automation, I use a TAG category Automation.</li>
+<li>You don&rsquo;t need to do this step. You could use a category already existing within vCenter.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Create vCenter TAG Category ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># New TAG Category Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newCategory</span> <span class="p">=</span> <span class="s1">&#39;Automation&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get all existing vCenter TAG Categories</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allCategory</span> <span class="p">=</span> <span class="nb">Get-TagCategory</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Check to see if category already exists</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allCategory</span> <span class="p">=</span> <span class="nv">$allCategory</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$categoryExists</span> <span class="p">=</span> <span class="nv">$allCategory</span><span class="p">.</span><span class="py">Contains</span><span class="p">(</span><span class="nv">$newCategory</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># If TAG category already exists it will not try to re-create</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$categoryExists</span> <span class="o">-eq</span> <span class="vm">$true</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="s1">&#39;Category Already exists within vCenter!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End if</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Creating New Category within vCenter: &#39;</span> <span class="p">+</span> <span class="nv">$newCategory</span>  
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Create New TAG Category in vCenter</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">New-TagCategory</span> <span class="n">-Name</span> <span class="nv">$newCategory</span> <span class="n">-Cardinality</span> <span class="n">Multiple</span> <span class="n">-Description</span> <span class="s1">&#39;Used with Automation&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Create vCenter TAG Category ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-create-a-vcenter-tag-for-every-datastore-cluster">Code to create a vCenter TAG for every Datastore Cluster:</h6>
+<ul>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Create vCenter TAG for every Datastore Cluster ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># New TAG Category Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newCategory</span> <span class="p">=</span> <span class="s1">&#39;Automation&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allDatastoreClusters</span> <span class="p">=</span> <span class="nb">Get-DatastoreCluster</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allDatastoreClusters</span> <span class="p">=</span> <span class="nv">$allDatastoreClusters</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nb">Get-Tag</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nv">$allTAGs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$newTAGs</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Create new TAG Names</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$newTAG</span> <span class="k">in</span> <span class="nv">$allDatastoreClusters</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$newTAGname</span> <span class="p">=</span> <span class="s1">&#39;TAG-VM-&#39;</span> <span class="p">+</span> <span class="nv">$newTAG</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;New TAG Name: &#39;</span> <span class="p">+</span> <span class="nv">$newTAGname</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$newTAGs</span><span class="p">+=</span> <span class="nv">$newTAGname</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Add TAGs to vCenter if they don&#39;t already exist</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$newTAG</span> <span class="k">in</span> <span class="nv">$newTAGs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># Check to see if category already exists</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$TagExists</span> <span class="p">=</span> <span class="nv">$allTAGs</span><span class="p">.</span><span class="py">Contains</span><span class="p">(</span><span class="nv">$newTAG</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nv">$TagExists</span> <span class="o">-eq</span> <span class="vm">$true</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Tag &#39;</span> <span class="p">+</span> <span class="nv">$newTAG</span> <span class="p">+</span> <span class="s1">&#39; already Exists: &#39;</span> <span class="p">+</span> <span class="nv">$TagExists</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Tag &#39;</span> <span class="p">+</span> <span class="nv">$newTAG</span> <span class="p">+</span> <span class="s1">&#39; Exists: &#39;</span> <span class="p">+</span> <span class="nv">$TagExists</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Create New TAG</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Get-TagCategory</span> <span class="n">-Name</span> <span class="nv">$newCategory</span> <span class="p">|</span> <span class="nb">New-Tag</span> <span class="n">-Name</span> <span class="nv">$newTAG</span> <span class="n">-Description</span> <span class="s1">&#39;VM Storage TAG used with Automation&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Create vCenter TAG for every Datastore Cluster ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-add-datastore-cluster-vcenter-tag-to-vms-for-a-specific-datastore-cluster">Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:</h6>
+<ul>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$datastoreCluster</span> <span class="p">=</span> <span class="s1">&#39;DS-CLSTR-03&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$datastoreCluster = &#39;DS-CLSTR-04&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$TAGname</span> <span class="p">=</span> <span class="s1">&#39;TAG-VM-&#39;</span> <span class="p">+</span> <span class="nv">$datastoreCluster</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nb">Get-DatastoreCluster</span> <span class="n">-Name</span> <span class="nv">$datastoreCluster</span> <span class="p">|</span> <span class="nb">Get-VM</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nv">$allVMs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$allVMs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Get existing TAGs assigned to VM</span>
+</span></span><span class="line"><span class="cl">  <span class="c">#$assignedTAGs = &#39;&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="nv">$vm</span> <span class="p">|</span> <span class="nb">Get-TagAssignment</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">Tag</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(!</span><span class="nv">$assignedTAGs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span> <span class="p">+</span> <span class="s1">&#39; has no tags&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">New-TagAssignment</span> <span class="n">-Tag</span> <span class="nv">$TAGname</span> <span class="n">-Entity</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$TagExists</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">Contains</span><span class="p">(</span><span class="nv">$TAGname</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="nv">$TagExists</span> <span class="o">-eq</span> <span class="vm">$false</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">New-TagAssignment</span> <span class="n">-Tag</span> <span class="nv">$TAGname</span> <span class="n">-Entity</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Assigned TAG: &#39;</span> <span class="p">+</span> <span class="nv">$TAGname</span> <span class="p">+</span> <span class="s1">&#39; to VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;TAG: &#39;</span> <span class="p">+</span> <span class="nv">$TAGname</span> <span class="p">+</span> <span class="s1">&#39; already assigned to VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-verify-that-each-vm-only-has-1-datastore-cluster-tag-assigned">Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:</h6>
+<ul>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Verify that VM has only (1) DS Cluster TAG ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nb">Get-VM</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nv">$allVMs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nv">$allvms</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="s1">&#39;Starting TAG count check...&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$allVMs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="nv">$vm</span> <span class="p">|</span> <span class="nb">Get-TagAssignment</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">Tag</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-like</span> <span class="s1">&#39;TAG-VM-DS-CLSTR-*&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$tagCount</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nv">$tagCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span> <span class="p">+</span> <span class="s1">&#39; has more than 1 DS Cluter Tag Assigned!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="s1">&#39;TAG count check complete&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Verify that VM has only (1) DS Cluster TAG ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-verify-that-each-vm-is-located-in-the-correct-datastore-cluster-based-in-vcenter-tag">Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:</h6>
+<ul>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Verify that VM is in correct DS Cluster based in TAG ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$newCategory</span> <span class="p">=</span> <span class="s1">&#39;Automation&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nb">Get-Tag</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nv">$allTAGs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nv">$allTAGs</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-like</span> <span class="s1">&#39;TAG-VM-DS-CLSTR-*&#39;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$tag</span> <span class="k">in</span> <span class="nv">$allTAGs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;--- TAG: &#39;</span> <span class="p">+</span> <span class="nv">$tag</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$dsCluster</span> <span class="p">=</span> <span class="nv">$tag</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$dsCluster</span> <span class="p">=</span> <span class="nv">$dsCluster</span><span class="p">.</span><span class="py">replace</span><span class="p">(</span><span class="s1">&#39;TAG-VM-&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$tagfilter</span> <span class="p">=</span> <span class="nv">$newCategory</span> <span class="p">+</span> <span class="s1">&#39;/&#39;</span> <span class="p">+</span> <span class="nv">$tag</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$vmList</span> <span class="p">=</span> <span class="nb">Get-TagAssignment</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Tag</span> <span class="o">-like</span> <span class="nv">$tagfilter</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$vmList</span> <span class="p">=</span> <span class="nv">$vmList</span><span class="p">.</span><span class="py">Entity</span><span class="p">.</span><span class="py">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">foreach</span><span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$vmlist</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$currentDSCluster</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="nv">$vm</span> <span class="p">|</span> <span class="nb">Get-DatastoreCluster</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$currentDSCluster</span> <span class="p">=</span> <span class="nv">$currentDSCluster</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$currentDSCluster</span> <span class="o">-eq</span> <span class="nv">$dsCluster</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Already in DS Cluster: &#39;</span> <span class="p">+</span> <span class="nv">$dsCluster</span> <span class="p">+</span> <span class="s1">&#39; - VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;*Moving to DS Cluster: &#39;</span> <span class="p">+</span> <span class="nv">$dsCluster</span> <span class="p">+</span> <span class="s1">&#39; - VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nb">Move-VM</span> <span class="n">-VM</span> <span class="nv">$vm</span> <span class="n">-Datastore</span> <span class="nv">$dsCluster</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Verify that VM is in correct DS Cluster based in TAG ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-disconnect-cd-from-all-vms">Code to Disconnect CD from all VMs:</h6>
+<ul>
+<li>include code to connect to vCenter</li>
+<li>Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a CD attached.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Code Disconnect CD from all VMs</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">PowerState</span> <span class="err">–</span><span class="n">eq</span> <span class="err">“</span><span class="n">PoweredOn</span><span class="err">”</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Get-CDDrive</span> <span class="p">|</span> <span class="nb">Set-CDDrive</span> <span class="n">-NoMedia</span> <span class="n">-Confirm:</span><span class="vm">$False</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>You can use this code to maintain VM placement, but you could also use this code to move VMs to new DatStore Clusters. Assign a new TAG to the VM and the process will do a Storage vMotion for you. Great way to move VMs if you get a new SAN.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write about <b>vRealize Aria Automation</b>,  I always say there are many ways to accomplish the same task.  This article is just one way that you could accomplish this task.  I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete automation as long as it completes successfully and consistently.</div>
+        </div>
+    </div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-27</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/use-vcenter-tags-to-maintain-vm-storage-placement/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/" data-title="Use vCenter TAGs to maintain VM Storage Placement" data-via="dalehassinger" data-hashtags="PowerCLI,VMware Aria Automation,vRealize Automation,PowerShell,vCenter,Storage"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/" data-hashtag="PowerCLI"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/powercli/">PowerCLI</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/vcenter/">vCenter</a>,&nbsp;<a href="/tags/storage/">Storage</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vmware-aria-automation-ansible-integration/" class="prev" rel="prev" title="VMware Aria Automation and Ansible Integration"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware Aria Automation and Ansible Integration</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-166234216-1');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-166234216-1" async></script></body>
+</html>
