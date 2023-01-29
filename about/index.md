@@ -17,18 +17,20 @@
 The views and opinions expressed on this blog are my strictly my own and do not reflect the views and opinions of my employer. I Blog about Subjects and Products that I find interesting and will hopefully help someone get started on their Automation, Monitoring and Logging journey by providing some tips|tricks|processes|code needed.  
 {{< /admonition >}}
 
-My current focus is Enterprise Automation | Monitoring and Logging. I have created an IaC (Infrastructure as Code) Environment. I am using VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes… For monitoring I use vRealize Operations for the “Single Pane of Glass” experience. I also use vRealize Log Insight for logging and LCM (Life Cycle Manager) for installing all the vRealize Products.
+* My focus is Enterprise Automation, Monitoring and Logging. When I was a VMware customer I created an IaC (Infrastructure as Code) Environment. I used VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes… For monitoring I used vRealize Operations for the “Single Pane of Glass” experience. I also used vRealize Log Insight for logging and LCM (Life Cycle Manager) for installing all the vRealize Products.  
 
-Almost all the code I write to complete the Automation that I create is done with PowerShell. The reason I choose to use PowerShell is because to do Automation with VMware products they have released their product PowerCLI, which is built on top of PowerShell. There hasn’t been anything that I wanted to Automate that I haven’t been able to do with PowerShell. To do remote Citrix management also works very well using PowerShell.
+* Almost all the code I write to complete the Automation that I create is done with PowerShell. The reason I choose to use PowerShell is because to do Automation with VMware products, VMware has a PowerShell module named PowerCLI. There hasn’t been anything that I wanted to Automate that I haven’t been able to do with PowerShell.
 
-I have also started to do Automation with Azure. I am using PowerShell to create VMs and SaltStack Config to complete the configuration management, install software and maintain state.  
+* I have also done Automation with Azure. I am using PowerShell to create VMs and SaltStack Config to complete the configuration management, install software and maintain state.  
 
->Your thought process is the most powerful automation tool you’ll ever have! - Cody De Arkland  
+>  
+> Your thought process is the most powerful automation tool you’ll ever have! - Cody De Arkland  
+>  
 
 {{< admonition type=success title="vCommunity" open=true >}}
-I have learned a lot from the vCommunity, Powershell and PowerCLI web sites. I want to use this blog as a way for me to give back. If one person finds anything I post helpful, I will consider my efforts successful.  
+* I have learned a lot from the vCommunity, Powershell and PowerCLI web sites. I want to use this Blog Site as a way for me to give back. If one person finds anything I post helpful, I will consider my efforts successful.  
 
-The code that I have shared I use with vRealize Automation Cloud Templates/Catalog Items and everyday VMware Admin functions. Everyday I learn something new. If I think it should be shared I will write a blog about it. Check back often to see what I am doing next.  
+* The code that I have shared on this Blog Site is code that I use with vRealize Automation Cloud Templates/Catalog Items and everyday VMware Admin functions. Everyday I learn something new. If I think it should be shared I will write a blog about it. Check back often to see what I am doing next.  
 
 {{< /admonition >}}
 
@@ -39,7 +41,7 @@ The code that I have shared I use with vRealize Automation Cloud Templates/Catal
 * Special Thanks to David Kruse for getting me started with vRA.
 * Special Thanks to Vincent Riccio for allowing me to do SaltStack Config Presentations with you at VMworld 21 and SaltConf 21.  
 * Special Thanks to my first manager at VMware: Alex Musicante. You believed in me and my passion/skills/knowledge of the VMware Products. You gave me a career opportunity that no one else did.
-* Special Thanks to some past and present co-workers, SEs, TAMs, HVC Members that I learned a lot from: Kirk Shaffer, Robert Mitchell, Dan Grove, Steve Holmes, Steve Pittenger, Anton Wesztergom (Opened my eyes to vRA Day 2), Ryan Palmer, Megan Koss, Josh Demcher.
+* Special Thanks to some past and present co-workers, SEs, TAMs, HVC Members that I learned a lot from: Robert Mitchell, Dan Grove, Steve Holmes, Steve Pittenger, Anton Wesztergom (Opened my eyes to vRA Day 2), Ryan Palmer, Megan Koss, Josh Demcher, Kirk Shaffer.
 * Special Thanks to the person that gave me my first Job in IT: David Cornelius
 * List of Bloggers that I follow and have learned a lot by them “Giving Back”: Cody De Arkland, Luc Dekens, Kyle Ruddy, William Lam, Nathen Bennett, Vince Wood, Alan Renouf.
 * and anyone else that helped me in my journey called my career…
@@ -63,6 +65,7 @@ The code that I have shared I use with vRealize Automation Cloud Templates/Catal
 * vRealize Log Insight
 * Windows Servers
 * Linux Servers
+* Python
 * Ansible
 {{< /admonition >}}
 
