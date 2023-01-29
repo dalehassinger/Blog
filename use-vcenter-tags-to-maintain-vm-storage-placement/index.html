@@ -31,7 +31,7 @@
                             "url": "https:\/\/www.vcrocs.info\/use-vcenter-tags-to-maintain-vm-storage-placement\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "PowerCLI, VMware Aria Automation, vRealize Automation, PowerShell, vCenter, Storage","wordcount":  1548 ,
+                        }],"genre": "posts","keywords": "PowerCLI, VMware Aria Automation, vRealize Automation, PowerShell, vCenter, Storage","wordcount":  1877 ,
         "url": "https:\/\/www.vcrocs.info\/use-vcenter-tags-to-maintain-vm-storage-placement\/","datePublished": "2023-01-27T00:00:00+00:00","dateModified": "2023-01-27T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Use vCenter TAGs to maintain VM Storage Placement</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-27">2023-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1548 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-27">2023-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1877 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -136,8 +136,8 @@
                   <ul>
                     <li><a href="#use-case">Use Case:</a></li>
                     <li><a href="#solution">Solution:</a></li>
-                    <li><a href="#code-to-create-a-vcenter-tag-category">Code to create a vCenter TAG Category:</a></li>
-                    <li><a href="#code-to-create-a-vcenter-tag-for-every-datastore-cluster">Code to create a vCenter TAG for every Datastore Cluster:</a></li>
+                    <li><a href="#code-to-create-a-vmware-vcenter-tag-category">Code to create a VMware vCenter TAG Category:</a></li>
+                    <li><a href="#code-to-create-a-vmware-vcenter-tag-for-every-datastore-cluster">Code to create a VMware vCenter TAG for every Datastore Cluster:</a></li>
                     <li><a href="#code-to-add-datastore-cluster-vcenter-tag-to-vms-for-a-specific-datastore-cluster">Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:</a></li>
                     <li><a href="#code-to-verify-that-each-vm-only-has-1-datastore-cluster-tag-assigned">Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:</a></li>
                     <li><a href="#code-to-verify-that-each-vm-is-located-in-the-correct-datastore-cluster-based-in-vcenter-tag">Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:</a></li>
@@ -155,31 +155,31 @@
 </nav></div>
             </div><div class="content" id="content"><p><strong>Use vCenter TAGs to maintain VM Storage Placement.</strong></p>
 <hr>
-<p>A questions was recently asked, How can we specify and maintain which DataStore Cluster a VM should use within the VMware vCenter UI? I like using vCenter TAGs for specifying details about VMs, so I thought I would use vCenter TAGs to specify which DataStore Cluster to place a VM.</p>
-<p>I looked at using a Configuration management tool like salt but one of the requirements was to make it easy for the VMware Admin to specify and maintain VM DataStore placement within the vCenter UI.</p>
+<p>A questions was recently asked, How can we specify and maintain which DataStore Cluster a VM should use within the VMware vCenter UI? I like using vCenter TAGs for specifying details about VMs, so I thought I would use VMware vCenter TAGs to specify which DataStore Cluster to place a VM.</p>
+<p>I looked at using a Configuration management tool like salt but one of the requirements was to make it easy for the VMware Admin to specify and maintain VM DataStore placement within the VMware vCenter UI.</p>
 <p>I have included sample code that will:</p>
 <ul>
-<li>Create a vCenter TAG Category</li>
-<li>Create a vCenter TAG based on DataStore Cluster Name</li>
-<li>Add the DataStore Cluster vCenter TAG to all VMs within a DataStore cluster</li>
+<li>Create a VMware vCenter TAG Category</li>
+<li>Create a VMware vCenter TAG based on DataStore Cluster Name</li>
+<li>Add the DataStore Cluster VMware vCenter TAG to all VMs within a DataStore cluster</li>
 <li>Verify that each VM has only (1) vCenter DataStore Cluster TAG</li>
 <li>Verify that the VM is in the correct DataStore Cluster. Do a VM move if it is not in correct DataStore Cluster.</li>
 </ul>
 <hr>
 <h6 id="use-case">Use Case:</h6>
 <ul>
-<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a way to specify which DataStore Cluster the VM will use within vCenter UI.</li>
-<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a process in place that will maintain which DataStore Cluster will be used with each VM within vCenter.</li>
-<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> If a user moves a VM to a DataStore Cluster that it shouldn&rsquo;t be located, move it back.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a way to specify which DataStore Cluster the VM will use within VMware vCenter UI.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a process in place that will maintain which DataStore Cluster will be used with each VM within VMware vCenter.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> If a user moves a VM to a DataStore Cluster that it shouldn&rsquo;t be located, move it back to the correct Datastore Cluster to match the assigned VMware vCenter TAG.</li>
 </ul>
 <h6 id="solution">Solution:</h6>
 <ul>
-<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Create a vCenter TAG for every DataStore Cluster within vCenter.</li>
-<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Assign a vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.</li>
-<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches vCenter TAG assigned.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Create a VMware vCenter TAG for every DataStore Cluster within VMware vCenter.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Assign a VMware vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches VMware vCenter TAG assigned.</li>
 </ul>
 <hr>
-<p><strong>All the steps require a connection to VMware vCenter:</strong></p>
+<p><strong>Steps to connect to VMware vCenter:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -196,19 +196,19 @@
 <pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Script created by: Dale Hassinger</span>
 </span></span><span class="line"><span class="cl"><span class="c"># Script provided for Demo Use Only</span>
 </span></span><span class="line"><span class="cl"><span class="c"># Date: 2023-01-27</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Purpose: Create vCenter TAGs to be used for VM Storage placement</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Purpose: Create and Assign vCenter TAGs to be used for VM Storage placement</span>
 </span></span><span class="line"><span class="cl"><span class="c"># Notes: VMs with ISOs attached and Snap Shots may be listed in more than 1 Datastore Cluster</span>
-</span></span><span class="line"><span class="cl"><span class="c">#        In my lab I made sure there were no SNAPs or ISOs attached before applying TAGs with Automation</span>
+</span></span><span class="line"><span class="cl"><span class="c"># In my lab I made sure there were no SNAPs or ISOs attached before applying TAGs with Automation</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># ----- [ Connect to vCenter ] -----</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="s1">&#39;vCenter.vCROCS.info&#39;</span> <span class="n">-User</span> <span class="s1">&#39;administrator@vCROCS.info&#39;</span> <span class="n">-Password</span> <span class="s1">&#39;HackMe1!&#39;</span> <span class="n">-Force</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
-<h6 id="code-to-create-a-vcenter-tag-category">Code to create a vCenter TAG Category:</h6>
+<h6 id="code-to-create-a-vmware-vcenter-tag-category">Code to create a VMware vCenter TAG Category:</h6>
 <ul>
-<li>For any custom TAGs that I create to use with Automation, I use a TAG category Automation.</li>
-<li>You don&rsquo;t need to do this step. You could use a category already existing within vCenter.</li>
+<li>For any custom VMware vCenter TAGs that I create to use with Automation, I use a TAG category &ldquo;Automation&rdquo;.</li>
+<li>You don&rsquo;t need to do this step. You could use a category that already exists within VMware vCenter.</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -267,8 +267,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
-<h6 id="code-to-create-a-vcenter-tag-for-every-datastore-cluster">Code to create a vCenter TAG for every Datastore Cluster:</h6>
+<h6 id="code-to-create-a-vmware-vcenter-tag-for-every-datastore-cluster">Code to create a VMware vCenter TAG for every Datastore Cluster:</h6>
 <ul>
+<li>The code gets all DataStore Cluster Names and creates a VMware vCenter TAG to match DataStore Cluster Name. I prefix the DataStore Cluster Name with &ldquo;TAG-VM-&rdquo;.</li>
+<li>The code does check to see if the VMware vCenter TAG already exists. If the vCenter TAG does exist, it does not try and create a new vCenter TAG.</li>
 <li>include code to connect to vCenter</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -364,6 +366,7 @@
 </div><hr>
 <h6 id="code-to-add-datastore-cluster-vcenter-tag-to-vms-for-a-specific-datastore-cluster">Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:</h6>
 <ul>
+<li>You specify DataStore Cluster Name. The code with get all VM names and assign the correct VMware vCenter TAG. It will check to see if TAG is already assigned to the VM.</li>
 <li>include code to connect to vCenter</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -457,6 +460,10 @@
 </div><hr>
 <h6 id="code-to-verify-that-each-vm-only-has-1-datastore-cluster-tag-assigned">Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:</h6>
 <ul>
+<li>The code looks to see if one than (1) DataStore Cluster TAG is assigned.</li>
+<li>If a VM has an iso mounted from a 2nd Datastore that could make (2) TAGs get assigned.</li>
+<li>If a VM was located on a DataStore Cluster and had a SNAP Shot and was moved to a 2nd DataStore Cluster, it could get (2) DataStore Cluster TAGs assigned until the SNAP is Deleted.</li>
+<li>For this use case, I ONLY want (1) Datastore Cluster to be used per VM.</li>
 <li>include code to connect to vCenter</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -520,6 +527,9 @@
 </div><hr>
 <h6 id="code-to-verify-that-each-vm-is-located-in-the-correct-datastore-cluster-based-in-vcenter-tag">Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:</h6>
 <ul>
+<li>The code gets all the DataStore Cluster VMware vCenter TAGs.</li>
+<li>The code then gets all VMs assigned a TAG and verifies that the VM is located in the correct DataStore Cluster.</li>
+<li>If the VM is NOT located in the DataStore Cluster that matches the vCenter TAG, it moves the VM to the correct DataStore Cluster.</li>
 <li>include code to connect to vCenter</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -614,7 +624,7 @@
 <h6 id="code-to-disconnect-cd-from-all-vms">Code to Disconnect CD from all VMs:</h6>
 <ul>
 <li>include code to connect to vCenter</li>
-<li>Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a CD attached.</li>
+<li>Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a iso attached. Here is the code to disconnect all iso images mounted to a VM.</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -635,6 +645,8 @@
         <div class="details-content">
             <div class="admonition-content"><ul>
 <li>You can use this code to maintain VM placement, but you could also use this code to move VMs to new DatStore Clusters. Assign a new TAG to the VM and the process will do a Storage vMotion for you. Great way to move VMs if you get a new SAN.</li>
+<li>I located the VM based on DataStore Cluster. You could change code slightly and specify a specific DataStore.</li>
+<li>If there is a member on your VMware Team that changes which DataStore Cluster a VM should be located for no reason, you could also fix the issue by giving that Team Member 30 days in the electric chair so they don&rsquo;t do it again. :)</li>
 </ul>
 </div>
         </div>

@@ -7,14 +7,14 @@
 
 ---
 
-A questions was recently asked, How can we specify and maintain which DataStore Cluster a VM should use within the VMware vCenter UI? I like using vCenter TAGs for specifying details about VMs, so I thought I would use vCenter TAGs to specify which DataStore Cluster to place a VM.
+A questions was recently asked, How can we specify and maintain which DataStore Cluster a VM should use within the VMware vCenter UI? I like using vCenter TAGs for specifying details about VMs, so I thought I would use VMware vCenter TAGs to specify which DataStore Cluster to place a VM.
 
-I looked at using a Configuration management tool like salt but one of the requirements was to make it easy for the VMware Admin to specify and maintain VM DataStore placement within the vCenter UI.  
+I looked at using a Configuration management tool like salt but one of the requirements was to make it easy for the VMware Admin to specify and maintain VM DataStore placement within the VMware vCenter UI.  
 
 I have included sample code that will:
-* Create a vCenter TAG Category
-* Create a vCenter TAG based on DataStore Cluster Name
-* Add the DataStore Cluster vCenter TAG to all VMs within a DataStore cluster
+* Create a VMware vCenter TAG Category
+* Create a VMware vCenter TAG based on DataStore Cluster Name
+* Add the DataStore Cluster VMware vCenter TAG to all VMs within a DataStore cluster
 * Verify that each VM has only (1) vCenter DataStore Cluster TAG
 * Verify that the VM is in the correct DataStore Cluster. Do a VM move if it is not in correct DataStore Cluster.
  
@@ -22,26 +22,26 @@ I have included sample code that will:
 
 ###### Use Case:
 
-- [x] Have a way to specify which DataStore Cluster the VM will use within vCenter UI.
-- [x] Have a process in place that will maintain which DataStore Cluster will be used with each VM within vCenter.
-- [x] If a user moves a VM to a DataStore Cluster that it shouldn't be located, move it back.
+- [x] Have a way to specify which DataStore Cluster the VM will use within VMware vCenter UI.
+- [x] Have a process in place that will maintain which DataStore Cluster will be used with each VM within VMware vCenter.
+- [x] If a user moves a VM to a DataStore Cluster that it shouldn't be located, move it back to the correct Datastore Cluster to match the assigned VMware vCenter TAG.
 
 ###### Solution:
 
-- [x] Create a vCenter TAG for every DataStore Cluster within vCenter.
-- [x] Assign a vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.
-- [x] Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches vCenter TAG assigned.
+- [x] Create a VMware vCenter TAG for every DataStore Cluster within VMware vCenter.
+- [x] Assign a VMware vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.
+- [x] Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches VMware vCenter TAG assigned.
 
 ---
 
-**All the steps require a connection to VMware vCenter:**
+**Steps to connect to VMware vCenter:**
 ```PowerShell
 # Script created by: Dale Hassinger
 # Script provided for Demo Use Only
 # Date: 2023-01-27
-# Purpose: Create vCenter TAGs to be used for VM Storage placement
+# Purpose: Create and Assign vCenter TAGs to be used for VM Storage placement
 # Notes: VMs with ISOs attached and Snap Shots may be listed in more than 1 Datastore Cluster
-#        In my lab I made sure there were no SNAPs or ISOs attached before applying TAGs with Automation
+# In my lab I made sure there were no SNAPs or ISOs attached before applying TAGs with Automation
 
 # ----- [ Connect to vCenter ] -----
 Connect-VIServer -Server 'vCenter.vCROCS.info' -User 'administrator@vCROCS.info' -Password 'HackMe1!' -Force
@@ -50,9 +50,9 @@ Connect-VIServer -Server 'vCenter.vCROCS.info' -User 'administrator@vCROCS.info'
 
 ---
 
-###### Code to create a vCenter TAG Category:
-* For any custom TAGs that I create to use with Automation, I use a TAG category Automation.
-* You don't need to do this step. You could use a category already existing within vCenter.
+###### Code to create a VMware vCenter TAG Category:
+* For any custom VMware vCenter TAGs that I create to use with Automation, I use a TAG category "Automation".
+* You don't need to do this step. You could use a category that already exists within VMware vCenter.
 
 ```PowerShell
 # ----- [ Start Create vCenter TAG Category ] -----
@@ -85,7 +85,9 @@ else{
 
 ---
 
-###### Code to create a vCenter TAG for every Datastore Cluster:
+###### Code to create a VMware vCenter TAG for every Datastore Cluster:
+* The code gets all DataStore Cluster Names and creates a VMware vCenter TAG to match DataStore Cluster Name. I prefix the DataStore Cluster Name with "TAG-VM-".
+* The code does check to see if the VMware vCenter TAG already exists. If the vCenter TAG does exist, it does not try and create a new vCenter TAG.
 * include code to connect to vCenter
 
 ```PowerShell
@@ -137,6 +139,7 @@ foreach($newTAG in $newTAGs){
 ---
 
 ###### Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:
+* You specify DataStore Cluster Name. The code with get all VM names and assign the correct VMware vCenter TAG. It will check to see if TAG is already assigned to the VM.
 * include code to connect to vCenter
 
 ```PowerShell
@@ -187,7 +190,11 @@ foreach($vm in $allVMs){
 ---
 
 ###### Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:
-* include code to connect to vCenter
+* The code looks to see if one than (1) DataStore Cluster TAG is assigned.
+* If a VM has an iso mounted from a 2nd Datastore that could make (2) TAGs get assigned.
+* If a VM was located on a DataStore Cluster and had a SNAP Shot and was moved to a 2nd DataStore Cluster, it could get (2) DataStore Cluster TAGs assigned until the SNAP is Deleted.
+* For this use case, I ONLY want (1) Datastore Cluster to be used per VM.  
+* include code to connect to vCenter  
 
 ```PowerShell
 # ----- [ Start Verify that VM has only (1) DS Cluster TAG ] -----
@@ -222,6 +229,9 @@ Write-Output 'TAG count check complete'
 ---
 
 ###### Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:
+* The code gets all the DataStore Cluster VMware vCenter TAGs.
+* The code then gets all VMs assigned a TAG and verifies that the VM is located in the correct DataStore Cluster.
+* If the VM is NOT located in the DataStore Cluster that matches the vCenter TAG, it moves the VM to the correct DataStore Cluster.
 * include code to connect to vCenter
 
 ```PowerShell
@@ -273,7 +283,7 @@ foreach($tag in $allTAGs){
 
 ###### Code to Disconnect CD from all VMs:
 * include code to connect to vCenter
-* Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a CD attached.
+* Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a iso attached. Here is the code to disconnect all iso images mounted to a VM.
 
 ```PowerShell
 # Code Disconnect CD from all VMs
@@ -287,6 +297,8 @@ Get-VM | Where-Object {$_.PowerState –eq “PoweredOn”} | Get-CDDrive | Set-
 
 {{< admonition type=info title="Lessons Learned:" open=true >}}
 * You can use this code to maintain VM placement, but you could also use this code to move VMs to new DatStore Clusters. Assign a new TAG to the VM and the process will do a Storage vMotion for you. Great way to move VMs if you get a new SAN.
+* I located the VM based on DataStore Cluster. You could change code slightly and specify a specific DataStore.
+* If there is a member on your VMware Team that changes which DataStore Cluster a VM should be located for no reason, you could also fix the issue by giving that Team Member 30 days in the electric chair so they don't do it again. :)
 {{< /admonition >}}
 
 ---
