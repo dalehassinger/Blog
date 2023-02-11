@@ -32,7 +32,7 @@ Requirements:
 
 {{< image src="ssc-03.png" caption="Click to see Larger Image of Screen Shot">}}  
 
-Any OS not listed in currently not supported at this time.
+Any OS not listed is currently not supported at this time.
 
 ---  
 
