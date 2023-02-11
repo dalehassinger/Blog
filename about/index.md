@@ -14,7 +14,7 @@
 {{< image src="vexpert-cloud-management.png" caption="" >}}
 
 {{< admonition type=info title="Info" open=true >}}
-The views and opinions expressed on this blog are my strictly my own and do not reflect the views and opinions of my employer. I Blog about Subjects and Products that I find interesting and will hopefully help someone get started on their Automation, Monitoring and Logging journey by providing some tips|tricks|processes|code needed.  
+The views and opinions expressed on this blog are my strictly my own and do not reflect the views and opinions of my employer. I Blog about Subjects and Products that I find interesting and will hopefully help someone get started on their Automation, Monitoring and Logging journey by providing some tips | tricks | processes | code needed.  
 {{< /admonition >}}
 
 * My focus is Enterprise Automation, Monitoring and Logging. When I was a VMware customer I created an IaC (Infrastructure as Code) Environment. I used VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes… For monitoring I used vRealize Operations for the “Single Pane of Glass” experience. I also used vRealize Log Insight for logging and LCM (Life Cycle Manager) for installing all the vRealize Products.  

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware Aria Automation and SaltStack Config Resource - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="VMware Aria Automation and SaltStack Config Resource" />
+<meta property="og:description" content="How to start using the SaltStack Config Resource with VMware Aria Automation Cloud Templates." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/vmware-aria-automation-saltstack-config-resource/" /><meta property="og:image" content="https://www.vcrocs.info/vmware-aria-automation-saltstack-config-resource/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-11T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/vmware-aria-automation-saltstack-config-resource/featured-image.png"/>
+<meta name="twitter:title" content="VMware Aria Automation and SaltStack Config Resource"/>
+<meta name="twitter:description" content="How to start using the SaltStack Config Resource with VMware Aria Automation Cloud Templates."/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/vmware-aria-automation-saltstack-config-resource/" /><link rel="prev" href="https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware Aria Automation and SaltStack Config Resource",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/vmware-aria-automation-saltstack-config-resource\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/vmware-aria-automation-saltstack-config-resource\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, Salt, minion","wordcount":  957 ,
+        "url": "https:\/\/www.vcrocs.info\/vmware-aria-automation-saltstack-config-resource\/","datePublished": "2023-02-11T00:00:00+00:00","dateModified": "2023-02-11T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Automation and SaltStack Config Resource</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-11">2023-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;957 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/vmware-aria-automation-saltstack-config-resource/featured-image.png"
+        data-srcset="/vmware-aria-automation-saltstack-config-resource/featured-image.png, /vmware-aria-automation-saltstack-config-resource/featured-image.png 1.5x, /vmware-aria-automation-saltstack-config-resource/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/vmware-aria-automation-saltstack-config-resource/featured-image.png"
+        title="/vmware-aria-automation-saltstack-config-resource/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#use-case">Use Case</a></li>
+                    <li><a href="#current-os-support">Current OS support:</a></li>
+                    <li><a href="#cloud-template">Cloud Template:</a></li>
+                    <li><a href="#completed-deployment">Completed Deployment</a></li>
+                    <li><a href="#custom-form-to-create-the-windows-server-deployment">Custom Form to create the Windows Server Deployment</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned</a></li>
+                    <li><a href="#helpful-links">Helpful Links</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to start using the SaltStack Config Resource with VMware Aria Automation Cloud Templates.</strong></p>
+<hr>
+<h6 id="use-case">Use Case</h6>
+<p>VMware Aria Automation Config has been the Configuration Management tool that I like to use with Servers, Windows and Linux. The first process to use salt with new servers is to install the salt minion, which is an agent that needs installed on the Server. There are many different ways to install the salt minion agent and what I wanted to show in this blog post is how to use the SaltStack Config Resource with the VMware Automation Cloud Template. When creating a Cloud Template in VMware Aria Automation, one of the options is to add the SaltStack Config Resource.</p>
+<hr>
+<p>What the SaltStack Config Resource provides:</p>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Automated Salt minion installation</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Ability to add grains data to minion when the minion installation completes.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> The minion key is auto-accepted in SaltStack Config</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> If you delete the VM deployment in VMware Aria Automation, the minion key will be automatically removed from VMware Aria Automation Config. Built-in decommission.</li>
+</ul>
+<hr>
+<p>Requirements:</p>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> TCP Port 445 needs to be open between VMware Aria Automation Config server and the new Server that the minion is being installed on.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Check the VMware Aria Automation Config server. The OS that you are using for the new server must have an agent file in the /etc/salt/cloud.deploy.d folder.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Check the VMware Aria Automation Config server. The version of the agent files in the /etc/salt/cloud.deploy.d folder must match the version of the salt master.</li>
+</ul>
+<hr>
+<h6 id="current-os-support">Current OS support:</h6>
+<figure><a class="lightgallery" href="/vmware-aria-automation-saltstack-config-resource/ssc-03.png" title="/vmware-aria-automation-saltstack-config-resource/ssc-03.png" data-thumbnail="/vmware-aria-automation-saltstack-config-resource/ssc-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vmware-aria-automation-saltstack-config-resource/ssc-03.png"
+            data-srcset="/vmware-aria-automation-saltstack-config-resource/ssc-03.png, /vmware-aria-automation-saltstack-config-resource/ssc-03.png 1.5x, /vmware-aria-automation-saltstack-config-resource/ssc-03.png 2x"
+            data-sizes="auto"
+            alt="/vmware-aria-automation-saltstack-config-resource/ssc-03.png" width="678" height="205" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<p>Any OS not listed in currently not supported at this time.</p>
+<hr>
+<h6 id="cloud-template">Cloud Template:</h6>
+<figure><a class="lightgallery" href="/vmware-aria-automation-saltstack-config-resource/ssc-02.png" title="/vmware-aria-automation-saltstack-config-resource/ssc-02.png" data-thumbnail="/vmware-aria-automation-saltstack-config-resource/ssc-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vmware-aria-automation-saltstack-config-resource/ssc-02.png"
+            data-srcset="/vmware-aria-automation-saltstack-config-resource/ssc-02.png, /vmware-aria-automation-saltstack-config-resource/ssc-02.png 1.5x, /vmware-aria-automation-saltstack-config-resource/ssc-02.png 2x"
+            data-sizes="auto"
+            alt="/vmware-aria-automation-saltstack-config-resource/ssc-02.png" width="2555" height="1236" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>cloud template yaml code:</li>
+<li>You <strong>MUST</strong> add the remoteAccess code in the Virtual_Machine section for minion installation.</li>
+<li>grains data is added in the additionalMinionParams section of the yaml code.</li>
+<li>When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You no not need to accept the minion key.</li>
+<li>click to expand code</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span><span class="lnt">98
+</span><span class="lnt">99
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">FEformatVersion</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CustomizationSpec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Customization Specification</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">W2K19</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CustomizationSpec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMName</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">VM Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minLength</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLength</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">DBH-194</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.110.194</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">EDrive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">integer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">E-Drive</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Enter 0 to disable the disk and not create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">FDrive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">integer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">F-Drive</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Enter 0 to disable the disk and not create</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">SQL</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">SQL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Selecting SQL will format all DATA drives with 64k allocation.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;False&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enum</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;True&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;False&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Network</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.Network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networkType</span><span class="p">:</span><span class="w"> </span><span class="l">existing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">network:VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Virtual_Machine</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.Machine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">W2K19</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">flavor</span><span class="p">:</span><span class="w"> </span><span class="l">medium</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">customizationSpec</span><span class="p">:</span><span class="w"> </span><span class="l">${input.CustomizationSpec}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VMName}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">remoteAccess</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">authentication</span><span class="p">:</span><span class="w"> </span><span class="l">usernamePassword</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l">${resource.Network.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">assignment</span><span class="p">:</span><span class="w"> </span><span class="l">static</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l">${input.IP}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">attachedDisks</span><span class="p">:</span><span class="w"> </span><span class="l">${map_to_object(resource.Cloud_Volume_E[*].id + resource.Cloud_Volume_F[*].id , &#34;source&#34;)}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">edrivesize</span><span class="p">:</span><span class="w"> </span><span class="l">${input.EDrive}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">fdrivesize</span><span class="p">:</span><span class="w"> </span><span class="l">${input.FDrive}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">sql</span><span class="p">:</span><span class="w"> </span><span class="l">${input.SQL}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># - VMware Max SCSI Controllers is 4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># - VMware Max Unit per SCSI Controllers is 15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_Volume_E</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.Volume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">capacityGb</span><span class="p">:</span><span class="w"> </span><span class="l">${input.EDrive}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;${input.EDrive == 0 ? 0 : 1 }&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SCSIController</span><span class="p">:</span><span class="w"> </span><span class="l">SCSI_Controller_1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">unitNumber</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">provisioningType</span><span class="p">:</span><span class="w"> </span><span class="l">thin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_Volume_F</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.Volume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">capacityGb</span><span class="p">:</span><span class="w"> </span><span class="l">${input.FDrive}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">count</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;${input.FDrive == 0 ? 0 : 1 }&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">SCSIController</span><span class="p">:</span><span class="w"> </span><span class="l">SCSI_Controller_1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">unitNumber</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">provisioningType</span><span class="p">:</span><span class="w"> </span><span class="l">thin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_SaltStack_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.SaltStack</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">${resource.Virtual_Machine.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">masterId</span><span class="p">:</span><span class="w"> </span><span class="l">saltstack_enterprise_installer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">stateFiles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">/vcrocs/windows.sls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">saltEnvironment</span><span class="p">:</span><span class="w"> </span><span class="l">base</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># - This is how you add grains data to the minion</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">additionalMinionParams</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">grains</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">vCROCS_Roles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">webserver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">database</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">vCROCS_E_Drive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">${input.EDrive}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">vCROCS_F_Drive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">${input.FDrive}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">vCROCS_SQL</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">${input.SQL}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<ul>
+<li>This screen shot shows how to get the &ldquo;masterId&rdquo; to use in the Cloud Template yaml code.</li>
+</ul>
+<figure><a class="lightgallery" href="/vmware-aria-automation-saltstack-config-resource/ssc-05.png" title="/vmware-aria-automation-saltstack-config-resource/ssc-05.png" data-thumbnail="/vmware-aria-automation-saltstack-config-resource/ssc-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vmware-aria-automation-saltstack-config-resource/ssc-05.png"
+            data-srcset="/vmware-aria-automation-saltstack-config-resource/ssc-05.png, /vmware-aria-automation-saltstack-config-resource/ssc-05.png 1.5x, /vmware-aria-automation-saltstack-config-resource/ssc-05.png 2x"
+            data-sizes="auto"
+            alt="/vmware-aria-automation-saltstack-config-resource/ssc-05.png" width="2018" height="722" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<ul>
+<li>This screen shot shows how to see the SaltMaster version.</li>
+</ul>
+<figure><a class="lightgallery" href="/vmware-aria-automation-saltstack-config-resource/ssc-06.png" title="/vmware-aria-automation-saltstack-config-resource/ssc-06.png" data-thumbnail="/vmware-aria-automation-saltstack-config-resource/ssc-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vmware-aria-automation-saltstack-config-resource/ssc-06.png"
+            data-srcset="/vmware-aria-automation-saltstack-config-resource/ssc-06.png, /vmware-aria-automation-saltstack-config-resource/ssc-06.png 1.5x, /vmware-aria-automation-saltstack-config-resource/ssc-06.png 2x"
+            data-sizes="auto"
+            alt="/vmware-aria-automation-saltstack-config-resource/ssc-06.png" width="2162" height="676" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="completed-deployment">Completed Deployment</h6>
+<ul>
+<li>This shows what the deployment looks like after it is completed.</li>
+<li>Grain data is shown within the Salt Configuration section.</li>
+</ul>
+<figure><a class="lightgallery" href="/vmware-aria-automation-saltstack-config-resource/ssc-01.png" title="/vmware-aria-automation-saltstack-config-resource/ssc-01.png" data-thumbnail="/vmware-aria-automation-saltstack-config-resource/ssc-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vmware-aria-automation-saltstack-config-resource/ssc-01.png"
+            data-srcset="/vmware-aria-automation-saltstack-config-resource/ssc-01.png, /vmware-aria-automation-saltstack-config-resource/ssc-01.png 1.5x, /vmware-aria-automation-saltstack-config-resource/ssc-01.png 2x"
+            data-sizes="auto"
+            alt="/vmware-aria-automation-saltstack-config-resource/ssc-01.png" width="2558" height="1235" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="custom-form-to-create-the-windows-server-deployment">Custom Form to create the Windows Server Deployment</h6>
+<ul>
+<li>Example of a Custom Form for Windows Server Builds</li>
+</ul>
+<figure><a class="lightgallery" href="/vmware-aria-automation-saltstack-config-resource/ssc-04.png" title="/vmware-aria-automation-saltstack-config-resource/ssc-04.png" data-thumbnail="/vmware-aria-automation-saltstack-config-resource/ssc-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vmware-aria-automation-saltstack-config-resource/ssc-04.png"
+            data-srcset="/vmware-aria-automation-saltstack-config-resource/ssc-04.png, /vmware-aria-automation-saltstack-config-resource/ssc-04.png 1.5x, /vmware-aria-automation-saltstack-config-resource/ssc-04.png 2x"
+            data-sizes="auto"
+            alt="/vmware-aria-automation-saltstack-config-resource/ssc-04.png" width="1393" height="1240" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>See &ldquo;Requirements&rdquo; listed above</li>
+<li>See &ldquo;What the SaltStack Config Resource provides&rdquo; above</li>
+<li>If you need to update the minion agent files on the salt master server, in folder /etc/salt/cloud.deploy.d, you will have to have your VMware account team download the files for you or open an SR. The files are not public facing.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<h6 id="helpful-links">Helpful Links</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>VMware Aria Automation | Ansible Links I found to be very helpful:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li><a href="https://docs.vmware.com/en/vRealize-Automation/8.11/Using-and-Managing-Cloud-Assembly/GUID-5555BD8D-506C-40C9-8CE9-138297FB8F30.html#GUID-5555BD8D-506C-40C9-8CE9-138297FB8F30" target="_blank" rel="noopener noreffer ">Configure a SaltStack Config integration in vRealize Automation</a></li>
+<li><a href="https://docs.vmware.com/en/vRealize-Automation/8.11/Using-and-Managing-Cloud-Assembly/GUID-70F29C74-848F-41F2-91B1-8E96A918DD93.html" target="_blank" rel="noopener noreffer ">Add the SaltStack Config resource to the cloud template</a></li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>When I write about <b>VMware Aria Automation</b>, I always say there are many ways to accomplish the same task.  <b>VMware Aria Automation Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your VMware Aria Suite Advanced/Enterprise license. If you own the VMware Aria Suite, you own VMware Aria Automation Config.</p>
+<ul>
+<li>vRealize Automation = VMware Aria Automation</li>
+<li>SaltStack Config = VMware Aria Automation Config</li>
+</ul>
+</div>
+        </div>
+    </div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-02-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/vmware-aria-automation-saltstack-config-resource/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/vmware-aria-automation-saltstack-config-resource/" data-title="VMware Aria Automation and SaltStack Config Resource" data-via="dalehassinger" data-hashtags="SaltStack Config,VMware Aria Automation,vRealize Automation,Salt,minion"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/vmware-aria-automation-saltstack-config-resource/" data-hashtag="SaltStack Config"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/vmware-aria-automation-saltstack-config-resource/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/saltstack-config/">SaltStack Config</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/vrealize-automation/">vRealize Automation</a>,&nbsp;<a href="/tags/salt/">Salt</a>,&nbsp;<a href="/tags/minion/">minion</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/use-vcenter-tags-to-maintain-vm-storage-placement/" class="prev" rel="prev" title="Use vCenter TAGs to maintain VM Storage Placement"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Use vCenter TAGs to maintain VM Storage Placement</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-166234216-1');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-166234216-1" async></script></body>
+</html>
