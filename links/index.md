@@ -35,6 +35,9 @@
 {{< admonition type=tip title="Podcasts:" open=true >}}
 * [Virtually Speaking Podcast](https://www.vspeakingpodcast.com)
 * [The Hacks - Powered By SaltStack](https://saltproject.io/the-hacks/episodes/)
+* [The PowerShell Podcast](https://powershellpodcast.podbean.com/)
+* [VMware Communities Roundtable](https://app.talkshoe.com/show/vmware-communities-roundtable)
 * [IT Reality Podcast](https://itr-it-reality.zencast.website/episodes/21)
 {{< /admonition >}}
+
 
