@@ -273,7 +273,7 @@ resources:
 {{< admonition type=info title="Info" open=true >}}
 When I write about <b>VMware Aria Automation</b>, I always say there are many ways to accomplish the same task.  <b>VMware Aria Automation Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your VMware Aria Suite Advanced/Enterprise license. If you own the VMware Aria Suite, you own VMware Aria Automation Config.
 
-- vRealize Automation = VMware Aria Automation 
-- SaltStack Config = VMware Aria Automation Config
+- VMware Aria Automation = vRealize Automation 
+- VMware Aria Automation Config = SaltStack Config
 {{< /admonition >}}
 
