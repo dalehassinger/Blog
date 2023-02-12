@@ -31,7 +31,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vmware-aria-automation-saltstack-config-resource\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, Salt, minion","wordcount":  957 ,
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, Salt, minion","wordcount":  1305 ,
         "url": "https:\/\/www.vcrocs.info\/vmware-aria-automation-saltstack-config-resource\/","datePublished": "2023-02-11T00:00:00+00:00","dateModified": "2023-02-11T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Automation and SaltStack Config Resource</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-11">2023-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;957 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-11">2023-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1305 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -136,7 +136,8 @@
                   <ul>
                     <li><a href="#use-case">Use Case</a></li>
                     <li><a href="#current-os-support">Current OS support:</a></li>
-                    <li><a href="#cloud-template">Cloud Template:</a></li>
+                    <li><a href="#cloud-template--windows-2019-server">Cloud Template | Windows 2019 Server:</a></li>
+                    <li><a href="#cloud-template--ubuntu-20-server">Cloud Template | Ubuntu 20 Server:</a></li>
                     <li><a href="#completed-deployment">Completed Deployment</a></li>
                     <li><a href="#custom-form-to-create-the-windows-server-deployment">Custom Form to create the Windows Server Deployment</a></li>
                     <li><a href="#lessons-learned">Lessons Learned</a></li>
@@ -159,16 +160,25 @@
 <p>What the SaltStack Config Resource provides:</p>
 <ul>
 <li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Automated Salt minion installation</li>
-<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Ability to add grains data to minion when the minion installation completes.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Ability to add grains data to minion when the minion installation completes. See example yaml code.</li>
 <li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> The minion key is auto-accepted in SaltStack Config</li>
 <li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> If you delete the VM deployment in VMware Aria Automation, the minion key will be automatically removed from VMware Aria Automation Config. Built-in decommission.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Ability to run a state file when the minion installation completes. See example yaml code.</li>
 </ul>
 <hr>
 <p>Requirements:</p>
 <ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> This blog was created using VMware Aria Automation version 8.11.0. The process may vary for different version of VMware Aria Automation.</li>
 <li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> TCP Port 445 needs to be open between VMware Aria Automation Config server and the new Server that the minion is being installed on.</li>
 <li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Check the VMware Aria Automation Config server. The OS that you are using for the new server must have an agent file in the /etc/salt/cloud.deploy.d folder.</li>
 <li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Check the VMware Aria Automation Config server. The version of the agent files in the /etc/salt/cloud.deploy.d folder must match the version of the salt master.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> The script that creates the grains file when using the SaltStack Config Resource and VMware Aria cloud templates with Windows Servers needs to be manually replaced on the VMware Aria Automation Config Server (salt master). Future VMware Aria Automation Config installs with LCM (VMware Aria Suite LifeCycle) will include this fix. The script creates the grains file in the incorrect folder.
+<ul>
+<li>Location of script on salt master: /lib64/python3.7/site-packages/salt/utils/cloud.py</li>
+<li>Make a copy of the original cloud.py before replacing with updated version.</li>
+<li>Where to get new script: <a href="https://github.com/saltstack/salt/blob/master/salt/utils/cloud.py" target="_blank" rel="noopener noreffer ">https://github.com/saltstack/salt/blob/master/salt/utils/cloud.py</a></li>
+</ul>
+</li>
 </ul>
 <hr>
 <h6 id="current-os-support">Current OS support:</h6>
@@ -184,7 +194,7 @@
     </figure>
 <p>Any OS not listed is currently not supported at this time.</p>
 <hr>
-<h6 id="cloud-template">Cloud Template:</h6>
+<h6 id="cloud-template--windows-2019-server">Cloud Template | Windows 2019 Server:</h6>
 <figure><a class="lightgallery" href="/vmware-aria-automation-saltstack-config-resource/ssc-02.png" title="/vmware-aria-automation-saltstack-config-resource/ssc-02.png" data-thumbnail="/vmware-aria-automation-saltstack-config-resource/ssc-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -197,11 +207,11 @@
     </figure>
 <hr>
 <ul>
-<li>cloud template yaml code:</li>
+<li>Windows 2019 Server cloud template yaml code:</li>
 <li>You <strong>MUST</strong> add the remoteAccess code in the Virtual_Machine section for minion installation.</li>
 <li>grains data is added in the additionalMinionParams section of the yaml code.</li>
-<li>When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You no not need to accept the minion key.</li>
-<li>click to expand code</li>
+<li>When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You do not need to accept the minion key.</li>
+<li>click to expand yaml code</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -405,6 +415,127 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">${input.FDrive}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">vCROCS_SQL</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">${input.SQL}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="cloud-template--ubuntu-20-server">Cloud Template | Ubuntu 20 Server:</h6>
+<ul>
+<li>Ubuntu 20 Server cloud template yaml code:</li>
+<li>You <strong>MUST</strong> add the remoteAccess code in the Virtual_Machine section for minion installation.</li>
+<li>grains data is added in the additionalMinionParams section of the yaml code.</li>
+<li>When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You do not need to accept the minion key.</li>
+<li>click to expand yaml code</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">formatVersion</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CustomizationSpec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Customization Specification</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CustomizationSpec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMName</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">VM Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minLength</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLength</span><span class="p">:</span><span class="w"> </span><span class="m">12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">DBH-197</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.110.197</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_Network_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.Network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networkType</span><span class="p">:</span><span class="w"> </span><span class="l">existing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">network:VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_Machine_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.Machine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">flavor</span><span class="p">:</span><span class="w"> </span><span class="l">small</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VMName}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">remoteAccess</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">authentication</span><span class="p">:</span><span class="w"> </span><span class="l">usernamePassword</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">customizationSpec</span><span class="p">:</span><span class="w"> </span><span class="l">${input.CustomizationSpec}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">env:VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l">${resource.Cloud_Network_1.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">assignment</span><span class="p">:</span><span class="w"> </span><span class="l">static</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l">${input.IP}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_SaltStack_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.SaltStack</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">${resource.Cloud_Machine_1.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">masterId</span><span class="p">:</span><span class="w"> </span><span class="l">saltstack_enterprise_installer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">stateFiles</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">/vcrocs/ubuntu.sls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">saltEnvironment</span><span class="p">:</span><span class="w"> </span><span class="l">base</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">additionalMinionParams</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">grains</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">roles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">webserver</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><hr>

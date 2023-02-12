@@ -15,16 +15,21 @@ VMware Aria Automation Config has been the Configuration Management tool that I 
 
 What the SaltStack Config Resource provides:
 - [x] Automated Salt minion installation
-- [x] Ability to add grains data to minion when the minion installation completes.
+- [x] Ability to add grains data to minion when the minion installation completes. See example yaml code.
 - [x] The minion key is auto-accepted in SaltStack Config
 - [x] If you delete the VM deployment in VMware Aria Automation, the minion key will be automatically removed from VMware Aria Automation Config. Built-in decommission.  
-
+- [x] Ability to run a state file when the minion installation completes. See example yaml code.
 ---
 
 Requirements:
+- [x] This blog was created using VMware Aria Automation version 8.11.0. The process may vary for different version of VMware Aria Automation.
 - [x] TCP Port 445 needs to be open between VMware Aria Automation Config server and the new Server that the minion is being installed on.
 - [x] Check the VMware Aria Automation Config server. The OS that you are using for the new server must have an agent file in the /etc/salt/cloud.deploy.d folder.
 - [x] Check the VMware Aria Automation Config server. The version of the agent files in the /etc/salt/cloud.deploy.d folder must match the version of the salt master.
+- [x] The script that creates the grains file when using the SaltStack Config Resource and VMware Aria cloud templates with Windows Servers needs to be manually replaced on the VMware Aria Automation Config Server (salt master). Future VMware Aria Automation Config installs with LCM (VMware Aria Suite LifeCycle) will include this fix. The script creates the grains file in the incorrect folder. 
+   - Location of script on salt master: /lib64/python3.7/site-packages/salt/utils/cloud.py
+   - Make a copy of the original cloud.py before replacing with updated version.
+   - Where to get new script: https://github.com/saltstack/salt/blob/master/salt/utils/cloud.py  
 
 ---
 
@@ -37,17 +42,17 @@ Any OS not listed is currently not supported at this time.
 ---  
 
 
-###### Cloud Template:
+###### Cloud Template | Windows 2019 Server:
 
 {{< image src="ssc-02.png" caption="Click to see Larger Image of Screen Shot">}}  
 
 ---  
 
-- cloud template yaml code:
+- Windows 2019 Server cloud template yaml code:
 - You **MUST** add the remoteAccess code in the Virtual_Machine section for minion installation.  
 - grains data is added in the additionalMinionParams section of the yaml code.  
-- When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You no not need to accept the minion key.
-- click to expand code
+- When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You do not need to accept the minion key.
+- click to expand yaml code
 
 ```yaml
 FEformatVersion: 1
@@ -149,6 +154,73 @@ resources:
             - ${input.FDrive}
           vCROCS_SQL:
             - ${input.SQL}
+```
+
+---
+
+###### Cloud Template | Ubuntu 20 Server:
+
+
+- Ubuntu 20 Server cloud template yaml code:
+- You **MUST** add the remoteAccess code in the Virtual_Machine section for minion installation.  
+- grains data is added in the additionalMinionParams section of the yaml code.  
+- When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You do not need to accept the minion key.
+- click to expand yaml code
+
+```yaml
+formatVersion: 1
+inputs:
+  CustomizationSpec:
+    type: string
+    description: Customization Specification
+    default: ubuntu
+    title: CustomizationSpec
+  VMName:
+    type: string
+    title: VM Name
+    minLength: 1
+    maxLength: 12
+    default: DBH-197
+  IP:
+    type: string
+    default: 192.168.110.197
+resources:
+  Cloud_Network_1:
+    type: Cloud.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: network:VMs
+  Cloud_Machine_1:
+    type: Cloud.Machine
+    properties:
+      image: ubuntu-20
+      flavor: small
+      name: ${input.VMName}
+      remoteAccess:
+        authentication: usernamePassword
+        username: administrator
+        password: VMware1!
+      customizationSpec: ${input.CustomizationSpec}
+      constraints:
+        - tag: env:VMs
+      networks:
+        - network: ${resource.Cloud_Network_1.id}
+          assignment: static
+          address: ${input.IP}
+  Cloud_SaltStack_1:
+    type: Cloud.SaltStack
+    properties:
+      hosts:
+        - ${resource.Cloud_Machine_1.id}
+      masterId: saltstack_enterprise_installer
+      stateFiles: 
+        - /vcrocs/ubuntu.sls
+      saltEnvironment: base
+      additionalMinionParams:
+        grains:
+          roles:
+            - webserver
 ```
 
 ---
