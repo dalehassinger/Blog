@@ -4,12 +4,12 @@
 <center>{{< image src="author.png" caption="">}}</center>
 
 >VMware TAM (Technical Account Manager)  
->VMware vExpert 2020 - 2022  
+>VMware vExpert 2020 - 2023  
 >VMware vExpert Cloud Management 2021 - 2022  
 
 >If you can script it, You can Automate it!  
 
-{{< image src="vexpert-2022.png" caption="">}}
+{{< image src="vexpert-2023.png" caption="">}}
 {{< image src="vexpert-2023-4-stars.png" caption="" >}}
 {{< image src="vexpert-cloud-management.png" caption="" >}}
 
@@ -72,7 +72,7 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 >"9 - 5 pays the bills, 5 - 10 advances your career" - Author Unknown  
 
 {{< admonition type=success title="vCommunity Activities" open=true >}}
-* VMware vExpert | 2020 - 2022
+* VMware vExpert | 2020 - 2023
 * VMware vExpert - Cloud Management | 2021 - 2022
 * SaltConf Session - 2021 | Managing Windows with SaltStack Config | 
 * VMworld Session - 2021 | Manage Windows Workloads Through vRealize Automation SaltStack Config [MCL1895]
