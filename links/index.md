@@ -34,6 +34,7 @@
 
 {{< admonition type=tip title="Podcasts:" open=true >}}
 * [Virtually Speaking Podcast](https://www.vspeakingpodcast.com)
+* [Mac Power Users - MPU](https://www.relay.fm/mpu)
 * [The Hacks - Powered By SaltStack](https://saltproject.io/the-hacks/episodes/)
 * [The PowerShell Podcast](https://powershellpodcast.podbean.com/)
 * [VMware Communities Roundtable](https://app.talkshoe.com/show/vmware-communities-roundtable)
