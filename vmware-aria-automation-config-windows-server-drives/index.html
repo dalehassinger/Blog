@@ -31,7 +31,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vmware-aria-automation-config-windows-server-drives\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, Salt, minion, Windows Server, Ubuntu Server, Cloud Template","wordcount":  1681 ,
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, Salt, minion, Windows Server, Ubuntu Server, Cloud Template","wordcount":  1726 ,
         "url": "https:\/\/www.vcrocs.info\/vmware-aria-automation-config-windows-server-drives\/","datePublished": "2023-02-18T00:00:00+00:00","dateModified": "2023-02-18T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Automation | Working with Windows Server Drives</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-18">2023-02-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1681 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-18">2023-02-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1726 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -155,7 +155,7 @@
 </nav></div>
             </div><div class="content" id="content"><p><strong>How to add Windows Server Drives to VMware Aria Automation Cloud Templates.</strong></p>
 <hr>
-<p>I want to create new Windows Servers in VMware Aria Automation that will be production ready when the server build process is complete. One item when building new Windows Servers is adding drives. I want a way to add additional drives and have the drive be online and formatted properly. Non SQL Windows Servers will have data drives formatted with 4k allocation unit size and Windows SQL Servers will have the data drives formatted with 64k allocation unit size. This Blog post shows one way to accomplish these tasks. I always say, with automation there a 100 ways to do the same process. Hopefully this Blog gives you some ideas and options.</p>
+<p>I want to create new Windows Servers in VMware Aria Automation that will be production ready when the server build process is complete. One item when building new Windows Servers is adding drives. I want a way to add additional drives and have the drive be online and formatted properly. Non SQL Windows Servers will have data drives formatted with 4k allocation unit size and Windows SQL Servers will have the data drives formatted with 64k allocation unit size. VMware Aria Automation provides a way to add drives OOTB (Out of the Box) but does not automatically format the drives. That is why I use a Salt state in my example. I use the salt state to bring the new drive online and format. This Blog post shows one way to accomplish these tasks. I always say, with automation there a 100 ways to do the same process. Hopefully this Blog gives you some ideas and options.</p>
 <h6 id="use-case">Use Case</h6>
 <ul>
 <li>Add Cloud Agnostic Volumes to a VMware Aria Automation Cloud Template.</li>

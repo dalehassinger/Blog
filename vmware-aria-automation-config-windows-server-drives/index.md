@@ -7,7 +7,7 @@
 
 ---
 
-I want to create new Windows Servers in VMware Aria Automation that will be production ready when the server build process is complete. One item when building new Windows Servers is adding drives. I want a way to add additional drives and have the drive be online and formatted properly. Non SQL Windows Servers will have data drives formatted with 4k allocation unit size and Windows SQL Servers will have the data drives formatted with 64k allocation unit size. This Blog post shows one way to accomplish these tasks. I always say, with automation there a 100 ways to do the same process. Hopefully this Blog gives you some ideas and options.
+I want to create new Windows Servers in VMware Aria Automation that will be production ready when the server build process is complete. One item when building new Windows Servers is adding drives. I want a way to add additional drives and have the drive be online and formatted properly. Non SQL Windows Servers will have data drives formatted with 4k allocation unit size and Windows SQL Servers will have the data drives formatted with 64k allocation unit size. VMware Aria Automation provides a way to add drives OOTB (Out of the Box) but does not automatically format the drives. That is why I use a Salt state in my example. I use the salt state to bring the new drive online and format. This Blog post shows one way to accomplish these tasks. I always say, with automation there a 100 ways to do the same process. Hopefully this Blog gives you some ideas and options.
 
 ###### Use Case  
 
