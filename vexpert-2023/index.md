@@ -44,8 +44,6 @@ I have worked with a great group of people at VMware, past and present. I would 
 Email: Dale.Hassinger@vCrocs.info  
 Location: Dillsburg, PA
 
-<div style="background-color:#ffcc80; Padding:20px; font-size:18px;" >
-  <b>"9 - 5 pays the bills, 5 - 10 advances your career"</b>
-</div>
+> "9 - 5 pays the bills, 5 - 10 advances your career"
 
 
