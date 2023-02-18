@@ -166,7 +166,7 @@ resources:
             - ${input.SQL}
 ```
 
----  
+---
 
 ###### Service Broker Catalog item:
 
@@ -174,6 +174,15 @@ resources:
 * To create the drives is an option. Make drive size a "0" (default Value) and the drive will NOT be created.
 
 {{< image src="windows-drives-03.png" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+###### Completed Windows Server Deployment:
+
+* Shows which salt states were used with the deployment.
+* You can view the grains data that was added to the minion.
+
+{{< image src="windows-drives-02.png" caption="Click to see Larger Image of Screen Shot">}}  
 
 ---
 
