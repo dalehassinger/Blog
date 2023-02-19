@@ -172,6 +172,7 @@ resources:
 
 * Show the (3) drives that are available as a Standard Windows Server Build.
 * To create the drives is an option. Make drive size a "0" (default Value) and the drive will NOT be created.
+* Select SQL "True" will make the data drives be formatted with 64k allocation unit size, "false" will be 4k allocation unit size.
 
 {{< image src="windows-drives-03.png" caption="Click to see Larger Image of Screen Shot">}}  
 
