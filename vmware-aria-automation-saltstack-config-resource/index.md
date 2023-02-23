@@ -30,6 +30,7 @@ Requirements:
    - Location of script on salt master: /lib64/python3.7/site-packages/salt/utils/cloud.py
    - Make a copy of the original cloud.py before replacing with updated version.
    - Where to get new script: https://github.com/saltstack/salt/blob/master/salt/utils/cloud.py  
+   - The grains file will be created in "C:\ProgramData\Salt Project\Salt\conf" after the script is updated.
 
 ---
 
