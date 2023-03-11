@@ -44,11 +44,6 @@ minion_add:
   wheel.key.accept:
     - args:
       - match: {{ data['id']}}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('vCROCS') %}
-minion_add:
-  wheel.key.accept:
-    - args:
-      - match: {{ data['id']}}
 {% endif %}
 
 {{< /highlight >}}
@@ -61,13 +56,13 @@ minion_add:
 
 <div><b>To restart the salt-master service run this command from the salt-master cli.</b></div>
 
-{{< highlight powershell >}}
+{{< highlight bash >}}
 service salt-master restart
 {{< /highlight >}}
 
 <div><b>To check the status of the salt-master service run this command from the salt-master cli.</b></div>
 
-{{< highlight powershell >}}
+{{< highlight bash >}}
 systemctl status salt-minion.service
 {{< /highlight >}}
 
