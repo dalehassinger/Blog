@@ -23,7 +23,7 @@ In addition to the reactor file you need to create a state file. I located the f
 
 <div><b>Reactor File: base/reactor/reactor.conf</b></div>
 
-{{< highlight powershell >}}
+{{< highlight yaml >}}
 reactor:
   - 'salt/auth':                              # React to a new minion
     - salt://reactor/accept-key.sls           # Run this state to auto accept new minion
@@ -37,7 +37,7 @@ reactor:
 
 <div><b>State File: base/reactor/accept-key.sls</b></div>
 
-```
+{{< highlight yaml >}}
 
 {% if 'act' in data and data['act'] == 'pend' and data['id'].startswith('DBH') %}
 minion_add:
@@ -51,7 +51,7 @@ minion_add:
       - match: {{ data['id']}}
 {% endif %}
 
-```
+{{< /highlight >}}
 
 <div><b>Location of the State File:</b></div>
 
