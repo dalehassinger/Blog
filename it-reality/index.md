@@ -9,7 +9,7 @@
 
 ###### Podcasts
 
- I have been listening to Podcasts for many years.  Everyday while driving to and from work I would listen to a Podcast. Anytime I traveled to a conference I would download hours worth of Podcasts to listen to while flying. Most of the Podcasts I listen to are Technology related. Here are some of my favorites:
+I have been listening to Podcasts for many years.  Everyday while driving to and from work I would listen to a Podcast. Anytime I traveled to a conference I would download hours worth of Podcasts to listen to while flying. Most of the Podcasts I listen to are Technology related. Here are some of my favorites:
 
 * IT Reality
 * Virtual Speaking Podcast
