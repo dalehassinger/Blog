@@ -17,6 +17,16 @@
 The views and opinions expressed on this blog are my strictly my own and do not reflect the views and opinions of my employer. I Blog about Subjects and Products that I find interesting and will hopefully help someone get started on their Automation, Monitoring and Logging journey by providing some tips | tricks | processes | code needed.  
 {{< /admonition >}}
 
+---
+
+* I will never add advertising on my Blog Site. If you ever find something useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!
+
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+
+---
+
 * My focus is Enterprise Automation, Monitoring and Logging. When I was a VMware customer I created an IaC (Infrastructure as Code) Environment. I used VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes… For monitoring I used vRealize Operations for the “Single Pane of Glass” experience. I also used vRealize Log Insight for logging and LCM (Life Cycle Manager) for installing all the vRealize Products.  
 
 * Almost all the code I write to complete the Automation that I create is done with PowerShell. The reason I choose to use PowerShell is because to do Automation with VMware products, VMware has a PowerShell module named PowerCLI. There hasn’t been anything that I wanted to Automate that I haven’t been able to do with PowerShell.
