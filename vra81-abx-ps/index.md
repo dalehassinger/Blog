@@ -137,4 +137,13 @@ Using ABX and a subscription in vRA 8.1 eliminates the need to have a Windows Po
 * A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused.
 * I will not need as many VMs for the installation and administration of vRA 8.x.
 
+---
+
+* I will never add advertising on my Blog Site. If you find this blog useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!
+
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+
+---
 
