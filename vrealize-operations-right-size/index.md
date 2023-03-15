@@ -127,3 +127,12 @@ I like using Donut Charts in Dashboards. You can show a lot of data in a small a
 
 When I write about Automation I always say there are many ways to accomplish the same task.  Monitoring is the same way.  I am showing what I felt was important to see but every organization will be different.  Add/Remove columns in the Dashboard to suite you needs. There is no right or wrong way to monitor. Maybe other metrics make more sense to you. What is important with monitoring is don't install vRealize Operation and not use it. Don't make vROPS Shelfware! This is a GREAT Tool that shows you so much information about your virtual environment. And it keeps getting better...
 
+---
+
+* I will never add advertising to my Blog Site. If you find this blog useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!
+
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+
+---
