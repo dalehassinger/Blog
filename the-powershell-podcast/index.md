@@ -15,7 +15,13 @@ I thought it would be fun to join the podcast as a guest, to share how I use Pow
 
 Hopefully the vCommunity enjoys this episode. I thought this would be another great way to give back to the community and share some information.
 
-The episode I recorded with "The PowerShell Podcast" will be released on 03/20/2023. I will add a link after the episode is officially released.
+---
+
+The episode I recorded with "The PowerShell Podcast" was released on 03/20/2023. Here are the links:
+* [The PowerShell Podcast | "Using PowerCLI with Dale Hassinger" | on Podbean](https://powershellpodcast.podbean.com/e/using-powercli-with-dale-hassinger/)
+* [The PowerShell Podcast | "Using PowerCLI with Dale Hassinger" | on Youtube](https://youtu.be/U8QwsnM4EkQ)
+
+---
 
 
 ###### Podcast Discussion:
