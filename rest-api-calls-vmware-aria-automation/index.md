@@ -1,7 +1,7 @@
-# Rest-API calls in VMware Aria Automation with PowerShell
+# Rest API calls in VMware Aria Automation with PowerShell
 
 
-**Rest-API calls in VMware Aria Automation with PowerShell**
+**Rest API calls in VMware Aria Automation with PowerShell**
 
 ---
 
@@ -146,5 +146,5 @@ Hopefully this example helps anyone who is stuck or just looking for an example 
 
 ###### Guest Blogger:
 
->I want to thank guest Blogger, **Dave Kaber**, for taking the time to write this blog post and share with the **#vCommunity**. Hopefully Dave will be sharing some additional content in the future.
+>I want to thank guest Blogger, **Dave Kaber** [@dave_kaber](https://twitter.com/dave_kaber), for taking the time to write this blog post and share with the **#vCommunity**. Hopefully Dave will be sharing some additional content in the future.
 
