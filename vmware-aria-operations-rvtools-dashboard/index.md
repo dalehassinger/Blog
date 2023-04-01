@@ -39,7 +39,8 @@ If you don't use RVTools today, take some time and review it. There are some goo
 ###### PowerShell Script:
 
 * The script was created to be dynamic. No worksheet names or field names are hard coded. If new Worksheets or fields are added to RVTools in the future, they will automatically be picked up with this script.
-* RVTools provides a program to encrypt your password that will be used with the script. The program is named "RVToolsPasswordEncryption.exe".  
+* RVTools provides a program to encrypt your password that will be used with the script. The program is named "RVToolsPasswordEncryption.exe".
+* The PowerShell Script uses the importexcel PowerShell Module to see the data in the RVTools xlsx file. If you have never used the importexcel module, please review to see if you would have other use cases. No need to have Excel Installed. Works Awesome, one of my Favorite PowerShell Modules. Thanks [Doug Finke ](https://github.com/dfinke)
 
 * **Click to expand PowerShell code**
 
