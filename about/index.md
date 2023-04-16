@@ -4,8 +4,8 @@
 <center>{{< image src="author.png" caption="">}}</center>
 
 >VMware TAM (Technical Account Manager)  
->VMware vExpert 2020 - 2023  
->VMware vExpert Cloud Management 2021 - 2022  
+>VMware vExpert 2020 - Present  
+>VMware vExpert Cloud Management 2021 - Present  
 
 >If you can script it, You can Automate it!  
 
