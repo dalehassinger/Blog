@@ -47,7 +47,7 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 >“It doesn’t make sense to hire smart people and then tell them what to do, We hire smart people so they can tell us what to do.” - Steve Jobs  
 
 {{< admonition type=success title="Thanks!" open=true >}}
-* I have worked with a great group of people at VMware, past and present. I would like to thank the following people for all their support in no particular order: Steve Leiberson, Marshall Cline, Brock Peterson, Ariel Sanchez, Karl Hauck, Cosmin Trif,  Daniel Thomas, Marcus Roberts, Paul Schlosser, Eric Pennente, Kevin Holland and others.
+* I have worked with a great group of people at VMware, past and present. I would like to thank the following people for all their support in no particular order: Steve Leiberson, Marshall Cline, Brock Peterson, Christopher Kusek, Ariel Sanchez, Karl Hauck, Cosmin Trif,  Daniel Thomas, Marcus Roberts, Paul Schlosser, Eric Pennente, Kevin Holland and others.
 * Special Thanks to David Kruse for getting me started with vRA.
 * Special Thanks to Vincent Riccio for allowing me to do SaltStack Config Presentations with you at VMworld 21 and SaltConf 21.  
 * Special Thanks to my first manager at VMware: Alex Musicante. You believed in me and my passion/skills/knowledge of the VMware Products. You gave me a career opportunity that no one else did.

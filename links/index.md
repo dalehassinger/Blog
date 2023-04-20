@@ -5,13 +5,15 @@
 
 ---
 
-{{< admonition type=tip title="Bloggers:" open=true >}}
+{{< admonition type=tip title="Bloggers | Youtube" open=true >}}
 * [Brock Peterson - VMware Aria Operations Master](https://www.brockpeterson.com)
+* [Christopher Kusek - The Forgotten Manual Tech](https://www.youtube.com/@WTFManTech/featured)
 * [Cosmin Trif - VMware Aria Suite Master](https://cosmin.gq/)
 * [LucD - PowerShell Master](https://www.lucd.info)
 * [William Lam - VMware Master](https://williamlam.com)
 * [Yellow Bricks](https://www.yellow-bricks.com)
 {{< /admonition >}}
+
 
 ---
 
