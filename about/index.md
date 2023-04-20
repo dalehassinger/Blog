@@ -3,7 +3,7 @@
 
 <center>{{< image src="author.png" caption="">}}</center>
 
->VMware TAM (Technical Account Manager)  
+>VMware TAM (Technical Adoption Manager)  
 >VMware vExpert 2020 - Present  
 >VMware vExpert Cloud Management 2021 - Present  
 
