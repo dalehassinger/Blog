@@ -86,6 +86,8 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 * VMware vExpert - Cloud Management | 2021 - 2022
 * SaltConf Session - 2021 | Managing Windows with SaltStack Config | 
 * VMworld Session - 2021 | Manage Windows Workloads Through vRealize Automation SaltStack Config [MCL1895]
+* Philly VMUG - 2023 | VMware Aria Automation and Operations  
+* Central PA VMUG - 2022 | VMware Explore 2022  
 * VMware PowerBlock - 2021 | Customer Showcase - VM Right Sizing
 * VMware PowerBlock- 2020 | vRealize Operations, your monitoring “Single Pane of Glass
 * vBrownbag session for VMworld - 2020 | vRealize Operations, your monitoring “Single Pane of Glass

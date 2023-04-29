@@ -1,13 +1,13 @@
-# vExpert 2023
+# vExpert 2023 | vExpert Cloud Management
 
 
-VMware vExpert 2020 - 2023 | VMware vExpert Cloud Management 2021 - 2022
+VMware vExpert 2020 - Present | VMware vExpert Cloud Management 2021 - Present
 
 <!--more-->
 
 ---
 
-##### VMware vExpert 2020 - 2023 | VMware vExpert Cloud Management 2021 - 2022
+##### VMware vExpert 2020 - Present | VMware vExpert Cloud Management 2021 - Present
 
 {{< image src="vexpert-2023.png" caption="">}}  
 {{< image src="vexpert-2023-4-stars.png" caption="">}}  
@@ -18,6 +18,8 @@ VMware vExpert 2020 - 2023 | VMware vExpert Cloud Management 2021 - 2022
 I am very proud to be part of the VMware vExpert program.  This is the fourth year that I was accepted into the program. One part of the vExpert program that I think is great is that the program recognizes people for sharing their knowledge and "Giving Back". A person selected into the vExpert programs is someone that likes to share, wants to make themselves and everyone around them smarter.  
 
 One of my goals as an VMware employee is to be able to give more back to the vCommunity than I was able to as an end user of the VMware Products.
+
+2023 is also the 3rd year that I was accepted into the VMware vExpert Cloud Management subprogram.  
 
 ---
 
@@ -45,5 +47,6 @@ Email: Dale.Hassinger@vCrocs.info
 Location: Dillsburg, PA
 
 > "9 - 5 pays the bills, 5 - 10 advances your career"
+
 
 

@@ -1,7 +1,7 @@
 # Philly VMUG | VMware Aria Automation and Operations
 
 
-**Philly VMUG | VMware Aria Automation and Operations**
+**Philly VMUG | VMware Aria Automation and Operations | Recorded Session now available!**
 
 ---
 
@@ -23,6 +23,15 @@ I am going to demo to the Philly VMUG Community, how to use **VMware Aria Automa
         <li>Stop the cloud chaos by using a single tool like VMware Aria for creation, management and monitoring.</li>
     </ul>
 </div>
+
+---
+
+###### Update:
+Here is the link to watch the Presentation on the Philly VMUG Youtube Channel:  
+
+{{< youtube QWr64shPoBc >}}
+
+
 
 {{< image src="aria-automation.jpg" caption="Click to see Larger Image">}}  
 {{< image src="aria-operations.png" caption="Click to see Larger Image">}}  
