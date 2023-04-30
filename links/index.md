@@ -5,7 +5,7 @@
 
 ---
 
-{{< admonition type=tip title="Bloggers | Youtube" open=true >}}
+{{< admonition type=tip title="Bloggers | Youtube:" open=true >}}
 * [Brock Peterson - VMware Aria Operations Master](https://www.brockpeterson.com)
 * [Christopher Kusek - The Forgotten Manual Tech](https://www.youtube.com/@WTFManTech/featured)
 * [Cosmin Trif - VMware Aria Suite Master](https://cosmin.gq/)
@@ -35,10 +35,10 @@
 ---
 
 {{< admonition type=tip title="Podcasts:" open=true >}}
+* [The PowerShell Podcast](https://powershellpodcast.podbean.com/)
 * [Virtually Speaking Podcast](https://www.vspeakingpodcast.com)
 * [Mac Power Users - MPU](https://www.relay.fm/mpu)
 * [The Hacks - Powered By SaltStack](https://saltproject.io/the-hacks/episodes/)
-* [The PowerShell Podcast](https://powershellpodcast.podbean.com/)
 * [VMware Communities Roundtable](https://app.talkshoe.com/show/vmware-communities-roundtable)
 * [IT Reality Podcast](https://itr-it-reality.zencast.website/episodes/21)
 {{< /admonition >}}

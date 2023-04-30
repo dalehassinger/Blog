@@ -19,14 +19,6 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 
 ---
 
-* I will never add advertising to my Blog Site. If you ever find something useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!
-
-<center>
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-</center>
-
----
-
 * My focus is Enterprise Automation, Monitoring and Logging. When I was a VMware customer I created an IaC (Infrastructure as Code) Environment. I used VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes… For monitoring I used vRealize Operations for the “Single Pane of Glass” experience. I also used vRealize Log Insight for logging and LCM (Life Cycle Manager) for installing all the vRealize Products.  
 
 * Almost all the code I write to complete the Automation that I create is done with PowerShell. The reason I choose to use PowerShell is because to do Automation with VMware products, VMware has a PowerShell module named PowerCLI. There hasn’t been anything that I wanted to Automate that I haven’t been able to do with PowerShell.
@@ -58,25 +50,16 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 {{< /admonition >}}
 
 {{< admonition type=success title="Experience" open=true >}}
-* VMware Aria
-* VMware Aria Hub
-* VMware Aria Graph
-* VMware Aria Automation
-* VMware Aria Automation Config
-* VMware Aria Operations
-* VMware Aria Operations for Logs
-* VMware vSphere
-* VMware vCenter
-* vRealize Automation
-* vRealize SaltStack Config
-* vRealize Operations
-* PowerShell
-* PowerCLI
-* vRealize Log Insight
-* Windows Servers
-* Linux Servers
-* Python
-* Ansible
+* VMware Aria | VMware Aria Hub | VMware Aria Graph
+* VMware Aria Automation | VMware Aria Automation Config
+* VMware Aria Operations | VMware Aria Operations for Logs
+* VMware vCenter | VMware vSphere
+* vRealize Automation | vRealize SaltStack Config | vRealize Operations | vRealize Log Insight
+* PowerShell | PowerCLI | Python
+* Windows Servers | Linux Servers | macOS
+* Salt | Ansible
+* SQL Server
+* more...
 {{< /admonition >}}
 
 >"9 - 5 pays the bills, 5 - 10 advances your career" - Author Unknown  
@@ -96,4 +79,12 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 {{< admonition type=info title="Info" open=true >}}
 I like to wear Crocs and I like VMware Products. So what better name than "vCrocs for my Blog"  
 {{< /admonition >}}
+
+---
+
+* I will never add advertising to my Blog Site. If you ever find something useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!
+
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
 
