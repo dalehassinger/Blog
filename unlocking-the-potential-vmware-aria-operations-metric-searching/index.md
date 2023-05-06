@@ -1,4 +1,4 @@
-# Unlocking the Potential | VMware Aria Operations Metric Searching
+# Unlocking the Potential | VMware Aria Operations Metric Search
 
 
 **Example metric queries to help you with "Real World" questions.**
