@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Unlocking the Potential | VMware Aria Operations Metric Searching - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="Unlocking the Potential | VMware Aria Operations Metric Searching" />
+<meta property="og:description" content="Example metric queries to help you with &ldquo;Real World&rdquo; questions." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/" /><meta property="og:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-06T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png"/>
+<meta name="twitter:title" content="Unlocking the Potential | VMware Aria Operations Metric Searching"/>
+<meta name="twitter:description" content="Example metric queries to help you with &ldquo;Real World&rdquo; questions."/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/" /><link rel="prev" href="https://www.vcrocs.info/vmware-aria-operations-rvtools-dashboard/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Unlocking the Potential | VMware Aria Operations Metric Searching",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-metric-searching\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-metric-searching\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VMware Aria Operations, Metrics, Searches, Trouble Shooting","wordcount":  1047 ,
+        "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-metric-searching\/","datePublished": "2023-05-06T00:00:00+00:00","dateModified": "2023-05-06T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Unlocking the Potential | VMware Aria Operations Metric Searching</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/unlocking-the-potential/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Unlocking the Potential</a>&nbsp;<a href="/categories/vmware-aria-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria Operations</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-06">2023-05-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1047 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png"
+        data-srcset="/unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png, /unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png 1.5x, /unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png"
+        title="/unlocking-the-potential-vmware-aria-operations-metric-searching/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#vmware-aria-operations-812-released">VMware Aria Operations 8.12 Released:</a></li>
+                    <li><a href="#search-examples">Search Examples:</a></li>
+                    <li><a href="#example-metric-searches-for-vms">Example Metric Searches for VMs:</a></li>
+                    <li><a href="#example-metric-searches-for-hosts">Example Metric Searches for Hosts:</a></li>
+                    <li><a href="#example-metric-searches-for-clusters">Example Metric Searches for Clusters:</a></li>
+                    <li><a href="#stream-deck">Stream Deck</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned</a></li>
+                    <li><a href="#links-i-found-to-be-very-helpful">Links I found to be very helpful:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Example metric queries to help you with &ldquo;Real World&rdquo; questions.</strong></p>
+<hr>
+<p>This blog post is the start of a series of blog posts that will be created to help you &ldquo;Unlock the Potential&rdquo; of the VMware Aria Products. I want to give you some &ldquo;Real World&rdquo; examples that VMware admins could use everyday to help them with their daily tasks. Hopefully you will learn from my Tips and Tricks.</p>
+<hr>
+<h6 id="vmware-aria-operations-812-released">VMware Aria Operations 8.12 Released:</h6>
+<p>With the release of VMware Aria Operations 8.12, Metric Searches was added to the product.</p>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png, /unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png 1.5x, /unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png" width="1507" height="466" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>I always like to create Dashboards with VMware Aria Operations to show metric information that I think is important to a VMware Admin. I think that metric searches will help provide a lot of information that is not included on existing or custom dashboards. Metric Searches will also allow non-admins, that don&rsquo;t have permission to create dashboards and views, to see specific information to help troubleshoot an issue.</p>
+<p>I really like how the results of a metric search will stack and then you can scroll to see what item has the highest value. You can change the results to show different time ranges. After results are displayed you can also start defining the parents of the results.</p>
+<hr>
+<h6 id="search-examples">Search Examples:</h6>
+<p>In this example the metric search found all VMs with CPU|Ready ms &gt; 750 ms. When search is complete you can define the search further by selecting the parent host.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU|Ready ms &gt; 750 ms
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="n">Ready</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">750</span><span class="w"> </span><span class="n">ms</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif, /unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif 1.5x, /unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif" width="1502" height="670" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<p>Now lets take the search used above and define the results further by specifying host or cluster.
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU|Ready ms &gt; 750 ms WHERE the host is esx-02a.corp.local
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="n">Ready</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">750</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="n">childOf</span><span class="w"> </span><span class="n">esx</span><span class="o">-</span><span class="mi">02</span><span class="n">a</span><span class="p">.</span><span class="n">corp</span><span class="p">.</span><span class="k">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU|Ready ms &gt; 750 ms WHERE the cluster is Cluster-01
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="n">Ready</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">750</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="n">childOf</span><span class="w"> </span><span class="k">Cluster</span><span class="o">-</span><span class="mi">01</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="example-metric-searches-for-vms">Example Metric Searches for VMs:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU usage % greater than 90
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">90</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with Memory usage % greater than 90
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">90</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with Snap Shots older than 2 days
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">{</span><span class="n">Disk</span><span class="w"> </span><span class="k">Space</span><span class="o">|</span><span class="n">Snapshot</span><span class="o">|</span><span class="n">Age</span><span class="w"> </span><span class="p">(</span><span class="n">Days</span><span class="p">)</span><span class="err">}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs running longer than 30 days. Shows VMs not patched if you do monthly patching.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">{</span><span class="k">System</span><span class="o">|</span><span class="n">OS</span><span class="w"> </span><span class="n">Uptime</span><span class="w"> </span><span class="k">Second</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="err">}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="err">{</span><span class="k">Day</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="err">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU and Memory usage for all VMs with a specific string in the name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Name</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s1">&#39;rocky&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU and Memory usage for a specific VM
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Name</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;DBH-196&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU and Memory usage for all VMs in a specific Cluster
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Summary</span><span class="o">|</span><span class="n">Parent</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;Cluster-02&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="example-metric-searches-for-hosts">Example Metric Searches for Hosts:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts with High CPU Usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts with High Memory Usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts In Maintenance Mode
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Runtime</span><span class="o">|</span><span class="n">Maintenance</span><span class="w"> </span><span class="k">State</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;inMaintenance&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts where Health is less than 100%
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Badge</span><span class="o">|</span><span class="n">Health</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU Usage and Memory Usage for all Hosts In a Specific Cluster
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Summary</span><span class="o">|</span><span class="n">Parent</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;Cluster-01&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="example-metric-searches-for-clusters">Example Metric Searches for Clusters:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Clusters where DRS was turned off
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">DRS</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Enabled</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="n">Compute</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">DRS</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Enabled</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;false&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>These metric search query examples should give you some good ideas of what you can do. Take thee examples and change to make your own. Have Fun!</p>
+<hr>
+<p>Metric search queries remind me of one of my favorite quotes:<br>
+Your thought process is the most powerful automation tool you’ll ever have! - Cody De Arkland</p>
+<hr>
+<h6 id="stream-deck">Stream Deck</h6>
+<p>If you&rsquo;re thinking to yourself, I don&rsquo;t want to have to type or copy/paste these metric searches everyday, I have a solution. STREAM DECK! If you ever wanted an excuse to spend the money for a Stream Deck, now is the time! You can program the buttons of a Stream Deck to do the searches. There is a button type in the Stream Deck called text. Enter the metric search query as the text. See the screen shot below. AWESOME!</p>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png, /unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png 1.5x, /unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png" width="1682" height="1530" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>Demo of doing Multiple Searches in a row and all the text is entered by the Stream Deck.</p>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif, /unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif 1.5x, /unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif" width="2000" height="1090" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>Metric Searches are a great way to do get some quick data.</li>
+<li>Nice way for non-admins to get data they want to see that isn&rsquo;t included in OOTB (Out of The Box) Dashboards and Views.</li>
+<li>Quick way to be able to stack metrics from multiple objects.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<h6 id="links-i-found-to-be-very-helpful">Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://blogs.vmware.com/management/2023/04/metric-based-search.html" target="_blank">VMware Blog: Metric-Based Search Improvements in VMware Aria Operations</a></li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>I will never add advertising to my Blog Site. If you find this blog useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-06</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/" data-title="Unlocking the Potential | VMware Aria Operations Metric Searching" data-via="dalehassinger" data-hashtags="VMware Aria Operations,Metrics,Searches,Trouble Shooting"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/" data-hashtag="VMware Aria Operations"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vmware-aria-operations/">VMware Aria Operations</a>,&nbsp;<a href="/tags/metrics/">Metrics</a>,&nbsp;<a href="/tags/searches/">Searches</a>,&nbsp;<a href="/tags/trouble-shooting/">Trouble Shooting</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vmware-aria-operations-rvtools-dashboard/" class="prev" rel="prev" title="VMware Aria Operations | RVTools Dashboard"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware Aria Operations | RVTools Dashboard</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-166234216-1');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-166234216-1" async></script></body>
+</html>
