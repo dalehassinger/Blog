@@ -102,7 +102,7 @@ Metric: Cluster Configuration|DRS Configuration|Enabled of Cluster Compute Resou
 
 ---
 
-These metric search query examples should give you some good ideas of what you can do. Take thee examples and change to make your own. Have Fun!
+These metric search query examples should give you some good ideas of what you can do. Take these examples and change to make your own. Have Fun!
 
 ---
 
