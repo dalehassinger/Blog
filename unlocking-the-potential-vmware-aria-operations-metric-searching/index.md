@@ -125,6 +125,19 @@ Demo of doing Multiple Searches in a row and all the text is entered by the Stre
 
 ---
 
+###### How to use the Kebab menu to go to the TroubleShotting Workbench
+
+Here is an example of all the steps above and then also choosing the kebab menu to go to the troubleshooting workbench.
+
+- [x] Enter Search String with Stream Deck
+- [x] Review the VMs for high CPU
+- [x] Change the date range to 7 days to see how long the VM has been at 100% usage
+- [x] Go to the troubleshooting WorkBench to see why the CPU usage is so high.
+
+{{< image src="metric-search-03.gif" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
 ###### Lessons Learned
 
 {{< admonition type=info title="Lessons Learned:" open=true >}}
