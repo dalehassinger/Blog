@@ -134,7 +134,7 @@ Here is an example of all the steps above and then also choosing the kebab menu 
 - [x] Change the date range to 7 days to see how long the VM has been at 100% usage
 - [x] Go to the troubleshooting WorkBench to see why the CPU usage is so high.
 
-{{< image src="metric-search-03.gif" caption="Click to see Larger Image of Screen Shot">}}  
+{{< vimeo 824500571 >}}
 
 ---
 
