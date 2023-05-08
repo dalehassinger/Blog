@@ -88,6 +88,9 @@ Metric: Host System where Runtime|Maintenance State equals 'inMaintenance'
 # --- Show Hosts where Health is less than 100%
 Metric: Host System where Badge|Health % < 100
 
+# --- Show Hosts where Workload is greater than 75%
+Metric: Host System where Badge|Workload % > 75
+
 # --- Show CPU Usage and Memory Usage for all Hosts In a Specific Cluster
 Metric: Host System where CPU|Usage % > 0 and Memory|Usage % > 0 and Summary|Parent Cluster equals 'Cluster-01'
 {{< /highlight >}}  
@@ -98,6 +101,18 @@ Metric: Host System where CPU|Usage % > 0 and Memory|Usage % > 0 and Summary|Par
 {{< highlight SQL >}}
 # --- Show Clusters where DRS was turned off
 Metric: Cluster Configuration|DRS Configuration|Enabled of Cluster Compute Resource where Cluster Configuration|DRS Configuration|Enabled equals 'false'
+{{< /highlight >}}  
+
+---
+
+###### Example Metric Searches for Datastores:
+{{< highlight SQL >}}
+# --- Show Datastores where Capacity used is greater than 75%
+Metric: Datastore where Capacity|Used Space % > 75
+
+# --- Show Datastores where Health is less than 100%
+Metric: Datastore where Badge|Health % < 100
+
 {{< /highlight >}}  
 
 ---
