@@ -125,7 +125,7 @@ Demo of doing Multiple Searches in a row and all the text is entered by the Stre
 
 ---
 
-###### How to use the Kebab menu to go to the TroubleShotting Workbench
+###### How to use the Kebab menu to go to the TroubleShooting Workbench
 
 Here is an example of all the steps above and then also choosing the kebab menu to go to the troubleshooting workbench.
 
@@ -144,6 +144,7 @@ Here is an example of all the steps above and then also choosing the kebab menu 
 * Metric Searches are a great way to do get some quick data. 
 * Nice way for non-admins to get data they want to see that isn't included in OOTB (Out of The Box) Dashboards and Views.
 * Quick way to be able to stack metrics from multiple objects.
+* Metric Search adds a way to extend how you would use Aria Operations Standard version, because you can not create custom dashboards and views.
 {{< /admonition >}}
 
 ---
