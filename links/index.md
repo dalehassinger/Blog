@@ -5,6 +5,12 @@
 
 ---
 
+{{< admonition type=tip title="vCROCS | GitHub Repository" open=true >}}
+* [vCROCS | GitHub Repository](https://github.com/dalehassinger/unlocking-the-potential)
+{{< /admonition >}}
+
+---
+
 {{< admonition type=tip title="Bloggers | Youtube:" open=true >}}
 * [Brock Peterson - VMware Aria Operations Master](https://www.brockpeterson.com)
 * [Christopher Kusek - The Forgotten Manual Tech](https://www.youtube.com/@WTFManTech/featured)
@@ -13,7 +19,6 @@
 * [William Lam - VMware Master](https://williamlam.com)
 * [Yellow Bricks](https://www.yellow-bricks.com)
 {{< /admonition >}}
-
 
 ---
 

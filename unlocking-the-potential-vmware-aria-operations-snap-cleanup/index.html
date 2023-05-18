@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Unlocking the Potential | VMware Aria Operations | Automation Central | VM Snaps - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="Unlocking the Potential | VMware Aria Operations | Automation Central | VM Snaps" />
+<meta property="og:description" content="Adding &ldquo;DoNotDelete&rdquo; to a VM Snap Name to control if Auto Deleted." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/" /><meta property="og:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-05-13T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png"/>
+<meta name="twitter:title" content="Unlocking the Potential | VMware Aria Operations | Automation Central | VM Snaps"/>
+<meta name="twitter:description" content="Adding &ldquo;DoNotDelete&rdquo; to a VM Snap Name to control if Auto Deleted."/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/" /><link rel="prev" href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Unlocking the Potential | VMware Aria Operations | Automation Central | VM Snaps",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-snap-cleanup\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-snap-cleanup\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VMware Aria Operations, Snaps, Automation","wordcount":  406 ,
+        "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-snap-cleanup\/","datePublished": "2023-05-13T00:00:00+00:00","dateModified": "2023-05-13T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Unlocking the Potential | VMware Aria Operations | Automation Central | VM Snaps</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/unlocking-the-potential/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Unlocking the Potential</a>&nbsp;<a href="/categories/vmware-aria-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria Operations</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-05-13">2023-05-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;406 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png"
+        data-srcset="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png 1.5x, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png"
+        title="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#vmware-aria-operations-812-released">VMware Aria Operations 8.12 Released:</a></li>
+                    <li><a href="#delete-old-snapshots">Delete old snapshots:</a></li>
+                    <li><a href="#schedule-report-history-amd-jobs">Schedule, Report, History amd Jobs</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned</a></li>
+                    <li><a href="#links-i-found-to-be-very-helpful">Links I found to be very helpful:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Adding &ldquo;DoNotDelete&rdquo; to a VM Snap Name to control if Auto Deleted.</strong></p>
+<hr>
+<h6 id="vmware-aria-operations-812-released">VMware Aria Operations 8.12 Released:</h6>
+<p>With the release of VMware Aria Operations 8.12, &ldquo;Snapshot Name&rdquo; was added to &ldquo;Delete old snapshots&rdquo;.</p>
+<hr>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png" title="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png 1.5x, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png" width="1834" height="1289" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="delete-old-snapshots">Delete old snapshots:</h6>
+<p>Adding &ldquo;Snapshot Name&rdquo; to &ldquo;Delete old snapshots&rdquo; in Automation Central may seem like a small change but it adds a lot of Power to the process. This change allows you to create a Job to run everyday that will delete all Snaps on VMs EXCEPT Snaps that have &ldquo;DoNotDelete&rdquo; in the name.</p>
+<hr>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> You could also do the opposite with this process. You can have the job only delete Snapshots where the Snap Name contains the text &ldquo;AutoDelete&rdquo;.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png" title="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png 1.5x, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png" width="1691" height="993" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>I prefer using the method to auto delete all old VM snaps, unless you tell me not to. After being a VMware administrator for many years, I have seen to many VMs running with snaps older that 30 days or even with multiple snaps running and each snap 60+ days old. That is NOT best practice. VM Snaps are NOT Backups. Using Automation Central within VMware Aria Operations helps you keep your environment running better and helps you follow some best practice rules.</p>
+<hr>
+<h6 id="schedule-report-history-amd-jobs">Schedule, Report, History amd Jobs</h6>
+<p>Here are the screens you will see in Automation Central, Schedule, Report, History amd Jobs.</p>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Schedule:  Nice calendar view of all scheduled jobs.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Report: Shows you how much storage you were able to re-claim by deleting old snaps.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> History: Shows you every time a Snap was deleted with details.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Jobs: List of all Jobs you created.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif" title="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif 1.5x, /unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif" width="1604" height="904" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>DoNotDelete</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<h6 id="links-i-found-to-be-very-helpful">Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://blogs.vmware.com/management/2023/04/whats-new-in-vmware-aria-operations-8-12.html" target="_blank">VMware Blog: What’s New in VMware Aria Operations 8.12</a></li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>I will never add advertising to my Blog Site. If you find this blog useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-13</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/" data-title="Unlocking the Potential | VMware Aria Operations | Automation Central | VM Snaps" data-via="dalehassinger" data-hashtags="VMware Aria Operations,Snaps,Automation"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/" data-hashtag="VMware Aria Operations"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vmware-aria-operations/">VMware Aria Operations</a>,&nbsp;<a href="/tags/snaps/">Snaps</a>,&nbsp;<a href="/tags/automation/">Automation</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/unlocking-the-potential-vmware-aria-operations-metric-searching/" class="prev" rel="prev" title="Unlocking the Potential | VMware Aria Operations | Metric Search"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Unlocking the Potential | VMware Aria Operations | Metric Search</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-166234216-1');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-166234216-1" async></script></body>
+</html>
