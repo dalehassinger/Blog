@@ -53,7 +53,9 @@ Here are the screens you will see in Automation Central, Schedule, Report, Histo
 ###### Lessons Learned
 
 {{< admonition type=info title="Lessons Learned:" open=true >}}
-* DoNotDelete
+* Using the VMware Aria Operations Automation Central is a great way to keep snapshots cleaned up on VMs.
+* Add the text "DoNotDelete" to the Snap Name, makes an easy way to save Snaps that shouldn't be auto deleted.
+* Overall nice new feature added to VMware Aria Operations 8.12.
 
 {{< /admonition >}}
 
