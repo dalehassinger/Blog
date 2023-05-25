@@ -7,6 +7,7 @@
 
 {{< admonition type=tip title="vCROCS | GitHub Repository" open=true >}}
 * [vCROCS | GitHub Repository](https://github.com/dalehassinger/unlocking-the-potential)
+* [Salt | Formulas Repository](https://github.com/orgs/saltstack-formulas/repositories?type=all)
 {{< /admonition >}}
 
 ---
