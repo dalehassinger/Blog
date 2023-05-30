@@ -65,8 +65,8 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 >"9 - 5 pays the bills, 5 - 10 advances your career" - Author Unknown  
 
 {{< admonition type=success title="vCommunity Activities" open=true >}}
-* VMware vExpert | 2020 - 2023
-* VMware vExpert - Cloud Management | 2021 - 2022
+* VMware vExpert | 2020 - Present
+* VMware vExpert - Cloud Management | 2021 - Present
 * SaltConf Session - 2021 | Managing Windows with SaltStack Config | 
 * VMworld Session - 2021 | Manage Windows Workloads Through vRealize Automation SaltStack Config [MCL1895]
 * Philly VMUG - 2023 | VMware Aria Automation and Operations  
