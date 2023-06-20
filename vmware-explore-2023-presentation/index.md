@@ -18,7 +18,12 @@ Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud) [CODE25
 
 ###### Description:
 Learn how to create Windows Servers on-prem and in the cloud, see how to use the saltstack resource with the cloud template, add grain data with the cloud template, install software using the windows repo, add Windows Server roles and features with states, and use states to maintain your Windows Server configuration. After creating Windows Servers, you will also see how to monitor on-prem and cloud servers with VMware Aria Operations.
- 
+
+--- 
+
+{{< image src="code2501lv.png" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
 
 ###### Presenters:
 Dale Hassinger, Technical Adoption Manager, vExpert  
@@ -29,6 +34,12 @@ Track : Multi-Cloud
 Primary Products: VMware Aria Automation | VMware Aria Automation Config | VMware Aria Operations  
 Session Type: VMware {code} Theater Session  
 VMware Explore Conference: 08/21/2023-08/24/2023  
+
+---
+
+###### Link to My Session:  
+
+<a href="https://event.vmware.com/flow/vmware/explore2023lv/content/page/catalog?search=Hassinger" target="_blank">My Session | Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud)</a>
 
 ---
 
