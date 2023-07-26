@@ -31,7 +31,7 @@
                             "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-09\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Windows Server, Configuration Management, Salt API","wordcount":  1487 ,
+                        }],"genre": "posts","keywords": "SaltStack Config, VMware Aria Automation, vRealize Automation, PowerShell, Windows Server, Configuration Management, Salt API","wordcount":  1536 ,
         "url": "https:\/\/www.vcrocs.info\/saltstack-config-part-09\/","datePublished": "2022-06-10T00:00:00+00:00","dateModified": "2023-01-07T22:37:59-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware vRealize SaltStack Config as a Windows Server Admin - Part 9</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/saltstack-config/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>SaltStack Config</a>&nbsp;<a href="/categories/vmware-aria/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-10">2022-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1487 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-10">2022-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1536 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -150,6 +150,8 @@
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Part 9: Using salt-api with PowerShell for Windows Server Automation</p>
+<hr>
+<p><strong>Update: It was brought to my attention that adding cherypy will break the salt master. After a quick test in my lab I had the same issue with the newest version of SaltStack Config. DO NOT use this blog post until I get a working version in my lab.</strong></p>
 <hr>
 <p>This post is to show how to use PowerShell to make RESTful API calls to SaltStack Config. This is something that I have wanted to do for awhile. I could never find any examples in my Google searches, so I took the time to learn how the examples that use curl work and translated that into PowerShell Code. I hope some Windows Server Admins will find this post helpful. I like using salt to do Windows Server Configuration Management more than remote PowerShell. You can run changes against many servers at the exact same time instead of looping thru a list of servers names.</p>
 <p>I am also going to look at use salt-api with vRealize Automation ABX action scripts.</p>

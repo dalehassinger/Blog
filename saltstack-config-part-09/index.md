@@ -7,6 +7,10 @@ Part 9: Using salt-api with PowerShell for Windows Server Automation
 
 ---
 
+**Update: It was brought to my attention that adding cherypy will break the salt master. After a quick test in my lab I had the same issue with the newest version of SaltStack Config. DO NOT use this blog post until I get a working version in my lab.**  
+
+---
+
 This post is to show how to use PowerShell to make RESTful API calls to SaltStack Config. This is something that I have wanted to do for awhile. I could never find any examples in my Google searches, so I took the time to learn how the examples that use curl work and translated that into PowerShell Code. I hope some Windows Server Admins will find this post helpful. I like using salt to do Windows Server Configuration Management more than remote PowerShell. You can run changes against many servers at the exact same time instead of looping thru a list of servers names.
 
 I am also going to look at use salt-api with vRealize Automation ABX action scripts.
