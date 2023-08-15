@@ -39,41 +39,74 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 >“It doesn’t make sense to hire smart people and then tell them what to do, We hire smart people so they can tell us what to do.” - Steve Jobs  
 
 {{< admonition type=success title="Thanks!" open=true >}}
-* I have worked with a great group of people at VMware, past and present. I would like to thank the following people for all their support in no particular order: Steve Leiberson, Marshall Cline, Brock Peterson, Christopher Kusek, Ariel Sanchez, Karl Hauck, Cosmin Trif,  Daniel Thomas, Marcus Roberts, Paul Schlosser, Eric Pennente, Kevin Holland and others.
-* Special Thanks to David Kruse for getting me started with vRA.
+* The Cloud Solution Architects team I am currently a part of is highly rated and renowned for its innovation and expertise. Over the past few years, several members of this team have become role models for me. I anticipate gaining significant knowledge from their expertise and, in turn, give back to the team.  
+
+* I have worked with a great group of people at VMware, past and present. I would like to thank the following people for all their support in no particular order: Steve Leiberson, Marshall Cline, Brock Peterson, Christopher Kusek, Ariel Sanchez, Karl Hauck, Cosmin Trif,  Daniel Thomas, Marcus Roberts, Paul Schlosser, Eric Pennente, Kevin Holland and others.  
+
+* Special Thanks to David Kruse for getting me started with vRA.  
+
 * Special Thanks to Vincent Riccio for allowing me to do SaltStack Config Presentations with you at VMworld 21 and SaltConf 21.  
-* Special Thanks to my first manager at VMware: Alex Musicante. You believed in me and my passion/skills/knowledge of the VMware Products. You gave me a career opportunity that no one else did.
-* Special Thanks to some past and present co-workers, SEs, TAMs, HVC Members that I learned a lot from: Robert Mitchell, Dan Grove, Steve Holmes, Steve Pittenger, Anton Wesztergom (Opened my eyes to vRA Day 2), Ryan Palmer, Megan Koss, Josh Demcher, Kirk Shaffer.
-* Special Thanks to the person that gave me my first Job in IT: David Cornelius
-* List of Bloggers that I follow and have learned a lot by them “Giving Back”: Cody De Arkland, Luc Dekens, Kyle Ruddy, William Lam, Nathen Bennett, Vince Wood, Alan Renouf.
-* and anyone else that helped me in my journey called my career…
+
+* Special Thanks to my first manager at VMware: Alex Musicante. You believed in me and my passion/skills/knowledge of the VMware Products. You gave me a career opportunity that no one else did.  
+
+* Special Thanks to some past and present co-workers, SEs, TAMs, HVC Members that I learned a lot from: Robert Mitchell, Dan Grove, Steve Holmes, Steve Pittenger, Anton Wesztergom (Opened my eyes to vRA Day 2), Ryan Palmer, Megan Koss, Josh Demcher, Kirk Shaffer.  
+
+* Special Thanks to the person that gave me my first Job in IT: David Cornelius  
+
+* List of Bloggers that I follow and have learned a lot by them “Giving Back”: Cody De Arkland, Luc Dekens, Kyle Ruddy, William Lam, Nathen Bennett, Vince Wood, Alan Renouf.  
+
+* and anyone else that helped me in my journey called my career…  
+
 {{< /admonition >}}
 
 {{< admonition type=success title="Experience" open=true >}}
-* VMware Aria | VMware Aria Hub | VMware Aria Graph
-* VMware Aria Automation | VMware Aria Automation Config
-* VMware Aria Operations | VMware Aria Operations for Logs
-* VMware vCenter | VMware vSphere
-* vRealize Automation | vRealize SaltStack Config | vRealize Operations | vRealize Log Insight
-* PowerShell | PowerCLI | Python
-* Windows Servers | Linux Servers | macOS
-* Salt | Ansible
-* SQL Server
-* more...
+* VMware Aria | VMware Aria Hub | VMware Aria Graph  
+
+* VMware Aria Automation | VMware Aria Automation Config  
+
+* VMware Aria Operations | VMware Aria Operations for Logs  
+
+* VMware vCenter | VMware vSphere  
+
+* vRealize Automation | vRealize SaltStack Config | vRealize Operations | vRealize Log Insight  
+
+* PowerShell | PowerCLI | Python  
+
+* Windows Servers | Linux Servers | macOS  
+
+* Salt | Ansible  
+
+* SQL Server  
+
+* more...  
+
 {{< /admonition >}}
 
 >"9 - 5 pays the bills, 5 - 10 advances your career" - Author Unknown  
 
 {{< admonition type=success title="vCommunity Activities" open=true >}}
-* VMware vExpert | 2020 - Present
-* VMware vExpert - Cloud Management | 2021 - Present
-* SaltConf Session - 2021 | Managing Windows with SaltStack Config | 
-* VMworld Session - 2021 | Manage Windows Workloads Through vRealize Automation SaltStack Config [MCL1895]
+* VMware vExpert | 2020 - Present  
+
+* VMware vExpert - Cloud Management | 2021 - Present  
+
+* VMware Explore 2023 Presenation | Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud) [CODE2501LV]  
+
+* Hackathon Team Captain | VMware Explore 2023  
+
+* SaltConf Session - 2021 | Managing Windows with SaltStack Config  
+
+* VMworld Session - 2021 | Manage Windows Workloads Through vRealize Automation SaltStack Config [MCL1895]  
+
 * Philly VMUG - 2023 | VMware Aria Automation and Operations  
+
 * Central PA VMUG - 2022 | VMware Explore 2022  
-* VMware PowerBlock - 2021 | Customer Showcase - VM Right Sizing
-* VMware PowerBlock- 2020 | vRealize Operations, your monitoring “Single Pane of Glass
-* vBrownbag session for VMworld - 2020 | vRealize Operations, your monitoring “Single Pane of Glass
+
+* VMware PowerBlock - 2021 | Customer Showcase - VM Right Sizing  
+
+* VMware PowerBlock- 2020 | vRealize Operations, your monitoring “Single Pane of Glass  
+
+* vBrownbag session for VMworld - 2020 | vRealize Operations, your monitoring “Single Pane of Glass  
+
 {{< /admonition >}}
 
 {{< admonition type=info title="Info" open=true >}}

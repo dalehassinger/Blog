@@ -26,7 +26,7 @@ Learn how to create Windows Servers on-prem and in the cloud, see how to use the
 ---
 
 ###### Presenters:
-Dale Hassinger, Technical Adoption Manager, vExpert  
+Dale Hassinger, Senior Cloud Solutions Architect, vExpert  
 
 Topic: Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud)  
 Session ID: CODE2501LV  
