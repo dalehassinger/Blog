@@ -64,3 +64,47 @@ The Team is almost ready. We are looking forward to doing our presentation to th
 Here is a Sneak Peak at what we are working on. We will make it easier for anyone to get started with Automation.
 
 {{< image src="sneak-peak.png" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+###### Update 08/25/2023:
+
+The "Well-Spoken" Team got 2nd place at the VMware Explore Hackathon! There was a total of 9 Teams.  
+
+I am so proud of what the "Well-Spoken" Team created together. There was great collaboration throughout the whole process.  
+
+The Team created a custom form in VMware Aria Automation that will help you build a chat question that would be sent to ChatGPT and return complete usable scripts to use with Automation.  The Scirpt returned could then be saved into a Teams/Slack Channel, GitHub Repository or a VMwaqre Aria Operations Dashboard.  
+
+This custom form will help customers get started with Automation and also convert existing Automation, like an Ansible Playbook, into a salt state file.  
+
+---
+
+**Award:**
+{{< image src="award.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+{{< image src="hack-01.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+**Great discussion with Alan Renouf and William Lam:**  
+{{< image src="hack-02.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+**All Participates and Judges:**  
+{{< image src="hack-03.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+**Ed Sanchez and I:**  
+{{< image src="hack-04.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+**Viviana Miranda and I:**  
+{{< image src="hack-05.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+It would have been nice if the Whole Hackathon Team would have been able to attend the Hackathon. Maybe next year. Fingers crossed...

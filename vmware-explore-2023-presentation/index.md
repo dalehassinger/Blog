@@ -55,5 +55,19 @@ All the code from my Presentation is in my GitHub Repository.
 Here is the link:  
 * [vCROCS | GitHub Repository](https://github.com/dalehassinger/unlocking-the-potential)  
 
+--- 
 
+###### PICs of the Presentation at VMware Explore 2023.
 
+---
+{{< image src="presenting-01.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+{{< image src="presenting-02.jpg" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
+The presentation was well attended. There was some good discussions with some of the attendees after the presentation. Thank You to eveyone that took the time from their schedule to attend my presentation. 
+
+---
