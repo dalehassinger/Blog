@@ -1,4 +1,4 @@
-# VMware Explore 2023 - Presentation
+# VMware Explore 2023 | Presentation
 
 
 **Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud)**
