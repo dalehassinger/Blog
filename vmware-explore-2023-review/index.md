@@ -24,7 +24,7 @@ You may be wondering why the headline says "VMware Explore 2023 was the best Con
 
 * There were many sessions with new VMware product announcements that are very exciting. Go view the recorded session videos on the [VMware Explore Web Site](https://www.vmware.com/explore/video-library/search.html#year=2023).  
 
-* Attending VMware Explore as an employee for the first time was a much different experience than when I was customer. I had of feeling of pride for being part of such a great company and culture.  
+* Attending VMware Explore as an employee for the first time was a much different experience than when I was customer. I had a feeling of pride for being part of such a great company and culture.  
 
 
 
@@ -111,7 +111,7 @@ You may be wondering why the headline says "VMware Explore 2023 was the best Con
 
 ---
 
-**Healthcare SE Breakfast group | Marjorie Abdelkrime, Jeff Pardi, Dan Mitchell, Dale Hassinger | Another great group of co-workers:**  
+**Healthcare SE Breakfast group | Marjorie Abdelkrime, Cory Lyons, Jeff Pardi, Dan Mitchell, Dale Hassinger | Another great group of co-workers:**  
 {{< image src="fav-15.jpg" caption="Click to see Larger Image of Screen Shot">}}  
 
 ---
