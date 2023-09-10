@@ -210,35 +210,35 @@ There are some potentially easier methods to authenticate to Aria Automation and
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c">#BasicInfo:</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$vraServer</span> <span class="p">=</span> <span class="s2">&#34;vra.corp.local&#34;</span>
-</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="err"> </span>
 </span></span><span class="line"><span class="cl"><span class="c">#Get Credentials to build auth:</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$credential</span> <span class="p">=</span> <span class="nb">Get-Credential</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="p">=</span> <span class="nv">$credential</span><span class="p">.</span><span class="py">UserName</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$pass</span> <span class="p">=</span> <span class="nv">$credential</span><span class="p">.</span><span class="py">Password</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Runtime.InteropServices.Marshal</span><span class="p">]::</span><span class="n">PtrToStringAuto</span><span class="p">([</span><span class="no">System.Runtime.InteropServices.Marshal</span><span class="p">]::</span><span class="n">SecureStringToBSTR</span><span class="p">(</span><span class="nv">$pass</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$authBody</span>  <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;username&#34;</span> <span class="p">=</span> <span class="nv">$username</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;password&#34;</span> <span class="p">=</span> <span class="nv">$password</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authBody</span><span class="err"> </span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;username&#34;</span> <span class="p">=</span> <span class="nv">$username</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;password&#34;</span> <span class="p">=</span> <span class="nv">$password</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="err"> </span>
 </span></span><span class="line"><span class="cl"><span class="c">#Build Header:</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="s2">&#34;System.Collections.Generic.Dictionary[[String],[String]]&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Accept&#34;</span><span class="p">,</span><span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span><span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="err"> </span>
 </span></span><span class="line"><span class="cl"><span class="c">#Get Refresh Token:</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/csp/gateway/am/api/login?access_token&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$refreshToken</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-Body</span> <span class="p">(</span><span class="nv">$authBody</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$refreshToken</span> <span class="p">=</span> <span class="nv">$refreshToken</span><span class="p">.</span><span class="py">refresh_token</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$refreshTokenBody</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;refreshToken&#34;</span> <span class="p">=</span> <span class="nv">$refreshToken</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;refreshToken&#34;</span> <span class="p">=</span> <span class="nv">$refreshToken</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="err"> </span>
 </span></span><span class="line"><span class="cl"><span class="c">#Get Access Token:</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/login&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$accessToken</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-body</span> <span class="p">(</span><span class="nv">$refreshTokenBody</span> <span class="p">|</span> <span class="nb">ConvertTo-JSON</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$accessToken</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$accessToken</span><span class="p">.</span><span class="py">token</span>
-</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="err"> </span>
 </span></span><span class="line"><span class="cl"><span class="c">#add access token to Header</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Authorization&#34;</span><span class="p">,</span><span class="nv">$accessToken</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
@@ -315,21 +315,21 @@ Now that I have my list of fabric-networks, I wanted to build a JSON body that I
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span> <span class="p">=</span> <span class="s2">&#34;REST_API&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;id&#34;</span><span class="p">=</span>  <span class="s2">&#34;cce57ddd-d206-9999-870d-25b8775fb365&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;orgId&#34;</span> <span class="p">=</span> <span class="s2">&#34;12131928-3bdd-9999-9e69-3edf5c318a7d&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customProperties&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;datacenterId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;externalRegionId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;cloudAccountId&#34;</span> <span class="p">=</span> <span class="s2">&#34;8274acb1-bad2-40cf-1969-e3ed60c16956&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;isolationType&#34;</span> <span class="p">=</span>  <span class="s2">&#34;NONE&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;fabricNetworkIds&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;fba96959-c0b2-99a6-bb7b-0da4c35b3eaf&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;21a52412-85a3-4b9d-a99b-0aaf19185755&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;name&#34;</span> <span class="p">=</span> <span class="s2">&#34;REST_API&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;id&#34;</span><span class="p">=</span><span class="err"> </span> <span class="s2">&#34;cce57ddd-d206-9999-870d-25b8775fb365&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;orgId&#34;</span> <span class="p">=</span> <span class="s2">&#34;12131928-3bdd-9999-9e69-3edf5c318a7d&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;customProperties&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="err">       </span> <span class="s2">&#34;datacenterId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;externalRegionId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;cloudAccountId&#34;</span> <span class="p">=</span> <span class="s2">&#34;8274acb1-bad2-40cf-1969-e3ed60c16956&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;isolationType&#34;</span> <span class="p">=</span><span class="err"> </span> <span class="s2">&#34;NONE&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="s2">&#34;fabricNetworkIds&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl"><span class="err">       </span> <span class="s2">&#34;fba96959-c0b2-99a6-bb7b-0da4c35b3eaf&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">      </span> <span class="err"> </span><span class="s2">&#34;21a52412-85a3-4b9d-a99b-0aaf19185755&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">   </span> <span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="err"> </span>
 </span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/network-profiles/&#34;</span> <span class="p">+</span> <span class="nv">$npId</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">PATCH</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-Body</span> <span class="p">(</span><span class="nv">$body</span> <span class="p">|</span> <span class="nb">ConvertTo-JSON</span> <span class="n">-Depth</span> <span class="mf">5</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
 </span></span></code></pre></td></tr></table>
