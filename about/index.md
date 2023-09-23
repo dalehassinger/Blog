@@ -89,9 +89,9 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 
 * VMware vExpert - Cloud Management | 2021 - Present  
 
-* VMware Explore 2023 Presenation | Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud) [CODE2501LV]  
+* VMware Explore 2023 Presentation | Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud) [CODE2501LV]  
 
-* Hackathon Team Captain | VMware Explore 2023  
+* Hackathon Team Captain (Finished in 2nd Place) | VMware Explore 2023  
 
 * SaltConf Session - 2021 | Managing Windows with SaltStack Config  
 
@@ -110,7 +110,7 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 {{< /admonition >}}
 
 {{< admonition type=info title="Info" open=true >}}
-I like to wear Crocs and I like VMware Products. So what better name than "vCrocs for my Blog"  
+I like to wear Crocs and I like VMware Products. So what better name than www.vCROCS.info for my Blog  
 {{< /admonition >}}
 
 ---

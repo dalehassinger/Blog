@@ -68,6 +68,14 @@ Here is the link:
 
 ---
 
+###### Video of the Presentation at VMware Explore 2023.
+
+---
+
+{{< youtube k_BLvRb2SI4 >}}
+
+---
+
 The presentation was well attended. There was some good discussions with some of the attendees after the presentation. Thank You to eveyone that took the time from their schedule to attend my presentation. 
 
 ---

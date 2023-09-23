@@ -146,3 +146,9 @@ You may be wondering why the headline says "VMware Explore 2023 was the best Con
 
 ---
 
+###### Video of the Presentation at VMware Explore 2023.
+
+---
+
+{{< youtube k_BLvRb2SI4 >}}
+
