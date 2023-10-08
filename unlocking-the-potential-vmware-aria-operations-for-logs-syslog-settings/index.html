@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting - vCROCS</title><meta name="Description" content="Hugo theme - LoveIt"><meta property="og:title" content="VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting" />
+<meta property="og:description" content="How to Automate the ESXi Host &ldquo;Syslog.global.logHost&rdquo; setting, when using Cloud Proxies." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/" /><meta property="og:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-10-07T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png"/>
+<meta name="twitter:title" content="VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting"/>
+<meta name="twitter:description" content="How to Automate the ESXi Host &ldquo;Syslog.global.logHost&rdquo; setting, when using Cloud Proxies."/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/" /><link rel="prev" href="https://www.vcrocs.info/vmware-community-podcast-659/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VMware Aria Operations for Logs, syslog, SaaS, PowerShell, PowerCLI","wordcount":  1898 ,
+        "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings\/","datePublished": "2023-10-07T00:00:00+00:00","dateModified": "2023-10-07T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/unlocking-the-potential/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Unlocking the Potential</a>&nbsp;<a href="/categories/vmware-aria-operations-for-logs/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VMware Aria Operations for Logs</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-07">2023-10-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1898 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png"
+        data-srcset="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png 1.5x, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png"
+        title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#vmware-aria-operations-for-logs--saas-version">VMware Aria Operations for Logs | SaaS Version:</a></li>
+                    <li><a href="#powershell-code">PowerShell Code:</a></li>
+                    <li><a href="#set-sysloggloballoghost-value-on-all-hosts">Set “Syslog.global.logHost” value on all Hosts</a></li>
+                    <li><a href="#get-current-sysloggloballoghost-value-on-all-hosts">Get current “Syslog.global.logHost” value on all Hosts</a></li>
+                    <li><a href="#set-sysloggloballoghost-value-to-null-on-all-hosts">Set “Syslog.global.logHost” value to null on all Hosts</a></li>
+                    <li><a href="#get-sysloggloballoghost-address-on-a-specific-host">Get “Syslog.global.logHost” address on a specific Host</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to Automate the ESXi Host &ldquo;Syslog.global.logHost&rdquo; setting, when using Cloud Proxies.</strong></p>
+<hr>
+<p>This blog post is part of a series of blog posts that will be created to help you &ldquo;Unlock the Potential&rdquo; of the VMware Aria Products. I want to give you some &ldquo;Real World&rdquo; examples that VMware admins could use everyday to help them with their daily tasks. Hopefully you will learn from my Tips and Tricks.</p>
+<hr>
+<h6 id="vmware-aria-operations-for-logs--saas-version">VMware Aria Operations for Logs | SaaS Version:</h6>
+<p>The Details in this Blog Post were created in October 2023. New updates are released every month, so the details shown in this Blog Post could change.</p>
+<p>When you use VMware Aria Operations for Logs | SaaS Version, you need to have one or more Cloud Proxies to send the log info from your on-prem vCenter and ESXi Hosts to VMware Cloud Services.  If you have more than (1) Cloud Proxy, there is no automated way built into VMware Aria Operations for Logs to distribute the Cloud Proxy usage. One way to set the vCenter ESXi hosts to use a specific Cloud Proxy, is to use a PowerCLI script. I included some sample scripts in this blog post to help you get started.</p>
+<p><strong>Logic of the PowerCLI script:</strong></p>
+<ul>
+<li>The script will count the number of VMware Cloud Services, Cloud Proxies Specified</li>
+<li>The script will count the number of VMware vCenter ESXi Hosts in the vCenter Specified</li>
+<li>The script will equally distribute the number of vCenter ESXi Hosts per Cloud Proxy</li>
+<li>The script will set the Advanced System Setting &ldquo;Syslog.global.logHost&rdquo; on each ESXi Host</li>
+</ul>
+<hr>
+<p><strong>ESXi Host Advanced System Settings:</strong></p>
+<ul>
+<li>This is how to manually set the &ldquo;Syslog.global.logHost&rdquo; on each ESXi Host</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png 1.5x, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png" width="2032" height="1093" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Cloud Proxies:</strong></p>
+<ul>
+<li>Go to Configuration/Cloud Proxies to see all the Proxies added</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png 1.5x, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png" width="3022" height="1582" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Cloud Proxy Information:</strong></p>
+<ul>
+<li>Cloud Proxy Details like State, CPU, Memory</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png 1.5x, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png" width="1512" height="789" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>vSphere Integration:</strong></p>
+<ul>
+<li>Go to Configuration/vSphere Integration to see all the vCenters added</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png 1.5x, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png" width="1513" height="793" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>vCenter Server Configuration:</strong></p>
+<ul>
+<li>vCenter Server Configuration</li>
+<li>You can use this screen to set which Cloud Proxy to use but if you have 100s or 1000s of Hosts, I find it easier to use the script included in this Blog Post.</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png 1.5x, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png" width="3024" height="1584" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="powershell-code">PowerShell Code:</h6>
+<h6 id="set-sysloggloballoghost-value-on-all-hosts">Set “Syslog.global.logHost” value on all Hosts</h6>
+<ul>
+<li>Sample Script to set the &ldquo;Syslog.global.logHost&rdquo; value on each ESXi Host</li>
+<li>The script will balance the usage of the Cloud Proxies</li>
+<li>The script could be scheduled to run every day to maintain the correct settings.</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Set Variable Values to use with Script</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcServer</span>     <span class="p">=</span> <span class="s2">&#34;vcsa8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcUser</span>       <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcPassword</span>   <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (1) syslog setting for each host.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (2) syslog settings for each host.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip.corp.local:514,tcp://DBH-CP-VAOL-01.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (2) syslog settings divided equally between hosts.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip.corp.local:514;udp://vaol-01.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (3) syslog settings divided equally between hosts.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogServers</span> <span class="p">=</span> <span class="s2">&#34;udp://vaol-vip-03.corp.local:514;udp://vaol-vip-02.corp.local:514;udp://vaol-vip-01.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (4) syslog settings divided equally between hosts.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip-01.corp.local:514;udp://vaol-vip-02.corp.local:514;udp://vaol-vip-03.corp.local:514;udp://vaol-vip-04.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get list of syslog server specifed and seperated by semicolons. Semicolons were used in case you would want to specify (2) syslog servers seperated by commas.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogServerList</span> <span class="p">=</span> <span class="nv">$syslogServers</span><span class="p">.</span><span class="py">Split</span><span class="p">(</span><span class="s2">&#34;;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogServerList</span> <span class="p">=</span> <span class="nv">$syslogServerList</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;syslog Server List: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$syslogServerCount</span> <span class="p">=</span> <span class="nv">$syslogServerList</span><span class="p">.</span><span class="py">Count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;syslog Server Count: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerCount</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Connect to the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-User</span> <span class="nv">$vcUser</span> <span class="n">-Password</span> <span class="nv">$vcPassword</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$syslogServerCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Get Number of Hosts</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$hostList</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$hostCount</span> <span class="p">=</span> <span class="nv">$hostList</span><span class="p">.</span><span class="py">Count</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Total Number of Hosts</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Host Count: &#34;</span> <span class="p">+</span> <span class="nv">$hostCount</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Calculate how to divide the hosts</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$baseValue</span> <span class="p">=</span> <span class="p">[</span><span class="no">math</span><span class="p">]::</span><span class="n">Floor</span><span class="p">(</span><span class="nv">$hostCount</span> <span class="p">/</span> <span class="nv">$syslogServerCount</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$remainder</span> <span class="p">=</span> <span class="nv">$hostCount</span> <span class="p">%</span> <span class="nv">$syslogServerCount</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Create an array to hold the results</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$syslogProxyNumber</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="mf">1</span><span class="p">..</span><span class="nv">$syslogServerCount</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$baseValue</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$syslogProxyNumber</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Distribute the remainder among the numbers</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-lt</span> <span class="nv">$syslogServerCount</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$remainder</span> <span class="o">-eq</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$syslogProxyNumber</span><span class="p">[</span><span class="nv">$i</span><span class="p">]++</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$remainder</span><span class="p">--</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Hosts Per Syslog Group: &#34;</span> <span class="p">+</span> <span class="nv">$syslogProxyNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Highest sysloggroup array value: &#34;</span> <span class="p">+</span> <span class="p">(</span><span class="nv">$syslogProxyNumber</span><span class="p">.</span><span class="py">Count</span> <span class="p">-</span> <span class="mf">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Syslog Group Count: &#34;</span> <span class="p">+</span> <span class="nv">$syslogProxyNumber</span><span class="p">.</span><span class="py">Count</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Calculate the sum</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$sum</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$syslogProxyNumber</span> <span class="p">|</span> <span class="nb">Measure-Object</span> <span class="n">-Sum</span><span class="p">).</span><span class="py">Sum</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Total Hosts to add syslog info: &#34;</span> <span class="p">+</span> <span class="nv">$sum</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$sum</span> <span class="o">-eq</span> <span class="nv">$hostCount</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="s2">&#34;Hosts were divided as equal as posible&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="s2">&#34;Hosts were NOT divided equal. TRY AGAIN!&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="s2">&#34;Only 1 syslog Server was specififed!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogProxyNumberArrayValue</span> <span class="p">=</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servercountstart</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$serverCountTotal</span> <span class="p">=</span> <span class="nv">$syslogProxyNumber</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Loop thru ESXi Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$esxiName</span> <span class="k">in</span> <span class="nv">$hostList</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Create Server Count Number</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$servercountstartstr</span> <span class="p">=</span> <span class="s1">&#39;0000&#39;</span> <span class="p">+</span> <span class="nv">$servercountstart</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$servercountstartstr</span> <span class="p">=</span> <span class="nv">$servercountstartstr</span><span class="p">[</span><span class="mf">-4</span><span class="p">..</span><span class="mf">-1</span><span class="p">]</span> <span class="n">-join</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Set the syslog Host value on Each ESXi Host</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$syslogServerCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Count: &#34;</span> <span class="p">+</span> <span class="nv">$servercountstartstr</span> <span class="p">+</span> <span class="s2">&#34; | ESXi Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$esxiName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | Proxy Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c"># ----- Set the Syslog.global.logHost value</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;------------- Get-VMHost &#34;</span> <span class="p">+</span> <span class="nv">$esxiName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | Get-AdvancedSetting -Name &#39;Syslog.Global.Loghost&#39; | Set-AdvancedSetting -Value &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span> <span class="p">+</span> <span class="s2">&#34; -Confirm:</span><span class="nv">$false</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># ----- The next line will make the changes. Remove the line comment after you test the script and make sure you are getting the results you want to use.</span>
+</span></span><span class="line"><span class="cl">        <span class="c">#Get-VMHost $esxiName.Name | Get-AdvancedSetting -Name &#39;Syslog.Global.Loghost&#39; | Set-AdvancedSetting -Value $syslogServerList[$syslogProxyNumberArrayValue] -Confirm:$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elseif</span><span class="p">(</span><span class="nv">$syslogServerCount</span> <span class="o">-eq</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Count: &#34;</span> <span class="p">+</span> <span class="nv">$servercountstartstr</span> <span class="p">+</span> <span class="s2">&#34; | ESXi Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$esxiName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | Proxy Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># ----- The next line will make the changes. Remove the line comment after you test the script and make sure you are getting the results you want to use.</span>
+</span></span><span class="line"><span class="cl">        <span class="c">#Get-VMHost $esxiName.Name | Get-AdvancedSetting -Name &#39;Syslog.Global.Loghost&#39; | Set-AdvancedSetting -Value $syslogServerList -Confirm:$false</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Elseif</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Increment Host Count and switch which Proxy to use based on count</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$servercountstart</span><span class="p">++</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$servercountstart</span> <span class="o">-gt</span> <span class="nv">$serverCountTotal</span> <span class="o">-and</span> <span class="nv">$syslogServerCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$servercountstart</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$syslogProxyNumberArrayValue</span><span class="p">++</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$serverCountTotal</span> <span class="p">=</span> <span class="nv">$syslogProxyNumber</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Disconnect from the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="get-current-sysloggloballoghost-value-on-all-hosts">Get current “Syslog.global.logHost” value on all Hosts</h6>
+<ul>
+<li>Here is a sample script that can be used to show the current &ldquo;Syslog.global.logHost&rdquo; values</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Get current sysloghost value on all Hosts ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Set Variable Values to use with Script</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcServer</span>     <span class="p">=</span> <span class="s2">&#34;vcsa8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcUser</span>       <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcPassword</span>   <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- File Name to store data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$filePath</span> <span class="p">=</span> <span class="s2">&#34;C:\Github\PS-TAM-Lab\syslog-current-info.csv&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Connect to the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-User</span> <span class="nv">$vcUser</span> <span class="n">-Password</span> <span class="nv">$vcPassword</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get list of all Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Create new CSV file</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="nv">$filePath</span> <span class="n">-ItemType</span> <span class="n">File</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- add header to CSV file</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Add-Content</span> <span class="n">-Path</span> <span class="nv">$filePath</span> <span class="n">-Value</span> <span class="s2">&#34;ServerName,syslogName&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get all ESXi Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Output Data to screen and the CSV file</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$hostName</span> <span class="k">in</span> <span class="nv">$hostList</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$syslogInfo</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="n">-Name</span> <span class="nv">$hostName</span><span class="p">.</span><span class="py">Name</span> <span class="p">|</span> <span class="nb">Get-AdvancedSetting</span> <span class="n">-Name</span> <span class="s2">&#34;Syslog.global.logHost&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Entity</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | syslog Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Value</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- add info to csv file</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$addContentstr</span> <span class="p">=</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Entity</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34;,&#34;</span> <span class="p">+</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Value</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Add-Content</span> <span class="n">-Path</span> <span class="nv">$filePath</span> <span class="n">-Value</span> <span class="nv">$addContentstr</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Disconnect from the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<ul>
+<li>Sample Output from script:</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png"
+            data-srcset="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png 1.5x, /unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png 2x"
+            data-sizes="auto"
+            alt="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png" width="586" height="137" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="set-sysloggloballoghost-value-to-null-on-all-hosts">Set “Syslog.global.logHost” value to null on all Hosts</h6>
+<ul>
+<li>Sample script if you would ever want to set the &ldquo;Syslog.global.logHost&rdquo; values to null on all the ESXi Hosts.</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Set sysloghost value to null on all Hosts ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Set Variable Values to use with Script</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcServer</span>     <span class="p">=</span> <span class="s2">&#34;vcsa8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcUser</span>       <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcPassword</span>   <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Connect to the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-User</span> <span class="nv">$vcUser</span> <span class="n">-Password</span> <span class="nv">$vcPassword</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get list of all Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get all ESXi Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Output Data to screen and a CSV file.</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$hostName</span> <span class="k">in</span> <span class="nv">$hostList</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$hostName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | syslog Name: Set to null&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Set logserver address to null</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Set-VMHostSysLogServer</span> <span class="n">-SysLogServer</span> <span class="vm">$null</span> <span class="n">-VMHost</span> <span class="nv">$hostName</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Disconnect from the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="get-sysloggloballoghost-address-on-a-specific-host">Get “Syslog.global.logHost” address on a specific Host</h6>
+<ul>
+<li>Very simple script to get the &ldquo;Syslog.global.logHost&rdquo; values on a single ESXi host.</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- Simple Get syslogserver address on a specific Host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VMHostSysLogServer</span> <span class="n">-VMHost</span> <span class="s1">&#39;esxi8-05.corp.local&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>When you use VMware Aria Operations for Logs | SaaS Version, you may need more than one Cloud Proxy</li>
+<li>If you have more than one Cloud Proxy, you will need a way to balance the usage between the Proxies</li>
+<li>If you have 10s, 100s or 1000s of ESXi Hosts, using a script will be the easiest and quickest way to specify &ldquo;Syslog.global.logHost” values.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>I will never add advertising to my Blog Site. If you find this blog useful and want to show your appreciation, use the Buy me a Coffee link and let me enjoy a cup of coffee on you. Thanks!</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/" data-title="VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting" data-via="dalehassinger" data-hashtags="VMware Aria Operations for Logs,syslog,SaaS,PowerShell,PowerCLI"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/" data-hashtag="VMware Aria Operations for Logs"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vmware-aria-operations-for-logs/">VMware Aria Operations for Logs</a>,&nbsp;<a href="/tags/syslog/">syslog</a>,&nbsp;<a href="/tags/saas/">SaaS</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/powercli/">PowerCLI</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vmware-community-podcast-659/" class="prev" rel="prev" title="The VMware Community Podcast | I was a Guest on the show"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>The VMware Community Podcast | I was a Guest on the show</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'UA-166234216-1');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-166234216-1" async></script></body>
+</html>
