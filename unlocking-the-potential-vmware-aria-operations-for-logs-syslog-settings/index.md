@@ -13,7 +13,7 @@ This blog post is part of a series of blog posts that will be created to help yo
 
 ###### VMware Aria Operations for Logs | SaaS Version:
 
-The Details in this Blog Post were created in October 2023. New updates are released every month, so the details shown in this Blog Post could change.  
+The Details in this Blog Post were created in October 2023. New VMware Aria Operations for Logs updates are released every month, so the details shown in this Blog Post could change.  
 
 
 When you use VMware Aria Operations for Logs | SaaS Version, you need to have one or more Cloud Proxies to send the log info from your on-prem vCenter and ESXi Hosts to VMware Cloud Services.  If you have more than (1) Cloud Proxy, there is no automated way built into VMware Aria Operations for Logs to distribute the Cloud Proxy usage. One way to set the vCenter ESXi hosts to use a specific Cloud Proxy, is to use a PowerCLI script. I included some sample scripts in this blog post to help you get started.  
