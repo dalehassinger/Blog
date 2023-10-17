@@ -63,7 +63,8 @@ What the top 10 list shows me is there is a lot of interest to use PowerShell wi
 ###### Thanks for visiting in 2021!
 
 ---
-* If you like wearing Crocs and want to get a pair like I wear, follow this link:
+
+* If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
 <a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a>  
 * If you found this Blog article useful and it helped you, Buy me a coffee to start my day.  
 
