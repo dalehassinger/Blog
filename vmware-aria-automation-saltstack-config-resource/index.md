@@ -31,7 +31,7 @@ Requirements:
    - Make a copy of the original cloud.py before replacing with updated version.
    - Where to get new script: https://github.com/saltstack/salt/blob/master/salt/utils/cloud.py  
    - The grains file will be created in "C:\ProgramData\Salt Project\Salt\conf" after the script is updated.
-   - **Update:** When I installed VMware Aria Automation Config 8.12, I still needed to update the cloud.py file for the grains to be created properly. 
+   - **Update:** When I installed VMware Aria Automation Config 8.12, 8.13 and 8.14 I still needed to update the cloud.py file for the grains to be created properly. 
 
 ---
 
