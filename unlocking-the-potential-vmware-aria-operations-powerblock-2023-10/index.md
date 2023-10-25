@@ -9,11 +9,13 @@
 
 ###### A Comprehensive Guide:
 
-[Christopher Kusek](https://www.linkedin.com/in/christopherkusek/) and I recorded this PowerBlock video to show the vCommunity some of the new VMware Aria Operations features that customers are asking about and using. Watch this video to learn some VMware Aria Operations Tips/Tricks.  
+[Christopher Kusek](https://www.linkedin.com/in/christopherkusek/) and I teamed up to create this PowerBlock video, aimed at showcasing some of the new VMware Aria Operations features that have been in high demand among customers. In this video, we'll be sharing valuable VMware Aria Operations Tips and Tricks.  
 
-This PowerBlock Agenda was created by conversations we had with VMware Customers. When the customers said, “We didn’t know you could do that”, we knew it was time to do a PowerBlock to share our answers with the vCommunity.  
+Our PowerBlock Agenda was inspired by conversations with VMware customers. When they expressed their surprise by saying, 'We didn't know you could do that,' we recognized the need to create this PowerBlock to share our insights with the vCommunity.  
 
-Take some time and watch the video. We know you will learn some new Tip/Tricks.  
+We invite you to take a moment to watch the video, as we're confident you'll discover some insightful new tips and tricks to enhance your VMware Aria experience.  
+
+---
 
 ###### Video Content:
 * Learn how to set a home Dashboard and give some examples  
@@ -30,15 +32,13 @@ Take some time and watch the video. We know you will learn some new Tip/Tricks.
 
 ---
 
----
-
 ###### Thank You:
 
 {{< admonition type=info title=" " open=true >}}
-* I want to thank Christopher Kusek for asking me to create this video with him to share on his YouTube Channel.  
-* Christopher has been a great mentor for me since I joined VMware. My first week at VMware, before we worked together on the same Team, Christopher reached and out to me and we had a zoom session together. He said I want to make sure you are successful at VMware so here are items to do and look at. Now that we are on the same Team together, he continues to help me everyday. Everyone has someone during your career that makes a impact. Christopher Kusek has made an impact in my career and I will always appreciate his help and be thankful for our friendship.
-* Some of the content in this video I learned from others members of my Team. My Team has a Slack channel that we are always helping each other. The culture of my Team is the best I have ever experienced. Everyone wants everyone else to be successful and are always there to lend a helping hand.  
-* Thanks to Ron Singler and Aaron Dunbrow for seeing the passion I have for the VMware Aria Suite of Products and allowing me to join the Team I am on at VMware today. To be a Senior Cloud Solutions Architect on the Team that I am a member of has been a great experience.  
+* I want to extend my gratitude to Christopher Kusek for inviting me to collaborate on this video, which we are excited to share on his YouTube channel.  
+* Christopher has been a mentor to me from the moment I stepped into VMware. In my very first week at the company, even before we became colleagues on the same team, Christopher reached out to me and initiated a Zoom session. He expressed his genuine commitment to ensuring my success at VMware and offered valuable insights and guidance. Now that we're both part of the same team, Christopher's support continues to be an asset in my daily journey. Throughout one's career, there are individuals who leave a lasting impact, and Christopher Kusek has played that role in mine. I will forever appreciate his guidance and cherish the friendship we've built.
+* In this video, I'd like to acknowledge that some of the knowledge I'm sharing today was by fellow members of my team. We have a Slack channel where mutual support is a way of life. The culture within my team is nothing short of remarkable; it's the most collaborative environment I've ever been a part of. Here, everyone is genuinely invested in each other's success, always ready to extend a helping hand.  
+* I want to express my gratitude to Ron Singler and Aaron Dunbrow for recognizing my passion for the VMware Aria Suite of Products and extending me the opportunity to join the exceptional team at VMware. Being a part of this team as a Senior Cloud Solutions Architect has been an incredibly rewarding journey.  
 
 {{< /admonition >}}
 
