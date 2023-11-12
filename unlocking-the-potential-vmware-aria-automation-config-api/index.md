@@ -9,12 +9,19 @@
 
 ###### VMware Aria Automation Config API:
 
-I used VMware Aria Automation Config 8.14 to create this Blog Post.
+I used VMware Aria Automation Config 8.14 to create this Blog Post. When new versions of VMware Aria Automation Config are released, the code may need to be changed.  
 
-There is a lot of Automation that I like to complete where I use the VMware Aria Automation Config API. The code that I am sharing can be used as a PowerShell Script, VMware Aria Automation ABX Action, VMware Aria Automation Orchestrator Action or VMware Aria Automation Orchestrator Workflow. 
+There is a lot of Automation that I like to complete where I use the VMware Aria Automation Config API. The code that I am sharing can be used as a PowerShell Script, VMware Aria Automation ABX Action, VMware Aria Automation Orchestrator Action or VMware Aria Automation Orchestrator Workflow.  
+
+All of the customers are 80% - 90% Microsoft Windows Servers. That is why you will see a lot of PowerShell code as examples in my Blog Posts. I like to share what my customers will find useful.   
+
+All the source code for this Blog is saved in my GitHub Repository. Please click on the link to see the code.  
+
+---
 
 * [Link | vCROCS | GitHub Repository](https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Automation-Config/Aria-Automation-Config-API)
 
+---
 
 * Added these PowerShell Scripts to use with the VMware Aria Automation Config APIs  
 * These PowerShell Scripts are a good starting point to help you use the VMware Aria Automation Config APIs  
