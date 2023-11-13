@@ -9,6 +9,9 @@ Part 9: Using salt-api with PowerShell for Windows Server Automation
 
 **Update: It was brought to my attention that adding cherypy will break the salt master. After a quick test in my lab I had the same issue with the newest version of SaltStack Config. DO NOT use this blog post until I get a working version in my lab.**  
 
+**If you want to work with the VMware Aria Automation Config API please use this newer Blog Post that I created:**  
+* [Unlocking the Potential | VMware Aria Automation Config API](https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-config-api/)
+
 ---
 
 This post is to show how to use PowerShell to make RESTful API calls to SaltStack Config. This is something that I have wanted to do for awhile. I could never find any examples in my Google searches, so I took the time to learn how the examples that use curl work and translated that into PowerShell Code. I hope some Windows Server Admins will find this post helpful. I like using salt to do Windows Server Configuration Management more than remote PowerShell. You can run changes against many servers at the exact same time instead of looping thru a list of servers names.
