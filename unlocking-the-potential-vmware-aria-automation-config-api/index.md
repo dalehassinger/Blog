@@ -11,9 +11,9 @@
 
 I used VMware Aria Automation Config 8.14 to create this Blog Post. When new versions of VMware Aria Automation Config are released, the code may need to be changed.  
 
-There is a lot of Automation that I like to complete where I use the VMware Aria Automation Config API. The code that I am sharing can be used as a PowerShell Script, VMware Aria Automation ABX Action, VMware Aria Automation Orchestrator Action or VMware Aria Automation Orchestrator Workflow.  
+There is a lot of Automation that I like to complete where I use the VMware Aria Automation Config API. The code that I am sharing is a PowerShell Script but the code could also be included in a VMware Aria Automation ABX Action, VMware Aria Automation Orchestrator Action or VMware Aria Automation Orchestrator Workflow.  
 
-All of my customers are 80% - 90% Microsoft Windows Servers. That is why you will see a lot of PowerShell code as examples in my Blog Posts. I like to share what my customers will find useful.   
+All of my customers are 80% - 90% Microsoft Windows Servers. That is why you will see a lot of PowerShell code as examples in my Blog Posts. I like to share what my customers will use in their environments.   
 
 All the source code for this Blog is saved in my GitHub Repository. Please click on the link to see the code.  
 
@@ -31,6 +31,10 @@ All the source code for this Blog is saved in my GitHub Repository. Please click
   [x] grains.append  
   [x] grains.remove  
   [x] state.apply  
+* The scripts will show you how to authenticate with VMware Aria Automation Config to use the APIs.  
+* The scripts will show you how to create the API Body to use with VMware Aria Automation Config.  
+* The scripts will show you how to use the Job ID (JID) to get the status of the job so you know when the job is complete and if it was successful.  
+
 
 ---
 
