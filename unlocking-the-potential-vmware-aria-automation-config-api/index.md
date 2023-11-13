@@ -31,6 +31,7 @@ All the source code for this Blog is saved in my GitHub Repository. Please click
   [x] grains.append  
   [x] grains.remove  
   [x] state.apply  
+  [x] key.delete  
 * The scripts will show you how to authenticate with VMware Aria Automation Config to use the APIs.  
 * The scripts will show you how to create the API Body to use with VMware Aria Automation Config.  
 * The scripts will show you how to use the Job ID (JID) to get the status of the job so you know when the job is complete and if it was successful.  
