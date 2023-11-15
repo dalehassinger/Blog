@@ -9,7 +9,7 @@
 
 ###### VMware Aria Automation  
 
-I used VMware Aria Automation 8.14 to create this Blog Post. When new versions of VMware Aria Automation are released, the code may need to be changed.  
+VMware Aria Automation 8.14 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code may need to be changed.  
 
 All the source code for this Blog is saved in my GitHub Repository. Click on the links within the blog to access the code.  
 

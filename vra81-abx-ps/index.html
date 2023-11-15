@@ -10,10 +10,12 @@
 <meta property="og:url" content="https://www.vcrocs.info/vra81-abx-ps/" /><meta property="og:image" content="https://www.vcrocs.info/vra81-abx-ps/featured-image.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-05-17T00:00:00+00:00" />
 <meta property="article:modified_time" content="2023-10-17T09:08:38-04:00" /><meta property="og:site_name" content="vCROCS" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.vcrocs.info/vra81-abx-ps/featured-image.png"/>
 <meta name="twitter:title" content="vRealize Automation 8.1 - PowerShell ABX"/>
 <meta name="twitter:description" content="Options to use PowerShell Modules"/>
+<meta name="twitter:site" content="@dalehassinger"/>
 <meta name="application-name" content="vCROCS">
 <meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/vra81-abx-ps/" /><link rel="prev" href="https://www.vcrocs.info/hugo/" /><link rel="next" href="https://www.vcrocs.info/it-reality/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -225,49 +227,49 @@
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># This is the yaml code for the BluePrint
-</span></span><span class="line"><span class="cl"># Created by vCrocs.info
-</span></span><span class="line"><span class="cl">formatVersion: 1
-</span></span><span class="line"><span class="cl">inputs:
-</span></span><span class="line"><span class="cl">  cpuCount:
-</span></span><span class="line"><span class="cl">    type: integer
-</span></span><span class="line"><span class="cl">    description: Number of virtual processors
-</span></span><span class="line"><span class="cl">    default: 2
-</span></span><span class="line"><span class="cl">  totalMemoryMB:
-</span></span><span class="line"><span class="cl">    type: integer
-</span></span><span class="line"><span class="cl">    description: Machine virtual memory size in Megabytes
-</span></span><span class="line"><span class="cl">    default: 2048
-</span></span><span class="line"><span class="cl">  VMname:
-</span></span><span class="line"><span class="cl">    type: string
-</span></span><span class="line"><span class="cl">    default: DBH00
-</span></span><span class="line"><span class="cl">  SQL:
-</span></span><span class="line"><span class="cl">    type: boolean
-</span></span><span class="line"><span class="cl">    description: Is this a SQL Server?
-</span></span><span class="line"><span class="cl">    default: false
-</span></span><span class="line"><span class="cl">  D-Drive-Size:
-</span></span><span class="line"><span class="cl">    type: integer
-</span></span><span class="line"><span class="cl">    description: &#39;Enter D:\ Size in GB&#39;
-</span></span><span class="line"><span class="cl">    default: 10
-</span></span><span class="line"><span class="cl">    minimum: 5
-</span></span><span class="line"><span class="cl">    maximum: 50
-</span></span><span class="line"><span class="cl">  TEST:
-</span></span><span class="line"><span class="cl">    type: string
-</span></span><span class="line"><span class="cl">    enum:
-</span></span><span class="line"><span class="cl">      - &#39;Yes&#39;
-</span></span><span class="line"><span class="cl">      - &#39;No&#39;
-</span></span><span class="line"><span class="cl">resources:
-</span></span><span class="line"><span class="cl">  Cloud_vSphere_Machine_1:
-</span></span><span class="line"><span class="cl">    type: Cloud.vSphere.Machine
-</span></span><span class="line"><span class="cl">    properties:
-</span></span><span class="line"><span class="cl">      name: &#39;${input.VMname}&#39;
-</span></span><span class="line"><span class="cl">      SQL: &#39;${input.SQL}&#39;
-</span></span><span class="line"><span class="cl">      DDRive: &#39;${input.D-Drive-Size}&#39;
-</span></span><span class="line"><span class="cl">      imageRef: 2019-TEMPLATE
-</span></span><span class="line"><span class="cl">      cpuCount: &#39;${input.cpuCount}&#39;
-</span></span><span class="line"><span class="cl">      totalMemoryMB: &#39;${input.totalMemoryMB}&#39;
-</span></span><span class="line"><span class="cl">      TEST: &#39;${input.TEST}&#39;
-</span></span><span class="line"><span class="cl">      constraints:
-</span></span><span class="line"><span class="cl">        - tag: &#39;quick_start_run:1&#39;
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1"># This is the yaml code for the BluePrint</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Created by vCrocs.info</span>
+</span></span><span class="line"><span class="cl"><span class="n">formatVersion</span><span class="p">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">inputs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cpuCount</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="n">integer</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="p">:</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">virtual</span> <span class="n">processors</span>
+</span></span><span class="line"><span class="cl">    <span class="n">default</span><span class="p">:</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">  <span class="n">totalMemoryMB</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="n">integer</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="p">:</span> <span class="n">Machine</span> <span class="n">virtual</span> <span class="n">memory</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">Megabytes</span>
+</span></span><span class="line"><span class="cl">    <span class="n">default</span><span class="p">:</span> <span class="mi">2048</span>
+</span></span><span class="line"><span class="cl">  <span class="n">VMname</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="n">default</span><span class="p">:</span> <span class="n">DBH00</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SQL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="n">boolean</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="p">:</span> <span class="n">Is</span> <span class="n">this</span> <span class="n">a</span> <span class="n">SQL</span> <span class="n">Server</span><span class="err">?</span>
+</span></span><span class="line"><span class="cl">    <span class="n">default</span><span class="p">:</span> <span class="bp">false</span>
+</span></span><span class="line"><span class="cl">  <span class="n">D</span><span class="o">-</span><span class="n">Drive</span><span class="o">-</span><span class="n">Size</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="n">integer</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="p">:</span> <span class="s1">&#39;Enter D:\ Size in GB&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">default</span><span class="p">:</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minimum</span><span class="p">:</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">    <span class="n">maximum</span><span class="p">:</span> <span class="mi">50</span>
+</span></span><span class="line"><span class="cl">  <span class="n">TEST</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">    <span class="k">enum</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-</span> <span class="s1">&#39;Yes&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-</span> <span class="s1">&#39;No&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">resources</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Cloud_vSphere_Machine_1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">type</span><span class="p">:</span> <span class="n">Cloud</span><span class="o">.</span><span class="n">vSphere</span><span class="o">.</span><span class="n">Machine</span>
+</span></span><span class="line"><span class="cl">    <span class="n">properties</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;${input.VMname}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">SQL</span><span class="p">:</span> <span class="s1">&#39;${input.SQL}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">DDRive</span><span class="p">:</span> <span class="s1">&#39;${input.D-Drive-Size}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">imageRef</span><span class="p">:</span> <span class="mi">2019</span><span class="o">-</span><span class="n">TEMPLATE</span>
+</span></span><span class="line"><span class="cl">      <span class="n">cpuCount</span><span class="p">:</span> <span class="s1">&#39;${input.cpuCount}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">totalMemoryMB</span><span class="p">:</span> <span class="s1">&#39;${input.totalMemoryMB}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">TEST</span><span class="p">:</span> <span class="s1">&#39;${input.TEST}&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constraints</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-</span> <span class="n">tag</span><span class="p">:</span> <span class="s1">&#39;quick_start_run:1&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>&mdash;Using the Inputs Screen helps you build the BluePrint yaml code.  I found this very useful since I am still learning the proper yaml formatting.</p>
@@ -322,31 +324,31 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># This is the PowerShell code for the Action
-</span></span><span class="line"><span class="cl">function handler($context, $payload) {
-</span></span><span class="line"><span class="cl">    Write-Host &#34;VM Name Created: &#34; $payload.resourceNames[0]
-</span></span><span class="line"><span class="cl">    Write-Host &#34;D-DRive Size: &#34; $payload.customProperties.DDRive
-</span></span><span class="line"><span class="cl">    Write-Host &#34;SQL: &#34; $payload.customProperties.SQL
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1"># This is the PowerShell code for the Action</span>
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">handler</span><span class="p">(</span><span class="o">$</span><span class="n">context</span><span class="p">,</span> <span class="o">$</span><span class="n">payload</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;VM Name Created: &#34;</span> <span class="o">$</span><span class="n">payload</span><span class="o">.</span><span class="n">resourceNames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;D-DRive Size: &#34;</span> <span class="o">$</span><span class="n">payload</span><span class="o">.</span><span class="n">customProperties</span><span class="o">.</span><span class="n">DDRive</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;SQL: &#34;</span> <span class="o">$</span><span class="n">payload</span><span class="o">.</span><span class="n">customProperties</span><span class="o">.</span><span class="n">SQL</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    $VMname = $payload.resourceNames[0]
-</span></span><span class="line"><span class="cl">    Write-Host &#34;VM Name Variable: &#34; $VMname
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">VMname</span> <span class="o">=</span> <span class="o">$</span><span class="n">payload</span><span class="o">.</span><span class="n">resourceNames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;VM Name Variable: &#34;</span> <span class="o">$</span><span class="n">VMname</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    $SQL = $payload.customProperties.SQL
-</span></span><span class="line"><span class="cl">    $DDrive = $payload.customProperties.DDRive
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">SQL</span> <span class="o">=</span> <span class="o">$</span><span class="n">payload</span><span class="o">.</span><span class="n">customProperties</span><span class="o">.</span><span class="n">SQL</span>
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">DDrive</span> <span class="o">=</span> <span class="o">$</span><span class="n">payload</span><span class="o">.</span><span class="n">customProperties</span><span class="o">.</span><span class="n">DDRive</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    #Connect to vCenter
-</span></span><span class="line"><span class="cl">    Connect-VIServer -server 192.168.1.1 -User &#34;administrator@vsphere.local&#34; -Password &#34;VMware#1&#34; -Protocol https -Force
+</span></span><span class="line"><span class="cl">    <span class="c1">#Connect to vCenter</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Connect</span><span class="o">-</span><span class="n">VIServer</span> <span class="o">-</span><span class="n">server</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span> <span class="o">-</span><span class="n">User</span> <span class="s2">&#34;administrator@vsphere.local&#34;</span> <span class="o">-</span><span class="n">Password</span> <span class="s2">&#34;VMware#1&#34;</span> <span class="o">-</span><span class="n">Protocol</span> <span class="n">https</span> <span class="o">-</span><span class="n">Force</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    #Assign Tag to new VM
-</span></span><span class="line"><span class="cl">    New-TagAssignment -Tag &#39;TAG-vRA-Built&#39; -Entity $VMname
+</span></span><span class="line"><span class="cl">    <span class="c1">#Assign Tag to new VM</span>
+</span></span><span class="line"><span class="cl">    <span class="n">New</span><span class="o">-</span><span class="n">TagAssignment</span> <span class="o">-</span><span class="n">Tag</span> <span class="s1">&#39;TAG-vRA-Built&#39;</span> <span class="o">-</span><span class="n">Entity</span> <span class="o">$</span><span class="n">VMname</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    if($SQL -eq &#39;true&#39;){
-</span></span><span class="line"><span class="cl">        New-TagAssignment -Tag &#39;TAG-SQL-Server&#39; -Entity $VMname
-</span></span><span class="line"><span class="cl">    } # End if
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">$</span><span class="n">SQL</span> <span class="o">-</span><span class="n">eq</span> <span class="s1">&#39;true&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">New</span><span class="o">-</span><span class="n">TagAssignment</span> <span class="o">-</span><span class="n">Tag</span> <span class="s1">&#39;TAG-SQL-Server&#39;</span> <span class="o">-</span><span class="n">Entity</span> <span class="o">$</span><span class="n">VMname</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c1"># End if</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  return $payload
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="o">$</span><span class="n">payload</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h6 id="subscription">Subscription:</h6>

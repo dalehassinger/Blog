@@ -10,10 +10,12 @@
 <meta property="og:url" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-config-api/" /><meta property="og:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-config-api/featured-image.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-12T00:00:00+00:00" />
 <meta property="article:modified_time" content="2023-11-14T08:48:14-05:00" /><meta property="og:site_name" content="vCROCS" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-config-api/featured-image.png"/>
 <meta name="twitter:title" content="Unlocking the Potential | VMware Aria Automation Config API"/>
 <meta name="twitter:description" content="Using PowerShell with the VMware Aria Automation Config API"/>
+<meta name="twitter:site" content="@dalehassinger"/>
 <meta name="application-name" content="vCROCS">
 <meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-config-api/" /><link rel="prev" href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-powerblock-2023-10/" /><link rel="next" href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-abx-secrets-action-constants/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -31,7 +33,7 @@
                             "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-automation-config-api\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, VMware Aria Automation Config, PowerShell, API","wordcount":  394 ,
+                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, VMware Aria Automation Config, PowerShell, API","wordcount":  397 ,
         "url": "https:\/\/www.vcrocs.info\/unlocking-the-potential-vmware-aria-automation-config-api\/","datePublished": "2023-11-12T00:00:00+00:00","dateModified": "2023-11-14T08:48:14-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -112,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Unlocking the Potential | VMware Aria Automation Config API</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;394 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;397 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -150,7 +152,7 @@
             </div><div class="content" id="content"><p><strong>Using PowerShell with the VMware Aria Automation Config API</strong></p>
 <hr>
 <h6 id="vmware-aria-automation-config-api">VMware Aria Automation Config API:</h6>
-<p>I used VMware Aria Automation Config 8.14 to create this Blog Post. When new versions of VMware Aria Automation Config are released, the code may need to be changed.</p>
+<p>VMware Aria Automation 8.14 was used for this Blog Post. When new versions of VMware Aria Automation Config are released, the code may need to be changed.</p>
 <p>There is a lot of Automation that I like to complete where I use the VMware Aria Automation Config API. The code that I am sharing is a PowerShell Script but the code could also be included in a VMware Aria Automation ABX Action, VMware Aria Automation Orchestrator Action or VMware Aria Automation Orchestrator Workflow.</p>
 <p>All of my customers are 80% - 90% Microsoft Windows Servers. That is why you will see a lot of PowerShell code as examples in my Blog Posts. I like to share what my customers will use in their environments.</p>
 <p>All the source code for this Blog is saved in my GitHub Repository. Please click on the link to see the code.</p>
@@ -164,11 +166,11 @@
 <li>These PowerShell Scripts are a good starting point to help you use the VMware Aria Automation Config APIs</li>
 <li>You can modify the scripts to work with any of the salt functions.</li>
 <li>The sample scripts show how to:<br>
-<i class="far fa-check-square fa-fw" aria-hidden="true"></i> test.ping<br>
-<i class="far fa-check-square fa-fw" aria-hidden="true"></i> grains.append<br>
-<i class="far fa-check-square fa-fw" aria-hidden="true"></i> grains.remove<br>
-<i class="far fa-check-square fa-fw" aria-hidden="true"></i> state.apply<br>
-<i class="far fa-check-square fa-fw" aria-hidden="true"></i> key.delete</li>
+[x] test.ping<br>
+[x] grains.append<br>
+[x] grains.remove<br>
+[x] state.apply<br>
+[x] key.delete</li>
 <li>The scripts will show you how to authenticate with VMware Aria Automation Config to use the APIs.</li>
 <li>The scripts will show you how to create the API Body to use with VMware Aria Automation Config.</li>
 <li>The scripts will show you how to use the Job ID (JID) to get the status of the job so you know when the job is complete and if it was successful.</li>

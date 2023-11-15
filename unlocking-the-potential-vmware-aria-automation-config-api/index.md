@@ -9,7 +9,7 @@
 
 ###### VMware Aria Automation Config API:
 
-I used VMware Aria Automation Config 8.14 to create this Blog Post. When new versions of VMware Aria Automation Config are released, the code may need to be changed.  
+VMware Aria Automation 8.14 was used for this Blog Post. When new versions of VMware Aria Automation Config are released, the code may need to be changed.  
 
 There is a lot of Automation that I like to complete where I use the VMware Aria Automation Config API. The code that I am sharing is a PowerShell Script but the code could also be included in a VMware Aria Automation ABX Action, VMware Aria Automation Orchestrator Action or VMware Aria Automation Orchestrator Workflow.  
 
