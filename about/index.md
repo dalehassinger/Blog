@@ -1,13 +1,15 @@
-# Dale Hassinger
+# About
 
 
 <center>{{< image src="author.png" caption="">}}</center>
 
->VMware Senior Cloud Solutions Architect  
->VMware vExpert 2020 - Present  
->VMware vExpert Cloud Management 2021 - Present  
+><center>{{< image src="Broadcom-Logo.png" caption="">}}</center>  
 
->If you can script it, You can Automate it!  
+><center>VMware By <span style="color: Black;">Broadcom</span> | VMware Aria Suite Solution Architect</center>  
+><center>VMware vExpert 2020 - Present</center>  
+><center>VMware vExpert Cloud Management 2021 - Present</center>  
+
+><center>If you can script it, You can Automate it!</center>  
 
 {{< image src="vexpert-2023.png" caption="">}}
 {{< image src="vexpert-2023-4-stars.png" caption="" >}}
@@ -19,14 +21,14 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 
 ---
 
-* My focus is Enterprise Automation, Monitoring and Logging. When I was a VMware customer I created an IaC (Infrastructure as Code) Environment. I used VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes… For monitoring I used vRealize Operations for the “Single Pane of Glass” experience. I also used vRealize Log Insight for logging and LCM (Life Cycle Manager) for installing all the vRealize Products.  
+* My focus is Automation, Monitoring and Logging. When I was a VMware customer I created an IaC (Infrastructure as Code) Environment. I used VMware vRealize Automation and SaltStack Config to complete server builds, software installs, schedule VM snap shots, Microsoft 365 automation, Citrix Management, Automate Data Center Flips, Server Decommissions, and many other Day 2 processes… For monitoring I used vRealize Operations for the “Single Pane of Glass” experience. I also used vRealize Log Insight for logging and LCM (Life Cycle Manager) for installing all the vRealize Products.  
 
 * Almost all the code I write to complete the Automation that I create is done with PowerShell. The reason I choose to use PowerShell is because to do Automation with VMware products, VMware has a PowerShell module named PowerCLI. There hasn’t been anything that I wanted to Automate that I haven’t been able to do with PowerShell.
 
 * I have also done Automation with Azure. I am using PowerShell to create VMs and SaltStack Config to complete the configuration management, install software and maintain state.  
 
 >  
-> Your thought process is the most powerful automation tool you’ll ever have! - Cody De Arkland  
+><center>Your thought process is the most powerful automation tool you’ll ever have! - Cody De Arkland</center>  
 >  
 
 {{< admonition type=success title="vCommunity" open=true >}}
@@ -36,7 +38,7 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 
 {{< /admonition >}}
 
->“It doesn’t make sense to hire smart people and then tell them what to do, We hire smart people so they can tell us what to do.” - Steve Jobs  
+><center>“It doesn’t make sense to hire smart people and then tell them what to do, We hire smart people so they can tell us what to do.” - Steve Jobs</center>  
 
 {{< admonition type=success title="Thanks!" open=true >}}
 * The Cloud Solution Architects team I am currently a part of is highly rated and renowned for its innovation and expertise. Over the past few years, several members of this team have become role models for me. I anticipate gaining significant knowledge from their expertise and, in turn, give back to the team.  
@@ -60,7 +62,7 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 {{< /admonition >}}
 
 {{< admonition type=success title="Experience" open=true >}}
-* VMware Aria | VMware Aria Hub | VMware Aria Graph  
+* VMware Aria  
 
 * VMware Aria Automation | VMware Aria Automation Config  
 
@@ -82,7 +84,7 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 
 {{< /admonition >}}
 
->"9 - 5 pays the bills, 5 - 10 advances your career" - Author Unknown  
+><center>"9 - 5 pays the bills, 5 - 10 advances your career" - Author Unknown</center>  
 
 {{< admonition type=success title="vCommunity Activities" open=true >}}
 * VMware vExpert | 2020 - Present  
@@ -112,13 +114,6 @@ The views and opinions expressed on this blog are my strictly my own and do not 
 {{< admonition type=info title="Info" open=true >}}
 I like to wear Crocs and I like VMware Products. So what better name than www.vCROCS.info for my Blog  
 {{< /admonition >}}
-
----
-
-{{< admonition type=info title="Product Links" open=true >}}
-I am a Amazon Associate. As an Amazon Associate, I earn from qualifying purchases.  
-{{< /admonition >}}
-
 
 ---
 
