@@ -3,7 +3,7 @@
 
 <center>{{< image src="author.png" caption="">}}</center>
 
-><center>{{< image src="Broadcom-Logo.png" caption="">}}</center>  
+><center>{{< image src="vmware-by-broadcom-logo.png" caption="">}}</center>  
 
 ><center>VMware By <span style="color: Black;">Broadcom</span> | VMware Aria Suite Solution Architect</center>  
 ><center>VMware vExpert 2020 - Present</center>  
