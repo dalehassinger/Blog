@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.vcrocs.info/aria-operations-servicenow-mp-cmdb/" /><meta property="og:image" content="https://www.vcrocs.info/aria-operations-servicenow-mp-cmdb/featured-image.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-22T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-12-22T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta property="article:modified_time" content="2023-12-26T15:23:25-05:00" /><meta property="og:site_name" content="vCROCS" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.vcrocs.info/aria-operations-servicenow-mp-cmdb/featured-image.png"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/www.vcrocs.info\/aria-operations-servicenow-mp-cmdb\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VMware, VMware Aria Operations, Management Pack, PowerShell, Servicenow","wordcount":  1533 ,
-        "url": "https:\/\/www.vcrocs.info\/aria-operations-servicenow-mp-cmdb\/","datePublished": "2023-12-22T00:00:00+00:00","dateModified": "2023-12-22T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "VMware, VMware Aria Operations, Management Pack, PowerShell, Servicenow","wordcount":  1595 ,
+        "url": "https:\/\/www.vcrocs.info\/aria-operations-servicenow-mp-cmdb\/","datePublished": "2023-12-22T00:00:00+00:00","dateModified": "2023-12-26T15:23:25-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Operations | Servicenow | Management Pack</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/monitoring/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Monitoring</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-22">2023-12-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1533 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-22">2023-12-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1595 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -167,7 +167,7 @@
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
     </figure>
 <hr>
-<p>I wanted to share how I setup the Servicenow Management Pack in my lab to update a Servicenow CMDB. The VMware Documentation covers the process well. I wanted to cover a couple of steps to help make the process easier.</p>
+<p>I wanted to share how I setup the Servicenow Management Pack in my lab to update a Servicenow CMDB (Configuration Management DataBase). The VMware Documentation covers the process well. I wanted to cover a couple of steps to help make the process easier.</p>
 <hr>
 <p>I followed the instructions exactly as listed in the PDF link below.</p>
 <p><a href="/aria-operations-servicenow-mp-cmdb/servicenow-cmdb-sync-only-configuration.pdf" rel="">Instructions to setup Servicenow to allow the MP to send data to CMDB | Click Here to View PDF</a></p>
@@ -180,7 +180,41 @@
 <li>I gave the role “read” and “edit_ci_relations” to the tables listed in the document.</li>
 <li>I used the moid_populate_only.json config that is OOTB (Out of the Box) with no changes to start to make sure everything was working correct.</li>
 </ul>
-<p>When I added the account to the management pack in Aria Operations it did a good job to let me know if everything was set up correctly in Servicenow. I had a permission wrong and it showed me what was wrong when I did a Validate Connection. I fixed the permission like it showed me and then everything worked. My lab data is now showing up in Servicenow CMDB.</p>
+<p>When I added the account to the management pack in Aria Operations, it did a good job to let me know if everything was set up correctly in Servicenow and if the json config file was setup correct. I had a permission wrong and it showed me what was wrong when I did a Validate Connection. I fixed the permission like it showed me and then everything worked. My lab data is now showing up in Servicenow CMDB.</p>
+<hr>
+<p>Management Pack Config screen:
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png"
+            data-srcset="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png, /aria-operations-servicenow-mp-cmdb/snow-mp-05.png 1.5x, /aria-operations-servicenow-mp-cmdb/snow-mp-05.png 2x"
+            data-sizes="auto"
+            alt="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png" width="1418" height="798" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<p>Management Pack Config screen (Validate Connection | Failed). Shows the field name is incorrect:
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png"
+            data-srcset="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png, /aria-operations-servicenow-mp-cmdb/snow-mp-06.png 1.5x, /aria-operations-servicenow-mp-cmdb/snow-mp-06.png 2x"
+            data-sizes="auto"
+            alt="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png" width="1646" height="926" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<p>Management Pack Config screen (Validate Connection | Success):
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png"
+            data-srcset="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png, /aria-operations-servicenow-mp-cmdb/snow-mp-07.png 1.5x, /aria-operations-servicenow-mp-cmdb/snow-mp-07.png 2x"
+            data-sizes="auto"
+            alt="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png" width="1646" height="926" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
 <hr>
 <p>OOTB, the config files can be found here on the VMware Aria Operations Appliance:<br>
 The config file will go here: /usr/lib/vmware-vcops/user/plugins/inbound/servicenow_adapter3/work<br>
@@ -689,7 +723,7 @@ The templates are located at: /usr/lib/vmware-vcops/user/plugins/inbound/service
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-22</span>
+                <span>Updated on 2023-12-26</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

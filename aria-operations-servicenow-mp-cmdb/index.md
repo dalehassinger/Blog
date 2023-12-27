@@ -20,7 +20,7 @@ All the source code for this Blog is saved in my GitHub Repository. Click on the
 ---
 
 
-I wanted to share how I setup the Servicenow Management Pack in my lab to update a Servicenow CMDB. The VMware Documentation covers the process well. I wanted to cover a couple of steps to help make the process easier.  
+I wanted to share how I setup the Servicenow Management Pack in my lab to update a Servicenow CMDB (Configuration Management DataBase). The VMware Documentation covers the process well. I wanted to cover a couple of steps to help make the process easier.  
 
 ---
 
@@ -37,7 +37,18 @@ For the Servicenow user permissions I did the following:
 * I gave the role “read” and “edit_ci_relations” to the tables listed in the document.  
 * I used the moid_populate_only.json config that is OOTB (Out of the Box) with no changes to start to make sure everything was working correct.  
 
-When I added the account to the management pack in Aria Operations it did a good job to let me know if everything was set up correctly in Servicenow. I had a permission wrong and it showed me what was wrong when I did a Validate Connection. I fixed the permission like it showed me and then everything worked. My lab data is now showing up in Servicenow CMDB.
+When I added the account to the management pack in Aria Operations, it did a good job to let me know if everything was set up correctly in Servicenow and if the json config file was setup correct. I had a permission wrong and it showed me what was wrong when I did a Validate Connection. I fixed the permission like it showed me and then everything worked. My lab data is now showing up in Servicenow CMDB.
+
+---
+
+Management Pack Config screen:
+{{< image src="snow-mp-05.png" caption="Click to see Larger Image of Screen Shot">}}  
+
+Management Pack Config screen (Validate Connection | Failed). Shows the field name is incorrect:
+{{< image src="snow-mp-06.png" caption="Click to see Larger Image of Screen Shot">}}  
+
+Management Pack Config screen (Validate Connection | Success):
+{{< image src="snow-mp-07.png" caption="Click to see Larger Image of Screen Shot">}}  
 
 ---
 
