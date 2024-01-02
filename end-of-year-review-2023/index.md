@@ -39,15 +39,16 @@ The year 2023 was a good chapter in my career, emphasizing the importance of com
 | 09   |  How to use PowerShell Modules with vRA 8.2                                          |	305   |
 | 10   | Unlocking the Potential - VMware Aria Operations - Metric Search                     | 291   |
 | 11   | Unlocking the Potential - VMware Aria Operations - October 2023 PowerBlock           | 290   |
-| 12   | How to use PowerShell Modules with vRA 8.2                                           | 282   |
-| 13   | VMware Aria Operations - Servicenow - Management Pack                                | 265   |
-| 14   | Schedule RVTools Data Export                                                         | 250   |
-| 15   | Rest API calls in VMware Aria Automation with PowerShell                             | 228   |
-| 16   | VMware Explore 2023 - Presentation                                                   | 208   |
-| 17   | Unlocking the Potential - VMware Aria Automation - ABX Action Constants and Secrets  | 166   |
-| 18   | Unlocking the Potential - VMware Aria Automation - Custom Form Versioning            | 156   |
-| 19   | VMware Aria Operations for Logs (SaaS) - ESXi Host syslog setting                    | 146   |
-| 20   | Unlocking the Potential - VMware Aria Operations - Automation Central - VM Snaps     | 131   |
+| 12   | VMware Aria Operations - Servicenow - Management Pack                                | 265   |
+| 13   | Schedule RVTools Data Export                                                         | 250   |
+| 14   | Rest API calls in VMware Aria Automation with PowerShell                             | 228   |
+| 15   | VMware Explore 2023 - Presentation                                                   | 208   |
+| 16   | Unlocking the Potential - VMware Aria Automation - ABX Action Constants and Secrets  | 166   |
+| 17   | Unlocking the Potential - VMware Aria Automation - Custom Form Versioning            | 156   |
+| 18   | VMware Aria Operations for Logs (SaaS) - ESXi Host syslog setting                    | 146   |
+| 19   | Unlocking the Potential - VMware Aria Operations - Automation Central - VM Snaps     | 131   |
+| 20   | VMware Explore 2023 - Hackathon                                                      | 125   |
+
 
 The top 20 list reveals a significant interest in utilizing Automation and Operations. The fact that Ansible's integration with VMware Aria Automation ranked #1 was unexpected, evidenced by the frequent views of this particular blog post. This observation has inspired me to dedicate more of my blogging efforts to VMware Aria Automation Ansible integration in the upcoming year.  
 
