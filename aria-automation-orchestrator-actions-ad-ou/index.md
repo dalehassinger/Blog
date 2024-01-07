@@ -9,11 +9,11 @@
 
 ###### VMware Aria Automation  
 
-VMware Aria Automation 8.14.1 was used for this Blog Post. When new versions of VMware Aria Operations or the MP are released, the code or process may need to be changed.  
+VMware Aria Automation 8.14.1 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code or process may need to be changed.  
 
 All the source code for this Blog is saved in my GitHub Repository. Click on the links within the blog to access the code.  
 
-VMware Aria Automation Orchestrator Actions are a very powerful way to add checks into your server build process. This Blog Post shows you how to verify that the AD OU structure is in place before do a new Server Build. Within the VMware Aria Automation Catalog you can have custom forms to ask all the questions required to build a new server (see screen shot). One of the questions can be which AD OU you want to create the new Windows Server. The list of existing OUs in AD can be a dropdown with all the AD OU names provided by a Action. After you select the OU name to locate the new Windows Server Build the next Action can verify that all the AD Sub OUs are in place. If the OUs are in place the action will only verify. If an AD OU is missing, the Action will create the AD OU before you press submit to create new Server.  
+VMware Aria Automation Orchestrator Actions are a very powerful way to add checks into your server build process. This Blog Post shows you how to verify that the AD OU structure is in place before you do a new Server Build. Within the VMware Aria Automation Catalog, you can have custom forms to ask all the questions required to build a new server (see screen shot). One of the questions can be which AD OU you want to create the new Windows Server. The list of existing OUs in AD can be a dropdown with all the AD OU names provided by a Action. After you select the OU name to locate the new Windows Server Build, the next Action can verify that all the AD Sub OUs are in place. If the OUs are in place the action will only verify. If an AD OU is missing, the Action will create the AD OU before you press submit to create new Server.  
 
 ---
 

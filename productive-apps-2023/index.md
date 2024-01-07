@@ -71,8 +71,6 @@ My current app selection has been influenced significantly by the VMware/Broadco
 
 ---
 
-* If you're a fan of Crocs and are interested in getting a pair similar to the ones I wear, follow this link to find them on Amazon:
-<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a>  
 * If you found this article helpful and would like to show your appreciation, consider buying me a coffee to kickstart my day.  
 
 <center>
