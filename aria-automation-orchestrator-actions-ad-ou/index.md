@@ -27,7 +27,7 @@ Watch this video to see the complete process that is discussed in this Blog Post
 
 ---
 
-Here is Javascript code for the Action that returns all existing AD OUs to populate the dropdown on the custom form.  
+Here is Javascript code for the Action that returns all existing AD OUs to populate the dropdown on the custom form. Watch the Video to understand how the code works.  
 
 **Click arrow to expand the code:**  
 
@@ -57,8 +57,6 @@ for each (ou in parentOUPath){
 var data = new Array();
 for each (var ouObject in childOUs){
     data.push(ouObject.name)
-    //data.push(ouObject.distinguishedName)
-    
     //System.log("Existing OU Name: " + ouObject.name);
 }
 System.log("Existing Sub OUs: " + data);
@@ -69,7 +67,7 @@ return data
 
 ---
 
-Here is Javascript code for the Action that verifies that the AD OU structure is in place and creates the AD OUs if they do not exist.  
+Here is Javascript code for the Action that verifies that the AD OU structure is in place and creates the AD OUs if they do not exist. Watch the Video to understand how the code works.  
 
 **Click arrow to expand the code:**  
 

@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.vcrocs.info/aria-automation-orchestrator-actions-ad-ou/" /><meta property="og:image" content="https://www.vcrocs.info/aria-automation-orchestrator-actions-ad-ou/featured-image.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-07T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-01-07T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta property="article:modified_time" content="2024-01-07T13:12:46-05:00" /><meta property="og:site_name" content="vCROCS" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://www.vcrocs.info/aria-automation-orchestrator-actions-ad-ou/featured-image.png"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/www.vcrocs.info\/aria-automation-orchestrator-actions-ad-ou\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, Active Directory, Organizational Units, Actions","wordcount":  1010 ,
-        "url": "https:\/\/www.vcrocs.info\/aria-automation-orchestrator-actions-ad-ou\/","datePublished": "2024-01-07T00:00:00+00:00","dateModified": "2024-01-07T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, Active Directory, Organizational Units, Actions","wordcount":  1025 ,
+        "url": "https:\/\/www.vcrocs.info\/aria-automation-orchestrator-actions-ad-ou\/","datePublished": "2024-01-07T00:00:00+00:00","dateModified": "2024-01-07T13:12:46-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Automation Orchestrator | Active Directory OUs</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-07">2024-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1010 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-07">2024-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1025 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -175,7 +175,7 @@
 </div>
 
 <hr>
-<p>Here is Javascript code for the Action that returns all existing AD OUs to populate the dropdown on the custom form.</p>
+<p>Here is Javascript code for the Action that returns all existing AD OUs to populate the dropdown on the custom form. Watch the Video to understand how the code works.</p>
 <p><strong>Click arrow to expand the code:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -210,8 +210,6 @@
 </span><span class="lnt">29
 </span><span class="lnt">30
 </span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">  
@@ -240,8 +238,6 @@
 </span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">each</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">ouObject</span> <span class="k">in</span> <span class="nx">childOUs</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">data</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">ouObject</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">//data.push(ouObject.distinguishedName)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
 </span></span><span class="line"><span class="cl">    <span class="c1">//System.log(&#34;Existing OU Name: &#34; + ouObject.name);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Existing Sub OUs: &#34;</span> <span class="o">+</span> <span class="nx">data</span><span class="p">);</span>
@@ -250,7 +246,7 @@
 </div>
 </div>
 <hr>
-<p>Here is Javascript code for the Action that verifies that the AD OU structure is in place and creates the AD OUs if they do not exist.</p>
+<p>Here is Javascript code for the Action that verifies that the AD OU structure is in place and creates the AD OUs if they do not exist. Watch the Video to understand how the code works.</p>
 <p><strong>Click arrow to expand the code:</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
