@@ -72,7 +72,7 @@ Here is Javascript code for the Action that verifies that the AD OU structure is
 **Click arrow to expand the code:**  
 
 {{< highlight javascript >}}  
-// Orchestrator Action to list AD Sub OUs
+// Orchestrator Action to Verify AD OU Structure
 // Created by the VMware by Broadcom Healthcare Aria Team
 
 // Before you use this Action you MUST run the next 2 Workflows
