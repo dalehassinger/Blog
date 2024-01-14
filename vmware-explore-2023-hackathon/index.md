@@ -30,12 +30,11 @@ I want to thank Senior Staff TAM, [Ariel Sanchez](https://twitter.com/arielsanch
 
 ###### Team Members:  
 
-All Team Members work at VMware.  
-
 [Tina Krogull](https://www.linkedin.com/in/tinakrogull/) | Senior Technical Adoption Manager | Germany  
 [Wes Milliron](https://www.linkedin.com/in/wesmilliron/) | Technical Adoption Manager | Pennsylvania  
 [Viviana Miranda](https://www.linkedin.com/in/viviana-miranda-cubero/) | Senior Technical Marketing Architect | Costa Rica  
 [Madison Welsch](https://www.linkedin.com/in/madisonwelsch/) | Technical Adoption Manager | Ohio  
+[Edgar Sanchez](https://www.linkedin.com/in/edgar-sanchez-90439920/) | Systems Engineer II-VR/Windows at UMB | Alabama  
 [Dale Hassinger](https://www.linkedin.com/in/dale-hassinger-5712301b/) | Technical Adoption Manager | Pennsylvania  
 
 This is an AWESOME Team! I think it is great how we will be able to work together as an International Team. There is a lot of great experience and backgrounds on this Team.

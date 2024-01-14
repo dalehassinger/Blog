@@ -1,14 +1,21 @@
 # Pics
 
 
+{{< image src="pic17.jpg" caption="VMware Explore 2023 | {code Theatre} Presentation">}}
+{{< image src="pic21.png" caption="VMware Explore 2023 | {code Theatre} Presentation">}}
+{{< image src="pic18.jpg" caption="VMware Explore 2023 | Hackathon 2nd Place Award">}}
+{{< image src="pic19.jpg" caption="VMware Explore 2023 | Good Friend and Mentor | Christopher Kusek">}}
+{{< image src="pic20.jpg" caption="VMware Explore 2023 | Great Friends from the vCommunity">}}
 {{< image src="pic11.jpg" caption="VMworld 2021">}}
 {{< image src="Salt-Conf-Agenda.png" caption="SaltConf 2021">}}
 {{< image src="pic06.jpg" caption="Pat Gelsinger">}}
 {{< image src="pic05.jpg" caption="The Woz">}}
+<!--
 {{< image src="pic01.jpg" caption="Belle">}}
 {{< image src="pic02.jpg" caption="Belle">}}
 {{< image src="pic03.jpg" caption="Belle">}}
 {{< image src="pic04.jpg" caption="Belle">}}
+-->
 {{< image src="pic07.gif" caption="Belle">}}
 {{< image src="pic08.gif" caption="Belle">}}
 {{< image src="pic09.jpg" caption="Belle">}}
@@ -19,8 +26,6 @@
 
 ---
 
-* If you like wearing Crocs and want to get a pair like I wear, follow this link:
-<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a>  
 * If you found this Blog article useful and it helped you, Buy me a coffee to start my day.  
 
 <center>
