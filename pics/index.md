@@ -1,8 +1,8 @@
 # Pics
 
 
-{{< image src="pic17.jpg" caption="VMware Explore 2023 | {code Theatre} Presentation">}}
-{{< image src="pic21.png" caption="VMware Explore 2023 | {code Theatre} Presentation">}}
+{{< image src="pic17.jpg" caption="VMware Explore 2023 | code Theatre Presentation">}}
+{{< image src="pic21.png" caption="VMware Explore 2023 | code Theatre Presentation">}}
 {{< image src="pic18.jpg" caption="VMware Explore 2023 | Hackathon 2nd Place Award">}}
 {{< image src="pic19.jpg" caption="VMware Explore 2023 | Good Friend and Mentor | Christopher Kusek">}}
 {{< image src="pic20.jpg" caption="VMware Explore 2023 | Great Friends from the vCommunity">}}
