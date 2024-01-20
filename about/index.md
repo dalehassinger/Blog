@@ -3,16 +3,11 @@
 
 <center>{{< image src="author.png" caption="">}}</center>  
 
->  
-><center>{{< image src="vmware-by-broadcom-logo.png" caption="">}}</center>  
-><center><b>&nbsp;</b></center>  
-><center><b>VMware By <span style="color: Black;">Broadcom</span> | VMware Aria Suite Solution Architect</b></center>  
-><center><b>&nbsp;</b></center>  
-><center><b>VMware vExpert 2020 - Present</b></center>  
-><center><b>VMware vExpert Cloud Management 2021 - Present</b></center>  
-><center><b>&nbsp;</b></center>  
-><center><b>If you can script it, You can Automate it!</b></center>  
->  
+  
+#### vCF Specialist SE | VMware Aria Suite  
+###### VMware vExpert 2020 - Present  
+###### VMware vExpert Cloud Management 2021 - Present  
+###### If you can script it, You can Automate it!  
 
 <center>{{< image src="vexpert-2023.png" caption="">}}</center>  
 <center>{{< image src="vexpert-2023-4-stars.png" caption="" >}}</center>  
