@@ -46,7 +46,7 @@ Watch video to see how to define VMware Aria Operations Custom Group membership 
 
 ---
 
-To show the Metric Totals of each Custom Group, we created Super Metrics to sum the value of all the VMs within the Custom Group. If you were only using one vCenter TAG and one Custom Group your would need to do this. We wanted to show the Metric Values of a 100+ vCenter TAGs and each vCenter TAG would be on a separate line. That is why we created the Super Metrics.  
+To show the Metric Totals of each Custom Group, we created Super Metrics to sum the value of all the VMs within the Custom Group. If you were only using one vCenter TAG and one Custom Group, you would not need to do this. We wanted to show the Metric Values of a 100+ vCenter TAGs and each vCenter TAG would be on a separate line. That is why we created the Super Metrics.  
 
 Watch video to see how to create VMware Aria Operations Super Metrics to total Virtual Machine Metrics:  
 
