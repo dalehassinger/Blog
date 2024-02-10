@@ -7,6 +7,12 @@
 
 ---
 
+###### Blog Update:  
+
+I presented the content from this Blog at a **TECH BYTES** session on February 9th, 2024. 150 people registered for the webinar and there was a lot of interest with the ServiceNow Management Pack (MP). We received good feedback from the attendees on the capabilities of the MP.  
+
+---
+
 ###### VMware Aria Operations  
 
 VMware Aria Operations 8.14.1 and Servicenow MP (Management Pack) 9.0 was used for this Blog Post. When new versions of VMware Aria Operations or the MP are released, the code or process may need to be changed.  
