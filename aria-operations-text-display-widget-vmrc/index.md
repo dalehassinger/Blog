@@ -24,6 +24,10 @@ Please explore the blog post to witness the exceptional outcomes a great team ca
 
 ---
 
+{{< image src="vmrc.gif" caption="Click to see Larger Image of Screen Shot">}}  
+
+---
+
 All the source code for this Blog is saved in my GitHub Repository. Click on the links below.  
 
 ---
