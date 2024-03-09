@@ -15,8 +15,8 @@ I have been in the IT Industry for many years and there is a quote that I use al
 
 **There are still many options to learn about VMware Products. Here are some items that can be used to advance your knowledge:**  
 * VMware Workstation | [Link to Workstation Download site](https://www.vmware.com/products/workstation-player.html)  
-* VMware Fusion  
-* VMware ESXi  
+* VMware Fusion | [Link to Fusion Download site](https://www.vmware.com/products/fusion.html)  
+* VMware ESXi  [Link to vSphere Download site](https://www.vmware.com/products/vsphere.html)
 * Vmware ESXi ARM Edition | [Link to Documentation](https://communities.vmware.com/t5/ESXi-Arm-Fling-Documents/VMware-ESXi-Arm-Documentation/ta-p/2993062)  
 
 ---
