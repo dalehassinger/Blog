@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VMware Aria Automation | How to send messages and updates - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:title" content="VMware Aria Automation | How to send messages and updates" />
+<meta property="og:description" content="How to send messages/updates to a Microsoft Teams Channel or Google Spaces." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/aria-automation-messages-updates/" /><meta property="og:image" content="https://www.vcrocs.info/aria-automation-messages-updates/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-03-17T10:37:18-04:00" /><meta property="og:site_name" content="vCROCS" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.vcrocs.info/aria-automation-messages-updates/featured-image.png"/>
+<meta name="twitter:title" content="VMware Aria Automation | How to send messages and updates"/>
+<meta name="twitter:description" content="How to send messages/updates to a Microsoft Teams Channel or Google Spaces."/>
+<meta name="twitter:site" content="@dalehassinger"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/aria-automation-messages-updates/" /><link rel="prev" href="https://www.vcrocs.info/how-to-learn-about-vmware-products/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VMware Aria Automation | How to send messages and updates",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/aria-automation-messages-updates\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/aria-automation-messages-updates\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, Teams Messages, Google Spaces, Alerts, Messages","wordcount":  2285 ,
+        "url": "https:\/\/www.vcrocs.info\/aria-automation-messages-updates\/","datePublished": "2024-03-17T00:00:00+00:00","dateModified": "2024-03-17T10:37:18-04:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><a class="menu-item" href="/disclaimer/"> Disclaimer </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a class="menu-item" href="/disclaimer/" title="">Disclaimer</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Automation | How to send messages and updates</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-17">2024-03-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2285 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/aria-automation-messages-updates/featured-image.png"
+        data-srcset="/aria-automation-messages-updates/featured-image.png, /aria-automation-messages-updates/featured-image.png 1.5x, /aria-automation-messages-updates/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/aria-automation-messages-updates/featured-image.png"
+        title="/aria-automation-messages-updates/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#vmware-aria-automation">VMware Aria Automation</a></li>
+                    <li><a href="#screen-shots-of-the-steps">Screen Shots of the Steps:</a></li>
+                    <li><a href="#message-examples">Message Examples:</a></li>
+                    <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
+                    <li><a href="#aria-automation-version">Aria Automation Version:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to send messages/updates to a Microsoft Teams Channel or Google Spaces.</strong></p>
+<hr>
+<blockquote>
+<p>&ldquo;If everyone is moving forward together, then success takes care of itself.” - Henry Ford</p>
+</blockquote>
+<hr>
+<h6 id="vmware-aria-automation">VMware Aria Automation</h6>
+<p>Whenever new VMs are deployed or Day 2 operations are executed via the VMware Aria Automation Catalog, I find it crucial to update our team through a common messaging platform about the ongoing creations or modifications. In this blog, I&rsquo;ll demonstrate how to dispatch notifications to both Microsoft Teams and Google Spaces via a Webhook. This technique can be adapted for any messaging service such as Slack, Zoom, Discord, etc., by simply altering the JSON body formatting code and creating a Webhook for message delivery.</p>
+<p>I will guide you through the process of sending alerts from VMware Aria Automation utilizing ABX Actions and Orchestrator Workflows. Though the procedure remains largely the same, there are minor variations in acquiring Property Values. Presenting both methods offers you, the Automation Specialists, the freedom to choose the approach that seamlessly integrates into your workflows. My philosophy in automation is that there are countless ways to achieve the same outcome.</p>
+<hr>
+<p>In this blog, I&rsquo;ll walk you through the creation of a new virtual machine (VM). At the onset of the build process, I have configured an Extensibility Subscription that triggers the sending of notifications to both Microsoft Teams and Google Spaces. This is accomplished through the use of an ABX Action and an Orchestrator Workflow.</p>
+<hr>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Within the Design section of Aria Automation, create a template. For the purpose of this tutorial, we will construct a straightforward Rocky Linux VM. | Refer to &ldquo;Screen Shot 01&rdquo;.</li>
+<li>Ensure that all properties you wish to include in your notification are incorporated into the template&rsquo;s YAML code. These property values will be transmitted to both ABX Actions and Orchestrator Workflows. | Refer to &ldquo;Screen Shot 02&rdquo;.
+<ul>
+<li>You have the flexibility to include any property in your messages, provided it is specified in the template&rsquo;s YAML code.</li>
+</ul>
+</li>
+<li>Proceed to set up an Extensibility Action. | See &ldquo;Screen Shots 03 and 04&rdquo;.</li>
+<li>Establish an Extensibility Subscription that will initiate the ABX Action or Orchestrator Workflow as required. | Refer to &ldquo;Screen Shot 05&rdquo;.</li>
+<li>Here&rsquo;s an example of how to define a subscription. | See &ldquo;Screen Shot 06&rdquo;.</li>
+<li>Initiate the creation of an Orchestrator Workflow. | Refer to &ldquo;Screen Shot 07&rdquo;.
+<ul>
+<li>Incorporate an input property into the Orchestrator Workflow. | See &ldquo;Screen Shot 08&rdquo;.</li>
+<li>Outline the schema within the Orchestrator Workflow. | Refer to &ldquo;Screen Shot 09&rdquo;.</li>
+<li>Inject the necessary code into the Orchestrator Workflow. | See &ldquo;Screen Shots 10 and 11&rdquo;.</li>
+</ul>
+</li>
+<li>Deploy a new VM and confirm that the Extensibility Subscription successfully triggered the ABX Action you defined.</li>
+<li>Check your preferred messaging system to ensure the notification was received.
+<ul>
+<li>Example of a Google Spaces Message | Refer to &ldquo;Screen Shot 12&rdquo;.</li>
+<li>Example of a Microsoft Teams Message | See &ldquo;Screen Shot 13&rdquo;.</li>
+</ul>
+</li>
+<li>If all steps were executed successfully, it&rsquo;s time for a celebration!</li>
+<li>&ldquo;Screen Shot 14&rdquo; illustrates the process of creating a Google Spaces Webhook.</li>
+</ol>
+<hr>
+<h6 id="screen-shots-of-the-steps">Screen Shots of the Steps:</h6>
+<p>Design Template with YAML Code that has all the required Properties.</p>
+<p>Screen Shot 01:</p>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-01.png" title="/aria-automation-messages-updates/aria-automation-messages-01.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-01.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-01.png, /aria-automation-messages-updates/aria-automation-messages-01.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-01.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-01.png" width="4170" height="2344" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Design Template Example YAML Code:</strong></p>
+<p>This YAML code shows all the Properties that I want to send to a ABX Action or Orchestrator Workflow.</p>
+<p>Click arrow to expand the code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">formatVersion</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Ubuntu-20-with-minion</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CustomizationSpec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Customization Specification</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">Customization-Ubuntu-22</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Customization Spec:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMName</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;VM Name:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minLength</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLength</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">LINUX-U-16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.69.16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">BuildTime</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Build Time:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">date-time</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vCenterFolders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;vCenter Folder:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">Blogs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">$dynamicEnum</span><span class="p">:</span><span class="w"> </span><span class="l">/data/vro-actions/TAM/DBH_vCenter_Folders</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_vSphere_Machine_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Machine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">vCenter-ubuntu-20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">flavor</span><span class="p">:</span><span class="w"> </span><span class="l">vCenter-1CPU-2GB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VMName}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">BuildTime</span><span class="p">:</span><span class="w"> </span><span class="l">${input.BuildTime}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">folderName</span><span class="p">:</span><span class="w"> </span><span class="l">${input.vCenterFolders}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">customizationSpec</span><span class="p">:</span><span class="w"> </span><span class="l">${input.CustomizationSpec}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vmIP</span><span class="p">:</span><span class="w"> </span><span class="l">${input.IP}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">remoteAccess</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">authentication</span><span class="p">:</span><span class="w"> </span><span class="l">usernamePassword</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">Cluster:PROD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l">${resource.Cloud_vSphere_Network_1.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">assignment</span><span class="p">:</span><span class="w"> </span><span class="l">static</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l">${input.IP}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_vSphere_Network_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networkType</span><span class="p">:</span><span class="w"> </span><span class="l">existing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">Network:vCenter-VMs</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>Highlight of YAML Code showing Properties.</p>
+<p>Screen Shot 02:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-02.png" title="/aria-automation-messages-updates/aria-automation-messages-02.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-02.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-02.png, /aria-automation-messages-updates/aria-automation-messages-02.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-02.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-02.png" width="1090" height="1604" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Where to create Extensibility ABX Actions.</p>
+<p>Screen Shot 03:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-03-1.png" title="/aria-automation-messages-updates/aria-automation-messages-03-1.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-03-1.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-03-1.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-03-1.png, /aria-automation-messages-updates/aria-automation-messages-03-1.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-03-1.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-03-1.png" width="4180" height="2350" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Example Extensibility ABX Action.</p>
+<p>Screen Shot 04:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-03-2.png" title="/aria-automation-messages-updates/aria-automation-messages-03-2.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-03-2.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-03-2.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-03-2.png, /aria-automation-messages-updates/aria-automation-messages-03-2.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-03-2.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-03-2.png" width="4180" height="2352" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p><strong>Extensibility ABX Action Code:</strong></p>
+<p>Code Snippets.</p>
+<ul>
+<li>Each ABX Action starts with identical code to retrieve Property Values.</li>
+<li>The variation arises in the methodology of dispatching this information to the respective messaging systems.</li>
+</ul>
+<p>Here&rsquo;s an example script for sending notifications to Microsoft Teams.</p>
+<p>Click arrow to expand the code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">handler($context</span><span class="p">,</span> <span class="nv">$inputs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Build PowerShell variables</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="n">resourceNames</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">resourceNames</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">image</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$image</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$image</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">image</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">flavor</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$flavor</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$flavor</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">flavor</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">folderName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$folder</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$folder</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">folderName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">vmIP</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmIP</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmIP</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">vmIP</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">__metadata</span><span class="p">.</span><span class="n">userName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$userName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$userName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">__metadata</span><span class="p">.</span><span class="py">userName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--vmName:&#34;</span><span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;---image:&#34;</span><span class="nv">$image</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--flavor:&#34;</span><span class="nv">$flavor</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--folder:&#34;</span><span class="nv">$folder</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;userName:&#34;</span><span class="nv">$userName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;----vmIP:&#34;</span><span class="nv">$vmIP</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># --- [ Start Add Alert to Teams Channel ] ---</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Define the webhook URL</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$webhookUrl</span> <span class="p">=</span> <span class="s1">&#39;https://vcrocs.webhook.office.com/webhookb2/ac73a8c3-bd4572@015568c1-bbe7-hack-me-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2f-hack-you-12/925b-9960-4590-9251-65db25f05419&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Create the message card</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$messageCard</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;@type&#34;</span>    <span class="p">=</span> <span class="s2">&#34;MessageCard&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;@context&#34;</span> <span class="p">=</span> <span class="s2">&#34;http://schema.org/extensions&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;summary&#34;</span>  <span class="p">=</span> <span class="s2">&#34;Issue 176715375&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;sections&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;activityTitle&#34;</span>    <span class="p">=</span> <span class="s2">&#34;vRA Automated VM Build:&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;facts&#34;</span>            <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM Name:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$vmName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM IP:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$vmIP</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;Created By:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$userName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM Image:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$image</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;vCenter Folder:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$folder</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM Flavor:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$flavor</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;markdown&#34;</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Send the message card</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$webhookUrl</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-ContentType</span> <span class="s1">&#39;application/json&#39;</span> <span class="n">-Body</span> <span class="nv">$messageCard</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$outPut</span> <span class="p">=</span> <span class="s2">&#34;Done&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$outPut</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>This code is to send a message to Google Spaces.</p>
+<p>Click arrow to expand the code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">handler($context</span><span class="p">,</span> <span class="nv">$inputs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Build PowerShell variables</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="n">resourceNames</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">resourceNames</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">image</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$image</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$image</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">image</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">flavor</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$flavor</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$flavor</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">flavor</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">folderName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$folder</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$folder</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">folderName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">vmIP</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmIP</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmIP</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">vmIP</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">__metadata</span><span class="p">.</span><span class="n">userName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$userName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$userName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">__metadata</span><span class="p">.</span><span class="py">userName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--vmName:&#34;</span><span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;---image:&#34;</span><span class="nv">$image</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--flavor:&#34;</span><span class="nv">$flavor</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--folder:&#34;</span><span class="nv">$folder</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;userName:&#34;</span><span class="nv">$userName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;----vmIP:&#34;</span><span class="nv">$vmIP</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># --- [ Start Add Alert to Google Chat ] ---</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Create json body for Google Alert   </span>
+</span></span><span class="line"><span class="cl"><span class="nv">$messageBody</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cards</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">header</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">title</span>    <span class="p">=</span> <span class="s2">&#34;New VM Build&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sections</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">widgets</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">keyValue</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">topLabel</span>         <span class="p">=</span> <span class="s2">&#34;VM Name:&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">content</span>          <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$vmname</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">contentMultiline</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">keyValue</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">topLabel</span>         <span class="p">=</span> <span class="s2">&#34;VM IP:&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">content</span>          <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$vmIP</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">contentMultiline</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">keyValue</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">topLabel</span>         <span class="p">=</span> <span class="s2">&#34;Created By:&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">content</span>          <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$username</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">contentMultiline</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">keyValue</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">topLabel</span>         <span class="p">=</span> <span class="s2">&#34;VM Image:&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">content</span>          <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$image</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">contentMultiline</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">keyValue</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">topLabel</span>         <span class="p">=</span> <span class="s2">&#34;vCenter Folder:&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">content</span>          <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$folder</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">contentMultiline</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">keyValue</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">topLabel</span>         <span class="p">=</span> <span class="s2">&#34;VM Flavor:&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">content</span>          <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$flavor</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">contentMultiline</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nv">$jsonMessage</span> <span class="p">=</span> <span class="nv">$messageBody</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Output the JSON to verify</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$jsonMessage</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Define the webhook URL (replace it with your actual webhook URL)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$webhookUrl</span> <span class="p">=</span> <span class="s1">&#39;https://chat.googleapis.com/v1/spaces/AAAAvSYSmfg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&amp;token=Vj-NoThfrmjLnkIW_iQRQw71qcE2CGxG1tkjs2ArM7o&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Send the message</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$webhookUrl</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Body</span> <span class="nv">$jsonMessage</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">#$outPut = &#34;WebHook Date/Time: &#34; + $results.createTime</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#Write-Host $outPut</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nv">$outPut</span> <span class="p">=</span> <span class="s2">&#34;Done&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nv">$outPut</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>Subscriptions used to start ABX Actions or Orchestrator Workflows.</p>
+<p>Screen Shot 05:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-03.png" title="/aria-automation-messages-updates/aria-automation-messages-03.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-03.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-03.png, /aria-automation-messages-updates/aria-automation-messages-03.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-03.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-03.png" width="4172" height="2346" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Subscription definition example.</p>
+<p>Screen Shot 06:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-04.png" title="/aria-automation-messages-updates/aria-automation-messages-04.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-04.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-04.png, /aria-automation-messages-updates/aria-automation-messages-04.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-04.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-04.png" width="4180" height="2350" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Create a new Orchestrator Workflow.</p>
+<p>Screen Shot 07:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-07.png" title="/aria-automation-messages-updates/aria-automation-messages-07.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-07.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-07.png, /aria-automation-messages-updates/aria-automation-messages-07.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-07.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-07.png" width="4168" height="2344" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Add Input named &ldquo;inputProperties&rdquo; to the Orchestrator Workflow.</p>
+<p>Screen Shot 08:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-08.png" title="/aria-automation-messages-updates/aria-automation-messages-08.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-08.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-08.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-08.png, /aria-automation-messages-updates/aria-automation-messages-08.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-08.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-08.png" width="4170" height="2346" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Create the Orchestrator Workflow Schema.</p>
+<p>Screen Shot 09:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-09.png" title="/aria-automation-messages-updates/aria-automation-messages-09.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-09.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-09.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-09.png, /aria-automation-messages-updates/aria-automation-messages-09.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-09.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-09.png" width="4170" height="2344" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Add the code to the Orchestrator Workflow.</p>
+<p>Screen Shot 10:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-10.png" title="/aria-automation-messages-updates/aria-automation-messages-10.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-10.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-10.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-10.png, /aria-automation-messages-updates/aria-automation-messages-10.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-10.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-10.png" width="4170" height="2346" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p><strong>Orchestrator Workflow Code:</strong></p>
+<p>Code Examples. At the start of each Orchestrator Workflow, the code for retrieving Property Values is consistent. The variation comes in how the information is sent to each messaging system.</p>
+<ul>
+<li>For sending messages to Microsoft Teams, use the following code.</li>
+<li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
+<li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.</li>
+</ul>
+<p>Click arrow to expand the code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Handler($context</span><span class="p">,</span> <span class="nv">$inputs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Build PowerShell variables</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="n">resourceNames</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">resourceNames</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">image</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$image</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$image</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">image</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">flavor</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$flavor</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$flavor</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">flavor</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">folderName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$folder</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$folder</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">folderName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">vmIP</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmIP</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmIP</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">inputProperties</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">vmIP</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="n">__metadata_userName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$userName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$userName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">__metadata_userName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--vmName:&#34;</span><span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;---image:&#34;</span><span class="nv">$image</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--flavor:&#34;</span><span class="nv">$flavor</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;--folder:&#34;</span><span class="nv">$folder</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;userName:&#34;</span><span class="nv">$userName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;----vmIP:&#34;</span><span class="nv">$vmIP</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Define the webhook URL</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$webhookUrl</span> <span class="p">=</span> <span class="s1">&#39;https://vcrocs.webhook.office.com/webhookb2/ac73a8c3-59a2-hack-me-bd4572@015568c1-bbe7-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2fcbd-hack-you-0212/925be554-9960-4590-9251-65db25f05419&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Create the message card</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$messageCard</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;@type&#34;</span>    <span class="p">=</span> <span class="s2">&#34;MessageCard&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;@context&#34;</span> <span class="p">=</span> <span class="s2">&#34;http://schema.org/extensions&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;summary&#34;</span>  <span class="p">=</span> <span class="s2">&#34;Issue 176715375&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;sections&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;activityTitle&#34;</span>    <span class="p">=</span> <span class="s2">&#34;vRA Automated VM Build:&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;facts&#34;</span>            <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM Name:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$vmName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM IP:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$vmIP</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;Created By:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$userName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM Image:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$image</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;vCenter Folder:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$folder</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM Flavor:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$flavor</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;markdown&#34;</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Send the message card</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$webhookUrl</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-ContentType</span> <span class="s1">&#39;application/json&#39;</span> <span class="n">-Body</span> <span class="nv">$messageCard</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span><span class="p">=</span><span class="vm">@</span><span class="p">{</span><span class="n">status</span> <span class="p">=</span> <span class="s1">&#39;done&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>Code difference between a Orchestrator Workflow and a ABX Action.</p>
+<p>Screen Shot 11:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-11.png" title="/aria-automation-messages-updates/aria-automation-messages-11.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-11.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-11.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-11.png, /aria-automation-messages-updates/aria-automation-messages-11.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-11.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-11.png" width="2040" height="1638" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<h6 id="message-examples">Message Examples:</h6>
+<p>When all is configured and functioning properly, the Google Space message containing the New VM Build Details will appear as follows. Quite impressive!</p>
+<p>Screen Shot 12:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-google-space.png" title="/aria-automation-messages-updates/aria-automation-messages-google-space.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-google-space.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-google-space.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-google-space.png, /aria-automation-messages-updates/aria-automation-messages-google-space.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-google-space.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-google-space.png" width="1046" height="794" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>Microsoft Teams Message with New VM Build Details. Very Cool!</p>
+<p>Screen Shot 13:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" title="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-teams-message.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-teams-message.png, /aria-automation-messages-updates/aria-automation-messages-teams-message.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-teams-message.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" width="1202" height="632" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>How to create a Google Spaces Webhook. Link included below on how to create a Microsoft Teams Webhook.</p>
+<p>Screen Shot 14:<br>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-12.png" title="/aria-automation-messages-updates/aria-automation-messages-12.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-12.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-12.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-12.png, /aria-automation-messages-updates/aria-automation-messages-12.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-12.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-12.png" width="2126" height="1132" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=newteams%2Cdotnet" target="_blank" rel="noopener noreffer ">Link to learn how to create a Microsoft Teams Webhook.</a></li>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/" target="_blank" rel="noopener noreffer ">Link to my GitHub Repository for sample code like what is included in this Blog Post.</a></li>
+</ul>
+<hr>
+<h6 id="aria-automation-version">Aria Automation Version:</h6>
+<p>VMware Aria Automation 8.16.0 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code or process may need to be changed.</p>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-03-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/aria-automation-messages-updates/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/aria-automation-messages-updates/" data-title="VMware Aria Automation | How to send messages and updates" data-via="dalehassinger" data-hashtags="VMware,VMware Aria Automation,Teams Messages,Google Spaces,Alerts,Messages"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/aria-automation-messages-updates/" data-hashtag="VMware"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/aria-automation-messages-updates/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vmware/">VMware</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/teams-messages/">Teams Messages</a>,&nbsp;<a href="/tags/google-spaces/">Google Spaces</a>,&nbsp;<a href="/tags/alerts/">Alerts</a>,&nbsp;<a href="/tags/messages/">Messages</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/how-to-learn-about-vmware-products/" class="prev" rel="prev" title="How to learn about VMware Products"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>How to learn about VMware Products</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
