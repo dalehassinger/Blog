@@ -33,7 +33,7 @@
                             "url": "https:\/\/www.vcrocs.info\/aria-automation-messages-updates\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, Teams Messages, Google Spaces, Alerts, Messages","wordcount":  2285 ,
+                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, Teams Messages, Google Spaces, Alerts, Messages","wordcount":  3010 ,
         "url": "https:\/\/www.vcrocs.info\/aria-automation-messages-updates\/","datePublished": "2024-03-17T00:00:00+00:00","dateModified": "2024-03-17T10:37:18-04:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VMware Aria Automation | How to send messages and updates</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-17">2024-03-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2285 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-17">2024-03-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3010 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -139,10 +139,30 @@
                 <li>
                   <ul>
                     <li><a href="#vmware-aria-automation">VMware Aria Automation</a></li>
+                    <li><a href="#create-a-new-vm-and-send-message">Create a New VM and Send Message</a></li>
+                    <li><a href="#day-2-automation-process-with-a-orchestrator-workflow-and-send-message">Day 2 Automation Process with a Orchestrator Workflow and Send Message</a></li>
                     <li><a href="#screen-shots-of-the-steps">Screen Shots of the Steps:</a></li>
+                    <li><a href="#screen-shot-01">Screen Shot 01:</a></li>
+                    <li><a href="#screen-shot-02">Screen Shot 02:</a></li>
+                    <li><a href="#screen-shot-03">Screen Shot 03:</a></li>
+                    <li><a href="#screen-shot-04">Screen Shot 04:</a></li>
+                    <li><a href="#screen-shot-05">Screen Shot 05:</a></li>
+                    <li><a href="#screen-shot-06">Screen Shot 06:</a></li>
+                    <li><a href="#screen-shot-07">Screen Shot 07:</a></li>
+                    <li><a href="#screen-shot-08">Screen Shot 08:</a></li>
+                    <li><a href="#screen-shot-09">Screen Shot 09:</a></li>
+                    <li><a href="#screen-shot-10">Screen Shot 10:</a></li>
+                    <li><a href="#screen-shot-11">Screen Shot 11:</a></li>
                     <li><a href="#message-examples">Message Examples:</a></li>
+                    <li><a href="#screen-shot-12">Screen Shot 12:</a></li>
+                    <li><a href="#screen-shot-13">Screen Shot 13:</a></li>
+                    <li><a href="#screen-shot-14">Screen Shot 14:</a></li>
+                    <li><a href="#orchestrator-workflow-day-2-automation-and-send-message">Orchestrator Workflow Day 2 Automation and Send Message</a></li>
+                    <li><a href="#screen-shot-15">Screen Shot 15:</a></li>
+                    <li><a href="#screen-shot-16">Screen Shot 16:</a></li>
+                    <li><a href="#screen-shot-17">Screen Shot 17:</a></li>
                     <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
-                    <li><a href="#aria-automation-version">Aria Automation Version:</a></li>
+                    <li><a href="#aria-automation-version-used-for-blog-post">Aria Automation Version used for Blog Post:</a></li>
                   </ul>
                 </li>
               </ul>
@@ -165,38 +185,53 @@
 <hr>
 <p>In this blog, I&rsquo;ll walk you through the creation of a new virtual machine (VM). At the onset of the build process, I have configured an Extensibility Subscription that triggers the sending of notifications to both Microsoft Teams and Google Spaces. This is accomplished through the use of an ABX Action and an Orchestrator Workflow.</p>
 <hr>
+<p>Besides notifying your team when a new VM is created, I&rsquo;ll demonstrate how to dispatch a message through an Orchestrator Workflow for a Day 2 Automation process.</p>
+<hr>
+<h6 id="create-a-new-vm-and-send-message">Create a New VM and Send Message</h6>
 <p><strong>Steps:</strong></p>
 <ol>
+<li>Within the Design section of Aria Automation, create a template. For the purpose of this tutorial, we will construct a straightforward Rocky Linux VM. | Refer to <a href="#screen-shot-01">Screen Shot 1</a>.</li>
+<li>Ensure that all properties you wish to include in your notification are incorporated into the template&rsquo;s YAML code. These property values will be transmitted to both ABX Actions and Orchestrator Workflows. | Refer to <a href="#screen-shot-02">Screen Shot 2</a>.
+<ul>
+<li>You have the flexibility to include any property in your messages, provided it is specified in the template&rsquo;s YAML code.</li>
+</ul>
+</li>
+<li>Proceed to set up an Extensibility Action. | See <a href="#screen-shot-03">Screen Shot 3</a> and <a href="#screen-shot-04">Screen Shot 4</a>.</li>
+<li>Establish an Extensibility Subscription that will initiate the ABX Action or Orchestrator Workflow as required. | Refer to <a href="#screen-shot-05">Screen Shot 5</a>.</li>
+<li>Here&rsquo;s an example of how to define a subscription. | See <a href="#screen-shot-06">Screen Shot 6</a>.</li>
+<li>Initiate the creation of an Orchestrator Workflow. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.
+<ul>
+<li>Incorporate an input property into the Orchestrator Workflow. | See <a href="#screen-shot-08">Screen Shot 8</a>.</li>
+<li>Outline the schema within the Orchestrator Workflow. | Refer to <a href="#screen-shot-09">Screen Shot 9</a>.</li>
+<li>Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-10">Screen Shot 10</a> and <a href="#screen-shot-11">Screen Shot 11</a>.</li>
+</ul>
+</li>
+<li>Deploy a new VM and confirm that the Extensibility Subscription successfully triggered the ABX Action you defined.</li>
+<li>Check your preferred messaging system to ensure the notification was received.
+<ul>
+<li>Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.</li>
+<li>Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.</li>
+</ul>
+</li>
+<li>If all steps were executed successfully, it&rsquo;s time for a celebration!</li>
+<li><a href="#screen-shot-14">Screen Shot 14</a> illustrates the process of creating a Google Spaces Webhook.</li>
+</ol>
+<hr>
+<h6 id="day-2-automation-process-with-a-orchestrator-workflow-and-send-message">Day 2 Automation Process with a Orchestrator Workflow and Send Message</h6>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Initiate the creation of an Orchestrator Workflow. | Refer to &ldquo;Screen Shot 07&rdquo;.</li>
 <li>Within the Design section of Aria Automation, create a template. For the purpose of this tutorial, we will construct a straightforward Rocky Linux VM. | Refer to &ldquo;Screen Shot 01&rdquo;.</li>
 <li>Ensure that all properties you wish to include in your notification are incorporated into the template&rsquo;s YAML code. These property values will be transmitted to both ABX Actions and Orchestrator Workflows. | Refer to &ldquo;Screen Shot 02&rdquo;.
 <ul>
 <li>You have the flexibility to include any property in your messages, provided it is specified in the template&rsquo;s YAML code.</li>
 </ul>
 </li>
-<li>Proceed to set up an Extensibility Action. | See &ldquo;Screen Shots 03 and 04&rdquo;.</li>
-<li>Establish an Extensibility Subscription that will initiate the ABX Action or Orchestrator Workflow as required. | Refer to &ldquo;Screen Shot 05&rdquo;.</li>
-<li>Here&rsquo;s an example of how to define a subscription. | See &ldquo;Screen Shot 06&rdquo;.</li>
-<li>Initiate the creation of an Orchestrator Workflow. | Refer to &ldquo;Screen Shot 07&rdquo;.
-<ul>
-<li>Incorporate an input property into the Orchestrator Workflow. | See &ldquo;Screen Shot 08&rdquo;.</li>
-<li>Outline the schema within the Orchestrator Workflow. | Refer to &ldquo;Screen Shot 09&rdquo;.</li>
-<li>Inject the necessary code into the Orchestrator Workflow. | See &ldquo;Screen Shots 10 and 11&rdquo;.</li>
-</ul>
-</li>
-<li>Deploy a new VM and confirm that the Extensibility Subscription successfully triggered the ABX Action you defined.</li>
-<li>Check your preferred messaging system to ensure the notification was received.
-<ul>
-<li>Example of a Google Spaces Message | Refer to &ldquo;Screen Shot 12&rdquo;.</li>
-<li>Example of a Microsoft Teams Message | See &ldquo;Screen Shot 13&rdquo;.</li>
-</ul>
-</li>
-<li>If all steps were executed successfully, it&rsquo;s time for a celebration!</li>
-<li>&ldquo;Screen Shot 14&rdquo; illustrates the process of creating a Google Spaces Webhook.</li>
 </ol>
 <hr>
 <h6 id="screen-shots-of-the-steps">Screen Shots of the Steps:</h6>
+<h6 id="screen-shot-01">Screen Shot 01:</h6>
 <p>Design Template with YAML Code that has all the required Properties.</p>
-<p>Screen Shot 01:</p>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-01.png" title="/aria-automation-messages-updates/aria-automation-messages-01.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -328,8 +363,8 @@
 </div>
 </div>
 <hr>
+<h6 id="screen-shot-02">Screen Shot 02:</h6>
 <p>Highlight of YAML Code showing Properties.</p>
-<p>Screen Shot 02:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-02.png" title="/aria-automation-messages-updates/aria-automation-messages-02.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -339,10 +374,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-02.png" width="1090" height="1604" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-03">Screen Shot 03:</h6>
 <p>Where to create Extensibility ABX Actions.</p>
-<p>Screen Shot 03:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-03-1.png" title="/aria-automation-messages-updates/aria-automation-messages-03-1.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-03-1.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -352,10 +387,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-03-1.png" width="4180" height="2350" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-04">Screen Shot 04:</h6>
 <p>Example Extensibility ABX Action.</p>
-<p>Screen Shot 04:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-03-2.png" title="/aria-automation-messages-updates/aria-automation-messages-03-2.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-03-2.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -365,7 +400,7 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-03-2.png" width="4180" height="2352" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
 <p><strong>Extensibility ABX Action Code:</strong></p>
 <p>Code Snippets.</p>
@@ -821,8 +856,8 @@
 </div>
 </div>
 <hr>
+<h6 id="screen-shot-05">Screen Shot 05:</h6>
 <p>Subscriptions used to start ABX Actions or Orchestrator Workflows.</p>
-<p>Screen Shot 05:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-03.png" title="/aria-automation-messages-updates/aria-automation-messages-03.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -832,10 +867,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-03.png" width="4172" height="2346" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-06">Screen Shot 06:</h6>
 <p>Subscription definition example.</p>
-<p>Screen Shot 06:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-04.png" title="/aria-automation-messages-updates/aria-automation-messages-04.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -845,10 +880,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-04.png" width="4180" height="2350" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-07">Screen Shot 07:</h6>
 <p>Create a new Orchestrator Workflow.</p>
-<p>Screen Shot 07:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-07.png" title="/aria-automation-messages-updates/aria-automation-messages-07.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -858,10 +893,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-07.png" width="4168" height="2344" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-08">Screen Shot 08:</h6>
 <p>Add Input named &ldquo;inputProperties&rdquo; to the Orchestrator Workflow.</p>
-<p>Screen Shot 08:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-08.png" title="/aria-automation-messages-updates/aria-automation-messages-08.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-08.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -871,10 +906,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-08.png" width="4170" height="2346" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-09">Screen Shot 09:</h6>
 <p>Create the Orchestrator Workflow Schema.</p>
-<p>Screen Shot 09:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-09.png" title="/aria-automation-messages-updates/aria-automation-messages-09.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-09.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -884,10 +919,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-09.png" width="4170" height="2344" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-10">Screen Shot 10:</h6>
 <p>Add the code to the Orchestrator Workflow.</p>
-<p>Screen Shot 10:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-10.png" title="/aria-automation-messages-updates/aria-automation-messages-10.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-10.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -897,7 +932,7 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-10.png" width="4170" height="2346" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
 <p><strong>Orchestrator Workflow Code:</strong></p>
 <p>Code Examples. At the start of each Orchestrator Workflow, the code for retrieving Property Values is consistent. The variation comes in how the information is sent to each messaging system.</p>
@@ -1099,8 +1134,8 @@
 </div>
 </div>
 <hr>
+<h6 id="screen-shot-11">Screen Shot 11:</h6>
 <p>Code difference between a Orchestrator Workflow and a ABX Action.</p>
-<p>Screen Shot 11:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-11.png" title="/aria-automation-messages-updates/aria-automation-messages-11.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-11.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -1110,11 +1145,11 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-11.png" width="2040" height="1638" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
 <h6 id="message-examples">Message Examples:</h6>
+<h6 id="screen-shot-12">Screen Shot 12:</h6>
 <p>When all is configured and functioning properly, the Google Space message containing the New VM Build Details will appear as follows. Quite impressive!</p>
-<p>Screen Shot 12:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-google-space.png" title="/aria-automation-messages-updates/aria-automation-messages-google-space.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-google-space.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -1124,10 +1159,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-google-space.png" width="1046" height="794" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-13">Screen Shot 13:</h6>
 <p>Microsoft Teams Message with New VM Build Details. Very Cool!</p>
-<p>Screen Shot 13:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" title="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -1137,10 +1172,10 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-teams-message.png" width="1202" height="632" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
 <hr>
+<h6 id="screen-shot-14">Screen Shot 14:</h6>
 <p>How to create a Google Spaces Webhook. Link included below on how to create a Microsoft Teams Webhook.</p>
-<p>Screen Shot 14:<br>
 <figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-12.png" title="/aria-automation-messages-updates/aria-automation-messages-12.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-12.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
         <img
             class="lazyload"
@@ -1150,7 +1185,219 @@
             data-sizes="auto"
             alt="/aria-automation-messages-updates/aria-automation-messages-12.png" width="2126" height="1132" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
-    </figure></p>
+    </figure>
+<hr>
+<h6 id="orchestrator-workflow-day-2-automation-and-send-message">Orchestrator Workflow Day 2 Automation and Send Message</h6>
+<p><strong>Steps:</strong></p>
+<ol>
+<li>Initiate the creation of an Orchestrator Workflow. Creating a new Workflow is the same for Day 2 Automation Processes as when a Workflow was created for building a New VM. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.
+<ul>
+<li>Incorporate an input property into the Orchestrator Workflow for every question needed to complete the Day 2 Automation. | See <a href="#screen-shot-15">Screen Shot 15</a>.</li>
+<li>Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-16">Screen Shot 16</a>.</li>
+</ul>
+</li>
+<li>Run the Workflow and confirm that the code successfully ran and created the message .</li>
+<li>Check your preferred messaging system to ensure the notification was received. The Messages with look the same as when you created a New VM. YOU define what information is shown.
+<ul>
+<li>Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.</li>
+<li>Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.</li>
+</ul>
+</li>
+<li>If all steps were executed successfully, it&rsquo;s time for a celebration!</li>
+<li>Example of a Day 2 Automation Microsoft Teams Message | See <a href="#screen-shot-17">Screen Shot 17</a>.</li>
+</ol>
+<hr>
+<h6 id="screen-shot-15">Screen Shot 15:</h6>
+<p>Add all the required inputs to the Workflow for the Day 2 Automation process.</p>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-15.png" title="/aria-automation-messages-updates/aria-automation-messages-15.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-15.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-15.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-15.png, /aria-automation-messages-updates/aria-automation-messages-15.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-15.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-15.png" width="4166" height="2344" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="screen-shot-16">Screen Shot 16:</h6>
+<p>Add the code to the Orchestrator Workflow.</p>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-16.png" title="/aria-automation-messages-updates/aria-automation-messages-16.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-16.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-16.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-16.png, /aria-automation-messages-updates/aria-automation-messages-16.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-16.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-16.png" width="4168" height="2344" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Orchestrator Workflow Code for Day 2 Automation:</strong></p>
+<p>Code Example.</p>
+<ul>
+<li>The difference between this Workflow for day 2 Automation Code and when I used a Workflow to create a new VM is how you get the input values.</li>
+<li>For sending messages to Microsoft Teams, use the following code.</li>
+<li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
+<li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.</li>
+</ul>
+<p>Click arrow to expand the code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="n">s</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Handler($context</span><span class="p">,</span> <span class="nv">$inputs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Build PowerShell variables</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="n">vmName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">vmName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="n">snapName</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$snapName</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$snapName</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">snapName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="n">snapDescription</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$snapDescription</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$snapDescription</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">snapDescription</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;---------vmName:&#34;</span><span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;-------snapName:&#34;</span><span class="nv">$snapName</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;snapDescription:&#34;</span><span class="nv">$snapDescription</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Define the webhook URL</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$webhookUrl</span> <span class="p">=</span> <span class="s1">&#39;https://thornhilllanecom.webhook.office.com/webhookb2/ac73a8c3-59a2-4df2-b6bd-82ce2fbd4572@015568c1-bbe7-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2fcbd4531892b8a4626340212/925be554-9960-4590-9251-65db25f05419&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Create the message card</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$messageCard</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;@type&#34;</span>    <span class="p">=</span> <span class="s2">&#34;MessageCard&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;@context&#34;</span> <span class="p">=</span> <span class="s2">&#34;http://schema.org/extensions&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;summary&#34;</span>  <span class="p">=</span> <span class="s2">&#34;Issue 176715375&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;sections&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;activityTitle&#34;</span>    <span class="p">=</span> <span class="s2">&#34;VM SNAP Shot:&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;facts&#34;</span>            <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;VM Name:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$vmName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;Snap Name:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$snapName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;name&#34;</span>  <span class="p">=</span> <span class="s2">&#34;Snap Description:&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;value&#34;</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$snapDescription</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;markdown&#34;</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Send the message card</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$webhookUrl</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-ContentType</span> <span class="s1">&#39;application/json&#39;</span> <span class="n">-Body</span> <span class="nv">$messageCard</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Use this section to add the code to do whatever day 2 process you want to run</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># --- Start the Code</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># --- end the Code</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span><span class="p">=</span><span class="vm">@</span><span class="p">{</span><span class="n">status</span> <span class="p">=</span> <span class="s1">&#39;done&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="screen-shot-17">Screen Shot 17:</h6>
+<p>Microsoft Teams Message with Day 2 Automation Details. Awesome!</p>
+<figure><a class="lightgallery" href="/aria-automation-messages-updates/aria-automation-messages-17.png" title="/aria-automation-messages-updates/aria-automation-messages-17.png" data-thumbnail="/aria-automation-messages-updates/aria-automation-messages-17.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-automation-messages-updates/aria-automation-messages-17.png"
+            data-srcset="/aria-automation-messages-updates/aria-automation-messages-17.png, /aria-automation-messages-updates/aria-automation-messages-17.png 1.5x, /aria-automation-messages-updates/aria-automation-messages-17.png 2x"
+            data-sizes="auto"
+            alt="/aria-automation-messages-updates/aria-automation-messages-17.png" width="1278" height="552" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
 <hr>
 <h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
 <ul>
@@ -1158,7 +1405,7 @@
 <li><a href="https://github.com/dalehassinger/unlocking-the-potential/" target="_blank" rel="noopener noreffer ">Link to my GitHub Repository for sample code like what is included in this Blog Post.</a></li>
 </ul>
 <hr>
-<h6 id="aria-automation-version">Aria Automation Version:</h6>
+<h6 id="aria-automation-version-used-for-blog-post">Aria Automation Version used for Blog Post:</h6>
 <p>VMware Aria Automation 8.16.0 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code or process may need to be changed.</p>
 <hr>
 <div class="details admonition info open">
