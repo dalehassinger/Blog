@@ -50,14 +50,19 @@ Besides notifying your team when a new VM is created, I'll demonstrate how to di
 
 ---
 
-###### Day 2 Automation Process with a Orchestrator Workflow and Send Message
+###### Orchestrator Workflow Day 2 Automation and Send Message
 
 **Steps:**
 
-1. Initiate the creation of an Orchestrator Workflow. | Refer to "Screen Shot 07".
-2. Within the Design section of Aria Automation, create a template. For the purpose of this tutorial, we will construct a straightforward Rocky Linux VM. | Refer to "Screen Shot 01".
-2. Ensure that all properties you wish to include in your notification are incorporated into the template's YAML code. These property values will be transmitted to both ABX Actions and Orchestrator Workflows. | Refer to "Screen Shot 02".
-   - You have the flexibility to include any property in your messages, provided it is specified in the template's YAML code.
+1. Initiate the creation of an Orchestrator Workflow. Creating a new Workflow is the same for Day 2 Automation Processes as when a Workflow was created for building a New VM. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.
+   - Incorporate an input property into the Orchestrator Workflow for every question needed to complete the Day 2 Automation. | See <a href="#screen-shot-15">Screen Shot 15</a>.
+   - Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-16">Screen Shot 16</a>.
+2. Run the Workflow and confirm that the code successfully ran and created the message .
+3. Check your preferred messaging system to ensure the notification was received. The Messages with look the same as when you created a New VM. YOU define what information is shown.
+   - Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.
+   - Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.
+4. If all steps were executed successfully, it's time for a high five!
+5. Example of a Day 2 Automation Microsoft Teams Message | See <a href="#screen-shot-17">Screen Shot 17</a>.
 
 ---
 
@@ -75,7 +80,7 @@ Design Template with YAML Code that has all the required Properties.
 
 This YAML code shows all the Properties that I want to send to a ABX Action or Orchestrator Workflow.  
 
-Click arrow to expand the code:  
+<span style="color: red; font-weight: bold;">Click arrow to expand the code:</span>  
 
 {{< highlight YAML >}}  
 formatVersion: 1
@@ -169,7 +174,7 @@ Code Snippets.
 
 Here's an example script for sending notifications to Microsoft Teams.
 
-Click arrow to expand the code:  
+<span style="color: red; font-weight: bold;">Click arrow to expand the code:</span>  
 
 {{< highlight PowerShell >}}  
 
@@ -271,7 +276,7 @@ $messageCard = @{
 
 This code is to send a message to Google Spaces.  
 
-Click arrow to expand the code:  
+<span style="color: red; font-weight: bold;">Click arrow to expand the code:</span>  
 
 {{< highlight PowerShell >}}  
 
@@ -457,7 +462,7 @@ Code Examples. At the start of each Orchestrator Workflow, the code for retrievi
 - The Google Spaces code does not change between ABX Actions and Workflows.
 - The difference in ABX Actions and Workflows is in the method of obtaining Property Values.
 
-Click arrow to expand the code:  
+<span style="color: red; font-weight: bold;">Click arrow to expand the code:</span>  
 
 {{< highlight PowerShell >}}  
 function Handler($context, $inputs) {
@@ -590,21 +595,7 @@ How to create a Google Spaces Webhook. Link included below on how to create a Mi
 
 ---
 
-###### Orchestrator Workflow Day 2 Automation and Send Message
-
-**Steps:**
-
-1. Initiate the creation of an Orchestrator Workflow. Creating a new Workflow is the same for Day 2 Automation Processes as when a Workflow was created for building a New VM. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.
-   - Incorporate an input property into the Orchestrator Workflow for every question needed to complete the Day 2 Automation. | See <a href="#screen-shot-15">Screen Shot 15</a>.
-   - Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-16">Screen Shot 16</a>.
-2. Run the Workflow and confirm that the code successfully ran and created the message .
-3. Check your preferred messaging system to ensure the notification was received. The Messages with look the same as when you created a New VM. YOU define what information is shown.
-   - Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.
-   - Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.
-4. If all steps were executed successfully, it's time for a celebration!
-5. Example of a Day 2 Automation Microsoft Teams Message | See <a href="#screen-shot-17">Screen Shot 17</a>.
-
----
+###### Start of Day 2 Automation Screen Shots:
 
 ###### Screen Shot 15:  
 
@@ -632,10 +623,10 @@ Code Example.
 - The Google Spaces code does not change between ABX Actions and Workflows.
 - The difference in ABX Actions and Workflows is in the method of obtaining Property Values.
 
-Click arrow to expand the code:  
+<span style="color: red; font-weight: bold;">Click arrow to expand the code:</span>
 
 {{< highlight PowerShell >}}  
-s
+
 function Handler($context, $inputs) {
 
     # Build PowerShell variables
