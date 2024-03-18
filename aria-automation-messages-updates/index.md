@@ -651,7 +651,7 @@ function Handler($context, $inputs) {
     Write-Host "snapDescription:"$snapDescription
 
     # Define the webhook URL
-    $webhookUrl = 'https://thornhilllanecom.webhook.office.com/webhookb2/ac73a8c3-59a2-4df2-b6bd-82ce2fbd4572@015568c1-bbe7-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2fcbd4531892b8a4626340212/925be554-9960-4590-9251-65db25f05419'
+    $webhookUrl = 'https://thornhilllanecom.webhook.office.com/webhookb2/ac73a8c3-hack-me-e2fbd4572@015568c1-bbe7-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2fcb-hack-you-2/925be554-9960-4590-9251-65db25f05419'
 
 # Create the message card
 $messageCard = @{
