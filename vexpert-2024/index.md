@@ -7,7 +7,22 @@
 
 ---
 
-##### VMware vExpert 2020 - Present
+###### VMware vExpert 2020 - Present
+
+I have been included in (2) vExpert Subprograms in 2024.
+
+###### vExpert Subprograms:
+* vExpert Cloud Management
+* vExpert vSphere
+
+---
+
+{{< image src="2024-vexpert-cloud-management.png" caption="">}}  
+{{< image src="2024-vexpert-vsphere.png" caption="">}}  
+
+---
+
+2024 is the 4th year that I was accepted into the VMware vExpert Cloud Management subprogram and the 1st year for vExpert vSphere.
 
 ---
 
