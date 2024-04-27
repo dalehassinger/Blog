@@ -40,9 +40,9 @@ The views and opinions expressed on this blog are strictly my own and do not ref
 ><center><b>“It doesn’t make sense to hire smart people and then tell them what to do, We hire smart people so they can tell us what to do.” - Steve Jobs</b></center>  
 
 {{< admonition type=success title="Thanks!" open=true >}}
-* The **Cloud Solution Architects** team I am currently a part of is highly rated and renowned for its innovation and expertise. Over the past few years, several members of this team have become role models for me. I anticipate gaining significant knowledge from their expertise and, in turn, give back to the team.  
+* The **VCF Specialist Architects** team I am currently a part of is highly rated and renowned for its innovation and expertise. Over the past few years, several members of this team have become role models for me. I anticipate gaining significant knowledge from their expertise and, in turn, give back to the team.  
 
-* I have worked with a great group of people at VMware, past and present. I would like to thank the following people for all their support in no particular order: Steve Leiberson, Marshall Cline, Brock Peterson, Christopher Kusek, Ariel Sanchez, Karl Hauck, Cosmin Trif, Tom Szabo, Daniel Thomas, Marcus Roberts, Ken Jordan, Eric Pennente, Kevin Holland and others.  
+* I have worked with a great group of people at VMware, past and present. I would like to thank the following people for all their support in no particular order: Steve Leiberson, Marshall Cline, Brock Peterson, Christopher Kusek, Eric Murray, Ariel Sanchez, Karl Hauck, Cosmin Trif, Daniel Thomas, Marcus Roberts, Ken Jordan, Eric Pennente, Corey Blaz, Wes Milliron, Matt Emerson and others.  
 
 * **Special Thanks** to David Kruse for getting me started with vRA.  
 
@@ -88,9 +88,10 @@ The views and opinions expressed on this blog are strictly my own and do not ref
 ><center><b>"9 - 5 pays the bills, 5 - 10 advances your career" - Author Unknown</b></center>  
 
 {{< admonition type=success title="vCommunity Activities" open=true >}}
-* **VMware vExpert** | 2020 - Present  
-
+* **VMware vExpert** | 2020 - Present | [Link to vExpert Profile](https://vexpert.vmware.com/directory/5721)  
 * **VMware vExpert - Cloud Management** | 2021 - Present  
+
+* **VMware vExpert - vSphere** | 2024 - Present  
 
 * **VMware Explore 2023 Presentation** | Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud) [CODE2501LV]  
 
