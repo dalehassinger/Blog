@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Automation Code Creation with ollama - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:title" content="Automation Code Creation with ollama" />
+<meta property="og:description" content="My review on using ollama to help create code for Automation" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/ollama/" /><meta property="og:image" content="https://www.vcrocs.info/ollama/featured-image.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-04-27T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://www.vcrocs.info/ollama/featured-image.png" /><meta name="twitter:title" content="Automation Code Creation with ollama"/>
+<meta name="twitter:description" content="My review on using ollama to help create code for Automation"/>
+      <meta name="twitter:site" content="@dalehassinger"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/ollama/" /><link rel="prev" href="https://www.vcrocs.info/vexpert-2024/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Automation Code Creation with ollama",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/ollama\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/ollama\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VMware, VMware Aria Automation, Teams Messages, Google Spaces, Alerts, Messages","wordcount":  1693 ,
+        "url": "https:\/\/www.vcrocs.info\/ollama\/","datePublished": "2024-04-27T00:00:00+00:00","dateModified": "2024-04-27T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><a class="menu-item" href="/disclaimer/"> Disclaimer </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a class="menu-item" href="/disclaimer/" title="">Disclaimer</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Automation Code Creation with ollama</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-27">2024-04-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1693 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/ollama/featured-image.png"
+        data-srcset="/ollama/featured-image.png, /ollama/featured-image.png 1.5x, /ollama/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/ollama/featured-image.png"
+        title="/ollama/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#ollama">ollama</a></li>
+                    <li><a href="#ollama-web-site-link">ollama Web Site Link:</a></li>
+                    <li><a href="#ollama-models">ollama Models:</a></li>
+                    <li><a href="#how-to-run-ollama-from-cli">How to run ollama from cli:</a></li>
+                    <li><a href="#ollama-real-world-examples">ollama &ldquo;Real World&rdquo; Examples:</a></li>
+                    <li><a href="#ollama-powershell-function">ollama PowerShell Function</a></li>
+                    <li><a href="#ollama-prompt-engineering-examples">ollama Prompt Engineering Examples:</a></li>
+                    <li><a href="#set-the-role-to-start">Set the &lsquo;Role&rsquo; to start:</a></li>
+                    <li><a href="#questions-to-generate-code">Questions to generate code:</a></li>
+                    <li><a href="#questions-to-help-with-writing">Questions to help with writing:</a></li>
+                    <li><a href="#ollama-commands">ollama commands:</a></li>
+                    <li><a href="#commonsense-rules">Commonsense Rules:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                    <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
+                    <li><a href="#product-versions-used-for-blog-post">Product Versions used for Blog Post:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>My review on using ollama to help create code for Automation</strong></p>
+<hr>
+<blockquote>
+<p>&ldquo;By harnessing the power of AI, I simplify my coding workflow, freeing up time to focus on creating blog posts that resonate with the vCommunity. With the help of AI, my writing becomes more precise, more creative, and more impactful.” - Dale Hassinger</p>
+</blockquote>
+<hr>
+<h6 id="ollama">ollama</h6>
+<figure><a class="lightgallery" href="/ollama/ollama-01.png" title="/ollama/ollama-01.png" data-thumbnail="/ollama/ollama-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/ollama/ollama-01.png"
+            data-srcset="/ollama/ollama-01.png, /ollama/ollama-01.png 1.5x, /ollama/ollama-01.png 2x"
+            data-sizes="auto"
+            alt="/ollama/ollama-01.png" width="862" height="686" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<h6 id="ollama-web-site-link">ollama Web Site Link:</h6>
+<p><a href="https://ollama.com/" target="_blank" rel="noopener noreffer ">Link to ollama web site.</a></p>
+<p>Building on my experience with ChatGPT, I decided to explore Ollama Local on my trusty Apple MacBook Pro M1. As a user-friendly AI enthusiast, I was eager to see how seamless the installation process would be. To my delight, setting up Ollama Local on Mac is incredibly straightforward.</p>
+<p>To get started, simply head to the <a href="https://ollama.com/" target="_blank" rel="noopener noreffer ">Ollama website</a> and download the application as a zip file. Expand the contents of the archive and copy the Ollama Application file into your Applications folder. Double-clicking the icon will launch the app in no time – it&rsquo;s that easy!</p>
+<p>For this review, I&rsquo;ll be using the Llama3 Large Language Model (LLM) to demonstrate Ollama Local&rsquo;s capabilities. The first time you run the application, it will automatically download the necessary LLM files for you. Like I said, very easy to use.</p>
+<p>With Ollama Local up and running, let&rsquo;s dive into its features and see what kind of AI-powered magic it can create.</p>
+<p>Go to a terminal and type &ldquo;ollama run llama3&rdquo; to get started.</p>
+<hr>
+<p><span style="font-size: 13px; color: red; font-weight: bold;">Click arrow to expand the code:</span><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ollama run llama3</span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<figure><a class="lightgallery" href="/ollama/ollama-02.png" title="/ollama/ollama-02.png" data-thumbnail="/ollama/ollama-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/ollama/ollama-02.png"
+            data-srcset="/ollama/ollama-02.png, /ollama/ollama-02.png 1.5x, /ollama/ollama-02.png 2x"
+            data-sizes="auto"
+            alt="/ollama/ollama-02.png" width="946" height="516" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="ollama-models">ollama Models:</h6>
+<p><strong>There are many models to pick from to use with ollama&hellip;</strong></p>
+<hr>
+<figure><a class="lightgallery" href="/ollama/ollama-03.gif" title="/ollama/ollama-03.gif" data-thumbnail="/ollama/ollama-03.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/ollama/ollama-03.gif"
+            data-srcset="/ollama/ollama-03.gif, /ollama/ollama-03.gif 1.5x, /ollama/ollama-03.gif 2x"
+            data-sizes="auto"
+            alt="/ollama/ollama-03.gif" width="1782" height="1002" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>Once you&rsquo;ve chosen the desired model, the web site will provide you with the necessary command prompts to get started. No need to dig through complex documentation or struggle with unfamiliar code - just follow the straightforward instructions and you&rsquo;re good to go!</p>
+<hr>
+<figure><a class="lightgallery" href="/ollama/ollama-04.gif" title="/ollama/ollama-04.gif" data-thumbnail="/ollama/ollama-04.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/ollama/ollama-04.gif"
+            data-srcset="/ollama/ollama-04.gif, /ollama/ollama-04.gif 1.5x, /ollama/ollama-04.gif 2x"
+            data-sizes="auto"
+            alt="/ollama/ollama-04.gif" width="2000" height="1125" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="how-to-run-ollama-from-cli">How to run ollama from cli:</h6>
+<p><strong>Here is a quick video to show how to get started from the CLI</strong></p>
+<ul>
+<li>Run command to start ollama</li>
+<li>Ask a question and see the results</li>
+<li>type /bye to exit ollama</li>
+</ul>
+<p>Hands-on experience with this tool? A breeze! Not only is it incredibly user-friendly, but the performance on my laptop has been impressive too. And what really stands out is the speed at which responses are delivered - no waiting around here! The unedited video itself
+is a testament to its fast processing capabilities.</p>
+<hr>
+<figure><a class="lightgallery" href="/ollama/ollama-05.gif" title="/ollama/ollama-05.gif" data-thumbnail="/ollama/ollama-05.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/ollama/ollama-05.gif"
+            data-srcset="/ollama/ollama-05.gif, /ollama/ollama-05.gif 1.5x, /ollama/ollama-05.gif 2x"
+            data-sizes="auto"
+            alt="/ollama/ollama-05.gif" width="2000" height="1125" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><span style="font-size: 13px; color: red; font-weight: bold;">Click arrow to expand the code:</span><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ollama run llama3
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; Who Created PowerShell
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt; /bye</span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="ollama-real-world-examples">ollama &ldquo;Real World&rdquo; Examples:</h6>
+<p>Now I will show some examples of how I use ollama everyday for coding and writing. They are my main uses cases for AI.</p>
+<hr>
+<h6 id="ollama-powershell-function">ollama PowerShell Function</h6>
+<p>In my previous blogs, I&rsquo;ve highlighted the versatility of PowerShell in automating various tasks. In this blog, I&rsquo;ll show how to harness the power of PowerShell to interact with AI assistants like Ollama. To start, I created a custom function that enables you to ask Ollama questions directly from the PowerShell command line. Here&rsquo;s the sample code to get you started:</p>
+<p><span style="font-size: 13px; color: red; font-weight: bold;">Click arrow to expand the code:</span><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Function to ask Ollama</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">ask-ollama</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Code to run when the function is called</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Mandatory</span><span class="p">=</span><span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$question</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="c"># Set request body</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$requestBody</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">model</span> <span class="p">=</span> <span class="s2">&#34;llama3&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prompt</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$question</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stream</span> <span class="p">=</span> <span class="vm">$false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">    <span class="c"># Set headers</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$headers</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$Body</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$requestBody</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">    <span class="c"># Send the request</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$request</span> <span class="p">=</span><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s1">&#39;http://localhost:11434/api/generate&#39;</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$Body</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$response</span> <span class="p">=</span><span class="nv">$request</span><span class="p">.</span><span class="py">Content</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Print response to console</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="nv">$response</span><span class="p">.</span><span class="py">response</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Copy response to clipboard</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Set-Clipboard</span> <span class="n">-Value</span> <span class="nv">$response</span><span class="p">.</span><span class="py">response</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Example Questions -----</span>
+</span></span><span class="line"><span class="cl"><span class="nb">ask-ollama</span> <span class="n">-question</span> <span class="s2">&#34;What is PowerCLI&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">ask-ollama</span> <span class="n">-question</span> <span class="s2">&#34;Create a PowerShell script to connect to a vCenter, Get a list of all VMs with a Snap&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">ask-ollama</span> <span class="n">-question</span> <span class="s2">&#34;Create a Salt State file to stop and disable a service with a name of Spooler&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">ask-ollama</span> <span class="n">-question</span> <span class="s2">&#34;Show me how to copy a powershell variable value to the clipboard&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<p>If you are a PowerShell enthusiast, you&rsquo;re probably accustomed to the flexibility of functions within your scripts. Feel free to adapt this example to your own workflow and coding style, regardless of whether you prefer to use it as is or modify it to fit your needs.</p>
+<hr>
+<h6 id="ollama-prompt-engineering-examples">ollama Prompt Engineering Examples:</h6>
+<h6 id="set-the-role-to-start">Set the &lsquo;Role&rsquo; to start:</h6>
+<p>One of my habits when working with ollama, or ChatGPT, is setting a specific &lsquo;role&rsquo; for our conversations. By defining a clear context or persona, I&rsquo;ve found that I&rsquo;m able to receive more effective and insightful responses from the AI. This approach has been refined over time through experimentation and exploration of the product&rsquo;s capabilities, yielding better results and a more productive dialogue.</p>
+<ul>
+<li>Act as a PowerShell SME</li>
+<li>Act as a PowerCLI SME</li>
+<li>Act as a VMware SME</li>
+<li>Act as a vRealize SME</li>
+<li>Act as a Javascript SME to work with VMware Orchestrator</li>
+<li>Act as a Technology Blogger</li>
+</ul>
+<hr>
+<h6 id="questions-to-generate-code">Questions to generate code:</h6>
+<ul>
+<li>PowerCLI:
+<ul>
+<li>Act as a PowerCLI SME</li>
+<li>Create a script to connect to a VMware vCenter. username is <a href="mailto:administrator@vsphere.local" rel="">administrator@vsphere.local</a>. password is Password123. vCenter name is vcenter8x.corp.local. List all VMs that have a snap. Export the list of VMs with a snap to c:\reports\vms-with-snaps.csv.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Unedited Code Returned:</strong></p>
+<p><span style="font-size: 13px; color: red; font-weight: bold;">Click arrow to expand the code:</span><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Set the connection settings</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcenter</span> <span class="p">=</span> <span class="s2">&#34;vcenter8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="p">=</span> <span class="s2">&#34;administrator@vsphere.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="p">=</span> <span class="s2">&#34;Password123&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to the vCenter using PowerCLI</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcenter</span> <span class="n">-User</span> <span class="nv">$username</span> <span class="n">-Password</span> <span class="nv">$password</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get a list of all VMs that have a snapshot</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmsWithSnaps</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">HasSnapshot</span><span class="p">}</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vm</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Found snapshot for VM: </span><span class="nv">$vm</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vmsWithSnaps</span> <span class="p">+=</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Export the list of VMs with a snap to a CSV file</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmsWithSnaps</span> <span class="p">|</span> <span class="nb">Export-Csv</span> <span class="n">-Path</span> <span class="s2">&#34;C:\reports\vms-with-snaps.csv&#34;</span> <span class="n">-NoTypeInformation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Disconnect from the vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl"><span class="p">```</span>
+</span></span><span class="line"><span class="cl"><span class="n">Let</span> <span class="n">me</span> <span class="n">explain</span> <span class="n">what</span> <span class="n">each</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">script</span> <span class="n">does</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mf">1</span><span class="p">.</span> <span class="n">The</span> <span class="n">first</span> <span class="n">section</span> <span class="n">sets</span> <span class="n">the</span> <span class="n">connection</span> <span class="n">settings</span><span class="err">:</span> <span class="p">`</span><span class="n">vcenter</span><span class="p">`,</span> <span class="p">`</span><span class="n">username</span><span class="p">`,</span> <span class="n">and</span> <span class="p">`</span><span class="n">password</span><span class="p">`.</span>
+</span></span><span class="line"><span class="cl"><span class="mf">2</span><span class="p">.</span> <span class="n">The</span> <span class="p">`</span><span class="nb">Connect-VIServer</span><span class="p">`</span> <span class="n">cmdlet</span> <span class="n">connects</span> <span class="n">to</span> <span class="n">your</span> <span class="n">VMware</span> <span class="n">vCenter</span> <span class="n">using</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">credentials</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="mf">3</span><span class="p">.</span> <span class="n">The</span> <span class="p">`</span><span class="nb">Get-VM</span><span class="p">`</span> <span class="n">cmdlet</span> <span class="n">retrieves</span> <span class="n">a</span> <span class="n">list</span> <span class="n">of</span> <span class="n">all</span> <span class="n">virtual</span> <span class="n">machines</span> <span class="k">in</span> <span class="n">the</span> <span class="n">vCenter</span><span class="p">.</span> <span class="n">We</span> <span class="n">then</span> <span class="n">use</span> <span class="n">the</span> <span class="p">`</span><span class="nb">Where-Object</span><span class="p">`</span> <span class="n">cmdlet</span> <span class="n">to</span> <span class="kd">filter</span><span class="w"> </span><span class="nb">this</span> <span class="n">list</span> <span class="n">and</span> 
+</span></span><span class="line"><span class="cl"><span class="n">only</span> <span class="n">include</span> <span class="n">VMs</span> <span class="n">that</span> <span class="n">have</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">snapshot</span> <span class="p">(`$</span><span class="n">_</span><span class="p">.</span><span class="n">HasSnapshot</span><span class="p">`).</span>
+</span></span><span class="line"><span class="cl"><span class="mf">4</span><span class="p">.</span> <span class="n">We</span> <span class="n">loop</span> <span class="n">through</span> <span class="n">each</span> <span class="n">VM</span> <span class="n">that</span> <span class="n">has</span> <span class="n">a</span> <span class="n">snapshot</span> <span class="n">using</span> <span class="n">a</span> <span class="p">`</span><span class="nb">ForEach-Object</span><span class="p">`</span> <span class="n">cmdlet</span><span class="p">,</span> <span class="n">and</span> <span class="n">add</span> <span class="n">its</span> <span class="n">name</span> <span class="n">to</span> <span class="n">an</span> <span class="n">array</span> <span class="p">`$</span><span class="n">vmsWithSnaps</span><span class="p">`.</span>
+</span></span><span class="line"><span class="cl"><span class="mf">5</span><span class="p">.</span> <span class="n">The</span> <span class="n">final</span> <span class="n">section</span> <span class="n">exports</span> <span class="n">the</span> <span class="n">array</span> <span class="n">of</span> <span class="n">VM</span> <span class="n">names</span> <span class="n">to</span> <span class="n">a</span> <span class="n">CSV</span> <span class="n">file</span> <span class="n">named</span> <span class="p">`</span><span class="nb">vms-with</span><span class="n">-snaps</span><span class="p">.</span><span class="n">csv</span><span class="p">`</span> <span class="k">in</span> <span class="n">the</span> <span class="p">`</span><span class="n">C:</span><span class="p">\</span><span class="n">reports</span><span class="p">`</span> <span class="n">directory</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="mf">6</span><span class="p">.</span> <span class="k">Finally</span><span class="p">,</span> <span class="n">we</span> <span class="n">disconnect</span> <span class="n">from</span> <span class="n">the</span> <span class="n">vCenter</span> <span class="n">using</span> <span class="n">the</span> <span class="p">`</span><span class="nb">Disconnect-VIServer</span><span class="p">`</span> <span class="n">cmdlet</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Save</span> <span class="n">this</span> <span class="n">script</span> <span class="n">as</span> <span class="n">a</span> <span class="n">PowerShell</span> <span class="n">file</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="py">g</span><span class="p">.,</span> <span class="p">`</span><span class="n">vms_with_snaps</span><span class="p">.</span><span class="n">ps1</span><span class="p">`)</span> <span class="n">and</span> <span class="n">run</span> <span class="n">it</span> <span class="n">to</span> <span class="n">get</span> <span class="n">the</span> <span class="n">list</span> <span class="n">of</span> <span class="n">VMs</span> <span class="n">with</span> <span class="n">snapshots</span> <span class="n">exported</span> <span class="n">to</span> <span class="n">the</span> <span class="n">specified</span> 
+</span></span><span class="line"><span class="cl"><span class="n">CSV</span> <span class="n">file</span><span class="p">!</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<figure><a class="lightgallery" href="/ollama/ollama-07.gif" title="/ollama/ollama-07.gif" data-thumbnail="/ollama/ollama-07.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/ollama/ollama-07.gif"
+            data-srcset="/ollama/ollama-07.gif, /ollama/ollama-07.gif 1.5x, /ollama/ollama-07.gif 2x"
+            data-sizes="auto"
+            alt="/ollama/ollama-07.gif" width="2000" height="1125" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Code questions that I have used:</strong></p>
+<ul>
+<li>Convert this curl command to PowerShell</li>
+<li>Create a html file that does&hellip; Amazing how advanced the code will be for a complete web page. Include a table that I can sort the columns, select the number of rows and have a search within the table. Awesome!</li>
+<li>Convert this Python to PowerShell or convert this PowerShell to Python</li>
+<li>Javascript that can be used with VMware Orchestrator Actions and Workflows</li>
+<li>SQL commands</li>
+<li>Linux commands</li>
+<li>vi and nano help</li>
+<li>salt state files</li>
+</ul>
+<hr>
+<h6 id="questions-to-help-with-writing">Questions to help with writing:</h6>
+<ul>
+<li>My writing process in commands:
+<ul>
+<li>Act as a Technology Blogger</li>
+<li>Reword &ldquo;Paste what I wrote within double quotes&rdquo;</li>
+</ul>
+</li>
+<li>See what the results look like. If I want a second example I will type:
+<ul>
+<li>&ldquo;again&rdquo; or</li>
+<li>&ldquo;another example&rdquo;</li>
+</ul>
+</li>
+<li>For my writing style I will use this command a lot:
+<ul>
+<li>use less adjectives</li>
+</ul>
+</li>
+</ul>
+<p>Data for LLama3 is up to the year 2022. When asking VMware Aria questions I will still use vRealize a lot because of the name change.</p>
+<ul>
+<li>Other writing example questions:
+<ul>
+<li>I want to create a Technology presentation description &ldquo;Topic VMware vRealize Operations with a focus on Dashboards&rdquo;</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h6 id="ollama-commands">ollama commands:</h6>
+<p>Two commands I use the most:</p>
+<ul>
+<li>&ldquo;ollama run llama3&rdquo; to start ollama</li>
+<li>&ldquo;/bye&rdquo; to exit ollama</li>
+</ul>
+<figure><a class="lightgallery" href="/ollama/ollama-06.png" title="/ollama/ollama-06.png" data-thumbnail="/ollama/ollama-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/ollama/ollama-06.png"
+            data-srcset="/ollama/ollama-06.png, /ollama/ollama-06.png 1.5x, /ollama/ollama-06.png 2x"
+            data-sizes="auto"
+            alt="/ollama/ollama-06.png" width="2120" height="1192" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="commonsense-rules">Commonsense Rules:</h6>
+<p><strong>Rules I use when working with AI/LLMs:</strong></p>
+<ul>
+<li>Never use any code generated in a production environment without testing in a lab first</li>
+<li>Always understand the code that is generated before even using in a lab</li>
+<li>Read the text that is generated before using</li>
+<li>Understand that AI/LLMs are to help you, not do the work for you.</li>
+<li>You are responsible for anything generated that you use.</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>ollama and llama3 are both available at no cost today (04/2024).</li>
+<li>I pay $20 per month for ChatGPT. You get more with ChatGPT but ollama does a good job for a way to have a local LLM option.</li>
+</ul>
+<hr>
+<h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
+<ul>
+<li><a href="https://ollama.com/" target="_blank" rel="noopener noreffer ">ollama web site.</a></li>
+</ul>
+<hr>
+<h6 id="product-versions-used-for-blog-post">Product Versions used for Blog Post:</h6>
+<ul>
+<li>ollama: 0.1.32 | Use this command at cli to show ollama version &ldquo;ollama -v&rdquo;</li>
+<li>LLM: llama3</li>
+</ul>
+<hr>
+<p><span style="font-size: 16px; color: red; font-weight: bold;">DO NOT EVER USE ANY CODE FROM A BLOG IN A PRODUCTION ENVIRONMENT! PLEASE TEST ANY CODE IN THIS BLOG IN A LAB!</span></p>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-04-27</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ollama/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/ollama/" data-title="Automation Code Creation with ollama" data-via="dalehassinger" data-hashtags="VMware,VMware Aria Automation,Teams Messages,Google Spaces,Alerts,Messages"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/ollama/" data-hashtag="VMware"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/ollama/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vmware/">VMware</a>,&nbsp;<a href="/tags/vmware-aria-automation/">VMware Aria Automation</a>,&nbsp;<a href="/tags/teams-messages/">Teams Messages</a>,&nbsp;<a href="/tags/google-spaces/">Google Spaces</a>,&nbsp;<a href="/tags/alerts/">Alerts</a>,&nbsp;<a href="/tags/messages/">Messages</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vexpert-2024/" class="prev" rel="prev" title="VMware vExpert 2024 | Fifth Year"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware vExpert 2024 | Fifth Year</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
