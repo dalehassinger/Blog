@@ -11,7 +11,210 @@
     <author>Dave Kaber</author>
     <guid>https://www.vcrocs.info/rest-api-calls-vmware-aria-automation/</guid>
     <description><![CDATA[<p><strong>Rest API calls in VMware Aria Automation with PowerShell</strong></p>
-<hr>]]></description>
+<hr>
+<h6 id="use-case">Use Case: </h6>
+<p>I’m often faced with the scenario where a client or colleague are attempting to perform an action and are met with the response that the feature isn’t in a GUI, but there is an API you can call. This scenario is common across the VMware stack of products as it’s not practical to have a button for everything, but it usually leads to the follow up question in some form of “well how do I call that?”. I wanted to write about a recent experience with a colleague as a means of showing one way to accomplish that.</p>
+<p>Before I jump into the details, I wanted to add somewhat of a disclaimer that with any type of automation there are numerous ways to solve a particular problem. Based on my comfort with specific products and scripting languages, what’s below is how I was able to work with the client to address the problem. There is the possibility that another person could accomplish the same task in a different way and none of it is ‘wrong’.</p>
+<p>A colleague came to me and asked about a way to assist a client looking to add several networks into a Network Profile within Cloud Assembly (a component of Aria Automation). While his client could have very easily clicked one-by-one in the UI, that is a tedious operation and runs the risk of human error. Based on the client’s familiarity with PowerShell, we opted to write a script to invoke the necessary API’s using the Invoke-RestMethod PowerShell cmdlet.</p>
+<p>So, to frame up a bit more of the ‘how’, when faced with a scenario like this, we need to have a script that performs three steps:</p>
+<h6 id="steps">Steps:</h6>
+<ol>
+<li>Get your authentication token/header configured</li>
+<li>Find the appropriate URI and use a ‘GET’ method to look at the formatting and to help build a body</li>
+<li>Find the appropriate URI and method (e.g. ‘PATCH’ or ‘POST’) in order to call that API and feed it the necessary information in the body</li>
+</ol>
+<hr>
+<h6 id="step-1">Step 1:</h6>
+<p>So, I need to provide a set of credentials to the CSP login URI. This will give me a refresh token which I can then feed to the IaaS login URI to get my access token. The access token will be what I can use to make the necessary calls into my Aria Automation environment. The URI’s and some more detail are provided in <a href="https://kb.vmware.com/s/article/89129" target="_blank" rel="noopener noreffer ">VMware KB 89129</a>.</p>
+<p> 
+There are some potentially easier methods to authenticate to Aria Automation and invoke a REST API call (like the PowerVRA Module), but for my example below, I used all native PowerShell.<br>
+ </p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c">#BasicInfo:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vraServer</span> <span class="p">=</span> <span class="s2">&#34;vra.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Get Credentials to build auth:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$credential</span> <span class="p">=</span> <span class="nb">Get-Credential</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="p">=</span> <span class="nv">$credential</span><span class="p">.</span><span class="py">UserName</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$pass</span> <span class="p">=</span> <span class="nv">$credential</span><span class="p">.</span><span class="py">Password</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Runtime.InteropServices.Marshal</span><span class="p">]::</span><span class="n">PtrToStringAuto</span><span class="p">([</span><span class="no">System.Runtime.InteropServices.Marshal</span><span class="p">]::</span><span class="n">SecureStringToBSTR</span><span class="p">(</span><span class="nv">$pass</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authBody</span>  <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;username&#34;</span> <span class="p">=</span> <span class="nv">$username</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;password&#34;</span> <span class="p">=</span> <span class="nv">$password</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Build Header:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="s2">&#34;System.Collections.Generic.Dictionary[[String],[String]]&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Accept&#34;</span><span class="p">,</span><span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span><span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Get Refresh Token:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/csp/gateway/am/api/login?access_token&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$refreshToken</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-Body</span> <span class="p">(</span><span class="nv">$authBody</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$refreshToken</span> <span class="p">=</span> <span class="nv">$refreshToken</span><span class="p">.</span><span class="py">refresh_token</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$refreshTokenBody</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;refreshToken&#34;</span> <span class="p">=</span> <span class="nv">$refreshToken</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Get Access Token:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/login&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$accessToken</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-body</span> <span class="p">(</span><span class="nv">$refreshTokenBody</span> <span class="p">|</span> <span class="nb">ConvertTo-JSON</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$accessToken</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$accessToken</span><span class="p">.</span><span class="py">token</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#add access token to Header</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Authorization&#34;</span><span class="p">,</span><span class="nv">$accessToken</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="step-2">Step 2:</h6>
+<p> 
+Now that I have the $accessToken variable set and added to my header, I can make any REST API calls I need.
+ 
+For this example, we wanted to add a bunch of fabric-networks (in vSphere parlance DvPGs) to a network profile. In VMware Aria Automation, these are already available with the addition of my vCenter Cloud Account, just not associated with a network profile.
+ 
+In order to enumerate the available fabric-networks, I am going to take my $header variable with the newly generated $accessToken added and call a ‘Get’ against the /iaas/api/fabric-networks/ URI.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c">#Get Fabric Network Ids:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/fabric-networks&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fabricNetworks</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="p">-</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now that I have a full list, I wanted to isolate the list down to those on a specific Distributed Virtual Switch using the following:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="nv">$dvPGs</span> <span class="p">=</span> <span class="nv">$fabricNetworks</span><span class="p">.</span><span class="py">content</span> <span class="p">|</span> <span class="nb">Where </span><span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">name</span> <span class="o">-like</span> <span class="s1">&#39;*DvPG*&#39;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="step-3">Step 3:</h6>
+<p> 
+Now that I have my list of fabric-networks, I wanted to build a JSON body that I could send to Aria Automation to add them to the network-profile in question. So, I used the following request to pull the necessary info:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c">#Get Network Profiles:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/network-profiles&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$networkProfiles</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-SkipCertificateCheck</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In my lab I had a single network profile, so if I just run $networkProfiles | ConvertTo-JSON in PowerShell, we get the info we need for our body.</p>
+<p>The fun with this specific example is that the info in the ‘GET’ request is slightly different than how we have to format it for the ‘PATCH’ request. Looking at the SwaggerUI interface (https://&ldquo;YourAriaAutomationServer&rdquo;/iaas/api/swagger) and looking at the Network Profile Section, I can see the URI for the PATCH call (/iaas/api/network-profiles/{id}) and that we need to feed an array of ID’s to a property called ‘fabricNetworkIds’. A couple of other good points to call out is to pay attention to any field or property marked as ‘Required’. If you’re unfamiliar with the SwaggerUI interface, selecting the ‘Model’ link within a Specific URI will give you that information. In my example, I see I need to have the ID for the network profile, the name of the network profile, and the regionID of the network profile.</p>
+<p>(Side note… depending on what is in the REST Body, exercise some caution and testing with a PATCH or PUT command as in this specific case with the NetworkID’s, they will only add what is in the body and remove anything else. Essentially the body replaces what is already there instead of appending to an already existing list.)</p>
+<p>Now that I have my body, we just repeat the process and invoke the call to the appropriate URI. The example below only has a couple of fabricNetworkIds specified, but the actual ask was for several hundred.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span> <span class="p">=</span> <span class="s2">&#34;REST_API&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;id&#34;</span><span class="p">=</span>  <span class="s2">&#34;cce57ddd-d206-9999-870d-25b8775fb365&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;orgId&#34;</span> <span class="p">=</span> <span class="s2">&#34;12131928-3bdd-9999-9e69-3edf5c318a7d&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customProperties&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;datacenterId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;externalRegionId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;cloudAccountId&#34;</span> <span class="p">=</span> <span class="s2">&#34;8274acb1-bad2-40cf-1969-e3ed60c16956&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;isolationType&#34;</span> <span class="p">=</span>  <span class="s2">&#34;NONE&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;fabricNetworkIds&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;fba96959-c0b2-99a6-bb7b-0da4c35b3eaf&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;21a52412-85a3-4b9d-a99b-0aaf19185755&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/network-profiles/&#34;</span> <span class="p">+</span> <span class="nv">$npId</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">PATCH</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-Body</span> <span class="p">(</span><span class="nv">$body</span> <span class="p">|</span> <span class="nb">ConvertTo-JSON</span> <span class="n">-Depth</span> <span class="mf">5</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<figure><a class="lightgallery" href="/rest-api-calls-vmware-aria-automation/dave01.png" title="/rest-api-calls-vmware-aria-automation/dave01.png" data-thumbnail="/rest-api-calls-vmware-aria-automation/dave01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<p>The result is beneficial for two reasons.</p>
+<ol>
+<li>My colleague and his client have a way of adding the necessary DvPG’s to their network profile in a methodical way that avoids a lot of clicking.</li>
+<li>The steps and much of the code above are reusable, so whatever the use case you’re attempting to solve for, you don’t have to start from scratch each time.</li>
+</ol>
+<p>Hopefully this example helps anyone who is stuck or just looking for an example to keep in their back pocket of ‘how to’ for when that situation arises.</p>
+<h6 id="guest-blogger">Guest Blogger:</h6>
+<blockquote>
+<p>I want to thank guest Blogger, <strong>Dave Kaber</strong> <a href="https://twitter.com/dave_kaber" target="_blank" rel="noopener noreffer ">@dave_kaber</a>, for taking the time to write this blog post and share with the <strong>#vCommunity</strong>. Hopefully Dave will be sharing some additional content in the future.</p>
+</blockquote>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 </channel>
 </rss>

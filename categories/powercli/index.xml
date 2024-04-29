@@ -10,7 +10,267 @@
     <pubDate>Fri, 31 Dec 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/powershell-nsx-t/</guid>
-    <description><![CDATA[<p><strong>How to work with NSX-T security Tags using PowerShell</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to work with NSX-T security Tags using PowerShell</strong></p>
+<hr>
+<h6 id="powershell-code-to-work-with-nsx-t-apis">PowerShell Code to work with NSX-T APIs</h6>
+<p>Included some examples of code to Automate adding/removing NSX-T Security Tags from VMs. Also some code to show which VMs are assigned to a Security TAG or which TAGs are assigned to a VM.</p>
+<p>Code Samples:</p>
+<ul>
+<li>Add NSX-T Security TAG to a VM.</li>
+<li>Remove NSX-T Security TAG from a VM.</li>
+<li>Show All VMs assigned to a NSX-T Security TAG</li>
+<li>Show All Security TAGs assigned to a VM</li>
+</ul>
+<p>Hope you find these snippets of code useful.</p>
+<hr>
+<p>Click to expand code:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Connect to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenterName</span> <span class="p">=</span> <span class="s1">&#39;vCenter.vCrocs.info&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="nv">$vCenterName</span> <span class="n">-Credential</span> <span class="nv">$cred</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="p">*</span> <span class="n">-Force</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Start NSX-T</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start Add a Single NSX-T TAG to VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Add code to allow untrusted SSL certs</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Use when connecting to NSX-T Server and running from a Windows Computer</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Add-Type</span> <span class="p">@</span><span class="s2">&#34; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System.Net; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System.Net.Security; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System.Security.Cryptography.X509Certificates; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    public class ServerCertificateValidationCallback 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    { 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        public static void Ignore() 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        { 
+</span></span></span><span class="line"><span class="cl"><span class="s2">            ServicePointManager.ServerCertificateValidationCallback +=  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                delegate 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                ( 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    Object obj,  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    X509Certificate certificate,  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    X509Chain chain,  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    SslPolicyErrors errors 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                ) 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                { 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    return true; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                }; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        } 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    } 
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;</span><span class="p">@</span>  
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">ServerCertificateValidationCallback</span><span class="p">]::</span><span class="n">Ignore</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ This section connects you to vCenter ] ------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenterName</span> <span class="p">=</span> <span class="s1">&#39;vCenter.vCROCS.info&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="nv">$vCenterName</span> <span class="n">-Credential</span> <span class="nv">$cred</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to vCenter and fetch virtual machine info.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmInfo</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="n">-Name</span> <span class="n">DBH</span><span class="p">-</span><span class="mf">213</span> <span class="p">|</span> <span class="nb">Get-View</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ This section defines the API header ] ------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Set Username/Password info for API</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$user</span> <span class="p">=</span> <span class="s1">&#39;srv_vRA_NSXT@vCROCS.info&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$nsxpassword</span> <span class="p">=</span> <span class="s1">&#39;VMware!1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$pair</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$user</span><span class="p">)</span><span class="s2">:</span><span class="p">$(</span><span class="nv">$nsxpassword</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$encodedCredentials</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Convert</span><span class="p">]::</span><span class="n">ToBase64String</span><span class="p">([</span><span class="no">System.Text.Encoding</span><span class="p">]::</span><span class="n">ASCII</span><span class="p">.</span><span class="py">GetBytes</span><span class="p">(</span><span class="nv">$Pair</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span> <span class="n">Authorization</span> <span class="p">=</span> <span class="s2">&#34;Basic </span><span class="nv">$encodedCredentials</span><span class="s2">&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmid</span> <span class="p">=</span> <span class="nv">$vm</span><span class="p">.</span><span class="py">Config</span><span class="p">.</span><span class="py">InstanceUuid</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newtag</span> <span class="p">=</span> <span class="s1">&#39;UST.SM.UBUNTU_SERVER&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$JSON</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">{
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;external_id&#34;: &#34;</span><span class="nv">$vmid</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;tags&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="sh">        {&#34;scope&#34;: &#34;&#34;, &#34;tag&#34;: &#34;</span><span class="nv">$newtag</span><span class="sh">&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="sh">    ]
+</span></span></span><span class="line"><span class="cl"><span class="sh">}
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$posturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/api/v1/fabric/virtual-machines?action=add_tags&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$posturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Body</span> <span class="nv">$JSON</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Add a Single TAG ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start Get NSX-T TAGs assigned to VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmid</span> <span class="p">=</span> <span class="nv">$vm</span><span class="p">.</span><span class="py">Config</span><span class="p">.</span><span class="py">InstanceUuid</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$geturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/api/v1/fabric/virtual-machines?external_id=</span><span class="nv">$vmid</span><span class="s2">&amp;included_fields=tags&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$getrequest</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$geturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$currenttags</span> <span class="p">=</span> <span class="nv">$getrequest</span><span class="p">.</span><span class="py">results</span><span class="p">.</span><span class="py">tags</span><span class="p">.</span><span class="py">Tag</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$currenttags</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Get NSX-T TAGs assigned to VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start remove NSX-T TAG from VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmid</span> <span class="p">=</span> <span class="nv">$vm</span><span class="p">.</span><span class="py">Config</span><span class="p">.</span><span class="py">InstanceUuid</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newtag</span> <span class="p">=</span> <span class="s1">&#39;UST.SM.UBUNTU_SERVER&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$JSON</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">{
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;external_id&#34;: &#34;</span><span class="nv">$vmid</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;tags&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="sh">        {&#34;scope&#34;: &#34;&#34;, &#34;tag&#34;: &#34;</span><span class="nv">$newtag</span><span class="sh">&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="sh">    ]
+</span></span></span><span class="line"><span class="cl"><span class="sh">}
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$posturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/api/v1/fabric/virtual-machines?action=remove_tags&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$posturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Body</span> <span class="nv">$JSON</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End remove NSX-T TAG from VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start Get VMs assigned to a TAG NSX-T ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$geturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/policy/api/v1/infra/tags/effective-resources?scope=&amp;tag=UST.SM.UBUNTU_SERVER&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$result</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$geturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Body</span> <span class="nv">$JSON</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="nv">$result</span><span class="p">.</span><span class="py">results</span><span class="p">.</span><span class="py">target_display_name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Get VMs assigned to a TAG NSX-T ] --------------------------------------------------</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>Very easy to automate NSX-T Security TAG processes after you learn the urls.</li>
+<li>NSX-T API documentation is easily accessed and well documented.</li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank" rel="noopener noreffer ">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/" target="_blank" rel="noopener noreffer ">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html" target="_blank" rel="noopener noreffer ">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com" target="_blank" rel="noopener noreffer ">SaltStack Community Slack Channel</a></li>
+</ul>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>Automating Automation (Updated)</title>
@@ -18,7 +278,380 @@
     <pubDate>Thu, 29 Apr 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/automating-automation/</guid>
-    <description><![CDATA[<p><strong>Using vRO REST API. - (Updated for vRA 8.4)</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Using vRO REST API. - (Updated for vRA 8.4)</strong></p>
+<hr>
+<p>I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but not a lot of details on how to get and use variables, sdk-objects and bearer token for permission. Here is how I made the vRO REST API calls with PowerShell using vRealize Orchestrator built-into vRA.</p>
+<hr>
+<p>Steps:</p>
+<ol>
+<li>Permission:
+<ul>
+<li>Need to get a Bearer Token from vRO to make REST API Call to execute Workflow.</li>
+<li>To get a Bearer Token you need to make an REST API Call with username/password. See example code.</li>
+</ul>
+</li>
+<li>Workflow Information:
+<ul>
+<li>Get Workflow ID.</li>
+<li>Get Workflow variable inputs.</li>
+<li>Get sdk-object names from a successful Workflow run.</li>
+<li>See Screen Shots and sample code.</li>
+</ul>
+</li>
+<li>Run the Workflow you want to use REST API with manually at least one time successfully. When you look at the variables of a successful Workflow run it shows you what the Workflow is expecting for variables and sdk-objects. See Screen Shots.</li>
+</ol>
+<hr>
+<h6 id="code-to-get-bearer-token-powershell">Code to get bearer Token (PowerShell):</h6>
+<p>You can&rsquo;t use vRO REST API without getting bearer token first.</p>
+<h6 id="note-when-vrealize-automation-84-was-released-there-was-a-small-change-to-api-to-get-bearer-token--see-the-changes-in-the-code-area-everything-else-has-stayed-the-same-for-my-processes">(Note: When vRealize Automation 8.4 was released there was a small change to api to get Bearer Token.  See the changes in the code area. Everything else has stayed the same for my processes.)</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Get Bearer Token from vRA REST API Call</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Some of the commented lines are in the code for testing.  I use to check variable</span>
+</span></span><span class="line"><span class="cl"><span class="c"># values when building the Automation.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># I am showing password in this example. In Production I get the Password from a Hashi</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Secret Server and DO NOT have the password Hard Coded.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Variables ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="p">=</span> <span class="s1">&#39;VMware1&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Headers ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="s2">&#34;System.Collections.Generic.Dictionary[[String],[String]]&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span> <span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Accept&#34;</span><span class="p">,</span> <span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Body ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">`n</span><span class="s2">    </span><span class="se">`&#34;</span><span class="s2">password</span><span class="se">`&#34;</span><span class="s2">:  </span><span class="se">`&#34;</span><span class="s2">passwordString</span><span class="se">`&#34;</span><span class="s2">,
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">`n</span><span class="s2">    </span><span class="se">`&#34;</span><span class="s2">username</span><span class="se">`&#34;</span><span class="s2">:  </span><span class="se">`&#34;</span><span class="s2">administrator</span><span class="se">`&#34;</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2"></span><span class="se">`n</span><span class="s2">}&#34;</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-Replace</span><span class="p">(</span><span class="s2">&#34;passwordString&#34;</span><span class="p">,</span><span class="nv">$password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Invoke REST API ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.3 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-SkipCertificateCheck</span> <span class="s1">&#39;https://vRA-FQDN.domain.name/csp/gateway/am/api/login?access_token&#39;</span> <span class="n">-Method</span> <span class="s1">&#39;POST&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.4 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-SkipCertificateCheck</span> <span class="s1">&#39;https://vRA-FQDN.domain.name/csp/gateway/am/api/login?cspAuthToken&#39;</span> <span class="n">-Method</span> <span class="s1">&#39;POST&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.3 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response.access_token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.4 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response.cspAuthToken</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.3 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bearer_token</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$response</span><span class="p">.</span><span class="py">access_token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># vRA 8.4 Use next line</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bearer_token</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$response</span><span class="p">.</span><span class="py">cspAuthToken</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># $bearer_token</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="code-to-get-execute-a-vro-workflow-using-api-call-powershell">Code to get execute a vRO Workflow using API Call (PowerShell):</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Run vRA Workflow using API Call</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Variables ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmName</span> <span class="p">=</span> <span class="s1">&#39;DBH-1234&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailAddress</span> <span class="p">=</span> <span class="n">Dale</span><span class="p">.</span><span class="n">Hassinger</span><span class="nv">@vCROCS</span><span class="p">.</span><span class="n">info</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">$OSVersion = &#39;</span><span class="n">Ubuntu18044</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">$PSText = &#39;</span><span class="n">G:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="nb">Create-Linux</span><span class="n">-Server-Step</span><span class="p">-</span><span class="mf">1</span><span class="n">-v01-PROD</span><span class="p">.</span><span class="py">ps1</span> <span class="n">-vmNAME</span> <span class="nv">$vmName</span> <span class="n">-emailAddress</span> <span class="nv">$emailAddress</span> <span class="n">-OSVersion</span> <span class="nv">$OSVersion</span><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># --- [ Headers ] ---
+</span></span></span><span class="line"><span class="cl"><span class="s1">$headers = New-Object &#34;System.Collections.Generic.Dictionary[[String],[String]]&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s1">$headers.Add(&#34;Content-Type&#34;, &#34;application/xml&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s1">$headers.Add(&#34;Authorization&#34;, $bearer_token)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># --- [ Body ] ---
+</span></span></span><span class="line"><span class="cl"><span class="s1">$body = &#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nb">execution-context</span> <span class="n">xmlns</span><span class="p">=</span><span class="s2">&#34;http://www.vmware.com/vco&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;</span><span class="n">parameters</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vm&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="nb">sdk-object</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">id</span><span class="p">=</span><span class="s2">&#34;vCenter.FQDN,id:vm-12345&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vmUsername&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">username</span><span class="nv">@domain</span><span class="p">.</span><span class="n">name</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vmPassword&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;SecureString&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">vmPassword_string</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;programPath&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">System32</span><span class="p">\</span><span class="n">WindowsPowerShell</span><span class="p">\</span><span class="n">v1</span><span class="p">.</span><span class="mf">0</span><span class="p">\</span><span class="n">powershell</span><span class="p">.</span><span class="n">exe</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;arguments&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">arguments_string</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;workingDirectory&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;string&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span><span class="n">G:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">&lt;/</span><span class="n">string</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;/</span><span class="n">parameters</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nb">execution-context</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># $body
+</span></span></span><span class="line"><span class="cl"><span class="s1"># I define the Body format and then replace strings of text that I define with variables
+</span></span></span><span class="line"><span class="cl"><span class="s1"># in the code.
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">$body = $body -Replace(&#34;vmPassword_string&#34;,$password)
+</span></span></span><span class="line"><span class="cl"><span class="s1">$body = $body -Replace(&#34;arguments_string&#34;,$PSText)
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1"># --- [ Invoke REST API ] ---
+</span></span></span><span class="line"><span class="cl"><span class="s1">$response = Invoke-RestMethod -SkipCertificateCheck &#39;</span><span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="nb">vRA-FQDN</span><span class="p">.</span><span class="py">domain</span><span class="p">.</span><span class="n">name</span><span class="p">/</span><span class="n">vco</span><span class="p">/</span><span class="n">api</span><span class="p">/</span><span class="n">workflows</span><span class="p">/</span><span class="n">9cc3ac9d</span><span class="p">-</span><span class="n">062b</span><span class="p">-</span><span class="mf">4e98</span><span class="n">-aa9d-e781e47f1234</span><span class="p">/</span><span class="n">executions</span><span class="s1">&#39; -Method &#39;</span><span class="n">POST</span><span class="err">&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$response</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="orchestrator-workflow">Orchestrator Workflow:</h6>
+<p>This is where you get the Workflow ID value. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/automating-automation/vro-ss-01.png" title="/automating-automation/vro-ss-01.png" data-thumbnail="/automating-automation/vro-ss-01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Sample Code to use Workflow ID:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-SkipCertificateCheck</span> <span class="s1">&#39;https://vRA-FQDN.domain.name/vco/api/workflows/7452cce6-c715-482d-9127-1f3aa11523ba/executions&#39;</span> <span class="n">-Method</span> <span class="s1">&#39;POST&#39;</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>This is where you get the input variable values. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/automating-automation/vro-ss-02.png" title="/automating-automation/vro-ss-02.png" data-thumbnail="/automating-automation/vro-ss-02.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>This is where you get the sdk-object variable values. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/automating-automation/vro-ss-03.png" title="/automating-automation/vro-ss-03.png" data-thumbnail="/automating-automation/vro-ss-03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>This is where you get the sdk-object/input variable values. See highlighted area.:</p>
+<figure><a class="lightgallery" href="/automating-automation/vro-ss-04.png" title="/automating-automation/vro-ss-04.png" data-thumbnail="/automating-automation/vro-ss-04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/automating-automation/vro-ss-05.png" title="/automating-automation/vro-ss-05.png" data-thumbnail="/automating-automation/vro-ss-05.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Sample Code to specify &ldquo;VC:HostSystem&rdquo; and ID value:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vm&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:HostSystem&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;</span><span class="nb">sdk-object</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">id</span><span class="p">=</span><span class="s2">&#34;192.168.86.200,id:host-14&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong></strong></p>
+<h6 id="click-here-to-see-larger-image-of-screen-shotimgvro-ss-06png"><a href="/img/vro-ss-06.png" rel="">Click Here to see Larger Image of Screen Shot</a></h6>
+<p>Sample Code to specify &ldquo;VC:VirtualMachine&rdquo; and ID value (VM.ExtensionData.MoRef.Value):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nb">parameter</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;vm&#34;</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">scope</span><span class="p">=</span><span class="s2">&#34;local&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">&lt;</span><span class="nb">sdk-object</span> <span class="n">type</span><span class="p">=</span><span class="s2">&#34;VC:VirtualMachine&#34;</span> <span class="n">id</span><span class="p">=</span><span class="s2">&#34;192.168.86.200,id:vm-3006&#34;</span><span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nb">parameter</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Example of how to build the body. </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenter</span> <span class="p">=</span> <span class="s1">&#39;192.168.86.200&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmInfo</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="n">-Name</span> <span class="s1">&#39;administrator-904&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmMoref</span> <span class="p">=</span> <span class="nv">$vmInfo</span><span class="p">.</span><span class="py">ExtensionData</span><span class="p">.</span><span class="py">MoRef</span><span class="p">.</span><span class="py">Value</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- [ Body ] ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&lt;execution-context xmlns=&#34;http://www.vmware.com/vco&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">   &lt;parameters&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">      &lt;parameter name=&#34;vm&#34; type=&#34;VC:VirtualMachine&#34; scope=&#34;local&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">         &lt;sdk-object type=&#34;VC:VirtualMachine&#34; id=&#34;vCenterString,id:vmString&#34;/&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">      &lt;/parameter&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">   &lt;/parameters&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&lt;/execution-context&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span>
+</span></span><span class="line"><span class="cl"><span class="c"># I define the Body format and then replace strings of text that I define with variables</span>
+</span></span><span class="line"><span class="cl"><span class="c"># in the code.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-Replace</span><span class="p">(</span><span class="s2">&#34;vmstring&#34;</span><span class="p">,</span><span class="nv">$vmMoref</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-Replace</span><span class="p">(</span><span class="s2">&#34;vCenterstring&#34;</span><span class="p">,</span><span class="nv">$vCenter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>I hope this helps you understand how to automate running vRO Workflows using REST API with PowerShell.</p>
+<p>Happy Automating&hellip;</p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>Open Ports | Zero Trust</title>
@@ -26,7 +659,72 @@
     <pubDate>Sat, 24 Apr 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/check-ports/</guid>
-    <description><![CDATA[<p><strong>How to check if ports are open to a remote server</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to check if ports are open to a remote server</strong></p>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>Use PowerShell to see if ports are open to a remote server.</p>
+<p>Living in a zero trust environment can be challenging. Here is some code that I have been using to test for open ports from a Windows server to any type of destination. Just change PortNumber and Destination for your use case.</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Powershell" data-lang="Powershell"><span class="line"><span class="cl"><span class="nv">$PortNumber</span> <span class="p">=</span> <span class="s1">&#39;443&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Destination</span> <span class="p">=</span> <span class="s1">&#39;Server.vCrocs.info&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$socket</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Net</span><span class="p">.</span><span class="py">Sockets</span><span class="p">.</span><span class="py">TcpClient</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$socket</span><span class="p">.</span><span class="py">Connect</span><span class="p">(</span><span class="nv">$Destination</span><span class="p">,</span><span class="nv">$PortNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$socket</span><span class="p">.</span><span class="n">Connected</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$PortOpened</span> <span class="p">=</span> <span class="s1">&#39;Port: &#39;</span> <span class="p">+</span> <span class="nv">$PortNumber</span> <span class="p">+</span> <span class="s1">&#39; to &#39;</span> <span class="p">+</span> <span class="nv">$Destination</span> <span class="p">+</span><span class="s1">&#39; is Open! :)&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$socket</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$PortOpened</span> <span class="p">=</span> <span class="s1">&#39;Port: &#39;</span> <span class="p">+</span> <span class="nv">$PortNumber</span> <span class="p">+</span> <span class="s1">&#39; to &#39;</span> <span class="p">+</span> <span class="nv">$Destination</span> <span class="p">+</span><span class="s1">&#39; IS NOT Open! :(&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span>  <span class="nv">$PortOpened</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="linux-commands">Linux Commands</h6>
+<p>If you work with VMware vRealize Suite of appliances here are some commands (curl and Netcat) that can be used with Linux OS to test if ports are open to destination servers.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">curl -v telnet://server01.vCROCS.info:443
+</span></span><span class="line"><span class="cl">nc -ztv server01.vCROCS.info <span class="m">443</span> -w <span class="m">3</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<p>Article Updated: 2021-04-24</p>]]></description>
 </item>
 <item>
     <title>Add disk to a Remote Windows Server | VMware VM</title>
@@ -34,7 +732,91 @@
     <pubDate>Sun, 19 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/add-drives/</guid>
-    <description><![CDATA[<p><strong>Add disk to a Remote Windows Server | VMware VM</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Add disk to a Remote Windows Server | VMware VM</strong></p>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>Powershell code to add disk to a Remote Windows Server | VMware VM:</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#The Following code shows how to add a New Drive, bring drive online, initialize and format:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Connect to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">vCenter</span><span class="p">.</span><span class="py">vCROCS</span><span class="p">.</span><span class="py">info</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Add new drive to VM</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-HardDisk</span> <span class="n">-VM</span> <span class="nv">$VMNAME</span> <span class="n">-CapacityGB</span> <span class="nv">$DISKSIZEGB</span> <span class="n">-StorageFormat</span> <span class="n">Thin</span> <span class="n">-Controller</span> <span class="err">‘</span><span class="n">SCSI</span> <span class="n">Controller</span> <span class="mf">1</span><span class="err">’</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Make disk online</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">Set-Disk</span> <span class="mf">2</span> <span class="n">-isOffline</span> <span class="vm">$false</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Initialize disk</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">Initialize-Disk</span> <span class="mf">2</span> <span class="n">-PartitionStyle</span> <span class="n">GPT</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Create Partition</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">New-Partition</span> <span class="n">-DiskNumber</span> <span class="mf">2</span> <span class="n">-UseMaximumSize</span> <span class="n">-DriveLetter</span> <span class="n">E</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Format drive</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">Format-Volume</span> <span class="n">-DriveLetter</span> <span class="n">E</span> <span class="n">-FileSystem</span> <span class="n">NTFS</span> <span class="n">-NewFileSystemLabel</span> <span class="err">‘</span><span class="n">Data</span><span class="err">’</span> <span class="n">-AllocationUnitSize</span> <span class="mf">16384</span> <span class="n">-Confirm:</span><span class="vm">$false</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#-------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#The Following Code will show disk “Allocation Unit Size” on a remote Windows Server:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$C</span> <span class="p">=</span> <span class="nb">Invoke-Command</span> <span class="n">-ComputerName</span> <span class="nv">$VMname</span> <span class="p">{</span><span class="nb">Get-WmiObject</span> <span class="n">-Class</span> <span class="n">Win32_Volume</span> <span class="n">-Filter</span> <span class="err">“</span><span class="n">DriveLetter</span> <span class="p">=</span> <span class="err">‘</span><span class="n">C:</span><span class="err">&#39;”</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">BLOCKSIZE</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$C_AllocationUnitSize</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$C</span><span class="p">.</span><span class="n">BLOCKSIZE</span><span class="p">/</span><span class="mf">1024</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$C_AllocationUnitSize</span> <span class="p">=</span> <span class="err">‘</span><span class="n">Disk</span> <span class="n">Allocation</span> <span class="n">Unit</span> <span class="n">Size</span><span class="err">:</span> <span class="err">‘</span> <span class="p">+</span> <span class="nv">$C_AllocationUnitSize</span> <span class="p">+</span> <span class="err">‘</span><span class="n">k</span><span class="err">’</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$C_AllocationUnitSize</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>PowerCLI Getting Started</title>
@@ -42,7 +824,82 @@
     <pubDate>Sun, 19 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/powercli-getting-started/</guid>
-    <description><![CDATA[<p><strong>PowerCLI Basics</strong></p>]]></description>
+    <description><![CDATA[<p><strong>PowerCLI Basics</strong></p>
+<hr>
+<h6 id="powercli-code">PowerCLI Code</h6>
+<p>Some basic PowerCLI commands to get started. I have some simple scripts in production that are 10 lines of code and I have some scripts that do a lot that are 2500 lines of code. Take the time to learn all the commands that are available and you will be amazed at what you can automate.</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Here are some basic commands that you can keep adding additional code</span>
+</span></span><span class="line"><span class="cl"><span class="c">#and get more precise on what you want to see.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Connect to a vCenter</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">vcsa</span><span class="p">.</span><span class="py">domain</span><span class="p">.</span><span class="py">org</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Disconnect from vCenter and not be prompted</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">vcsa</span><span class="p">.</span><span class="py">domain</span><span class="p">.</span><span class="py">org</span> <span class="n">-confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Get VM Listing</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs sorted by Name</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs sorted by Name that are Powered On</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Powerstate</span> <span class="o">-eq</span> <span class="s1">&#39;PoweredOn&#39;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs sorted by Name, that are Powered On and only shows</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Name,MemoryGB,NumCpu</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Powerstate</span> <span class="o">-eq</span> <span class="s1">&#39;PoweredOn&#39;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span><span class="p">,</span><span class="n">MemoryGB</span><span class="p">,</span><span class="n">NumCpu</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="why-use-powercli">Why use PowerCLI</h6>
+<p>Picking a scripting language for automation can be a hard decision. My #1 reason to use PowerShell was because of the PowerCLI PowerShell module that VMware maintains. You can use the PowerCLI module to automate almost all of the VMware Products.</p>
+<p>There hasn&rsquo;t been any automation process that I have not been able to use PowerShell to automate. PowerShell has a great collection of modules available to use with different products. PowerShell is also easy to use with Products that make APIs available.</p>
+<hr>
+<p><strong>Happy Scripting!</strong></p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>Powershell code to add custom Registry values</title>
@@ -50,7 +907,38 @@
     <pubDate>Sun, 19 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/add-registry-values/</guid>
-    <description><![CDATA[<p><strong>Add Windows Server Registry Values</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Add Windows Server Registry Values</strong></p>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>Add Registry Values to Windows Server</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#vCrocs Registry Changes</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="nb">new-Item</span> <span class="n">HKLM</span><span class="err">:</span><span class="p">\</span><span class="n">SOFTWARE</span><span class="p">\</span><span class="n">vCrocs</span> <span class="o">-f</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$SG</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">SupportGroup</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$SG</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$SG</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$APP</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">Application</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$APP</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$APP</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$LOC</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">Location</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$LOC</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$LOC</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$SL</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">ServiceLevel</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$SL</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$SL</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 </channel>
 </rss>

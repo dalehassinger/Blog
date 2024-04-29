@@ -11,6 +11,157 @@
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/schedule-rvtools/</guid>
     <description><![CDATA[<p><strong>Export RVTools xlsx Files Everyday</strong></p>
+<hr>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday.  Here is a sample PowerShell script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files. On the 1st of every month a file will also be created for history that is not deleted.</p>
+<p>Click arrow to expand the PowerShell Code:<br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Script to create RVTools files and delete files older than 7 Days.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Also creates an Archive RVTools file on the first of every Month.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Set parameters for RVTools export ] -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenter</span>      <span class="p">=</span> <span class="s2">&#34;vcsa8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$User</span>         <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Password</span>     <span class="p">=</span> <span class="s2">&#34;_RVToolsV2PWDe9yqxNV-HACKME-w5gkyxsCh5R1Kbg+hVYiKo=&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fileLocation</span> <span class="p">=</span> <span class="s2">&#34;C:\RVTools&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fileArchive</span>  <span class="p">=</span> <span class="s2">&#34;C:\RVTools\Archive&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fileName</span>     <span class="p">=</span>  <span class="p">(</span><span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&#34;MM-dd-yyyy-hh-mm&#34;</span><span class="p">)</span> <span class="p">+</span> <span class="s1">&#39;-&#39;</span> <span class="p">+</span> <span class="nv">$vCenter</span> <span class="p">+</span> <span class="s1">&#39;.xlsx&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$filePath</span>     <span class="p">=</span> <span class="s2">&#34;C:\Program Files (x86)\Robware\RVTools\RVtools.exe&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$outPut</span> <span class="p">=</span> <span class="s1">&#39;Starting Process to create an RVTools xlsx file...&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$outPut</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$outPut</span> <span class="p">=</span> <span class="s1">&#39;Creating xlsx file for vCenter &#39;</span> <span class="p">+</span> <span class="nv">$vCenter</span> <span class="p">+</span> <span class="s1">&#39;...&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$outPut</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Arguments</span> <span class="p">=</span> <span class="s2">&#34;-u </span><span class="nv">$User</span><span class="s2"> -p </span><span class="nv">$Password</span><span class="s2"> -s </span><span class="nv">$vCenter</span><span class="s2"> -c ExportAll2xlsx -d </span><span class="nv">$fileLocation</span><span class="s2"> -f </span><span class="nv">$fileName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Process</span> <span class="p">=</span> <span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="nv">$filePath</span> <span class="n">-ArgumentList</span> <span class="nv">$Arguments</span> <span class="n">-Wait</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$Process</span><span class="p">.</span><span class="py">ExitCode</span> <span class="o">-eq</span> <span class="mf">-1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Error: Export failed! RVTools returned exitcode -1, probably a connection error! Script is stopped&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [Create a RVTools file that will not be deleted for history on the 1st of every month ] -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$DayofMonth</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&#34;dd&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$DayofMonth</span> <span class="o">-eq</span> <span class="s1">&#39;01&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$outPut</span> <span class="p">=</span> <span class="s2">&#34;Day of the Month: &#34;</span> <span class="p">+</span> <span class="nv">$DayofMonth</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$outPut</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$outPut</span> <span class="p">=</span> <span class="s1">&#39;Starting Process to create an RVTools xlsx file for Archive that will not be deleted...&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$outPut</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nv">$Arguments</span> <span class="p">=</span> <span class="s2">&#34;-u </span><span class="nv">$User</span><span class="s2"> -p </span><span class="nv">$Password</span><span class="s2"> -s </span><span class="nv">$vCenter</span><span class="s2"> -c ExportAll2xlsx -d </span><span class="nv">$fileArchive</span><span class="s2"> -f </span><span class="nv">$fileName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$Process</span> <span class="p">=</span> <span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="nv">$filePath</span> <span class="n">-ArgumentList</span> <span class="nv">$Arguments</span> <span class="n">-Wait</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Clean up old RVTools Files ] -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$outPut</span> <span class="p">=</span> <span class="s1">&#39;Removing all XLSX files older than 7 days...&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$outPut</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Delete all RVTools Files in older than 7 day(s) ] -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Daysback</span> <span class="p">=</span> <span class="s2">&#34;-7&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$CurrentDate</span> <span class="p">=</span> <span class="nb">Get-Date</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$DatetoDelete</span> <span class="p">=</span> <span class="nv">$CurrentDate</span><span class="p">.</span><span class="py">AddDays</span><span class="p">(</span><span class="nv">$Daysback</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="nv">$fileLocation</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">LastWriteTime</span> <span class="o">-lt</span> <span class="nv">$DatetoDelete</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Remove-Item</span> <span class="n">-Confirm:</span><span class="vm">$false</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">&lt;#
+</span></span></span><span class="line"><span class="cl"><span class="cm"># ----- [ Sample code to change a file last write date/time to test code for deleting files older than 7 days ] -----
+</span></span></span><span class="line"><span class="cl"><span class="cm">$fileToChange = $fileLocation + &#39;\&#39; + $fileName
+</span></span></span><span class="line"><span class="cl"><span class="cm">$fileToChange
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">(Get-Item $fileToChange).LastWriteTime = Get-Date &#34;02/01/2024 01:00&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cm">#&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<blockquote>
+<p>Blog Updated: 02/08/2024<br>
+Changes: Updated script to work with newest version of RVTools</p>
+</blockquote>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
 <hr>]]></description>
 </item>
 <item>
@@ -19,7 +170,500 @@
     <pubDate>Sat, 01 Apr 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/vmware-aria-operations-rvtools-dashboard/</guid>
-    <description><![CDATA[<p><strong>How to show RVTools data in a VMware Aria Operations Dashboard.</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to show RVTools data in a VMware Aria Operations Dashboard.</strong></p>
+<hr>
+<p>I know a lot of VMware admins that use <a href="https://www.robware.net/rvtools/" target="_blank" rel="noopener noreffer ">RVTools</a> on a regular basis. RVTools was #1 on the VMware Tools list on <a href="https://blogs.vmware.com/virtualblocks/2019/03/08/vspeaking-podcast-episode-108-top-10-vmware-tools/" target="_blank" rel="noopener noreffer ">vSpeaking Podcast Episode 108.</a>  When I was a VMware Customer, I used RVTools for 10+ years.</p>
+<p>Recently I was asked how to see some of the data that RVTools generates in a VMware Aria Operations Dashboard. Some of the data displayed in the RVTools vHealth Worksheet is not a metric or property that VMware Aria Operations collects or generates. The company uses VMware Aria Operations for all monitoring and thought it would be nice to see this additional data in a VMware Aria Operations Dashboard. They would auto generate the RVTools files everyday, but it was additional steps to open the generated spreadsheet file, plus they had to remember to go look at the RVTools data. If the RVTools data was in a Dashboard, they thought it would be easier to see and wouldn&rsquo;t have to remember to go look at the data. They would make the RVTools Dashboard a favorite in VMware Aria Operations and look at the data everyday.</p>
+<p>If you don&rsquo;t use RVTools today, take some time and review it. There are some good use cases for using the product. Awesome to see a Product developed by a VMware admin to make his life easier, and then shared and used by over a million people within the vCommunity.</p>
+<h6 id="use-case">Use Case</h6>
+<ul>
+<li>Customer used RVTools to see data about their VMware environment.</li>
+<li>Customer used VMware Aria Operations for all monitoring.</li>
+<li>Customer wanted to have a VMware Aria Operations Dashboard that showed RVTools data to create a &ldquo;Single Pane of Glass&rdquo; experience.</li>
+</ul>
+<hr>
+<h6 id="steps-to-complete-the-process">Steps to complete the process:</h6>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Automate the process to generate the RVTools xlsx file everyday.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Generate html files from the RVTools xlsx file, to display in a VMware Aria Operations Dashboard.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Need access to a Web Server of your choice to save the html files. The files are static, so any flavor of web server will work.</li>
+</ul>
+<hr>
+<h6 id="rvtools-vhealth-data-in-a-vmware-aria-operations-dashboard">RVTools vHealth data in a VMware Aria Operations Dashboard:</h6>
+<ul>
+<li>Screen shot of Dashboard</li>
+</ul>
+<figure><a class="lightgallery" href="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-01.gif" title="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-01.gif" data-thumbnail="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-01.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="powershell-script">PowerShell Script:</h6>
+<ul>
+<li>
+<p>The script was created to be dynamic. No worksheet names or field names are hard coded. If new Worksheets or fields are added to RVTools in the future, they will automatically be picked up with this script.</p>
+</li>
+<li>
+<p>RVTools provides a program to encrypt your password that will be used with the script. The program is named &ldquo;RVToolsPasswordEncryption.exe&rdquo;.</p>
+</li>
+<li>
+<p>The PowerShell Script uses the importexcel PowerShell Module to see the data in the RVTools xlsx file. If you have never used the importexcel module, please review to see if you would have other use cases. No need to have Excel Installed. Works Awesome, one of my Favorite PowerShell Modules. Thanks <a href="https://github.com/dfinke" target="_blank" rel="noopener noreffer ">Doug Finke </a></p>
+</li>
+<li>
+<p><strong>Click to expand PowerShell code</strong></p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Created By: Dale Hassinger</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Blog Site: www.vCROCS.info</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Notes:</span>
+</span></span><span class="line"><span class="cl"><span class="c"># This script uses the importexcel powershell module</span>
+</span></span><span class="line"><span class="cl"><span class="c"># find-module importexcel</span>
+</span></span><span class="line"><span class="cl"><span class="c"># install-module importexcel</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Script Description: Creates RVTools xlsx file and creates a web page for every worksheet.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Function to Create the HTML Files ] -----</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Create-HTML</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">	<span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$workSheet</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="c"># End param</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#$workSheet = &#39;vHealth&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vTools</span> <span class="p">=</span> <span class="nb">Import-Excel</span> <span class="n">-Path</span> <span class="s2">&#34;C:\RVTools\RVTools-Data.xlsx&#34;</span> <span class="n">-WorksheetName</span> <span class="nv">$workSheet</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$vTools</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Get the Header info for the specifc worksheet</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$tableHeaders</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$vTools</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="py">psobject</span><span class="p">.</span><span class="n">Properties</span><span class="p">).</span><span class="py">name</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$tableHeaders</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Build the Table Header</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$tableHeader</span> <span class="p">=</span> <span class="sh">@&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#39;@
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">foreach($field in $tableHeaders){
+</span></span></span><span class="line"><span class="cl"><span class="sh">  $outPut = &#39;                        &lt;th&gt;&#39; + $field + &#39;&lt;/th&gt;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">  $tableHeader += &#34;$output&#34; + &#34;`n&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">  #Write-Output $tableHeader
+</span></span></span><span class="line"><span class="cl"><span class="sh">}
+</span></span></span><span class="line"><span class="cl"><span class="sh">#$tableHeader
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh"># -- Start creating the HTML file
+</span></span></span><span class="line"><span class="cl"><span class="sh">$htmlFile = @&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;meta charset=&#34;UTF-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;title&gt;PageTitle&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;!-- Include the required stylesheets and scripts --&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-3.6.0.min.js&#34;&gt;&lt;/script&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js&#34;&gt;&lt;/script&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;!-- CSS rules to control the font --&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;style type=&#34;text/css&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">		body {
+</span></span></span><span class="line"><span class="cl"><span class="sh">			font-family: Arial, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="sh">			font-size: 11px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">		}
+</span></span></span><span class="line"><span class="cl"><span class="sh">		table {
+</span></span></span><span class="line"><span class="cl"><span class="sh">			font-family: Arial, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="sh">			font-size: 11px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">			border-collapse: collapse;
+</span></span></span><span class="line"><span class="cl"><span class="sh">			width: 100%;
+</span></span></span><span class="line"><span class="cl"><span class="sh">		}
+</span></span></span><span class="line"><span class="cl"><span class="sh">		th, td {
+</span></span></span><span class="line"><span class="cl"><span class="sh">			padding: 8px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">			text-align: left;
+</span></span></span><span class="line"><span class="cl"><span class="sh">			border: 1px solid #ddd;
+</span></span></span><span class="line"><span class="cl"><span class="sh">		}
+</span></span></span><span class="line"><span class="cl"><span class="sh">		th {
+</span></span></span><span class="line"><span class="cl"><span class="sh">			background-color: #f2f2f2;
+</span></span></span><span class="line"><span class="cl"><span class="sh">		}
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;/style&gt;	
+</span></span></span><span class="line"><span class="cl"><span class="sh">	
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;!-- Initialize the DataTables plugin --&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;script type=&#34;text/javascript&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">		$(document).ready(function() {
+</span></span></span><span class="line"><span class="cl"><span class="sh">			$(&#39;#example&#39;).DataTable({
+</span></span></span><span class="line"><span class="cl"><span class="sh">				scrollX: true, // enable horizontal scrolling
+</span></span></span><span class="line"><span class="cl"><span class="sh">				order: [[ 0, &#34;asc&#34; ]], // sort by the first column in ascending order by default
+</span></span></span><span class="line"><span class="cl"><span class="sh">				searching: true // enable searching
+</span></span></span><span class="line"><span class="cl"><span class="sh">			});
+</span></span></span><span class="line"><span class="cl"><span class="sh">		});
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;/script&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">	&lt;table id=&#34;example&#34; class=&#34;display&#34; style=&#34;width:100%&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">		&lt;thead&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">			&lt;tr&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#39;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Create HTML Page Title</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$pageTitle</span> <span class="p">=</span> <span class="s1">&#39;RVTools | &#39;</span> <span class="p">+</span> <span class="nv">$workSheet</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$htmlFile</span> <span class="p">=</span> <span class="nv">$htmlFile</span><span class="p">.</span><span class="py">Replace</span><span class="p">(</span><span class="s2">&#34;PageTitle&#34;</span><span class="p">,</span><span class="nv">$pageTitle</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Add Table Header to HTML File</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$htmlFile</span> <span class="p">+=</span> <span class="nv">$tableHeader</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$htmlHeader2</span> <span class="p">=</span> <span class="sh">@&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">                    &lt;/tr&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">                &lt;/thead&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">                &lt;tbody&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#39;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$htmlFile</span> <span class="p">+=</span> <span class="nv">$htmlHeader2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Create HTML Table</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$table</span> <span class="p">=</span> <span class="sh">@&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#39;@
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">foreach($record in $vTools){
+</span></span></span><span class="line"><span class="cl"><span class="sh">  $output = &#39;                    &lt;tr&gt;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">  foreach($field in $tableHeaders){
+</span></span></span><span class="line"><span class="cl"><span class="sh">    $output += &#39;&lt;td&gt;&#39; + $record.$field + &#39;&lt;/td&gt;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    #Write-Output $tableHeader
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">  }
+</span></span></span><span class="line"><span class="cl"><span class="sh">  $output += &#39;&lt;/tr&gt;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">  #Write-Output $output
+</span></span></span><span class="line"><span class="cl"><span class="sh">  $table += &#34;$output&#34; + &#34;`n&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">}
+</span></span></span><span class="line"><span class="cl"><span class="sh">#$table
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh"># -- Add Table to HTML File
+</span></span></span><span class="line"><span class="cl"><span class="sh">#$table
+</span></span></span><span class="line"><span class="cl"><span class="sh">$htmlFile += $table
+</span></span></span><span class="line"><span class="cl"><span class="sh">#$htmlFile
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh"># -- Create HTML Footer
+</span></span></span><span class="line"><span class="cl"><span class="sh">$htmlFooter = @&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sh">                &lt;/tbody&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            &lt;/table&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#39;@</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$htmlFooter</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Add HTML Footer</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$htmlFile</span> <span class="p">+=</span> <span class="nv">$htmlFooter</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$htmlFile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Create the  HTML file in the Web Server folder</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$filePath</span> <span class="p">=</span> <span class="s1">&#39;C:\inetpub\wwwroot\rvtools\&#39;</span> <span class="p">+</span> <span class="nv">$workSheet</span> <span class="p">+</span> <span class="s1">&#39;.htm&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$htmlFile</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-FilePath</span> <span class="nv">$filePath</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Run RVTools and create the xlsx file ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Set RVTools path</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">string</span><span class="p">]</span> <span class="nv">$RVToolsPath</span> <span class="p">=</span> <span class="s2">&#34;C:\RVTools&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- cd to RVTools directory</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set-location</span> <span class="nv">$RVToolsPath</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Set parameters for vCenter and start RVTools export</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">string</span><span class="p">]</span> <span class="nv">$VCServer</span>          <span class="p">=</span> <span class="s2">&#34;vcsa-01a.corp.local&#34;</span>                                                    <span class="c"># my test vCenter server</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">string</span><span class="p">]</span> <span class="nv">$User</span>              <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>                                                    <span class="c"># or use -passthroughAuth</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">string</span><span class="p">]</span> <span class="nv">$EncryptedPassword</span> <span class="p">=</span> <span class="s2">&#34;_RVToolsV2PWDasF30QqSuq9OjfEwP+zMeR93x/p511QbI9SZl9YvUJw=&#34;</span> <span class="c"># use RVToolsPasswordEncryption.exe to encrypt your password</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">string</span><span class="p">]</span> <span class="nv">$XlsxDir</span>           <span class="p">=</span> <span class="s2">&#34;C:\RVTools&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">string</span><span class="p">]</span> <span class="nv">$XlsxFile</span>          <span class="p">=</span> <span class="s2">&#34;RVTools-Data.xlsx&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># -- Start cli of RVTools</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;Start export for vCenter </span><span class="nv">$VCServer</span><span class="s2">&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">DarkYellow</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Arguments</span> <span class="p">=</span> <span class="s2">&#34;-u </span><span class="nv">$User</span><span class="s2"> -p </span><span class="nv">$EncryptedPassword</span><span class="s2"> -s </span><span class="nv">$VCServer</span><span class="s2"> -c ExportAll2xlsx -d </span><span class="nv">$XlsxDir</span><span class="s2"> -f </span><span class="nv">$XlsxFile</span><span class="s2"> -DBColumnNames&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Write-Host $Arguments</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Process</span> <span class="p">=</span> <span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="s2">&#34;C:\RVTools\RVTools.exe&#34;</span> <span class="n">-ArgumentList</span> <span class="nv">$Arguments</span> <span class="n">-Wait</span> <span class="n">-PassThru</span> <span class="c">#-NoNewWindow</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$Process</span><span class="p">.</span><span class="py">ExitCode</span> <span class="o">-eq</span> <span class="mf">-1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Error: Export failed! RVTools returned exitcode -1, probably a connection error! Script is stopped&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Get Name of every Worksheet in xlsx file and send to function to create html files ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$worksheetNames</span> <span class="p">=</span> <span class="nb">Get-ExcelSheetInfo</span> <span class="s1">&#39;C:\RVTools\RVTools-Data.xlsx&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$workSheet</span> <span class="k">in</span> <span class="nv">$worksheetNames</span><span class="p">.</span><span class="n">Name</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;WorkSheet: &#39;</span> <span class="p">+</span> <span class="nv">$workSheet</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">Create-HTML</span> <span class="n">-workSheet</span> <span class="nv">$workSheet</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Foreach</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="results-of-script">Results of script:</h6>
+<ul>
+<li>For my example, I am using a Windows Server and IIs Web Server.</li>
+<li>All html files are saved in the folder C:\inetpub\wwwroot\rvtools\ on the IIS Server.</li>
+<li>A html file is created for ever Worksheet within the xlsx file.</li>
+</ul>
+<figure><a class="lightgallery" href="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-02.png" title="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-02.png" data-thumbnail="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<h6 id="vmware-aria-operation-dashboard-design">VMware Aria Operation Dashboard Design:</h6>
+<ul>
+<li>Use the Text Display Widget to show the results of a html within the Dashboard.</li>
+<li>Add a Text Display Widget for every Worksheet that you want to display within the Dashboard.</li>
+<li>Add the url to the Text Display Widget. You <strong>MUST</strong> use a secure url. IE: https://192.168.110.202/rvtools/vHealth.htm</li>
+</ul>
+<p><figure><a class="lightgallery" href="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-03.png" title="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-03.png" data-thumbnail="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-04.png" title="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-04.png" data-thumbnail="/vmware-aria-operations-rvtools-dashboard/rvtools-dashboard-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<h6 id="how-to-run-the-script-everyday">How to run the script everyday?:</h6>
+<ul>
+<li>I use a Workflow within VMware Aria Automation Orchestrator that is built-in to VMware Aria Automation. You can also you a stand alone VMware Aria Automation Orchestrator install if you don&rsquo;t use VMware Aria Automation.</li>
+<li>There is a OOTB (Out of the Box) Workflow that allows you to run a PowerShell script on a PowerShell Host. I clone that Workflow and edit to match my environment.</li>
+<li>I schedule the Workflow to run everyday at 5:00 am.</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>The Text Display Widget is a nice way to display data in a VMware Aria Operations Dashboard from any html file.</li>
+<li>Using the Text Display Widget allows you to create that &ldquo;Single Pane of Glass&rdquo; experience with VMware Aria Operations.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write about Automation, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete automation as long as it completes successfully and consistently.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 </channel>
 </rss>

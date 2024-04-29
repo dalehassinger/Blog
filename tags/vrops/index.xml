@@ -11,6 +11,123 @@
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/vrealize-operations-right-size/</guid>
     <description><![CDATA[<h5 id="using-vrops-data-to-help-show-app-owners-proper-vm-sizing">Using vROPS Data to help show APP Owners Proper VM Sizing:</h5>
+<hr>
+<hr>
+<p>vRealize Operations does a good job to show you what the correct number for vCPU/Memory settings should be based on monitoring history. But instead of showing APP owners a screen that just shows what the current VM vCPU/Memory settings are and what the new settings &ldquo;Should&rdquo; be, I wanted to show the real data that proves why these changes should be made. It can still be hard for people to understand that taking away a VM resources can make performance better.  If a mechanic told you to replace a v-8 engine in a vehicle with a 4 cylinder to get more performance, would you believe them? Probably not!</p>
+<p>vROPS Right Sizing does not just show you what vCPU to remove to make a VM performance better.  If a VM requires more vCPU resources there is a Metric CPU|Add that can be very useful.</p>
+<h5 id="vrops-right-size-screen">vROPS Right Size Screen:</h5>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-05.png" title="/vrealize-operations-right-size/right-size-05.png" data-thumbnail="/vrealize-operations-right-size/right-size-05.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<div><b>VM Names were removed from screen Shot</b></div>
+<hr>
+<p>In vCenter if you look at the performance of a VM one of the options is to show CPU Ready|State (ms). I think this is a metric that you can show to an APP Owner and they can understand why this is important.</p>
+<div><b>CPU Ready|State (ms):</b> "Time that the virtual machine was ready, but could not get scheduled to run on the physical CPU during last measurement interval"</b></div>
+<div><br></div>
+<div><b>vCenter VM Advanced Performance:</b></div>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-03.png" title="/vrealize-operations-right-size/right-size-03.png" data-thumbnail="/vrealize-operations-right-size/right-size-03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<div><br></div>
+<div><b>vCenter VM Advanced Performance Settings:</b></div>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-04.png" title="/vrealize-operations-right-size/right-size-04.png" data-thumbnail="/vrealize-operations-right-size/right-size-04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<p>When I looked at vROPS OOTB (Out of the Box) the VM CPU Metric CPU|Ready (ms) was not being collected. I wanted to be able to show the CPU Metric CPU|Ready (ms) in a Right-Size/Performance Dashboard to show APP Owners this value.</p>
+<div><b>Steps to add Metric CPU|Ready (ms) to vROPS:</b></div>
+<ol>
+<li>Administration:</li>
+<li>Policies.</li>
+<li>Select your Default Policy.</li>
+<li>Edit Policy.</li>
+<li>Select Object Type: Virtual Machine</li>
+<li>Filter for the word Ready.</li>
+<li>Expand the metrics/CPU.</li>
+<li>You will see Ready (ms) Disabled.</li>
+<li>Change State and Instanced State to Enabled.</li>
+<li>Save</li>
+<li>See the (2) screen shots below.</li>
+</ol>
+<div><br></div>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-01.png" title="/vrealize-operations-right-size/right-size-01.png" data-thumbnail="/vrealize-operations-right-size/right-size-01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-02.png" title="/vrealize-operations-right-size/right-size-02.png" data-thumbnail="/vrealize-operations-right-size/right-size-02.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<div>
+Here is a vROPS Dashboard that I created to show APP Owners Performance information and Right Sizing information in a "Single Pane of Glass". A question the APP Owners always ask is WHY should we take resources away from a VM to make the performance better. If you look at the Column CPU|Remove and then look at the column CPU|Ready (ms), the CPU|Ready (ms) is much higher on VMs that are <b>NOT</b> Right Sized.  
+In one Dashboard I am showing several CPU performance metrics, vSAN performance metrics, CPU configuration (Counts/Hot ADD) and Right Sizing. I like to be able to look at all these metrics at the same time. Nice to be able to see if there is a relationship between performance, latency and Right Sizing. Does CPU performance affect the vSAN performance? Here is a VM that CPU|Remove is 0 and the CPU|Ready (ms) is much lower. Why is that?</div>
+<div><br></div>
+<p>Dashboard Screen Shot:</p>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-07.png" title="/vrealize-operations-right-size/right-size-07.png" data-thumbnail="/vrealize-operations-right-size/right-size-07.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>VM Names were removed from screen Shot</p>
+<p><a href="https://code.vmware.com/samples/7624/vrops-dashboard-for-vm-right-sizing-and-performance-" target="_blank">Click here to Download Dashboard and Views from VMware Code Web Site</a></p>
+<hr>
+<div><b>CPU | Ready (ms) metric after using vROPS Right Size recommendation:</b></div>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-08.png" title="/vrealize-operations-right-size/right-size-08.png" data-thumbnail="/vrealize-operations-right-size/right-size-08.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>This metric chart is showing a VM that had 12 CPU.  vROPS recommended that the CPU count be 10.  Before VM CPU count was changed to 10 you can see the CPU|Ready (ms) was running between 1500 - 2000 (ms).  After the VM CPU count was changed to 10 you can see the CPU|Ready (ms) was running between 500 - 600 (ms). If you would do this across 100s of VMs in a cluster you would see even more performance gains because then the &ldquo;Noisy Neighbors&rdquo; would not be as Noisy.</p>
+<hr>
+<div><b>Performance Values:</b></div>
+<ul>
+<li>CPU|Ready (ms) should be 1000 or less for best performance</li>
+<li>CPU|Remove - I like to keep this at 2 or less.  For some applications this can be trial and error.</li>
+<li>CPU|Add - I like to keep this at 0. Make sure the VM is sized with enough resources. Don&rsquo;t under size VMs. This will keep the APP Owners Happy!</li>
+</ul>
+<hr>
+<div><b>The next section was in an IBM KB article that I found helpful:</b></div>
+<p>CPU ready time is a vSphere metric that records the amount of time a VM is ready to use CPU but was unable to schedule physical CPU time because all the vSphere ESXi host CPU resources are busy. CPU ready time is dependent on the number of VMs on the host and their CPU loads. It is normal for a VM to average between 0–50 ms of CPU ready time; anything over 1000 ms is considered to lead to VM performance problems.</p>
+<p>VMs that are configured with multiple vCPUs will suffer from an increased amount of ready time than compared to VMs with fewer vCPUs configured. Ready time increases as the VM needs more vCPU resources to be made available at the same time and, therefore, may have to wait for extended times for all the required vCPUS to be free to be made available to the VM with more vCPUs.</p>
+<hr>
+<div><b>In Addition to Right Sizing</b>, I also think that <b>Optimizing</b> a VM is important. VMware has a Fling available that I like to use <a href="https://flings.vmware.com/vmware-os-optimization-tool?src=vmw_so_vex_pmasz_426" target="_blank">VMware OS Optimization Tool</a>
+that helps you optimize CPU Settings.</div>
+<hr>
+<div><b>Dashboard Tips:</b></div>
+<ul>
+<li>Add Color to the list data to make poor performance values catch your eye. (I used Red)</li>
+<li>Use Donut Charts to show some of the metrics that you feel are more important.</li>
+</ul>
+<p>To add color to List View values, use Show advanced settings for a metric:</p>
+<div><br></div>
+<a class="lightgallery" href="images/post/right-size-09.png" title="images/post/right-size-09.png" data-thumbnail="images/post/right-size-09.png">
+        
+    </a>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-09.png" title="/vrealize-operations-right-size/right-size-09.png" data-thumbnail="/vrealize-operations-right-size/right-size-09.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>  
+<p>Enter the metric values when you want the color to change:</p>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-10.png" title="/vrealize-operations-right-size/right-size-10.png" data-thumbnail="/vrealize-operations-right-size/right-size-10.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>I like using Donut Charts in Dashboards. You can show a lot of data in a small amount of screen space. Using colors also catches your eye quickly when there are issues:</p>
+<figure><a class="lightgallery" href="/vrealize-operations-right-size/right-size-11.png" title="/vrealize-operations-right-size/right-size-11.png" data-thumbnail="/vrealize-operations-right-size/right-size-11.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<p>When I write about Automation I always say there are many ways to accomplish the same task.  Monitoring is the same way.  I am showing what I felt was important to see but every organization will be different.  Add/Remove columns in the Dashboard to suite you needs. There is no right or wrong way to monitor. Maybe other metrics make more sense to you. What is important with monitoring is don&rsquo;t install vRealize Operation and not use it. Don&rsquo;t make vROPS Shelfware! This is a GREAT Tool that shows you so much information about your virtual environment. And it keeps getting better&hellip;</p>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
 <hr>]]></description>
 </item>
 <item>
@@ -20,7 +137,81 @@
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/vrops8-new-features/</guid>
     <description><![CDATA[<p><strong>The New Features I use the most.</strong></p>
-<hr>]]></description>
+<hr>
+<hr>
+<ol>
+<li>Donut Charts.
+<ul>
+<li>This is one of my favorite new features.</li>
+<li>The donut chart allows you to show a lot of information in a smaller space and makes the Dashboards look more modern and clean looking.</li>
+<li>I have been replacing the Heat Map Widgets on some of my custom Dashboards with Donut Charts.</li>
+<li>If you click on the colors of the Donut charts you will then get a list of the data that makes up that color.</li>
+</ul>
+</li>
+<li>Top-N Chart and Color Method.
+<ul>
+<li>Adding color to the Top-N makes it so much more usable. With the previous version where is was just blue it didn&rsquo;t grab your eye like adding the color.</li>
+<li>Using the Top-N chart and the Donut chart together makes a GREAT looking Dashboard. See my example below.</li>
+</ul>
+</li>
+<li>Ping Monitoring.
+<ul>
+<li>This feature always us to monitor non VMware devices. In a short period of time I learned a lot about latency and packet drops in our environment.</li>
+</ul>
+</li>
+<li>Troubleshooting Workbench.
+<ul>
+<li>In previous versions of vROPS I would create Dashboards to help with trouble shooting.</li>
+<li>With Trouble Shooting work bench I don&rsquo;t need to create those custom Dashboards anymore.</li>
+<li>The included Trouble Shooting workbench is like what I did on steroids.</li>
+</ul>
+</li>
+</ol>
+<h6 id="donut-chart-and-top-n-example">Donut Chart and Top-N Example:</h6>
+<figure><a class="lightgallery" href="/vrops8-new-features/vrops8-01.png" title="/vrops8-new-features/vrops8-01.png" data-thumbnail="/vrops8-new-features/vrops8-01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>This single Dashboard has a lot of info that would has taken several Dashboards to show same amount of data using Heat Maps. This would be a good example of a Dashboard that managers may want to see.</p>
+<figure><a class="lightgallery" href="/vrops8-new-features/vrops8-05.png" title="/vrops8-new-features/vrops8-05.png" data-thumbnail="/vrops8-new-features/vrops8-05.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="donut-chart-config">Donut Chart Config:</h6>
+<ul>
+<li>Create a Distribution View.</li>
+<li>Make the visualization a Donut Chart.</li>
+<li>Use Manual distribution.</li>
+<li>Create Buckets and set the values/colors for the Buckets.</li>
+<li>Add the View to a Dashboard.</li>
+</ul>
+<figure><a class="lightgallery" href="/vrops8-new-features/vrops8-02.png" title="/vrops8-new-features/vrops8-02.png" data-thumbnail="/vrops8-new-features/vrops8-02.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/vrops8-new-features/vrops8-03.png" title="/vrops8-new-features/vrops8-03.png" data-thumbnail="/vrops8-new-features/vrops8-03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="top-n-chart-config">Top-N Chart Config:</h6>
+<ul>
+<li>Add Top-N Widget to Dashboard</li>
+<li>Define configuration and Input Transformation.</li>
+<li>Output Data:Color Method:Custom is where you define the color values.</li>
+</ul>
+<figure><a class="lightgallery" href="/vrops8-new-features/vrops8-04.png" title="/vrops8-new-features/vrops8-04.png" data-thumbnail="/vrops8-new-features/vrops8-04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>Creating Charts with ChartJS and displaying in vRealize Operations</title>
@@ -28,7 +219,197 @@
     <pubDate>Sun, 03 Jan 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/chartjs/</guid>
-    <description><![CDATA[<p><strong>Creating Charts with ChartJS and displaying in vRealize Operations</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Creating Charts with ChartJS and displaying in vRealize Operations</strong></p>
+<hr>
+<p>I like the idea of using VMware vRealize Operations as the “Single Pane of Glass” for all monitoring.  The Citrix Team recently asked me if I could show license usage within vRealize Operations. They wanted to see the highest usage in the last 30 days, 10 days and 24 hours. Citrix license usage is not built into vROPS but I have used the “Text Display Widget” to show other information within vROPS.</p>
+<p>I wanted to create a half donut chart to show the highest license usage in the last 30 days, a horizontal bar chart to show the last 10 days and a table to show the last 24 hours.  I reviewed to see what “Open Source” Javascript options were available and I found ChartJS. After reviewing how to program the files to create charts with ChartJS I liked the solution.</p>
+<h6 id="chartjs-displayed-in-vrealize-operations-using-the-text-display-widget">ChartJS Displayed in vRealize Operations using the &ldquo;Text Display Widget&rdquo;</h6>
+<figure><a class="lightgallery" href="/chartjs/chartjs01.jpg" title="/chartjs/chartjs01.jpg" data-thumbnail="/chartjs/chartjs01.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="chartjs-half-donut">ChartJS Half Donut.</h6>
+<figure><a class="lightgallery" href="/chartjs/chartjs02.jpg" title="/chartjs/chartjs02.jpg" data-thumbnail="/chartjs/chartjs02.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>When you hold the mouse over the chart you will see the values.</p>
+<h6 id="chartjs-half-donut-code">ChartJS Half Donut code:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Citrix Licensing Count<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;width:95%&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">canvas</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;doughnut-chart&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">canvas</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">new</span> <span class="nx">Chart</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;doughnut-chart&#34;</span><span class="p">),</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;doughnut&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">labels</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;Used&#34;</span><span class="p">,</span><span class="s2">&#34;Total&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">datasets</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Peak Usage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">backgroundColor</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#808B96&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">data</span><span class="o">:</span> <span class="p">[</span><span class="mi">1682</span><span class="p">,</span><span class="mi">8000</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">display</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Citrix License Usage (MPS_PLT_CCU)&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">rotation</span><span class="o">:</span> <span class="mi">1</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">circumference</span><span class="o">:</span> <span class="mi">1</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="chartjs-horizintal-bar-chart">ChartJS Horizintal Bar Chart.</h6>
+<figure><a class="lightgallery" href="/chartjs/chartjs03.jpg" title="/chartjs/chartjs03.jpg" data-thumbnail="/chartjs/chartjs03.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="chartjs-horizintal-bar-chart-code">ChartJS Horizintal Bar Chart code:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Citrix Licensing Count<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;width:95%&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">canvas</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;bar-chart-horizontal&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">canvas</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">new</span> <span class="nx">Chart</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;bar-chart-horizontal&#34;</span><span class="p">),</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;horizontalBar&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">labels</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;01/03/2021&#34;</span><span class="p">,</span><span class="s2">&#34;01/02/2021&#34;</span><span class="p">,</span><span class="s2">&#34;01/01/2021&#34;</span><span class="p">,</span><span class="s2">&#34;12/31/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/30/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/29/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/28/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/27/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/26/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/25/2020&#34;</span><span class="p">,</span><span class="s2">&#34;Total Licences&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">datasets</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Peak Usage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">backgroundColor</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span> <span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#808B96&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">data</span><span class="o">:</span> <span class="p">[</span><span class="mi">249</span><span class="p">,</span><span class="mi">318</span><span class="p">,</span><span class="mi">302</span><span class="p">,</span><span class="mi">1402</span><span class="p">,</span><span class="mi">1535</span><span class="p">,</span><span class="mi">1498</span><span class="p">,</span><span class="mi">1516</span><span class="p">,</span><span class="mi">271</span><span class="p">,</span><span class="mi">273</span><span class="p">,</span><span class="mi">269</span><span class="p">,</span><span class="mi">8000</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">legend</span><span class="o">:</span> <span class="p">{</span> <span class="nx">display</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">display</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">text</span><span class="o">:</span> <span class="s2">&#34;Citrix License Usage (MPS_PLT_CCU)&#34;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">});</span>	
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>Read all the documentation on how to create ChartJS files.  Very important steps need to be followed.</li>
+<li>All the Web pages to show Citrix Licence counts are updated very hour.</li>
+<li>The process to update the Web Pages is scheduled with vRealize Automation Orchestrator.</li>
+<li>The code to get the license information and create the web pages is all done with PowerShell.</li>
+<li>The License values collected every hour are saved in a Microsoft SQL Database.</li>
+</ul>
+<p>The process to save the data and create the web pages can be done many different ways. I outlined how I do it in my environment. What I feel was important to show was the finished HTML code to create the ChartJS Web Pages that I display in vRealize Operations.  The data could be from any source that makes sense in your environment. This makes a great way to graphically show data within vROPS from data that is saved outside of vROPS.</p>
+<hr>
+<p><a href="../text-display-widget/" target="_blank">Link to my blog post that shows how to use the &ldquo;Test Display Widget</a></p>
+<p><a href="https://www.chartjs.org" target="_blank">Link to ChartJS</a></p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>vBrownbag VMworld Presentation</title>
@@ -36,7 +417,38 @@
     <pubDate>Thu, 01 Oct 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/vbrownbag-presentation/</guid>
-    <description><![CDATA[<p><strong>How to use vRealize Operations as your monitoring &ldquo;Single Pane of Glass&rdquo;</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to use vRealize Operations as your monitoring &ldquo;Single Pane of Glass&rdquo;</strong></p>
+<hr>
+<p>For the 2020 VMware VMworld my presentation for the vBrownbag TechTalks was selected.</p>
+<p>Learn how to use the &ldquo;Text Display&rdquo; Widget on Dashboards to display data that is not within vRealize Operations. Display Weather Forecasts, Radar Maps, Data from SQL DBs on your next NOC Dashboard.</p>
+<hr>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/lNN4JNF3diU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<h6 id="socials">Socials:</h6>
+<ul>
+<li>Twitter: <a href="https://twitter.com/vBrownBag" target="_blank" rel="noopener noreffer ">https://twitter.com/vBrownBag</a></li>
+<li>Facebook: <a href="https://facebook.com/vBrownBag" target="_blank" rel="noopener noreffer ">https://facebook.com/vBrownBag</a></li>
+<li>iTunes: <a href="http://bit.ly/vbrownbagitunes" target="_blank" rel="noopener noreffer ">http://bit.ly/vbrownbagitunes</a></li>
+</ul>
+<p><a href="https://vBrownBag.com" target="_blank" rel="noopener noreffer ">https://vBrownBag.com</a> is a community of people who believe in helping other people. Specifically we work in IT infrastructure and we help other people in the IT industry to better their carreers by educating. Most frequent activity is producing the vBrownBag podcast. vBrownBag also attends global conferences to produce TechTalks and theater sessions.</p>
+<h6 id="about-vbrownbag-podcasts">About vBrownBag Podcasts</h6>
+<p>The vBrownBag crew host podcasts where community members present on topics that will help others in the community. Some podcast series are aimed at helping people achieve certifications.
+Other podcasts help community members learn an entirely new subject area. We also cover areas like storage or automation. The podcast has been running weekly since 2010.</p>
+<h6 id="vbrownbag-techtalks">vBrownBag TechTalks</h6>
+<p>The vBrownBag crew love IT conferences, the only place where we actually see each other, the awesome people who are our presenters and the community members who follow the podcast. The conferences are also a great place to generate some more community learning content.</p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>Text Display Widget - More Powerful than just displaying text on a Dashboard...</title>
@@ -45,7 +457,54 @@
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/text-display-widget/</guid>
     <description><![CDATA[<p><strong>vRealize Operations - Dashboards:</strong></p>
-<hr>]]></description>
+<hr>
+<hr>
+<p>I was recently reviewing some sample custom vRealize Operations Dashboards and I seen where some of the Dashboards had custom text and images.  I reviewed how they included the text and images and in some of the sample Dashboards they used the “Text Display” Widget and used a url for the content. They would display images saved on a web server. I thought this was interesting and started reviewing what else could be displayed by using a url with the &ldquo;Text Display&rdquo; Widget.</p>
+<p>The first thought I had was to display the weather for both the data center locations where I work.  This could be used with a NOC type Dashboard.  I looked online for a weather widget site and got the code to display the weather for the specific locations. If you go to Administration/Configuration/Metric Configurations/TxtWidgetContent you can create html files to save the widget code. See examples in images below. You can display any Widget data from any web site that provides widgets using the &ldquo;Text Display&rdquo; Widget.</p>
+<p>After I successfully added weather widgets I wanted to get more serious and show data from a SQL Database. I use a SQL database to store data from some vRealize Automation Day 2 BluePrints that I created. Some example BluePrints where I store data in a SQL DB are Server Builds and Server Decomissions. I created a web page that displayed the SQL Data and added another “Text Display” widget to the Dashboard.  I used the url of the web page and assigned it to the widget and now I am also able to show SQL Data on a Dashboard.</p>
+<p>The reason I wanted to show Weather and SQL data is to use vRealize Operations Dashboards as the “Single Pane of Glass” for all monitoring. I have never seen a demo from VMware to use the “Text Display” Widget this way but I think this is awesome. This could completely change the way I use vRealize Operations Dashboards. There are not always vRealize Operations Management Packs available and this provides a cool way to show any data on a Dashboard.  The data will be for reference only but it does allow the &ldquo;Single Pane of Glass&rdquo;.</p>
+<h6 id="vrealize-operations-dashboard">vRealize Operations Dashboard:</h6>
+<figure><a class="lightgallery" href="/text-display-widget/vrops01-1.png" title="/text-display-widget/vrops01-1.png" data-thumbnail="/text-display-widget/vrops01-1.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Here is a closeup of the Dashboard so you can see the details.</p>
+<figure><a class="lightgallery" href="/text-display-widget/vrops01-2.png" title="/text-display-widget/vrops01-2.png" data-thumbnail="/text-display-widget/vrops01-2.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="widget-code">Widget Code:</h6>
+<p>Administration/Configuration/Metric Configurations/TxtWidgetContent</p>
+<figure><a class="lightgallery" href="/text-display-widget/vrops02-1.png" title="/text-display-widget/vrops02-1.png" data-thumbnail="/text-display-widget/vrops02-1.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Here is a closeup. Create a html file and paste the Widget Code.</p>
+<figure><a class="lightgallery" href="/text-display-widget/vrops02-2.png" title="/text-display-widget/vrops02-2.png" data-thumbnail="/text-display-widget/vrops02-2.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Select the html file created to show the widget data</p>
+<figure><a class="lightgallery" href="/text-display-widget/vrops04.png" title="/text-display-widget/vrops04.png" data-thumbnail="/text-display-widget/vrops04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="url-page">url Page:</h6>
+<figure><a class="lightgallery" href="/text-display-widget/vrops03.png" title="/text-display-widget/vrops03.png" data-thumbnail="/text-display-widget/vrops03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>The url web page could be a static or dynamic page. Use whatever works best for you.  I think this opens up so many possibilities of what you can display on a Custom Dashboard. If you want to take it a step further you could publish the Custom vRealize Operations Dashboard with Workspace One and provide the data to anyone in your organization even if they are not a vRealize Operations user.  Cool Shit!</p>
+<p>The &ldquo;Text Display&rdquo; Widget should be renamed to the &ldquo;Cool Shit&rdquo; Widget!</p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 </channel>
 </rss>

@@ -10,7 +10,197 @@
     <pubDate>Sun, 03 Jan 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/chartjs/</guid>
-    <description><![CDATA[<p><strong>Creating Charts with ChartJS and displaying in vRealize Operations</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Creating Charts with ChartJS and displaying in vRealize Operations</strong></p>
+<hr>
+<p>I like the idea of using VMware vRealize Operations as the “Single Pane of Glass” for all monitoring.  The Citrix Team recently asked me if I could show license usage within vRealize Operations. They wanted to see the highest usage in the last 30 days, 10 days and 24 hours. Citrix license usage is not built into vROPS but I have used the “Text Display Widget” to show other information within vROPS.</p>
+<p>I wanted to create a half donut chart to show the highest license usage in the last 30 days, a horizontal bar chart to show the last 10 days and a table to show the last 24 hours.  I reviewed to see what “Open Source” Javascript options were available and I found ChartJS. After reviewing how to program the files to create charts with ChartJS I liked the solution.</p>
+<h6 id="chartjs-displayed-in-vrealize-operations-using-the-text-display-widget">ChartJS Displayed in vRealize Operations using the &ldquo;Text Display Widget&rdquo;</h6>
+<figure><a class="lightgallery" href="/chartjs/chartjs01.jpg" title="/chartjs/chartjs01.jpg" data-thumbnail="/chartjs/chartjs01.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="chartjs-half-donut">ChartJS Half Donut.</h6>
+<figure><a class="lightgallery" href="/chartjs/chartjs02.jpg" title="/chartjs/chartjs02.jpg" data-thumbnail="/chartjs/chartjs02.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>When you hold the mouse over the chart you will see the values.</p>
+<h6 id="chartjs-half-donut-code">ChartJS Half Donut code:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Citrix Licensing Count<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;width:95%&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">canvas</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;doughnut-chart&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">canvas</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">new</span> <span class="nx">Chart</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;doughnut-chart&#34;</span><span class="p">),</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;doughnut&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">labels</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;Used&#34;</span><span class="p">,</span><span class="s2">&#34;Total&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">datasets</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Peak Usage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">backgroundColor</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#808B96&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">data</span><span class="o">:</span> <span class="p">[</span><span class="mi">1682</span><span class="p">,</span><span class="mi">8000</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">display</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Citrix License Usage (MPS_PLT_CCU)&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">rotation</span><span class="o">:</span> <span class="mi">1</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">circumference</span><span class="o">:</span> <span class="mi">1</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h6 id="chartjs-horizintal-bar-chart">ChartJS Horizintal Bar Chart.</h6>
+<figure><a class="lightgallery" href="/chartjs/chartjs03.jpg" title="/chartjs/chartjs03.jpg" data-thumbnail="/chartjs/chartjs03.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="chartjs-horizintal-bar-chart-code">ChartJS Horizintal Bar Chart code:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Citrix Licensing Count<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;width:95%&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">canvas</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;bar-chart-horizontal&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">canvas</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">new</span> <span class="nx">Chart</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;bar-chart-horizontal&#34;</span><span class="p">),</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;horizontalBar&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">labels</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;01/03/2021&#34;</span><span class="p">,</span><span class="s2">&#34;01/02/2021&#34;</span><span class="p">,</span><span class="s2">&#34;01/01/2021&#34;</span><span class="p">,</span><span class="s2">&#34;12/31/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/30/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/29/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/28/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/27/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/26/2020&#34;</span><span class="p">,</span><span class="s2">&#34;12/25/2020&#34;</span><span class="p">,</span><span class="s2">&#34;Total Licences&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">datasets</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">label</span><span class="o">:</span> <span class="s2">&#34;Peak Usage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">backgroundColor</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span> <span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#28B463&#34;</span><span class="p">,</span><span class="s2">&#34;#808B96&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">data</span><span class="o">:</span> <span class="p">[</span><span class="mi">249</span><span class="p">,</span><span class="mi">318</span><span class="p">,</span><span class="mi">302</span><span class="p">,</span><span class="mi">1402</span><span class="p">,</span><span class="mi">1535</span><span class="p">,</span><span class="mi">1498</span><span class="p">,</span><span class="mi">1516</span><span class="p">,</span><span class="mi">271</span><span class="p">,</span><span class="mi">273</span><span class="p">,</span><span class="mi">269</span><span class="p">,</span><span class="mi">8000</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">legend</span><span class="o">:</span> <span class="p">{</span> <span class="nx">display</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">title</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">display</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">text</span><span class="o">:</span> <span class="s2">&#34;Citrix License Usage (MPS_PLT_CCU)&#34;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">});</span>	
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>Read all the documentation on how to create ChartJS files.  Very important steps need to be followed.</li>
+<li>All the Web pages to show Citrix Licence counts are updated very hour.</li>
+<li>The process to update the Web Pages is scheduled with vRealize Automation Orchestrator.</li>
+<li>The code to get the license information and create the web pages is all done with PowerShell.</li>
+<li>The License values collected every hour are saved in a Microsoft SQL Database.</li>
+</ul>
+<p>The process to save the data and create the web pages can be done many different ways. I outlined how I do it in my environment. What I feel was important to show was the finished HTML code to create the ChartJS Web Pages that I display in vRealize Operations.  The data could be from any source that makes sense in your environment. This makes a great way to graphically show data within vROPS from data that is saved outside of vROPS.</p>
+<hr>
+<p><a href="../text-display-widget/" target="_blank">Link to my blog post that shows how to use the &ldquo;Test Display Widget</a></p>
+<p><a href="https://www.chartjs.org" target="_blank">Link to ChartJS</a></p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 </channel>
 </rss>

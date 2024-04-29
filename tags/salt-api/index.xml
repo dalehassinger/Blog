@@ -10,7 +10,472 @@
     <pubDate>Sun, 26 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/saltstack-config-api/</guid>
-    <description><![CDATA[<p>Using SaltStack Config api for Automation from vRA Catalog or cmd</p>]]></description>
+    <description><![CDATA[<p>Using SaltStack Config api for Automation from vRA Catalog or cmd</p>
+<hr>
+<p>A personal goal of mine for 2022 was to start doing more with Python when working with VMware SaltStack Config. As a Windows Admin most of my automation was done with PowerShell. All the examples you see in the salt documentation are written in Python, so to use Python for some processes makes sense.</p>
+<p>I had a use case that made sense to use Python. I want to schedule reboots of AWS EC2 instances using SaltStack Config. For Servers that are on-prem I would always automate the process to create a server reboot scheduled task in vCenter.  With AWS I want to use VMware SaltStack Config to schedule the Server Reboot.</p>
+<p>Manual Steps:</p>
+<ul>
+<li>Create a SaltStack Config Job to do the reboot.<br>
+I create a job named &ldquo;vRA | Server Reboot&rdquo;. This job will be used for all scheduled server reboots.</li>
+<li>Copy the Python Code below and create a ScheduleServerReboot.py file that will be copied to the SSC server.</li>
+</ul>
+<p>The Python Code completes the following steps:</p>
+<ul>
+<li>Creates a Target that uses the grain &ldquo;id&rdquo; and will only target the Server that you want to reboot.</li>
+<li>Creates a Run Once Schedule to use the job and new target that was created.</li>
+<li>Sends an email to show that the run once schedule to reboot server  was created.</li>
+</ul>
+<hr>
+<h6 id="saltstack-config-server">SaltStack Config Server:</h6>
+<div>
+  <b>My SaltStack Config Server (SSC) is what VMware provides when using Life Cycle Manager (LCM) running Photon OS.</b>
+</div>
+<div>
+  <br>
+</div>
+<hr>
+<h6 id="python-code">Python Code:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># --- Python Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --- In my code I show the Password. In Production DO NOT DO THIS.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --- There are so many different ways to include encrypted PWs in the code. </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Use what works best in your environment.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># example to run the script</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># python3 /scripts/ScheduleServerReboot.py -name &#39;2019DC&#39; -dateTime &#39;2022-06-25T23:00&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pprint</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">smtplib</span><span class="o">,</span> <span class="nn">ssl</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Generate a random ID number</span>
+</span></span><span class="line"><span class="cl"><span class="n">randomNumber</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">randomNumber</span> <span class="o">=</span> <span class="s1">&#39;0000&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">randomNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">randomNumber</span> <span class="o">=</span> <span class="n">randomNumber</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ID:&#39;</span><span class="p">,</span><span class="n">randomNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- parse arguments</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&#34;Create Targets&#34;</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;-name&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Target Name&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;-dateTime&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Schedule Date | Time&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Set up variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">argName</span>     <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">argDateTime</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&#34;dateTime&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">argDate</span>     <span class="o">=</span> <span class="n">argDateTime</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Print the variables</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Server Name: &#39;</span><span class="p">,</span><span class="n">argName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Date | Time: &#39;</span><span class="p">,</span><span class="n">argDateTime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Connect to SSC Server</span>
+</span></span><span class="line"><span class="cl"><span class="n">host</span>     <span class="o">=</span> <span class="s1">&#39;https://192.168.86.110&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">user</span>     <span class="o">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;HackMe!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sseapiclient.tornado</span> <span class="kn">import</span> <span class="n">SyncClient</span>
+</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">SyncClient</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">ssl_validate_cert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Check to make sure minion exists</span>
+</span></span><span class="line"><span class="cl"><span class="n">minionName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">minionReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">minions</span><span class="o">.</span><span class="n">get_minion_presence</span><span class="p">(</span><span class="n">minion_id</span> <span class="o">=</span> <span class="n">argName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#print(targetReturn)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">minionReturn</span><span class="o">.</span><span class="n">ret</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#print(x)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minionName</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;minion&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;minionName:&#39;</span><span class="p">,</span> <span class="n">minionName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">minionName</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minion not found!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minionExists</span> <span class="o">=</span> <span class="s1">&#39;false&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minion found!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">minionExists</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create Target ID | Name</span>
+</span></span><span class="line"><span class="cl">    <span class="n">targetID</span> <span class="o">=</span> <span class="s1">&#39;id:&#39;</span> <span class="o">+</span> <span class="n">argName</span>
+</span></span><span class="line"><span class="cl">    <span class="n">targetName</span> <span class="o">=</span> <span class="s2">&#34;vRA | Reboot | &#34;</span> <span class="o">+</span> <span class="n">argName</span> <span class="o">+</span> <span class="s1">&#39; | &#39;</span> <span class="o">+</span> <span class="n">argDate</span> <span class="o">+</span> <span class="s1">&#39; | ID:&#39;</span> <span class="o">+</span> <span class="n">randomNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target ID:&#39;</span><span class="p">,</span><span class="n">targetID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target Name:&#39;</span><span class="p">,</span><span class="n">targetName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create New SSC Target</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">tgt</span><span class="o">.</span><span class="n">save_target_group</span><span class="p">(</span><span class="n">tgt</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;tgt_type&#39;</span><span class="p">:</span> <span class="s1">&#39;grain&#39;</span><span class="p">,</span> <span class="s1">&#39;tgt&#39;</span><span class="p">:</span><span class="n">targetID</span><span class="p">}},</span> <span class="n">name</span><span class="o">=</span><span class="n">targetName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Get UUID of new Target Created</span>
+</span></span><span class="line"><span class="cl">    <span class="n">targetReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">tgt</span><span class="o">.</span><span class="n">get_target_group</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">targetName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">targetReturn</span><span class="o">.</span><span class="n">ret</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(x)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">targetUUID</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target UUID:&#39;</span><span class="p">,</span> <span class="n">targetUUID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Get UUID of Job to run in Schedule</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#jobReturn=client.api.job.get_jobs()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jobName</span> <span class="o">=</span> <span class="s1">&#39;vRA | Server Reboot&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Job Name: &#39;</span><span class="p">,</span><span class="n">jobName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jobReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">get_jobs</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">jobName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">jobReturn</span><span class="o">.</span><span class="n">ret</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(x)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jobUUID</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Job UUID:&#39;</span><span class="p">,</span> <span class="n">jobUUID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># -- Create a run once Schedule</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 2022-06-21T13:21 - Date|Time format from vRA</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Schedule Time:&#39;</span><span class="p">,</span><span class="n">argDateTime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create Schedule Name</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scheduleName</span> <span class="o">=</span> <span class="s1">&#39;vRA | Reboot | &#39;</span> <span class="o">+</span> <span class="n">argName</span> <span class="o">+</span> <span class="s1">&#39; | &#39;</span> <span class="o">+</span> <span class="n">argDate</span> <span class="o">+</span> <span class="s1">&#39; | ID:&#39;</span> <span class="o">+</span> <span class="n">randomNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Schedule Name:&#39;</span><span class="p">,</span> <span class="n">scheduleName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- Create Run Once Schedule</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scheduleReturn</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">schedule</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="o">=</span><span class="n">scheduleName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;once&#39;</span><span class="p">:</span> <span class="n">argDateTime</span><span class="p">,</span> <span class="s1">&#39;timezone&#39;</span><span class="p">:</span> <span class="s1">&#39;America/New_York&#39;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cmd</span><span class="o">=</span><span class="s2">&#34;local&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tgt_uuid</span><span class="o">=</span><span class="n">targetUUID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">job_uuid</span><span class="o">=</span><span class="n">jobUUID</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Send Email about vRA Request using gmail.</span>
+</span></span><span class="line"><span class="cl"><span class="n">sender_email</span>   <span class="o">=</span> <span class="s2">&#34;dale.hassinger@gmail.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">receiver_email</span> <span class="o">=</span> <span class="s2">&#34;dale.hassinger@vcrocs.info&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">password</span>       <span class="o">=</span> <span class="s2">&#34;HackMe!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s2">&#34;alternative&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="p">[</span><span class="s2">&#34;Subject&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;vRA Scheduled EC2 Reboot | &#34;</span> <span class="o">+</span> <span class="n">argName</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="p">[</span><span class="s2">&#34;From&#34;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">sender_email</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="p">[</span><span class="s2">&#34;To&#34;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">receiver_email</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Create HTML Body</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">minionExists</span> <span class="o">==</span> <span class="s1">&#39;true&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">html</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;A Request to reboot a AWS EC2 was run from vRA.&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;EC2 Information:&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;ul style=&#34;list-style-type:disc&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;&lt;b&gt;EC2 Name: &#34;&#34;&#34;</span>         <span class="o">+</span> <span class="n">argName</span>      <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/b&gt;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Target Created: &#34;&#34;&#34;</span>      <span class="o">+</span> <span class="n">targetName</span>   <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Schedule Created: &#34;&#34;&#34;</span>    <span class="o">+</span> <span class="n">scheduleName</span> <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;Reboot Date | Time: &#34;&#34;&#34;</span>  <span class="o">+</span> <span class="n">argDateTime</span>  <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 11px;&#34;&gt;&lt;b&gt;vCROCS - Automated IT &lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 10px;&#34;&gt;#VMware #vRealize #SaltStackConfig&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="n">minionExists</span> <span class="o">==</span> <span class="s1">&#39;false&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">html</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;A Request to reboot a AWS EC2 was run from vRA.&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;EC2 Information:&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;ul style=&#34;list-style-type:disc&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 12px;&#34;&gt;&lt;li&gt;&lt;b&gt;EC2 Name: &#34;&#34;&#34;</span>         <span class="o">+</span> <span class="n">argName</span>      <span class="o">+</span> <span class="s2">&#34;&#34;&#34;&lt;/b&gt;&lt;/li&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/ul&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;b&gt;The Server Name was not found in Salt! Please double check name and try again!&lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 14px;&#34;&gt;&lt;/div&gt;&lt;br&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 11px;&#34;&gt;&lt;b&gt;vCROCS - Automated IT &lt;/b&gt;&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;div style=&#34;font-family: Arial, sans-serif; font-size: 10px;&#34;&gt;#VMware #vRealize #SaltStackConfig&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- HTML MIMEText objects</span>
+</span></span><span class="line"><span class="cl"><span class="n">emailHTML</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&#34;html&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Add the HTML part to MIMEMultipart message</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">emailHTML</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># --- Create secure connection and send HTML email</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s2">&#34;smtp.gmail.com&#34;</span><span class="p">,</span> <span class="mi">465</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">sender_email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sender_email</span><span class="p">,</span> <span class="n">receiver_email</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>Example of email that is sent when process completes.</p>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-53.PNG" title="/saltstack-config-api/Salt-53.PNG" data-thumbnail="/saltstack-config-api/Salt-53.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<p>Screen Shots of the SaltStack Config Job, Target and Schedule:</p>
+<p>SSC Job:</p>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-58.PNG" title="/saltstack-config-api/Salt-58.PNG" data-thumbnail="/saltstack-config-api/Salt-58.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-59.PNG" title="/saltstack-config-api/Salt-59.PNG" data-thumbnail="/saltstack-config-api/Salt-59.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>SSC Target:</p>
+<p><figure><a class="lightgallery" href="/saltstack-config-api/Salt-60.PNG" title="/saltstack-config-api/Salt-60.PNG" data-thumbnail="/saltstack-config-api/Salt-60.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-61.PNG" title="/saltstack-config-api/Salt-61.PNG" data-thumbnail="/saltstack-config-api/Salt-61.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-62.PNG" title="/saltstack-config-api/Salt-62.PNG" data-thumbnail="/saltstack-config-api/Salt-62.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-63.PNG" title="/saltstack-config-api/Salt-63.PNG" data-thumbnail="/saltstack-config-api/Salt-63.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure></p>
+<hr>
+<p>To run this process to reboot an AWS EC2 from the vRA catalog for Day 2 operations I used the OOTB (Out of The Box) orchestrator workflow named &ldquo;Run SSH command&rdquo;.  I never modify the OOTB workflows.  I cloned this Workflow and named it &ldquo;Schedule EC2 Reboot&rdquo;.</p>
+<p>Original OOTB Workflow from vRO:</p>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-54.PNG" title="/saltstack-config-api/Salt-54.PNG" data-thumbnail="/saltstack-config-api/Salt-54.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Cloned Worked in vRO:</p>
+<p><figure><a class="lightgallery" href="/saltstack-config-api/Salt-55.PNG" title="/saltstack-config-api/Salt-55.PNG" data-thumbnail="/saltstack-config-api/Salt-55.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-56.PNG" title="/saltstack-config-api/Salt-56.PNG" data-thumbnail="/saltstack-config-api/Salt-56.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure><br>
+<figure><a class="lightgallery" href="/saltstack-config-api/Salt-57.PNG" title="/saltstack-config-api/Salt-57.PNG" data-thumbnail="/saltstack-config-api/Salt-57.PNG" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure></p>
+<p>Very simple form to fill out. Enter EC2 name and Date|Time.</p>
+<p>The Workflow takes the data from the vRA custom form and does an SSH Connection to the SSC server and runs a single line command using the data from the form as arguments:</p>
+<p>python3 /scripts/ScheduleServerReboot.py -name &lsquo;2019DC&rsquo; -dateTime 2022-06-25T23:00&rsquo;</p>
+<hr>
+<ul>
+<li>I hope the provided code and screenshots were helpful to get you started.</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>If you are a Windows Server Admin that knows PowerShell, to start using Python will take some time but the languages are similar.</li>
+<li>SaltStack Config api is a great way to create Day 2 automation processes in vRA.</li>
+<li><a href="https://developer.vmware.com/apis/1179/saltstack-config-raas" target="_blank">SaltStack Config - RaaS API Documentation</a></li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
+<li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
+<li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
+</ul>
+<div style="background-color:#ccffcc; Padding:20px;" >
+When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 9</title>
@@ -18,7 +483,612 @@
     <pubDate>Fri, 10 Jun 2022 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/saltstack-config-part-09/</guid>
-    <description><![CDATA[<p>Part 9: Using salt-api with PowerShell for Windows Server Automation</p>]]></description>
+    <description><![CDATA[<p>Part 9: Using salt-api with PowerShell for Windows Server Automation</p>
+<hr>
+<p><strong>Update: It was brought to my attention that adding cherypy will break the salt master. After a quick test in my lab I had the same issue with the newest version of SaltStack Config. DO NOT use this blog post until I get a working version in my lab.</strong></p>
+<p><strong>If you want to work with the VMware Aria Automation Config API please use this newer Blog Post that I created:</strong></p>
+<ul>
+<li><a href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-config-api/" target="_blank" rel="noopener noreffer ">Unlocking the Potential | VMware Aria Automation Config API</a></li>
+</ul>
+<hr>
+<p>This post is to show how to use PowerShell to make RESTful API calls to SaltStack Config. This is something that I have wanted to do for awhile. I could never find any examples in my Google searches, so I took the time to learn how the examples that use curl work and translated that into PowerShell Code. I hope some Windows Server Admins will find this post helpful. I like using salt to do Windows Server Configuration Management more than remote PowerShell. You can run changes against many servers at the exact same time instead of looping thru a list of servers names.</p>
+<p>I am also going to look at use salt-api with vRealize Automation ABX action scripts.</p>
+<p>In some previous posts I used the POSH-SSH module but when you use the salt-api, the PowerShell Module POSH-SSH is no longer needed.</p>
+<hr>
+<h6 id="configuration-changes-to-the--saltstack-config-server">Configuration Changes to the  SaltStack Config Server:</h6>
+<div>
+  <b>My SaltStack Config Server (SSC) is what VMware provides when using Life Cycle Manager (LCM) running Photon OS.</b>
+</div>
+<div>
+  <b>The following steps are what I needed to do in my Lab environment from the SSC CLI to enable salt-api:</b>
+</div>
+<div>
+  <br>
+</div>
+<div>
+  <b> * Always make sure you have a good snap | backup before making any changes to SSC Server</b>
+</div>
+<div>
+  <br>
+</div>
+<ul>
+<li>Install CherryPy:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">cherrypy</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Install the PyOpenSSL package:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">pyopenssl</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Generate a self-signed certificate:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">salt-call</span> <span class="p">-</span><span class="n">-local</span> <span class="n">tls</span><span class="p">.</span><span class="n">create_self_signed_cert</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>open firewall port 8000:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">iptables</span> <span class="n">-A</span> <span class="n">INPUT</span> <span class="n">-i</span> <span class="n">eth0</span> <span class="n">-p</span> <span class="n">tcp</span> <span class="p">-</span><span class="n">-dport</span> <span class="mf">8000</span> <span class="n">-j</span> <span class="n">ACCEPT</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Edit /etc/salt/master file:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">vi</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">salt</span><span class="p">/</span><span class="n">master</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Add these lines to the /etc/salt/master file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">external_auth</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">pam</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">root</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">      <span class="p">-</span> <span class="p">.*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rest_cherrypy</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">port</span><span class="err">:</span> <span class="mf">8000</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ssl_crt</span><span class="err">:</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">pki</span><span class="p">/</span><span class="n">tls</span><span class="p">/</span><span class="n">certs</span><span class="p">/</span><span class="n">localhost</span><span class="p">.</span><span class="py">crt</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ssl_key</span><span class="err">:</span> <span class="p">/</span><span class="n">etc</span><span class="p">/</span><span class="n">pki</span><span class="p">/</span><span class="n">tls</span><span class="p">/</span><span class="n">certs</span><span class="p">/</span><span class="n">localhost</span><span class="p">.</span><span class="n">key</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Restart salt-master and check service status for any errors:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="n">restart</span> <span class="nb">salt-master</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="n">status</span> <span class="nb">salt-master</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Enable | Start salt-api and check service status for any errors:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="n">enable</span> <span class="nb">salt-api</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="nb">start salt-api</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemctl</span> <span class="n">status</span> <span class="nb">salt-api</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="tests-to-make-sure-saltstack-config-changes-are-working">Tests to make sure SaltStack Config Changes are working:</h6>
+<ul>
+<li>I did all this PowerShell code from my mac.  To use self-signed certs I use -SkipCertificateCheck. On a Windows OS the code is different.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- PowerShell Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s1">&#39;https://192.168.86.141:8000&#39;</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Results</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">StatusCode</span>        <span class="err">:</span> <span class="mf">200</span>
+</span></span><span class="line"><span class="cl"><span class="n">StatusDescription</span> <span class="err">:</span> <span class="n">OK</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span>           <span class="err">:</span> <span class="p">{</span><span class="s2">&#34;return&#34;</span><span class="err">:</span> <span class="s2">&#34;Welcome&#34;</span><span class="p">,</span> <span class="s2">&#34;clients&#34;</span><span class="err">:</span> <span class="p">[</span><span class="s2">&#34;local&#34;</span><span class="p">,</span> <span class="s2">&#34;local_async&#34;</span><span class="p">,</span> <span class="s2">&#34;local_batch&#34;</span><span class="p">,</span> <span class="s2">&#34;local_subset&#34;</span><span class="p">,</span> <span class="s2">&#34;runner&#34;</span><span class="p">,</span> <span class="s2">&#34;runner_async&#34;</span><span class="p">,</span> <span class="s2">&#34;ssh&#34;</span><span class="p">,</span> <span class="s2">&#34;wheel&#34;</span><span class="p">,</span> <span class="s2">&#34;wheel_async&#34;</span><span class="p">]}</span>
+</span></span><span class="line"><span class="cl"><span class="n">RawContent</span>        <span class="err">:</span> <span class="n">HTTP</span><span class="p">/</span><span class="mf">1.1</span> <span class="mf">200</span> <span class="n">OK</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Server</span><span class="err">:</span> <span class="n">CherryPy</span><span class="p">/</span><span class="mf">8.9</span><span class="p">.</span><span class="py">1</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Date</span><span class="err">:</span> <span class="n">Sat</span><span class="p">,</span> <span class="mf">11</span> <span class="n">Jun</span> <span class="mf">2022</span> <span class="mf">20</span><span class="err">:</span><span class="mf">57</span><span class="err">:</span><span class="mf">46</span> <span class="n">GMT</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">Access-Control</span><span class="n">-Allow-Origin:</span> <span class="p">*</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">Access-Control</span><span class="n">-Expose-Headers:</span> <span class="n">GET</span><span class="p">,</span> <span class="n">POST</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">Access-Control</span><span class="n">-Allow-Credentials:</span> <span class="n">true</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Vary</span><span class="err">:</span> <span class="nb">Accept-E</span><span class="err">…</span>
+</span></span><span class="line"><span class="cl"><span class="n">Headers</span>           <span class="err">:</span> <span class="p">{[</span><span class="no">Server, System.String[]], [Date, System.String[]</span><span class="p">],</span> <span class="p">[</span><span class="nb">Access-Control</span><span class="n">-Allow-Origin</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">String</span><span class="p">[]],</span> <span class="p">[</span><span class="nb">Access-Control</span><span class="n">-Expose-Headers</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                    <span class="n">System</span><span class="p">.</span><span class="n">String</span><span class="p">[]]</span><span class="err">…</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">Images</span>            <span class="err">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">InputFields</span>       <span class="err">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">Links</span>             <span class="err">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">RawContentLength</span>  <span class="err">:</span> <span class="mf">146</span>
+</span></span><span class="line"><span class="cl"><span class="n">RelationLink</span>      <span class="err">:</span> <span class="p">{}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>
+<p>Make sure you see StatusCode: 200</p>
+</li>
+<li>
+<p>Next step is to make sure you get a token:</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- PowerShell Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="c"># --- In my code I show the PassWord. In Production DO NOT DO THIS.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># --- There are so many different ways to include encrypted PWs in the code. </span>
+</span></span><span class="line"><span class="cl"><span class="c"># --- Use what works best in your environment.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$saltServerAddress</span> <span class="p">=</span> <span class="s1">&#39;https://192.168.86.110:8000&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Set the json body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;{ &#34;username&#34;: &#34;root&#34;,&#34;password&#34;: &#34;HackMe!&#34;,&#34;eauth&#34;: &#34;pam&#34;}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Fetch New Token from salt master</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$url</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$saltServerAddress</span><span class="s2">/login&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Method</span> <span class="p">=</span> <span class="s2">&#34;Post&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Uri</span> <span class="p">=</span> <span class="nv">$url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Body</span> <span class="p">=</span> <span class="nv">$Body</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="nv">@Params</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="py">token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Results</span><span class="err">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="p">------</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="vm">@</span><span class="p">{</span><span class="n">token</span><span class="p">=</span><span class="n">6696846c802f78d5326a69b79d36e95015d37f5a</span><span class="p">;</span> <span class="n">expire</span><span class="p">=</span><span class="mf">1655025071.22838</span><span class="p">;</span> <span class="n">start</span><span class="p">=</span><span class="mf">1654981871.22838</span><span class="p">;</span> <span class="n">user</span><span class="p">=</span><span class="n">root</span><span class="p">;</span> <span class="n">eauth</span><span class="p">=</span><span class="n">pam</span><span class="p">;</span> <span class="n">perms</span><span class="p">=</span><span class="n">System</span><span class="p">.</span><span class="n">Object</span><span class="p">[]}}</span>
+</span></span><span class="line"><span class="cl"><span class="n">6696846c802f78d5326a69b79d36e95015d37f5a</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>You will see &ldquo;token=&rdquo; in the return data</li>
+</ul>
+<hr>
+<h6 id="powershell-api-code-examples">PowerShell API Code Examples:</h6>
+<ul>
+<li>Run a test.ping</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- PowerShell Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minionName</span>        <span class="p">=</span> <span class="s1">&#39;2019DC&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltServerAddress</span> <span class="p">=</span> <span class="s1">&#39;https://192.168.86.110:8000&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$userName</span>          <span class="p">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span>          <span class="p">=</span> <span class="s1">&#39;HackMe!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fun</span>               <span class="p">=</span> <span class="s1">&#39;test.ping&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span>             <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Set the json body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;{ &#34;username&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$userName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;password&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$password</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;eauth&#34;: &#34;pam&#34;,&#34;tgt&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minionName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;fun&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$fun</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;client&#34;: &#34;local&#34;}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create RESTful API Request</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$url</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$saltServerAddress</span><span class="s2">/run&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Method</span> <span class="p">=</span> <span class="s2">&#34;Post&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Uri</span> <span class="p">=</span> <span class="nv">$url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Body</span> <span class="p">=</span> <span class="nv">$Body</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="nv">@Params</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Showing different ways to show the return data</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$fetch</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="nv">$minionName</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Check disk.usage</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- PowerShell Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minionName</span>        <span class="p">=</span> <span class="s1">&#39;2019DC&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltServerAddress</span> <span class="p">=</span> <span class="s1">&#39;https://192.168.86.110:8000&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$userName</span>          <span class="p">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span>          <span class="p">=</span> <span class="s1">&#39;HackMe!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fun</span>               <span class="p">=</span> <span class="s1">&#39;disk.usage&#39;</span> <span class="c"># -salt function</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span>             <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Set the json body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;{ &#34;username&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$userName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;password&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$password</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;eauth&#34;: &#34;pam&#34;,&#34;tgt&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minionName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;fun&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$fun</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;client&#34;: &#34;local&#34;}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create RESTful API Request</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$url</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$saltServerAddress</span><span class="s2">/run&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Method</span> <span class="p">=</span> <span class="s2">&#34;Post&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Uri</span> <span class="p">=</span> <span class="nv">$url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Body</span> <span class="p">=</span> <span class="nv">$Body</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="nv">@Params</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Showing different ways to show the return data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="nv">$minionName</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="nv">$minionName</span><span class="p">.</span><span class="s1">&#39;C:\&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="nv">$minionName</span><span class="p">.</span><span class="s1">&#39;C:\&#39;</span><span class="p">.</span><span class="n">capacity</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Check Service Status</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- PowerShell Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minionName</span>        <span class="p">=</span> <span class="s1">&#39;2019DC&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltServerAddress</span> <span class="p">=</span> <span class="s1">&#39;https://192.168.86.110:8000&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$userName</span>          <span class="p">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span>          <span class="p">=</span> <span class="s1">&#39;HackMe!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fun</span>               <span class="p">=</span> <span class="s1">&#39;service.status&#39;</span> <span class="c"># -salt function</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$arg</span>               <span class="p">=</span> <span class="s1">&#39;spooler&#39;</span> <span class="c"># -Service Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span>             <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Set the json body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;{&#34;username&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$userName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;password&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$password</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;eauth&#34;: &#34;pam&#34;,&#34;tgt&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minionName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;fun&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$fun</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;arg&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$arg</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;client&#34;: &#34;local&#34;}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create RESTful API Request</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$url</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$saltServerAddress</span><span class="s2">/run&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Method</span> <span class="p">=</span> <span class="s2">&#34;Post&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Uri</span> <span class="p">=</span> <span class="nv">$url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Body</span> <span class="p">=</span> <span class="nv">$Body</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="nv">@Params</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Service Status | True = Running | False = Stopped</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="nv">$minionName</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Stop Service</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- PowerShell Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minionName</span>        <span class="p">=</span> <span class="s1">&#39;2019DC&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltServerAddress</span> <span class="p">=</span> <span class="s1">&#39;https://192.168.86.110:8000&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$userName</span>          <span class="p">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span>          <span class="p">=</span> <span class="s1">&#39;HackMe!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fun</span>               <span class="p">=</span> <span class="s1">&#39;service.stop&#39;</span> <span class="c"># -salt function</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$arg</span>               <span class="p">=</span> <span class="s1">&#39;spooler&#39;</span> <span class="c"># -Service Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span>             <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Set the json body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;{&#34;username&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$userName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;password&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$password</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;eauth&#34;: &#34;pam&#34;,&#34;tgt&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minionName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;fun&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$fun</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;arg&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$arg</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;client&#34;: &#34;local&#34;}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create RESTful API Request</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$url</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$saltServerAddress</span><span class="s2">/run&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Method</span> <span class="p">=</span> <span class="s2">&#34;Post&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Uri</span> <span class="p">=</span> <span class="nv">$url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Body</span> <span class="p">=</span> <span class="nv">$Body</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="nv">@Params</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Service Stopped | True = Stopped | False = Not Stopped</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="nv">$minionName</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>Disable Service</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># --- PowerShell Code ---</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$minionName</span>        <span class="p">=</span> <span class="s1">&#39;2019DC&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$saltServerAddress</span> <span class="p">=</span> <span class="s1">&#39;https://192.168.86.110:8000&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$userName</span>          <span class="p">=</span> <span class="s1">&#39;root&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span>          <span class="p">=</span> <span class="s1">&#39;HackMe!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fun</span>               <span class="p">=</span> <span class="s1">&#39;service.disable&#39;</span> <span class="c"># -salt function</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$arg</span>               <span class="p">=</span> <span class="s1">&#39;spooler&#39;</span> <span class="c"># -Service Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span>             <span class="p">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Set the json body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;{&#34;username&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$userName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;password&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$password</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;eauth&#34;: &#34;pam&#34;,&#34;tgt&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minionName</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;fun&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$fun</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;arg&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="nv">$arg</span> <span class="p">+</span> <span class="s1">&#39;&#34;,&#34;client&#34;: &#34;local&#34;}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create RESTful API Request</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$url</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$saltServerAddress</span><span class="s2">/run&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Method</span> <span class="p">=</span> <span class="s2">&#34;Post&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Uri</span> <span class="p">=</span> <span class="nv">$url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Body</span> <span class="p">=</span> <span class="nv">$Body</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="nv">@Params</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Service Disabled | True = Disabled | False = Not Disabled</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fetch</span><span class="p">.</span><span class="k">return</span><span class="p">.</span><span class="nv">$minionName</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>I hope the code was helpful to get started.</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>OOTB (Out of the Box) a SaltStack Config Server is NOT setup to use CherryPY to use api calls.</li>
+<li>Using PowerShell Invoke-RestMethod is a great way to automate SaltStack Config.</li>
+<li>The more I use salt with Windows Servers the more I like how it works.  So fast. Many different ways to do automation | configuration Management.</li>
+<li>To get the proper args for a salt function I always test from the CLI.</li>
+<li><a href="https://docs.saltproject.io/en/latest/ref/netapi/all/salt.netapi.rest_cherrypy.html" target="_blank">SaltStack REST_CHERRYPY Documentation</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/topics/eauth/index.html"                       target="_blank">SaltStack EXTERNAL AUTHENTICATION SYSTEM Documentation</a></li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
+<li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
+<li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
+</ul>
+<div style="background-color:#ccffcc; Padding:20px;" >
+When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 </channel>
 </rss>

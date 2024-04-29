@@ -10,7 +10,563 @@
     <pubDate>Sat, 07 Oct 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/</guid>
-    <description><![CDATA[<p><strong>How to Automate the ESXi Host &ldquo;Syslog.global.logHost&rdquo; setting, when using Cloud Proxies.</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to Automate the ESXi Host &ldquo;Syslog.global.logHost&rdquo; setting, when using Cloud Proxies.</strong></p>
+<hr>
+<p>This blog post is part of a series of blog posts that will be created to help you &ldquo;Unlock the Potential&rdquo; of the VMware Aria Products. I want to give you some &ldquo;Real World&rdquo; examples that VMware admins could use everyday to help them with their daily tasks. Hopefully you will learn from my Tips and Tricks.</p>
+<hr>
+<h6 id="vmware-aria-operations-for-logs--saas-version">VMware Aria Operations for Logs | SaaS Version:</h6>
+<p>The Details in this Blog Post were created in October 2023. New VMware Aria Operations for Logs updates are released every month, so the details shown in this Blog Post could change.</p>
+<p>When you use VMware Aria Operations for Logs | SaaS Version, you need to have one or more Cloud Proxies to send the log info from your on-prem vCenter and ESXi Hosts to VMware Cloud Services.  If you have more than (1) Cloud Proxy, there is no automated way built into VMware Aria Operations for Logs to distribute the Cloud Proxy usage. One way to set the vCenter ESXi hosts to use a specific Cloud Proxy, is to use a PowerCLI script. I included some sample scripts in this blog post to help you get started.</p>
+<p><strong>Logic of the PowerCLI script:</strong></p>
+<ul>
+<li>The script will count the number of VMware Cloud Services, Cloud Proxies Specified</li>
+<li>The script will count the number of VMware vCenter ESXi Hosts in the vCenter Specified</li>
+<li>The script will equally distribute the number of vCenter ESXi Hosts per Cloud Proxy</li>
+<li>The script will set the Advanced System Setting &ldquo;Syslog.global.logHost&rdquo; on each ESXi Host</li>
+</ul>
+<hr>
+<p><strong>ESXi Host Advanced System Settings:</strong></p>
+<ul>
+<li>This is how to manually set the &ldquo;Syslog.global.logHost&rdquo; on each ESXi Host</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Cloud Proxies:</strong></p>
+<ul>
+<li>Go to Configuration/Cloud Proxies to see all the Proxies added</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Cloud Proxy Information:</strong></p>
+<ul>
+<li>Cloud Proxy Details like State, CPU, Memory</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>vSphere Integration:</strong></p>
+<ul>
+<li>Go to Configuration/vSphere Integration to see all the vCenters added</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>vCenter Server Configuration:</strong></p>
+<ul>
+<li>vCenter Server Configuration</li>
+<li>You can use this screen to set which Cloud Proxy to use but if you have 100s or 1000s of Hosts, I find it easier to use the script included in this Blog Post.</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="powershell-code">PowerShell Code:</h6>
+<h6 id="set-sysloggloballoghost-value-on-all-hosts">Set “Syslog.global.logHost” value on all Hosts</h6>
+<ul>
+<li>Sample Script to set the &ldquo;Syslog.global.logHost&rdquo; value on each ESXi Host</li>
+<li>The script will balance the usage of the Cloud Proxies</li>
+<li>The script could be scheduled to run every day to maintain the correct settings.</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Set Variable Values to use with Script</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcServer</span>     <span class="p">=</span> <span class="s2">&#34;vcsa8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcUser</span>       <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcPassword</span>   <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (1) syslog setting for each host.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (2) syslog settings for each host.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip.corp.local:514,tcp://DBH-CP-VAOL-01.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (2) syslog settings divided equally between hosts.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip.corp.local:514;udp://vaol-01.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (3) syslog settings divided equally between hosts.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogServers</span> <span class="p">=</span> <span class="s2">&#34;udp://vaol-vip-03.corp.local:514;udp://vaol-vip-02.corp.local:514;udp://vaol-vip-01.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- This example uses (4) syslog settings divided equally between hosts.</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$syslogServers = &#34;udp://vaol-vip-01.corp.local:514;udp://vaol-vip-02.corp.local:514;udp://vaol-vip-03.corp.local:514;udp://vaol-vip-04.corp.local:514&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get list of syslog server specifed and seperated by semicolons. Semicolons were used in case you would want to specify (2) syslog servers seperated by commas.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogServerList</span> <span class="p">=</span> <span class="nv">$syslogServers</span><span class="p">.</span><span class="py">Split</span><span class="p">(</span><span class="s2">&#34;;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogServerList</span> <span class="p">=</span> <span class="nv">$syslogServerList</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;syslog Server List: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$syslogServerCount</span> <span class="p">=</span> <span class="nv">$syslogServerList</span><span class="p">.</span><span class="py">Count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;syslog Server Count: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerCount</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Connect to the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-User</span> <span class="nv">$vcUser</span> <span class="n">-Password</span> <span class="nv">$vcPassword</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$syslogServerCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Get Number of Hosts</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$hostList</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$hostCount</span> <span class="p">=</span> <span class="nv">$hostList</span><span class="p">.</span><span class="py">Count</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Total Number of Hosts</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Host Count: &#34;</span> <span class="p">+</span> <span class="nv">$hostCount</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Calculate how to divide the hosts</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$baseValue</span> <span class="p">=</span> <span class="p">[</span><span class="no">math</span><span class="p">]::</span><span class="n">Floor</span><span class="p">(</span><span class="nv">$hostCount</span> <span class="p">/</span> <span class="nv">$syslogServerCount</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$remainder</span> <span class="p">=</span> <span class="nv">$hostCount</span> <span class="p">%</span> <span class="nv">$syslogServerCount</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Create an array to hold the results</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$syslogProxyNumber</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="mf">1</span><span class="p">..</span><span class="nv">$syslogServerCount</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$baseValue</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$syslogProxyNumber</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Distribute the remainder among the numbers</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-lt</span> <span class="nv">$syslogServerCount</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$remainder</span> <span class="o">-eq</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span> <span class="k">break</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$syslogProxyNumber</span><span class="p">[</span><span class="nv">$i</span><span class="p">]++</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$remainder</span><span class="p">--</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Hosts Per Syslog Group: &#34;</span> <span class="p">+</span> <span class="nv">$syslogProxyNumber</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Highest sysloggroup array value: &#34;</span> <span class="p">+</span> <span class="p">(</span><span class="nv">$syslogProxyNumber</span><span class="p">.</span><span class="py">Count</span> <span class="p">-</span> <span class="mf">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Syslog Group Count: &#34;</span> <span class="p">+</span> <span class="nv">$syslogProxyNumber</span><span class="p">.</span><span class="py">Count</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Calculate the sum</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$sum</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$syslogProxyNumber</span> <span class="p">|</span> <span class="nb">Measure-Object</span> <span class="n">-Sum</span><span class="p">).</span><span class="py">Sum</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Total Hosts to add syslog info: &#34;</span> <span class="p">+</span> <span class="nv">$sum</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$sum</span> <span class="o">-eq</span> <span class="nv">$hostCount</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="s2">&#34;Hosts were divided as equal as posible&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="s2">&#34;Hosts were NOT divided equal. TRY AGAIN!&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="s2">&#34;Only 1 syslog Server was specififed!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$syslogProxyNumberArrayValue</span> <span class="p">=</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$servercountstart</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$serverCountTotal</span> <span class="p">=</span> <span class="nv">$syslogProxyNumber</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Loop thru ESXi Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$esxiName</span> <span class="k">in</span> <span class="nv">$hostList</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Create Server Count Number</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$servercountstartstr</span> <span class="p">=</span> <span class="s1">&#39;0000&#39;</span> <span class="p">+</span> <span class="nv">$servercountstart</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$servercountstartstr</span> <span class="p">=</span> <span class="nv">$servercountstartstr</span><span class="p">[</span><span class="mf">-4</span><span class="p">..</span><span class="mf">-1</span><span class="p">]</span> <span class="n">-join</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Set the syslog Host value on Each ESXi Host</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$syslogServerCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Count: &#34;</span> <span class="p">+</span> <span class="nv">$servercountstartstr</span> <span class="p">+</span> <span class="s2">&#34; | ESXi Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$esxiName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | Proxy Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c"># ----- Set the Syslog.global.logHost value</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;------------- Get-VMHost &#34;</span> <span class="p">+</span> <span class="nv">$esxiName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | Get-AdvancedSetting -Name &#39;Syslog.Global.Loghost&#39; | Set-AdvancedSetting -Value &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span> <span class="p">+</span> <span class="s2">&#34; -Confirm:</span><span class="nv">$false</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># ----- The next line will make the changes. Remove the line comment after you test the script and make sure you are getting the results you want to use.</span>
+</span></span><span class="line"><span class="cl">        <span class="c">#Get-VMHost $esxiName.Name | Get-AdvancedSetting -Name &#39;Syslog.Global.Loghost&#39; | Set-AdvancedSetting -Value $syslogServerList[$syslogProxyNumberArrayValue] -Confirm:$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elseif</span><span class="p">(</span><span class="nv">$syslogServerCount</span> <span class="o">-eq</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Count: &#34;</span> <span class="p">+</span> <span class="nv">$servercountstartstr</span> <span class="p">+</span> <span class="s2">&#34; | ESXi Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$esxiName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | Proxy Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogServerList</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># ----- The next line will make the changes. Remove the line comment after you test the script and make sure you are getting the results you want to use.</span>
+</span></span><span class="line"><span class="cl">        <span class="c">#Get-VMHost $esxiName.Name | Get-AdvancedSetting -Name &#39;Syslog.Global.Loghost&#39; | Set-AdvancedSetting -Value $syslogServerList -Confirm:$false</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Elseif</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Increment Host Count and switch which Proxy to use based on count</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$servercountstart</span><span class="p">++</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$servercountstart</span> <span class="o">-gt</span> <span class="nv">$serverCountTotal</span> <span class="o">-and</span> <span class="nv">$syslogServerCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$servercountstart</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$syslogProxyNumberArrayValue</span><span class="p">++</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$serverCountTotal</span> <span class="p">=</span> <span class="nv">$syslogProxyNumber</span><span class="p">[</span><span class="nv">$syslogProxyNumberArrayValue</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Disconnect from the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="get-current-sysloggloballoghost-value-on-all-hosts">Get current “Syslog.global.logHost” value on all Hosts</h6>
+<ul>
+<li>Here is a sample script that can be used to show the current &ldquo;Syslog.global.logHost&rdquo; values</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Get current sysloghost value on all Hosts ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Set Variable Values to use with Script</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcServer</span>     <span class="p">=</span> <span class="s2">&#34;vcsa8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcUser</span>       <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcPassword</span>   <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- File Name to store data</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$filePath</span> <span class="p">=</span> <span class="s2">&#34;C:\Github\PS-TAM-Lab\syslog-current-info.csv&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Connect to the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-User</span> <span class="nv">$vcUser</span> <span class="n">-Password</span> <span class="nv">$vcPassword</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get list of all Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Create new CSV file</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="nv">$filePath</span> <span class="n">-ItemType</span> <span class="n">File</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- add header to CSV file</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Add-Content</span> <span class="n">-Path</span> <span class="nv">$filePath</span> <span class="n">-Value</span> <span class="s2">&#34;ServerName,syslogName&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get all ESXi Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Output Data to screen and the CSV file</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$hostName</span> <span class="k">in</span> <span class="nv">$hostList</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$syslogInfo</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="n">-Name</span> <span class="nv">$hostName</span><span class="p">.</span><span class="py">Name</span> <span class="p">|</span> <span class="nb">Get-AdvancedSetting</span> <span class="n">-Name</span> <span class="s2">&#34;Syslog.global.logHost&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Entity</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | syslog Name: &#34;</span> <span class="p">+</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Value</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- add info to csv file</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$addContentstr</span> <span class="p">=</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Entity</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34;,&#34;</span> <span class="p">+</span> <span class="nv">$syslogInfo</span><span class="p">.</span><span class="py">Value</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Add-Content</span> <span class="n">-Path</span> <span class="nv">$filePath</span> <span class="n">-Value</span> <span class="nv">$addContentstr</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Disconnect from the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<ul>
+<li>Sample Output from script:</li>
+</ul>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png" title="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-for-logs-syslog-settings/syslog-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="set-sysloggloballoghost-value-to-null-on-all-hosts">Set “Syslog.global.logHost” value to null on all Hosts</h6>
+<ul>
+<li>Sample script if you would ever want to set the &ldquo;Syslog.global.logHost&rdquo; values to null on all the ESXi Hosts.</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Set sysloghost value to null on all Hosts ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Set Variable Values to use with Script</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcServer</span>     <span class="p">=</span> <span class="s2">&#34;vcsa8x.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcUser</span>       <span class="p">=</span> <span class="s2">&#34;administrator@corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vcPassword</span>   <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Connect to the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-User</span> <span class="nv">$vcUser</span> <span class="n">-Password</span> <span class="nv">$vcPassword</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get list of all Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get all ESXi Hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostList</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Output Data to screen and a CSV file.</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$hostName</span> <span class="k">in</span> <span class="nv">$hostList</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Server Name: &#34;</span> <span class="p">+</span> <span class="nv">$hostName</span><span class="p">.</span><span class="py">Name</span> <span class="p">+</span> <span class="s2">&#34; | syslog Name: Set to null&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># ----- Set logserver address to null</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Set-VMHostSysLogServer</span> <span class="n">-SysLogServer</span> <span class="vm">$null</span> <span class="n">-VMHost</span> <span class="nv">$hostName</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Disconnect from the vCenter Server or ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="nv">$vcServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="get-sysloggloballoghost-address-on-a-specific-host">Get “Syslog.global.logHost” address on a specific Host</h6>
+<ul>
+<li>Very simple script to get the &ldquo;Syslog.global.logHost&rdquo; values on a single ESXi host.</li>
+</ul>
+<p><strong>Click arrow to expand the code:</strong><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- Simple Get syslogserver address on a specific Host</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VMHostSysLogServer</span> <span class="n">-VMHost</span> <span class="s1">&#39;esxi8-05.corp.local&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>When you use VMware Aria Operations for Logs | SaaS Version, you may need more than one Cloud Proxy</li>
+<li>If you have more than one Cloud Proxy, you will need a way to balance the usage between the Proxies</li>
+<li>If you have 10s, 100s or 1000s of ESXi Hosts, using a script will be the easiest and quickest way to specify &ldquo;Syslog.global.logHost” values.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>GitHub Repository | Code and Examples to help you get started</title>
@@ -18,7 +574,61 @@
     <pubDate>Sat, 24 Jun 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/github-repository/</guid>
-    <description><![CDATA[<p><strong>GitHub Repository | Code and Examples to help you get started</strong></p>]]></description>
+    <description><![CDATA[<p><strong>GitHub Repository | Code and Examples to help you get started</strong></p>
+<hr>
+<p>Creating a Blog Post every time I want to share a new code example or a new Dashboard Design can take a lot of time. To keep it simple for some items I want to share, I created a <a href="https://github.com/dalehassinger/unlocking-the-potential" target="_blank" rel="noopener noreffer ">GitHub Repository</a>. This will be a nice way for me to quickly add code more often. So go take a look at the <a href="https://github.com/dalehassinger/unlocking-the-potential" target="_blank" rel="noopener noreffer ">GitHub Repository</a>, and check back often. I will continue to do the more detailed Blog Posts, but I will also add a lot of snippets of code to the repository to share with the vCommunity.</p>
+<h6 id="github-repository-name-unlocking-the-potential">GitHub Repository Name: &ldquo;Unlocking The Potential&rdquo;</h6>
+<p>Collection of items for the VMware Aria Admin and Automation | Monitoring | Logging Enthusiast.</p>
+<ul>
+<li>VMware Aria Automation | vRA
+<ul>
+<li>Templates</li>
+<li>abx scripts</li>
+<li>Workflows</li>
+</ul>
+</li>
+<li>VMware Aria Automation Config | SaltStack Config
+<ul>
+<li>state files</li>
+<li>jobs</li>
+</ul>
+</li>
+<li>VMware Aria Operations | vROPS
+<ul>
+<li>Dashboards</li>
+<li>Views</li>
+<li>Super Metrics</li>
+<li>Metric Search Examples</li>
+</ul>
+</li>
+<li>VMware Aria Operations for Logs | Log Insight</li>
+<li>PowerShell
+<ul>
+<li>Scripts</li>
+</ul>
+</li>
+<li>PowerCLI
+<ul>
+<li>Scripts</li>
+</ul>
+</li>
+<li>Ansible
+<ul>
+<li>Playbooks</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h6 id="link-to-github-repository">Link to GitHub Repository:</h6>
+<p><a href="https://github.com/dalehassinger/unlocking-the-potential" target="_blank" rel="noopener noreffer ">GitHub Repository | &ldquo;Unlocking The Potential&rdquo;</a>.</p>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>Rest API calls in VMware Aria Automation with PowerShell</title>
@@ -27,7 +637,210 @@
     <author>Dave Kaber</author>
     <guid>https://www.vcrocs.info/rest-api-calls-vmware-aria-automation/</guid>
     <description><![CDATA[<p><strong>Rest API calls in VMware Aria Automation with PowerShell</strong></p>
-<hr>]]></description>
+<hr>
+<h6 id="use-case">Use Case: </h6>
+<p>I’m often faced with the scenario where a client or colleague are attempting to perform an action and are met with the response that the feature isn’t in a GUI, but there is an API you can call. This scenario is common across the VMware stack of products as it’s not practical to have a button for everything, but it usually leads to the follow up question in some form of “well how do I call that?”. I wanted to write about a recent experience with a colleague as a means of showing one way to accomplish that.</p>
+<p>Before I jump into the details, I wanted to add somewhat of a disclaimer that with any type of automation there are numerous ways to solve a particular problem. Based on my comfort with specific products and scripting languages, what’s below is how I was able to work with the client to address the problem. There is the possibility that another person could accomplish the same task in a different way and none of it is ‘wrong’.</p>
+<p>A colleague came to me and asked about a way to assist a client looking to add several networks into a Network Profile within Cloud Assembly (a component of Aria Automation). While his client could have very easily clicked one-by-one in the UI, that is a tedious operation and runs the risk of human error. Based on the client’s familiarity with PowerShell, we opted to write a script to invoke the necessary API’s using the Invoke-RestMethod PowerShell cmdlet.</p>
+<p>So, to frame up a bit more of the ‘how’, when faced with a scenario like this, we need to have a script that performs three steps:</p>
+<h6 id="steps">Steps:</h6>
+<ol>
+<li>Get your authentication token/header configured</li>
+<li>Find the appropriate URI and use a ‘GET’ method to look at the formatting and to help build a body</li>
+<li>Find the appropriate URI and method (e.g. ‘PATCH’ or ‘POST’) in order to call that API and feed it the necessary information in the body</li>
+</ol>
+<hr>
+<h6 id="step-1">Step 1:</h6>
+<p>So, I need to provide a set of credentials to the CSP login URI. This will give me a refresh token which I can then feed to the IaaS login URI to get my access token. The access token will be what I can use to make the necessary calls into my Aria Automation environment. The URI’s and some more detail are provided in <a href="https://kb.vmware.com/s/article/89129" target="_blank" rel="noopener noreffer ">VMware KB 89129</a>.</p>
+<p> 
+There are some potentially easier methods to authenticate to Aria Automation and invoke a REST API call (like the PowerVRA Module), but for my example below, I used all native PowerShell.<br>
+ </p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c">#BasicInfo:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vraServer</span> <span class="p">=</span> <span class="s2">&#34;vra.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Get Credentials to build auth:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$credential</span> <span class="p">=</span> <span class="nb">Get-Credential</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$username</span> <span class="p">=</span> <span class="nv">$credential</span><span class="p">.</span><span class="py">UserName</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$pass</span> <span class="p">=</span> <span class="nv">$credential</span><span class="p">.</span><span class="py">Password</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$password</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Runtime.InteropServices.Marshal</span><span class="p">]::</span><span class="n">PtrToStringAuto</span><span class="p">([</span><span class="no">System.Runtime.InteropServices.Marshal</span><span class="p">]::</span><span class="n">SecureStringToBSTR</span><span class="p">(</span><span class="nv">$pass</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authBody</span>  <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;username&#34;</span> <span class="p">=</span> <span class="nv">$username</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;password&#34;</span> <span class="p">=</span> <span class="nv">$password</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Build Header:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="s2">&#34;System.Collections.Generic.Dictionary[[String],[String]]&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Accept&#34;</span><span class="p">,</span><span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Content-Type&#34;</span><span class="p">,</span><span class="s2">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Get Refresh Token:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/csp/gateway/am/api/login?access_token&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$refreshToken</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-Body</span> <span class="p">(</span><span class="nv">$authBody</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$refreshToken</span> <span class="p">=</span> <span class="nv">$refreshToken</span><span class="p">.</span><span class="py">refresh_token</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$refreshTokenBody</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;refreshToken&#34;</span> <span class="p">=</span> <span class="nv">$refreshToken</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#Get Access Token:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/login&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$accessToken</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-body</span> <span class="p">(</span><span class="nv">$refreshTokenBody</span> <span class="p">|</span> <span class="nb">ConvertTo-JSON</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$accessToken</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$accessToken</span><span class="p">.</span><span class="py">token</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c">#add access token to Header</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Authorization&#34;</span><span class="p">,</span><span class="nv">$accessToken</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="step-2">Step 2:</h6>
+<p> 
+Now that I have the $accessToken variable set and added to my header, I can make any REST API calls I need.
+ 
+For this example, we wanted to add a bunch of fabric-networks (in vSphere parlance DvPGs) to a network profile. In VMware Aria Automation, these are already available with the addition of my vCenter Cloud Account, just not associated with a network profile.
+ 
+In order to enumerate the available fabric-networks, I am going to take my $header variable with the newly generated $accessToken added and call a ‘Get’ against the /iaas/api/fabric-networks/ URI.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c">#Get Fabric Network Ids:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/fabric-networks&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fabricNetworks</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="p">-</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now that I have a full list, I wanted to isolate the list down to those on a specific Distributed Virtual Switch using the following:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="nv">$dvPGs</span> <span class="p">=</span> <span class="nv">$fabricNetworks</span><span class="p">.</span><span class="py">content</span> <span class="p">|</span> <span class="nb">Where </span><span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">name</span> <span class="o">-like</span> <span class="s1">&#39;*DvPG*&#39;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="step-3">Step 3:</h6>
+<p> 
+Now that I have my list of fabric-networks, I wanted to build a JSON body that I could send to Aria Automation to add them to the network-profile in question. So, I used the following request to pull the necessary info:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c">#Get Network Profiles:</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/network-profiles&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$networkProfiles</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-SkipCertificateCheck</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In my lab I had a single network profile, so if I just run $networkProfiles | ConvertTo-JSON in PowerShell, we get the info we need for our body.</p>
+<p>The fun with this specific example is that the info in the ‘GET’ request is slightly different than how we have to format it for the ‘PATCH’ request. Looking at the SwaggerUI interface (https://&ldquo;YourAriaAutomationServer&rdquo;/iaas/api/swagger) and looking at the Network Profile Section, I can see the URI for the PATCH call (/iaas/api/network-profiles/{id}) and that we need to feed an array of ID’s to a property called ‘fabricNetworkIds’. A couple of other good points to call out is to pay attention to any field or property marked as ‘Required’. If you’re unfamiliar with the SwaggerUI interface, selecting the ‘Model’ link within a Specific URI will give you that information. In my example, I see I need to have the ID for the network profile, the name of the network profile, and the regionID of the network profile.</p>
+<p>(Side note… depending on what is in the REST Body, exercise some caution and testing with a PATCH or PUT command as in this specific case with the NetworkID’s, they will only add what is in the body and remove anything else. Essentially the body replaces what is already there instead of appending to an already existing list.)</p>
+<p>Now that I have my body, we just repeat the process and invoke the call to the appropriate URI. The example below only has a couple of fabricNetworkIds specified, but the actual ask was for several hundred.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span> <span class="p">=</span> <span class="s2">&#34;REST_API&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;id&#34;</span><span class="p">=</span>  <span class="s2">&#34;cce57ddd-d206-9999-870d-25b8775fb365&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;orgId&#34;</span> <span class="p">=</span> <span class="s2">&#34;12131928-3bdd-9999-9e69-3edf5c318a7d&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;customProperties&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;datacenterId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;externalRegionId&#34;</span> <span class="p">=</span> <span class="s2">&#34;Datacenter:datacenter-3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;cloudAccountId&#34;</span> <span class="p">=</span> <span class="s2">&#34;8274acb1-bad2-40cf-1969-e3ed60c16956&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;isolationType&#34;</span> <span class="p">=</span>  <span class="s2">&#34;NONE&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;fabricNetworkIds&#34;</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;fba96959-c0b2-99a6-bb7b-0da4c35b3eaf&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;21a52412-85a3-4b9d-a99b-0aaf19185755&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://&#34;</span> <span class="p">+</span> <span class="nv">$vraServer</span> <span class="p">+</span> <span class="s2">&#34;/iaas/api/network-profiles/&#34;</span> <span class="p">+</span> <span class="nv">$npId</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">PATCH</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-Body</span> <span class="p">(</span><span class="nv">$body</span> <span class="p">|</span> <span class="nb">ConvertTo-JSON</span> <span class="n">-Depth</span> <span class="mf">5</span><span class="p">)</span> <span class="n">-SkipCertificateCheck</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<figure><a class="lightgallery" href="/rest-api-calls-vmware-aria-automation/dave01.png" title="/rest-api-calls-vmware-aria-automation/dave01.png" data-thumbnail="/rest-api-calls-vmware-aria-automation/dave01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<p>The result is beneficial for two reasons.</p>
+<ol>
+<li>My colleague and his client have a way of adding the necessary DvPG’s to their network profile in a methodical way that avoids a lot of clicking.</li>
+<li>The steps and much of the code above are reusable, so whatever the use case you’re attempting to solve for, you don’t have to start from scratch each time.</li>
+</ol>
+<p>Hopefully this example helps anyone who is stuck or just looking for an example to keep in their back pocket of ‘how to’ for when that situation arises.</p>
+<h6 id="guest-blogger">Guest Blogger:</h6>
+<blockquote>
+<p>I want to thank guest Blogger, <strong>Dave Kaber</strong> <a href="https://twitter.com/dave_kaber" target="_blank" rel="noopener noreffer ">@dave_kaber</a>, for taking the time to write this blog post and share with the <strong>#vCommunity</strong>. Hopefully Dave will be sharing some additional content in the future.</p>
+</blockquote>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>The PowerShell Podcast | I was a Guest on the show</title>
@@ -36,7 +849,51 @@
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/the-powershell-podcast/</guid>
     <description><![CDATA[<p><strong>The PowerShell Podcast | I was a Guest on the show</strong></p>
-<hr>]]></description>
+<hr>
+<h6 id="podcast-guest">Podcast Guest:</h6>
+<p>I listen to Podcasts all the time. This past year, I started listening to a new podcast, <strong>&ldquo;The PowerShell Podcast&rdquo;</strong>. This podcast has become one of my favorites that I listen to every week. The hosts (<strong>Andrew Pla</strong> and <strong>Jordan Hammond</strong>) are funny, the content interests me a lot, and the list of guests has been awesome. The guests are people that I have read their books or use their PowerShell Modules to complete automation.</p>
+<p>I thought it would be fun to join the podcast as a guest, to share how I use PowerShell with VMware products. VMware has a PowerShell Module, PowerCLI, that I use with almost all automation that I create. With VMware Aria Automation, you can use PowerShell with Workflows, Actions, and have salt execute PowerShell scripts with state files and functions. So I reached out to the hosts of &ldquo;The PowerShell Podcast&rdquo; and showed my interest to be a guest on the Podcast. They thought that my story would make a good episode, so we scheduled a time to record. The experience to record the podcast episode was great. The behind the scenes was funny. The guests talk to each other the same way they do when when recording an episode. They make you feel comfortable as a guest.</p>
+<p>Hopefully the vCommunity enjoys this episode. I thought this would be another great way to give back to the community and share some information.</p>
+<hr>
+<p>The episode I recorded with &ldquo;The PowerShell Podcast&rdquo; was released on 03/20/2023. Here are the links:</p>
+<ul>
+<li><a href="https://powershellpodcast.podbean.com/e/using-powercli-with-dale-hassinger/" target="_blank" rel="noopener noreffer ">The PowerShell Podcast | &ldquo;Using PowerCLI with Dale Hassinger&rdquo; | on Podbean</a></li>
+<li><a href="https://youtu.be/U8QwsnM4EkQ" target="_blank" rel="noopener noreffer ">The PowerShell Podcast | &ldquo;Using PowerCLI with Dale Hassinger&rdquo; | on Youtube</a></li>
+</ul>
+<hr>
+<h6 id="podcast-discussion">Podcast Discussion:</h6>
+<ul>
+<li>How did I get started with PowerShell</li>
+<li>My career path, CNC Programmer to a VMware TAM</li>
+<li>The VMUG vCommunity and other User Groups</li>
+<li>My favorite PowerShell Module, PowerCLI</li>
+<li>Other PowerShell Modules I like to use.</li>
+</ul>
+<h6 id="link-to-podcast-website">Link to Podcast Website:</h6>
+<ul>
+<li><a href="https://powershellpodcast.podbean.com/" target="_blank" rel="noopener noreffer ">The PowerShell Podcast on Podbean</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PL1mL90yFExsjUS8DRkzfLUcHds7vlxqgM" target="_blank" rel="noopener noreffer ">The PowerShell Podcast on Youtube</a></li>
+</ul>
+<h6 id="hosts-and-show-on-twitter">Hosts and Show on Twitter:</h6>
+<ul>
+<li><a href="https://twitter.com/AndrewPlaTech" target="_blank" rel="noopener noreffer ">Andrew Pla</a></li>
+<li><a href="https://twitter.com/DevOpsJordan" target="_blank" rel="noopener noreffer ">Jordan Hammond</a></li>
+<li><a href="https://twitter.com/PowerShellpod" target="_blank" rel="noopener noreffer ">The PowerShell Podcast</a></li>
+</ul>
+<p><strong>Enjoy the listen!</strong></p>
+<figure><a class="lightgallery" href="/the-powershell-podcast/powercli.jpg" title="/the-powershell-podcast/powercli.jpg" data-thumbnail="/the-powershell-podcast/powercli.jpg" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>Use vCenter TAGs to maintain VM Storage Placement</title>
@@ -44,7 +901,521 @@
     <pubDate>Fri, 27 Jan 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/use-vcenter-tags-to-maintain-vm-storage-placement/</guid>
-    <description><![CDATA[<p><strong>Use vCenter TAGs to maintain VM Storage Placement.</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Use vCenter TAGs to maintain VM Storage Placement.</strong></p>
+<hr>
+<p>A question was recently asked, How can we specify and maintain which DataStore Cluster a VM should use within the VMware vCenter UI? I like using vCenter TAGs for specifying details about VMs, so I thought I would use VMware vCenter TAGs to specify which DataStore Cluster to place a VM.</p>
+<p>I looked at using a Configuration management tool like salt but one of the requirements was to make it easy for the VMware Admin to specify and maintain VM DataStore placement within the VMware vCenter UI.</p>
+<p>I have included sample code that will:</p>
+<ul>
+<li>Create a VMware vCenter TAG Category</li>
+<li>Create a VMware vCenter TAG based on DataStore Cluster Name</li>
+<li>Add the DataStore Cluster VMware vCenter TAG to all VMs within a DataStore cluster</li>
+<li>Verify that each VM has only (1) vCenter DataStore Cluster TAG</li>
+<li>Verify that the VM is in the correct DataStore Cluster. Do a VM move if it is not in correct DataStore Cluster.</li>
+</ul>
+<hr>
+<h6 id="use-case">Use Case:</h6>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a way to specify which DataStore Cluster the VM will use within VMware vCenter UI.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Have a process in place that will maintain which DataStore Cluster will be used with each VM within VMware vCenter.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> If a user moves a VM to a DataStore Cluster that it shouldn&rsquo;t be located, move it back to the correct Datastore Cluster to match the assigned VMware vCenter TAG.</li>
+</ul>
+<h6 id="solution">Solution:</h6>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Create a VMware vCenter TAG for every DataStore Cluster within VMware vCenter.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Assign a VMware vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches VMware vCenter TAG assigned.</li>
+</ul>
+<hr>
+<p><strong>Steps to connect to VMware vCenter:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Script created by: Dale Hassinger</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Script provided for Demo Use Only</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Date: 2023-01-27</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Purpose: Create and Assign vCenter TAGs to be used for VM Storage placement</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Notes: VMs with ISOs attached and Snap Shots may be listed in more than 1 Datastore Cluster</span>
+</span></span><span class="line"><span class="cl"><span class="c"># In my lab I made sure there were no SNAPs or ISOs attached before applying TAGs with Automation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Connect to vCenter ] -----</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="s1">&#39;vCenter.vCROCS.info&#39;</span> <span class="n">-User</span> <span class="s1">&#39;administrator@vCROCS.info&#39;</span> <span class="n">-Password</span> <span class="s1">&#39;HackMe1!&#39;</span> <span class="n">-Force</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-create-a-vmware-vcenter-tag-category">Code to create a VMware vCenter TAG Category:</h6>
+<ul>
+<li>For any custom VMware vCenter TAGs that I create to use with Automation, I use a TAG category &ldquo;Automation&rdquo;.</li>
+<li>You don&rsquo;t need to do this step. You could use a category that already exists within VMware vCenter.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Create vCenter TAG Category ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># New TAG Category Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newCategory</span> <span class="p">=</span> <span class="s1">&#39;Automation&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get all existing vCenter TAG Categories</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allCategory</span> <span class="p">=</span> <span class="nb">Get-TagCategory</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Check to see if category already exists</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allCategory</span> <span class="p">=</span> <span class="nv">$allCategory</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$categoryExists</span> <span class="p">=</span> <span class="nv">$allCategory</span><span class="p">.</span><span class="py">Contains</span><span class="p">(</span><span class="nv">$newCategory</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># If TAG category already exists it will not try to re-create</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$categoryExists</span> <span class="o">-eq</span> <span class="vm">$true</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="s1">&#39;Category Already exists within vCenter!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End if</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Creating New Category within vCenter: &#39;</span> <span class="p">+</span> <span class="nv">$newCategory</span>  
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Create New TAG Category in vCenter</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">New-TagCategory</span> <span class="n">-Name</span> <span class="nv">$newCategory</span> <span class="n">-Cardinality</span> <span class="n">Multiple</span> <span class="n">-Description</span> <span class="s1">&#39;Used with Automation&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Create vCenter TAG Category ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-create-a-vmware-vcenter-tag-for-every-datastore-cluster">Code to create a VMware vCenter TAG for every Datastore Cluster:</h6>
+<ul>
+<li>The code gets all DataStore Cluster Names and creates a VMware vCenter TAG to match DataStore Cluster Name. I prefix the DataStore Cluster Name with &ldquo;TAG-VM-&rdquo;.</li>
+<li>The code does check to see if the VMware vCenter TAG already exists. If the vCenter TAG does exist, it does not try and create a new vCenter TAG.</li>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Create vCenter TAG for every Datastore Cluster ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># New TAG Category Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newCategory</span> <span class="p">=</span> <span class="s1">&#39;Automation&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allDatastoreClusters</span> <span class="p">=</span> <span class="nb">Get-DatastoreCluster</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allDatastoreClusters</span> <span class="p">=</span> <span class="nv">$allDatastoreClusters</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nb">Get-Tag</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nv">$allTAGs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$newTAGs</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Create new TAG Names</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$newTAG</span> <span class="k">in</span> <span class="nv">$allDatastoreClusters</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$newTAGname</span> <span class="p">=</span> <span class="s1">&#39;TAG-VM-&#39;</span> <span class="p">+</span> <span class="nv">$newTAG</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;New TAG Name: &#39;</span> <span class="p">+</span> <span class="nv">$newTAGname</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$newTAGs</span><span class="p">+=</span> <span class="nv">$newTAGname</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Add TAGs to vCenter if they don&#39;t already exist</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$newTAG</span> <span class="k">in</span> <span class="nv">$newTAGs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># Check to see if category already exists</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$TagExists</span> <span class="p">=</span> <span class="nv">$allTAGs</span><span class="p">.</span><span class="py">Contains</span><span class="p">(</span><span class="nv">$newTAG</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nv">$TagExists</span> <span class="o">-eq</span> <span class="vm">$true</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Tag &#39;</span> <span class="p">+</span> <span class="nv">$newTAG</span> <span class="p">+</span> <span class="s1">&#39; already Exists: &#39;</span> <span class="p">+</span> <span class="nv">$TagExists</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Tag &#39;</span> <span class="p">+</span> <span class="nv">$newTAG</span> <span class="p">+</span> <span class="s1">&#39; Exists: &#39;</span> <span class="p">+</span> <span class="nv">$TagExists</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Create New TAG</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Get-TagCategory</span> <span class="n">-Name</span> <span class="nv">$newCategory</span> <span class="p">|</span> <span class="nb">New-Tag</span> <span class="n">-Name</span> <span class="nv">$newTAG</span> <span class="n">-Description</span> <span class="s1">&#39;VM Storage TAG used with Automation&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Create vCenter TAG for every Datastore Cluster ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-add-datastore-cluster-vcenter-tag-to-vms-for-a-specific-datastore-cluster">Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:</h6>
+<ul>
+<li>You specify DataStore Cluster Name. The code with get all VM names and assign the correct VMware vCenter TAG. It will check to see if TAG is already assigned to the VM.</li>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$datastoreCluster</span> <span class="p">=</span> <span class="s1">&#39;DS-CLSTR-03&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$datastoreCluster = &#39;DS-CLSTR-04&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$TAGname</span> <span class="p">=</span> <span class="s1">&#39;TAG-VM-&#39;</span> <span class="p">+</span> <span class="nv">$datastoreCluster</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nb">Get-DatastoreCluster</span> <span class="n">-Name</span> <span class="nv">$datastoreCluster</span> <span class="p">|</span> <span class="nb">Get-VM</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nv">$allVMs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$allVMs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Get existing TAGs assigned to VM</span>
+</span></span><span class="line"><span class="cl">  <span class="c">#$assignedTAGs = &#39;&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="nv">$vm</span> <span class="p">|</span> <span class="nb">Get-TagAssignment</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">Tag</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(!</span><span class="nv">$assignedTAGs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span> <span class="p">+</span> <span class="s1">&#39; has no tags&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">New-TagAssignment</span> <span class="n">-Tag</span> <span class="nv">$TAGname</span> <span class="n">-Entity</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$TagExists</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">Contains</span><span class="p">(</span><span class="nv">$TAGname</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="nv">$TagExists</span> <span class="o">-eq</span> <span class="vm">$false</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">New-TagAssignment</span> <span class="n">-Tag</span> <span class="nv">$TAGname</span> <span class="n">-Entity</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Assigned TAG: &#39;</span> <span class="p">+</span> <span class="nv">$TAGname</span> <span class="p">+</span> <span class="s1">&#39; to VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;TAG: &#39;</span> <span class="p">+</span> <span class="nv">$TAGname</span> <span class="p">+</span> <span class="s1">&#39; already assigned to VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-verify-that-each-vm-only-has-1-datastore-cluster-tag-assigned">Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:</h6>
+<ul>
+<li>The code looks to see if one than (1) DataStore Cluster TAG is assigned.</li>
+<li>If a VM has an iso mounted from a 2nd Datastore that could make (2) TAGs get assigned.</li>
+<li>If a VM was located on a DataStore Cluster and had a SNAP Shot and was moved to a 2nd DataStore Cluster, it could get (2) DataStore Cluster TAGs assigned until the SNAP is Deleted.</li>
+<li>For this use case, I ONLY want (1) Datastore Cluster to be used per VM.</li>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Verify that VM has only (1) DS Cluster TAG ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nb">Get-VM</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nv">$allVMs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allVMs</span> <span class="p">=</span> <span class="nv">$allvms</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="s1">&#39;Starting TAG count check...&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$allVMs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="nv">$vm</span> <span class="p">|</span> <span class="nb">Get-TagAssignment</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">Tag</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$assignedTAGs</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-like</span> <span class="s1">&#39;TAG-VM-DS-CLSTR-*&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$tagCount</span> <span class="p">=</span> <span class="nv">$assignedTAGs</span><span class="p">.</span><span class="py">count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nv">$tagCount</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span> <span class="p">+</span> <span class="s1">&#39; has more than 1 DS Cluter Tag Assigned!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="s1">&#39;TAG count check complete&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Verify that VM has only (1) DS Cluster TAG ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-verify-that-each-vm-is-located-in-the-correct-datastore-cluster-based-in-vcenter-tag">Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:</h6>
+<ul>
+<li>The code gets all the DataStore Cluster VMware vCenter TAGs.</li>
+<li>The code then gets all VMs assigned a TAG and verifies that the VM is located in the correct DataStore Cluster.</li>
+<li>If the VM is NOT located in the DataStore Cluster that matches the vCenter TAG, it moves the VM to the correct DataStore Cluster.</li>
+<li>include code to connect to vCenter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># ----- [ Start Verify that VM is in correct DS Cluster based in TAG ] -----</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$newCategory</span> <span class="p">=</span> <span class="s1">&#39;Automation&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nb">Get-Tag</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nv">$allTAGs</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$allTAGs</span> <span class="p">=</span> <span class="nv">$allTAGs</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-like</span> <span class="s1">&#39;TAG-VM-DS-CLSTR-*&#39;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$tag</span> <span class="k">in</span> <span class="nv">$allTAGs</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;--- TAG: &#39;</span> <span class="p">+</span> <span class="nv">$tag</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$dsCluster</span> <span class="p">=</span> <span class="nv">$tag</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$dsCluster</span> <span class="p">=</span> <span class="nv">$dsCluster</span><span class="p">.</span><span class="py">replace</span><span class="p">(</span><span class="s1">&#39;TAG-VM-&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$tagfilter</span> <span class="p">=</span> <span class="nv">$newCategory</span> <span class="p">+</span> <span class="s1">&#39;/&#39;</span> <span class="p">+</span> <span class="nv">$tag</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$vmList</span> <span class="p">=</span> <span class="nb">Get-TagAssignment</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Tag</span> <span class="o">-like</span> <span class="nv">$tagfilter</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">$vmList</span> <span class="p">=</span> <span class="nv">$vmList</span><span class="p">.</span><span class="py">Entity</span><span class="p">.</span><span class="py">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">foreach</span><span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$vmlist</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$currentDSCluster</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="nv">$vm</span> <span class="p">|</span> <span class="nb">Get-DatastoreCluster</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$currentDSCluster</span> <span class="p">=</span> <span class="nv">$currentDSCluster</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$currentDSCluster</span> <span class="o">-eq</span> <span class="nv">$dsCluster</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;Already in DS Cluster: &#39;</span> <span class="p">+</span> <span class="nv">$dsCluster</span> <span class="p">+</span> <span class="s1">&#39; - VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$output</span> <span class="p">=</span> <span class="s1">&#39;*Moving to DS Cluster: &#39;</span> <span class="p">+</span> <span class="nv">$dsCluster</span> <span class="p">+</span> <span class="s1">&#39; - VM: &#39;</span> <span class="p">+</span> <span class="nv">$vm</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Output</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nb">Move-VM</span> <span class="n">-VM</span> <span class="nv">$vm</span> <span class="n">-Datastore</span> <span class="nv">$dsCluster</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># End foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end foreach</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Verify that VM is in correct DS Cluster based in TAG ] -----</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-to-disconnect-cd-from-all-vms">Code to Disconnect CD from all VMs:</h6>
+<ul>
+<li>include code to connect to vCenter</li>
+<li>Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a iso attached. Here is the code to disconnect all iso images mounted to a VM.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Code Disconnect CD from all VMs</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">PowerState</span> <span class="err">–</span><span class="n">eq</span> <span class="err">“</span><span class="n">PoweredOn</span><span class="err">”</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Get-CDDrive</span> <span class="p">|</span> <span class="nb">Set-CDDrive</span> <span class="n">-NoMedia</span> <span class="n">-Confirm:</span><span class="vm">$False</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>You can use this code to maintain VM placement, but you could also use this code to move VMs to new DatStore Clusters. Assign a new TAG to the VM and the process will do a Storage vMotion for you. Great way to move VMs if you get a new SAN.</li>
+<li>I located the VM based on DataStore Cluster. You could change code slightly and specify a specific DataStore.</li>
+<li>If there is a member on your VMware Team that changes which DataStore Cluster a VM should be located for no reason, you could also fix the issue by giving that Team Member 30 days in the electric chair so they don&rsquo;t do it again. :)</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write about <b>vRealize Aria Automation</b>,  I always say there are many ways to accomplish the same task.  This article is just one way that you could accomplish this task.  I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete automation as long as it completes successfully and consistently.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>NSX-T security Tags and PowerShell</title>
@@ -52,7 +1423,267 @@
     <pubDate>Fri, 31 Dec 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/powershell-nsx-t/</guid>
-    <description><![CDATA[<p><strong>How to work with NSX-T security Tags using PowerShell</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to work with NSX-T security Tags using PowerShell</strong></p>
+<hr>
+<h6 id="powershell-code-to-work-with-nsx-t-apis">PowerShell Code to work with NSX-T APIs</h6>
+<p>Included some examples of code to Automate adding/removing NSX-T Security Tags from VMs. Also some code to show which VMs are assigned to a Security TAG or which TAGs are assigned to a VM.</p>
+<p>Code Samples:</p>
+<ul>
+<li>Add NSX-T Security TAG to a VM.</li>
+<li>Remove NSX-T Security TAG from a VM.</li>
+<li>Show All VMs assigned to a NSX-T Security TAG</li>
+<li>Show All Security TAGs assigned to a VM</li>
+</ul>
+<p>Hope you find these snippets of code useful.</p>
+<hr>
+<p>Click to expand code:
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Connect to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenterName</span> <span class="p">=</span> <span class="s1">&#39;vCenter.vCrocs.info&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="nv">$vCenterName</span> <span class="n">-Credential</span> <span class="nv">$cred</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="p">*</span> <span class="n">-Force</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Start NSX-T</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start Add a Single NSX-T TAG to VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Add code to allow untrusted SSL certs</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Use when connecting to NSX-T Server and running from a Windows Computer</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Add-Type</span> <span class="p">@</span><span class="s2">&#34; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System.Net; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System.Net.Security; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    using System.Security.Cryptography.X509Certificates; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    public class ServerCertificateValidationCallback 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    { 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        public static void Ignore() 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        { 
+</span></span></span><span class="line"><span class="cl"><span class="s2">            ServicePointManager.ServerCertificateValidationCallback +=  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                delegate 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                ( 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    Object obj,  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    X509Certificate certificate,  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    X509Chain chain,  
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    SslPolicyErrors errors 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                ) 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                { 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    return true; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                }; 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        } 
+</span></span></span><span class="line"><span class="cl"><span class="s2">    } 
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;</span><span class="p">@</span>  
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">ServerCertificateValidationCallback</span><span class="p">]::</span><span class="n">Ignore</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ This section connects you to vCenter ] ------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenterName</span> <span class="p">=</span> <span class="s1">&#39;vCenter.vCROCS.info&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="nv">$vCenterName</span> <span class="n">-Credential</span> <span class="nv">$cred</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to vCenter and fetch virtual machine info.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmInfo</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="n">-Name</span> <span class="n">DBH</span><span class="p">-</span><span class="mf">213</span> <span class="p">|</span> <span class="nb">Get-View</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ This section defines the API header ] ------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Set Username/Password info for API</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$user</span> <span class="p">=</span> <span class="s1">&#39;srv_vRA_NSXT@vCROCS.info&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$nsxpassword</span> <span class="p">=</span> <span class="s1">&#39;VMware!1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$pair</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$user</span><span class="p">)</span><span class="s2">:</span><span class="p">$(</span><span class="nv">$nsxpassword</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$encodedCredentials</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Convert</span><span class="p">]::</span><span class="n">ToBase64String</span><span class="p">([</span><span class="no">System.Text.Encoding</span><span class="p">]::</span><span class="n">ASCII</span><span class="p">.</span><span class="py">GetBytes</span><span class="p">(</span><span class="nv">$Pair</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$headers</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span> <span class="n">Authorization</span> <span class="p">=</span> <span class="s2">&#34;Basic </span><span class="nv">$encodedCredentials</span><span class="s2">&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmid</span> <span class="p">=</span> <span class="nv">$vm</span><span class="p">.</span><span class="py">Config</span><span class="p">.</span><span class="py">InstanceUuid</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newtag</span> <span class="p">=</span> <span class="s1">&#39;UST.SM.UBUNTU_SERVER&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$JSON</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">{
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;external_id&#34;: &#34;</span><span class="nv">$vmid</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;tags&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="sh">        {&#34;scope&#34;: &#34;&#34;, &#34;tag&#34;: &#34;</span><span class="nv">$newtag</span><span class="sh">&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="sh">    ]
+</span></span></span><span class="line"><span class="cl"><span class="sh">}
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$posturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/api/v1/fabric/virtual-machines?action=add_tags&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$posturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Body</span> <span class="nv">$JSON</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Add a Single TAG ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start Get NSX-T TAGs assigned to VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmid</span> <span class="p">=</span> <span class="nv">$vm</span><span class="p">.</span><span class="py">Config</span><span class="p">.</span><span class="py">InstanceUuid</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$geturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/api/v1/fabric/virtual-machines?external_id=</span><span class="nv">$vmid</span><span class="s2">&amp;included_fields=tags&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$getrequest</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$geturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$currenttags</span> <span class="p">=</span> <span class="nv">$getrequest</span><span class="p">.</span><span class="py">results</span><span class="p">.</span><span class="py">tags</span><span class="p">.</span><span class="py">Tag</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$currenttags</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Get NSX-T TAGs assigned to VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start remove NSX-T TAG from VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmid</span> <span class="p">=</span> <span class="nv">$vm</span><span class="p">.</span><span class="py">Config</span><span class="p">.</span><span class="py">InstanceUuid</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$newtag</span> <span class="p">=</span> <span class="s1">&#39;UST.SM.UBUNTU_SERVER&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$JSON</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">{
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;external_id&#34;: &#34;</span><span class="nv">$vmid</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &#34;tags&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="sh">        {&#34;scope&#34;: &#34;&#34;, &#34;tag&#34;: &#34;</span><span class="nv">$newtag</span><span class="sh">&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="sh">    ]
+</span></span></span><span class="line"><span class="cl"><span class="sh">}
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$posturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/api/v1/fabric/virtual-machines?action=remove_tags&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$posturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Body</span> <span class="nv">$JSON</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End remove NSX-T TAG from VM ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Start Get VMs assigned to a TAG NSX-T ] --------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$geturl</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$nsxmanager</span><span class="s2">/policy/api/v1/infra/tags/effective-resources?scope=&amp;tag=UST.SM.UBUNTU_SERVER&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$result</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$geturl</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Body</span> <span class="nv">$JSON</span> <span class="n">-ContentType</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="nv">$result</span><span class="p">.</span><span class="py">results</span><span class="p">.</span><span class="py">target_display_name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End Get VMs assigned to a TAG NSX-T ] --------------------------------------------------</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>Very easy to automate NSX-T Security TAG processes after you learn the urls.</li>
+<li>NSX-T API documentation is easily accessed and well documented.</li>
+</ul>
+<hr>
+<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank" rel="noopener noreffer ">SaltStack Cheat Sheet</a></li>
+<li><a href="https://docs.saltproject.io/en/getstarted/" target="_blank" rel="noopener noreffer ">SaltStack Tutorials</a></li>
+<li><a href="https://docs.saltproject.io/en/latest/contents.html" target="_blank" rel="noopener noreffer ">SaltStack Documentation</a></li>
+<li><a href="https://saltstackcommunity.slack.com" target="_blank" rel="noopener noreffer ">SaltStack Community Slack Channel</a></li>
+</ul>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>Open Ports | Zero Trust</title>
@@ -60,7 +1691,72 @@
     <pubDate>Sat, 24 Apr 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/check-ports/</guid>
-    <description><![CDATA[<p><strong>How to check if ports are open to a remote server</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to check if ports are open to a remote server</strong></p>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>Use PowerShell to see if ports are open to a remote server.</p>
+<p>Living in a zero trust environment can be challenging. Here is some code that I have been using to test for open ports from a Windows server to any type of destination. Just change PortNumber and Destination for your use case.</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Powershell" data-lang="Powershell"><span class="line"><span class="cl"><span class="nv">$PortNumber</span> <span class="p">=</span> <span class="s1">&#39;443&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Destination</span> <span class="p">=</span> <span class="s1">&#39;Server.vCrocs.info&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$socket</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Net</span><span class="p">.</span><span class="py">Sockets</span><span class="p">.</span><span class="py">TcpClient</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$socket</span><span class="p">.</span><span class="py">Connect</span><span class="p">(</span><span class="nv">$Destination</span><span class="p">,</span><span class="nv">$PortNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$socket</span><span class="p">.</span><span class="n">Connected</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$PortOpened</span> <span class="p">=</span> <span class="s1">&#39;Port: &#39;</span> <span class="p">+</span> <span class="nv">$PortNumber</span> <span class="p">+</span> <span class="s1">&#39; to &#39;</span> <span class="p">+</span> <span class="nv">$Destination</span> <span class="p">+</span><span class="s1">&#39; is Open! :)&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$socket</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$PortOpened</span> <span class="p">=</span> <span class="s1">&#39;Port: &#39;</span> <span class="p">+</span> <span class="nv">$PortNumber</span> <span class="p">+</span> <span class="s1">&#39; to &#39;</span> <span class="p">+</span> <span class="nv">$Destination</span> <span class="p">+</span><span class="s1">&#39; IS NOT Open! :(&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span>  <span class="nv">$PortOpened</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="linux-commands">Linux Commands</h6>
+<p>If you work with VMware vRealize Suite of appliances here are some commands (curl and Netcat) that can be used with Linux OS to test if ports are open to destination servers.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">curl -v telnet://server01.vCROCS.info:443
+</span></span><span class="line"><span class="cl">nc -ztv server01.vCROCS.info <span class="m">443</span> -w <span class="m">3</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<p>Article Updated: 2021-04-24</p>]]></description>
 </item>
 <item>
     <title>Add disk to a Remote Windows Server | VMware VM</title>
@@ -68,7 +1764,91 @@
     <pubDate>Sun, 19 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/add-drives/</guid>
-    <description><![CDATA[<p><strong>Add disk to a Remote Windows Server | VMware VM</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Add disk to a Remote Windows Server | VMware VM</strong></p>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>Powershell code to add disk to a Remote Windows Server | VMware VM:</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#The Following code shows how to add a New Drive, bring drive online, initialize and format:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Connect to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">vCenter</span><span class="p">.</span><span class="py">vCROCS</span><span class="p">.</span><span class="py">info</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Add new drive to VM</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-HardDisk</span> <span class="n">-VM</span> <span class="nv">$VMNAME</span> <span class="n">-CapacityGB</span> <span class="nv">$DISKSIZEGB</span> <span class="n">-StorageFormat</span> <span class="n">Thin</span> <span class="n">-Controller</span> <span class="err">‘</span><span class="n">SCSI</span> <span class="n">Controller</span> <span class="mf">1</span><span class="err">’</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Make disk online</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">Set-Disk</span> <span class="mf">2</span> <span class="n">-isOffline</span> <span class="vm">$false</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Initialize disk</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">Initialize-Disk</span> <span class="mf">2</span> <span class="n">-PartitionStyle</span> <span class="n">GPT</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Create Partition</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">New-Partition</span> <span class="n">-DiskNumber</span> <span class="mf">2</span> <span class="n">-UseMaximumSize</span> <span class="n">-DriveLetter</span> <span class="n">E</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Format drive</span>
+</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$VMNAME</span> <span class="n">-scriptblock</span> <span class="p">{</span><span class="nb">Format-Volume</span> <span class="n">-DriveLetter</span> <span class="n">E</span> <span class="n">-FileSystem</span> <span class="n">NTFS</span> <span class="n">-NewFileSystemLabel</span> <span class="err">‘</span><span class="n">Data</span><span class="err">’</span> <span class="n">-AllocationUnitSize</span> <span class="mf">16384</span> <span class="n">-Confirm:</span><span class="vm">$false</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#-------------------------------------------------------------------------</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#The Following Code will show disk “Allocation Unit Size” on a remote Windows Server:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$C</span> <span class="p">=</span> <span class="nb">Invoke-Command</span> <span class="n">-ComputerName</span> <span class="nv">$VMname</span> <span class="p">{</span><span class="nb">Get-WmiObject</span> <span class="n">-Class</span> <span class="n">Win32_Volume</span> <span class="n">-Filter</span> <span class="err">“</span><span class="n">DriveLetter</span> <span class="p">=</span> <span class="err">‘</span><span class="n">C:</span><span class="err">&#39;”</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">BLOCKSIZE</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$C_AllocationUnitSize</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$C</span><span class="p">.</span><span class="n">BLOCKSIZE</span><span class="p">/</span><span class="mf">1024</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$C_AllocationUnitSize</span> <span class="p">=</span> <span class="err">‘</span><span class="n">Disk</span> <span class="n">Allocation</span> <span class="n">Unit</span> <span class="n">Size</span><span class="err">:</span> <span class="err">‘</span> <span class="p">+</span> <span class="nv">$C_AllocationUnitSize</span> <span class="p">+</span> <span class="err">‘</span><span class="n">k</span><span class="err">’</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$C_AllocationUnitSize</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>One way to do Automation in a Zero Trust Environment</title>
@@ -76,7 +1856,120 @@
     <pubDate>Sun, 19 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/automation-zero-trust/</guid>
-    <description><![CDATA[<p><strong>Automation with Zero Trust</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Automation with Zero Trust</strong></p>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>There are two PowerCLI commands that have become my best friends in a Zero Trust Environment.</p>
+<ul>
+<li>Invoke-VMScript - Use to run scripts on VMs.</li>
+<li>Copy-VMGuestFile - Use to copy files to/from VMs.</li>
+</ul>
+<p>In this example you can use Invoke-VMScript to run commands on a VM to install Trend Deep Security. All commands run with VM in a zero trust state.</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$VMName</span> <span class="p">=</span> <span class="s1">&#39;VM Name&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Copy file to the VM</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;wget https://server01.vCrocs.info/software/agent/Ubuntu_18.04/x86_64/agent.deb&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run the install of the agent that was copied.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;sudo -S &lt;&lt;&lt; &#34;Password1&#34; sudo apt install ./agent.deb&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run command to reset the agent</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;sudo -S &lt;&lt;&lt; &#34;Password1&#34; sudo /opt/ds_agent/dsa_control -r&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run command to config the agent</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;sudo -S &lt;&lt;&lt; &#34;Password1&#34; sudo /opt/ds_agent/dsa_control -a dsm://server01.vCrocs.info:4120/&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run command to get service staus.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;service ds_agent status&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$DeepSecurityServiceStatus</span> <span class="p">=</span> <span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>In this example you can use Copy-VMGuestFile to copy a file to a VM and use invoke-VMScript to run commands on a VM to install agent. All commands run with VM in a zero trust state.</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$VMName</span> <span class="p">=</span> <span class="s1">&#39;VM Name&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Copy-VMGuestFile</span> <span class="n">-Source</span> <span class="n">G:</span><span class="p">\</span><span class="n">splunkforwarder</span><span class="p">-</span><span class="mf">8.0</span><span class="p">.</span><span class="mf">1</span><span class="p">-</span><span class="n">6db836e2fb9e-linux</span><span class="p">-</span><span class="mf">2.6</span><span class="n">-amd64</span><span class="p">.</span><span class="py">deb</span> <span class="n">-Destination</span> <span class="p">/</span><span class="n">home</span><span class="p">/</span><span class="n">vcrocsadmin</span> <span class="n">-VM</span> <span class="nv">$VMNAME</span> <span class="n">-LocalToGuest</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcredsmadmin</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run the install of the agent that was copied.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;sudo -S &lt;&lt;&lt; &#34;Password1&#34; sudo apt install ./splunkforwarder-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run command to config the agent</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;sudo -S &lt;&lt;&lt; &#34;Password1&#34; sudo /opt/splunkforwarder/bin/splunk enable boot-start --accept-license --answer-yes --no-prompt --seed-passwd Password1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run command to config the agent</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;sudo -S &lt;&lt;&lt; &#34;Password1&#34; sudo /opt/splunkforwarder/bin/splunk set deploy-poll server01.vCrocs.info:8089&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Run command to get service staus.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$PSText</span> <span class="p">=</span> <span class="s1">&#39;sudo -S &lt;&lt;&lt; &#34;Password1&#34; service splunkd status&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Invoke-VMScript</span> <span class="n">-VM</span> <span class="nv">$VMName</span> <span class="n">-ScriptType</span> <span class="n">Bash</span> <span class="n">-ScriptText</span> <span class="nv">$PSText</span> <span class="n">-GuestCredential</span> <span class="nv">$SSHcred</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">ScriptOutput</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 <item>
     <title>PowerCLI Getting Started</title>
@@ -84,7 +1977,82 @@
     <pubDate>Sun, 19 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/powercli-getting-started/</guid>
-    <description><![CDATA[<p><strong>PowerCLI Basics</strong></p>]]></description>
+    <description><![CDATA[<p><strong>PowerCLI Basics</strong></p>
+<hr>
+<h6 id="powercli-code">PowerCLI Code</h6>
+<p>Some basic PowerCLI commands to get started. I have some simple scripts in production that are 10 lines of code and I have some scripts that do a lot that are 2500 lines of code. Take the time to learn all the commands that are available and you will be amazed at what you can automate.</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Here are some basic commands that you can keep adding additional code</span>
+</span></span><span class="line"><span class="cl"><span class="c">#and get more precise on what you want to see.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Connect to a vCenter</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Connect-VIServer</span> <span class="n">vcsa</span><span class="p">.</span><span class="py">domain</span><span class="p">.</span><span class="py">org</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Disconnect from vCenter and not be prompted</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">vcsa</span><span class="p">.</span><span class="py">domain</span><span class="p">.</span><span class="py">org</span> <span class="n">-confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Get VM Listing</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs sorted by Name</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs sorted by Name that are Powered On</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Powerstate</span> <span class="o">-eq</span> <span class="s1">&#39;PoweredOn&#39;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#Shows all VMs sorted by Name, that are Powered On and only shows</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Name,MemoryGB,NumCpu</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Powerstate</span> <span class="o">-eq</span> <span class="s1">&#39;PoweredOn&#39;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span><span class="p">,</span><span class="n">MemoryGB</span><span class="p">,</span><span class="n">NumCpu</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="why-use-powercli">Why use PowerCLI</h6>
+<p>Picking a scripting language for automation can be a hard decision. My #1 reason to use PowerShell was because of the PowerCLI PowerShell module that VMware maintains. You can use the PowerCLI module to automate almost all of the VMware Products.</p>
+<p>There hasn&rsquo;t been any automation process that I have not been able to use PowerShell to automate. PowerShell has a great collection of modules available to use with different products. PowerShell is also easy to use with Products that make APIs available.</p>
+<hr>
+<p><strong>Happy Scripting!</strong></p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 </channel>
 </rss>

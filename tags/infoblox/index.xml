@@ -10,7 +10,41 @@
     <pubDate>Sun, 14 Jun 2020 00:00:00 &#43;0000</pubDate>
     <author>Dan Grove</author>
     <guid>https://www.vcrocs.info/infoblox/</guid>
-    <description><![CDATA[<p><strong>Infoblox 1.1 plugin for vRA 8.1</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Infoblox 1.1 plugin for vRA 8.1</strong></p>
+<hr>
+<p>I recently setup the Infoblox 1.1 plugin for vRA 8.1 and ran into an interesting challenge that I thought I would share. The setup of the plugin is straight forward; follow the documentation and you’ll likely be set. However, if you use custom DNS views in Infoblox (internal, external, etc.) then some additional configuration is required that’s not easily identified. Out of the box, the Infoblox IPAM integration comes with only a few default properties. I left these values in place when creating my first VM build blueprint but the <strong>Infoblox_AllocateIP</strong> action would always fail. Action Run logs under the Extensibility tab are a great way to troubleshoot. They were displaying the following error:</p>
+<figure><a class="lightgallery" href="/infoblox/infoblox-01.png" title="/infoblox/infoblox-01.png" data-thumbnail="/infoblox/infoblox-01.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>The fix for this issue is to add a custom property called <strong>Infoblox.IPAM.Network.dnsView</strong> and set the appropriate value. This property needs to be added in both the integration settings as well as in the blueprint.</p>
+<h6 id="integration-settings">Integration Settings:</h6>
+<figure><a class="lightgallery" href="/infoblox/infoblox-02.png" title="/infoblox/infoblox-02.png" data-thumbnail="/infoblox/infoblox-02.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<h6 id="blueprint">Blueprint:</h6>
+<figure><a class="lightgallery" href="/infoblox/infoblox-03.png" title="/infoblox/infoblox-03.png" data-thumbnail="/infoblox/infoblox-03.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>Once you complete these steps, you’ll find that the <strong>Infoblox_AllocateIP</strong> action will successfully complete.</p>
+<figure><a class="lightgallery" href="/infoblox/infoblox-04.png" title="/infoblox/infoblox-04.png" data-thumbnail="/infoblox/infoblox-04.png" data-sub-html="<h2>Click to see Larger Image</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p>For the record, the ability to test deployments without actually kicking off a build is fantastic. I confirmed that the test was accurate by running a deployment and verifying that an IP was assigned and a DNS record was registered.</p>
+<p>Hope this helps.</p>
+<p><strong>Dan Grove</strong></p>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>]]></description>
 </item>
 </channel>
 </rss>

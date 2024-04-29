@@ -10,7 +10,40 @@
     <pubDate>Sun, 18 Feb 2024 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/aria-operations-text-display-widget-vmrc/</guid>
-    <description><![CDATA[<p><strong>How to use the VMware Aria Operations and a Text Display Widget to launch VMRC</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to use the VMware Aria Operations and a Text Display Widget to launch VMRC</strong></p>
+<hr>
+<h6 id="vmware-aria-operations">VMware Aria Operations</h6>
+<p>I recently had the opportunity to work together on a Blog Post, <a href="https://www.brockpeterson.com/post/launch-vmrc-from-aria-operations" target="_blank" rel="noopener noreffer ">Launch VMRC from Aria Operations</a>, with <a href="https://www.brockpeterson.com/" target="_blank" rel="noopener noreffer ">Brock Peterson</a>.</p>
+<hr>
+<ul>
+<li><a href="https://www.brockpeterson.com/post/launch-vmrc-from-aria-operations" target="_blank" rel="noopener noreffer ">Link to Blog Post</a></li>
+</ul>
+<hr>
+<p>During my time as a VMware customer, I had the opportunity to connect with Brock through my account executive, <a href="https://www.linkedin.com/in/stevelieberson/" target="_blank" rel="noopener noreffer ">Steve Lieberson</a>. Whenever I sought an in-depth understanding of Aria Operations, Steve would arrange a session with Brock. These interactions left me aspiring for a similar position at VMware. My contributions to VMware included participating in customer reference calls, where I eagerly shared my expertise in the Aria Suite with Healthcare Organizations, aiding them in embarking on their journey in Automation, Monitoring, or Logging. Eventually, I secured a role at VMware, allowing me to collaborate daily with Brock and the incredible VMware Cloud Foundation Specialists team, focusing on Automation, Monitoring, and Logging. The camaraderie and collective expertise of this team is truly remarkable. Working within a team that boasts a variety of role models is an great experience.</p>
+<p>The blog post begins with an intriguing scenario where Brock, responding to a customer&rsquo;s query about launching the VMRC client to display a VM&rsquo;s console within Aria Operations (a functionality not native to the product), highlighted the collaborative spirit of the team. Having previously created a similar dashboard as a customer, I offered to replicate it in my lab area for Brock, emphasizing the team&rsquo;s culture of sharing existing solutions and code. Brock liked what I created in my lab and suggested that we share this knowledge with the vCommunity by creating a Blog, recognizing the potential interest from other customers in implementing such a solution. This shows the team&rsquo;s commitment to collaboration and knowledge sharing.</p>
+<p>Please explore the blog post to witness the exceptional outcomes a great team can achieve. Enjoy!</p>
+<hr>
+<figure><a class="lightgallery" href="/aria-operations-text-display-widget-vmrc/vmrc.gif" title="/aria-operations-text-display-widget-vmrc/vmrc.gif" data-thumbnail="/aria-operations-text-display-widget-vmrc/vmrc.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>All the source code for this Blog is saved in my GitHub Repository. Click on the links below.</p>
+<hr>
+<h6 id="links-to-resources-for-this-blog-post">Links to resources for this Blog Post:</h6>
+<ul>
+<li><a href="https://www.brockpeterson.com/post/launch-vmrc-from-aria-operations" target="_blank" rel="noopener noreffer ">Brock Peterson Blog Post | Launch VMRC from Aria Operations</a>.</li>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/vmrc" target="_blank" rel="noopener noreffer ">Source code used for this Blog Post.</a></li>
+</ul>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<hr>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details</title>
@@ -18,7 +51,78 @@
     <pubDate>Fri, 26 Jan 2024 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/</guid>
-    <description><![CDATA[<p><strong>How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group</strong></p>
+<hr>
+<h6 id="vmware-aria-operations">VMware Aria Operations</h6>
+<p>VMware Aria Operations 8.14.1 was used for this Blog Post. When new versions of VMware Aria Operations are released, the code or process may need to be changed.</p>
+<hr>
+<p>I was recently asked how to create a VMware Aria Operations Dashboard that groups VMs together by vCenter TAGs. IE: If there is 100 VMs in vCenter that have a TAG Named &ldquo;Servers-DB&rdquo;, they wanted to see the CPU, Memory, Disk Space, and Critical Alerts Totals for all VMs with that vCenter TAG. They have many vCenter TAGs and each TAG would be on a single line with only Total Values shown.</p>
+<p>See the screenshot that shows the final Dashboard Design.</p>
+<hr>
+<h6 id="dashboard-design">Dashboard Design</h6>
+<ul>
+<li>The left side of the Dashboard shows all the Custom Groups that were created based on vCenter TAGs. The values shown on each row are the Metric Totals for all VMs that have the same vCenter TAG.</li>
+<li>The left side is a View so that all the data can be exported as a CSV file.</li>
+<li>The right side of the Dashboard is a view that shows the VM details. The right side is optional. I added the right side to show that the Super Metrics were calculating the metric totals correct.</li>
+<li>Each metric shown requires a Super Metric to Sum the values within the Custom Group.</li>
+<li>Each row shown requires a Custom Group to define which vCenter TAG to use.</li>
+<li>Watch the videos below to see the details on how to create this Dashboard.</li>
+</ul>
+<hr>
+<h6 id="screen-shot-of-dashboard">Screen Shot of Dashboard</h6>
+<figure><a class="lightgallery" href="/aria-operations-vcenter-tags-vm-info/vm-info-vcenter-tags-02.png" title="/aria-operations-vcenter-tags-vm-info/vm-info-vcenter-tags-02.png" data-thumbnail="/aria-operations-vcenter-tags-vm-info/vm-info-vcenter-tags-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>To group VMs together in VMware Aria Operations based on vCenter TAGs, you use Custom Groups. Custom Groups have a group type. I created (2) new Group Types for this Dashboard. I named one Group Type &ldquo;Applications&rdquo; and one Group Type &ldquo;All-APPs&rdquo;. &ldquo;All-APPs&rdquo; is the Parent Group and &ldquo;Applications&rdquo; is the child group.</p>
+<hr>
+<p>Watch video to see how to define VMware Aria Operations Custom Group membership based on a vCenter TAG Name:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/gt099N3DpXU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<p>To show the Metric Totals of each Custom Group, we created Super Metrics to sum the value of all the VMs within the Custom Group. If you were only using one vCenter TAG and one Custom Group, you would not need to do this. We wanted to show the Metric Values of a 100+ vCenter TAGs and each vCenter TAG would be on a separate line. That is why we created the Super Metrics.</p>
+<p>Watch video to see how to create VMware Aria Operations Super Metrics to total Virtual Machine Metrics:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/MpyVlj4whvc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<p>To show all the Custom Groups names and Super Metric values we created a View. Main reason to create the View was to be able to export the data as a CSV file.</p>
+<p>Watch video to see how to create VMware Aria Operations View that shows the Custom Groups with VM metric totals:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/mqODM3-6LCA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<h6 id="lessons-learned-and-acknowledgements">Lessons Learned and acknowledgements:</h6>
+<ul>
+<li>Thank You to <a href="https://www.BrockPeterson.com" target="_blank" rel="noopener noreffer ">Brock Peterson</a> on providing input on how to get metric value totals by using Super Metrics.</li>
+<li>Thank You to my customer for the challenging question. I did not create a Dashboard like this before. I am glad we were able to create a Dashboard that answered your request and I am able to share the technique with the vCommunity.</li>
+<li>You CAN group VMs in VMware Aria Operations together by using vCenter TAGs and total the Metric Values on a single line within a List View.</li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>VMware Aria Operations | Servicenow | Management Pack</title>
@@ -26,7 +130,534 @@
     <pubDate>Fri, 22 Dec 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/aria-operations-servicenow-mp-cmdb/</guid>
-    <description><![CDATA[<p><strong>How to use the VMware Aria Operations | Servicenow | Management Pack to add information to the Servicenow CMDB</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to use the VMware Aria Operations | Servicenow | Management Pack to add information to the Servicenow CMDB</strong></p>
+<hr>
+<h6 id="blog-update">Blog Update:</h6>
+<p>I presented the content from this Blog at a <strong>TECH BYTES</strong> session on February 9th, 2024. 150 people registered for the webinar and there was a lot of interest with the ServiceNow Management Pack (MP). We received good feedback from the attendees on the capabilities of the MP.</p>
+<hr>
+<h6 id="vmware-aria-operations">VMware Aria Operations</h6>
+<p>VMware Aria Operations 8.14.1 and Servicenow MP (Management Pack) 9.0 was used for this Blog Post. When new versions of VMware Aria Operations or the MP are released, the code or process may need to be changed.</p>
+<p>All the source code for this Blog is saved in my GitHub Repository. Click on the links within the blog to access the code.</p>
+<hr>
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-01.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-01.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>I wanted to share how I setup the Servicenow Management Pack in my lab to update a Servicenow CMDB (Configuration Management DataBase). The VMware Documentation covers the process well. I wanted to cover a couple of steps to help make the process easier.</p>
+<hr>
+<p>I followed the instructions exactly as listed in the PDF link below.</p>
+<p><a href="/aria-operations-servicenow-mp-cmdb/servicenow-cmdb-sync-only-configuration.pdf" rel="">Instructions to setup Servicenow to allow the MP to send data to CMDB | Click Here to View PDF</a></p>
+<p>For the Servicenow user permissions I did the following:</p>
+<ul>
+<li>Created a Servicenow user named LPU (Least Privilege User)</li>
+<li>Created a Servicenow Role and named it vROPS_MP</li>
+<li>Added the user to the role.</li>
+<li>Added the role to all the Servicenow ACLs listed in the document. If there were more than one ACL with the same name with read permissions, I used the newest ACL. I did not add to all ACLs with the same name.</li>
+<li>I gave the role “read” and “edit_ci_relations” to the tables listed in the document.</li>
+<li>I used the moid_populate_only.json config that is OOTB (Out of the Box) with no changes to start to make sure everything was working correct.</li>
+</ul>
+<p>When I added the account to the management pack in Aria Operations, it did a good job to let me know if everything was set up correctly in Servicenow and if the json config file was setup correct. I had a permission wrong and it showed me what was wrong when I did a Validate Connection. I fixed the permission like it showed me and then everything worked. My lab data is now showing up in Servicenow CMDB.</p>
+<hr>
+<p>Management Pack Config screen:
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<p>Management Pack Config screen (Validate Connection | Failed). Shows the field name is incorrect:
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<p>Management Pack Config screen (Validate Connection | Success):
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure></p>
+<hr>
+<p>OOTB, the config files can be found here on the VMware Aria Operations Appliance:<br>
+The config file will go here: /usr/lib/vmware-vcops/user/plugins/inbound/servicenow_adapter3/work<br>
+The templates are located at: /usr/lib/vmware-vcops/user/plugins/inbound/servicenow_adapter3/conf/config_samples</p>
+<hr>
+<p>Here is the moid_populate_only.json with no changes.</p>
+<p><strong>Click arrow to expand the code:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;cmdbSync&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;syncMode&#34;</span><span class="p">:</span> <span class="s2">&#34;POPULATE_ONLY&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;objectIdentifierSource&#34;</span><span class="p">:</span> <span class="s2">&#34;MOID&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>After I verified everything was working with OOTB settings, I wanted to add some additional data to the Servicenow CMDB. The VM (virtual machine) IP address is not sent to Servicenow CMDB with default settings. Here is the json file I have in my lab to  send VM IP and Host CPU info.</p>
+<p><strong>Click arrow to expand the code:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;cmdbSync&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;syncMode&#34;</span><span class="p">:</span> <span class="s2">&#34;POPULATE_ONLY&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;objectIdentifierSource&#34;</span><span class="p">:</span> <span class="s2">&#34;MOID&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;additionalColumns&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;builtInHostSystem&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;cmdbColumn&#34;</span><span class="p">:</span> <span class="s2">&#34;cpu_name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;vropsType&#34;</span><span class="p">:</span> <span class="s2">&#34;PROPERTY&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;vropsField&#34;</span><span class="p">:</span> <span class="s2">&#34;cpu|cpuModel&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;builtInVirtualMachine&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;cmdbColumn&#34;</span><span class="p">:</span> <span class="s2">&#34;guest_os_fullname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;vropsType&#34;</span><span class="p">:</span> <span class="s2">&#34;PROPERTY&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;vropsField&#34;</span><span class="p">:</span> <span class="s2">&#34;summary|guest|fullName&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;cmdbColumn&#34;</span><span class="p">:</span> <span class="s2">&#34;ip_address&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;vropsType&#34;</span><span class="p">:</span> <span class="s2">&#34;PROPERTY&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;vropsField&#34;</span><span class="p">:</span> <span class="s2">&#34;summary|guest|ipAddress&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>In the VMware documentation it says to use the vropsField name in the json config file but I did not see where it told you how to get the vropsField name. Here are some examples on how to get the vROPS field names.</p>
+<hr>
+<p>vROPS VM Field Names available (PowerShell Script):</p>
+<p><strong>Click arrow to expand the code:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$opsURL</span>      <span class="p">=</span> <span class="s2">&#34;https://vao-ent.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsUsername</span> <span class="p">=</span> <span class="s2">&#34;admin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsPassword</span> <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmName</span>      <span class="p">=</span> <span class="s2">&#34;LINUX-U-170&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authSource</span>  <span class="p">=</span> <span class="s2">&#34;local&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get Aria Operations token</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/auth/token/acquire?_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bodyHashtable</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">username</span> <span class="p">=</span> <span class="nv">$opsUsername</span>
+</span></span><span class="line"><span class="cl">    <span class="n">authSource</span> <span class="p">=</span> <span class="nv">$authSource</span>
+</span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="p">=</span> <span class="nv">$opsPassword</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Convert the hashtable to a JSON string</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$bodyHashtable</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$token</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Content-Type&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-Body</span> <span class="nv">$body</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#$token.token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$authorization</span> <span class="p">=</span> <span class="s2">&#34;OpsToken &#34;</span> <span class="p">+</span> <span class="nv">$token</span><span class="p">.</span><span class="py">token</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$authorization</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get the VM Operations identifier</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri = &#34;$opsURL/suite-api/api/resources?maintenanceScheduleId=&amp;name=$vmName&amp;page=0&amp;pageSize=1000&amp;_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/resources?name=</span><span class="nv">$vmName</span><span class="s2">&amp;page=0&amp;pageSize=1000&amp;_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$identifier</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Authorization&#34;</span> <span class="p">=</span> <span class="nv">$authorization</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#$identifier</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$identifier</span> <span class="p">=</span> <span class="nv">$identifier</span><span class="p">.</span><span class="py">resourceList</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$json</span> <span class="p">=</span> <span class="nv">$identifier</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Convert the JSON string to a PowerShell object</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$data</span> <span class="p">=</span> <span class="nv">$json</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Search for the object where resourceKindKey is &#34;VirtualMachine&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$targetResourceKindKey</span> <span class="p">=</span> <span class="s2">&#34;VirtualMachine&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$matchedObject</span> <span class="p">=</span> <span class="nv">$data</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">resourceKey</span><span class="p">.</span><span class="py">resourceKindKey</span> <span class="o">-eq</span> <span class="nv">$targetResourceKindKey</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># If a matching object is found, output the identifier</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$matchedObject</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vmIdentifier</span> <span class="p">=</span> <span class="vm">$</span><span class="p">(</span><span class="nv">$matchedObject</span><span class="p">.</span><span class="n">identifier</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#Write-Output $($matchedObject.identifier)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="s2">&#34;No VirtualMachine resourceKindKey found&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get Field Names and Values</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/resources/properties?resourceId=</span><span class="nv">$vmidentifier</span><span class="s2">&amp;_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$resourcePropertiesList</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Authorization&#34;</span> <span class="p">=</span> <span class="nv">$authorization</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$outPut</span> <span class="p">=</span> <span class="nv">$resourcePropertiesList</span><span class="p">.</span><span class="py">resourcePropertiesList</span><span class="p">.</span><span class="py">property</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$outPut</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>vROPS Host Field Names available (PowerShell Script):</p>
+<p><strong>Click arrow to expand the code:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$opsURL</span>      <span class="p">=</span> <span class="s2">&#34;https://vao-ent.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsUsername</span> <span class="p">=</span> <span class="s2">&#34;admin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsPassword</span> <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostName</span>      <span class="p">=</span> <span class="s2">&#34;esxi8-04.corp.local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authSource</span>  <span class="p">=</span> <span class="s2">&#34;local&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get Aria Operations token</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/auth/token/acquire?_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Create body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bodyHashtable</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">username</span> <span class="p">=</span> <span class="nv">$opsUsername</span>
+</span></span><span class="line"><span class="cl">    <span class="n">authSource</span> <span class="p">=</span> <span class="nv">$authSource</span>
+</span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="p">=</span> <span class="nv">$opsPassword</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Convert the hashtable to a JSON string</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$bodyHashtable</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$token</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Content-Type&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-Body</span> <span class="nv">$body</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#$token.token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$authorization</span> <span class="p">=</span> <span class="s2">&#34;OpsToken &#34;</span> <span class="p">+</span> <span class="nv">$token</span><span class="p">.</span><span class="py">token</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$authorization</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get the VM Operations identifier</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/resources?name=</span><span class="nv">$hostName</span><span class="s2">&amp;page=0&amp;pageSize=1000&amp;_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$identifier</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Authorization&#34;</span> <span class="p">=</span> <span class="nv">$authorization</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#$identifier</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$identifier</span> <span class="p">=</span> <span class="nv">$identifier</span><span class="p">.</span><span class="py">resourceList</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$json</span> <span class="p">=</span> <span class="nv">$identifier</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Convert the JSON string to a PowerShell object</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$data</span> <span class="p">=</span> <span class="nv">$json</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$data</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Search for the object where resourceKindKey is &#34;VirtualMachine&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$targetResourceKindKey</span> <span class="p">=</span> <span class="s2">&#34;Hostsystem&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$matchedObject</span> <span class="p">=</span> <span class="nv">$data</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">resourceKey</span><span class="p">.</span><span class="py">resourceKindKey</span> <span class="o">-eq</span> <span class="nv">$targetResourceKindKey</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># If a matching object is found, output the identifier</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$matchedObject</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vmIdentifier</span> <span class="p">=</span> <span class="vm">$</span><span class="p">(</span><span class="nv">$matchedObject</span><span class="p">.</span><span class="n">identifier</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#Write-Output $($matchedObject.identifier)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End If</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Output</span> <span class="s2">&#34;No VirtualMachine resourceKindKey found&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Get Field Names and Values</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/resources/properties?resourceId=</span><span class="nv">$vmidentifier</span><span class="s2">&amp;_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$resourcePropertiesList</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Authorization&#34;</span> <span class="p">=</span> <span class="nv">$authorization</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$outPut</span> <span class="p">=</span> <span class="nv">$resourcePropertiesList</span><span class="p">.</span><span class="py">resourcePropertiesList</span><span class="p">.</span><span class="py">property</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span> <span class="nv">$outPut</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>Here is the results of running the PowerShell scripts to get the vropsField names. The column &ldquo;name&rdquo; is what you need to use in the json config file.</p>
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-02.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-02.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>If you don&rsquo;t want to use the PowerSHell Scripts to get the VMware Aria Operations field names, watch this YouTube video to see the steps I used to get the field names using the VMware Aria Operations APIs.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/bGcDJ12lc0s" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<p>The cmdbColumn name info that needs included in the json config file is in Servicenow. Watch this YouTube video to see the steps I used to get the Servicenow column names to use with the json config file.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/Br4EVSJCLxE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<p>Example of how Servicenow CMDB will look with IP Address sent from VMware Aria Operation Management Pack.</p>
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-03.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-03.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>Another Example of how Servicenow CMDB will look with IP Address sent from VMware Aria Operation Management Pack.</p>
+<figure><a class="lightgallery" href="/aria-operations-servicenow-mp-cmdb/snow-mp-04.png" title="/aria-operations-servicenow-mp-cmdb/snow-mp-04.png" data-thumbnail="/aria-operations-servicenow-mp-cmdb/snow-mp-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="links-to-resources-about-vmware-aria-operations--servicenow--management-pack">Links to resources about VMware Aria Operations | Servicenow | Management Pack:</h6>
+<ul>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Management-Packs/Servicenow" target="_blank" rel="noopener noreffer ">Source code used in this Blog Post.</a></li>
+<li><a href="https://www.brockpeterson.com/post/updated-vrtvs-management-pack-for-servicenow" target="_blank" rel="noopener noreffer ">Brock Peterson Blog Post | Updated vRTVS Management Pack for ServiceNow</a>. This Blog Post does a great job discussing how to send VMware Aria Operations Alerts to Servicenow.</li>
+<li><a href="https://docs.vmware.com/en/VMware-Aria-Operations-for-Integrations/9.0/Management-Pack-for-ServiceNow/GUID-271D9F75-15C7-4395-96B1-EF024A1485C0.html" target="_blank" rel="noopener noreffer ">VMware Aria Operations Servicenow Management Pack documentation.</a></li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>Unlocking the Potential | VMware Aria Operations | October 2023 PowerBlock</title>
@@ -34,7 +665,53 @@
     <pubDate>Wed, 25 Oct 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-powerblock-2023-10/</guid>
-    <description><![CDATA[<p><strong>Unlocking the Power of VMware Aria Operations: A Comprehensive Guide</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Unlocking the Power of VMware Aria Operations: A Comprehensive Guide</strong></p>
+<hr>
+<h6 id="a-comprehensive-guide">A Comprehensive Guide:</h6>
+<p><a href="https://www.linkedin.com/in/christopherkusek/" target="_blank" rel="noopener noreffer ">Christopher Kusek</a> and I teamed up to create this PowerBlock video, aimed at showcasing some of the new VMware Aria Operations features that have been in high demand among customers. In this video, we&rsquo;ll be sharing valuable VMware Aria Operations Tips and Tricks.</p>
+<p>Our PowerBlock Agenda was inspired by conversations with VMware customers. When they expressed their surprise by saying, &lsquo;We didn&rsquo;t know you could do that,&rsquo; we recognized the need to create this PowerBlock to share our insights with the vCommunity.</p>
+<p>We invite you to take a moment to watch the video, as we&rsquo;re confident you&rsquo;ll discover some insightful new tips and tricks to enhance your VMware Aria experience.</p>
+<hr>
+<h6 id="video-content">Video Content:</h6>
+<ul>
+<li>Learn how to set a home Dashboard and give some examples</li>
+<li>Learn about text display Widget use cases like VMware Cloud Services Status, Zoom Status, Weather</li>
+<li>Learn how Automation Central can cleanup Snaps and skip VMs if a specific vCenter TAG is added to VM, reboot VMs, Power on/off Cloud Native VMs</li>
+<li>Learn how to change “Snapshot Age older than” value in Automation Central</li>
+<li>Learn how a single Dashboard can monitor vCenter and Cloud Native VMs</li>
+<li>Learn about View Usage</li>
+</ul>
+<hr>
+<h6 id="youtube-video">YouTube Video:</h6>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/2I9NsNpgy9E" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<h6 id="thank-you">Thank You:</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i> <i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>I want to extend my gratitude to Christopher Kusek for inviting me to collaborate on this video, which we are excited to share on his YouTube channel.</li>
+<li>Christopher has been a mentor to me from the moment I stepped into VMware. In my very first week at the company, even before we became colleagues on the same team, Christopher reached out to me and initiated a Zoom session. He expressed his genuine commitment to ensuring my success at VMware and offered valuable insights and guidance. Now that we&rsquo;re both part of the same team, Christopher&rsquo;s support continues to be an asset in my daily journey. Throughout one&rsquo;s career, there are individuals who leave a lasting impact, and Christopher Kusek has played that role in mine. I will forever appreciate his guidance and cherish the friendship we&rsquo;ve built.</li>
+<li>In this video, I&rsquo;d like to acknowledge that some of the knowledge I&rsquo;m sharing today was by fellow members of my team. We have a Slack channel where mutual support is a way of life. The culture within my team is nothing short of remarkable; it&rsquo;s the most collaborative environment I&rsquo;ve ever been a part of. Here, everyone is genuinely invested in each other&rsquo;s success, always ready to extend a helping hand.</li>
+<li>I want to express my gratitude to Ron Singler and Aaron Dunbrow for recognizing my passion for the VMware Aria Suite of Products and extending me the opportunity to join the exceptional team at VMware. Being a part of this team as a Senior Cloud Solutions Architect has been an incredibly rewarding journey.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>Unlocking the Potential | VMware Aria Operations | Automation Central | Snapshot Age</title>
@@ -42,7 +719,41 @@
     <pubDate>Mon, 16 Oct 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snapshot-age/</guid>
-    <description><![CDATA[<p><strong>How to change “Snapshot Age older than” value in VMware Aria Operations | Automation Central.</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to change “Snapshot Age older than” value in VMware Aria Operations | Automation Central.</strong></p>
+<hr>
+<h6 id="vmware-aria-operations--automation-central">VMware Aria Operations | Automation Central:</h6>
+<p>The question <strong>&ldquo;How to change “Snapshot Age older than” value in VMware Aria Operations | Automation Central&rdquo;</strong> has been asked several times recently, so I created a video to show you how to change the value.</p>
+<p>Watch the video on my YouTube Channel to see the steps to change the “Snapshot Age older than” value for Automation Central.</p>
+<hr>
+<h6 id="youtube-video">YouTube Video:</h6>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/NzFFQgDlrfo" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>Out of the Box the “Snapshot Age older than” is set to 7 days within VMware Aria Operations.</li>
+<li>You can change the “Snapshot Age older than” value within Optimize|Reclaim|Settings.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>Unlocking the Potential | VMware Aria Operations | Automation Central | VM Snaps</title>
@@ -50,7 +761,80 @@
     <pubDate>Sat, 13 May 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-snap-cleanup/</guid>
-    <description><![CDATA[<p><strong>Adding &ldquo;DoNotDelete&rdquo; to a VM Snap Name to control if Auto Deleted.</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Adding &ldquo;DoNotDelete&rdquo; to a VM Snap Name to control if Auto Deleted.</strong></p>
+<hr>
+<h6 id="vmware-aria-operations-812-released">VMware Aria Operations 8.12 Released:</h6>
+<p>With the release of VMware Aria Operations 8.12, &ldquo;Snapshot Name&rdquo; was added to &ldquo;Delete old snapshots&rdquo;.</p>
+<hr>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png" title="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="delete-old-snapshots">Delete old snapshots:</h6>
+<p>Adding &ldquo;Snapshot Name&rdquo; to &ldquo;Delete old snapshots&rdquo; in Automation Central may seem like a small change but it adds a lot of Power to the process. This change allows you to create a Job to run everyday that will delete all Snaps on VMs EXCEPT Snaps that have &ldquo;DoNotDelete&rdquo; in the name.</p>
+<hr>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> You could also do the opposite with this process. You can have the job only delete Snapshots where the Snap Name contains the text &ldquo;AutoDelete&rdquo;.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png" title="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>I prefer using the method to auto delete all old VM snaps, unless you tell me not to. After being a VMware administrator for many years, I have seen to many VMs running with snaps older that 30 days or even with multiple snaps running and each snap 60+ days old. That is NOT best practice. VM Snaps are NOT Backups. Using Automation Central within VMware Aria Operations helps you keep your environment running better and helps you follow some best practice rules.</p>
+<hr>
+<h6 id="schedule-report-history-amd-jobs">Schedule, Report, History amd Jobs</h6>
+<p>Here are the screens you will see in Automation Central, Schedule, Report, History amd Jobs.</p>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Schedule:  Nice calendar view of all scheduled jobs.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Report: Shows you how much storage you were able to re-claim by deleting old snaps.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> History: Shows you every time a Snap was deleted with details.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Jobs: List of all Jobs you created.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif" title="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-snap-cleanup/aria-operations-02.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>Using the VMware Aria Operations Automation Central is a great way to keep snapshots cleaned up on VMs.</li>
+<li>Add the text &ldquo;DoNotDelete&rdquo; to the Snap Name, makes an easy way to save Snaps that shouldn&rsquo;t be auto deleted.</li>
+<li>Overall nice new feature added to VMware Aria Operations 8.12.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<h6 id="links-i-found-to-be-very-helpful">Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://blogs.vmware.com/management/2023/04/whats-new-in-vmware-aria-operations-8-12.html" target="_blank">VMware Blog: What’s New in VMware Aria Operations 8.12</a></li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 <item>
     <title>Unlocking the Potential | VMware Aria Operations | Metric Search</title>
@@ -58,7 +842,243 @@
     <pubDate>Sat, 06 May 2023 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/unlocking-the-potential-vmware-aria-operations-metric-searching/</guid>
-    <description><![CDATA[<p><strong>Example metric queries to help you with &ldquo;Real World&rdquo; questions.</strong></p>]]></description>
+    <description><![CDATA[<p><strong>Example metric queries to help you with &ldquo;Real World&rdquo; questions.</strong></p>
+<hr>
+<p>This blog post is the start of a series of blog posts that will be created to help you &ldquo;Unlock the Potential&rdquo; of the VMware Aria Products. I want to give you some &ldquo;Real World&rdquo; examples that VMware admins could use everyday to help them with their daily tasks. Hopefully you will learn from my Tips and Tricks.</p>
+<hr>
+<h6 id="vmware-aria-operations-812-released">VMware Aria Operations 8.12 Released:</h6>
+<p>With the release of VMware Aria Operations 8.12, Metric Searches was added to the product.</p>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>I always like to create Dashboards with VMware Aria Operations to show metric information that I think is important to a VMware Admin. I think that metric searches will help provide a lot of information that is not included on existing or custom dashboards. Metric Searches will also allow non-admins, that don&rsquo;t have permission to create dashboards and views, to see specific information to help troubleshoot an issue.</p>
+<p>I really like how the results of a metric search will stack and then you can scroll to see what item has the highest value. You can change the results to show different time ranges. After results are displayed you can also start defining the parents of the results.</p>
+<hr>
+<h6 id="search-examples">Search Examples:</h6>
+<p>In this example the metric search found all VMs with CPU|Ready ms &gt; 750 ms. When search is complete you can define the search further by selecting the parent host.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU|Ready ms &gt; 750 ms
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="n">Ready</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">750</span><span class="w"> </span><span class="n">ms</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/metric-search-02.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<p>Now lets take the search used above and define the results further by specifying host or cluster.
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU|Ready ms &gt; 750 ms WHERE the host is esx-02a.corp.local
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="n">Ready</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">750</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="n">childOf</span><span class="w"> </span><span class="n">esx</span><span class="o">-</span><span class="mi">02</span><span class="n">a</span><span class="p">.</span><span class="n">corp</span><span class="p">.</span><span class="k">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU|Ready ms &gt; 750 ms WHERE the cluster is Cluster-01
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="n">Ready</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">750</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="n">childOf</span><span class="w"> </span><span class="k">Cluster</span><span class="o">-</span><span class="mi">01</span></span></span></code></pre></td></tr></table>
+</div>
+</div></p>
+<hr>
+<h6 id="example-metric-searches-for-vms">Example Metric Searches for VMs:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with CPU usage % greater than 90
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">90</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with Memory usage % greater than 90
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">90</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs with Snap Shots older than 2 days
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">{</span><span class="n">Disk</span><span class="w"> </span><span class="k">Space</span><span class="o">|</span><span class="n">Snapshot</span><span class="o">|</span><span class="n">Age</span><span class="w"> </span><span class="p">(</span><span class="n">Days</span><span class="p">)</span><span class="err">}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Find All VMs running longer than 30 days. Shows VMs not patched if you do monthly patching.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">{</span><span class="k">System</span><span class="o">|</span><span class="n">OS</span><span class="w"> </span><span class="n">Uptime</span><span class="w"> </span><span class="k">Second</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="err">}</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="err">{</span><span class="k">Day</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="err">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU and Memory usage for all VMs with a specific string in the name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Name</span><span class="w"> </span><span class="k">contains</span><span class="w"> </span><span class="s1">&#39;rocky&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU and Memory usage for a specific VM
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Name</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;DBH-196&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU and Memory usage for all VMs in a specific Cluster
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Summary</span><span class="o">|</span><span class="n">Parent</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;Cluster-02&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="example-metric-searches-for-hosts">Example Metric Searches for Hosts:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts with High CPU Usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts with High Memory Usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts In Maintenance Mode
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Runtime</span><span class="o">|</span><span class="n">Maintenance</span><span class="w"> </span><span class="k">State</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;inMaintenance&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts where Health is less than 100%
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Badge</span><span class="o">|</span><span class="n">Health</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Hosts where Workload is greater than 75%
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Badge</span><span class="o">|</span><span class="n">Workload</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">75</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show CPU Usage and Memory Usage for all Hosts In a Specific Cluster
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Host</span><span class="w"> </span><span class="k">System</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Memory</span><span class="o">|</span><span class="k">Usage</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">Summary</span><span class="o">|</span><span class="n">Parent</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;Cluster-01&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="example-metric-searches-for-clusters">Example Metric Searches for Clusters:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Clusters where DRS was turned off
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">DRS</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Enabled</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="n">Compute</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">Cluster</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">DRS</span><span class="w"> </span><span class="n">Configuration</span><span class="o">|</span><span class="n">Enabled</span><span class="w"> </span><span class="k">equals</span><span class="w"> </span><span class="s1">&#39;false&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="example-metric-searches-for-datastores">Example Metric Searches for Datastores:</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-SQL" data-lang="SQL"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Datastores where Capacity used is greater than 75%
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Datastore</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Capacity</span><span class="o">|</span><span class="n">Used</span><span class="w"> </span><span class="k">Space</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">75</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="c1">--- Show Datastores where Health is less than 100%
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Datastore</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">Badge</span><span class="o">|</span><span class="n">Health</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p>These metric search query examples should give you some good ideas of what you can do. Take these examples and change to make your own. Have Fun!</p>
+<hr>
+<p>Metric search queries remind me of one of my favorite quotes:<br>
+Your thought process is the most powerful automation tool you’ll ever have! - Cody De Arkland</p>
+<hr>
+<h6 id="stream-deck">Stream Deck</h6>
+<p>If you&rsquo;re thinking to yourself, I don&rsquo;t want to have to type or copy/paste these metric searches everyday, I have a solution. STREAM DECK! If you ever wanted an excuse to spend the money for a Stream Deck, now is the time! You can program the buttons of a Stream Deck to do the searches. There is a button type in the Stream Deck called text. Enter the metric search query as the text. See the screen shot below. AWESOME!</p>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p>Demo of doing Multiple Searches in a row and all the text is entered by the Stream Deck.</p>
+<figure><a class="lightgallery" href="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif" title="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif" data-thumbnail="/unlocking-the-potential-vmware-aria-operations-metric-searching/stream-deck-02.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="how-to-use-the-kebab-menu-to-go-to-the-troubleshooting-workbench">How to use the Kebab menu to go to the TroubleShooting Workbench</h6>
+<p>Here is an example of all the steps above and then also choosing the kebab menu to go to the troubleshooting workbench.</p>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Enter Search String with Stream Deck</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Review the VMs for high CPU</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Change the date range to 7 days to see how long the VM has been at 100% usage</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Go to the troubleshooting WorkBench to see why the CPU usage is so high.</li>
+</ul>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/BfPx0JUcw9o" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<h6 id="lessons-learned">Lessons Learned</h6>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Lessons Learned:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>Metric Searches are a great way to do get some quick data.</li>
+<li>Nice way for non-admins to get data they want to see that isn&rsquo;t included in OOTB (Out of The Box) Dashboards and Views.</li>
+<li>Quick way to be able to stack metrics from multiple objects.</li>
+<li>Metric Search adds a way to extend how you would use Aria Operations Standard version, because you can not create custom dashboards and views.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<h6 id="links-i-found-to-be-very-helpful">Links I found to be very helpful:</h6>
+<ul>
+<li><a href="https://blogs.vmware.com/management/2023/04/metric-based-search.html" target="_blank">VMware Blog: Metric-Based Search Improvements in VMware Aria Operations</a></li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
 </item>
 </channel>
 </rss>

@@ -10,7 +10,72 @@
     <pubDate>Sat, 24 Apr 2021 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/check-ports/</guid>
-    <description><![CDATA[<p><strong>How to check if ports are open to a remote server</strong></p>]]></description>
+    <description><![CDATA[<p><strong>How to check if ports are open to a remote server</strong></p>
+<hr>
+<h6 id="powershell-code">PowerShell Code</h6>
+<p>Use PowerShell to see if ports are open to a remote server.</p>
+<p>Living in a zero trust environment can be challenging. Here is some code that I have been using to test for open ports from a Windows server to any type of destination. Just change PortNumber and Destination for your use case.</p>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Powershell" data-lang="Powershell"><span class="line"><span class="cl"><span class="nv">$PortNumber</span> <span class="p">=</span> <span class="s1">&#39;443&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Destination</span> <span class="p">=</span> <span class="s1">&#39;Server.vCrocs.info&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$socket</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Net</span><span class="p">.</span><span class="py">Sockets</span><span class="p">.</span><span class="py">TcpClient</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$socket</span><span class="p">.</span><span class="py">Connect</span><span class="p">(</span><span class="nv">$Destination</span><span class="p">,</span><span class="nv">$PortNumber</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$socket</span><span class="p">.</span><span class="n">Connected</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$PortOpened</span> <span class="p">=</span> <span class="s1">&#39;Port: &#39;</span> <span class="p">+</span> <span class="nv">$PortNumber</span> <span class="p">+</span> <span class="s1">&#39; to &#39;</span> <span class="p">+</span> <span class="nv">$Destination</span> <span class="p">+</span><span class="s1">&#39; is Open! :)&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$socket</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end if</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$PortOpened</span> <span class="p">=</span> <span class="s1">&#39;Port: &#39;</span> <span class="p">+</span> <span class="nv">$PortNumber</span> <span class="p">+</span> <span class="s1">&#39; to &#39;</span> <span class="p">+</span> <span class="nv">$Destination</span> <span class="p">+</span><span class="s1">&#39; IS NOT Open! :(&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># end else</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Output</span>  <span class="nv">$PortOpened</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h6 id="linux-commands">Linux Commands</h6>
+<p>If you work with VMware vRealize Suite of appliances here are some commands (curl and Netcat) that can be used with Linux OS to test if ports are open to destination servers.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">curl -v telnet://server01.vCROCS.info:443
+</span></span><span class="line"><span class="cl">nc -ztv server01.vCROCS.info <span class="m">443</span> -w <span class="m">3</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<ul>
+<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
+<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<p>Article Updated: 2021-04-24</p>]]></description>
 </item>
 </channel>
 </rss>
