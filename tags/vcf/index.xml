@@ -1,0 +1,100 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>VCF - Tag - vCROCS</title>
+        <link>https://www.vcrocs.info/tags/vcf/</link>
+        <description>VCF - Tag - vCROCS</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</managingEditor>
+            <webMaster>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 31 May 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.vcrocs.info/tags/vcf/" rel="self" type="application/rss+xml" /><item>
+    <title>Aria Operations | vCenter Observability</title>
+    <link>https://www.vcrocs.info/vcenter-observability/</link>
+    <pubDate>Fri, 31 May 2024 00:00:00 &#43;0000</pubDate>
+    <author>Dale Hassinger</author>
+    <guid>https://www.vcrocs.info/vcenter-observability/</guid>
+    <description><![CDATA[<p><strong>How to monitor vCenter VM(s) within your environment</strong></p>
+<hr>
+<blockquote>
+<p>&ldquo;It&rsquo;s really hard to design products by focus groups. A lot of times, people don&rsquo;t know what they want until you show it to them.” - Steve Jobs</p>
+</blockquote>
+<hr>
+<h6 id="vcenter-observability">vCenter Observability</h6>
+<p>I was recently asked how to monitor the VM that <strong>VMware vCenter</strong> runs on using <strong>VMware Aria Operations</strong>. The main request was to show the disk space used on the volumes to prevent them from filling up. In an environment with over 100 vCenters, I decided to create a view to show all the VMs running vCenter. While Aria Operations allows selecting all vCenters in a view, it does not natively show the VM name that vCenter runs on.</p>
+<p>Creating a Custom Group in Aria Operations to specify the vCenter VMs manually seemed impractical. Initially, I considered using tags in vCenter and creating a Custom Group based on these tags. However, tagging over 100 vCenter VMs and ensuring they are properly tagged would be labor-intensive.</p>
+<p>After some thought, I realized that the volume names for vCenter VMs were unique. I created an Aria Operations View to select VMs based on the existence of vCenter volumes. This approach allowed me to add the view to any environment, displaying only the vCenter VMs.</p>
+<p>After creating the view to select only vCenter VMs, I aimed to build a comprehensive vCenter Monitoring Dashboard. At the top, I included counts of vCenters, clusters, hosts, and VMs, etc… as these metrics are frequently requested by management. The dashboard features widgets to display all VM volumes (the primary reason for creating the dashboard), vCenter VM performance, CPU/memory history, and a list of vCenters.</p>
+<p>It&rsquo;s important to note that in Vmware Aria Operations, showing VMware vCenter VMs is different from showing VMware vCenters. When a vCenter is selected in the vCenter Details widget, the dashboard displays host CPU/memory information.</p>
+<p>To prevent ESXi hosts from being left in maintenance mode accidentally, I added a donut widget to show their status. Additionally, since cluster DRS can sometimes be disabled for changes and forgotten to be re-enabled, another donut widget shows the DRS status.</p>
+<hr>
+<h6 id="steps-to-create-the-dashboard">Steps to Create the Dashboard</h6>
+<ol>
+<li>Create the (4) Views
+<ul>
+<li>Select all vCenter VMs</li>
+<li>Show vCenter Details</li>
+<li>Show Hosts Maintenance Mode Status</li>
+<li>Show Clusters DRS Status</li>
+</ul>
+</li>
+<li>Create the Dashboard</li>
+</ol>
+<p>To simplify getting started, all the Views and the Dashboard are available in my GitHub repository for download. <a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/vCenter-Observability" target="_blank" rel="noopener noreffer ">Click Here to Download the files.</a></p>
+<hr>
+<h6 id="view-to-select-vcenter-vms">View to Select vCenter VMs</h6>
+<p><strong>View Data:</strong></p>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-02.png" title="/vcenter-observability/vcenter-observability-02.png" data-thumbnail="/vcenter-observability/vcenter-observability-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>View Filter:</strong></p>
+<p>In the view filter, I specified two metrics: “guestfilesystem:/storage/imagebuilder|capacity” and “guestfilesystem:/storage/autodeploy|capacity”. If a VM contains these metrics, it will be selected. These volume names are unique to vCenter VMs, making this approach effective.</p>
+<hr>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-01.png" title="/vcenter-observability/vcenter-observability-01.png" data-thumbnail="/vcenter-observability/vcenter-observability-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Dashboard Screen Shot:</strong></p>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-03.png" title="/vcenter-observability/vcenter-observability-03.png" data-thumbnail="/vcenter-observability/vcenter-observability-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Dashboard Usage:</strong></p>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-04.gif" title="/vcenter-observability/vcenter-observability-04.gif" data-thumbnail="/vcenter-observability/vcenter-observability-04.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<blockquote>
+<p>Stay tuned for future blog posts. I plan to create dashboards for monitoring Aria appliances, similar to what I did for VMware vCenter. It&rsquo;s crucial to ensure these appliances are well monitored and maintained, like a Swiss watch.</p>
+</blockquote>
+<hr>
+<h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
+<ul>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/vCenter-Observability" target="_blank" rel="noopener noreffer ">Dale&rsquo;s Github Repository</a></li>
+</ul>
+<hr>
+<h6 id="product-version-used-for-blog-post">Product Version used for Blog Post:</h6>
+<ul>
+<li>Aria Operations: 8.17.1</li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
+</item>
+</channel>
+</rss>

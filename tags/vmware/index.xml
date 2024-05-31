@@ -4,7 +4,99 @@
         <link>https://www.vcrocs.info/tags/vmware/</link>
         <description>VMware - Tag - vCROCS</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</managingEditor>
-            <webMaster>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 May 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.vcrocs.info/tags/vmware/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 31 May 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.vcrocs.info/tags/vmware/" rel="self" type="application/rss+xml" /><item>
+    <title>Aria Operations | vCenter Observability</title>
+    <link>https://www.vcrocs.info/vcenter-observability/</link>
+    <pubDate>Fri, 31 May 2024 00:00:00 &#43;0000</pubDate>
+    <author>Dale Hassinger</author>
+    <guid>https://www.vcrocs.info/vcenter-observability/</guid>
+    <description><![CDATA[<p><strong>How to monitor vCenter VM(s) within your environment</strong></p>
+<hr>
+<blockquote>
+<p>&ldquo;It&rsquo;s really hard to design products by focus groups. A lot of times, people don&rsquo;t know what they want until you show it to them.” - Steve Jobs</p>
+</blockquote>
+<hr>
+<h6 id="vcenter-observability">vCenter Observability</h6>
+<p>I was recently asked how to monitor the VM that <strong>VMware vCenter</strong> runs on using <strong>VMware Aria Operations</strong>. The main request was to show the disk space used on the volumes to prevent them from filling up. In an environment with over 100 vCenters, I decided to create a view to show all the VMs running vCenter. While Aria Operations allows selecting all vCenters in a view, it does not natively show the VM name that vCenter runs on.</p>
+<p>Creating a Custom Group in Aria Operations to specify the vCenter VMs manually seemed impractical. Initially, I considered using tags in vCenter and creating a Custom Group based on these tags. However, tagging over 100 vCenter VMs and ensuring they are properly tagged would be labor-intensive.</p>
+<p>After some thought, I realized that the volume names for vCenter VMs were unique. I created an Aria Operations View to select VMs based on the existence of vCenter volumes. This approach allowed me to add the view to any environment, displaying only the vCenter VMs.</p>
+<p>After creating the view to select only vCenter VMs, I aimed to build a comprehensive vCenter Monitoring Dashboard. At the top, I included counts of vCenters, clusters, hosts, and VMs, etc… as these metrics are frequently requested by management. The dashboard features widgets to display all VM volumes (the primary reason for creating the dashboard), vCenter VM performance, CPU/memory history, and a list of vCenters.</p>
+<p>It&rsquo;s important to note that in Vmware Aria Operations, showing VMware vCenter VMs is different from showing VMware vCenters. When a vCenter is selected in the vCenter Details widget, the dashboard displays host CPU/memory information.</p>
+<p>To prevent ESXi hosts from being left in maintenance mode accidentally, I added a donut widget to show their status. Additionally, since cluster DRS can sometimes be disabled for changes and forgotten to be re-enabled, another donut widget shows the DRS status.</p>
+<hr>
+<h6 id="steps-to-create-the-dashboard">Steps to Create the Dashboard</h6>
+<ol>
+<li>Create the (4) Views
+<ul>
+<li>Select all vCenter VMs</li>
+<li>Show vCenter Details</li>
+<li>Show Hosts Maintenance Mode Status</li>
+<li>Show Clusters DRS Status</li>
+</ul>
+</li>
+<li>Create the Dashboard</li>
+</ol>
+<p>To simplify getting started, all the Views and the Dashboard are available in my GitHub repository for download. <a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/vCenter-Observability" target="_blank" rel="noopener noreffer ">Click Here to Download the files.</a></p>
+<hr>
+<h6 id="view-to-select-vcenter-vms">View to Select vCenter VMs</h6>
+<p><strong>View Data:</strong></p>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-02.png" title="/vcenter-observability/vcenter-observability-02.png" data-thumbnail="/vcenter-observability/vcenter-observability-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>View Filter:</strong></p>
+<p>In the view filter, I specified two metrics: “guestfilesystem:/storage/imagebuilder|capacity” and “guestfilesystem:/storage/autodeploy|capacity”. If a VM contains these metrics, it will be selected. These volume names are unique to vCenter VMs, making this approach effective.</p>
+<hr>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-01.png" title="/vcenter-observability/vcenter-observability-01.png" data-thumbnail="/vcenter-observability/vcenter-observability-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Dashboard Screen Shot:</strong></p>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-03.png" title="/vcenter-observability/vcenter-observability-03.png" data-thumbnail="/vcenter-observability/vcenter-observability-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Dashboard Usage:</strong></p>
+<figure><a class="lightgallery" href="/vcenter-observability/vcenter-observability-04.gif" title="/vcenter-observability/vcenter-observability-04.gif" data-thumbnail="/vcenter-observability/vcenter-observability-04.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<blockquote>
+<p>Stay tuned for future blog posts. I plan to create dashboards for monitoring Aria appliances, similar to what I did for VMware vCenter. It&rsquo;s crucial to ensure these appliances are well monitored and maintained, like a Swiss watch.</p>
+</blockquote>
+<hr>
+<h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
+<ul>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/vCenter-Observability" target="_blank" rel="noopener noreffer ">Dale&rsquo;s Github Repository</a></li>
+</ul>
+<hr>
+<h6 id="product-version-used-for-blog-post">Product Version used for Blog Post:</h6>
+<ul>
+<li>Aria Operations: 8.17.1</li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
+</item>
+<item>
     <title>VMware Explore 2024</title>
     <link>https://www.vcrocs.info/vmware-explore-2024/</link>
     <pubDate>Wed, 01 May 2024 00:00:00 &#43;0000</pubDate>
@@ -2199,162 +2291,6 @@ Location: Dillsburg, PA</p>
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
 </center>
 <hr>]]></description>
-</item>
-<item>
-    <title>End of Year Review - 2023</title>
-    <link>https://www.vcrocs.info/end-of-year-review-2023/</link>
-    <pubDate>Mon, 01 Jan 2024 00:00:00 &#43;0000</pubDate>
-    <author>Dale Hassinger</author>
-    <guid>https://www.vcrocs.info/end-of-year-review-2023/</guid>
-    <description><![CDATA[<p><strong>End Of Year Review 2023</strong></p>
-<hr>
-<p>The year 2023 was a good chapter in my career, emphasizing the importance of community contribution. I hold a belief that my endeavors are worthwhile if they benefit even one person. This past year, I engaged in numerous presentations and blog posts, focusing on giving back to the vCommunity. My efforts in sharing knowledge and resources have, I believe, positively impacted others, making 2023 a year of success and meaningful community engagement.</p>
-<hr>
-<h6 id="highlights-of-2023">Highlights of 2023</h6>
-<ul>
-<li>Started a VMware Aria Suite Solution Architect Role. I get to work with some people that have been role models to me. The culture within this Team is the best that I have ever experienced.</li>
-<li>vExpert 2023 | Member since 2020</li>
-<li>vExpert 2023 | vExpert Cloud Management</li>
-<li>VMware Explore 2023 Hackathon: I was the Hackathon Team Lead and we finished 2nd place.</li>
-<li>VMware Explore 2023 session (Presentation): Use VMware Aria to Create/Manage/Monitor Windows Servers (on-prem/cloud) [CODE2501LV]</li>
-<li>The VMware Community Podcast | I was a Guest on the show.</li>
-<li>The PowerShell Podcast | I was a Guest on the show</li>
-<li>Philly VMUG Presentation | VMware Aria Automation and Operations</li>
-</ul>
-<hr>
-<h6 id="my-top-20-blog-posts-of-2023">My Top 20 Blog Posts of 2023</h6>
-<table>
-<thead>
-<tr>
-<th>Rank</th>
-<th>Blog Topic</th>
-<th>Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>01</td>
-<td>vCROCS - Home Page</td>
-<td>3061</td>
-</tr>
-<tr>
-<td>02</td>
-<td>VMware Aria Automation and Ansible Integration</td>
-<td>1227</td>
-</tr>
-<tr>
-<td>03</td>
-<td>Unlocking the Potential - VMware Aria Operations - Automation Central - Snapshot Age</td>
-<td>713</td>
-</tr>
-<tr>
-<td>04</td>
-<td>VMware Aria Automation - Working with Windows Server Drives</td>
-<td>660</td>
-</tr>
-<tr>
-<td>05</td>
-<td>Unlocking the Potential - VMware Aria Automation Config API</td>
-<td>574</td>
-</tr>
-<tr>
-<td>06</td>
-<td>How vRealize Operations can help with Right Sizing VMs</td>
-<td>509</td>
-</tr>
-<tr>
-<td>07</td>
-<td>VMware Aria Automation and SaltStack Config Resource</td>
-<td>380</td>
-</tr>
-<tr>
-<td>08</td>
-<td>VMware Aria Operations - RVTools Dashboard</td>
-<td>331</td>
-</tr>
-<tr>
-<td>09</td>
-<td>How to use PowerShell Modules with vRA 8.2</td>
-<td>305</td>
-</tr>
-<tr>
-<td>10</td>
-<td>Unlocking the Potential - VMware Aria Operations - Metric Search</td>
-<td>291</td>
-</tr>
-<tr>
-<td>11</td>
-<td>Unlocking the Potential - VMware Aria Operations - October 2023 PowerBlock</td>
-<td>290</td>
-</tr>
-<tr>
-<td>12</td>
-<td>VMware Aria Operations - Servicenow - Management Pack</td>
-<td>265</td>
-</tr>
-<tr>
-<td>13</td>
-<td>Schedule RVTools Data Export</td>
-<td>250</td>
-</tr>
-<tr>
-<td>14</td>
-<td>Rest API calls in VMware Aria Automation with PowerShell</td>
-<td>228</td>
-</tr>
-<tr>
-<td>15</td>
-<td>VMware Explore 2023 - Presentation</td>
-<td>208</td>
-</tr>
-<tr>
-<td>16</td>
-<td>Unlocking the Potential - VMware Aria Automation - ABX Action Constants and Secrets</td>
-<td>166</td>
-</tr>
-<tr>
-<td>17</td>
-<td>Unlocking the Potential - VMware Aria Automation - Custom Form Versioning</td>
-<td>156</td>
-</tr>
-<tr>
-<td>18</td>
-<td>VMware Aria Operations for Logs (SaaS) - ESXi Host syslog setting</td>
-<td>146</td>
-</tr>
-<tr>
-<td>19</td>
-<td>Unlocking the Potential - VMware Aria Operations - Automation Central - VM Snaps</td>
-<td>131</td>
-</tr>
-<tr>
-<td>20</td>
-<td>VMware Explore 2023 - Hackathon</td>
-<td>125</td>
-</tr>
-</tbody>
-</table>
-<p>The top 20 list reveals a significant interest in utilizing Automation and Operations. The fact that Ansible&rsquo;s integration with VMware Aria Automation ranked #1 was unexpected, evidenced by the frequent views of this particular blog post. This observation has inspired me to dedicate more of my blogging efforts to VMware Aria Automation Ansible integration in the upcoming year.</p>
-<p>*Stats from Google Analytics.</p>
-<hr>
-<h6 id="set-goals-2024">Set-Goals 2024</h6>
-<ul>
-<li>Give back more to the vCommunity.</li>
-<li>Be a good mentor.</li>
-<li>Get a session approved for VMware Explore 2024.</li>
-<li>Do more VMware Aria Presentations | PowerBlocks | Videos | etc&hellip;</li>
-<li>Create more Blog Posts.</li>
-<li>Never Stop Learning&hellip;</li>
-</ul>
-<hr>
-<h6 id="thanks-for-visiting-in-2023">Thanks for visiting in 2023!</h6>
-<hr>
-<ul>
-<li>If you found this Blog site useful and it helped you, Buy me a coffee to start my day.</li>
-</ul>
-<center>
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-</center>]]></description>
 </item>
 </channel>
 </rss>
