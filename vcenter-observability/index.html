@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.vcrocs.info/vcenter-observability/" /><meta property="og:image" content="https://www.vcrocs.info/vcenter-observability/featured-image.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-05-31T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-05-31T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta property="article:modified_time" content="2024-05-31T16:16:35-04:00" /><meta property="og:site_name" content="vCROCS" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://www.vcrocs.info/vcenter-observability/featured-image.png" /><meta name="twitter:title" content="Aria Operations | vCenter Observability"/>
 <meta name="twitter:description" content="How to monitor vCenter VM(s) within your environment"/>
@@ -31,8 +31,8 @@
                             "url": "https:\/\/www.vcrocs.info\/vcenter-observability\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VMware, Aria Operations, VCF, vCenter","wordcount":  631 ,
-        "url": "https:\/\/www.vcrocs.info\/vcenter-observability\/","datePublished": "2024-05-31T00:00:00+00:00","dateModified": "2024-05-31T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "VMware, Aria Operations, VCF, vCenter","wordcount":  694 ,
+        "url": "https:\/\/www.vcrocs.info\/vcenter-observability\/","datePublished": "2024-05-31T00:00:00+00:00","dateModified": "2024-05-31T16:16:35-04:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -112,8 +112,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Aria Operations | vCenter Observability</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/observability/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Observability</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-31">2024-05-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;631 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-31">2024-05-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;694 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -141,6 +141,7 @@
                     <li><a href="#view-to-select-vcenter-vms">View to Select vCenter VMs</a></li>
                     <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
                     <li><a href="#product-version-used-for-blog-post">Product Version used for Blog Post:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
                   </ul>
                 </li>
               </ul>
@@ -162,7 +163,7 @@
 <p>Creating a Custom Group in Aria Operations to specify the vCenter VMs manually seemed impractical. Initially, I considered using tags in vCenter and creating a Custom Group based on these tags. However, tagging over 100 vCenter VMs and ensuring they are properly tagged would be labor-intensive.</p>
 <p>After some thought, I realized that the volume names for vCenter VMs were unique. I created an Aria Operations View to select VMs based on the existence of vCenter volumes. This approach allowed me to add the view to any environment, displaying only the vCenter VMs.</p>
 <p>After creating the view to select only vCenter VMs, I aimed to build a comprehensive vCenter Monitoring Dashboard. At the top, I included counts of vCenters, clusters, hosts, and VMs, etc… as these metrics are frequently requested by management. The dashboard features widgets to display all VM volumes (the primary reason for creating the dashboard), vCenter VM performance, CPU/memory history, and a list of vCenters.</p>
-<p>It&rsquo;s important to note that in Vmware Aria Operations, showing VMware vCenter VMs is different from showing VMware vCenters. When a vCenter is selected in the vCenter Details widget, the dashboard displays host CPU/memory information.</p>
+<p>It&rsquo;s important to note that in VMware Aria Operations, showing VMware vCenter VMs is different from showing VMware vCenters. When a vCenter is selected in the vCenter Details widget, the dashboard displays host CPU/memory information.</p>
 <p>To prevent ESXi hosts from being left in maintenance mode accidentally, I added a donut widget to show their status. Additionally, since cluster DRS can sometimes be disabled for changes and forgotten to be re-enabled, another donut widget shows the DRS status.</p>
 <hr>
 <h6 id="steps-to-create-the-dashboard">Steps to Create the Dashboard</h6>
@@ -242,6 +243,11 @@
 <h6 id="product-version-used-for-blog-post">Product Version used for Blog Post:</h6>
 <ul>
 <li>Aria Operations: 8.17.1</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>The relationship between VMware vCenter and the VM it runs on is not available out of the box in VMware Aria Operations. However, by identifying VMs through their unique volume names, I created a view that can be added to any environment to filter out the VMs running vCenter. The filter within that View is what enables this Dashboard to work.</li>
 </ul>
 <hr>
 <div class="details admonition info open">

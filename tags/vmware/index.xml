@@ -21,7 +21,7 @@
 <p>Creating a Custom Group in Aria Operations to specify the vCenter VMs manually seemed impractical. Initially, I considered using tags in vCenter and creating a Custom Group based on these tags. However, tagging over 100 vCenter VMs and ensuring they are properly tagged would be labor-intensive.</p>
 <p>After some thought, I realized that the volume names for vCenter VMs were unique. I created an Aria Operations View to select VMs based on the existence of vCenter volumes. This approach allowed me to add the view to any environment, displaying only the vCenter VMs.</p>
 <p>After creating the view to select only vCenter VMs, I aimed to build a comprehensive vCenter Monitoring Dashboard. At the top, I included counts of vCenters, clusters, hosts, and VMs, etc… as these metrics are frequently requested by management. The dashboard features widgets to display all VM volumes (the primary reason for creating the dashboard), vCenter VM performance, CPU/memory history, and a list of vCenters.</p>
-<p>It&rsquo;s important to note that in Vmware Aria Operations, showing VMware vCenter VMs is different from showing VMware vCenters. When a vCenter is selected in the vCenter Details widget, the dashboard displays host CPU/memory information.</p>
+<p>It&rsquo;s important to note that in VMware Aria Operations, showing VMware vCenter VMs is different from showing VMware vCenters. When a vCenter is selected in the vCenter Details widget, the dashboard displays host CPU/memory information.</p>
 <p>To prevent ESXi hosts from being left in maintenance mode accidentally, I added a donut widget to show their status. Additionally, since cluster DRS can sometimes be disabled for changes and forgotten to be re-enabled, another donut widget shows the DRS status.</p>
 <hr>
 <h6 id="steps-to-create-the-dashboard">Steps to Create the Dashboard</h6>
@@ -77,6 +77,11 @@
 <h6 id="product-version-used-for-blog-post">Product Version used for Blog Post:</h6>
 <ul>
 <li>Aria Operations: 8.17.1</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>The relationship between VMware vCenter and the VM it runs on is not available out of the box in VMware Aria Operations. However, by identifying VMs through their unique volume names, I created a view that can be added to any environment to filter out the VMs running vCenter. The filter within that View is what enables this Dashboard to work.</li>
 </ul>
 <hr>
 <div class="details admonition info open">
