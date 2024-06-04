@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Aria Operations | Aria Appliances Observability - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:title" content="Aria Operations | Aria Appliances Observability" />
+<meta property="og:description" content="How to monitor VMware Aria Appliances within your environment" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.vcrocs.info/aria-appliances-observability/" /><meta property="og:image" content="https://www.vcrocs.info/aria-appliances-observability/featured-image.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-06-04T00:00:00+00:00" /><meta property="og:site_name" content="vCROCS" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://www.vcrocs.info/aria-appliances-observability/featured-image.png" /><meta name="twitter:title" content="Aria Operations | Aria Appliances Observability"/>
+<meta name="twitter:description" content="How to monitor VMware Aria Appliances within your environment"/>
+      <meta name="twitter:site" content="@dalehassinger"/>
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/aria-appliances-observability/" /><link rel="prev" href="https://www.vcrocs.info/vcenter-observability/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Aria Operations | Aria Appliances Observability",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/aria-appliances-observability\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/aria-appliances-observability\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VMware, Aria Operations, VCF, vCenter","wordcount":  535 ,
+        "url": "https:\/\/www.vcrocs.info\/aria-appliances-observability\/","datePublished": "2024-06-04T00:00:00+00:00","dateModified": "2024-06-04T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><a class="menu-item" href="/disclaimer/"> Disclaimer </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a class="menu-item" href="/disclaimer/" title="">Disclaimer</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Aria Operations | Aria Appliances Observability</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/observability/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Observability</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-04">2024-06-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;535 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/aria-appliances-observability/featured-image.png"
+        data-srcset="/aria-appliances-observability/featured-image.png, /aria-appliances-observability/featured-image.png 1.5x, /aria-appliances-observability/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/aria-appliances-observability/featured-image.png"
+        title="/aria-appliances-observability/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#aria-appliance-observability">Aria Appliance Observability</a></li>
+                    <li><a href="#steps-to-create-the-dashboard">Steps to Create the Dashboard</a></li>
+                    <li><a href="#custom-group-filter-to-select-aria-appliance-vms">Custom Group Filter to Select Aria Appliance VMs</a></li>
+                    <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
+                    <li><a href="#product-version-used-for-blog-post">Product Version used for Blog Post:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to monitor VMware Aria Appliances within your environment</strong></p>
+<hr>
+<blockquote>
+<p>&ldquo;I believe that if you show people the problems and you show them the solutions, they will be moved to act.” - Bill Gates</p>
+</blockquote>
+<hr>
+<h6 id="aria-appliance-observability">Aria Appliance Observability</h6>
+<p>In my previous blog, I discussed <strong>VMware vCenter</strong> appliance observability. <a href="https://www.vcrocs.info/vcenter-observability/" target="_blank" rel="noopener noreffer ">Click here to read the blog</a>. Building on those ideas, I now want to demonstrate how to monitor <strong>VMware Aria</strong> Appliances. Monitoring and observing VMware Aria Appliance VMs is crucial in a VMware environment where many such appliances are present.</p>
+<p>For VMware Aria Appliances, I created a Custom Group within VMware Aria Operations. These appliances have a property named &ldquo;Summary|Configuration|Product Name&rdquo;. By using a filter that checks if the Product Name contains &ldquo;Aria&rdquo;, &ldquo;vRealize&rdquo;, or &ldquo;Log Insight&rdquo;, I was able to group all VMware Aria Appliance VMs together.</p>
+<p>This filter is applicable to the following Aria Appliances:</p>
+<ul>
+<li>Aria Operations</li>
+<li>Aria Operations for Logs</li>
+<li>Aria Automation</li>
+<li>Aria Suite LifeCycle</li>
+<li>Aria Cloud Proxies</li>
+<li>Aria Operations for Networks</li>
+<li>Aria Management Pack Builder</li>
+<li>vCenter Orchestrator</li>
+</ul>
+<hr>
+<p>After creating the Custom Group to select only VMware Aria Appliance VMs, I proceeded to build a comprehensive VMware Aria Appliance Monitoring Dashboard. At the top, I included some donut charts (my favorite) to display key metrics such as VMware Aria Appliances Health, Workload, Snapshots, and Uptime in days.</p>
+<p>I have a strong preference against VMs running on snapshots for extended periods, which is why I included a chart for Snapshots. Uptime is also a crucial metric, as it provides insight into a VMs maintenance status. When I see a VM running for hundreds of days, my first thought is that it hasn&rsquo;t been patched or upgraded in a while. To ensure the best reliability and access to the latest features, it&rsquo;s important to keep Aria Appliances patched and upgraded regularly.</p>
+<hr>
+<h6 id="steps-to-create-the-dashboard">Steps to Create the Dashboard</h6>
+<ol>
+<li>Create the (5) Views
+<ul>
+<li>Show all Aria Appliance VMs with details</li>
+<li>Show VM Health</li>
+<li>Show VM Workload</li>
+<li>Show Snapshot Status</li>
+<li>Show Uptime (Days)</li>
+</ul>
+</li>
+<li>Create the Dashboard</li>
+</ol>
+<p>To simplify getting started, all the Views and the Dashboard are available in my GitHub repository for download. <a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/Aria-Appliances-Observability" target="_blank" rel="noopener noreffer ">Click Here to Download the files.</a></p>
+<hr>
+<h6 id="custom-group-filter-to-select-aria-appliance-vms">Custom Group Filter to Select Aria Appliance VMs</h6>
+<p><strong>Filter Definition:</strong></p>
+<figure><a class="lightgallery" href="/aria-appliances-observability/aria-appliances-02.png" title="/aria-appliances-observability/aria-appliances-02.png" data-thumbnail="/aria-appliances-observability/aria-appliances-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-appliances-observability/aria-appliances-02.png"
+            data-srcset="/aria-appliances-observability/aria-appliances-02.png, /aria-appliances-observability/aria-appliances-02.png 1.5x, /aria-appliances-observability/aria-appliances-02.png 2x"
+            data-sizes="auto"
+            alt="/aria-appliances-observability/aria-appliances-02.png" width="5118" height="2588" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Dashboard Screen Shot:</strong></p>
+<figure><a class="lightgallery" href="/aria-appliances-observability/aria-appliances-01.png" title="/aria-appliances-observability/aria-appliances-01.png" data-thumbnail="/aria-appliances-observability/aria-appliances-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-appliances-observability/aria-appliances-01.png"
+            data-srcset="/aria-appliances-observability/aria-appliances-01.png, /aria-appliances-observability/aria-appliances-01.png 1.5x, /aria-appliances-observability/aria-appliances-01.png 2x"
+            data-sizes="auto"
+            alt="/aria-appliances-observability/aria-appliances-01.png" width="5106" height="2586" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Dashboard Usage:</strong></p>
+<figure><a class="lightgallery" href="/aria-appliances-observability/aria-appliances-03.gif" title="/aria-appliances-observability/aria-appliances-03.gif" data-thumbnail="/aria-appliances-observability/aria-appliances-03.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/aria-appliances-observability/aria-appliances-03.gif"
+            data-srcset="/aria-appliances-observability/aria-appliances-03.gif, /aria-appliances-observability/aria-appliances-03.gif 1.5x, /aria-appliances-observability/aria-appliances-03.gif 2x"
+            data-sizes="auto"
+            alt="/aria-appliances-observability/aria-appliances-03.gif" width="2000" height="968" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
+<ul>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/Aria-Appliances-Observability" target="_blank" rel="noopener noreffer ">Dale&rsquo;s Github Repository</a></li>
+</ul>
+<hr>
+<h6 id="product-version-used-for-blog-post">Product Version used for Blog Post:</h6>
+<ul>
+<li>Aria Operations: 8.17.1</li>
+</ul>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>I can use the Virtual Machine property named &ldquo;Summary|Configuration|Product Name&rdquo; to group all VMware Aria Appliances together. The filter within the Custom Group is what enables this Dashboard to work.</li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-06-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/aria-appliances-observability/" data-title="Aria Operations | Aria Appliances Observability" data-via="dalehassinger" data-hashtags="VMware,Aria Operations,VCF,vCenter"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/aria-appliances-observability/" data-hashtag="VMware"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/aria-appliances-observability/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vmware/">VMware</a>,&nbsp;<a href="/tags/aria-operations/">Aria Operations</a>,&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/vcenter/">VCenter</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vcenter-observability/" class="prev" rel="prev" title="Aria Operations | vCenter Observability"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Aria Operations | vCenter Observability</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
