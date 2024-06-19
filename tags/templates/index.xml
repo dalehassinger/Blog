@@ -1,0 +1,233 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Templates - Tag - vCROCS</title>
+        <link>https://www.vcrocs.info/tags/templates/</link>
+        <description>Templates - Tag - vCROCS</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</managingEditor>
+            <webMaster>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 19 Jun 2024 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.vcrocs.info/tags/templates/" rel="self" type="application/rss+xml" /><item>
+    <title>VMware Aria Automation | Options for CPU|Memory values</title>
+    <link>https://www.vcrocs.info/aria-automation-cpu-memory-values/</link>
+    <pubDate>Wed, 19 Jun 2024 00:00:00 &#43;0000</pubDate>
+    <author>Dale Hassinger</author>
+    <guid>https://www.vcrocs.info/aria-automation-cpu-memory-values/</guid>
+    <description><![CDATA[<p><strong>How to Allocate CPU and Memory for VMs Using T-Shirt Sizes or Custom Values</strong></p>
+<hr>
+<blockquote>
+<p>&ldquo;Always deliver more than expected.” - Larry Page (Co-founder of Google)</p>
+</blockquote>
+<hr>
+<h6 id="vmware-aria-automation--vm--cpu-and-memory">VMware Aria Automation | VM | CPU and Memory</h6>
+<p>Recently, I was asked how to create new VMs using T-Shirt sizes and also have the flexibility to specify custom CPU and Memory values. Typically, in the YAML code of a Aria Automation Design Template, you use either the properties <code>cpuCount</code> and <code>totalMemoryMB</code> or the <code>flavor</code> property. You <strong>cannot</strong> use both within the same template for the same VM.</p>
+<p>After considering the options, I decided to use the <code>cpuCount</code> and <code>totalMemoryMB</code> properties to specify VM CPU and memory, adding logic to the YAML code to determine values based on an input named Flavor.</p>
+<p><strong>Flavor Options:</strong></p>
+<ul>
+<li>Small: 1 CPU, 2 GB memory</li>
+<li>Medium: 2 CPUs, 4 GB memory</li>
+<li>Large: 4 CPUs, 8 GB memory</li>
+<li>Other: Use CPU and Memory values specified in custom inputs <code>CPU</code> and <code>Memory</code>. See the Full Design Template YAML code below.</li>
+</ul>
+<hr>
+<p>These two lines of YAML code demonstrate how to specify the <code>cpuCount</code> and <code>totalMemoryMB</code> properties. This is the key to enabling both T-Shirt sizes and custom values:</p>
+<hr>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">cpuCount</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 1 : (input.Flavor == &#39;medium&#39;) ? 2 : (input.Flavor == &#39;large&#39;) ? 4 : (input.Flavor == &#39;other&#39;) ? input.CPU : 1}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">totalMemoryMB</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 2048 : (input.Flavor == &#39;medium&#39;) ? 4096 : (input.Flavor == &#39;large&#39;) ? 8192 : (input.Flavor == &#39;other&#39;) ? input.Memory * 1024 : 1024}&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p><strong>Design Templates within Aria Automation:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-01.png" title="/aria-automation-cpu-memory-values/t-shirt-01.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Design Template and YAML Code:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-02.png" title="/aria-automation-cpu-memory-values/t-shirt-02.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Small Flavor Selected:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-03.png" title="/aria-automation-cpu-memory-values/t-shirt-03.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Other Flavor Selected:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-04.png" title="/aria-automation-cpu-memory-values/t-shirt-04.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Design Template Example YAML Code:</strong></p>
+<p>This full Design Template YAML code shows the inputs and how to specify the <code>cpuCount</code> and <code>totalMemoryMB</code> properties.</p>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">formatVersion</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CustomizationSpec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Customization Specification</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">Customization-Ubuntu-22</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CustomizationSpec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMName</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">VM Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minLength</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLength</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">RCKY-9-000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.69.17</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Flavor</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Standard Size</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">medium</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enum</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">small</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">medium</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">large</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">other</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Memory</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">number</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Memory(GB)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minimum</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maximum</span><span class="p">:</span><span class="w"> </span><span class="m">512</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CPU</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">number</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CPU Count</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minimum</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maximum</span><span class="p">:</span><span class="w"> </span><span class="m">32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_vSphere_Network_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networkType</span><span class="p">:</span><span class="w"> </span><span class="l">existing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">Network:vCenter-VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_vSphere_Machine_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Machine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VMName}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">vCenter-Rocky-9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpuCount</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 1 : (input.Flavor == &#39;medium&#39;) ? 2 : (input.Flavor == &#39;large&#39;) ? 4 : (input.Flavor == &#39;other&#39;) ? input.CPU : 1}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">totalMemoryMB</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 2048 : (input.Flavor == &#39;medium&#39;) ? 4096 : (input.Flavor == &#39;large&#39;) ? 8192 : (input.Flavor == &#39;other&#39;) ? input.Memory * 1024 : 1024}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l">${resource.Cloud_vSphere_Network_1.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">assignment</span><span class="p">:</span><span class="w"> </span><span class="l">static</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l">${input.IP}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Flavors:</strong></p>
+<p>In my lab, I already had some Flavor Mappings defined. To allow for larger sizes, I had to create a new Flavor Mapping for the maximum sizes I wanted to support. I couldn&rsquo;t specify CPU or memory sizes higher than the largest existing Flavor Mapping.</p>
+<hr>
+<p><strong>Warning I received while testing:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-05.png" title="/aria-automation-cpu-memory-values/t-shirt-05.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Flavor Mappings within Aria Automation:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-06.png" title="/aria-automation-cpu-memory-values/t-shirt-06.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Flavor Mapping to allow large VM Builds:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-07.png" title="/aria-automation-cpu-memory-values/t-shirt-07.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Summary:</strong></p>
+<p>I hope this helps anyone looking to standardize new VM builds using T-Shirt sizes while also providing the flexibility to specify custom CPU and Memory values.</p>
+<hr>
+<h6 id="aria-automation-version-used-for-blog-post">Aria Automation Version used for Blog Post:</h6>
+<p>VMware Aria Automation 8.17.0 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code or process may need to be changed.</p>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
+</item>
+</channel>
+</rss>

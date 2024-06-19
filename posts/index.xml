@@ -5,6 +5,231 @@
         <description>All Posts | vCROCS</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</managingEditor>
             <webMaster>Dale.Hassinger@vCROCS.info (| Dale Hassinger)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Apr 2099 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://www.vcrocs.info/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>VMware Aria Automation | Options for CPU|Memory values</title>
+    <link>https://www.vcrocs.info/aria-automation-cpu-memory-values/</link>
+    <pubDate>Wed, 19 Jun 2024 00:00:00 &#43;0000</pubDate>
+    <author>Dale Hassinger</author>
+    <guid>https://www.vcrocs.info/aria-automation-cpu-memory-values/</guid>
+    <description><![CDATA[<p><strong>How to Allocate CPU and Memory for VMs Using T-Shirt Sizes or Custom Values</strong></p>
+<hr>
+<blockquote>
+<p>&ldquo;Always deliver more than expected.” - Larry Page (Co-founder of Google)</p>
+</blockquote>
+<hr>
+<h6 id="vmware-aria-automation--vm--cpu-and-memory">VMware Aria Automation | VM | CPU and Memory</h6>
+<p>Recently, I was asked how to create new VMs using T-Shirt sizes and also have the flexibility to specify custom CPU and Memory values. Typically, in the YAML code of a Aria Automation Design Template, you use either the properties <code>cpuCount</code> and <code>totalMemoryMB</code> or the <code>flavor</code> property. You <strong>cannot</strong> use both within the same template for the same VM.</p>
+<p>After considering the options, I decided to use the <code>cpuCount</code> and <code>totalMemoryMB</code> properties to specify VM CPU and memory, adding logic to the YAML code to determine values based on an input named Flavor.</p>
+<p><strong>Flavor Options:</strong></p>
+<ul>
+<li>Small: 1 CPU, 2 GB memory</li>
+<li>Medium: 2 CPUs, 4 GB memory</li>
+<li>Large: 4 CPUs, 8 GB memory</li>
+<li>Other: Use CPU and Memory values specified in custom inputs <code>CPU</code> and <code>Memory</code>. See the Full Design Template YAML code below.</li>
+</ul>
+<hr>
+<p>These two lines of YAML code demonstrate how to specify the <code>cpuCount</code> and <code>totalMemoryMB</code> properties. This is the key to enabling both T-Shirt sizes and custom values:</p>
+<hr>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">cpuCount</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 1 : (input.Flavor == &#39;medium&#39;) ? 2 : (input.Flavor == &#39;large&#39;) ? 4 : (input.Flavor == &#39;other&#39;) ? input.CPU : 1}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">totalMemoryMB</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 2048 : (input.Flavor == &#39;medium&#39;) ? 4096 : (input.Flavor == &#39;large&#39;) ? 8192 : (input.Flavor == &#39;other&#39;) ? input.Memory * 1024 : 1024}&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<p><strong>Design Templates within Aria Automation:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-01.png" title="/aria-automation-cpu-memory-values/t-shirt-01.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Design Template and YAML Code:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-02.png" title="/aria-automation-cpu-memory-values/t-shirt-02.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Small Flavor Selected:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-03.png" title="/aria-automation-cpu-memory-values/t-shirt-03.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Other Flavor Selected:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-04.png" title="/aria-automation-cpu-memory-values/t-shirt-04.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Design Template Example YAML Code:</strong></p>
+<p>This full Design Template YAML code shows the inputs and how to specify the <code>cpuCount</code> and <code>totalMemoryMB</code> properties.</p>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="nt">formatVersion</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CustomizationSpec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Customization Specification</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">Customization-Ubuntu-22</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CustomizationSpec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMName</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">VM Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minLength</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLength</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">RCKY-9-000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.69.17</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Flavor</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Standard Size</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">medium</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enum</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">small</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">medium</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">large</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">other</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Memory</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">number</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Memory(GB)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minimum</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maximum</span><span class="p">:</span><span class="w"> </span><span class="m">512</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CPU</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">number</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CPU Count</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minimum</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maximum</span><span class="p">:</span><span class="w"> </span><span class="m">32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_vSphere_Network_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networkType</span><span class="p">:</span><span class="w"> </span><span class="l">existing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">Network:vCenter-VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Cloud_vSphere_Machine_1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Machine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VMName}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">vCenter-Rocky-9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpuCount</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 1 : (input.Flavor == &#39;medium&#39;) ? 2 : (input.Flavor == &#39;large&#39;) ? 4 : (input.Flavor == &#39;other&#39;) ? input.CPU : 1}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">totalMemoryMB</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;${(input.Flavor == &#39;small&#39;) ? 2048 : (input.Flavor == &#39;medium&#39;) ? 4096 : (input.Flavor == &#39;large&#39;) ? 8192 : (input.Flavor == &#39;other&#39;) ? input.Memory * 1024 : 1024}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l">${resource.Cloud_vSphere_Network_1.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">assignment</span><span class="p">:</span><span class="w"> </span><span class="l">static</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l">${input.IP}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Flavors:</strong></p>
+<p>In my lab, I already had some Flavor Mappings defined. To allow for larger sizes, I had to create a new Flavor Mapping for the maximum sizes I wanted to support. I couldn&rsquo;t specify CPU or memory sizes higher than the largest existing Flavor Mapping.</p>
+<hr>
+<p><strong>Warning I received while testing:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-05.png" title="/aria-automation-cpu-memory-values/t-shirt-05.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Flavor Mappings within Aria Automation:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-06.png" title="/aria-automation-cpu-memory-values/t-shirt-06.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Flavor Mapping to allow large VM Builds:</strong></p>
+<figure><a class="lightgallery" href="/aria-automation-cpu-memory-values/t-shirt-07.png" title="/aria-automation-cpu-memory-values/t-shirt-07.png" data-thumbnail="/aria-automation-cpu-memory-values/t-shirt-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Summary:</strong></p>
+<p>I hope this helps anyone looking to standardize new VM builds using T-Shirt sizes while also providing the flexibility to specify custom CPU and Memory values.</p>
+<hr>
+<h6 id="aria-automation-version-used-for-blog-post">Aria Automation Version used for Blog Post:</h6>
+<p>VMware Aria Automation 8.17.0 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code or process may need to be changed.</p>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<ul>
+<li>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</li>
+</ul>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>]]></description>
+</item>
+<item>
     <title>Aria Operations | Aria Appliances Observability</title>
     <link>https://www.vcrocs.info/aria-appliances-observability/</link>
     <pubDate>Tue, 04 Jun 2024 00:00:00 &#43;0000</pubDate>
@@ -11346,568 +11571,6 @@ When I write about <b>vRealize Automation</b> ("vRA") I always say there are man
 <li><a href="https://docs.saltproject.io/en/latest/contents.html" target="_blank" rel="noopener noreffer ">SaltStack Documentation</a></li>
 <li><a href="https://saltstackcommunity.slack.com" target="_blank" rel="noopener noreffer ">SaltStack Community Slack Channel</a></li>
 </ul>
-<hr>
-<ul>
-<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
-<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
-<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
-</ul>
-<center>
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-</center>]]></description>
-</item>
-<item>
-    <title>VMware vRealize SaltStack Config as a Windows Server Admin - Part 6</title>
-    <link>https://www.vcrocs.info/saltstack-config-part-06/</link>
-    <pubDate>Sat, 09 Oct 2021 00:00:00 &#43;0000</pubDate>
-    <author>Dale Hassinger</author>
-    <guid>https://www.vcrocs.info/saltstack-config-part-06/</guid>
-    <description><![CDATA[<p>Part 6: How to use SaltStack Config with Windows Server and PowerShell</p>
-<hr>
-<p><a class="lightgallery" href="/saltstack-config-part-06/ps.png" title="/saltstack-config-part-06/ps.png" data-thumbnail="/saltstack-config-part-06/ps.png">
-        
-    </a><br>
-<a class="lightgallery" href="/saltstack-config-part-06/powercli.png" title="/saltstack-config-part-06/powercli.png" data-thumbnail="/saltstack-config-part-06/powercli.png">
-        
-    </a></p>
-<div>
-The latest item on my journey with <b>VMware vRealize SaltStack Config</b> as a <b>Windows Server Admin</b> is going to be a lot PowerShell. I use PowerShell for a lot of Automation, Windows Server and Linux Server. When working with <b>VMware vRealize SaltStack Config</b> I constantly found myself going to the CLI to test and learn how the salt functions work.  
-<p>In the <a href="https://www.vcrocs.info/2021/10/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5/" target="_blank">Part 5 Blog</a> of this series I showed how I am using the PowerShell module POSH-SSH to connect to the <b>VMware vRealize SaltStack Config</b> Server to run salt commands remotely. So I started writing some PowerShell functions to run remote salt commands on the Salt Master. The end goal might be to turn this script into a Salt PowerShell Module. To start it will only have the functions that I find myself using the most. I could turn this into a community Github Project and see if there would be any interest. If anyone reading this blog post has any interest please reach out to me. (<a href="mailto:Dale.Hassinger@vCROCS.info" rel="">Dale.Hassinger@vCROCS.info</a>)</p>
-<p>My goal is to make all these PowerShell Salt functions work with <b>VMware vRealize SaltStack Config</b> like PowerCLI works with <b>VMware vCenter</b>. Use same verb/noun terminology. I use PowerCLI for all my VMware Automation. Works awesome! So to create these PowerShell Functions to work with my existing automation scripts is a win win in my book.</p>
-<p>Normally I will use a Products APIs to do all these types of processes. I looked at <b>VMware vRealize SaltStack Config</b> APIs and to the best of my knowledge I can not use them like I can the PS functions that I created. That may change in a future release of <b>VMware vRealize SaltStack Config</b>. Fingers crossed.</p>
-</div>
-<hr>
-<h6 id="salt-powershell-functions">Salt PowerShell Functions:</h6>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span><span class="lnt">140
-</span><span class="lnt">141
-</span><span class="lnt">142
-</span><span class="lnt">143
-</span><span class="lnt">144
-</span><span class="lnt">145
-</span><span class="lnt">146
-</span><span class="lnt">147
-</span><span class="lnt">148
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># ----- [ Start of Functions ] --------------------------------------------------------------------------------------------------------------</span>
-</span></span><span class="line"><span class="cl"><span class="c"># The POSH-SSH PS module MUST be installed to use these functions.</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Function to Connect to SSC Server</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Connect-SSCServer</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Server</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$userName</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Password</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c"># The next line is how to create the encrypted password</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$psPassword</span> <span class="p">=</span> <span class="nb">ConvertTo-SecureString</span> <span class="n">-String</span> <span class="nv">$global:HashiPW</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$creds</span> <span class="p">=</span> <span class="nb">new-object</span> <span class="n">-typename</span> <span class="n">System</span><span class="p">.</span><span class="py">Management</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">PSCredential</span> <span class="n">-argumentlist</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$psPassword</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ComputerName&#34;</span> <span class="p">=</span> <span class="nv">$Server</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Credential&#34;</span>   <span class="p">=</span> <span class="nv">$creds</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
-</span></span><span class="line"><span class="cl">      
-</span></span><span class="line"><span class="cl">    <span class="c"># SSH Connection to SaltStack Server</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">New-SSHSession</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Function to Disconnect from SSC Server</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Disconnect-SSCServer</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Remove-SSHSession</span> <span class="n">-SessionId</span> <span class="mf">0</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Sync Minion grains</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">invoke-SSC.sync.grains</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c"># Sync Grains after adding new grain information</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; saltutil.sync_grains --output=json&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;SessionId&#34;</span> <span class="p">=</span> <span class="mf">0</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Command&#34;</span>   <span class="p">=</span> <span class="nv">$sshCommand</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$results</span><span class="p">.</span><span class="py">Output</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Minion Grain Append</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">set-SSC.grains.append</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$grainkey</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$grainval</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c"># Grains Append</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; grains.append &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainkey</span> <span class="p">+</span> <span class="s1">&#39;&#34; &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainval</span> <span class="p">+</span> <span class="s1">&#39;&#34;&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;SessionId&#34;</span> <span class="p">=</span> <span class="mf">0</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Command&#34;</span>   <span class="p">=</span> <span class="nv">$sshCommand</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Minion Grain DelKey</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">set-SSC.grains.delkey</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$grainkey</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; grains.delkey &#34;&#39;</span> <span class="p">+</span> <span class="nv">$grainkey</span> <span class="p">+</span> <span class="s1">&#39;&#34; force=True&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;SessionId&#34;</span> <span class="p">=</span> <span class="mf">0</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Command&#34;</span>   <span class="p">=</span> <span class="nv">$sshCommand</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="c"># End Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Minion Test Ping</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">invoke-SSC.test.ping</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">parameter</span><span class="p">(</span><span class="na">mandatory</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="c"># End Parameters</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$sshCommand</span> <span class="p">=</span> <span class="s1">&#39;salt &#34;&#39;</span> <span class="p">+</span> <span class="nv">$minion</span> <span class="p">+</span> <span class="s1">&#39;&#34; test.ping --output=json&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="c">#$sshCommand</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="n">-SessionId</span> <span class="mf">0</span> <span class="n">-Command</span> <span class="nv">$sshCommand</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$results</span><span class="p">.</span><span class="n">Output</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="py">Trim</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ----- [ End of Functions ] --------------------------------------------------------------------------------------------------------------</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h6 id="examples-to-show-how-to-use-the-salt-powershell-functions-above">Examples to show how to use the Salt PowerShell Functions above:</h6>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># ----- [ Connect to SSC Server ] --------------------------------------------------</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># DO NOT use plain text PW&#39;s in your Code. I am only showing PW to make it easier to understand the code. </span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Server</span>   <span class="p">=</span> <span class="s1">&#39;SaltMaster.vCROCS.local&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$User</span>     <span class="p">=</span> <span class="s1">&#39;root&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Password</span> <span class="p">=</span> <span class="s1">&#39;VMware1!&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Server&#34;</span>   <span class="p">=</span> <span class="nv">$Server</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;User&#34;</span>     <span class="p">=</span> <span class="nv">$User</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Password&#34;</span> <span class="p">=</span> <span class="nv">$Password</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Connect to SSC</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Connect-SSCServer</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Disconnect to SSC Server ] -----------------------------------------------</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-SSCServer</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Sync Minion grains ] -------------------------------------------------------</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">sync</span><span class="p">.</span><span class="py">grains</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Minion grain append ] ----------------------------------------------------</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$grainkey</span> <span class="p">=</span> <span class="s1">&#39;PS_Module&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$grainval</span> <span class="p">=</span> <span class="s1">&#39;Works great for Windows Server&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span>   <span class="p">=</span> <span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;grainkey&#34;</span> <span class="p">=</span> <span class="nv">$grainkey</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;grainval&#34;</span> <span class="p">=</span> <span class="nv">$grainval</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set-SSC</span><span class="p">.</span><span class="py">grains</span><span class="p">.</span><span class="py">append</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">sync</span><span class="p">.</span><span class="py">grains</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Minion grain DelKey ] ----------------------------------------------------</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Set Parameter Values</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$grainkey</span> <span class="p">=</span> <span class="s1">&#39;PS_Module&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">minion</span>   <span class="p">=</span> <span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl">    <span class="n">grainkey</span> <span class="p">=</span> <span class="nv">$grainkey</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
-</span></span><span class="line"><span class="cl"><span class="nb">set-SSC</span><span class="p">.</span><span class="py">grains</span><span class="p">.</span><span class="py">delkey</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">sync</span><span class="p">.</span><span class="py">grains</span> <span class="nv">@Params</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># ----- [ Minion test.ping ] ----------------------------------------------------</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Set Paramter Values</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$minion</span> <span class="p">=</span> <span class="s1">&#39;DBH-211&#39;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Define Parameters (Splatting)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;minion&#34;</span> <span class="p">=</span> <span class="nv">$minion</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Run Function</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-SSC</span><span class="p">.</span><span class="py">test</span><span class="p">.</span><span class="py">ping</span> <span class="nv">@Params</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h6 id="lessons-learned">Lessons Learned:</h6>
-<ul>
-<li>Adding the POSH-SSH PowerShell module so you can create a SSH connection to the salt master opens up a lot of possibilities for your PowerShell Automation as a Windows Server Admin.</li>
-<li>Using the PowerShell Functions above as a Windows admin makes it very easy to add this code to existing scripts and use the Power of SaltStack without completely changing your processes.</li>
-<li>Creating a SSH Connection to a remote Salt Master and running commands works well in a &ldquo;Zero Trust&rdquo; environment. With NSX-T all you need to do is setup allow rules between the minions and the master on ports 4505,4506.</li>
-</ul>
-<hr>
-<h6 id="salt-links-i-found-to-be-very-helpful">Salt Links I found to be very helpful:</h6>
-<ul>
-<li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
-<li><a href="https://docs.saltproject.io/en/getstarted/"                            target="_blank">SaltStack Tutorials</a></li>
-<li><a href="https://docs.saltproject.io/en/latest/contents.html"                   target="_blank">SaltStack Documentation</a></li>
-<li><a href="https://saltstackcommunity.slack.com"                                  target="_blank">SaltStack Community Slack Channel</a></li>
-<li><a href="https://learnvrealizeautomation.github.io"                             target="_blank">Learn vRealize Automation</a></li>
-<li><a href="https://learnsaltstackconfig.github.io/"                               target="_blank">Learn SaltStack Config</a></li>
-</ul>
-<div style="background-color:#ccffcc; Padding:20px;" >
-When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.
-</div>
 <hr>
 <ul>
 <li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
