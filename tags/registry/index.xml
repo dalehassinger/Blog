@@ -10,38 +10,7 @@
     <pubDate>Sun, 19 Apr 2020 00:00:00 &#43;0000</pubDate>
     <author>Dale Hassinger</author>
     <guid>https://www.vcrocs.info/add-registry-values/</guid>
-    <description><![CDATA[<p><strong>Add Windows Server Registry Values</strong></p>
-<hr>
-<h6 id="powershell-code">PowerShell Code</h6>
-<p>Add Registry Values to Windows Server</p>
-<hr>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#vCrocs Registry Changes</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="nb">new-Item</span> <span class="n">HKLM</span><span class="err">:</span><span class="p">\</span><span class="n">SOFTWARE</span><span class="p">\</span><span class="n">vCrocs</span> <span class="o">-f</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$SG</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">SupportGroup</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$SG</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$SG</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$APP</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">Application</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$APP</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$APP</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$LOC</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">Location</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$LOC</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$LOC</span>
-</span></span><span class="line"><span class="cl"><span class="nb">invoke-command</span> <span class="n">-computername</span> <span class="nv">$FQDNVMname</span> <span class="n">-ScriptBlock</span> <span class="p">{</span><span class="k">param</span> <span class="p">(</span><span class="nv">$SL</span><span class="p">)</span> <span class="nb">Set-ItemProperty</span> <span class="n">hklm</span><span class="err">:</span><span class="p">\</span><span class="n">software</span><span class="p">\</span><span class="n">vCrocs</span> <span class="n">-Name</span> <span class="n">ServiceLevel</span> <span class="n">-Value</span> <span class="s2">&#34;</span><span class="nv">$SL</span><span class="s2">&#34;</span> <span class="n">-Force</span><span class="p">}</span> <span class="n">-ArgumentList</span> <span class="nv">$SL</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<hr>
-<ul>
-<li>If you like wearing Crocs and want to get a pair like I wear, follow this link to Amazon:
-<a target="_blank" href="https://www.amazon.com/dp/B001V7Z27W?psc=1&amp;ref=ppx_yo2ov_dt_b_product_details&_encoding=UTF8&tag=vcrocs-20&linkCode=ur2&linkId=fa4c787c9ab59a9b8a54b48c402b8517&camp=1789&creative=9325">My Favorite Crocs</a></li>
-<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
-</ul>
-<center>
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
-</center>]]></description>
+    <description><![CDATA[<p><strong>Add Windows Server Registry Values</strong></p>]]></description>
 </item>
 </channel>
 </rss>
