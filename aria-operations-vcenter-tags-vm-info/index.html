@@ -4,16 +4,27 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:title" content="VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details" />
-<meta property="og:description" content="How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/" /><meta property="og:image" content="https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/featured-image.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-01-26T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-02-11T09:28:35-05:00" /><meta property="og:site_name" content="vCROCS" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/featured-image.png" /><meta name="twitter:title" content="VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details"/>
-<meta name="twitter:description" content="How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group"/>
-      <meta name="twitter:site" content="@dalehassinger"/>
+        <title>VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details">
+  <meta property="og:description" content="How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-02-11T09:28:35-05:00">
+    <meta property="article:tag" content="VMware">
+    <meta property="article:tag" content="VMware Aria Operations">
+    <meta property="article:tag" content="VCenter TAGs">
+    <meta property="article:tag" content="Super Metric">
+    <meta property="article:tag" content="Custom Groups">
+    <meta property="og:image" content="https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/featured-image.png">
+  <meta name="twitter:title" content="VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details">
+  <meta name="twitter:description" content="How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group">
+      <meta name="twitter:site" content="@dalehassinger">
 <meta name="application-name" content="vCROCS">
 <meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/" /><link rel="prev" href="https://www.vcrocs.info/aria-automation-custom-form-with-chatgpt/" /><link rel="next" href="https://www.vcrocs.info/schedule-rvtools/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -184,25 +195,34 @@
 <hr>
 <p>Watch video to see how to define VMware Aria Operations Custom Group membership based on a vCenter TAG Name:</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube-nocookie.com/embed/gt099N3DpXU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/gt099N3DpXU?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
 
 <hr>
 <p>To show the Metric Totals of each Custom Group, we created Super Metrics to sum the value of all the VMs within the Custom Group. If you were only using one vCenter TAG and one Custom Group, you would not need to do this. We wanted to show the Metric Values of a 100+ vCenter TAGs and each vCenter TAG would be on a separate line. That is why we created the Super Metrics.</p>
 <p>Watch video to see how to create VMware Aria Operations Super Metrics to total Virtual Machine Metrics:</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube-nocookie.com/embed/MpyVlj4whvc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/MpyVlj4whvc?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
 
 <hr>
 <p>To show all the Custom Groups names and Super Metric values we created a View. Main reason to create the View was to be able to export the data as a CSV file.</p>
 <p>Watch video to see how to create VMware Aria Operations View that shows the Custom Groups with VM metric totals:</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube-nocookie.com/embed/mqODM3-6LCA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/mqODM3-6LCA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
 
 <hr>
 <h6 id="lessons-learned-and-acknowledgements">Lessons Learned and acknowledgements:</h6>
