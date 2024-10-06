@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VCF Operations Dashboard | ESXi Tiered Memory - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/esxi-vm-tiered-memory/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VCF Operations Dashboard | ESXi Tiered Memory">
+  <meta property="og:description" content="How to show ESXi Tiered Memory Metrics in VCF Operations.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-05T00:00:00+00:00">
+    <meta property="article:tag" content="ESXi">
+    <meta property="article:tag" content="Tiered Memory">
+    <meta property="article:tag" content="VCF Operations Management Pack Builder">
+    <meta property="article:tag" content="VCF Operations">
+    <meta property="article:tag" content="Dashboard">
+    <meta property="article:tag" content="FastAPI">
+    <meta property="og:image" content="https://www.vcrocs.info/esxi-vm-tiered-memory/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/esxi-vm-tiered-memory/featured-image.png">
+  <meta name="twitter:title" content="VCF Operations Dashboard | ESXi Tiered Memory">
+  <meta name="twitter:description" content="How to show ESXi Tiered Memory Metrics in VCF Operations.">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/esxi-vm-tiered-memory/" /><link rel="prev" href="https://www.vcrocs.info/vmware-explore-2024-insights-session-links/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VCF Operations Dashboard | ESXi Tiered Memory",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/esxi-vm-tiered-memory\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/esxi-vm-tiered-memory\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "ESXi, Tiered Memory, VCF Operations Management Pack Builder, VCF Operations, Dashboard, FastAPI, PowerShell","wordcount":  2072 ,
+        "url": "https:\/\/www.vcrocs.info\/esxi-vm-tiered-memory\/","datePublished": "2024-10-05T00:00:00+00:00","dateModified": "2024-10-05T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  - Links </a><a class="menu-item" href="/pics/"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  - Pics </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i>  - Twitter </a><a class="menu-item" href="/disclaimer/"> Disclaimer </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title=""><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i> - Links</a><a class="menu-item" href="/pics/" title=""><i class='fab fa-image fa-regular' aria-hidden='true'></i> - Pics</a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter fa-fw' aria-hidden='true'></i> - Twitter</a><a class="menu-item" href="/disclaimer/" title="">Disclaimer</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations Dashboard | ESXi Tiered Memory</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-05">2024-10-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2072 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/esxi-vm-tiered-memory/featured-image.png"
+        data-srcset="/esxi-vm-tiered-memory/featured-image.png, /esxi-vm-tiered-memory/featured-image.png 1.5x, /esxi-vm-tiered-memory/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/esxi-vm-tiered-memory/featured-image.png"
+        title="/esxi-vm-tiered-memory/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#fastapi">FastAPI</a></li>
+                    <li><a href="#fastapi-application-python-code">FastAPI application python code:</a></li>
+                    <li><a href="#powershell-script">PowerShell Script</a></li>
+                    <li><a href="#vcf-operations">VCF Operations:</a></li>
+                    <li><a href="#mp-builder-details">MP Builder Details:</a></li>
+                    <li><a href="#lessons-learned">Lessons learned:</a></li>
+                    <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to show ESXi Tiered Memory Metrics in VCF Operations.</strong></p>
+<hr>
+<blockquote>
+<p>Using VCF Operations Management Pack Builder alongside a product like FastAPI will elevate your observability to a whole new level&hellip;</p>
+</blockquote>
+<hr>
+<p>Here’s a use case that demonstrates the powerful capabilities of the <strong>VCF Operations Manager Pack Builder</strong> in your environment. With the introduction of <strong>Tiered Memory</strong> in ESXi 8.0.3, VMware hasn’t yet integrated tiered memory metrics visibility for VMs using tiered memory into <strong>VCF Operations</strong>. However, <strong>William Lam</strong> has provided a <strong>Blog</strong> outlining the necessary commands to retrieve the tiered memory metrics. <a href="https://github.com/dalehassinger/VMware-Explore-Hackathon-2024" target="_blank" rel="noopener noreffer ">Click here to see Blog</a></p>
+<p>To build an Operations Management Pack (MP) that captures this data, you need to utilize APIs. In my approach, I used <strong>FastAPI</strong> to execute a <strong>PowerShell Script</strong> that connects to vCenter to gather a list of ESXi hosts. The script then establishes an SSH connection to each host, retrieves the tiered memory metrics, and sends the results back to FastAPI. These metrics are then made available for Management Pack Builder, allowing you to incorporate the new metrics into the existing VM object within Operations.</p>
+<p>Once the tiered memory metrics are available in Operations, you can create some impressive dashboards to display this information. These dashboards provide a clear, visual representation of how tiered memory is being utilized across your environment, giving you deeper insights and making it easier to monitor and optimize performance.</p>
+<p>Using a tool like FastAPI to provide additional metrics to Operations opens up a world of possibilities. Once you understand the steps involved, your thought process becomes your most powerful observability tool. This approach empowers you to extend the capabilities of Operations, allowing you to gather and visualize critical metrics that might not be available out of the box.</p>
+<p>To get started, you’ll need to set up a server with FastAPI installed. In my lab, I created a Rocky Linux 9.4 VM and installed the latest version of FastAPI. Additionally, I installed the latest version of PowerShell along with the VMware PowerCLI and Posh-SSH modules, enabling the necessary functionality for this setup.</p>
+<p>To create and edit code on my Rocky Linux server, I prefer using the Remote SSH add-in for VSCode, which I have installed on my Apple MacBook. This approach allows me to avoid using the graphical version of Rocky Linux Server, keeping the setup lean and mean. I use PowerShell on Linux servers all the time—I’ve loved it ever since PowerShell became cross-platform.</p>
+<hr>
+<h6 id="fastapi">FastAPI</h6>
+<p>The steps I used to install FastAPI on Rocky Linux Server 9.4:</p>
+<ul>
+<li>A very simple process to install FastAPI and get started.</li>
+</ul>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Update the System:</span>
+</span></span><span class="line"><span class="cl">sudo dnf update -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install Python:</span>
+</span></span><span class="line"><span class="cl">sudo dnf install python3 -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install Pip (Python Package Manager):</span>
+</span></span><span class="line"><span class="cl">sudo dnf install python3-pip -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install FastAPI and Uvicorn:</span>
+</span></span><span class="line"><span class="cl">pip3 install fastapi uvicorn
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create a Sample FastAPI Application:</span>
+</span></span><span class="line"><span class="cl">nano app.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add the following content to app.py:</span>
+</span></span><span class="line"><span class="cl">from fastapi import FastAPI
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">app</span> <span class="o">=</span> FastAPI<span class="o">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@app.get<span class="o">(</span><span class="s2">&#34;/&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">def read_root<span class="o">()</span>:
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">{</span><span class="s2">&#34;Hello&#34;</span>: <span class="s2">&#34;World&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># You can run your app using uvicorn:</span>
+</span></span><span class="line"><span class="cl">uvicorn app:app --host 0.0.0.0 --port <span class="m">8000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Your FastAPI app should now be accessible at:</span>
+</span></span><span class="line"><span class="cl">http://&lt;your_server_ip&gt;:8000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h6 id="fastapi-application-python-code">FastAPI application python code:</h6>
+<p><strong>URLs used in my Lab:</strong></p>
+<ul>
+<li>For Tiered Memory you would use http://192.168.6.83:8000/tiered</li>
+<li>You can have many urls. See the sample FastAPI Python code.
+<ul>
+<li>To return simple json information use http://192.168.6.83:8000/</li>
+<li>To run a PowerShell script to get VM information http://192.168.6.83:8000/vms</li>
+<li>To run a PowerShell script to get Host information http://192.168.6.83:8000/hosts</li>
+</ul>
+</li>
+<li>I converted the data to json in the PowerShell Script. I wanted FastAPI to just return plaintext. See the Python code on how to do this.</li>
+</ul>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fastapi.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">read_root</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span><span class="s2">&#34;Hello&#34;</span><span class="p">:</span> <span class="s2">&#34;Welcome to the FastAPI Server by vCROCS!&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/tiered&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">run_powershell_script</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Run the PowerShell script and capture the output</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/tiered.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># Check if there&#39;s an error in the execution</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Return the raw output from the PowerShell script without modification</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/vms&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">run_powershell_script</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Run the PowerShell script and capture the output</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/vms.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># Check if there&#39;s an error in the execution</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Return the raw output from the PowerShell script without modification</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/hosts&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">run_powershell_script</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Run the PowerShell script and capture the output</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/hosts.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># Check if there&#39;s an error in the execution</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Return the raw output from the PowerShell script without modification</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="powershell-script">PowerShell Script</h6>
+<p>PowerShell script to collect the tiered memory metrics from the ESXi Hosts:</p>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># The Posh-SSH and VMware PowerCLI modules are required to run this script</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Import the Posh-SSH and VMware PowerCLI modules</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Import-Module Posh-SSH</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Import-Module VMware.PowerCLI</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define parameters for the Connect-VIServer cmdlet using splatting. Use a more secure method for passwords.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ConnectionParams</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Server</span>   <span class="p">=</span> <span class="s2">&#34;192.168.6.100&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span>     <span class="p">=</span> <span class="s2">&#34;administrator@vcrocs.local&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Password</span> <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Force</span>    <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to the vCenter Server</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenter</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="nv">@ConnectionParams</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get all ESXi hosts in the vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$esxiHosts</span> <span class="p">=</span> <span class="nb">Get-VMHost</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Create an empty array to store combined results</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$combinedResults</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Loop through each host</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$esxiHost</span> <span class="k">in</span> <span class="nv">$esxiHosts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Define ESXi SSH connection details</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$server</span> <span class="p">=</span> <span class="nv">$esxiHost</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$username</span> <span class="p">=</span> <span class="s2">&#34;root&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$password</span> <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>  <span class="c"># Use a more secure method for passwords</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Convert the password to a SecureString and create a PSCredential object</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$securePassword</span> <span class="p">=</span> <span class="nb">ConvertTo-SecureString</span> <span class="n">-String</span> <span class="nv">$password</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$credential</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Management</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">PSCredential</span><span class="p">(</span><span class="nv">$username</span><span class="p">,</span> <span class="nv">$securePassword</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Try to establish an SSH session, skip host if connection fails</span>
+</span></span><span class="line"><span class="cl">    <span class="k">Try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c">#Write-Host &#34;Attempting to connect to $server...&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$sshSession</span> <span class="p">=</span> <span class="nb">New-SSHSession</span> <span class="n">-ComputerName</span> <span class="nv">$server</span> <span class="n">-Credential</span> <span class="nv">$credential</span> <span class="n">-AcceptKey</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span>
+</span></span><span class="line"><span class="cl">        <span class="c">#Write-Host &#34;Connected to $server.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">Catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c">#Write-Host &#34;Failed to connect to $server. Skipping host...&#34; -ForegroundColor Yellow</span>
+</span></span><span class="line"><span class="cl">        <span class="k">Continue</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># If SSH session is successful, execute the commands</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nv">$sshSession</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># Define and execute the first SSH command to get the VMX Cartel IDs and Display Names</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmCommand</span> <span class="p">=</span> <span class="s2">&#34;esxcli --formatter csv vm process list | cut -d &#39;,&#39; -f 2,5&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmResult</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="n">-SessionId</span> <span class="nv">$sshSession</span><span class="p">.</span><span class="py">SessionId</span> <span class="n">-Command</span> <span class="nv">$vmCommand</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$VMXCartelID</span> <span class="p">=</span> <span class="nv">$vmResult</span><span class="p">.</span><span class="py">Output</span> <span class="p">|</span> <span class="nb">ConvertFrom-Csv</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Define and execute the second SSH command to get memory statistics</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$memCommand</span> <span class="p">=</span> <span class="s1">&#39;memstats -r vmtier-stats -u mb -s name:memSize:active:tier0Consumed:tier1Consumed&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$memResult</span> <span class="p">=</span> <span class="nb">Invoke-SSHCommand</span> <span class="n">-SessionId</span> <span class="nv">$sshSession</span><span class="p">.</span><span class="py">SessionId</span> <span class="n">-Command</span> <span class="nv">$memCommand</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Process the memory statistics output</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$lines</span> <span class="p">=</span> <span class="nv">$memResult</span><span class="p">.</span><span class="py">Output</span> <span class="n">-split</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Trim</span><span class="p">()</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_</span> <span class="o">-notmatch</span> <span class="s1">&#39;^-{2,}|Total|Start|No.|VIRTUAL|Unit|Selected&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Regex pattern for memory statistics</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$pattern</span> <span class="p">=</span> <span class="s1">&#39;^(?&lt;name&gt;\S+)\s+(?&lt;memSize&gt;\d+)\s+(?&lt;active&gt;\d+)\s+(?&lt;tier0Consumed&gt;\d+)\s+(?&lt;tier1Consumed&gt;\d+)$&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Array to store parsed memory stats</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$tieredMEM</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Parse the memory stats</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$line</span> <span class="k">in</span> <span class="nv">$lines</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nv">$line</span> <span class="o">-match</span> <span class="nv">$pattern</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$tieredMEM</span> <span class="p">+=</span> <span class="p">[</span><span class="no">pscustomobject</span><span class="p">]</span><span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Name</span>               <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">vm_MemSize_MB</span>      <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;memSize&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">vm_Active_Mem_MB</span>   <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;vm_Tier0_RAM_MB&#34;</span>  <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;tier0Consumed&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;vm_Tier1_NVMe_MB&#34;</span> <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;tier1Consumed&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Remove &#39;vm.&#39; prefix from each VM Name</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$tieredMEM</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-replace</span> <span class="s1">&#39;^vm\.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Create a hashtable for easy mapping of VMX Cartel IDs to Display Names</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmNameMap</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$entry</span> <span class="k">in</span> <span class="nv">$VMXCartelID</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$vmNameMap</span><span class="p">[</span><span class="nv">$entry</span><span class="p">.</span><span class="n">VMXCartelID</span><span class="p">]</span> <span class="p">=</span> <span class="nv">$entry</span><span class="p">.</span><span class="py">DisplayName</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Replace the Name field in $tieredMEM with the corresponding DisplayName</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$tieredMEM</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nv">$vmNameMap</span><span class="p">.</span><span class="py">ContainsKey</span><span class="p">(</span><span class="nv">$vm</span><span class="p">.</span><span class="n">Name</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$vm</span><span class="p">.</span><span class="py">Name</span> <span class="p">=</span> <span class="nv">$vmNameMap</span><span class="p">[</span><span class="nv">$vm</span><span class="p">.</span><span class="n">Name</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Filter out rows where the Name starts with &#34;vCLS-&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$tieredMEM</span> <span class="p">=</span> <span class="nv">$tieredMEM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-notlike</span> <span class="s2">&#34;vCLS-*&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Append the results from this host to the combined results array</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$combinedResults</span> <span class="p">+=</span> <span class="nv">$tieredMEM</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Close the SSH session for this host</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$removeSession</span> <span class="p">=</span> <span class="nb">Remove-SSHSession</span> <span class="n">-SessionId</span> <span class="nv">$sshSession</span><span class="p">.</span><span class="py">SessionId</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Convert the combined result to json</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$returnData</span> <span class="p">=</span> <span class="nv">$combinedResults</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Compress</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="nv">$returnData</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Disconnect from vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="vcf-operations">VCF Operations:</h6>
+<ul>
+<li>These metrics will allow you to create some great operational insights, including cool dashboards.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-01.png" title="/esxi-vm-tiered-memory/tiered-01.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-01.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-01.png, /esxi-vm-tiered-memory/tiered-01.png 1.5x, /esxi-vm-tiered-memory/tiered-01.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-01.png" width="2144" height="1205" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="mp-builder-details">MP Builder Details:</h6>
+<ul>
+<li>The following screen shots are all the details I used to create the MP</li>
+<li>I presented at VMware Explore 2024, and one of the sessions includes a video on MP Builder. I recommend checking it out to get more familiar with MPB. <a href="https://www.youtube.com/live/EcQNwO_skAA?si=xkLv3PvocHy5ka0f" target="_blank" rel="noopener noreffer ">Link to session | CODE1161LV</a></li>
+<li>Brock Peterson has a great Blog on building a MP. <a href="https://www.brockpeterson.com/post/building-a-management-pack-with-the-aria-operations-management-pack-builder" target="_blank" rel="noopener noreffer ">Link to Blog</a></li>
+<li>After building and saving the MP, you need to import into VCF Operations Repository and add account. I show those details in my VMware Explore session video.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-02.png" title="/esxi-vm-tiered-memory/tiered-02.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-02.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-02.png, /esxi-vm-tiered-memory/tiered-02.png 1.5x, /esxi-vm-tiered-memory/tiered-02.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-02.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-03.png" title="/esxi-vm-tiered-memory/tiered-03.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-03.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-03.png, /esxi-vm-tiered-memory/tiered-03.png 1.5x, /esxi-vm-tiered-memory/tiered-03.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-03.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-04.png" title="/esxi-vm-tiered-memory/tiered-04.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-04.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-04.png, /esxi-vm-tiered-memory/tiered-04.png 1.5x, /esxi-vm-tiered-memory/tiered-04.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-04.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-05.png" title="/esxi-vm-tiered-memory/tiered-05.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-05.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-05.png, /esxi-vm-tiered-memory/tiered-05.png 1.5x, /esxi-vm-tiered-memory/tiered-05.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-05.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-06.png" title="/esxi-vm-tiered-memory/tiered-06.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-06.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-06.png, /esxi-vm-tiered-memory/tiered-06.png 1.5x, /esxi-vm-tiered-memory/tiered-06.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-06.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-07.png" title="/esxi-vm-tiered-memory/tiered-07.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-07.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-07.png, /esxi-vm-tiered-memory/tiered-07.png 1.5x, /esxi-vm-tiered-memory/tiered-07.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-07.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-08.png" title="/esxi-vm-tiered-memory/tiered-08.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-08.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-08.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-08.png, /esxi-vm-tiered-memory/tiered-08.png 1.5x, /esxi-vm-tiered-memory/tiered-08.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-08.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-09.png" title="/esxi-vm-tiered-memory/tiered-09.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-09.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-09.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-09.png, /esxi-vm-tiered-memory/tiered-09.png 1.5x, /esxi-vm-tiered-memory/tiered-09.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-09.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-10.png" title="/esxi-vm-tiered-memory/tiered-10.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-10.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-10.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-10.png, /esxi-vm-tiered-memory/tiered-10.png 1.5x, /esxi-vm-tiered-memory/tiered-10.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-10.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-11.png" title="/esxi-vm-tiered-memory/tiered-11.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-11.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-11.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-11.png, /esxi-vm-tiered-memory/tiered-11.png 1.5x, /esxi-vm-tiered-memory/tiered-11.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-11.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-12.png" title="/esxi-vm-tiered-memory/tiered-12.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-12.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-12.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-12.png, /esxi-vm-tiered-memory/tiered-12.png 1.5x, /esxi-vm-tiered-memory/tiered-12.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-12.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-13.png" title="/esxi-vm-tiered-memory/tiered-13.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-13.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-13.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-13.png, /esxi-vm-tiered-memory/tiered-13.png 1.5x, /esxi-vm-tiered-memory/tiered-13.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-13.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-14.png" title="/esxi-vm-tiered-memory/tiered-14.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-14.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-14.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-14.png, /esxi-vm-tiered-memory/tiered-14.png 1.5x, /esxi-vm-tiered-memory/tiered-14.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-14.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-15.png" title="/esxi-vm-tiered-memory/tiered-15.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-15.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-15.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-15.png, /esxi-vm-tiered-memory/tiered-15.png 1.5x, /esxi-vm-tiered-memory/tiered-15.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-15.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-16.png" title="/esxi-vm-tiered-memory/tiered-16.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-16.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-16.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-16.png, /esxi-vm-tiered-memory/tiered-16.png 1.5x, /esxi-vm-tiered-memory/tiered-16.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-16.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-17.png" title="/esxi-vm-tiered-memory/tiered-17.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-17.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-17.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-17.png, /esxi-vm-tiered-memory/tiered-17.png 1.5x, /esxi-vm-tiered-memory/tiered-17.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-17.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-18.png" title="/esxi-vm-tiered-memory/tiered-18.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-18.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-18.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-18.png, /esxi-vm-tiered-memory/tiered-18.png 1.5x, /esxi-vm-tiered-memory/tiered-18.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-18.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-19.png" title="/esxi-vm-tiered-memory/tiered-19.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-19.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-19.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-19.png, /esxi-vm-tiered-memory/tiered-19.png 1.5x, /esxi-vm-tiered-memory/tiered-19.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-19.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-20.png" title="/esxi-vm-tiered-memory/tiered-20.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-20.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-20.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-20.png, /esxi-vm-tiered-memory/tiered-20.png 1.5x, /esxi-vm-tiered-memory/tiered-20.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-20.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/esxi-vm-tiered-memory/tiered-21.png" title="/esxi-vm-tiered-memory/tiered-21.png" data-thumbnail="/esxi-vm-tiered-memory/tiered-21.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/esxi-vm-tiered-memory/tiered-21.png"
+            data-srcset="/esxi-vm-tiered-memory/tiered-21.png, /esxi-vm-tiered-memory/tiered-21.png 1.5x, /esxi-vm-tiered-memory/tiered-21.png 2x"
+            data-sizes="auto"
+            alt="/esxi-vm-tiered-memory/tiered-21.png" width="1707" height="922" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons learned:</h6>
+<ul>
+<li>Incorporating a FastAPI server adds an additional layer to your observability environment, but the capabilities it unlocks are remarkable. It enables you to gather and serve custom metrics, offering greater flexibility and control over your monitoring and performance analysis. This approach not only enhances visibility but also provides powerful tools to extend the insights available in your environment.</li>
+<li>Just because products don’t offer APIs out of the box for the metrics you need doesn’t mean you’re limited. You can always leverage custom scripts to gather the data you want. By combining tools like PowerShell, SSH, and FastAPI, you can extract and integrate those custom metrics into your observability platform, giving you the flexibility to get exactly the insights you need.</li>
+</ul>
+<hr>
+<h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
+<ul>
+<li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreffer ">FastAPI</a></li>
+<li><a href="https://rockylinux.org/download" target="_blank" rel="noopener noreffer ">Rocky Linux | Downloads</a></li>
+<li><a href="https://marketplace.cloud.vmware.com/services/details/draft-vmware-aria-operation-management-pack-builder-1-1?slug=true" target="_blank" rel="noopener noreffer ">VCF Operations | Management Pack Builder | Download</a></li>
+<li><a href="https://www.brockpeterson.com" target="_blank" rel="noopener noreffer ">Brock Peterson Blogs | Great place to get Dashboard Ideas and see MPB examples</a></li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-10-05</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/esxi-vm-tiered-memory/" data-title="VCF Operations Dashboard | ESXi Tiered Memory" data-via="dalehassinger" data-hashtags="ESXi,Tiered Memory,VCF Operations Management Pack Builder,VCF Operations,Dashboard,FastAPI,PowerShell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/esxi-vm-tiered-memory/" data-hashtag="ESXi"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/esxi-vm-tiered-memory/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/esxi/">ESXi</a>,&nbsp;<a href="/tags/tiered-memory/">Tiered Memory</a>,&nbsp;<a href="/tags/vcf-operations-management-pack-builder/">VCF Operations Management Pack Builder</a>,&nbsp;<a href="/tags/vcf-operations/">VCF Operations</a>,&nbsp;<a href="/tags/dashboard/">Dashboard</a>,&nbsp;<a href="/tags/fastapi/">FastAPI</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vmware-explore-2024-insights-session-links/" class="prev" rel="prev" title="VMware Explore 2024 | My Insights, Session Recording Links and PICs"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware Explore 2024 | My Insights, Session Recording Links and PICs</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
