@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/esxi-vm-tiered-memory\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "ESXi, Tiered Memory, VCF Operations Management Pack Builder, VCF Operations, Dashboard, FastAPI, PowerShell","wordcount":  2072 ,
+                        }],"genre": "posts","keywords": "ESXi, Tiered Memory, VCF Operations Management Pack Builder, VCF Operations, Dashboard, FastAPI, PowerShell","wordcount":  2405 ,
         "url": "https:\/\/www.vcrocs.info\/esxi-vm-tiered-memory\/","datePublished": "2024-10-05T00:00:00+00:00","dateModified": "2024-10-05T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,8 +124,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations Dashboard | ESXi Tiered Memory</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-05">2024-10-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2072 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-05">2024-10-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2405 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -172,11 +172,13 @@
 </blockquote>
 <hr>
 <p>Here’s a use case that demonstrates the powerful capabilities of the <strong>VCF Operations Manager Pack Builder</strong> in your environment. With the introduction of <strong>Tiered Memory</strong> in ESXi 8.0.3, VMware hasn’t yet integrated tiered memory metrics visibility for VMs using tiered memory into <strong>VCF Operations</strong>. However, <strong>William Lam</strong> has provided a <strong>Blog</strong> outlining the necessary commands to retrieve the tiered memory metrics. <a href="https://williamlam.com/2024/09/how-much-virtual-machine-memory-is-using-nvme-tiering.html" target="_blank" rel="noopener noreffer ">Click here to see Blog</a></p>
-<p>To build an Operations Management Pack (MP) that captures this data, you need to utilize APIs. In my approach, I used <strong>FastAPI</strong> to execute a <strong>PowerShell Script</strong> that connects to vCenter to gather a list of ESXi hosts. The script then establishes an SSH connection to each host, retrieves the tiered memory metrics, and sends the results back to FastAPI. These metrics are then made available for Management Pack Builder, allowing you to incorporate the new metrics into the existing VM object within Operations.</p>
-<p>Once the tiered memory metrics are available in Operations, you can create some impressive dashboards to display this information. These dashboards provide a clear, visual representation of how tiered memory is being utilized across your environment, giving you deeper insights and making it easier to monitor and optimize performance.</p>
+<p>To build an Operations Management Pack (MP) that captures this data, you need to utilize APIs. In my approach, I used <strong>FastAPI</strong> to execute a <strong>PowerShell Script</strong> that connects to vCenter to gather a list of ESXi hosts. The script then establishes an SSH connection to each host, retrieves the VM tiered memory metrics, and sends the results back to FastAPI. These metrics are then made available for Management Pack Builder, allowing you to incorporate the new metrics into the existing VM object within Operations.</p>
+<p>Once the VM tiered memory metrics are available in Operations, you can create some impressive dashboards to display this information. These dashboards provide a clear, visual representation of how tiered memory is being utilized across your environment, giving you deeper insights and making it easier to monitor and optimize performance.</p>
 <p>Using a tool like FastAPI to provide additional metrics to Operations opens up a world of possibilities. Once you understand the steps involved, your thought process becomes your most powerful observability tool. This approach empowers you to extend the capabilities of Operations, allowing you to gather and visualize critical metrics that might not be available out of the box.</p>
 <p>To get started, you’ll need to set up a server with FastAPI installed. In my lab, I created a Rocky Linux 9.4 VM and installed the latest version of FastAPI. Additionally, I installed the latest version of PowerShell along with the VMware PowerCLI and Posh-SSH modules, enabling the necessary functionality for this setup.</p>
 <p>To create and edit code on my Rocky Linux server, I prefer using the Remote SSH add-in for VSCode, which I have installed on my Apple MacBook. This approach allows me to avoid using the graphical version of Rocky Linux Server, keeping the setup lean and mean. I use PowerShell on Linux servers all the time—I’ve loved it ever since PowerShell became cross-platform.</p>
+<p>While working on this blog and sharing links to the discussed resources, I came across another  post by William Lam that also explains how to retrieve Host Tiered Memory settings. I adapted William&rsquo;s script to work with MPB and added the new properties to my FastAPI Management Pack. <a href="https://williamlam.com/2024/10/useful-nvme-tiering-reporting-using-vsphere-8-0-update-3-apis.html" target="_blank" rel="noopener noreffer ">Click here to see Blog</a></p>
+<p>I encourage you to install the VCF Operations Management Pack Builder appliance and download the MP export file linked at the end of this blog. My goal is for you to understand how Management Packs (MPs) work. While simply using a pre-built MP is easy, taking the time to learn how this MP works will inspire you with new ideas for integrating properties and metrics from other products into your enterprise environment.</p>
 <hr>
 <h6 id="fastapi">FastAPI</h6>
 <p>The steps I used to install FastAPI on Rocky Linux Server 9.4:</p>
@@ -255,12 +257,11 @@
 </div><h6 id="fastapi-application-python-code">FastAPI application python code:</h6>
 <p><strong>URLs used in my Lab:</strong></p>
 <ul>
-<li>For Tiered Memory you would use http://192.168.6.83:8000/tiered</li>
+<li>For VM Tiered Memory you would use http://192.168.6.83:8000/tieredVM</li>
 <li>You can have many urls. See the sample FastAPI Python code.
 <ul>
 <li>To return simple json information use http://192.168.6.83:8000/</li>
-<li>To run a PowerShell script to get VM information http://192.168.6.83:8000/vms</li>
-<li>To run a PowerShell script to get Host information http://192.168.6.83:8000/hosts</li>
+<li>To run a PowerShell script to get Host Tiered Memory settings http://192.168.6.83:8000/tieredHost</li>
 </ul>
 </li>
 <li>I converted the data to json in the PowerShell Script. I wanted FastAPI to just return plaintext. See the Python code on how to do this.</li>
@@ -311,21 +312,6 @@
 </span><span class="lnt">41
 </span><span class="lnt">42
 </span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl">
@@ -339,11 +325,11 @@
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">read_root</span><span class="p">():</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span><span class="s2">&#34;Hello&#34;</span><span class="p">:</span> <span class="s2">&#34;Welcome to the FastAPI Server by vCROCS!&#34;</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/tiered&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/tieredVM&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">run_powershell_script</span><span class="p">():</span>
 </span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="c1"># Run the PowerShell script and capture the output</span>
-</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/tiered.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/tieredVM.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1"># Check if there&#39;s an error in the execution</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -355,27 +341,12 @@
 </span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/vms&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/tieredHost&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">run_powershell_script</span><span class="p">():</span>
 </span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="c1"># Run the PowerShell script and capture the output</span>
-</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/vms.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c1"># Check if there&#39;s an error in the execution</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1"># Return the raw output from the PowerShell script without modification</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PlainTextResponse</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl"><span class="nd">@app.get</span><span class="p">(</span><span class="s2">&#34;/hosts&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">run_powershell_script</span><span class="p">():</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># Run the PowerShell script and capture the output</span>
-</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/hosts.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;pwsh&#34;</span><span class="p">,</span> <span class="s2">&#34;-File&#34;</span><span class="p">,</span> <span class="s2">&#34;/root/tieredHost.ps1&#34;</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1"># Check if there&#39;s an error in the execution</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -390,7 +361,7 @@
 </div>
 </div><hr>
 <h6 id="powershell-script">PowerShell Script</h6>
-<p>PowerShell script to collect the tiered memory metrics from the ESXi Hosts:</p>
+<p>PowerShell script to collect the VM Tiered Memory metrics from the ESXi Hosts:</p>
 <p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -627,6 +598,129 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
+<p>PowerShell script to collect the Host Tiered Memory Properties:</p>
+<p><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Most of this Code from William Lam Blog Post</span>
+</span></span><span class="line"><span class="cl"><span class="c"># https://williamlam.com/2024/10/useful-nvme-tiering-reporting-using-vsphere-8-0-update-3-apis.html</span>
+</span></span><span class="line"><span class="cl"><span class="c"># I changed the code to test in my Lab. Select all hosts 8.0.3 or greater. Convert results to json to work with MPB.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define parameters for the Connect-VIServer cmdlet using splatting</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ConnectionParams</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Server</span>   <span class="p">=</span> <span class="s2">&#34;192.168.6.100&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span>     <span class="p">=</span> <span class="s2">&#34;administrator@vcrocs.local&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Password</span> <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Force</span>    <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to the vCenter Server</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenter</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="nv">@ConnectionParams</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$vmHosts</span> <span class="p">=</span> <span class="nb">Get-VMhost</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Version</span> <span class="o">-ge</span> <span class="s2">&#34;8.0.3&#34;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$vmhost</span> <span class="k">in</span> <span class="nv">$vmHosts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$tieringType</span> <span class="p">=</span> <span class="nv">$vmhost</span><span class="p">.</span><span class="py">ExtensionData</span><span class="p">.</span><span class="py">Hardware</span><span class="p">.</span><span class="py">memoryTieringType</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$totalMemory</span> <span class="p">=</span> <span class="p">[</span><span class="no">math</span><span class="p">]::</span><span class="n">round</span><span class="p">(</span><span class="nv">$vmhost</span><span class="p">.</span><span class="py">ExtensionData</span><span class="p">.</span><span class="py">Hardware</span><span class="p">.</span><span class="py">MemorySize</span> <span class="p">/</span><span class="mf">1</span><span class="p">GB,</span><span class="mf">2</span><span class="p">).</span><span class="py">ToString</span><span class="p">()</span> <span class="p">+</span> <span class="s2">&#34; GB&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$tieringRatio</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$vmhost</span> <span class="p">|</span> <span class="nb">Get-AdvancedSetting</span> <span class="n">Mem</span><span class="p">.</span><span class="n">TierNvmePct</span><span class="p">).</span><span class="py">Value</span><span class="p">.</span><span class="py">toString</span><span class="p">()</span> <span class="p">+</span> <span class="s2">&#34;%&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nv">$tieringEnabled</span> <span class="p">=</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$tieringType</span> <span class="o">-eq</span> <span class="s2">&#34;softwareTiering&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$tieringEnabled</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nv">$dramTotal</span> <span class="p">=</span> <span class="p">[</span><span class="no">math</span><span class="p">]::</span><span class="n">round</span><span class="p">((</span><span class="nv">$vmhost</span><span class="p">.</span><span class="py">ExtensionData</span><span class="p">.</span><span class="py">Hardware</span><span class="p">.</span><span class="py">MemoryTierInfo</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-eq</span> <span class="s2">&#34;DRAM&#34;</span><span class="p">}).</span><span class="py">Size</span> <span class="p">/</span><span class="mf">1</span><span class="p">GB,</span><span class="mf">2</span><span class="p">).</span><span class="py">ToString</span><span class="p">()</span> <span class="p">+</span> <span class="s2">&#34; GB&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$nvmeTotal</span> <span class="p">=</span> <span class="p">[</span><span class="no">math</span><span class="p">]::</span><span class="n">round</span><span class="p">((</span><span class="nv">$vmhost</span><span class="p">.</span><span class="py">ExtensionData</span><span class="p">.</span><span class="py">Hardware</span><span class="p">.</span><span class="py">MemoryTierInfo</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-eq</span> <span class="s2">&#34;NVMe&#34;</span><span class="p">}).</span><span class="py">Size</span> <span class="p">/</span><span class="mf">1</span><span class="p">GB,</span><span class="mf">2</span><span class="p">).</span><span class="py">ToString</span><span class="p">()</span> <span class="p">+</span> <span class="s2">&#34; GB&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nv">$storageSystem</span> <span class="p">=</span> <span class="nb">Get-View</span> <span class="nv">$vmhost</span><span class="p">.</span><span class="py">ExtensionData</span><span class="p">.</span><span class="py">ConfigManager</span><span class="p">.</span><span class="py">StorageSystem</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$nvmeDevice</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$storageSystem</span><span class="p">.</span><span class="py">StorageDeviceInfo</span><span class="p">.</span><span class="py">ScsiLun</span> <span class="p">|</span> <span class="nb">where </span><span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">UsedByMemoryTiering</span> <span class="o">-eq</span> <span class="vm">$true</span><span class="p">}).</span><span class="py">CanonicalName</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$dramTotal</span> <span class="p">=</span> <span class="nv">$totalMemory</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$nvmeTotal</span> <span class="p">=</span> <span class="mf">0</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$nvmeDevice</span> <span class="p">=</span> <span class="s2">&#34;N/A&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$tmp</span> <span class="p">=</span> <span class="p">[</span><span class="no">pscustomobject</span><span class="p">]</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">VMHost</span> <span class="p">=</span> <span class="nv">$vmhost</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TieringEnabled</span> <span class="p">=</span> <span class="nv">$tieringEnabled</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TieringRatio</span> <span class="p">=</span> <span class="nv">$tieringRatio</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DRAMMemory</span> <span class="p">=</span> <span class="nv">$dramTotal</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NVMeMemory</span> <span class="p">=</span> <span class="nv">$nvmeTotal</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TotalSystemMemory</span> <span class="p">=</span> <span class="nv">$totalMemory</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NVMeDevice</span> <span class="p">=</span> <span class="nv">$nvmeDevice</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$results</span><span class="p">+=</span><span class="nv">$tmp</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Compress</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Disconnect from vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
 <h6 id="vcf-operations">VCF Operations:</h6>
 <ul>
 <li>These metrics will allow you to create some great operational insights, including cool dashboards.</li>
@@ -639,7 +733,7 @@
             data-src="/esxi-vm-tiered-memory/tiered-01.png"
             data-srcset="/esxi-vm-tiered-memory/tiered-01.png, /esxi-vm-tiered-memory/tiered-01.png 1.5x, /esxi-vm-tiered-memory/tiered-01.png 2x"
             data-sizes="auto"
-            alt="/esxi-vm-tiered-memory/tiered-01.png" width="2144" height="1205" />
+            alt="/esxi-vm-tiered-memory/tiered-01.png" width="2006" height="1241" />
     </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
     </figure>
 <hr>
@@ -879,6 +973,7 @@
 <hr>
 <h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
 <ul>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Management-Packs/FastAPI" target="_blank" rel="noopener noreffer ">MP Export File to use with MPB</a></li>
 <li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreffer ">FastAPI</a></li>
 <li><a href="https://rockylinux.org/download" target="_blank" rel="noopener noreffer ">Rocky Linux | Downloads</a></li>
 <li><a href="https://marketplace.cloud.vmware.com/services/details/draft-vmware-aria-operation-management-pack-builder-1-1?slug=true" target="_blank" rel="noopener noreffer ">VCF Operations | Management Pack Builder | Download</a></li>
