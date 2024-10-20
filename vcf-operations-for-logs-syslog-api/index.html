@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VCF Operations for Logs | How to use with Automation Scripts - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VCF Operations for Logs | How to use with Automation Scripts">
+  <meta property="og:description" content="How to send Automation Script Execution Log Events to VCF Operations for Logs.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-19T00:00:00+00:00">
+    <meta property="article:tag" content="VCF">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="Deployments">
+    <meta property="article:tag" content="Operations">
+    <meta property="article:tag" content="Syslog">
+    <meta property="article:tag" content="PowerShell">
+    <meta property="og:image" content="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/featured-image.png">
+  <meta name="twitter:title" content="VCF Operations for Logs | How to use with Automation Scripts">
+  <meta name="twitter:description" content="How to send Automation Script Execution Log Events to VCF Operations for Logs.">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/" /><link rel="prev" href="https://www.vcrocs.info/vcf-automation-deployment-overview-tab/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VCF Operations for Logs | How to use with Automation Scripts",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/vcf-operations-for-logs-syslog-api\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/vcf-operations-for-logs-syslog-api\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VCF, Automation, Deployments, Operations, syslog, PowerShell","wordcount":  2191 ,
+        "url": "https:\/\/www.vcrocs.info\/vcf-operations-for-logs-syslog-api\/","datePublished": "2024-10-19T00:00:00+00:00","dateModified": "2024-10-19T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations for Logs | How to use with Automation Scripts</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-19">2024-10-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2191 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/vcf-operations-for-logs-syslog-api/featured-image.png"
+        data-srcset="/vcf-operations-for-logs-syslog-api/featured-image.png, /vcf-operations-for-logs-syslog-api/featured-image.png 1.5x, /vcf-operations-for-logs-syslog-api/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/vcf-operations-for-logs-syslog-api/featured-image.png"
+        title="/vcf-operations-for-logs-syslog-api/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#example-code">Example Code:</a></li>
+                    <li><a href="#filter-examples">Filter Examples:</a></li>
+                    <li><a href="#screen-shots">Screen Shots:</a></li>
+                    <li><a href="#rfc-3164-code-example">RFC 3164 Code Example:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                    <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to send Automation Script Execution Log Events to VCF Operations for Logs.</strong></p>
+<hr>
+<blockquote>
+<p>Surround yourself with people that push you to do better. No drama or negativity. Just higher goals and higher motivation. Good times and positive energy. No jealousy or hate. Simply bring out the absolute best in each other. – Warren Buffett</p>
+</blockquote>
+<hr>
+<p><small><strong>Note: VCF Operations and Operations for Logs 8.18.0 was used to create this Blog</strong></small></p>
+<p>I’ve always felt that <strong>VCF Operations for Logs</strong> deserves more attention, it is a great product. With the Diagnostics Feature <small>(Skyline Replacement)</small> now included in VCF Operations, having VCF Operations for Logs installed <small>(Requirement for Operations Diagnostics Feature)</small> and configured for integration is a <strong>game changer</strong>. It excites me because now, many of the customers I work with will have access to VCF Operations for Logs in their environment, going beyond just collecting vCenter and ESXi Host logs.</p>
+<p>When developing <strong>Automation Scripts</strong> and processes, I always prioritize execution logging. In the past, I relied on generating text-based log files. However, my latest approach is to route all script logging data directly to VCF Operations for Logs. Once you learn to format the log data in a way that makes it easily searchable, you’ll find yourself wanting to use VCF Operations for Logs for all your logging needs. It transforms log management into an <strong>efficient and streamlined</strong> process that enhances script visibility and performance monitoring.</p>
+<p>In this blog, I’ll share some sample script files demonstrating how to send logging information to Log Insight. Sending log data to VCF Operations for Logs via the API is straightforward and requires minimal code. One of the key advantages is that no authentication is needed to send log data, which not only simplifies the scripts but also improves execution speed.</p>
+<p>I’ve also included some sample filter queries that can be used within VCF Operations for Logs. If you’ve read my other blog posts, you’ll know I’m a big fan of creating custom VCF Operations <strong>Dashboards</strong> to present data in a <strong>user-friendly</strong> format. My goal is to ensure the data is formatted for quick visibility, allowing you to immediately spot issues that require attention. In this post, I’ll demonstrate how to use the Logs Widget within custom VCF Operations Dashboards to enhance your monitoring and troubleshooting experience.</p>
+<hr>
+<h6 id="example-code">Example Code:</h6>
+<p>Code details to make filter queries easier and exact:</p>
+<ul>
+<li>The parameters in the code are the fields used in VCF Operations for Logs event</li>
+<li>You will use these fields to filter events</li>
+<li>Fields in my example code
+<ul>
+<li>Uri              = # API Endpoint to send the event data</li>
+<li>priority         = # Event priority (info, warning, error, etc.)</li>
+<li>facility         = # Source generating the event (user, system, etc.)</li>
+<li>appname          = # Application name logging the event</li>
+<li>hostname         = # Hostname of the system (optional)</li>
+<li>vmw_esxi_vm_name = # Name of the VM or ESXi host (optional)</li>
+<li>vmw_vcenter      = # Name of the vCenter (optional)</li>
+<li>vmw_cluster      = # Name of the vCenter cluster (optional)</li>
+<li>vmw_host         = # Name of the vCenter Host (optional)</li>
+<li>Text             = # Custom text describing the event</li>
+</ul>
+</li>
+<li>Think about how to filter when creating the log events. Don&rsquo;t just add events without making sure a filter can find the precise results.</li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># This is a Fuction to send log events to VCF Operations for Logs</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Send-ApiEvent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">Param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="c"># Parameters with default values, can be overridden as needed.</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Uri</span>              <span class="p">=</span> <span class="s1">&#39;https://vaol-vip.vcrocs.local:9543/api/v2/events&#39;</span><span class="p">,</span>  <span class="c"># API Endpoint to send the event data. url and port listed.</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$priority</span>         <span class="p">=</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>                    <span class="c"># Event priority (info, warning, error, etc.)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$facility</span>         <span class="p">=</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>                    <span class="c"># Source generating the event (user, system, etc.)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$appname</span>          <span class="p">=</span> <span class="s1">&#39;VCF_Automation&#39;</span><span class="p">,</span>          <span class="c"># Application name logging the event</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$hostname</span>         <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Hostname of the system (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_esxi_vm_name</span> <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the VM or ESXi host (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_vcenter</span>      <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the vCenter (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_cluster</span>      <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the vCenter cluster (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_host</span>         <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the vCenter Host (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Text</span>             <span class="p">=</span> <span class="s2">&#34;Custom Script execution&#34;</span>  <span class="c"># Custom text describing the event</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="c"># End Param</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Define headers for the REST API call, using JSON for content type and response format.</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$headers</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;accept&#39;</span>       <span class="p">=</span> <span class="s1">&#39;application/json&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;Content-Type&#39;</span> <span class="p">=</span> <span class="s1">&#39;application/json&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># End headers</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Construct the JSON body for the API request using a here-string.</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$body</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">  [
+</span></span></span><span class="line"><span class="cl"><span class="sh">    {
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;priority&#34;: &#34;</span><span class="nv">$priority</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;facility&#34;: &#34;</span><span class="nv">$facility</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;appname&#34;:  &#34;</span><span class="nv">$appname</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;hostname&#34;: &#34;</span><span class="nv">$hostname</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_esxi_vm_name&#34;: &#34;</span><span class="nv">$vmw_esxi_vm_name</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_vcenter&#34;: &#34;</span><span class="nv">$vmw_vcenter</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_cluster&#34;: &#34;</span><span class="nv">$vmw_cluster</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_host&#34;: &#34;</span><span class="nv">$vmw_host</span><span class="sh">&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;text&#34;: &#34;</span><span class="nv">$Text</span><span class="sh">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    }
+</span></span></span><span class="line"><span class="cl"><span class="sh">  ]
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span> <span class="c"># End Body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># Send the POST request to the API endpoint within a try-catch block for error handling.</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c"># Invoke-RestMethod is used to send the API request and return the response.</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$Uri</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c"># Output the API response if successful.</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Host</span> <span class="s2">&#34;API response: &#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$response</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c"># Handle any errors that occur during the request and output the error message.</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">Write-Host</span> <span class="s2">&#34;Error occurred: </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="py">Exception</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># End try/catch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># Function End</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Example usage of the Send-ApiEvent function.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Customize the message text, add relevant data to $text, and invoke the function.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$text</span> <span class="p">=</span> <span class="s2">&#34;PowerShell: &#34;</span> <span class="p">+</span> <span class="s2">&#34;A new process has been created with ID 9876&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Send-ApiEvent</span> <span class="n">-Text</span> <span class="nv">$text</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># This is a example script to give you ideas on how to use the function listed above.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Load the Syslog function script, which will be used for logging events via Aria Operations for Logs API.</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span> <span class="p">/</span><span class="nb">Path-To</span><span class="n">-Script</span><span class="p">/</span><span class="nb">aria-operations</span><span class="n">-for-logs-syslog-api</span><span class="p">.</span><span class="py">ps1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define the VM name and the script process description</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;vCROCS-W2K22-02&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$scriptProcess</span> <span class="p">=</span> <span class="s2">&#34;VM Build: &#34;</span> <span class="p">+</span> <span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Connect to vCenter ---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define the parameters for connecting to the vCenter Server</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$ConnectVIServerParams</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Server</span>   <span class="p">=</span> <span class="s1">&#39;192.168.6.100&#39;</span>                     <span class="c"># vCenter Server IP or FQDN</span>
+</span></span><span class="line"><span class="cl">    <span class="n">User</span>     <span class="p">=</span> <span class="s1">&#39;administrator@vcrocs.local&#39;</span>        <span class="c"># vCenter Admin Username</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Password</span> <span class="p">=</span> <span class="s1">&#39;VMware1!&#39;</span>                          <span class="c"># vCenter Admin Password</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Protocol</span> <span class="p">=</span> <span class="s1">&#39;https&#39;</span>                             <span class="c"># Secure Protocol</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Force</span>    <span class="p">=</span> <span class="vm">$true</span>                               <span class="c"># Force connection even if already connected</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Log the connection attempt to Aria Operations for Logs</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$text</span> <span class="p">=</span> <span class="nv">$scriptProcess</span> <span class="p">+</span> <span class="s2">&#34; - Connecting to vCenter Server: &#34;</span> <span class="p">+</span> <span class="nv">$ConnectVIServerParams</span><span class="p">.</span><span class="py">Server</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Send-ApiEvent</span> <span class="n">-text</span> <span class="nv">$text</span> <span class="n">-vmw_vcenter</span> <span class="nv">$ConnectVIServerParams</span><span class="p">.</span><span class="py">Server</span> <span class="n">-vmw_esxi_vm_name</span> <span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Establish the connection to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenterConnect</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="nv">@ConnectVIServerParams</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Log successful connection status to Aria Operations for Logs</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$text</span> <span class="p">=</span> <span class="nv">$scriptProcess</span> <span class="p">+</span> <span class="s2">&#34; - Connection to vCenter Server: &#34;</span> <span class="p">+</span> <span class="nv">$ConnectVIServerParams</span><span class="p">.</span><span class="py">Server</span> <span class="p">+</span> <span class="s2">&#34; Successful: &#34;</span> <span class="p">+</span> <span class="nv">$vCenterConnect</span><span class="p">.</span><span class="py">IsConnected</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Send-ApiEvent</span> <span class="n">-text</span> <span class="nv">$text</span> <span class="n">-vmw_vcenter</span> <span class="nv">$ConnectVIServerParams</span><span class="p">.</span><span class="py">Server</span> <span class="n">-vmw_esxi_vm_name</span> <span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Add Your VM Build Steps Here ---</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Insert your VM build process code below. This section is a placeholder for any actions you will take on the VM during the build.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Example Log Event - Add specific operations during VM build (e.g., software installation, configuration, etc.)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$text</span> <span class="p">=</span> <span class="nv">$scriptProcess</span> <span class="p">+</span> <span class="s2">&#34; - Installing VCF Operations for Logs Agent&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Send-ApiEvent</span> <span class="n">-text</span> <span class="nv">$text</span> <span class="n">-vmw_vcenter</span> <span class="nv">$ConnectVIServerParams</span><span class="p">.</span><span class="py">Server</span> <span class="n">-vmw_esxi_vm_name</span> <span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># --- Disconnect from vCenter ---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Log the disconnection attempt from vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$text</span> <span class="p">=</span> <span class="nv">$scriptProcess</span> <span class="p">+</span> <span class="s2">&#34; - Disconnecting from vCenter Server&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Send-ApiEvent</span> <span class="n">-text</span> <span class="nv">$text</span> <span class="n">-vmw_vcenter</span> <span class="nv">$ConnectVIServerParams</span><span class="p">.</span><span class="py">Server</span> <span class="n">-vmw_esxi_vm_name</span> <span class="nv">$vmName</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Disconnect from the vCenter Server without confirmation prompts</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="nv">$ConnectVIServerParams</span><span class="p">.</span><span class="py">Server</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="filter-examples">Filter Examples:</h6>
+<ul>
+<li>See first screen shot for a visual example</li>
+<li>appname contains vcf_automation</li>
+<li>text contains VM Build:</li>
+<li>vmw_esxi_vm_name conatins vcrocs-w2k22-02</li>
+</ul>
+<hr>
+<h6 id="screen-shots">Screen Shots:</h6>
+<p><small>Screen Shot of the VCF Operations for Logs - Filter query and results:</small></p>
+<figure><a class="lightgallery" href="/vcf-operations-for-logs-syslog-api/logs-api-01.png" title="/vcf-operations-for-logs-syslog-api/logs-api-01.png" data-thumbnail="/vcf-operations-for-logs-syslog-api/logs-api-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-for-logs-syslog-api/logs-api-01.png"
+            data-srcset="/vcf-operations-for-logs-syslog-api/logs-api-01.png, /vcf-operations-for-logs-syslog-api/logs-api-01.png 1.5x, /vcf-operations-for-logs-syslog-api/logs-api-01.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-for-logs-syslog-api/logs-api-01.png" width="3646" height="2264" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><small>Screen Shot of the VCF Operations Log Analysis - Filter query and results:</small></p>
+<figure><a class="lightgallery" href="/vcf-operations-for-logs-syslog-api/logs-api-02.png" title="/vcf-operations-for-logs-syslog-api/logs-api-02.png" data-thumbnail="/vcf-operations-for-logs-syslog-api/logs-api-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-for-logs-syslog-api/logs-api-02.png"
+            data-srcset="/vcf-operations-for-logs-syslog-api/logs-api-02.png, /vcf-operations-for-logs-syslog-api/logs-api-02.png 1.5x, /vcf-operations-for-logs-syslog-api/logs-api-02.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-for-logs-syslog-api/logs-api-02.png" width="3984" height="2254" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><small>Screen Shot of the VCF Operations custom Dashboard using the Log Widget:</small></p>
+<figure><a class="lightgallery" href="/vcf-operations-for-logs-syslog-api/logs-api-03.png" title="/vcf-operations-for-logs-syslog-api/logs-api-03.png" data-thumbnail="/vcf-operations-for-logs-syslog-api/logs-api-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-for-logs-syslog-api/logs-api-03.png"
+            data-srcset="/vcf-operations-for-logs-syslog-api/logs-api-03.png, /vcf-operations-for-logs-syslog-api/logs-api-03.png 1.5x, /vcf-operations-for-logs-syslog-api/logs-api-03.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-for-logs-syslog-api/logs-api-03.png" width="3408" height="2120" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="rfc-3164-code-example">RFC 3164 Code Example:</h6>
+<p>I often say there are many ways to achieve the same outcome. While researching for this blog, I came across examples of sending syslog data to VCF Operations for Logs using the RFC 3164 standard. I created a script, tested it in my lab, and it works well. Personally, I prefer using the VCF Operations for Logs API, but I recognize that others may have a use case for this approach. I’m sharing it here in hopes that it might be helpful to someone.</p>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Send-SyslogMessage</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">Param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$IP</span>             <span class="p">=</span> <span class="s2">&#34;192.168.6.94&#34;</span><span class="p">,</span>        <span class="c"># Default Syslog server IP</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$Port</span>              <span class="p">=</span> <span class="mf">514</span><span class="p">,</span>                   <span class="c"># Default Syslog server UDP port</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Facility</span>       <span class="p">=</span> <span class="s2">&#34;syslog&#34;</span><span class="p">,</span>              <span class="c"># Default Syslog facility</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Severity</span>       <span class="p">=</span> <span class="s2">&#34;info&#34;</span><span class="p">,</span>                <span class="c"># Default Syslog severity</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Content</span>        <span class="p">=</span> <span class="s2">&#34;No Content provided&#34;</span><span class="p">,</span> <span class="c"># Default Message content</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$SourceHostname</span> <span class="p">=</span> <span class="s2">&#34;VCF-Automation&#34;</span><span class="p">,</span>      <span class="c"># Default Hostname</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Tag</span>            <span class="p">=</span> <span class="s2">&#34;PS-Script&#34;</span>            <span class="c"># Default Tag for the message</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Map RFC 3164 facilities to numeric values</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$facilityMap</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">kern</span>      <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="n">user</span>      <span class="p">=</span> <span class="mf">1</span><span class="p">;</span> <span class="n">mail</span>      <span class="p">=</span> <span class="mf">2</span><span class="p">;</span>  <span class="n">daemon</span>   <span class="p">=</span> <span class="mf">3</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">auth</span>      <span class="p">=</span> <span class="mf">4</span><span class="p">;</span> <span class="n">syslog</span>    <span class="p">=</span> <span class="mf">5</span><span class="p">;</span> <span class="n">lpr</span>       <span class="p">=</span> <span class="mf">6</span><span class="p">;</span>  <span class="n">news</span>     <span class="p">=</span> <span class="mf">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">uucp</span>      <span class="p">=</span> <span class="mf">8</span><span class="p">;</span> <span class="n">cron</span>      <span class="p">=</span> <span class="mf">9</span><span class="p">;</span> <span class="n">authpriv</span>  <span class="p">=</span> <span class="mf">10</span><span class="p">;</span> <span class="n">ftp</span>      <span class="p">=</span> <span class="mf">11</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ntp</span>       <span class="p">=</span> <span class="mf">12</span><span class="p">;</span> <span class="n">audit</span>    <span class="p">=</span> <span class="mf">13</span><span class="p">;</span> <span class="n">alert</span>    <span class="p">=</span> <span class="mf">14</span><span class="p">;</span> <span class="n">clock</span>    <span class="p">=</span> <span class="mf">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local0</span>    <span class="p">=</span> <span class="mf">16</span><span class="p">;</span> <span class="n">local1</span>   <span class="p">=</span> <span class="mf">17</span><span class="p">;</span> <span class="n">local2</span>   <span class="p">=</span> <span class="mf">18</span><span class="p">;</span> <span class="n">local3</span>   <span class="p">=</span> <span class="mf">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">local4</span>    <span class="p">=</span> <span class="mf">20</span><span class="p">;</span> <span class="n">local5</span>   <span class="p">=</span> <span class="mf">21</span><span class="p">;</span> <span class="n">local6</span>   <span class="p">=</span> <span class="mf">22</span><span class="p">;</span> <span class="n">local7</span>   <span class="p">=</span> <span class="mf">23</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Map RFC 3164 severities to numeric values</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$severityMap</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">emerg</span>     <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="n">alert</span>     <span class="p">=</span> <span class="mf">1</span><span class="p">;</span> <span class="n">crit</span>      <span class="p">=</span> <span class="mf">2</span><span class="p">;</span> <span class="n">err</span>       <span class="p">=</span> <span class="mf">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">warn</span>      <span class="p">=</span> <span class="mf">4</span><span class="p">;</span> <span class="n">notice</span>    <span class="p">=</span> <span class="mf">5</span><span class="p">;</span> <span class="n">info</span>      <span class="p">=</span> <span class="mf">6</span><span class="p">;</span> <span class="n">debug</span>     <span class="p">=</span> <span class="mf">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Resolve facility and severity values</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$facilityValue</span> <span class="p">=</span> <span class="nv">$facilityMap</span><span class="p">[</span><span class="nv">$Facility</span><span class="p">.</span><span class="py">ToLower</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$severityValue</span> <span class="p">=</span> <span class="nv">$severityMap</span><span class="p">[</span><span class="nv">$Severity</span><span class="p">.</span><span class="py">ToLower</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$facilityValue</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$facilityValue</span> <span class="p">=</span> <span class="nv">$facilityMap</span><span class="p">[</span><span class="s2">&#34;syslog&#34;</span><span class="p">]</span> <span class="p">}</span>  <span class="c"># Default to syslog</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$severityValue</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$severityValue</span> <span class="p">=</span> <span class="nv">$severityMap</span><span class="p">[</span><span class="s2">&#34;info&#34;</span><span class="p">]</span> <span class="p">}</span>    <span class="c"># Default to informational</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Calculate the syslog priority value</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$pri</span> <span class="p">=</span> <span class="s2">&#34;&lt;&#34;</span> <span class="p">+</span> <span class="p">((</span><span class="nv">$facilityValue</span> <span class="p">*</span> <span class="mf">8</span><span class="p">)</span> <span class="p">+</span> <span class="nv">$severityValue</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Timestamp in RFC 3164 format</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$timestamp</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="py">ToString</span><span class="p">(</span><span class="s2">&#34;MMM dd HH:mm:ss&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Create the syslog message</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$header</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$timestamp</span><span class="s2"> </span><span class="nv">$SourceHostname</span><span class="s2"> &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$msg</span> <span class="p">=</span> <span class="nv">$pri</span> <span class="p">+</span> <span class="nv">$header</span> <span class="p">+</span> <span class="nv">$Tag</span> <span class="p">+</span> <span class="s2">&#34;: &#34;</span> <span class="p">+</span> <span class="nv">$Content</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Display the message to be sent</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Write-Host &#34;Sending syslog message: $msg&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Convert message to ASCII bytes</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$byteArray</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Text.Encoding</span><span class="p">]::</span><span class="n">ASCII</span><span class="p">.</span><span class="py">GetBytes</span><span class="p">(</span><span class="nv">$msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Send the message via UDP</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$udpClient</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="py">Sockets</span><span class="p">.</span><span class="py">UdpClient</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$udpClient</span><span class="p">.</span><span class="py">Connect</span><span class="p">(</span><span class="nv">$IP</span><span class="p">,</span> <span class="nv">$Port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$udpClient</span><span class="p">.</span><span class="py">Send</span><span class="p">(</span><span class="nv">$byteArray</span><span class="p">,</span> <span class="nv">$byteArray</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$udpClient</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="s2">&#34;Syslog message sent to &#34;</span> <span class="p">+</span> <span class="nv">$IP</span> <span class="p">+</span> <span class="s2">&#34;:&#34;</span> <span class="p">+</span> <span class="nv">$Port</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="nv">$output</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Example usage of the function</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Send-SyslogMessage</span> <span class="n">-Content</span> <span class="s2">&#34;Creating PS Script for Syslog&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>VCF Operations for Logs is an excellent syslog solution, offering intuitive and user-friendly filtering tools.</li>
+<li>Always format events in a way that simplifies the creation of filters.</li>
+<li>Explore other products in your environment that can send log events to a syslog server. Make VCF Operations for Logs your company standard for syslog events and so much more&hellip;</li>
+<li>Leveraging VCF Operations for Logs can be a cost-effective solution if you have VMware Cloud Foundation licenses, as it comes included without any additional cost.</li>
+<li>A special thanks to Brock Peterson for providing valuable tips and tricks that contributed to the content of this blog. It’s a privilege to work alongside someone who consistently helps the team understand and master the full range of features in the VCF Automation and Operations products.</li>
+</ul>
+<hr>
+<h6 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</h6>
+<ul>
+<li><a href="https://docs.vmware.com/en/VMware-Aria-Operations-for-Logs/index.html" target="_blank" rel="noopener noreffer ">VCF Operations for Logs - Official Documentation</a></li>
+</ul>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>vCROCS Deep Dive Podcast<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
+<p><a href="https://youtu.be/rRrZOXFLod8?si=k7eSEH5FQG8IyTR7" target="_blank" rel="noopener noreffer ">vCROCS Deep Dive Podcast | VCF Automation Overview Tab</a></p>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-10-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/" data-title="VCF Operations for Logs | How to use with Automation Scripts" data-via="dalehassinger" data-hashtags="VCF,Automation,Deployments,Operations,syslog,PowerShell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/" data-hashtag="VCF"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/automation/">Automation</a>,&nbsp;<a href="/tags/deployments/">Deployments</a>,&nbsp;<a href="/tags/operations/">Operations</a>,&nbsp;<a href="/tags/syslog/">Syslog</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vcf-automation-deployment-overview-tab/" class="prev" rel="prev" title="VCF Automation Deployments | Overview Tab"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VCF Automation Deployments | Overview Tab</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
