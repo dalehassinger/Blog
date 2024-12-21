@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VCF Operations | Extract Diagnostics Events Script - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/vcf-operations-diagnostic-events-api/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VCF Operations | Extract Diagnostics Events Script">
+  <meta property="og:description" content="Example PowerShell Script to Extract Diagnostics Events from VCF Operations">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-21T00:00:00+00:00">
+    <meta property="article:tag" content="VCF">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="Diagnostics">
+    <meta property="article:tag" content="Operations">
+    <meta property="article:tag" content="API">
+    <meta property="article:tag" content="PowerShell">
+    <meta property="og:image" content="https://www.vcrocs.info/vcf-operations-diagnostic-events-api/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/vcf-operations-diagnostic-events-api/featured-image.png">
+  <meta name="twitter:title" content="VCF Operations | Extract Diagnostics Events Script">
+  <meta name="twitter:description" content="Example PowerShell Script to Extract Diagnostics Events from VCF Operations">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/vcf-operations-diagnostic-events-api/" /><link rel="prev" href="https://www.vcrocs.info/vcf-operations-dashboard-samples/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VCF Operations | Extract Diagnostics Events Script",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/vcf-operations-diagnostic-events-api\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/vcf-operations-diagnostic-events-api\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VCF, Automation, Diagnostics, Operations, API, PowerShell","wordcount":  1313 ,
+        "url": "https:\/\/www.vcrocs.info\/vcf-operations-diagnostic-events-api\/","datePublished": "2024-12-21T00:00:00+00:00","dateModified": "2024-12-21T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations | Extract Diagnostics Events Script</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-12-21">2024-12-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1313 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/vcf-operations-diagnostic-events-api/featured-image.png"
+        data-srcset="/vcf-operations-diagnostic-events-api/featured-image.png, /vcf-operations-diagnostic-events-api/featured-image.png 1.5x, /vcf-operations-diagnostic-events-api/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/vcf-operations-diagnostic-events-api/featured-image.png"
+        title="/vcf-operations-diagnostic-events-api/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#code-details">Code Details:</a>
+                  <ul>
+                    <li><a href="#screen-shots">Screen Shots:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Example PowerShell Script to Extract Diagnostics Events from VCF Operations</strong></p>
+<hr>
+<blockquote>
+<p>Alone we can do so little; together we can do so much. – Helen Keller</p>
+</blockquote>
+<hr>
+<p>Product Versions used for this Blog:</p>
+<ul>
+<li>VCF Operations: 8.18.2</li>
+<li>PowerCLI: 13.3</li>
+<li>PowerShell: 7.4.6</li>
+<li>importExcel PS Module: 7.8.10</li>
+</ul>
+<hr>
+<p><a href="https://www.brockpeterson.com" target="_blank" rel="noopener noreffer ">Brock Peterson</a> released a blog titled <a href="https://www.brockpeterson.com/post/extracting-diagnostics-events-from-aria-operations" target="_blank" rel="noopener noreffer ">&ldquo;Extracting Diagnostics Events from Aria Operations&rdquo;</a> on December 16, 2024. Prior to reading this <a href="https://www.brockpeterson.com/post/extracting-diagnostics-events-from-aria-operations" target="_blank" rel="noopener noreffer ">blog</a>, I was unaware that the diagnostic data added to VCF Operations could be extracted using the VCF Operations API. This is an excellent read that you should check out before working with the example PowerShell script shared within this blog post.</p>
+<p>I&rsquo;ve received several inquiries from people asking how to extract diagnostic data from VCF Operations since the VMware Skyline service was officially retired (EOL). In the past, VMware Technical Adoption Managers (TAMs) relied on VMware Skyline data to help customers ensure their environments remained up to date with the latest patches. This script could potentially serve as an alternative for extracting diagnostic data from VCF Operations and sharing it with a TAM.</p>
+<p>If you don&rsquo;t have a VMware TAM but still want to share this data with your internal VMware team, this script will work perfectly for that use case as well. The Excel file generated by this script can also be used to provide your security team with insights into the diagnostic data available within VCF Operations.</p>
+<p>For automating this script to run on a weekly or daily basis, I recommend using VCF Orchestrator, which is part of VCF Automation.</p>
+<p>I also have the example code saved in my <a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/API-Examples/Extract-Diagnostics-Events" target="_blank" rel="noopener noreffer ">GitHub Repository</a></p>
+<hr>
+<h5 id="code-details">Code Details:</h5>
+<ul>
+<li>Demonstrates how to connect to the VCF Operations API</li>
+<li>Generates a token for making API requests</li>
+<li>Creates an Excel spreadsheet to save the events using the <code>importExcel</code> PowerShell module</li>
+<li>Includes optional code to send the newly created Excel file as an email attachment</li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Import the ImportExcel module (requires prior installation)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Import-Module</span> <span class="n">ImportExcel</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Configuration and Credentials (Replace with secure methods in production) -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsURL</span>      <span class="p">=</span> <span class="s2">&#34;https://vao.vcrocs.local&#34;</span> <span class="c"># Your VCF Operations URL</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsUsername</span> <span class="p">=</span> <span class="s2">&#34;admin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsPassword</span> <span class="p">=</span> <span class="s2">&#34;VMware1!&#34;</span> <span class="c"># Use a secure vault or secret manager in production</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authSource</span>  <span class="p">=</span> <span class="s2">&#34;local&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Acquire Aria Operations Token -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/auth/token/acquire?_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Create authentication body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bodyHashtable</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">username</span> <span class="p">=</span> <span class="nv">$opsUsername</span>
+</span></span><span class="line"><span class="cl">    <span class="n">authSource</span> <span class="p">=</span> <span class="nv">$authSource</span>
+</span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="p">=</span> <span class="nv">$opsPassword</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Convert body to JSON</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$bodyHashtable</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Request token</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$token</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Content-Type&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-Body</span> <span class="nv">$body</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$authorization</span> <span class="p">=</span> <span class="s2">&#34;OpsToken &#34;</span> <span class="p">+</span> <span class="nv">$token</span><span class="p">.</span><span class="py">token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Retrieve Diagnostic Events -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/internal/events?active=true&amp;diagnosticSubType=HEALTH&amp;page=0&amp;pageSize=1000&amp;type=DIAGNOSTIC&amp;_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;X-Ops-API-use-unsupported&#34;</span> <span class="p">=</span> <span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Authorization&#34;</span> <span class="p">=</span> <span class="nv">$authorization</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$OPSDiagData</span> <span class="p">=</span> <span class="nv">$results</span><span class="p">.</span><span class="py">events</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Prepare Excel Output -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$excelFilePath</span> <span class="p">=</span> <span class="s2">&#34;/Users/hdale/github/PS-TAM-Lab/aria-operations-diag-data.xlsx&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$sheetName</span> <span class="p">=</span> <span class="s2">&#34;Diagnostic-Data&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Clear existing data in the worksheet</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$excelFilePath</span> <span class="n">-WorksheetName</span> <span class="nv">$sheetName</span> <span class="n">-ClearSheet</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Process Events and Export Data -----</span>
+</span></span><span class="line"><span class="cl"><span class="k">Try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span><span class="p">(</span><span class="nv">$OPSDiagEvent</span> <span class="k">in</span> <span class="nv">$OPSDiagData</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># Extract resource ID and clean up message content</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$resourceId</span> <span class="p">=</span> <span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="py">resourceId</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$messageContent</span> <span class="p">=</span> <span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="py">message</span> <span class="o">-replace</span> <span class="s2">&#34;[:_]&#34;</span><span class="p">,</span> <span class="s2">&#34; &#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Remove GUID patterns from messages</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$regex</span> <span class="p">=</span> <span class="s2">&#34;[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$messageContent</span> <span class="p">=</span> <span class="nv">$messageContent</span> <span class="o">-replace</span> <span class="nv">$regex</span><span class="p">,</span> <span class="s2">&#34;&#34;</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TrimStart</span><span class="p">()</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Process Rule ID and generate Event Link</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$ruleID</span> <span class="p">=</span> <span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="py">details</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">key</span> <span class="o">-eq</span> <span class="s2">&#34;ruleId&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-ExpandProperty</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$eventLink</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$ruleID</span> <span class="o">-match</span> <span class="s2">&#34;KB_(\d{5,7})$&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$KBNumber</span> <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$eventLink</span> <span class="p">=</span> <span class="s2">&#34;https://knowledge.broadcom.com/external/article?legacyId=</span><span class="nv">$KBNumber</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$ruleID</span> <span class="o">-match</span> <span class="s2">&#34;CVE_\d{4}_\d{5}&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$CVENumber</span> <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">-replace</span> <span class="s2">&#34;_&#34;</span><span class="p">,</span> <span class="s2">&#34;-&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$eventLink</span> <span class="p">=</span> <span class="s2">&#34;https://support.broadcom.com/web/ecx/search?searchString=</span><span class="nv">$CVENumber</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$ruleID</span> <span class="o">-match</span> <span class="s2">&#34;VMSA_(\d{4})(\d{2})&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$CVENumber</span> <span class="p">=</span> <span class="s2">&#34;VMSA-</span><span class="p">$(</span><span class="nv">$matches</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="s2">-00</span><span class="p">$(</span><span class="nv">$matches</span><span class="p">[</span><span class="mf">2</span><span class="p">])</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$eventLink</span> <span class="p">=</span> <span class="s2">&#34;https://www.vmware.com/security/advisories/</span><span class="nv">$CVENumber</span><span class="s2">.html&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$eventLink</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Fetch Resource Details</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$uri</span> <span class="p">=</span> <span class="nv">$opsURL</span> <span class="p">+</span> <span class="s1">&#39;/suite-api/api/resources/&#39;</span> <span class="p">+</span> <span class="nv">$resourceId</span> <span class="p">+</span> <span class="s1">&#39;?_no_links=true&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$IDresults</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;accept&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Authorization&#34;</span> <span class="p">=</span> <span class="nv">$authorization</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Prepare data for export</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$newData</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">[</span><span class="no">PSCustomObject</span><span class="p">]</span><span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EventID</span><span class="p">=</span><span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="n">eventId</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EventType</span><span class="p">=</span><span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="n">eventType</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">EventSubType</span><span class="p">=</span><span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="n">diagnosticSubType</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Severity</span><span class="p">=</span><span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="n">severity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ResourceName</span><span class="p">=</span><span class="nv">$IDresults</span><span class="p">.</span><span class="py">resourceKey</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">AdapterKind</span><span class="p">=</span><span class="nv">$IDresults</span><span class="p">.</span><span class="py">resourceKey</span><span class="p">.</span><span class="n">adapterKindKey</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ResourceKind</span><span class="p">=</span><span class="nv">$IDresults</span><span class="p">.</span><span class="py">resourceKey</span><span class="p">.</span><span class="n">resourceKindKey</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Message</span><span class="p">=</span><span class="nv">$messageContent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Event_Link</span><span class="p">=</span><span class="nv">$eventLink</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c"># Append data to Excel sheet</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$newData</span> <span class="p">|</span> <span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$excelFilePath</span> <span class="n">-WorksheetName</span> <span class="nv">$sheetName</span> <span class="n">-Append</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">Catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Error</span> <span class="s2">&#34;An error occurred: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Email Report with Excel Attachment -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$fromEmail</span> <span class="p">=</span> <span class="s2">&#34;dale.hassinger@gmail.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$toEmail</span> <span class="p">=</span> <span class="s2">&#34;dale.hassinger@vcrocs.info&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$subject</span> <span class="p">=</span> <span class="s2">&#34;VCF Operations Diagnostic Data&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Build email body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;vCROCS Automation&lt;/title&gt;&lt;style&gt;body {font-family: Arial;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Diagnostic Data attached.&lt;/p&gt;&lt;p&gt;Created By: vCROCS Automation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpServer</span> <span class="p">=</span> <span class="s2">&#34;smtp.gmail.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpPort</span> <span class="p">=</span> <span class="mf">587</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$appPassword</span> <span class="p">=</span> <span class="s2">&#34;kl-HackMe-tl&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">mailmessage</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">From</span> <span class="p">=</span> <span class="nv">$fromEmail</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">To</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$toEmail</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Subject</span> <span class="p">=</span> <span class="nv">$subject</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Body</span> <span class="p">=</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">IsBodyHtml</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="nv">$excelFilePath</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$attachment</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="py">Mail</span><span class="p">.</span><span class="py">Attachment</span><span class="p">(</span><span class="nv">$excelFilePath</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Attachments</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$attachment</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Attachment not found: </span><span class="nv">$excelFilePath</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">smtpclient</span><span class="p">(</span><span class="nv">$smtpServer</span><span class="p">,</span> <span class="nv">$smtpPort</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span><span class="p">.</span><span class="py">EnableSsl</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Credentials</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="py">NetworkCredential</span><span class="p">(</span><span class="nv">$fromEmail</span><span class="p">,</span> <span class="nv">$appPassword</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Send</span><span class="p">(</span><span class="nv">$emailMessage</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Email sent successfully.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Failed to send email: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Dispose</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$attachment</span><span class="p">.</span><span class="py">Dispose</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="screen-shots">Screen Shots:</h6>
+<p><small>Screen Shot of the VCF Operations - Diagnostics:</small></p>
+<figure><a class="lightgallery" href="/vcf-operations-diagnostic-events-api/operations-api-01.png" title="/vcf-operations-diagnostic-events-api/operations-api-01.png" data-thumbnail="/vcf-operations-diagnostic-events-api/operations-api-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-diagnostic-events-api/operations-api-01.png"
+            data-srcset="/vcf-operations-diagnostic-events-api/operations-api-01.png, /vcf-operations-diagnostic-events-api/operations-api-01.png 1.5x, /vcf-operations-diagnostic-events-api/operations-api-01.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-diagnostic-events-api/operations-api-01.png" width="3406" height="2126" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><small>Screen Shot of the VCF Operations Diagnostics Events Excel Spreadsheet:</small></p>
+<figure><a class="lightgallery" href="/vcf-operations-diagnostic-events-api/operations-api-02.png" title="/vcf-operations-diagnostic-events-api/operations-api-02.png" data-thumbnail="/vcf-operations-diagnostic-events-api/operations-api-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-diagnostic-events-api/operations-api-02.png"
+            data-srcset="/vcf-operations-diagnostic-events-api/operations-api-02.png, /vcf-operations-diagnostic-events-api/operations-api-02.png 1.5x, /vcf-operations-diagnostic-events-api/operations-api-02.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-diagnostic-events-api/operations-api-02.png" width="2576" height="1324" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><small>Screen Shot of the VCF Operations Diagnostics Events Email:</small></p>
+<figure><a class="lightgallery" href="/vcf-operations-diagnostic-events-api/operations-api-03.png" title="/vcf-operations-diagnostic-events-api/operations-api-03.png" data-thumbnail="/vcf-operations-diagnostic-events-api/operations-api-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-diagnostic-events-api/operations-api-03.png"
+            data-srcset="/vcf-operations-diagnostic-events-api/operations-api-03.png, /vcf-operations-diagnostic-events-api/operations-api-03.png 1.5x, /vcf-operations-diagnostic-events-api/operations-api-03.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-diagnostic-events-api/operations-api-03.png" width="2272" height="760" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>The <code>importExcel</code> PowerShell module is excellent for saving VCF Operations events.
+<ul>
+<li>Thanks to <a href="https://github.com/dfinke/ImportExcel" target="_blank" rel="noopener noreffer ">Doug Finke</a> for creating and sharing the importExcel PS module with the community</li>
+</ul>
+</li>
+<li>The VCF Operations API offers a method to extract diagnostic events.</li>
+<li>Special thanks to <a href="https://www.brockpeterson.com" target="_blank" rel="noopener noreffer ">Brock Peterson</a> for creating the blog that demonstrates how to use the VCF Operations Diagnostics API to extract diagnostic events.
+<ul>
+<li>Link to Brock&rsquo;s blog titled: <a href="https://www.brockpeterson.com/post/extracting-diagnostics-events-from-aria-operations" target="_blank" rel="noopener noreffer ">&ldquo;Extracting Diagnostics Events from Aria Operations&rdquo;</a></li>
+<li>I&rsquo;ve always enjoyed working with Brock. You won&rsquo;t find anyone who shares more insights into how VCF Operations works.</li>
+<li>Brock&rsquo;s &ldquo;How To&rdquo; guides on VCF Operations are some of the best available.</li>
+<li>Be sure to bookmark Brock&rsquo;s blog to enhance your VCF Operations knowledge!</li>
+<li>Brock has been a role model to me for many years. You won&rsquo;t find a better team player out there.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>vCROCS Deep Dive Podcast<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
+<p><a href="https://youtu.be/vbnpwtVqjas?si=CxRDxh-btsm3PYNh" target="_blank" rel="noopener noreffer ">vCROCS Deep Dive Podcast | VCF Operations | Extract Diagnostics Events Script</a></p>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-12-21</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/vcf-operations-diagnostic-events-api/" data-title="VCF Operations | Extract Diagnostics Events Script" data-via="dalehassinger" data-hashtags="VCF,Automation,Diagnostics,Operations,API,PowerShell"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/vcf-operations-diagnostic-events-api/" data-hashtag="VCF"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/vcf-operations-diagnostic-events-api/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/automation/">Automation</a>,&nbsp;<a href="/tags/diagnostics/">Diagnostics</a>,&nbsp;<a href="/tags/operations/">Operations</a>,&nbsp;<a href="/tags/api/">API</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vcf-operations-dashboard-samples/" class="prev" rel="prev" title="VCF Operations | Ideas for Practical and Effective Dashboards"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VCF Operations | Ideas for Practical and Effective Dashboards</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">| Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
