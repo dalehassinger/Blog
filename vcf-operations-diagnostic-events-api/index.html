@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vcf-operations-diagnostic-events-api\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VCF, Automation, Diagnostics, Operations, API, PowerShell","wordcount":  1313 ,
+                        }],"genre": "posts","keywords": "VCF, Automation, Diagnostics, Operations, API, PowerShell","wordcount":  1312 ,
         "url": "https:\/\/www.vcrocs.info\/vcf-operations-diagnostic-events-api\/","datePublished": "2024-12-21T00:00:00+00:00","dateModified": "2024-12-21T23:07:52-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,7 +124,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations | Extract Diagnostics Events Script</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-12-21">2024-12-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1313 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-12-21">2024-12-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1312 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -335,7 +335,6 @@
 </span><span class="lnt">143
 </span><span class="lnt">144
 </span><span class="lnt">145
-</span><span class="lnt">146
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
@@ -353,9 +352,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Create authentication body</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$bodyHashtable</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">username</span> <span class="p">=</span> <span class="nv">$opsUsername</span>
+</span></span><span class="line"><span class="cl">    <span class="n">username</span>   <span class="p">=</span> <span class="nv">$opsUsername</span>
 </span></span><span class="line"><span class="cl">    <span class="n">authSource</span> <span class="p">=</span> <span class="nv">$authSource</span>
-</span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="p">=</span> <span class="nv">$opsPassword</span>
+</span></span><span class="line"><span class="cl">    <span class="n">password</span>   <span class="p">=</span> <span class="nv">$opsPassword</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Convert body to JSON</span>
@@ -382,7 +381,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># ----- Prepare Excel Output -----</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$excelFilePath</span> <span class="p">=</span> <span class="s2">&#34;/Users/hdale/github/PS-TAM-Lab/aria-operations-diag-data.xlsx&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$sheetName</span> <span class="p">=</span> <span class="s2">&#34;Diagnostic-Data&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$sheetName</span>     <span class="p">=</span> <span class="s2">&#34;Diagnostic-Data&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Clear existing data in the worksheet</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Export-Excel</span> <span class="n">-Path</span> <span class="nv">$excelFilePath</span> <span class="n">-WorksheetName</span> <span class="nv">$sheetName</span> <span class="n">-ClearSheet</span>
@@ -391,7 +390,7 @@
 </span></span><span class="line"><span class="cl"><span class="k">Try</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">foreach</span><span class="p">(</span><span class="nv">$OPSDiagEvent</span> <span class="k">in</span> <span class="nv">$OPSDiagData</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">        <span class="c"># Extract resource ID and clean up message content</span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$resourceId</span> <span class="p">=</span> <span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="py">resourceId</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$resourceId</span>     <span class="p">=</span> <span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="py">resourceId</span>
 </span></span><span class="line"><span class="cl">        <span class="nv">$messageContent</span> <span class="p">=</span> <span class="nv">$OPSDiagEvent</span><span class="p">.</span><span class="py">message</span> <span class="o">-replace</span> <span class="s2">&#34;[:_]&#34;</span><span class="p">,</span> <span class="s2">&#34; &#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c"># Remove GUID patterns from messages</span>
@@ -403,7 +402,7 @@
 </span></span><span class="line"><span class="cl">        <span class="nv">$eventLink</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$ruleID</span> <span class="o">-match</span> <span class="s2">&#34;KB_(\d{5,7})$&#34;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">$KBNumber</span> <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$KBNumber</span>  <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">            <span class="nv">$eventLink</span> <span class="p">=</span> <span class="s2">&#34;https://knowledge.broadcom.com/external/article?legacyId=</span><span class="nv">$KBNumber</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nv">$ruleID</span> <span class="o">-match</span> <span class="s2">&#34;CVE_\d{4}_\d{5}&#34;</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nv">$CVENumber</span> <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="o">-replace</span> <span class="s2">&#34;_&#34;</span><span class="p">,</span> <span class="s2">&#34;-&#34;</span>
@@ -446,21 +445,21 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># ----- Email Report with Excel Attachment -----</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$fromEmail</span> <span class="p">=</span> <span class="s2">&#34;dale.hassinger@gmail.com&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$toEmail</span> <span class="p">=</span> <span class="s2">&#34;dale.hassinger@vcrocs.info&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$subject</span> <span class="p">=</span> <span class="s2">&#34;VCF Operations Diagnostic Data&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$toEmail</span>   <span class="p">=</span> <span class="s2">&#34;dale.hassinger@vcrocs.info&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$subject</span>   <span class="p">=</span> <span class="s2">&#34;VCF Operations Diagnostic Data&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Build email body</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;vCROCS Automation&lt;/title&gt;&lt;style&gt;body {font-family: Arial;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Diagnostic Data attached.&lt;/p&gt;&lt;p&gt;Created By: vCROCS Automation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&#39;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$smtpServer</span> <span class="p">=</span> <span class="s2">&#34;smtp.gmail.com&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$smtpPort</span> <span class="p">=</span> <span class="mf">587</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpServer</span>  <span class="p">=</span> <span class="s2">&#34;smtp.gmail.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpPort</span>    <span class="p">=</span> <span class="mf">587</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$appPassword</span> <span class="p">=</span> <span class="s2">&#34;kl-HackMe-tl&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">mailmessage</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">From</span> <span class="p">=</span> <span class="nv">$fromEmail</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span>            <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">mailmessage</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">From</span>       <span class="p">=</span> <span class="nv">$fromEmail</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">To</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$toEmail</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Subject</span> <span class="p">=</span> <span class="nv">$subject</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Body</span> <span class="p">=</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Subject</span>    <span class="p">=</span> <span class="nv">$subject</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Body</span>       <span class="p">=</span> <span class="nv">$body</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$emailMessage</span><span class="p">.</span><span class="py">IsBodyHtml</span> <span class="p">=</span> <span class="vm">$true</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="nv">$excelFilePath</span><span class="p">)</span> <span class="p">{</span>
@@ -471,8 +470,8 @@
 </span></span><span class="line"><span class="cl">    <span class="n">exit</span> <span class="mf">1</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">smtpclient</span><span class="p">(</span><span class="nv">$smtpServer</span><span class="p">,</span> <span class="nv">$smtpPort</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span><span class="p">.</span><span class="py">EnableSsl</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span>             <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">smtpclient</span><span class="p">(</span><span class="nv">$smtpServer</span><span class="p">,</span> <span class="nv">$smtpPort</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span><span class="p">.</span><span class="py">EnableSsl</span>   <span class="p">=</span> <span class="vm">$true</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Credentials</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="py">NetworkCredential</span><span class="p">(</span><span class="nv">$fromEmail</span><span class="p">,</span> <span class="nv">$appPassword</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
@@ -483,7 +482,6 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Dispose</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$attachment</span><span class="p">.</span><span class="py">Dispose</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
