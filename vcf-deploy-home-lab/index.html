@@ -41,7 +41,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vcf-deploy-home-lab\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VCF, Automation, Operations, PowerShell","wordcount":  5432 ,
+                        }],"genre": "posts","keywords": "VCF, Automation, Operations, PowerShell","wordcount":  5517 ,
         "url": "https:\/\/www.vcrocs.info\/vcf-deploy-home-lab\/","datePublished": "2024-12-26T00:00:00+00:00","dateModified": "2024-12-27T14:14:40-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -122,7 +122,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Deploy | Scripted Install | Home Lab</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-sddc-manager/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF SDDC Manager</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-12-26">2024-12-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5432 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-12-26">2024-12-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5517 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -152,6 +152,11 @@
                 <li><a href="#powershell-scripts">PowerShell Scripts:</a></li>
                 <li><a href="#screen-shots">Screen Shots:</a></li>
                 <li><a href="#lessons-learned">Lessons Learned:</a></li>
+              </ul>
+            </li>
+            <li><a href="#downloading-the-nested-esxi-virtual-appliances-from-vmware-fling-site">Downloading the Nested ESXi Virtual Appliances from VMware Fling Site</a>
+              <ul>
+                <li><a href="#important-note-for-macos-users">Important Note for macOS Users</a></li>
               </ul>
             </li>
           </ul>
@@ -2190,6 +2195,21 @@ This script automates the setup of VCF Cloud Builder and prepares the configurat
 <li>I also have the example code saved in my <a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/" target="_blank" rel="noopener noreffer ">GitHub Repository</a></li>
 </ul>
 <hr>
+<h4 id="downloading-the-nested-esxi-virtual-appliances-from-vmware-fling-site">Downloading the Nested ESXi Virtual Appliances from VMware Fling Site</h4>
+<p>For those looking to deploy a Nested ESXi Virtual Appliance, VMware provides pre-configured templates available on their Fling site.</p>
+<p>➡️ <a href="https://community.broadcom.com/flings/home" target="_blank" rel="noopener noreffer ">Click here to access the downloads</a></p>
+<h5 id="important-note-for-macos-users">Important Note for macOS Users</h5>
+<p>The Nested ESXi Virtual Appliance downloads are packaged as ZIP files. However, do not double-click to unpack them on macOS, as it may lead to issues with the extracted contents.</p>
+<p>Instead, use the command line to properly extract the ZIP file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">unzip Nested_ESXi8_0u3c_Appliance_Template_v1_ova-dl.zip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
 <div class="details admonition info open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
