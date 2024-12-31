@@ -41,7 +41,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vcf-deploy-home-lab\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VCF, Automation, Operations, PowerShell","wordcount":  6064 ,
+                        }],"genre": "posts","keywords": "VCF, Automation, Operations, PowerShell","wordcount":  6128 ,
         "url": "https:\/\/www.vcrocs.info\/vcf-deploy-home-lab\/","datePublished": "2024-12-26T00:00:00+00:00","dateModified": "2024-12-29T10:34:50-05:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -122,7 +122,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Deploy | Scripted Install | Home Lab</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-sddc-manager/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF SDDC Manager</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-12-26">2024-12-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6064 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-12-26">2024-12-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6128 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;29 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -221,7 +221,13 @@
 </li>
 <li>Storage Configuration:
 <ul>
-<li>1 TB NVMe for Tiered Memory @ 400% (SAMSUNG 990 PRO SSD NVMe)</li>
+<li>1 TB NVMe for Tiered Memory @ 400% (SAMSUNG 990 PRO SSD NVMe)
+<ul>
+<li>To specify the amount of tiered memory you want to use, you need to set a percentage. This percentage determines how much tiered memory is allocated relative to the physical memory. For example, in my lab, I have 96 GB of physical memory.</li>
+<li>Using a 400% tiered memory configuration:<br>
+￼     - (96 GB * 400%) + 96 GB physical = 480 GB Total Memory.</li>
+</ul>
+</li>
 <li>4 TB NVMe for Storage (SAMSUNG 990 PRO SSD NVMe)</li>
 <li>1 NVMe slot open for future expansion</li>
 </ul>
