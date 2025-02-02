@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VCF Automation | Input Arrays - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/vcf-automation-input-array/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VCF Automation | Input Arrays">
+  <meta property="og:description" content="How to use Input Arrays with ABX Actions.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-01-31T00:00:00+00:00">
+    <meta property="article:tag" content="VCF">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="PowerShell">
+    <meta property="article:tag" content="PowerCLI">
+    <meta property="article:tag" content="VMware Code Coach">
+    <meta property="article:tag" content="VMware VExpert">
+    <meta property="og:image" content="https://www.vcrocs.info/vcf-automation-input-array/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/vcf-automation-input-array/featured-image.png">
+  <meta name="twitter:title" content="VCF Automation | Input Arrays">
+  <meta name="twitter:description" content="How to use Input Arrays with ABX Actions.">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/vcf-automation-input-array/" /><link rel="prev" href="https://www.vcrocs.info/vcf-deploy-home-lab/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VCF Automation | Input Arrays",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/vcf-automation-input-array\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/vcf-automation-input-array\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert","wordcount":  1182 ,
+        "url": "https:\/\/www.vcrocs.info\/vcf-automation-input-array\/","datePublished": "2025-01-31T00:00:00+00:00","dateModified": "2025-01-31T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Automation | Input Arrays</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-31">2025-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1182 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/vcf-automation-input-array/featured-image.png"
+        data-srcset="/vcf-automation-input-array/featured-image.png, /vcf-automation-input-array/featured-image.png 1.5x, /vcf-automation-input-array/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/vcf-automation-input-array/featured-image.png"
+        title="/vcf-automation-input-array/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#vcf-automation-design-template">VCF Automation Design Template</a></li>
+                    <li><a href="#vcf-automation-design-template-1">VCF Automation Design Template</a></li>
+                    <li><a href="#lessons-learned">Lessons learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to use Input Arrays with ABX Actions.</strong></p>
+<hr>
+<blockquote>
+<p>Don’t automate for the sake of automation—automate to simplify, accelerate, and improve.</p>
+</blockquote>
+<hr>
+<p><small><strong>Note: VCF Automation 8.18.1 was used to create this Blog</strong></small></p>
+<p>I recently received a question about leveraging an Array Input from a VCF Automation Template and processing the array data within an ABX Action. Below, you&rsquo;ll find example code and screenshots demonstrating the approach. If you&rsquo;re working with array inputs in your automation workflows, this guide should be helpful!</p>
+<hr>
+<p><strong>Screenshots demonstrating the use of VCF Automation Input Arrays:</strong></p>
+<ul>
+<li><small><strong>Example manual Deployment that has an Array Input</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-01.png" title="/vcf-automation-input-array/array-01.png" data-thumbnail="/vcf-automation-input-array/array-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-01.png"
+            data-srcset="/vcf-automation-input-array/array-01.png, /vcf-automation-input-array/array-01.png 1.5x, /vcf-automation-input-array/array-01.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-01.png" width="2302" height="1674" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li><small><strong>Example Custom Form using an Array Input</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-10.png" title="/vcf-automation-input-array/array-10.png" data-thumbnail="/vcf-automation-input-array/array-10.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-10.png"
+            data-srcset="/vcf-automation-input-array/array-10.png, /vcf-automation-input-array/array-10.png 1.5x, /vcf-automation-input-array/array-10.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-10.png" width="2280" height="1368" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of the YAML Code for Input Array:</strong></p>
+<ul>
+<li><small><strong>Define the input type as array</strong></small></li>
+<li><small><strong>Use the array input in the &ldquo;Cloud.vSphere.Machine&rdquo; - &ldquo;properties:&rdquo; section</strong></small></li>
+<li><small><strong>All properties values will get passed in the ABX Action</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-02.png" title="/vcf-automation-input-array/array-02.png" data-thumbnail="/vcf-automation-input-array/array-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-02.png"
+            data-srcset="/vcf-automation-input-array/array-02.png, /vcf-automation-input-array/array-02.png 1.5x, /vcf-automation-input-array/array-02.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-02.png" width="1328" height="1554" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of the Inputs:</strong></p>
+<ul>
+<li><small><strong>If you haven&rsquo;t worked with YAML array inputs before, use the Inputs screens in VCF Automation to assist in formatting the YAML correctly. This will ensure the data is structured properly before being passed to the ABX Action.</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-03.png" title="/vcf-automation-input-array/array-03.png" data-thumbnail="/vcf-automation-input-array/array-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-03.png"
+            data-srcset="/vcf-automation-input-array/array-03.png, /vcf-automation-input-array/array-03.png 1.5x, /vcf-automation-input-array/array-03.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-03.png" width="3396" height="1600" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of the Array Creation with Inputs:</strong></p>
+<ul>
+<li><small><strong>Example screen of creating an Array</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-04.png" title="/vcf-automation-input-array/array-04.png" data-thumbnail="/vcf-automation-input-array/array-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-04.png"
+            data-srcset="/vcf-automation-input-array/array-04.png, /vcf-automation-input-array/array-04.png 1.5x, /vcf-automation-input-array/array-04.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-04.png" width="1720" height="1470" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of the Subscription to execute an ABX Action during an VM Build:</strong></p>
+<ul>
+<li><small><strong>In this example I am running an ABX Action during Pre Allocation of a new VM Build</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-05.png" title="/vcf-automation-input-array/array-05.png" data-thumbnail="/vcf-automation-input-array/array-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-05.png"
+            data-srcset="/vcf-automation-input-array/array-05.png, /vcf-automation-input-array/array-05.png 1.5x, /vcf-automation-input-array/array-05.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-05.png" width="3410" height="2564" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of the Array Creation with Inputs:</strong></p>
+<ul>
+<li><small><strong>Here&rsquo;s an example of PowerShell code that takes a YAML array string passed to an ABX Action, cleans it up, and converts it into a PowerShell array</strong></small></li>
+<li><small><strong>This is the most critical step in this blog post. Take the time to understand how the YAML string is transformed into a PowerShell array, as this enables you to leverage the array values for any automation tasks needed in your server build process.</strong></small></li>
+<li><small><strong>The PowerShell code processes the YAML string by replacing unnecessary characters, ensuring proper formatting, and then splitting the string on commas to create a PowerShell array. This transformation allows the data to be easily iterated and used within the ABX Action.</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-06.png" title="/vcf-automation-input-array/array-06.png" data-thumbnail="/vcf-automation-input-array/array-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-06.png"
+            data-srcset="/vcf-automation-input-array/array-06.png, /vcf-automation-input-array/array-06.png 1.5x, /vcf-automation-input-array/array-06.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-06.png" width="3410" height="2010" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of the YAML Array Values:</strong></p>
+<ul>
+<li><small><strong>This example demonstrates how the YAML array format is passed to the ABX Action as a string. Understanding this format is essential for parsing and utilizing the array data effectively within your automation logic.</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-07.png" title="/vcf-automation-input-array/array-07.png" data-thumbnail="/vcf-automation-input-array/array-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-07.png"
+            data-srcset="/vcf-automation-input-array/array-07.png, /vcf-automation-input-array/array-07.png 1.5x, /vcf-automation-input-array/array-07.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-07.png" width="3414" height="2584" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of the PowerShell Array Code Ouput:</strong></p>
+<ul>
+<li><small><strong>Example screen of PowerShell code output</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-08.png" title="/vcf-automation-input-array/array-08.png" data-thumbnail="/vcf-automation-input-array/array-08.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-08.png"
+            data-srcset="/vcf-automation-input-array/array-08.png, /vcf-automation-input-array/array-08.png 1.5x, /vcf-automation-input-array/array-08.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-08.png" width="3414" height="2584" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Screen Shot of ABX successful run:</strong></p>
+<ul>
+<li><small><strong>Shows that the ABX Action was successfully run.</strong></small></li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-automation-input-array/array-09.png" title="/vcf-automation-input-array/array-09.png" data-thumbnail="/vcf-automation-input-array/array-09.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-automation-input-array/array-09.png"
+            data-srcset="/vcf-automation-input-array/array-09.png, /vcf-automation-input-array/array-09.png 1.5x, /vcf-automation-input-array/array-09.png 2x"
+            data-sizes="auto"
+            alt="/vcf-automation-input-array/array-09.png" width="3416" height="1198" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="vcf-automation-design-template">VCF Automation Design Template</h6>
+<p><strong>Example Template Yaml Code:</strong></p>
+<ul>
+<li><small><strong>Code from the screen shots above.</strong></small></li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the yaml code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">formatVersion</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Rocky-Basic</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">outputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">__deploymentOverview</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **The following vSphere Virtual Machine has been provisioned with VMware VCF Automation.**  
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Original Build Specs Used:**  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      IP: ${input.IP}  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      Memory(MB): ${input.totalMemoryMB}  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      CPU (Count): ${input.cpuCount}  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      Core (Count): ${input.coreCount}  
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Connect to Server using Cockpit:**  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      http://${input.IP}:9090  
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Check out these Blogs for Updates/Tips/Tricks on the VMware VCF Operations/Automation Products:**  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Brock Peterson:** https://www.BrockPeterson.com  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Dale Hassinger:** https://www.vCROCS.info  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Cosmin Trif:** https://www.cosmin.gq  
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Link to vCROCS VCF Operations:**  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      https://vao.vcrocs.local  
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      **Link to vCROCS VCF Operations for Logs:**  
+</span></span></span><span class="line"><span class="cl"><span class="sd">      https://vaol.vcrocs.local  </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#cloud-config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">inputs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">CustomizationSpec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">Customization Specification</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">LINUX</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CustomizationSpec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMName</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">VM Name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minLength</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxLength</span><span class="p">:</span><span class="w"> </span><span class="m">15</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">Rocky-Array-202</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IP</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.5.202</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">totalMemoryMB</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">integer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Memory(MB)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">1024</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cpuCount</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">integer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">CPU (count)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">coreCount</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">integer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Core (count)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">folderName</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">vCenter Folder</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l">Rocky-Linux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enum</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Rocky-Linux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">ESXi-01-VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">ESXi-02-VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VolumeGB</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Volume Size GB:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;20&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vmAdminUsers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">array</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">items</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Admin Users:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minItems</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">maxItems</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">default</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">dale.hassinger</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l">VM Admin Users</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Network_VMs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Network</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">PG-VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networkType</span><span class="p">:</span><span class="w"> </span><span class="l">existing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">Network:VM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vCenter_Rocky</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Cloud.vSphere.Machine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ROCKY9</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c">#flavor: SM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">totalMemoryMB</span><span class="p">:</span><span class="w"> </span><span class="l">${input.totalMemoryMB}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cpuCount</span><span class="p">:</span><span class="w"> </span><span class="l">${input.cpuCount}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">coreCount</span><span class="p">:</span><span class="w"> </span><span class="l">${input.coreCount}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VMName}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">fqdn</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VMName}.vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">folderName</span><span class="p">:</span><span class="w"> </span><span class="l">Rocky-Linux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vmAdminUsers</span><span class="p">:</span><span class="w"> </span><span class="l">${input.vmAdminUsers}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">storage</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">bootDiskCapacityInGB</span><span class="p">:</span><span class="w"> </span><span class="l">${input.VolumeGB}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">remoteAccess</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">authentication</span><span class="p">:</span><span class="w"> </span><span class="l">usernamePassword</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">${secret.administrator}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">customizationSpec</span><span class="p">:</span><span class="w"> </span><span class="l">${input.CustomizationSpec}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">constraints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">VPZ:VM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l">${resource.Network_VMs.id}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">assignment</span><span class="p">:</span><span class="w"> </span><span class="l">static</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="l">${input.IP}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="vcf-automation-design-template-1">VCF Automation Design Template</h6>
+<p><strong>Example ABX Action Code:</strong></p>
+<ul>
+<li><small><strong>Code from the screen shots above.</strong></small></li>
+<li><small><strong>My example code simply outputs the values to demonstrate how to create the array and validate that the code works. Once you have this structure in place, you can extend the <code>foreach</code> section to automate any tasks you need.</strong></small></li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the ABX Action PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">handler($context</span><span class="p">,</span> <span class="nv">$inputs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(!</span><span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="n">vmAdminUsers</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmAdminUsers</span> <span class="p">=</span> <span class="s2">&#34;NA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$vmAdminUsers</span> <span class="p">=</span> <span class="nv">$inputs</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">vmAdminUsers</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;STR vmAdminUsers:&#34;</span> <span class="nv">$vmAdminUsers</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Input string</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#$vmAdminUsers = &#39;[\&#34;dale.hassinger\&#34;,\&#34;brock\&#34;,\&#34;chris\&#34;]&#39;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Convert the string into an array</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$Array</span> <span class="p">=</span> <span class="nv">$vmAdminUsers</span> <span class="o">-replace</span> <span class="s1">&#39;[\[\\\&#34;\]]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="n">-split</span> <span class="s1">&#39;,&#39;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Output the array</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Iterate through each item in the array and display its value</span>
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$Item</span> <span class="k">in</span> <span class="nv">$Array</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Username: </span><span class="nv">$Item</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Array:&#34;</span> <span class="nv">$Array</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Array Count:&#34;</span><span class="nv">$Array</span><span class="p">.</span><span class="py">Count</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nv">$inputs</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="lessons-learned">Lessons learned:</h6>
+<ul>
+<li>Using Array Inputs are a great way to use multiple values for processes needed to build new VMs.</li>
+<li>After you take the YAML array string and turn it into a PowerShell array, you can use the values to automate anything you can script.</li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-01-31</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/vcf-automation-input-array/" data-title="VCF Automation | Input Arrays" data-via="dalehassinger" data-hashtags="VCF,Automation,PowerShell,PowerCLI,VMware Code Coach,VMware vExpert"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/vcf-automation-input-array/" data-hashtag="VCF"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/vcf-automation-input-array/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/automation/">Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/powercli/">PowerCLI</a>,&nbsp;<a href="/tags/vmware-code-coach/">VMware Code Coach</a>,&nbsp;<a href="/tags/vmware-vexpert/">VMware VExpert</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vcf-deploy-home-lab/" class="prev" rel="prev" title="VCF Deploy | Scripted Install | Home Lab"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VCF Deploy | Scripted Install | Home Lab</a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.vcrocs.info" target="_blank">Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://vcrocs.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
