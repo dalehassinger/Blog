@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>PowerCLI and YAML - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/powercli-and-yaml/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="PowerCLI and YAML">
+  <meta property="og:description" content="Streamlining PowerCLI Scripts: Using YAML for Variable Management">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-03-08T00:00:00+00:00">
+    <meta property="article:tag" content="VCF">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="PowerShell">
+    <meta property="article:tag" content="PowerCLI">
+    <meta property="article:tag" content="VMware Code Coach">
+    <meta property="article:tag" content="VMware VExpert">
+    <meta property="og:image" content="https://www.vcrocs.info/powercli-and-yaml/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/powercli-and-yaml/featured-image.png">
+  <meta name="twitter:title" content="PowerCLI and YAML">
+  <meta name="twitter:description" content="Streamlining PowerCLI Scripts: Using YAML for Variable Management">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/powercli-and-yaml/" /><link rel="prev" href="https://www.vcrocs.info/powercli-loves-linux-mac-windows/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PowerCLI and YAML",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/powercli-and-yaml\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/powercli-and-yaml\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, yaml","wordcount":  2177 ,
+        "url": "https:\/\/www.vcrocs.info\/powercli-and-yaml\/","datePublished": "2025-03-08T00:00:00+00:00","dateModified": "2025-03-08T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PowerCLI and YAML</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-08">2025-03-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2177 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/powercli-and-yaml/featured-image.png"
+        data-srcset="/powercli-and-yaml/featured-image.png, /powercli-and-yaml/featured-image.png 1.5x, /powercli-and-yaml/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/powercli-and-yaml/featured-image.png"
+        title="/powercli-and-yaml/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#why-am-i-using-a-yaml-file">Why am I using a YAML file:</a></li>
+                    <li><a href="#code-examples">Code Examples:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Streamlining PowerCLI Scripts: Using YAML for Variable Management</strong></p>
+<hr>
+<blockquote>
+<p>The true power of automation lies in simplicity—storing all your home lab variables in a single YAML file transforms complexity into clarity, making every deployment seamless and every configuration effortless.</p>
+</blockquote>
+<hr>
+<h6 id="why-am-i-using-a-yaml-file">Why am I using a YAML file:</h6>
+<p>Many automation tools and platforms rely on YAML files for configuration due to their readability and flexibility. In VMware VCF Automation—something I frequently work with—YAML is used extensively for Design Templates. To maintain consistency across my automation scripts, I centralized all my Home Lab variables in a single YAML file.</p>
+<p>To work with YAML in PowerShell, I’m using the &ldquo;PowerShell-YAML&rdquo; module, which provides a simple and efficient way to read and write YAML data. In this blog post, I’ll share several sample scripts demonstrating how easy it is to integrate YAML into PowerShell-based automation.</p>
+<p>All required variables for the PowerShell scripts are centralized in a single YAML configuration file for streamlined management.</p>
+<hr>
+<blockquote>
+<p>For 2025, I’ve been invited to be a <strong>VMware Community {code} Coach</strong>! This year, my blogs will feature even more code examples to help others get started with automation, VMware solutions, and much more&hellip;</p>
+</blockquote>
+<hr>
+<hr>
+<h6 id="code-examples">Code Examples:</h6>
+<p><strong>The sample YAML file contains all the variables for my home lab:</strong></p>
+<ul>
+<li>You can see that I have defined variables for several products within my home lab</li>
+<li>The YAML file is organized into major categories, such as NH, vCenter, Host101, and OPS, each representing a different area of configuration for my Lab</li>
+<li>Within each top-level section, specific settings are defined using key-value pairs. For example, in NH, values like VIServer, VIUsername, and VIPassword store configuration details for a nested host setup</li>
+<li>Some sections, like NH → Hosts, contain lists (denoted by -), where multiple items (e.g., ESXi hosts) are grouped together with attributes such as Hostname, IP, and Create</li>
+<li>Separate Functional Areas
+<ul>
+<li>NH configures the nested ESXi environment</li>
+<li>vCenter stores vCenter connection details</li>
+<li>Host101 provides credentials for a single ESXi host</li>
+<li>OPS defines login details for VCF Operations</li>
+</ul>
+</li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the YAML code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># NH is Nested Host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">NH</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VIServer</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.100</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VIUsername</span><span class="p">:</span><span class="w"> </span><span class="l">administrator@vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VIPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">NestedESXiApplianceOVA</span><span class="p">:</span><span class="w"> </span><span class="l">/Users/dalehassinger/Downloads/Nested_ESXi8.0u3c_Appliance_Template_v1.ova</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">verboseLogFile</span><span class="p">:</span><span class="w"> </span><span class="l">VCF-Nested-Step-1-Host-Only-YAML.log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">NestedESXiMGMTvCPU</span><span class="p">:</span><span class="w"> </span><span class="m">12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">NestedESXiMGMTvMEM</span><span class="p">:</span><span class="w"> </span><span class="m">88</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">NestedESXiMGMTCachingvDisk</span><span class="p">:</span><span class="w"> </span><span class="m">4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">NestedESXiMGMTCapacityvDisk</span><span class="p">:</span><span class="w"> </span><span class="m">500</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">NestedESXiMGMTBootDisk</span><span class="p">:</span><span class="w"> </span><span class="m">32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMDatastore</span><span class="p">:</span><span class="w"> </span><span class="l">ESX-04-2TB-02</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMCluster</span><span class="p">:</span><span class="w"> </span><span class="l">CLUSTER-03-VCF</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMNetwork</span><span class="p">:</span><span class="w"> </span><span class="l">VMs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMNetmask</span><span class="p">:</span><span class="w"> </span><span class="m">255.255.252.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMGateway</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.4.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMDNS</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMNTP</span><span class="p">:</span><span class="w"> </span><span class="l">time.google.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMDomain</span><span class="p">:</span><span class="w"> </span><span class="l">vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VMSyslog</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.94</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">Hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">Hostname</span><span class="p">:</span><span class="w"> </span><span class="l">VCF-DDC-ESX178</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">IP</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.4.178</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Create</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">Hostname</span><span class="p">:</span><span class="w"> </span><span class="l">VCF-DDC-ESX179</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">IP</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.4.179</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Create</span><span class="p">:</span><span class="w"> </span><span class="kc">False</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">Hostname</span><span class="p">:</span><span class="w"> </span><span class="l">VCF-DDC-ESX180</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">IP</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.4.180</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Create</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># vCenter Connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">vCenter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l">vcsa8x.vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator@vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ignoreCertErrors</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># A Single ESXi Host Connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Host101</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.101</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># VCF Operations</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">OPS</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsURL</span><span class="p">:</span><span class="w"> </span><span class="l">https://vao.vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsUsername</span><span class="p">:</span><span class="w"> </span><span class="l">admin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">authSource</span><span class="p">:</span><span class="w">  </span><span class="l">local</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Sample Script to create Nested ESXi VMs:</strong></p>
+<ul>
+<li>The initial lines of code ensure that the necessary PowerShell modules are installed before executing the script</li>
+<li>The PowerShell code then reads the Home-Lab-Config.yaml file, loads its content as a raw string, and converts it from YAML format into a structured PowerShell object stored in $cfg</li>
+<li>The PowerShell code accesses the properties within the NH section of the $cfg object, which was previously loaded from a YAML configuration file</li>
+<li>The code references the NH section of the YAML configuration, accessing its VIServer value, where NH represents a structured key within the YAML file, organizing configuration settings into hierarchical sections.</li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Ensure required modules are installed before proceeding</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$requiredModules</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;powershell-yaml&#34;</span><span class="p">,</span> <span class="s2">&#34;VMware.PowerCLI&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$module</span> <span class="k">in</span> <span class="nv">$requiredModules</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="nv">$module</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="nv">$module</span><span class="s2"> is not installed. Install it using &#39;Install-Module </span><span class="nv">$module</span><span class="s2">&#39;.&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Read YAML configuration</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfgFile</span> <span class="p">=</span> <span class="s2">&#34;Home-Lab-Config.yaml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Function to display configuration details</span>
+</span></span><span class="line"><span class="cl"><span class="kd">Function</span><span class="w"> </span><span class="nb">Show-ConfigValue</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$label</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">switch</span><span class="p">]</span><span class="nv">$newLine</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="n">-NoNewline</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span> <span class="s2">&#34;</span><span class="nv">${label}</span><span class="s2">: &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">White</span> <span class="nv">$value</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nv">$newLine</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Display Nested ESXi Build Details</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Magenta</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">Nested ESXi Build Details:</span><span class="se">`n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span> <span class="s2">&#34;---- vCenter Server used to Build Nested ESXi Host(s) ----&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;vCenter Server Address&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VIServer</span> <span class="n">-newLine</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;VM Network&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMNetwork</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;VM Storage&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMDatastore</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;VM Cluster&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMCluster</span> <span class="n">-newLine</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span> <span class="s2">&#34;---- ESXi Configuration for VCF Management Domain ----&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostnames</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">Hosts</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Create</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Hostname</span> <span class="p">})</span> <span class="n">-join</span> <span class="s2">&#34;, &#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;ESXi VM Name(s)&#34;</span> <span class="nv">$hostnames</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostips</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">Hosts</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Create</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">ip</span> <span class="p">})</span> <span class="n">-join</span> <span class="s2">&#34;, &#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;IP Address(s)&#34;</span> <span class="nv">$hostips</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;vCPU&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiMGMTvCPU</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;vMEM&#34;</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTvMEM</span><span class="p">)</span><span class="s2"> GB&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;Caching VMDK&#34;</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTCachingvDisk</span><span class="p">)</span><span class="s2"> GB&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;Capacity VMDK&#34;</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTCapacityvDisk</span><span class="p">)</span><span class="s2"> GB&#34;</span> <span class="n">-newLine</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;Netmask&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMNetmask</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;Gateway&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMGateway</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;DNS&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMDNS</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;NTP&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMNTP</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-ConfigValue</span> <span class="s2">&#34;Syslog&#34;</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMSyslog</span> <span class="n">-newLine</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Build Start Time</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$StartTime</span> <span class="p">=</span> <span class="nb">Get-Date</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Function to log events</span>
+</span></span><span class="line"><span class="cl"><span class="kd">Function</span><span class="w"> </span><span class="nb">New-LogEvent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">([</span><span class="no">string</span><span class="p">]</span><span class="nv">$message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$timeStamp</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&#34;MM-dd-yyyy HH:mm:ss&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;[</span><span class="nv">$timeStamp</span><span class="s2">] </span><span class="nv">$message</span><span class="s2">&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;[</span><span class="nv">$timeStamp</span><span class="s2">] </span><span class="nv">$message</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-Append</span> <span class="n">-LiteralPath</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">verboseLogFile</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-LogEvent</span> <span class="s2">&#34;Connecting to vCenter: </span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">VIServer</span><span class="p">)</span><span class="s2">...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$viConnection</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VIServer</span> <span class="n">-User</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VIUsername</span> <span class="n">-Password</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VIPassword</span> <span class="n">-WarningAction</span> <span class="n">SilentlyContinue</span> <span class="n">-Protocol</span> <span class="n">https</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get datastore, cluster, and random ESXi host</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$datastore</span> <span class="p">=</span> <span class="nb">Get-Datastore</span> <span class="n">-Server</span> <span class="nv">$viConnection</span> <span class="n">-Name</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMDatastore</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-First</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cluster</span> <span class="p">=</span> <span class="nb">Get-Cluster</span> <span class="n">-Server</span> <span class="nv">$viConnection</span> <span class="n">-Name</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMCluster</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmhost</span> <span class="p">=</span> <span class="nv">$cluster</span> <span class="p">|</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Get-Random</span> <span class="n">-Count</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Iterate over each Nested ESXi Host in YAML</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$nestedhost</span> <span class="k">in</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">Hosts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$nestedhost</span><span class="p">.</span><span class="n">Create</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">New-LogEvent</span> <span class="s2">&#34;Skipping host: </span><span class="p">$(</span><span class="nv">$nestedhost</span><span class="p">.</span><span class="n">Hostname</span><span class="p">)</span><span class="s2"> as per configuration.&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Check if the VM already exists</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nb">Get-VM</span> <span class="n">-Name</span> <span class="nv">$nestedhost</span><span class="p">.</span><span class="py">Hostname</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="nb">New-LogEvent</span> <span class="s2">&#34;Nested ESXi Host: </span><span class="p">$(</span><span class="nv">$nestedhost</span><span class="p">.</span><span class="n">Hostname</span><span class="p">)</span><span class="s2"> already exists. Skipping deployment.&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Configure VM settings</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$VMHostName</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$nestedhost</span><span class="p">.</span><span class="n">Hostname</span><span class="p">)</span><span class="s2">.</span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">VMDomain</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span> <span class="p">=</span> <span class="nb">Get-OvfConfiguration</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiApplianceOVA</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$networkMapLabel</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">ToHashTable</span><span class="p">().</span><span class="py">keys</span> <span class="p">|</span> <span class="nb">Where </span><span class="p">{</span><span class="nv">$_</span> <span class="o">-Match</span> <span class="s2">&#34;NetworkMapping&#34;</span><span class="p">}).</span><span class="py">replace</span><span class="p">(</span><span class="s2">&#34;NetworkMapping.&#34;</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">).</span><span class="py">replace</span><span class="p">(</span><span class="s2">&#34;-&#34;</span><span class="p">,</span><span class="s2">&#34;_&#34;</span><span class="p">).</span><span class="py">replace</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span><span class="s2">&#34;_&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">NetworkMapping</span><span class="p">.</span><span class="nv">$networkMapLabel</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMNetwork</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">hostname</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$VMHostName</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">ipaddress</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$nestedhost</span><span class="p">.</span><span class="py">IP</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">netmask</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMNetmask</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">gateway</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMGateway</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">dns</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMDNS</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">domain</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMDomain</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">ntp</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMNTP</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">syslog</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMSyslog</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">password</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMPassword</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ovfconfig</span><span class="p">.</span><span class="py">common</span><span class="p">.</span><span class="py">guestinfo</span><span class="p">.</span><span class="py">ssh</span><span class="p">.</span><span class="py">value</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">New-LogEvent</span> <span class="s2">&#34;Deploying Nested ESXi VM: </span><span class="p">$(</span><span class="nv">$nestedhost</span><span class="p">.</span><span class="n">Hostname</span><span class="p">)</span><span class="s2"> with IP </span><span class="p">$(</span><span class="nv">$nestedhost</span><span class="p">.</span><span class="n">IP</span><span class="p">)</span><span class="s2"> ...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vm</span> <span class="p">=</span> <span class="nb">Import-VApp</span> <span class="n">-Source</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiApplianceOVA</span> <span class="n">-OvfConfiguration</span> <span class="nv">$ovfconfig</span> <span class="n">-Name</span> <span class="nv">$nestedhost</span><span class="p">.</span><span class="py">Hostname</span> <span class="n">-Location</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">VMCluster</span> <span class="n">-VMHost</span> <span class="nv">$vmhost</span> <span class="n">-Datastore</span> <span class="nv">$datastore</span> <span class="n">-DiskStorageFormat</span> <span class="n">thin</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">New-LogEvent</span> <span class="s2">&#34;Updating vCPU: </span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTvCPU</span><span class="p">)</span><span class="s2"> &amp; vMEM: </span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTvMEM</span><span class="p">)</span><span class="s2"> GB ...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Set-VM</span> <span class="n">-VM</span> <span class="nv">$vm</span> <span class="n">-NumCpu</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiMGMTvCPU</span> <span class="n">-CoresPerSocket</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiMGMTvCPU</span> <span class="n">-MemoryGB</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiMGMTvMEM</span> <span class="n">-Confirm:</span><span class="vm">$false</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-Append</span> <span class="n">-LiteralPath</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">verboseLogFile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">New-LogEvent</span> <span class="s2">&#34;Updating vSAN Disks (Boot: </span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTBootDisk</span><span class="p">)</span><span class="s2"> GB, Cache: </span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTCachingvDisk</span><span class="p">)</span><span class="s2"> GB, Capacity: </span><span class="p">$(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="n">NestedESXiMGMTCapacityvDisk</span><span class="p">)</span><span class="s2"> GB)...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Get-HardDisk</span> <span class="n">-VM</span> <span class="nv">$vm</span> <span class="n">-Name</span> <span class="s2">&#34;Hard disk 1&#34;</span> <span class="p">|</span> <span class="nb">Set-HardDisk</span> <span class="n">-CapacityGB</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiMGMTBootDisk</span> <span class="n">-Confirm:</span><span class="vm">$false</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-Append</span> <span class="n">-LiteralPath</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">verboseLogFile</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Get-HardDisk</span> <span class="n">-VM</span> <span class="nv">$vm</span> <span class="n">-Name</span> <span class="s2">&#34;Hard disk 2&#34;</span> <span class="p">|</span> <span class="nb">Set-HardDisk</span> <span class="n">-CapacityGB</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiMGMTCachingvDisk</span> <span class="n">-Confirm:</span><span class="vm">$false</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-Append</span> <span class="n">-LiteralPath</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">verboseLogFile</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Get-HardDisk</span> <span class="n">-VM</span> <span class="nv">$vm</span> <span class="n">-Name</span> <span class="s2">&#34;Hard disk 3&#34;</span> <span class="p">|</span> <span class="nb">Set-HardDisk</span> <span class="n">-CapacityGB</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">NestedESXiMGMTCapacityvDisk</span> <span class="n">-Confirm:</span><span class="vm">$false</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-Append</span> <span class="n">-LiteralPath</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">NH</span><span class="p">.</span><span class="py">verboseLogFile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">New-LogEvent</span> <span class="s2">&#34;Powering On </span><span class="p">$(</span><span class="nv">$nestedhost</span><span class="p">.</span><span class="n">Hostname</span><span class="p">)</span><span class="s2"> ...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vm</span> <span class="p">|</span> <span class="nb">Start-Vm</span> <span class="n">-RunAsync</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Disconnect from vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-LogEvent</span> <span class="s2">&#34;Disconnecting from vCenter...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="p">*</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$EndTime</span> <span class="p">=</span> <span class="nb">Get-Date</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$duration</span> <span class="p">=</span> <span class="p">[</span><span class="no">math</span><span class="p">]::</span><span class="n">Round</span><span class="p">((</span><span class="nb">New-TimeSpan</span> <span class="n">-Start</span> <span class="nv">$StartTime</span> <span class="n">-End</span> <span class="nv">$EndTime</span><span class="p">).</span><span class="n">TotalMinutes</span><span class="p">,</span><span class="mf">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">New-LogEvent</span> <span class="s2">&#34;VCF Lab Nested ESXi Hosts Build Complete!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-LogEvent</span> <span class="s2">&#34;StartTime: </span><span class="nv">$StartTime</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-LogEvent</span> <span class="s2">&#34;EndTime: </span><span class="nv">$EndTime</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">New-LogEvent</span> <span class="s2">&#34;Duration: </span><span class="nv">$duration</span><span class="s2"> minutes to deploy Nested ESXi Hosts&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Sample Script to connect to vCenter using variables from a YAML file:</strong></p>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Ensure required modules are installed before proceeding</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$requiredModules</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;powershell-yaml&#34;</span><span class="p">,</span> <span class="s2">&#34;VMware.PowerCLI&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$module</span> <span class="k">in</span> <span class="nv">$requiredModules</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="nv">$module</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="nv">$module</span><span class="s2"> is not installed. Install it using &#39;Install-Module </span><span class="nv">$module</span><span class="s2">&#39;.&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Read YAML configuration</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfgFile</span> <span class="p">=</span> <span class="s2">&#34;Home-Lab-Config.yaml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$credential</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">PSCredential</span> <span class="p">(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="n">username</span><span class="p">,</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">password</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vCenter</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">server</span> <span class="n">-Credential</span> <span class="nv">$credential</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="p">*</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Sample Script to Connect to an ESXi Host Using Variables from a YAML File:</strong></p>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Ensure required modules are installed before proceeding</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$requiredModules</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;powershell-yaml&#34;</span><span class="p">,</span> <span class="s2">&#34;VMware.PowerCLI&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$module</span> <span class="k">in</span> <span class="nv">$requiredModules</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="nv">$module</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="nv">$module</span><span class="s2"> is not installed. Install it using &#39;Install-Module </span><span class="nv">$module</span><span class="s2">&#39;.&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Read YAML configuration</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfgFile</span> <span class="p">=</span> <span class="s2">&#34;Home-Lab-Config.yaml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to a ESXi Host</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$credential</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">PSCredential</span> <span class="p">(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">Host101</span><span class="p">.</span><span class="n">username</span><span class="p">,</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Host101</span><span class="p">.</span><span class="py">password</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$hostConnection</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Host101</span><span class="p">.</span><span class="py">server</span> <span class="n">-Credential</span> <span class="nv">$credential</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="p">*</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Sample Script to Connect to a VCF Operations Appliance Using Variables from a YAML File:</strong></p>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Ensure required modules are installed before proceeding</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$requiredModules</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;powershell-yaml&#34;</span><span class="p">,</span> <span class="s2">&#34;VMware.PowerCLI&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$module</span> <span class="k">in</span> <span class="nv">$requiredModules</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="nv">$module</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="nv">$module</span><span class="s2"> is not installed. Install it using &#39;Install-Module </span><span class="nv">$module</span><span class="s2">&#39;.&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define YAML configuration file path</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfgFile</span> <span class="p">=</span> <span class="s2">&#34;Home-Lab-Config.yaml&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Read YAML configuration into PowerShell object</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Extract Aria Operations (OPS) credentials from the YAML file</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsURL</span>      <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">OPS</span><span class="p">.</span><span class="py">opsURL</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsUsername</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">OPS</span><span class="p">.</span><span class="py">opsUsername</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authSource</span>  <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">OPS</span><span class="p">.</span><span class="py">authSource</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$opsPassword</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">OPS</span><span class="p">.</span><span class="py">opsPassword</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Obtain Aria Operations authentication token -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authUri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/auth/token/acquire?_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Construct the request body as a hashtable</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$bodyHashtable</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">username</span>   <span class="p">=</span> <span class="nv">$opsUsername</span>
+</span></span><span class="line"><span class="cl">    <span class="n">authSource</span> <span class="p">=</span> <span class="nv">$authSource</span>
+</span></span><span class="line"><span class="cl">    <span class="n">password</span>   <span class="p">=</span> <span class="nv">$opsPassword</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Convert the hashtable to JSON format</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$bodyHashtable</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Execute REST API call to retrieve the authentication token</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$tokenResponse</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$authUri</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span>       <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Content-Type&#34;</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-Body</span> <span class="nv">$body</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Extract the token from the API response</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$authorization</span> <span class="p">=</span> <span class="s2">&#34;OpsToken &#34;</span> <span class="p">+</span> <span class="nv">$tokenResponse</span><span class="p">.</span><span class="py">token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># ----- Retrieve the VM Operations identifier -----</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$resourceUri</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$opsURL</span><span class="s2">/suite-api/api/resources?resourceKind=HostSystem&amp;page=0&amp;pageSize=1000&amp;_no_links=true&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Execute REST API call to fetch ESXi host system resources</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$resourceResponse</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$resourceUri</span> <span class="n">-Method</span> <span class="n">Get</span> <span class="n">-Headers</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;accept&#34;</span>        <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Authorization&#34;</span> <span class="p">=</span> <span class="nv">$authorization</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Extract resource list and convert to JSON for better readability</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$identifierList</span> <span class="p">=</span> <span class="nv">$resourceResponse</span><span class="p">.</span><span class="py">resourceList</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Convert the JSON string back to a PowerShell object</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$data</span> <span class="p">=</span> <span class="nv">$identifierList</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Display the names of all retrieved ESXi hosts</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$data</span><span class="p">.</span><span class="py">resourceKey</span><span class="p">.</span><span class="py">name</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>I enjoy bringing consistency to my scripts by leveraging a YAML file, similar to the approach used in automation platforms I work with.</li>
+<li>All the scripts in this blog were created and tested on a Mac using PowerShell.</li>
+<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!</li>
+<li>Integrating PowerShell with YAML has been something I’ve wanted to explore for a while. I’m glad I took the time to develop the necessary code and share it with the vCommunity.</li>
+</ul>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>vCROCS Deep Dive Podcast<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
+<p><a href="https://youtu.be/QChe8ogU_sY" target="_blank" rel="noopener noreffer ">vCROCS Deep Dive Podcast | PowerCLI on Mac, Linux and Windows</a></p>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog helpful, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<div style="font-weight: bold;">Comments:</div>
+<div style="height: 20px;"></div>
+<div
+  id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="c49f7fae-719b-4753-a518-a57e5321d7c1"
+  data-page-id="posts/powercli-and-yaml/index.en.md"
+  data-page-url="https://www.vcrocs.info/powercli-and-yaml/"
+  data-page-title="PowerCLI and YAML"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-03-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/powercli-and-yaml/" data-title="PowerCLI and YAML" data-via="dalehassinger" data-hashtags="VCF,Automation,PowerShell,PowerCLI,VMware Code Coach,VMware vExpert,yaml"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/powercli-and-yaml/" data-hashtag="VCF"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/powercli-and-yaml/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/automation/">Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/powercli/">PowerCLI</a>,&nbsp;<a href="/tags/vmware-code-coach/">VMware Code Coach</a>,&nbsp;<a href="/tags/vmware-vexpert/">VMware VExpert</a>,&nbsp;<a href="/tags/yaml/">Yaml</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/powercli-loves-linux-mac-windows/" class="prev" rel="prev" title="PowerCLI on Mac, Linux, and Windows"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>PowerCLI on Mac, Linux, and Windows</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.vcrocs.info" target="_blank">Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
