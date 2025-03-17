@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VCF Automation | Linux PowerShell Host - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VCF Automation | Linux PowerShell Host">
+  <meta property="og:description" content="How to use a Rocky Linux PowerShell Host with VCF Automation Orchestrator. Linux ❤️ PowerShell!">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-03-15T00:00:00+00:00">
+    <meta property="article:tag" content="VCF">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="PowerShell">
+    <meta property="article:tag" content="PowerCLI">
+    <meta property="article:tag" content="VMware Code Coach">
+    <meta property="article:tag" content="VMware VExpert">
+    <meta property="og:image" content="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/featured-image.png">
+  <meta name="twitter:title" content="VCF Automation | Linux PowerShell Host">
+  <meta name="twitter:description" content="How to use a Rocky Linux PowerShell Host with VCF Automation Orchestrator. Linux ❤️ PowerShell!">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/" /><link rel="prev" href="https://www.vcrocs.info/powercli-and-yaml/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VCF Automation | Linux PowerShell Host",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/powercli-orchestrator-linux-powershell-host\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/powercli-orchestrator-linux-powershell-host\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Linux","wordcount":  1123 ,
+        "url": "https:\/\/www.vcrocs.info\/powercli-orchestrator-linux-powershell-host\/","datePublished": "2025-03-15T00:00:00+00:00","dateModified": "2025-03-15T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Automation | Linux PowerShell Host</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-15">2025-03-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1123 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/powercli-orchestrator-linux-powershell-host/featured-image.png"
+        data-srcset="/powercli-orchestrator-linux-powershell-host/featured-image.png, /powercli-orchestrator-linux-powershell-host/featured-image.png 1.5x, /powercli-orchestrator-linux-powershell-host/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/powercli-orchestrator-linux-powershell-host/featured-image.png"
+        title="/powercli-orchestrator-linux-powershell-host/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#i-like-using-powershell-on-linux-in-my-lab">I like using PowerShell on Linux in my Lab:</a></li>
+                    <li><a href="#running-powershell-from-the-cli-and-executing-a-script">Running PowerShell from the CLI and Executing a Script:</a></li>
+                    <li><a href="#workflow-design">Workflow Design:</a></li>
+                    <li><a href="#code-examples">Code Examples:</a></li>
+                    <li><a href="#install-powershell-on-rocky-linux">Install PowerShell on Rocky Linux:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to use a Rocky Linux PowerShell Host with VCF Automation Orchestrator. Linux ❤️ PowerShell!</strong></p>
+<hr>
+<blockquote>
+<p>Streamline VMware Automation with VCF Automation, a Rocky Linux PowerShell host, custom workflows, and the simplicity of PowerCLI.</p>
+</blockquote>
+<hr>
+<h6 id="i-like-using-powershell-on-linux-in-my-lab">I like using PowerShell on Linux in my Lab:</h6>
+<p>In most cases, a PowerShell Host for VCF Automation Orchestrator is set up on a Windows Server, which works seamlessly. Having spent much of my career working with Microsoft Windows Server, I’m well-versed in its capabilities. However, in my lab, where resource efficiency is a priority, I prefer to run Linux VMs whenever possible. I keep these Linux VMs lean and mean for maximum performance.</p>
+<p>I set out to explore how a Rocky Linux VM could function as a PowerShell Host. By default, VCF Automation Orchestrator includes a workflow called “Run SSH Command”, designed to execute SSH commands on a server. I began testing with this built-in workflow and customized it to better align with my requirements.</p>
+<p>To keep the setup simple, I wanted to create a single workflow where I could specify the PS script path and name. The Linux VM details—such as hostname, username, password, and port—would remain static.</p>
+<blockquote>
+<p>For 2025, I’ve been invited to be a <strong>VMware Community {code} Coach</strong>! This year, my blogs will feature even more code examples to help others get started with automation, VMware solutions, and much more&hellip;</p>
+</blockquote>
+<hr>
+<h6 id="running-powershell-from-the-cli-and-executing-a-script">Running PowerShell from the CLI and Executing a Script:</h6>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">pwsh -file /home/administrator/Home-Lab-PS.ps1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># If you want to use Script Parameters</span>
+</span></span><span class="line"><span class="cl">pwsh -file /home/administrator/Home-Lab-PS.ps1 -vmName <span class="s2">&#34;VM-01&#34;</span> -PowerState <span class="s2">&#34;On&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="workflow-design">Workflow Design:</h6>
+<figure><a class="lightgallery" href="/powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif" title="/powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif" data-thumbnail="/powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif"
+            data-srcset="/powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif, /powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif 1.5x, /powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif 2x"
+            data-sizes="auto"
+            alt="/powercli-orchestrator-linux-powershell-host/linux0ps-host-01.gif" width="2000" height="1472" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<p><strong>Java Script used in the Workflow to SSH to the Rocky Linux PowerShell Host and run a PS Script:</strong></p>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the JavaScript code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nx">port</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SSHSession</span><span class="p">(</span><span class="nx">hostNameOrIP</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">port</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;A port value is not provided! Using default port 22&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SSHSession</span><span class="p">(</span><span class="nx">hostNameOrIP</span><span class="p">,</span> <span class="nx">username</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nx">passwordAuthentication</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Connecting with password&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nx">path</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="nx">path</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;using default&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">path</span> <span class="o">=</span> <span class="nx">defaultKeyPairPath</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Connecting with key pair (&#34;</span> <span class="o">+</span> <span class="nx">path</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">password</span> <span class="o">=</span> <span class="nx">passphrase</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">session</span><span class="p">.</span><span class="nx">connectWithPasswordOrIdentity</span><span class="p">(</span><span class="nx">passwordAuthentication</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Connected!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Executing &#39;&#34;</span> <span class="o">+</span> <span class="nx">cmd</span> <span class="o">+</span> <span class="s2">&#34;&#39; using encoding &#39;&#34;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">encoding</span> <span class="o">?</span> <span class="nx">encoding</span> <span class="o">:</span> <span class="s2">&#34;Default System Encoding&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">session</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="nx">encoding</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">session</span><span class="p">.</span><span class="nx">executeCommand</span><span class="p">(</span><span class="nx">cmd</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">output</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">getOutput</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">System</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Output: &#39;&#34;</span> <span class="o">+</span> <span class="nx">output</span> <span class="o">+</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">throw</span> <span class="s2">&#34;Unable to execute command: &#34;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nx">session</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">session</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="code-examples">Code Examples:</h6>
+<ul>
+<li>YAML file to store values to be used with scripts</li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the YAML code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="c"># vCenter Connection Values</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">vCenter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l">vcsa8x.vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator@vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ignoreCertErrors</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Sample PowerShell Script:</strong></p>
+<ul>
+<li>Sample script that I used to show that Rocky Linux can be used as a PowerShell Host</li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Ensure required modules are installed before proceeding</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$requiredModules</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;powershell-yaml&#34;</span><span class="p">,</span> <span class="s2">&#34;VMware.PowerCLI&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$module</span> <span class="k">in</span> <span class="nv">$requiredModules</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="nv">$module</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="nv">$module</span><span class="s2"> is not installed. Install it using &#39;Install-Module </span><span class="nv">$module</span><span class="s2">&#39;.&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Read YAML configuration</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfgFile</span> <span class="p">=</span> <span class="s2">&#34;Home-Lab-Config.yaml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;Executing Script&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Connect to vCenter</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;Connecting to vCenter...&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$credential</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">PSCredential</span> <span class="p">(</span><span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="n">username</span><span class="p">,</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">password</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$vCenter</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">server</span> <span class="n">-Credential</span> <span class="nv">$credential</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Running commands...&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$vmNames</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">PowerState</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$vmNames</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="p">*</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Disconnecting from vCenter...&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;Script Completed&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;An error occurred: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;Error: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<ul>
+<li>VCF Automation Catalog with an Option to run the Orchestrator Workflow that was created to run the script on Rocky Linux</li>
+</ul>
+<figure><a class="lightgallery" href="/powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png" title="/powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png" data-thumbnail="/powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png"
+            data-srcset="/powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png, /powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png 1.5x, /powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png 2x"
+            data-sizes="auto"
+            alt="/powercli-orchestrator-linux-powershell-host/linux0ps-host-02.png" width="3410" height="2502" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>Orchestrator Workflow as a Catalog Item</li>
+<li>This is a simple example to give you ideas. The script that will run could bascially Automate anything</li>
+<li>Script Parameters become fields on a custom form</li>
+<li>If you can write a script for the process, you can Automate it with Orchestrator</li>
+</ul>
+<figure><a class="lightgallery" href="/powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png" title="/powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png" data-thumbnail="/powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png"
+            data-srcset="/powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png, /powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png 1.5x, /powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png 2x"
+            data-sizes="auto"
+            alt="/powercli-orchestrator-linux-powershell-host/linux0ps-host-03.png" width="3410" height="2502" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="install-powershell-on-rocky-linux">Install PowerShell on Rocky Linux:</h6>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install PowerShell on Rocky Linux</span>
+</span></span><span class="line"><span class="cl">sudo dnf install -y powershell
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Ensure OpenSSH is installed and running</span>
+</span></span><span class="line"><span class="cl">sudo dnf install -y openssh-server
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> --now sshd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create a PowerShell subsystem entry in the SSH daemon config</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Subsystem powershell /usr/bin/pwsh -sshs -NoProfile&#34;</span> <span class="p">|</span> sudo tee -a /etc/ssh/sshd_config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Restart the SSH service</span>
+</span></span><span class="line"><span class="cl">sudo systemctl restart sshd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>If you like to use Linux for Servers, this is a good use case for running PowerShell scripts</li>
+<li>If you have existing PowerShell scripts that run on a Windows Server, most scripts should run on Linux with little to no modifications</li>
+<li>I enjoy bringing consistency to my scripts by leveraging a YAML file, similar to the approach used in automation platforms I work with</li>
+<li>All the scripts in this blog were created and tested on a Mac using PowerShell</li>
+<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!</li>
+</ul>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>vCROCS Deep Dive Podcast<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
+<p><a href="https://youtu.be/0qF9ONBxcwA" target="_blank" rel="noopener noreffer ">vCROCS Deep Dive Podcast | PowerCLI and YAML</a></p>
+</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog helpful, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<div style="font-weight: bold;">Comments:</div>
+<div style="height: 20px;"></div>
+<div
+  id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="c49f7fae-719b-4753-a518-a57e5321d7c1"
+  data-page-id="posts/powercli-orchestrator-linux-powershell-host/index.en.md"
+  data-page-url="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/"
+  data-page-title="VCF Automation | Linux PowerShell Host"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-03-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/" data-title="VCF Automation | Linux PowerShell Host" data-via="dalehassinger" data-hashtags="VCF,Automation,PowerShell,PowerCLI,VMware Code Coach,VMware vExpert,Linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/" data-hashtag="VCF"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/powercli-orchestrator-linux-powershell-host/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/automation/">Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/powercli/">PowerCLI</a>,&nbsp;<a href="/tags/vmware-code-coach/">VMware Code Coach</a>,&nbsp;<a href="/tags/vmware-vexpert/">VMware VExpert</a>,&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/powercli-and-yaml/" class="prev" rel="prev" title="PowerCLI and YAML"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>PowerCLI and YAML</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.vcrocs.info" target="_blank">Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
