@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vcf-automation-customproperties-cmdb\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, CMDB, CustomProperties","wordcount":  1774 ,
+                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, CMDB, CustomProperties","wordcount":  1863 ,
         "url": "https:\/\/www.vcrocs.info\/vcf-automation-customproperties-cmdb\/","datePublished": "2025-03-30T00:00:00+00:00","dateModified": "2025-03-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,7 +124,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Automation | CustomProperties</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-30">2025-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1774 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-30">2025-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1863 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -718,6 +718,14 @@
 </span><span class="lnt">50
 </span><span class="lnt">51
 </span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
@@ -725,52 +733,60 @@
 </span></span><span class="line"><span class="cl"><span class="c"># Code works in DDC Lab</span>
 </span></span><span class="line"><span class="cl"><span class="c"># Date: 2025.03.28</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Script uses the powershell-yaml module. Make sure the Module is Installed.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Check if the powershell-yaml module is installed</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="nb">powershell-yaml</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;PowerShell-YAML module is not installed. Please install it using &#39;Install-Module powershell-yaml&#39;.&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">exit</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Script uses the VMware PowerCLI module. Make sure the Module is Installed.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Check if the VMware PowerCLI module is installed</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="n">VMware</span><span class="p">.</span><span class="n">PowerCLI</span><span class="p">))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;VMware PowerCLI module is not installed. Please install it using &#39;Install-Module VMware.PowerCLI&#39;.&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">exit</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Read YAML configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Load YAML configuration file</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$cfgFile</span> <span class="p">=</span> <span class="s2">&#34;VCF-Nested-Step-1-Host-Only-YAML.yaml&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Set the VM name to retrieve customProperties for</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;DB-ROCKY-207&#34;</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get the VCF Automation server from the YAML config</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$vraServer</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">autoURL</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Prepare login URI</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vraServer</span><span class="s2">/csp/gateway/am/api/login&#34;</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Prepare login request body</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">username</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">autoUsername</span>
 </span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">autoPassword</span>
 </span></span><span class="line"><span class="cl">    <span class="n">domain</span>   <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">autoDomain</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
-</span></span><span class="line"><span class="cl"><span class="c">#$body</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$body  # Optional output for debugging</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Set standard request headers</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">&#39;accept&#39;</span>       <span class="p">=</span> <span class="s1">&#39;*/*&#39;</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">&#39;Content-Type&#39;</span> <span class="p">=</span> <span class="s1">&#39;application/json&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Authenticate and get access token</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-Body</span> <span class="nv">$body</span> <span class="n">-SkipCertificateCheck</span>
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nv">$accessToken</span> <span class="p">=</span> <span class="s2">&#34;Bearer &#34;</span> <span class="p">+</span> <span class="nv">$response</span><span class="p">.</span><span class="py">cspAuthToken</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Add Authorization header for subsequent API calls</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Authorization&#34;</span><span class="p">,</span><span class="nv">$accessToken</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define URI to fetch deployed machines</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vraServer</span><span class="s2">/iaas/api/machines/&#34;</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Get list of VMs and extract customProperties for the matching VM name</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-SkipCertificateCheck</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$customProperties</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$results</span><span class="p">.</span><span class="py">content</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="p">*</span> <span class="p">|</span>  <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-like</span> <span class="s2">&#34;*</span><span class="nv">$vmName</span><span class="s2">*&#34;</span> <span class="p">}).</span><span class="py">customProperties</span>
-</span></span><span class="line"><span class="cl"><span class="c">#$biosID = ($results.content | Select-Object * |  Where-Object { $_.Name -like &#34;*$vmName*&#34; }).customProperties.biosID</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Output the customProperties</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$customProperties</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -842,6 +858,7 @@
 <ul>
 <li>Using customProperties with VCF Automation is a great way to keep 3rd party processes out of VMware vCenter.</li>
 <li>customProperty values can be added Post Provision of a new VM deployment in VCF Automation.</li>
+<li>Think of other customProperties you would want to add to a VCF Automation VM Deployment. This technique can be done for a lot use cases.</li>
 </ul>
 <hr>
 <div class="details admonition info open">
