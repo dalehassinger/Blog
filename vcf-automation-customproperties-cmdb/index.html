@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vcf-automation-customproperties-cmdb\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, CMDB, CustomProperties","wordcount":  1849 ,
+                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, CMDB, CustomProperties","wordcount":  1869 ,
         "url": "https:\/\/www.vcrocs.info\/vcf-automation-customproperties-cmdb\/","datePublished": "2025-03-30T00:00:00+00:00","dateModified": "2025-03-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,7 +124,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Automation | CustomProperties</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-30">2025-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1849 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-30">2025-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1869 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -177,11 +177,19 @@
 <hr>
 <h6 id="steps">Steps:</h6>
 <p><strong>Steps to add a customProperty to a VM deployment:</strong></p>
+<hr>
 <ul>
 <li>Start with a Design Template that includes the customProperties you want to associate with the VM during the build process.</li>
-<li>Set up a Subscription that triggers an ABX Action to run Post-Provisioning.</li>
-<li>The ABX Action connects to vCenter, retrieves the VM’s “bios id”, and writes it back as a customProperty on the deployment.</li>
+<li>Set up a Subscription that triggers an ABX Action to run Post-Provisioning.
+<ul>
+<li>When the new VM deployment starts, you will not see the customProperty “bios id” until after the ABX Action runs.</li>
+</ul>
+</li>
+<li>The ABX Action connects to vCenter, retrieves the VM’s “bios id”, and writes it back as a customProperty on the deployment.
+<ul>
 <li>This action only needs to run once—the &ldquo;bios id&rdquo; is static.</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h6 id="design-template">Design Template:</h6>
