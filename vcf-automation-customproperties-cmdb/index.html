@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vcf-automation-customproperties-cmdb\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, CMDB, CustomProperties","wordcount":  1863 ,
+                        }],"genre": "posts","keywords": "VCF, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, CMDB, CustomProperties","wordcount":  1849 ,
         "url": "https:\/\/www.vcrocs.info\/vcf-automation-customproperties-cmdb\/","datePublished": "2025-03-30T00:00:00+00:00","dateModified": "2025-03-30T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,7 +124,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Automation | CustomProperties</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-30">2025-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1863 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-03-30">2025-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1849 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -550,6 +550,8 @@
 </span><span class="lnt">102
 </span><span class="lnt">103
 </span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">handler($context</span><span class="p">,</span> <span class="nv">$inputs</span><span class="p">)</span> <span class="p">{</span>
@@ -619,12 +621,13 @@
 </span></span><span class="line"><span class="cl">    <span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Authorization&#34;</span><span class="p">,</span> <span class="nv">$accessToken</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c"># Step 2: Get machine ID based on VM name</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vas</span><span class="s2">/iaas/api/machines/&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$filter</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Net.WebUtility</span><span class="p">]::</span><span class="n">UrlEncode</span><span class="p">(</span><span class="s2">&#34;name eq &#39;</span><span class="nv">$vmName</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vas</span><span class="s2">/iaas/api/machines?</span><span class="se">`$</span><span class="s2">filter=</span><span class="nv">$filter</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;uri:&#34;</span> <span class="nv">$uri</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Making VCF Automation API Call to get Machine ID...&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-SkipCertificateCheck</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$machineID</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$results</span><span class="p">.</span><span class="py">content</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">id</span><span class="p">,</span> <span class="n">name</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-like</span> <span class="s2">&#34;*</span><span class="nv">$vmName</span><span class="s2">*&#34;</span> <span class="p">}).</span><span class="py">id</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$machineID</span> <span class="p">=</span> <span class="nv">$results</span><span class="p">.</span><span class="py">content</span><span class="p">.</span><span class="py">id</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;machine id:&#34;</span> <span class="nv">$machineID</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c"># Step 3: Patch the machine with BIOS ID</span>
@@ -646,11 +649,12 @@
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;biosID Response:&#34;</span> <span class="nv">$response</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">biosID</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c"># Step 4: Verification – Confirm that the BIOS ID was updated</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vas</span><span class="s2">/iaas/api/machines/&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$filter</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Net.WebUtility</span><span class="p">]::</span><span class="n">UrlEncode</span><span class="p">(</span><span class="s2">&#34;name eq &#39;</span><span class="nv">$vmName</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vas</span><span class="s2">/iaas/api/machines?</span><span class="se">`$</span><span class="s2">filter=</span><span class="nv">$filter</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;uri:&#34;</span> <span class="nv">$uri</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-SkipCertificateCheck</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$biosID</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$results</span><span class="p">.</span><span class="py">content</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="p">*</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-like</span> <span class="s2">&#34;*</span><span class="nv">$vmName</span><span class="s2">*&#34;</span> <span class="p">}).</span><span class="py">customProperties</span><span class="p">.</span><span class="py">biosID</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$biosID</span> <span class="p">=</span> <span class="nv">$results</span><span class="p">.</span><span class="py">content</span><span class="p">.</span><span class="py">customProperties</span><span class="p">.</span><span class="py">biosID</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Verify BIOS ID:&#34;</span> <span class="nv">$biosID</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c"># Return original inputs</span>
@@ -726,9 +730,12 @@
 </span><span class="lnt">58
 </span><span class="lnt">59
 </span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># ------------- Code to Get VCF Automation Deployment customProperty Values --------------</span>
 </span></span><span class="line"><span class="cl"><span class="c"># Code works in DDC Lab</span>
 </span></span><span class="line"><span class="cl"><span class="c"># Date: 2025.03.28</span>
@@ -750,7 +757,7 @@
 </span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Set the VM name to retrieve customProperties for</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;DB-ROCKY-207&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$vmName</span> <span class="p">=</span> <span class="s2">&#34;DB-ROCKY-208&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Get the VCF Automation server from the YAML config</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$vraServer</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">autoURL</span>
@@ -764,7 +771,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">autoPassword</span>
 </span></span><span class="line"><span class="cl">    <span class="n">domain</span>   <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Automation</span><span class="p">.</span><span class="py">autoDomain</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
-</span></span><span class="line"><span class="cl"><span class="c">#$body  # Optional output for debugging</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$body # Optional output for debugging</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Set standard request headers</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
@@ -780,14 +787,15 @@
 </span></span><span class="line"><span class="cl"><span class="nv">$header</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="s2">&#34;Authorization&#34;</span><span class="p">,</span><span class="nv">$accessToken</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Define URI to fetch deployed machines</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vraServer</span><span class="s2">/iaas/api/machines/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$filter</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Net.WebUtility</span><span class="p">]::</span><span class="n">UrlEncode</span><span class="p">(</span><span class="s2">&#34;name eq &#39;</span><span class="nv">$vmName</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$uri</span> <span class="p">=</span> <span class="s2">&#34;https://</span><span class="nv">$vraServer</span><span class="s2">/iaas/api/machines?</span><span class="se">`$</span><span class="s2">filter=</span><span class="nv">$filter</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#$uri</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Get list of VMs and extract customProperties for the matching VM name</span>
 </span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-uri</span> <span class="nv">$uri</span> <span class="n">-Method</span> <span class="n">GET</span> <span class="n">-Headers</span> <span class="nv">$header</span> <span class="n">-SkipCertificateCheck</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$customProperties</span> <span class="p">=</span> <span class="p">(</span><span class="nv">$results</span><span class="p">.</span><span class="py">content</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="p">*</span> <span class="p">|</span>  <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-like</span> <span class="s2">&#34;*</span><span class="nv">$vmName</span><span class="s2">*&#34;</span> <span class="p">}).</span><span class="py">customProperties</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Output the customProperties</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$customProperties</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span><span class="p">.</span><span class="py">content</span><span class="p">.</span><span class="py">customProperties</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
