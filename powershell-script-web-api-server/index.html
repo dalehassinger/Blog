@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>PowerShell Script as a Web/API Server - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/powershell-script-web-api-server/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="PowerShell Script as a Web/API Server">
+  <meta property="og:description" content="How to use PowerShell Scripts as a Web Server or RESTful API Front End Server…">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-04-09T00:00:00+00:00">
+    <meta property="article:tag" content="Restful API">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="PowerShell">
+    <meta property="article:tag" content="PowerCLI">
+    <meta property="article:tag" content="VMware Code Coach">
+    <meta property="article:tag" content="VMware VExpert">
+    <meta property="og:image" content="https://www.vcrocs.info/powershell-script-web-api-server/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/powershell-script-web-api-server/featured-image.png">
+  <meta name="twitter:title" content="PowerShell Script as a Web/API Server">
+  <meta name="twitter:description" content="How to use PowerShell Scripts as a Web Server or RESTful API Front End Server…">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/powershell-script-web-api-server/" /><link rel="prev" href="https://www.vcrocs.info/vcf-automation-customproperties-cmdb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PowerShell Script as a Web/API Server",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "Restful API, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Web Server","wordcount":  2023 ,
+        "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/","datePublished": "2025-04-09T00:00:00+00:00","dateModified": "2025-04-09T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PowerShell Script as a Web/API Server</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-09">2025-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2023 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/powershell-script-web-api-server/featured-image.png"
+        data-srcset="/powershell-script-web-api-server/featured-image.png, /powershell-script-web-api-server/featured-image.png 1.5x, /powershell-script-web-api-server/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/powershell-script-web-api-server/featured-image.png"
+        title="/powershell-script-web-api-server/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#use-case">Use Case:</a></li>
+                    <li><a href="#powershell-script-for-restful-api-requests-use-case">PowerShell Script for RESTful API Requests Use Case:</a></li>
+                    <li><a href="#code-examples">Code Examples:</a></li>
+                    <li><a href="#lessons-learned">Lessons learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>How to use PowerShell Scripts as a Web Server or RESTful API Front End Server&hellip;</strong></p>
+<hr>
+<blockquote>
+<p>I’m constantly discovering new things, even after years of working with PowerShell. This blog post highlights a feature I only recently came across, and I’m excited to share it with you. My goal is to spark some ideas and inspire new use cases in your own automation journey.</p>
+</blockquote>
+<hr>
+<h6 id="use-case">Use Case:</h6>
+<p>Here’s a PowerShell use case I hadn’t come across until just last week: using a PowerShell script as a web server—no separate web server installation needed. Just run the script, and your machine starts listening for connections on the port you specify. This idea immediately got my wheels turning about all the possibilities this unlocks. You’ll find some example scripts included in this blog.</p>
+<p>After getting a basic listener running on port 8080 with a non-SSL connection, I was curious how complex it would be to switch to port 443 with SSL. A bit of research showed it doesn’t take much—just a few changes to the script. Examples of that are also included here.</p>
+<p>Once I saw how simple it was to handle incoming web requests, I naturally started thinking: what if a PowerShell script could act as an API front end? I tweaked the listener script to respond to RESTful API requests—and just like that, PowerShell was replying with data to API calls. Not every system you need to pull data from has a REST API, but with this technique, you can make your own. That’s a game-changer for my automation.</p>
+<h6 id="powershell-script-for-restful-api-requests-use-case">PowerShell Script for RESTful API Requests Use Case:</h6>
+<p>One example is the VCF Operations Management Pack (MP) Builder, which needs to make REST API calls. With this setup, a PowerShell script can serve that role directly. If you can script it, you can expose it as an API and include the data within VCF Operations!</p>
+<p>In my automation journey, I’ve yet to find something I couldn’t automate with PowerShell. Adding modules to your scripts unlocks even more use cases—like connecting to remote systems over SSH and parsing the results. Having a PowerShell script act as a RESTful API front end opens up endless possibilities for automation and integration.</p>
+<hr>
+<h6 id="code-examples">Code Examples:</h6>
+<p>This example is a simple web server (non-ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
+<figure><a class="lightgallery" href="/powershell-script-web-api-server/ps-web-api-server-01.gif" title="/powershell-script-web-api-server/ps-web-api-server-01.gif" data-thumbnail="/powershell-script-web-api-server/ps-web-api-server-01.gif" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/powershell-script-web-api-server/ps-web-api-server-01.gif"
+            data-srcset="/powershell-script-web-api-server/ps-web-api-server-01.gif, /powershell-script-web-api-server/ps-web-api-server-01.gif 1.5x, /powershell-script-web-api-server/ps-web-api-server-01.gif 2x"
+            data-sizes="auto"
+            alt="/powershell-script-web-api-server/ps-web-api-server-01.gif" width="2000" height="936" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$port</span> <span class="p">=</span> <span class="mf">8080</span>  <span class="c"># Define a port parameter with a default value of 8080</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Flag for cancellation, used to control when to stop the server</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cancelled</span> <span class="p">=</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Register an event handler for Ctrl+C (ConsoleBreak)</span>
+</span></span><span class="line"><span class="cl"><span class="c"># When triggered, it sets the $cancelled flag to true so the server can stop gracefully</span>
+</span></span><span class="line"><span class="cl"><span class="vm">$null</span> <span class="p">=</span> <span class="nb">Register-EngineEvent</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-Action</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">Ctrl+C detected. Stopping server...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$global:cancelled</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Create a new TCP listener that listens on any IP address and the specified port</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$listener</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Net.Sockets.TcpListener</span><span class="p">]::</span><span class="n">new</span><span class="p">([</span><span class="no">System.Net.IPAddress</span><span class="p">]::</span><span class="n">Any</span><span class="p">,</span> <span class="nv">$port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># Start the TCP listener</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$listener</span><span class="p">.</span><span class="py">Start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Server started, listening on port </span><span class="nv">$port</span><span class="s2">...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># Handle failure to start the listener</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Failed to start listener: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Main loop to keep the server running until cancelled</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$cancelled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># Check if a client is attempting to connect</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$listener</span><span class="p">.</span><span class="py">Pending</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Accept the incoming TCP client connection</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$client</span> <span class="p">=</span> <span class="nv">$listener</span><span class="p">.</span><span class="py">AcceptTcpClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Write-Host</span> <span class="s2">&#34;Client connected: </span><span class="p">$(</span><span class="nv">$client</span><span class="p">.</span><span class="py">Client</span><span class="p">.</span><span class="n">RemoteEndPoint</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Get the network stream and setup reader/writer for communication</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$stream</span> <span class="p">=</span> <span class="nv">$client</span><span class="p">.</span><span class="py">GetStream</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$reader</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.IO.StreamReader</span><span class="p">]::</span><span class="n">new</span><span class="p">(</span><span class="nv">$stream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.IO.StreamWriter</span><span class="p">]::</span><span class="n">new</span><span class="p">(</span><span class="nv">$stream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span><span class="p">.</span><span class="py">AutoFlush</span> <span class="p">=</span> <span class="vm">$true</span>  <span class="c"># Ensure output is flushed immediately</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Read the first line of the HTTP request from the client</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$request</span> <span class="p">=</span> <span class="nv">$reader</span><span class="p">.</span><span class="py">ReadLine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Write-Host</span> <span class="s2">&#34;Received: </span><span class="nv">$request</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Get the current date and time to include in the HTML response</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$currentDateTime</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&#34;dddd, MMMM dd, yyyy hh:mm:ss tt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Define the HTML content to return as the response</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$htmlContent</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;html lang=&#34;en&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;title&gt;PowerShell Web Example&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;style&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        * {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            box-sizing: border-box;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        body {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            margin: 0;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            padding: 0;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            font-family: &#39;Segoe UI&#39;, Tahoma, Geneva, Verdana, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            background: linear-gradient(120deg, #f0f2f5, #e2e8f0);
+</span></span></span><span class="line"><span class="cl"><span class="sh">            display: flex;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            justify-content: center;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            align-items: center;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            height: 100vh;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        .container {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            background-color: #ffffff;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            padding: 40px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            border-radius: 16px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+</span></span></span><span class="line"><span class="cl"><span class="sh">            max-width: 600px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            width: 90%;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            text-align: center;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        h1 {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            color: #1a202c;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            font-size: 2rem;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            margin-bottom: 20px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        .datetime {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            font-size: 1.2rem;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            color: #4a5568;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;/style&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;div class=&#34;container&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        &lt;h1&gt;Welcome to a PowerShell Web Site Example&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        &lt;div class=&#34;datetime&#34;&gt;Current Date and Time: </span><span class="nv">$currentDateTime</span><span class="sh">&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Combine HTTP headers and the HTML content into a full HTTP response</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$response</span> <span class="p">=</span> <span class="s2">&#34;HTTP/1.1 200 OK</span><span class="se">`r`n</span><span class="s2">Content-Type: text/html; charset=UTF-8</span><span class="se">`r`n`r`n</span><span class="nv">$htmlContent</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Write-Host</span> <span class="s2">&#34;Sending response...&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Send the response back to the client</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span><span class="p">.</span><span class="py">WriteLine</span><span class="p">(</span><span class="nv">$response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Clean up the network resources</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$reader</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$client</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Write-Host</span> <span class="s2">&#34;Client disconnected&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Sleep briefly to reduce CPU usage while waiting for new connections</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Start-Sleep</span> <span class="n">-Milliseconds</span> <span class="mf">100</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Stop the listener if it exists and isn&#39;t already connected</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nv">$listener</span> <span class="o">-and</span> <span class="nv">$listener</span><span class="p">.</span><span class="py">Server</span><span class="p">.</span><span class="py">Connected</span> <span class="o">-eq</span> <span class="vm">$false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$listener</span><span class="p">.</span><span class="py">Stop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Server stopped.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Clean up the registered Ctrl+C event</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Unregister-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Remove-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>This example is a simple web server (with ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
+<figure><a class="lightgallery" href="/powershell-script-web-api-server/ps-web-api-server-02.gif" title="/powershell-script-web-api-server/ps-web-api-server-02.gif" data-thumbnail="/powershell-script-web-api-server/ps-web-api-server-02.gif" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/powershell-script-web-api-server/ps-web-api-server-02.gif"
+            data-srcset="/powershell-script-web-api-server/ps-web-api-server-02.gif, /powershell-script-web-api-server/ps-web-api-server-02.gif 1.5x, /powershell-script-web-api-server/ps-web-api-server-02.gif 2x"
+            data-sizes="auto"
+            alt="/powershell-script-web-api-server/ps-web-api-server-02.gif" width="2000" height="957" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$port</span> <span class="p">=</span> <span class="mf">443</span><span class="p">,</span>  <span class="c"># Default port set to 443 for HTTPS</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$certPath</span> <span class="p">=</span> <span class="s2">&#34;/Users/dalehassinger/Documents/GitHub/PS-TAM-Lab/vcrocs.pfx&#34;</span><span class="p">,</span>  <span class="c"># Path to the SSL certificate (.pfx)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$certPassword</span> <span class="p">=</span> <span class="s2">&#34;1234&#34;</span>  <span class="c"># Password for the SSL certificate</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Attempt to load the SSL certificate from the specified path using the provided password</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$certificate</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Security</span><span class="p">.</span><span class="py">Cryptography</span><span class="p">.</span><span class="py">X509Certificates</span><span class="p">.</span><span class="py">X509Certificate2</span><span class="p">(</span><span class="nv">$certPath</span><span class="p">,</span> <span class="nv">$certPassword</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Certificate loaded successfully.&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># If certificate loading fails, write the error and exit</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;Failed to load certificate: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Define a cancellation flag to gracefully stop the server when Ctrl+C is pressed</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cancelled</span> <span class="p">=</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Register an event to catch Ctrl+C (ConsoleBreak) and flip the cancellation flag</span>
+</span></span><span class="line"><span class="cl"><span class="vm">$null</span> <span class="p">=</span> <span class="nb">Register-EngineEvent</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-Action</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">Ctrl+C detected. Stopping server...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$global:cancelled</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Initialize a TCP listener on all network interfaces for the specified port</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$listener</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Net.Sockets.TcpListener</span><span class="p">]::</span><span class="n">new</span><span class="p">([</span><span class="no">System.Net.IPAddress</span><span class="p">]::</span><span class="n">Any</span><span class="p">,</span> <span class="nv">$port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># Start the TCP listener</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$listener</span><span class="p">.</span><span class="py">Start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Server started, listening on port </span><span class="nv">$port</span><span class="s2">...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c"># Handle failure to start the listener</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Failed to start listener: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Server loop that handles incoming client connections until cancelled</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$cancelled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$listener</span><span class="p">.</span><span class="py">Pending</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Accept an incoming TCP client connection</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$client</span> <span class="p">=</span> <span class="nv">$listener</span><span class="p">.</span><span class="py">AcceptTcpClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Write-Host</span> <span class="s2">&#34;Client connected: </span><span class="p">$(</span><span class="nv">$client</span><span class="p">.</span><span class="py">Client</span><span class="p">.</span><span class="n">RemoteEndPoint</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Get the underlying network stream from the TCP client</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$networkStream</span> <span class="p">=</span> <span class="nv">$client</span><span class="p">.</span><span class="py">GetStream</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Wrap the network stream in an SslStream to secure communication</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$sslStream</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="py">Security</span><span class="p">.</span><span class="py">SslStream</span><span class="p">(</span><span class="nv">$networkStream</span><span class="p">,</span> <span class="vm">$false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c"># Authenticate the server with the loaded certificate, enforcing TLS 1.2</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$sslStream</span><span class="p">.</span><span class="py">AuthenticateAsServer</span><span class="p">(</span><span class="nv">$certificate</span><span class="p">,</span> <span class="vm">$false</span><span class="p">,</span> <span class="p">[</span><span class="no">System.Security.Authentication.SslProtocols</span><span class="p">]::</span><span class="n">Tls12</span><span class="p">,</span> <span class="vm">$false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">Write-Host</span> <span class="s2">&#34;SSL Authentication successful.&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c"># If TLS handshake fails, close the client connection and continue</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">Write-Host</span> <span class="s2">&#34;SSL Authentication failed: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$client</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Create a StreamReader and StreamWriter to handle HTTP data over SSL</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$reader</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">IO</span><span class="p">.</span><span class="py">StreamReader</span><span class="p">(</span><span class="nv">$sslStream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">IO</span><span class="p">.</span><span class="py">StreamWriter</span><span class="p">(</span><span class="nv">$sslStream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span><span class="p">.</span><span class="py">AutoFlush</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c"># Attempt to read the first line of the HTTP request</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$request</span> <span class="p">=</span> <span class="nv">$reader</span><span class="p">.</span><span class="py">ReadLine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">Write-Host</span> <span class="s2">&#34;Received: </span><span class="nv">$request</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c"># Handle any errors while reading the request, such as decryption issues</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">Write-Host</span> <span class="s2">&#34;Error reading request (possible decryption issue): </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$client</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Generate the current date/time to include in the response page</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$currentDateTime</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&#34;dddd, MMMM dd, yyyy hh:mm:ss tt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Define HTML content to serve in the response, styled with CSS and displaying the current time</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$htmlContent</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;html lang=&#34;en&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;title&gt;PowerShell Web Example&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;style&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        * {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            box-sizing: border-box;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        body {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            margin: 0;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            padding: 0;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            font-family: &#39;Segoe UI&#39;, Tahoma, Geneva, Verdana, sans-serif;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            background: linear-gradient(120deg, #f0f2f5, #e2e8f0);
+</span></span></span><span class="line"><span class="cl"><span class="sh">            display: flex;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            justify-content: center;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            align-items: center;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            height: 100vh;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        .container {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            background-color: #ffffff;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            padding: 40px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            border-radius: 16px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+</span></span></span><span class="line"><span class="cl"><span class="sh">            max-width: 600px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            width: 90%;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            text-align: center;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        h1 {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            color: #1a202c;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            font-size: 2rem;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            margin-bottom: 20px;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">        .datetime {
+</span></span></span><span class="line"><span class="cl"><span class="sh">            font-size: 1.2rem;
+</span></span></span><span class="line"><span class="cl"><span class="sh">            color: #4a5568;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        }
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;/style&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;div class=&#34;container&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        &lt;h1&gt;Welcome to a PowerShell Web Site Example using &lt;span style=&#34;color: green;&#34;&gt;SSL connection&lt;/span&gt;&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">        &lt;div class=&#34;datetime&#34;&gt;Current Date and Time: </span><span class="nv">$currentDateTime</span><span class="sh">&lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">    &lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Construct a basic HTTP 200 OK response with the HTML content</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$response</span> <span class="p">=</span> <span class="s2">&#34;HTTP/1.1 200 OK</span><span class="se">`r`n</span><span class="s2">Content-Type: text/html; charset=UTF-8</span><span class="se">`r`n`r`n</span><span class="nv">$htmlContent</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Write-Host</span> <span class="s2">&#34;Sending response...&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c"># Send the response to the client</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$writer</span><span class="p">.</span><span class="py">WriteLine</span><span class="p">(</span><span class="nv">$response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c"># Catch any errors during transmission</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">Write-Host</span> <span class="s2">&#34;Error sending response: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Clean up: close the streams and the client connection</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$reader</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$client</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Write-Host</span> <span class="s2">&#34;Client disconnected&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Wait briefly before checking for new clients to reduce CPU usage</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Start-Sleep</span> <span class="n">-Milliseconds</span> <span class="mf">100</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Stop the listener and clean up resources if no active connections remain</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nv">$listener</span> <span class="o">-and</span> <span class="nv">$listener</span><span class="p">.</span><span class="py">Server</span><span class="p">.</span><span class="py">Connected</span> <span class="o">-eq</span> <span class="vm">$false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$listener</span><span class="p">.</span><span class="py">Stop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Server stopped.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Unregister and remove the Ctrl+C event handler</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Unregister-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Remove-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>more to come&hellip;</p>
+<hr>
+<h6 id="lessons-learned">Lessons learned:</h6>
+<ul>
+<li>A PowerShell Script can be a Web Server or a RESTful API front end.</li>
+<li>Great way to test web pages in a lab or simple web server.</li>
+<li>The above scripts are cross platform. Can run on Windows, Mac or Linux.</li>
+<li>I like that I can take a bare bones linux VM, install PowerShell, add the script and I have a pages pages available or a RESTful API front end.</li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<div style="font-weight: bold;">Comments:</div>
+<div style="height: 20px;"></div>
+<div
+  id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="c49f7fae-719b-4753-a518-a57e5321d7c1"
+  data-page-id="posts/powershell-script-web-api-server/index.en.md"
+  data-page-url="https://www.vcrocs.info/powershell-script-web-api-server/"
+  data-page-title="PowerShell Script as a Web/API Server"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-04-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/powershell-script-web-api-server/" data-title="PowerShell Script as a Web/API Server" data-via="dalehassinger" data-hashtags="Restful API,Automation,PowerShell,PowerCLI,VMware Code Coach,VMware vExpert,Web Server"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/powershell-script-web-api-server/" data-hashtag="Restful API"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/powershell-script-web-api-server/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/restful-api/">Restful API</a>,&nbsp;<a href="/tags/automation/">Automation</a>,&nbsp;<a href="/tags/powershell/">PowerShell</a>,&nbsp;<a href="/tags/powercli/">PowerCLI</a>,&nbsp;<a href="/tags/vmware-code-coach/">VMware Code Coach</a>,&nbsp;<a href="/tags/vmware-vexpert/">VMware VExpert</a>,&nbsp;<a href="/tags/web-server/">Web Server</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vcf-automation-customproperties-cmdb/" class="prev" rel="prev" title="VCF Automation | CustomProperties"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VCF Automation | CustomProperties</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.vcrocs.info" target="_blank">Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
