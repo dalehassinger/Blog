@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "Restful API, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Web Server","wordcount":  2117 ,
+                        }],"genre": "posts","keywords": "Restful API, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Web Server","wordcount":  3475 ,
         "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/","datePublished": "2025-04-09T00:00:00+00:00","dateModified": "2025-04-09T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,8 +124,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PowerShell Script as a Web/API Server</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-09">2025-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2117 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-09">2025-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3475 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -177,7 +177,10 @@
 <p>In my automation journey, I’ve yet to find something I couldn’t automate with PowerShell. Adding modules to your scripts unlocks even more use cases—like connecting to remote systems over SSH and parsing the results. Having a PowerShell script act as a RESTful API front end opens up endless possibilities for automation and integration.</p>
 <hr>
 <h6 id="code-examples">Code Examples:</h6>
-<p>This example is a simple web server (non-ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
+<p>This example is a simple <strong>Web Server</strong> (non-ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
+<ul>
+<li>Script can be used to show any web page and data you can create. Think about some cool use cases.</li>
+</ul>
 <figure><a class="lightgallery" href="/powershell-script-web-api-server/ps-web-api-server-01.gif" title="/powershell-script-web-api-server/ps-web-api-server-01.gif" data-thumbnail="/powershell-script-web-api-server/ps-web-api-server-01.gif" data-sub-html="<h2>Click to see Larger Image</h2>">
         <img
             class="lazyload"
@@ -321,9 +324,13 @@
 </span><span class="lnt">128
 </span><span class="lnt">129
 </span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># API Server for Home Lab Use and a Nice way to see how PowerShell can be used.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Created By: Dale Hassinger</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">param</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$port</span> <span class="p">=</span> <span class="mf">8080</span>  <span class="c"># Define a port parameter with a default value of 8080</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
@@ -456,7 +463,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
-<p>This example is a simple web server (with ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
+<p>This example is a simple <strong>Web Server</strong> (with ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
+<ul>
+<li>Script can be used to show any web page and data you can create. Think about some cool use cases.</li>
+</ul>
 <figure><a class="lightgallery" href="/powershell-script-web-api-server/ps-web-api-server-02.gif" title="/powershell-script-web-api-server/ps-web-api-server-02.gif" data-thumbnail="/powershell-script-web-api-server/ps-web-api-server-02.gif" data-sub-html="<h2>Click to see Larger Image</h2>">
         <img
             class="lazyload"
@@ -638,9 +648,13 @@
 </span><span class="lnt">166
 </span><span class="lnt">167
 </span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># Web Server for Home Lab Use and a Nice way to see how PowerShell can be used.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Created By: Dale Hassinger</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">param</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$port</span> <span class="p">=</span> <span class="mf">443</span><span class="p">,</span>  <span class="c"># Default port set to 443 for HTTPS</span>
 </span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$certPath</span> <span class="p">=</span> <span class="s2">&#34;/Users/dalehassinger/Documents/GitHub/PS-TAM-Lab/vcrocs.pfx&#34;</span><span class="p">,</span>  <span class="c"># Path to the SSL certificate (.pfx)</span>
@@ -805,6 +819,529 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c"># Unregister and remove the Ctrl+C event handler</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Unregister-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Remove-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>This example is a simple <strong>RESTful API front end</strong> that returns any data that you have in the PS script.</p>
+<p>(4) Sample API calls:</p>
+<ul>
+<li>Returns Status</li>
+<li>Returns a simple Hello</li>
+<li>Returns all the VM Names in my lab vCenter</li>
+<li>Returns Tiered Memory usage of VMs in my Lab</li>
+<li>Script can be used to return any data you can create. Think about some cool use cases.</li>
+</ul>
+<figure><a class="lightgallery" href="/powershell-script-web-api-server/ps-web-api-server-03.gif" title="/powershell-script-web-api-server/ps-web-api-server-03.gif" data-thumbnail="/powershell-script-web-api-server/ps-web-api-server-03.gif" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/powershell-script-web-api-server/ps-web-api-server-03.gif"
+            data-srcset="/powershell-script-web-api-server/ps-web-api-server-03.gif, /powershell-script-web-api-server/ps-web-api-server-03.gif 1.5x, /powershell-script-web-api-server/ps-web-api-server-03.gif 2x"
+            data-sizes="auto"
+            alt="/powershell-script-web-api-server/ps-web-api-server-03.gif" width="2000" height="1019" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the PowerShell code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl"><span class="c"># API Server for Home Lab Use and a Nice way to see how PowerShell can be used.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Created By: Dale Hassinger</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$port</span> <span class="p">=</span> <span class="mf">8080</span>  <span class="c"># Set the port for the HTTP listener (default 8080)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Ensure required PowerShell modules are installed</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$requiredModules</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;powershell-yaml&#34;</span><span class="p">,</span> <span class="s2">&#34;VMware.PowerCLI&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$module</span> <span class="k">in</span> <span class="nv">$requiredModules</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Module</span> <span class="n">-ListAvailable</span> <span class="n">-Name</span> <span class="nv">$module</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;</span><span class="nv">$module</span><span class="s2"> is not installed. Install it using &#39;Install-Module </span><span class="nv">$module</span><span class="s2">&#39;.&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Load YAML configuration file (contains vCenter and ESXi credentials)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfgFile</span> <span class="p">=</span> <span class="s2">&#34;Home-Lab-Config.yaml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cfg</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="n">-Path</span> <span class="nv">$cfgFile</span> <span class="n">-Raw</span> <span class="p">|</span> <span class="nb">ConvertFrom-Yaml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Flag for gracefully stopping the API server with Ctrl+C</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$cancelled</span> <span class="p">=</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl"><span class="vm">$null</span> <span class="p">=</span> <span class="nb">Register-EngineEvent</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-Action</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Log a Ctrl+C (ConsoleBreak) interruption</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">New-LogEvent</span> <span class="n">-message</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">Ctrl+C detected. Stopping server...&#34;</span> <span class="n">-level</span> <span class="s2">&#34;warn&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$global:cancelled</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Function to log messages with timestamp and level coloring</span>
+</span></span><span class="line"><span class="cl"><span class="kd">Function</span><span class="w"> </span><span class="nb">New-LogEvent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$message</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$level</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nv">$timeStamp</span> <span class="p">=</span> <span class="nb">Get-Date</span> <span class="n">-Format</span> <span class="s2">&#34;MM-dd-yyyy HH:mm:ss&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="nv">$level</span><span class="p">.</span><span class="py">ToLower</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;info&#34;</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">&#34;[</span><span class="nv">$timeStamp</span><span class="s2">] </span><span class="nv">$message</span><span class="s2">&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;warn&#34;</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">&#34;[</span><span class="nv">$timeStamp</span><span class="s2">] </span><span class="nv">$message</span><span class="s2">&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">default</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">&#34;[</span><span class="nv">$timeStamp</span><span class="s2">] </span><span class="nv">$message</span><span class="s2">&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Main function to process incoming API requests</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Get-ApiResponse</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$method</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$path</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Split path into route and query string (e.g. /hello?name=Dale)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$route</span><span class="p">,</span> <span class="nv">$queryString</span> <span class="p">=</span> <span class="nv">$path</span> <span class="n">-split</span> <span class="s1">&#39;\?&#39;</span><span class="p">,</span> <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$params</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nv">$queryString</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$pairs</span> <span class="p">=</span> <span class="nv">$queryString</span> <span class="n">-split</span> <span class="s1">&#39;&amp;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$pair</span> <span class="k">in</span> <span class="nv">$pairs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$key</span><span class="p">,</span> <span class="nv">$value</span> <span class="p">=</span> <span class="nv">$pair</span> <span class="n">-split</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$params</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="p">=</span> <span class="nv">$value</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Route handling using switch based on method and path</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="s2">&#34;</span><span class="nv">$method</span><span class="s2"> </span><span class="nv">$route</span><span class="s2">&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;GET /hello&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Return a greeting, optionally personalized with ?name=</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$name</span> <span class="p">=</span> <span class="nv">$params</span><span class="p">[</span><span class="s2">&#34;name&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$name</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$name</span> <span class="p">=</span> <span class="s2">&#34;vCrocs&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">StatusCode</span>  <span class="p">=</span> <span class="s2">&#34;200 OK&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Body</span>        <span class="p">=</span> <span class="s2">&#34;{ </span><span class="se">`&#34;</span><span class="s2">message</span><span class="se">`&#34;</span><span class="s2">: </span><span class="se">`&#34;</span><span class="s2">Hello, </span><span class="nv">$name</span><span class="s2"> from PowerShell API</span><span class="se">`&#34;</span><span class="s2"> }&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;GET /status&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Return a simple health check status with timestamp</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">StatusCode</span> <span class="p">=</span> <span class="s2">&#34;200 OK&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Body</span> <span class="p">=</span> <span class="s1">&#39;{ &#34;status&#34;: &#34;ok&#34;, &#34;time&#34;: &#34;&#39;</span> <span class="p">+</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="py">ToString</span><span class="p">(</span><span class="s2">&#34;o&#34;</span><span class="p">)</span> <span class="p">+</span> <span class="s1">&#39;&#34; }&#39;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;GET /vms&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Connect to vCenter and retrieve list of VMs (excluding vCLS)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$vCenter</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">server</span> <span class="n">-User</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">username</span> <span class="n">-Password</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">password</span> <span class="n">-Protocol</span> <span class="n">https</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$vms</span> <span class="p">=</span> <span class="nb">Get-VM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-notlike</span> <span class="s2">&#34;vCLS-*&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$return</span> <span class="p">=</span> <span class="nv">$vms</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Disconnect-VIServer</span> <span class="n">-Server</span> <span class="p">*</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">StatusCode</span>  <span class="p">=</span> <span class="s2">&#34;200 OK&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Body</span>        <span class="p">=</span> <span class="s2">&#34;{&#34;&#34;results&#34;&#34;:</span><span class="nv">$return</span><span class="s2">}&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;GET /tiered&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Return detailed memory tier stats (Tier0-RAM and Tier1-NVMe) for each VM</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Uses sshpass to connect to each host and run esxcli and memstats</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nv">$vCenter</span> <span class="p">=</span> <span class="nb">Connect-VIServer</span> <span class="n">-Server</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">server</span> <span class="n">-User</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">username</span> <span class="n">-Password</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">vCenter</span><span class="p">.</span><span class="py">password</span> <span class="n">-Protocol</span> <span class="n">https</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$esxiHosts</span> <span class="p">=</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$combinedResults</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$esxiHost</span> <span class="k">in</span> <span class="nv">$esxiHosts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$server</span> <span class="p">=</span> <span class="nv">$esxiHost</span><span class="p">.</span><span class="py">Name</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$username</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Host101</span><span class="p">.</span><span class="py">username</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$password</span> <span class="p">=</span> <span class="nv">$cfg</span><span class="p">.</span><span class="py">Host101</span><span class="p">.</span><span class="py">password</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="nb">New-LogEvent</span> <span class="n">-message</span> <span class="p">(</span><span class="s2">&#34;Connecting to Host Name: &#34;</span> <span class="p">+</span> <span class="nv">$server</span><span class="p">)</span> <span class="n">-level</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Get-Command</span> <span class="n">sshpass</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">Write-Error</span> <span class="s2">&#34;sshpass is not installed or not in your PATH. Please install sshpass and try again.&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">exit</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Get VM ID to Name mapping</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$vmCommand</span> <span class="p">=</span> <span class="s2">&#34;esxcli --formatter csv vm process list | cut -d &#39;,&#39; -f 2,5&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$args_vm</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;-p&#34;</span><span class="p">,</span> <span class="nv">$password</span><span class="p">,</span> <span class="s2">&#34;ssh&#34;</span><span class="p">,</span> <span class="s2">&#34;-o&#34;</span><span class="p">,</span> <span class="s2">&#34;ConnectTimeout=10&#34;</span><span class="p">,</span> <span class="s2">&#34;-o&#34;</span><span class="p">,</span> <span class="s2">&#34;PreferredAuthentications=password&#34;</span><span class="p">,</span> <span class="s2">&#34;-o&#34;</span><span class="p">,</span> <span class="s2">&#34;PubkeyAuthentication=no&#34;</span><span class="p">,</span> <span class="s2">&#34;-o&#34;</span><span class="p">,</span> <span class="s2">&#34;StrictHostKeyChecking=no&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="nv">$username</span><span class="s2">@</span><span class="nv">$server</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nv">$vmCommand</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$vmOutput</span> <span class="p">=</span> <span class="p">&amp;</span> <span class="n">sshpass</span> <span class="nv">@args_vm</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$VMXCartelID</span> <span class="p">=</span> <span class="nv">$vmOutput</span> <span class="p">|</span> <span class="nb">ConvertFrom-Csv</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Run memstats to get memory usage details</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$memCommand</span> <span class="p">=</span> <span class="s1">&#39;memstats -r vmtier-stats -u mb -s name:memSize:active:tier0Consumed:tier1Consumed&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$args_mem</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span><span class="s2">&#34;-p&#34;</span><span class="p">,</span> <span class="nv">$password</span><span class="p">,</span> <span class="s2">&#34;ssh&#34;</span><span class="p">,</span> <span class="s2">&#34;-l&#34;</span><span class="p">,</span> <span class="nv">$username</span><span class="p">,</span> <span class="nv">$server</span><span class="p">,</span> <span class="nv">$memCommand</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$memOutput</span> <span class="p">=</span> <span class="p">&amp;</span> <span class="n">sshpass</span> <span class="nv">@args_mem</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Clean and parse memstats output</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$lines</span> <span class="p">=</span> <span class="nv">$memOutput</span> <span class="n">-split</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Trim</span><span class="p">()</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nv">$_</span> <span class="o">-notmatch</span> <span class="s1">&#39;^-{2,}|Total|Start|No.|VIRTUAL|Unit|Selected&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="nv">$pattern</span> <span class="p">=</span> <span class="s1">&#39;^(?&lt;name&gt;\S+)\s+(?&lt;memSize&gt;\d+)\s+(?&lt;active&gt;\d+)\s+(?&lt;tier0Consumed&gt;\d+)\s+(?&lt;tier1Consumed&gt;\d+)$&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$tieredMEM</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="nv">$line</span> <span class="k">in</span> <span class="nv">$lines</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="nv">$line</span> <span class="o">-match</span> <span class="nv">$pattern</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nv">$tieredMEM</span> <span class="p">+=</span> <span class="p">[</span><span class="no">pscustomobject</span><span class="p">]</span><span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">Name</span>         <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">MemSizeMB</span>    <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;memSize&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">ActiveMB</span>     <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;active&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                            <span class="s2">&#34;Tier0-RAM&#34;</span>  <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;tier0Consumed&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                            <span class="s2">&#34;Tier1-NVMe&#34;</span> <span class="p">=</span> <span class="p">[</span><span class="no">int</span><span class="p">]</span><span class="nv">$matches</span><span class="p">[</span><span class="s1">&#39;tier1Consumed&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Clean up names and match Cartel IDs to Display Names</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$tieredMEM</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-replace</span> <span class="s1">&#39;^vm\.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$vmNameMap</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="nv">$entry</span> <span class="k">in</span> <span class="nv">$VMXCartelID</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$vmNameMap</span><span class="p">[</span><span class="nv">$entry</span><span class="p">.</span><span class="n">VMXCartelID</span><span class="p">]</span> <span class="p">=</span> <span class="nv">$entry</span><span class="p">.</span><span class="py">DisplayName</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">foreach</span> <span class="p">(</span><span class="nv">$vm</span> <span class="k">in</span> <span class="nv">$tieredMEM</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="nv">$vmNameMap</span><span class="p">.</span><span class="py">ContainsKey</span><span class="p">(</span><span class="nv">$vm</span><span class="p">.</span><span class="n">Name</span><span class="p">))</span> <span class="p">{</span> <span class="nv">$vm</span><span class="p">.</span><span class="py">Name</span> <span class="p">=</span> <span class="nv">$vmNameMap</span><span class="p">[</span><span class="nv">$vm</span><span class="p">.</span><span class="n">Name</span><span class="p">]</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Remove system VMs (vCLS)</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$tieredMEM</span> <span class="p">=</span> <span class="nv">$tieredMEM</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Name</span> <span class="o">-notlike</span> <span class="s2">&#34;vCLS-*&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Aggregate host results</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$combinedResults</span> <span class="p">+=</span> <span class="nv">$tieredMEM</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nv">$return</span> <span class="p">=</span> <span class="nv">$combinedResults</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Disconnect-VIServer</span> <span class="n">-Confirm:</span><span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">StatusCode</span>  <span class="p">=</span> <span class="s2">&#34;200 OK&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Body</span>        <span class="p">=</span> <span class="s2">&#34;{&#34;&#34;results&#34;&#34;:</span><span class="nv">$return</span><span class="s2">}&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c"># Fallback/default response</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">StatusCode</span> <span class="p">=</span> <span class="s2">&#34;200 OK&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Body</span> <span class="p">=</span> <span class="s1">&#39;{ &#34;results&#34;: &#34;Default API reply&#34; }&#39;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Start the TCP listener and main server loop</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$listener</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Net.Sockets.TcpListener</span><span class="p">]::</span><span class="n">new</span><span class="p">([</span><span class="no">System.Net.IPAddress</span><span class="p">]::</span><span class="n">Any</span><span class="p">,</span> <span class="nv">$port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$listener</span><span class="p">.</span><span class="py">Start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">New-LogEvent</span> <span class="n">-message</span> <span class="s2">&#34;API server started on port </span><span class="nv">$port</span><span class="s2">...&#34;</span> <span class="n">-level</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Failed to start listener: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">-not</span> <span class="nv">$cancelled</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$listener</span><span class="p">.</span><span class="py">Pending</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$client</span> <span class="p">=</span> <span class="nv">$listener</span><span class="p">.</span><span class="py">AcceptTcpClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$stream</span> <span class="p">=</span> <span class="nv">$client</span><span class="p">.</span><span class="py">GetStream</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$reader</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.IO.StreamReader</span><span class="p">]::</span><span class="n">new</span><span class="p">(</span><span class="nv">$stream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.IO.StreamWriter</span><span class="p">]::</span><span class="n">new</span><span class="p">(</span><span class="nv">$stream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span><span class="p">.</span><span class="py">AutoFlush</span> <span class="p">=</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nv">$requestLine</span> <span class="p">=</span> <span class="nv">$reader</span><span class="p">.</span><span class="py">ReadLine</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">New-LogEvent</span> <span class="n">-message</span> <span class="s2">&#34;Received: </span><span class="nv">$requestLine</span><span class="s2">&#34;</span> <span class="n">-level</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nv">$requestLine</span> <span class="o">-match</span> <span class="s1">&#39;^(GET|POST|PUT|DELETE) (/[^ ]*)&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$method</span> <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$path</span> <span class="p">=</span> <span class="nv">$matches</span><span class="p">[</span><span class="mf">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="nv">$apiResponse</span> <span class="p">=</span> <span class="nb">Get-ApiResponse</span> <span class="n">-method</span> <span class="nv">$method</span> <span class="n">-path</span> <span class="nv">$path</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$body</span> <span class="p">=</span> <span class="nv">$apiResponse</span><span class="p">.</span><span class="py">Body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Construct HTTP response manually</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$response</span> <span class="p">=</span> <span class="sh">@&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sh">HTTP/1.1 </span><span class="p">$(</span><span class="nv">$apiResponse</span><span class="p">.</span><span class="n">StatusCode</span><span class="p">)</span><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">Content-Type: </span><span class="p">$(</span><span class="nv">$apiResponse</span><span class="p">.</span><span class="n">ContentType</span><span class="p">)</span><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">Content-Length: </span><span class="p">$(</span><span class="nv">$body</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh"></span><span class="nv">$body</span><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="nv">$writer</span><span class="p">.</span><span class="py">Write</span><span class="p">(</span><span class="nv">$response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c"># Log short response preview</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="nv">$body</span><span class="p">.</span><span class="py">Length</span> <span class="o">-ge</span> <span class="mf">50</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nv">$shortBody</span> <span class="p">=</span> <span class="nv">$body</span><span class="p">.</span><span class="py">Substring</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="mf">50</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&#34;...&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nv">$shortBody</span> <span class="p">=</span> <span class="nv">$body</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">New-LogEvent</span> <span class="n">-message</span> <span class="s2">&#34;Returned: </span><span class="nv">$shortBody</span><span class="s2">&#34;</span> <span class="n">-level</span> <span class="s2">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c"># Clean up connection</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$reader</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$writer</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$client</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">New-LogEvent</span> <span class="n">-message</span> <span class="s2">&#34;Client disconnected&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Start-Sleep</span> <span class="n">-Milliseconds</span> <span class="mf">100</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Cleanup on exit</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$listener</span><span class="p">.</span><span class="py">Stop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">New-LogEvent</span> <span class="n">-message</span> <span class="s2">&#34;Server stopped.&#34;</span> <span class="n">-level</span> <span class="s2">&#34;warn&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Unregister-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">Remove-Event</span> <span class="n">-SourceIdentifier</span> <span class="n">ConsoleBreak</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
