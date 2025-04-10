@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "Restful API, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Web Server","wordcount":  2023 ,
+                        }],"genre": "posts","keywords": "Restful API, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Web Server","wordcount":  2117 ,
         "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/","datePublished": "2025-04-09T00:00:00+00:00","dateModified": "2025-04-09T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,7 +124,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PowerShell Script as a Web/API Server</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-09">2025-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2023 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-09">2025-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2117 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -810,14 +810,49 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>more to come&hellip;</p>
+</div><hr>
+<p>I have been using Rocky Linux more in my lab for testing PowerShell Automation scripts.</p>
+<p>Here is how I install PowerShell on Rocky Linux.</p>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the cli code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install PowerShell</span>
+</span></span><span class="line"><span class="cl">sudo dnf install https://github.com/PowerShell/PowerShell/releases/download/v7.5.0/powershell-7.5.0-1.rh.x86_64.rpm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Turn off Firewall in your lab to make testing easier</span>
+</span></span><span class="line"><span class="cl">sudo systemctl stop firewalld
+</span></span><span class="line"><span class="cl">sudo systemctl disable firewalld
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Install sshpass to use with PS scripts where you want to make a SSH connection</span>
+</span></span><span class="line"><span class="cl">sudo dnf install epel-release
+</span></span><span class="line"><span class="cl">sudo dnf install sshpass
+</span></span><span class="line"><span class="cl">sshpass -V
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>more to come&hellip;</p>
 <hr>
 <h6 id="lessons-learned">Lessons learned:</h6>
 <ul>
-<li>A PowerShell Script can be a Web Server or a RESTful API front end.</li>
-<li>Great way to test web pages in a lab or simple web server.</li>
-<li>The above scripts are cross platform. Can run on Windows, Mac or Linux.</li>
-<li>I like that I can take a bare bones linux VM, install PowerShell, add the script and I have a pages pages available or a RESTful API front end.</li>
+<li>A PowerShell Script can be a Web Server or a RESTful API front end</li>
+<li>Great way to test web pages in a lab or simple web server</li>
+<li>The above scripts are cross platform. Can run on Windows, Mac or Linux</li>
+<li>I like that I can take a bare bones linux VM, install PowerShell, add the script and I have web pages available or a RESTful API front end</li>
 </ul>
 <hr>
 <div class="details admonition info open">
