@@ -43,7 +43,7 @@
                             "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "Restful API, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Web Server","wordcount":  3475 ,
+                        }],"genre": "posts","keywords": "Restful API, Automation, PowerShell, PowerCLI, VMware Code Coach, VMware vExpert, Web Server","wordcount":  3828 ,
         "url": "https:\/\/www.vcrocs.info\/powershell-script-web-api-server\/","datePublished": "2025-04-09T00:00:00+00:00","dateModified": "2025-04-09T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -124,8 +124,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PowerShell Script as a Web/API Server</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-automation/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Automation</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-09">2025-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3475 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-09">2025-04-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3828 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;18 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -1348,8 +1348,89 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
+<ul>
+<li>YAML file contents to use with the PowerShell Script</li>
+<li>I&rsquo;ve been using a YAML file with all my current scripts to store values for connecting to vCenter, VCF Operations, VCF Automation, and more. If anything changes, I just update the YAML file, and all the scripts continue to work without any issues.</li>
+</ul>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the yaml code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># vCenter Connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">vCenter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l">vcsa8x.vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator@vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ignoreCertErrors</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># A Single ESXi Host Connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Host101</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.101</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># VCF Operations</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">OPS</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsURL</span><span class="p">:</span><span class="w"> </span><span class="l">https://vao.vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsUsername</span><span class="p">:</span><span class="w"> </span><span class="l">admin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">authSource</span><span class="p">:</span><span class="w">  </span><span class="l">local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># VCF Automation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Automation</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">autoURL</span><span class="p">:</span><span class="w"> </span><span class="l">vaa.vcrocs.local</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">autoUsername</span><span class="p">:</span><span class="w"> </span><span class="l">configadmin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">autoPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">autoDomain</span><span class="p">:</span><span class="w">  </span><span class="l">System Domain</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>Here is a sample PowerShell Script web page that is used with the Text Display Widget within a VCF Operations Dashboard.</strong></p>
+<ul>
+<li>The PowerShell Script is running as a service within a Linux VM</li>
+<li>There is a 2nd PS script that runs and collects the Tiered Memory Metrics every five minutes and saves the data as a json file that is used with the web page</li>
+<li>100s of use cases</li>
+</ul>
+<figure><a class="lightgallery" href="/powershell-script-web-api-server/ps-web-api-server-04.gif" title="/powershell-script-web-api-server/ps-web-api-server-04.gif" data-thumbnail="/powershell-script-web-api-server/ps-web-api-server-04.gif" data-sub-html="<h2>Click to see Larger Image</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/powershell-script-web-api-server/ps-web-api-server-04.gif"
+            data-srcset="/powershell-script-web-api-server/ps-web-api-server-04.gif, /powershell-script-web-api-server/ps-web-api-server-04.gif 1.5x, /powershell-script-web-api-server/ps-web-api-server-04.gif 2x"
+            data-sizes="auto"
+            alt="/powershell-script-web-api-server/ps-web-api-server-04.gif" width="2000" height="1124" />
+    </a><figcaption class="image-caption">Click to see Larger Image</figcaption>
+    </figure>
+<hr>
 <p>I have been using Rocky Linux more in my lab for testing PowerShell Automation scripts.</p>
-<p>Here is how I install PowerShell on Rocky Linux.</p>
+<p>Here is how I install PowerShell on Rocky Linux:</p>
 <p><small><span style="color: red; font-weight: bold;">Click arrow to expand the cli code:</span></small></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1379,6 +1460,87 @@
 </span></span><span class="line"><span class="cl">sudo dnf install epel-release
 </span></span><span class="line"><span class="cl">sudo dnf install sshpass
 </span></span><span class="line"><span class="cl">sshpass -V
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><strong>How to setup a PowerShell Script to run as a service with Rocky Linux:</strong></p>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the cli code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create a new service file (e.g., myscript.service) under /etc/systemd/system/:</span>
+</span></span><span class="line"><span class="cl">sudo nano /etc/systemd/system/vcrocs-api.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Then add the following content:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>PowerShell API Service
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>network.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>simple
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/pwsh -File /root/http-server-api-test-8080.ps1
+</span></span><span class="line"><span class="cl"><span class="nv">Restart</span><span class="o">=</span>on-failure
+</span></span><span class="line"><span class="cl"><span class="nv">RestartSec</span><span class="o">=</span><span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="nv">User</span><span class="o">=</span>root
+</span></span><span class="line"><span class="cl"><span class="nv">WorkingDirectory</span><span class="o">=</span>/root
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># After saving the file, reload systemd to recognize the new service:</span>
+</span></span><span class="line"><span class="cl">sudo systemctl daemon-reload
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Then enable the service so it starts on boot:</span>
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> vcrocs-api.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Start the service</span>
+</span></span><span class="line"><span class="cl">sudo systemctl start vcrocs-api.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Service Status</span>
+</span></span><span class="line"><span class="cl">sudo systemctl status vcrocs-api.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Stop the Service</span>
+</span></span><span class="line"><span class="cl">sudo systemctl stop vcrocs-api.service
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
