@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VCF Operations | Zoom MP - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/vcf-operations-zoom-mp/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VCF Operations | Zoom MP">
+  <meta property="og:description" content="Learn how to monitor SaaS solutions like Zoom by building a custom Management Pack.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-04-20T00:00:00+00:00">
+    <meta property="article:tag" content="VCF">
+    <meta property="article:tag" content="Operations">
+    <meta property="article:tag" content="Zoom">
+    <meta property="article:tag" content="Management Pack">
+    <meta property="article:tag" content="VMware Code Coach">
+    <meta property="article:tag" content="VMware VExpert">
+    <meta property="og:image" content="https://www.vcrocs.info/vcf-operations-zoom-mp/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/vcf-operations-zoom-mp/featured-image.png">
+  <meta name="twitter:title" content="VCF Operations | Zoom MP">
+  <meta name="twitter:description" content="Learn how to monitor SaaS solutions like Zoom by building a custom Management Pack.">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/vcf-operations-zoom-mp/" /><link rel="prev" href="https://www.vcrocs.info/powershell-script-web-api-server/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VCF Operations | Zoom MP",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/vcf-operations-zoom-mp\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/vcf-operations-zoom-mp\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VCF, Operations, Zoom, Management Pack, VMware Code Coach, VMware vExpert, MP","wordcount":  651 ,
+        "url": "https:\/\/www.vcrocs.info\/vcf-operations-zoom-mp\/","datePublished": "2025-04-20T00:00:00+00:00","dateModified": "2025-04-20T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations | Zoom MP</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-20">2025-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;651 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/vcf-operations-zoom-mp/featured-image.png"
+        data-srcset="/vcf-operations-zoom-mp/featured-image.png, /vcf-operations-zoom-mp/featured-image.png 1.5x, /vcf-operations-zoom-mp/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/vcf-operations-zoom-mp/featured-image.png"
+        title="/vcf-operations-zoom-mp/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#why-create-and-use-a-zoom-mp">Why create and use a Zoom MP:</a></li>
+                    <li><a href="#dashboard-examples">Dashboard Examples:</a></li>
+                    <li><a href="#building-the-mp">Building the MP:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>Learn how to monitor SaaS solutions like Zoom by building a custom Management Pack.</strong></p>
+<hr>
+<blockquote>
+<p>You start to see the true power of VCF Operations when you add Management Packs (MPs) tailored to the systems your organization needs to monitor.</p>
+</blockquote>
+<hr>
+<h6 id="why-create-and-use-a-zoom-mp">Why create and use a Zoom MP:</h6>
+<p>I rely on Zoom for daily conference calls. Last week, regional issues prevented users from joining scheduled meetings. This highlighted the need for alerts when SaaS tools experience problems.</p>
+<p>While I’ve created dashboards in the past to show the status of SaaS services using the Text Display widget, I wanted to take it a step further and receive email alerts from VCF Operations—just as I do for ESXi hosts, VMs, or storage issues.</p>
+<p>To enable this, I built a Management Pack (MP) to bring the data into VCF Operations. Once the data is available, you can create dashboards, views, alerts, and reports—just like you would for any other monitored system.</p>
+<p>Creating Management Packs (MPs) with the MP Builder requires making API calls. I did some research and found that Zoom status information is available through a REST API.</p>
+<p>I’ve used the MP Builder before for other use cases, so I was already familiar with the process. Building the Zoom MP took about 30 minutes.</p>
+<p>See the screenshots and steps below—it’s a straightforward process that anyone can follow.</p>
+<hr>
+<blockquote>
+<p>In 2025, take some time to get hands-on with the MP Builder in VCF Operations. The platform already delivers solid monitoring out of the box, but when you start building your own Management Packs, that’s when it really starts to shine.</p>
+</blockquote>
+<hr>
+<h6 id="dashboard-examples">Dashboard Examples:</h6>
+<ul>
+<li>Colors are very poweful in VCF Operations. When you see <span style="color:green; font-weight:bold;">Green</span> it&rsquo;s good, while <span style="color:red; font-weight:bold;">Red</span>, <span style="color:orange; font-weight:bold;">Orange</span>, or <span style="color:yellow; font-weight:bold;">Yellow</span> suggests something may need attention.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-01.png" title="/vcf-operations-zoom-mp/zoom-mp-01.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-01.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-01.png, /vcf-operations-zoom-mp/zoom-mp-01.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-01.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-01.png" width="3406" height="2502" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="building-the-mp">Building the MP:</h6>
+<ul>
+<li>Screen Shots creating the MP.</li>
+</ul>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-02.png" title="/vcf-operations-zoom-mp/zoom-mp-02.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-02.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-02.png, /vcf-operations-zoom-mp/zoom-mp-02.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-02.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-02.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-03.png" title="/vcf-operations-zoom-mp/zoom-mp-03.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-03.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-03.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-03.png, /vcf-operations-zoom-mp/zoom-mp-03.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-03.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-03.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>Define the source</li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-04.png" title="/vcf-operations-zoom-mp/zoom-mp-04.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-04.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-04.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-04.png, /vcf-operations-zoom-mp/zoom-mp-04.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-04.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-04.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-05.png" title="/vcf-operations-zoom-mp/zoom-mp-05.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-05.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-05.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-05.png, /vcf-operations-zoom-mp/zoom-mp-05.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-05.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-05.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-06.png" title="/vcf-operations-zoom-mp/zoom-mp-06.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-06.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-06.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-06.png, /vcf-operations-zoom-mp/zoom-mp-06.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-06.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-06.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-07.png" title="/vcf-operations-zoom-mp/zoom-mp-07.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-07.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-07.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-07.png, /vcf-operations-zoom-mp/zoom-mp-07.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-07.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-07.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-08.png" title="/vcf-operations-zoom-mp/zoom-mp-08.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-08.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-08.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-08.png, /vcf-operations-zoom-mp/zoom-mp-08.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-08.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-08.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>Define the Requests</li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-09.png" title="/vcf-operations-zoom-mp/zoom-mp-09.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-09.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-09.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-09.png, /vcf-operations-zoom-mp/zoom-mp-09.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-09.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-09.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-10.png" title="/vcf-operations-zoom-mp/zoom-mp-10.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-10.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-10.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-10.png, /vcf-operations-zoom-mp/zoom-mp-10.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-10.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-10.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-11.png" title="/vcf-operations-zoom-mp/zoom-mp-11.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-11.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-11.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-11.png, /vcf-operations-zoom-mp/zoom-mp-11.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-11.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-11.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>Define the Objects</li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-12.png" title="/vcf-operations-zoom-mp/zoom-mp-12.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-12.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-12.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-12.png, /vcf-operations-zoom-mp/zoom-mp-12.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-12.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-12.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-13.png" title="/vcf-operations-zoom-mp/zoom-mp-13.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-13.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-13.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-13.png, /vcf-operations-zoom-mp/zoom-mp-13.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-13.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-13.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>I only pick the fields that I want to be included in VCF Operations. You do NOT have to pick all fiields.</li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-14.png" title="/vcf-operations-zoom-mp/zoom-mp-14.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-14.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-14.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-14.png, /vcf-operations-zoom-mp/zoom-mp-14.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-14.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-14.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-15.png" title="/vcf-operations-zoom-mp/zoom-mp-15.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-15.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-15.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-15.png, /vcf-operations-zoom-mp/zoom-mp-15.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-15.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-15.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-16.png" title="/vcf-operations-zoom-mp/zoom-mp-16.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-16.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-16.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-16.png, /vcf-operations-zoom-mp/zoom-mp-16.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-16.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-16.png" width="3402" height="2292" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>Set default values for the MP</li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-17.png" title="/vcf-operations-zoom-mp/zoom-mp-17.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-17.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-17.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-17.png, /vcf-operations-zoom-mp/zoom-mp-17.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-17.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-17.png" width="3406" height="2500" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-18.png" title="/vcf-operations-zoom-mp/zoom-mp-18.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-18.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-18.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-18.png, /vcf-operations-zoom-mp/zoom-mp-18.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-18.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-18.png" width="3406" height="2500" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<ul>
+<li>Perform a Collection and then Build</li>
+</ul>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-19.png" title="/vcf-operations-zoom-mp/zoom-mp-19.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-19.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-19.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-19.png, /vcf-operations-zoom-mp/zoom-mp-19.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-19.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-19.png" width="3406" height="2500" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<figure><a class="lightgallery" href="/vcf-operations-zoom-mp/zoom-mp-20.png" title="/vcf-operations-zoom-mp/zoom-mp-20.png" data-thumbnail="/vcf-operations-zoom-mp/zoom-mp-20.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-zoom-mp/zoom-mp-20.png"
+            data-srcset="/vcf-operations-zoom-mp/zoom-mp-20.png, /vcf-operations-zoom-mp/zoom-mp-20.png 1.5x, /vcf-operations-zoom-mp/zoom-mp-20.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-zoom-mp/zoom-mp-20.png" width="3406" height="2500" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>Management Packs (MPs) provide a way to monitor components that aren’t included by default.</li>
+<li>MPs are straightforward to build. Once you understand how the APIs work, you can create powerful integrations.</li>
+</ul>
+<hr>
+<p>MP Download coming soon&hellip;</p>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog helpful, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<div style="font-weight: bold;">Comments:</div>
+<div style="height: 20px;"></div>
+<div
+  id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="c49f7fae-719b-4753-a518-a57e5321d7c1"
+  data-page-id="posts/vcf-operations-zoom-mp/index.en.md"
+  data-page-url="https://www.vcrocs.info/vcf-operations-zoom-mp/"
+  data-page-title="VCF Operations | Zoom MP"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-04-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/vcf-operations-zoom-mp/" data-title="VCF Operations | Zoom MP" data-via="dalehassinger" data-hashtags="VCF,Operations,Zoom,Management Pack,VMware Code Coach,VMware vExpert,MP"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/vcf-operations-zoom-mp/" data-hashtag="VCF"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/vcf-operations-zoom-mp/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/operations/">Operations</a>,&nbsp;<a href="/tags/zoom/">Zoom</a>,&nbsp;<a href="/tags/management-pack/">Management Pack</a>,&nbsp;<a href="/tags/vmware-code-coach/">VMware Code Coach</a>,&nbsp;<a href="/tags/vmware-vexpert/">VMware VExpert</a>,&nbsp;<a href="/tags/mp/">MP</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/powershell-script-web-api-server/" class="prev" rel="prev" title="PowerShell Script as a Web/API Server"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>PowerShell Script as a Web/API Server</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.vcrocs.info" target="_blank">Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
