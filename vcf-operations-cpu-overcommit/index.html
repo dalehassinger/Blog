@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VCF Operations | CPU|Overcommit Details - vCROCS</title><meta name="Description" content="Enterprise Automation, Monitoring and Logging. Plus more..."><meta property="og:url" content="https://www.vcrocs.info/vcf-operations-cpu-overcommit/">
+  <meta property="og:site_name" content="vCROCS">
+  <meta property="og:title" content="VCF Operations | CPU|Overcommit Details">
+  <meta property="og:description" content="See your CPU|Overcommit at the Datacenter, Cluster and Host level.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-06-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-06-04T00:00:00+00:00">
+    <meta property="article:tag" content="VCF">
+    <meta property="article:tag" content="Operations">
+    <meta property="article:tag" content="VMware VExpert">
+    <meta property="article:tag" content="Dashboard">
+    <meta property="article:tag" content="Super Metric">
+    <meta property="og:image" content="https://www.vcrocs.info/vcf-operations-cpu-overcommit/featured-image.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.vcrocs.info/vcf-operations-cpu-overcommit/featured-image.png">
+  <meta name="twitter:title" content="VCF Operations | CPU|Overcommit Details">
+  <meta name="twitter:description" content="See your CPU|Overcommit at the Datacenter, Cluster and Host level.">
+      <meta name="twitter:site" content="@dalehassinger">
+<meta name="application-name" content="vCROCS">
+<meta name="apple-mobile-web-app-title" content="vCROCS"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://www.vcrocs.info/vcf-operations-cpu-overcommit/" /><link rel="prev" href="https://www.vcrocs.info/vcf-operations-zoom-mp/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VCF Operations | CPU|Overcommit Details",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.vcrocs.info\/vcf-operations-cpu-overcommit\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/www.vcrocs.info\/vcf-operations-cpu-overcommit\/featured-image.png",
+                            "width":  1420 ,
+                            "height":  708 
+                        }],"genre": "posts","keywords": "VCF, Operations, VMware vExpert, Dashboard, Super Metric","wordcount":  366 ,
+        "url": "https:\/\/www.vcrocs.info\/vcf-operations-cpu-overcommit\/","datePublished": "2025-06-04T00:00:00+00:00","dateModified": "2025-06-04T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/www.vcrocs.info\/images\/avatar.png",
+                    "width":  528 ,
+                    "height":  560 
+                }},"author": {
+                "@type": "Person",
+                "name": "Dale Hassinger"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i>  </a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i>  </a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i>  </a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7670183691519835" crossorigin="anonymous"></script>
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="vCROCS"><span class="header-title-pre"><i class='far fa-house fa-solid'></i></span>vCROCS</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/links/" title="Links"><i class='fab fa-bookmark fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="/pics/" title="Pics"><i class='fab fa-image fa-regular' aria-hidden='true'></i></a><a class="menu-item" href="https://twitter.com/dalehassinger" title="Twitter" rel="noopener noreffer" target="_blank"><i class='fab fa-twitter'></i></a><a class="menu-item" href="https://www.youtube.com/playlist?list=PLqjVNzdDCzwZXR3lfqaFX_hZI3zB8nsVF" title="Podcast" rel="noopener noreffer" target="_blank"><i class='fa fa-podcast fa-fw' aria-hidden='true'></i></a><a class="menu-item" href="/disclaimer/" title="Disclaimer"><i class='fa-regular fa-file' aria-hidden='true'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations | CPU|Overcommit Details</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-06-04">2025-06-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;366 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/vcf-operations-cpu-overcommit/featured-image.png"
+        data-srcset="/vcf-operations-cpu-overcommit/featured-image.png, /vcf-operations-cpu-overcommit/featured-image.png 1.5x, /vcf-operations-cpu-overcommit/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/vcf-operations-cpu-overcommit/featured-image.png"
+        title="/vcf-operations-cpu-overcommit/featured-image.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#cpuovercommit">CPU|Overcommit:</a></li>
+                    <li><a href="#dashboard-example">Dashboard Example:</a></li>
+                    <li><a href="#super-metric">Super Metric:</a></li>
+                    <li><a href="#lessons-learned">Lessons Learned:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>See your CPU|Overcommit at the Datacenter, Cluster and Host level.</strong></p>
+<hr>
+<blockquote>
+<p>My CPU usage is like my Energy Drink intake — dangerously high and probably not sustainable.</p>
+</blockquote>
+<hr>
+<h6 id="cpuovercommit">CPU|Overcommit:</h6>
+<p>Many of my blog posts stem from real-world questions I encounter. Recently, someone asked about the CPU|Overcommit ratio for a specific ESXi host. When I checked VCF Operations, I noticed that CPU|Overcommit metrics were available at the Datacenter and Cluster levels—but not at the Host level.</p>
+<p>To address this gap, I built a Super Metric to calculate the CPU|Overcommit ratio at the host level. You can find the Super Metric formula below.</p>
+<p>To make it easier to visualize CPU|Overcommit ratios across all levels—Datacenter, Cluster, and Host—I also created a custom dashboard. An example of this dashboard is shown below.</p>
+<p>CPU|Overcommit isn’t inherently a bad thing—in fact, it’s one of the main reasons we virtualize: to efficiently share physical resources across VMs. The key is finding a CPU|Overcommit ratio that works for your specific environment and workloads.</p>
+<p>That’s why I included the VM Details widget in the dashboard—to help you monitor important metrics like CPU|Ready (ms). Different workloads and use cases will tolerate different levels of overcommit, so keep an eye on performance indicators and adjust accordingly.</p>
+<hr>
+<h6 id="dashboard-example">Dashboard Example:</h6>
+<figure><a class="lightgallery" href="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png" title="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png" data-thumbnail="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png"
+            data-srcset="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png, /vcf-operations-cpu-overcommit/cpu-overcommit-01.png 1.5x, /vcf-operations-cpu-overcommit/cpu-overcommit-01.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png" width="4990" height="2474" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="super-metric">Super Metric:</h6>
+<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the yaml code:</span></small></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{‌ This Resource: ‌cpu|vcpus_allocated_on_all_powered_on_vms}/{‌This Resource: ‌cpu|corecount_provisioned }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<figure><a class="lightgallery" href="/vcf-operations-cpu-overcommit/cpu-overcommit-02.png" title="/vcf-operations-cpu-overcommit/cpu-overcommit-02.png" data-thumbnail="/vcf-operations-cpu-overcommit/cpu-overcommit-02.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="/vcf-operations-cpu-overcommit/cpu-overcommit-02.png"
+            data-srcset="/vcf-operations-cpu-overcommit/cpu-overcommit-02.png, /vcf-operations-cpu-overcommit/cpu-overcommit-02.png 1.5x, /vcf-operations-cpu-overcommit/cpu-overcommit-02.png 2x"
+            data-sizes="auto"
+            alt="/vcf-operations-cpu-overcommit/cpu-overcommit-02.png" width="2442" height="1174" />
+    </a><figcaption class="image-caption">Click to see Larger Image of Screen Shot</figcaption>
+    </figure>
+<hr>
+<h6 id="lessons-learned">Lessons Learned:</h6>
+<ul>
+<li>Host CPU|Overcommit isn&rsquo;t a metric available OOTB (Out of the Box).</li>
+</ul>
+<hr>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Lab<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</div>
+        </div>
+    </div>
+<hr>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tips and Tricks<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">If you found this blog helpful, consider buying me a coffee to kickstart my day.</div>
+        </div>
+    </div>
+<center>
+<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+</center>
+<hr>
+<div style="font-weight: bold;">Comments:</div>
+<div style="height: 20px;"></div>
+<div
+  id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="c49f7fae-719b-4753-a518-a57e5321d7c1"
+  data-page-id="posts/vcf-operations-cpu-overcommit/index.en.md"
+  data-page-url="https://www.vcrocs.info/vcf-operations-cpu-overcommit/"
+  data-page-title="VCF Operations | CPU|Overcommit Details"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-06-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.vcrocs.info/vcf-operations-cpu-overcommit/" data-title="VCF Operations | CPU|Overcommit Details" data-via="dalehassinger" data-hashtags="VCF,Operations,VMware vExpert,Dashboard,Super Metric"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.vcrocs.info/vcf-operations-cpu-overcommit/" data-hashtag="VCF"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.vcrocs.info/vcf-operations-cpu-overcommit/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vcf/">VCF</a>,&nbsp;<a href="/tags/operations/">Operations</a>,&nbsp;<a href="/tags/vmware-vexpert/">VMware VExpert</a>,&nbsp;<a href="/tags/dashboard/">Dashboard</a>,&nbsp;<a href="/tags/super-metric/">Super Metric</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vcf-operations-zoom-mp/" class="prev" rel="prev" title="VCF Operations | Zoom MP"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VCF Operations | Zoom MP</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Designed | Developed By vCROCS</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2025</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://www.vcrocs.info" target="_blank">Dale Hassinger</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://www.vCROCS.info" target="_blank">www.vCROCS.info</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', 'G-KSLC6FHF36');
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36" async></script></body>
+</html>
