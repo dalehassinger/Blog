@@ -42,7 +42,7 @@
                             "url": "https:\/\/www.vcrocs.info\/vcf-operations-cpu-overcommit\/featured-image.png",
                             "width":  1420 ,
                             "height":  708 
-                        }],"genre": "posts","keywords": "VCF, Operations, VMware vExpert, Dashboard, Super Metric","wordcount":  389 ,
+                        }],"genre": "posts","keywords": "VCF, Operations, VMware vExpert, Dashboard, Super Metric","wordcount":  494 ,
         "url": "https:\/\/www.vcrocs.info\/vcf-operations-cpu-overcommit\/","datePublished": "2025-06-04T00:00:00+00:00","dateModified": "2025-06-04T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -123,8 +123,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VCF Operations | CPU|Overcommit Details</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://twitter.com/dalehassinger" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Dale Hassinger</a></span>&nbsp;<span class="post-category">included in <a href="/categories/vcf-operations/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>VCF Operations</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-06-04">2025-06-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;389 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-06-04">2025-06-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;494 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -173,6 +173,8 @@
 <p>To make it easier to visualize CPU|Overcommit ratios across all levels—Datacenter, Cluster, and Host—I also created a custom dashboard. An example of this dashboard is shown below.</p>
 <p>CPU|Overcommit isn’t inherently a bad thing—in fact, it’s one of the main reasons we virtualize: to efficiently share physical resources across VMs. The key is finding a CPU|Overcommit ratio that works for your specific environment and workloads.</p>
 <p>That’s why I included the VM Details widget in the dashboard—to help you monitor important metrics like CPU|Ready (ms). Different workloads and use cases will tolerate different levels of overcommit, so keep an eye on performance indicators and adjust accordingly.</p>
+<p>By default, the CPU|Ready (ms) metric is not enabled in VMware Aria Operations. To activate it, navigate to Operations &gt; Configuration &gt; Policy Definition. Select your Default Policy, then click Edit Policy. Under Metrics and Properties, use the filter to search for &ldquo;cpu|ready&rdquo;. Select Virtual Machine, expand Metrics, then CPU. You’ll find Ready (ms) listed as Deactivated—switch it to Activated and save your changes.</p>
+<p>Allow for a few collection cycles (typically 10–15 minutes), and the CPU Ready (ms) metric will become available for monitoring VM performance.</p>
 <hr>
 <h6 id="dashboard-example">Dashboard Example:</h6>
 <figure><a class="lightgallery" href="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png" title="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png" data-thumbnail="/vcf-operations-cpu-overcommit/cpu-overcommit-01.png" data-sub-html="<h2>Click to see Larger Image of Screen Shot</h2>">
@@ -220,6 +222,7 @@
 <li>1 Dashboard</li>
 </ul>
 </li>
+<li>Be sure to activate the CPU|Ready (ms) metric, as it’s required for displaying data in the VM Details widget.</li>
 </ul>
 <hr>
 <div class="details admonition info open">
