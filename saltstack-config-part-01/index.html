@@ -148,7 +148,7 @@
               <ul>
                 <li>
                   <ul>
-                    <li><a href="#a-hrefhttpsdocsvmwarecomenvrealize-automation84install-configure-saltstack-configguid-dbe6d84b-0d4b-4747-8291-b0d80851ce62html-target_blankinstalling-and-configuring-saltstack-configa"><a href="https://docs.vmware.com/en/vRealize-Automation/8.4/install-configure-saltstack-config/GUID-DBE6D84B-0D4B-4747-8291-B0D80851CE62.html" target="_blank">Installing and Configuring SaltStack Config</a></a></li>
+                    <li><a href="#installing-and-configuring-saltstack-config">Installing and Configuring SaltStack Config</a></li>
                     <li><a href="#the-first-step-minions">The first step (minions):</a></li>
                     <li><a href="#here-are-some-basic-salt-commands-from-cli-that-i-have-been-using">Here are some basic salt commands from CLI that I have been using:</a></li>
                     <li><a href="#lessons-learned">Lessons Learned:</a></li>
@@ -170,7 +170,7 @@
 <p>I like to show how to use VMware vRealize Products from a <strong>Windows Server Admin</strong> point of view.  I do work with both Windows Servers and Linux Servers but most information you see online with Salt is using Linux Servers. I also do most of my current automation with PowerShell scripts. I do not want to lose all the time invested into the logic with my current PowerShell scripts.</p>
 <hr>
 <p>I am not going to go thru the process to install SaltStack Config.  There is already some very good blogs written on installing SaltStack Config. One item I would recommend with installing Salt-Stack Config is to use VMware vRealize Life Cycle Manager (&ldquo;LCM&rdquo;). LCM makes the process to install SaltStack Config a lot easier. This Blog is assuming you already installed SaltStack Config, now how do I use salt and what do I use salt for.</p>
-<h6 id="a-hrefhttpsdocsvmwarecomenvrealize-automation84install-configure-saltstack-configguid-dbe6d84b-0d4b-4747-8291-b0d80851ce62html-target_blankinstalling-and-configuring-saltstack-configa"><a href="https://docs.vmware.com/en/vRealize-Automation/8.4/install-configure-saltstack-config/GUID-DBE6D84B-0D4B-4747-8291-B0D80851CE62.html" target="_blank">Installing and Configuring SaltStack Config</a></h6>
+<h6 id="installing-and-configuring-saltstack-config"><a href="https://docs.vmware.com/en/vRealize-Automation/8.4/install-configure-saltstack-config/GUID-DBE6D84B-0D4B-4747-8291-B0D80851CE62.html" target="_blank">Installing and Configuring SaltStack Config</a></h6>
 <hr>
 <h6 id="the-first-step-minions">The first step (minions):</h6>
 <p>After you get a working SaltStack Config Server setup, the first item you need to do is add the salt agent to some &ldquo;Test&rdquo; servers. Servers that have the salt agent installed are called minions. There is the option to not add the salt agent to servers but then you need to use SSH to connect.  Windows Servers do not have SSH available as default so you would need to install an SSH server like OpenSSH on your servers. My thoughts are I need to add something for the minions to communicate with the salt-master. Instead of adding OpenSSH to every Windows Server I chose to install and use the salt agent.</p>

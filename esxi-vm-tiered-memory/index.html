@@ -168,8 +168,7 @@
             </div><div class="content" id="content"><p><strong>How to show ESXi Tiered Memory Metrics in VCF Operations.</strong></p>
 <hr>
 <blockquote>
-<p>Using VCF Operations Management Pack Builder alongside a product like FastAPI will elevate your observability to a whole new level&hellip;</p>
-</blockquote>
+<p>Using VCF Operations Management Pack Builder alongside a product like FastAPI will elevate your observability to a whole new level&hellip;</p></blockquote>
 <hr>
 <p>Here’s a use case that demonstrates the powerful capabilities of the <strong>VCF Operations Manager Pack Builder</strong> in your environment. With the introduction of <strong>Tiered Memory</strong> in ESXi 8.0.3, VMware hasn’t yet integrated tiered memory metrics visibility for VMs using tiered memory into <strong>VCF Operations</strong>. However, <strong>William Lam</strong> has provided a <strong>Blog</strong> outlining the necessary commands to retrieve the tiered memory metrics. <a href="https://williamlam.com/2024/09/how-much-virtual-machine-memory-is-using-nvme-tiering.html" target="_blank" rel="noopener noreffer ">Click here to see Blog</a></p>
 <p>To build an Operations Management Pack (MP) that captures this data, you need to utilize APIs. In my approach, I used <strong>FastAPI</strong> to execute a <strong>PowerShell Script</strong> that connects to vCenter to gather a list of ESXi hosts. The script then establishes an SSH connection to each host, retrieves the VM tiered memory metrics, and sends the results back to FastAPI. These metrics are then made available for Management Pack Builder, allowing you to incorporate the new metrics into the existing VM object within Operations.</p>
