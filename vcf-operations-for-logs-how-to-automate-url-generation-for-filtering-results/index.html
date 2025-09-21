@@ -317,7 +317,6 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#example-code">Example Code:</a></li>
     <li><a href="#screen-shots">Screen Shots:</a></li>
     <li><a href="#lessons-learned">Lessons Learned:</a></li>
     <li><a href="#links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:</a></li>
@@ -422,33 +421,11 @@
     >Click here to read&hellip;</a> In this blog, I’ll demonstrate how to <strong>generate a URL</strong> that connects to VCF Operations for Logs and automatically applies a <strong>filter</strong> based on the log events you’ve just sent.</p>
 <p>When running an automation script, as shown in the example below, I want the results to be saved in <strong>VCF Operations for Logs</strong>. To make it easier for the person running the script to view the logged events, I’ve incorporated the generation of the VCF Operations for Logs URL directly into the automation script. When reviewing the VCF Operations for Logs URL format, I found that it wasn’t very human-readable.</p>
 <hr>
-<p>Example URL to filter events for VCF Operations for Logs:<br>
-<small><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></small><br>
-<small></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">vaol</span><span class="o">.</span><span class="n">vcrocs</span><span class="o">.</span><span class="n">local</span><span class="o">/</span><span class="n">explorer</span><span class="o">/</span><span class="err">?</span><span class="n">existingChartQuery</span><span class="o">=%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">query</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">startTimeMillis</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A1729528045745</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">endTimeMillis</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A1729614745743</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">piqlFunctionGroups</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">functions</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">label</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">Count</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">COUNT</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">requiresField</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Afalse</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">numericOnly</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Afalse</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">field</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Anull</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">dateFilterPreset</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">CUSTOM</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">shouldGroupByTime</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Atrue</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">includeAllContentPackFields</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Atrue</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">eventSortOrder</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">DESC</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">summarySortOrder</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">DESC</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">compareQueryOrderBy</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">TREND</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">compareQuerySortOrder</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">DESC</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">compareQueryOptions</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Anull</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">messageViewType</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">EVENTS</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">constraintToggle</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">ALL</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">piqlFunction</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">label</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">Count</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">COUNT</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">requiresField</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Afalse</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">numericOnly</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Afalse</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">piqlFunctionField</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Anull</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">fieldConstraints</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">internalName</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">appname</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">operator</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">STARTS_WITH</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">vcf_automation</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">internalName</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">text</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">operator</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">CONTAINS</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">VM</span><span class="o">%</span><span class="mi">20</span><span class="n">Build</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">internalName</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">vmw_esxi_vm_name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">operator</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">CONTAINS</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">vCROCS</span><span class="o">-</span><span class="n">W2K22</span><span class="o">-</span><span class="mi">06</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">supplementalConstraints</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">groupByFields</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">contentPacksToIncludeFields</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">extractedFields</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">&amp;</span><span class="n">chartOptions</span><span class="o">=%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">logaxis</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Afalse</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">trendline</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Afalse</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">spline</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Afalse</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span></code></pre></td></tr></table>
-</div>
-</div></small>
-<hr>
-<p>To simplify the generation of the VCF Operations for Logs URL that includes a filter, I created a function that accepts parameters for the required filter items. In my example, I’m embedding the generated URL in an email, making it easy to click and have VCF Operations for Logs open  directly to your filtered data. I love Automation!</p>
-<hr>
-<h2 id="example-code">Example Code:
-</h2><p>(3) Functions:</p>
-<ul>
-<li>Function to Send event logs to VCF Operations for Logs API</li>
-<li>Function to generate the VCF Operations for Logs URL</li>
-<li>Function to send the email with the link in the email body</li>
-</ul>
-<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></small></p>
+<p>Example URL to filter events for VCF Operations for Logs:</p>
+<small>
+```URL
+<p><a class="link" href="https://vaol.vcrocs.local/explorer/?existingChartQuery=%7B%22query%22%3A%22%22%2C%22startTimeMillis%22%3A1729528045745%2C%22endTimeMillis%22%3A1729614745743%2C%22piqlFunctionGroups%22%3A%5B%7B%22functions%22%3A%5B%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%5D%2C%22field%22%3Anull%7D%5D%2C%22dateFilterPreset%22%3A%22CUSTOM%22%2C%22shouldGroupByTime%22%3Atrue%2C%22includeAllContentPackFields%22%3Atrue%2C%22eventSortOrder%22%3A%22DESC%22%2C%22summarySortOrder%22%3A%22DESC%22%2C%22compareQueryOrderBy%22%3A%22TREND%22%2C%22compareQuerySortOrder%22%3A%22DESC%22%2C%22compareQueryOptions%22%3Anull%2C%22messageViewType%22%3A%22EVENTS%22%2C%22constraintToggle%22%3A%22ALL%22%2C%22piqlFunction%22%3A%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%2C%22piqlFunctionField%22%3Anull%2C%22fieldConstraints%22%3A%5B%7B%22internalName%22%3A%22appname%22%2C%22operator%22%3A%22STARTS_WITH%22%2C%22value%22%3A%22vcf_automation%22%7D%2C%7B%22internalName%22%3A%22text%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22VM%20Build%3A%22%7D%2C%7B%22internalName%22%3A%22vmw_esxi_vm_name%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22vCROCS-W2K22-06%22%7D%5D%2C%22supplementalConstraints%22%3A%5B%5D%2C%22groupByFields%22%3A%5B%5D%2C%22contentPacksToIncludeFields%22%3A%5B%5D%2C%22extractedFields%22%3A%5B%5D%7D&amp;chartOptions=%7B%22logaxis%22%3Afalse%2C%22trendline%22%3Afalse%2C%22spline%22%3Afalse%7D"  target="_blank" rel="noopener"
+    >https://vaol.vcrocs.local/explorer/?existingChartQuery=%7B%22query%22%3A%22%22%2C%22startTimeMillis%22%3A1729528045745%2C%22endTimeMillis%22%3A1729614745743%2C%22piqlFunctionGroups%22%3A%5B%7B%22functions%22%3A%5B%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%5D%2C%22field%22%3Anull%7D%5D%2C%22dateFilterPreset%22%3A%22CUSTOM%22%2C%22shouldGroupByTime%22%3Atrue%2C%22includeAllContentPackFields%22%3Atrue%2C%22eventSortOrder%22%3A%22DESC%22%2C%22summarySortOrder%22%3A%22DESC%22%2C%22compareQueryOrderBy%22%3A%22TREND%22%2C%22compareQuerySortOrder%22%3A%22DESC%22%2C%22compareQueryOptions%22%3Anull%2C%22messageViewType%22%3A%22EVENTS%22%2C%22constraintToggle%22%3A%22ALL%22%2C%22piqlFunction%22%3A%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%2C%22piqlFunctionField%22%3Anull%2C%22fieldConstraints%22%3A%5B%7B%22internalName%22%3A%22appname%22%2C%22operator%22%3A%22STARTS_WITH%22%2C%22value%22%3A%22vcf_automation%22%7D%2C%7B%22internalName%22%3A%22text%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22VM%20Build%3A%22%7D%2C%7B%22internalName%22%3A%22vmw_esxi_vm_name%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22vCROCS-W2K22-06%22%7D%5D%2C%22supplementalConstraints%22%3A%5B%5D%2C%22groupByFields%22%3A%5B%5D%2C%22contentPacksToIncludeFields%22%3A%5B%5D%2C%22extractedFields%22%3A%5B%5D%7D&chartOptions=%7B%22logaxis%22%3Afalse%2C%22trendline%22%3Afalse%2C%22spline%22%3Afalse%7D</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -699,256 +676,290 @@
 </span><span class="lnt">246
 </span><span class="lnt">247
 </span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Function to send event data to Aria Operations for Logs</span>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">small</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Send-ApiEvent</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">Param</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="c"># Parameters with default values, can be overridden as needed.</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Uri</span>              <span class="p">=</span> <span class="s1">&#39;https://vaol-vip.vcrocs.local:9543/api/v2/events&#39;</span><span class="p">,</span>  <span class="c"># API Endpoint to send the event data</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$priority</span>         <span class="p">=</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>                    <span class="c"># Event priority (info, warning, error, etc.)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$facility</span>         <span class="p">=</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>                    <span class="c"># Source generating the event (user, system, etc.)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$appname</span>          <span class="p">=</span> <span class="s1">&#39;VCF_Automation&#39;</span><span class="p">,</span>          <span class="c"># Application name logging the event</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$hostname</span>         <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Hostname of the system (optional)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_esxi_vm_name</span> <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the VM or ESXi host (optional)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_vcenter</span>      <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the vCenter (optional)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_cluster</span>      <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the vCenter cluster (optional)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmw_host</span>         <span class="p">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c"># Name of the vCenter Host (optional)</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Text</span>             <span class="p">=</span> <span class="s2">&#34;Custom Script execution&#34;</span>  <span class="c"># Custom text describing the event</span>
-</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="c"># End Param</span>
+</span></span><span class="line"><span class="cl"><span class="o">---</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Define headers for the REST API call, using JSON for content type and response format.</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$headers</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="s1">&#39;accept&#39;</span>       <span class="p">=</span> <span class="s1">&#39;application/json&#39;</span>
-</span></span><span class="line"><span class="cl">      <span class="s1">&#39;Content-Type&#39;</span> <span class="p">=</span> <span class="s1">&#39;application/json&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># End headers</span>
+</span></span><span class="line"><span class="cl"><span class="n">To</span> <span class="n">simplify</span> <span class="n">the</span> <span class="n">generation</span> <span class="n">of</span> <span class="n">the</span> <span class="n">VCF</span> <span class="n">Operations</span> <span class="k">for</span> <span class="n">Logs</span> <span class="n">URL</span> <span class="n">that</span> <span class="n">includes</span> <span class="n">a</span> <span class="n">filter</span><span class="p">,</span> <span class="n">I</span> <span class="n">created</span> <span class="n">a</span> <span class="n">function</span> <span class="n">that</span> <span class="n">accepts</span> <span class="n">parameters</span> <span class="k">for</span> <span class="n">the</span> <span class="n">required</span> <span class="n">filter</span> <span class="n">items</span><span class="o">.</span> <span class="n">In</span> <span class="n">my</span> <span class="n">example</span><span class="p">,</span> <span class="n">I</span><span class="err">’</span><span class="n">m</span> <span class="n">embedding</span> <span class="n">the</span> <span class="n">generated</span> <span class="n">URL</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">email</span><span class="p">,</span> <span class="n">making</span> <span class="n">it</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">click</span> <span class="ow">and</span> <span class="n">have</span> <span class="n">VCF</span> <span class="n">Operations</span> <span class="k">for</span> <span class="n">Logs</span> <span class="n">open</span>  <span class="n">directly</span> <span class="n">to</span> <span class="n">your</span> <span class="n">filtered</span> <span class="n">data</span><span class="o">.</span> <span class="n">I</span> <span class="n">love</span> <span class="n">Automation</span><span class="o">!</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Construct the JSON body for the API request using a here-string.</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$body</span> <span class="p">=</span> <span class="sh">@&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sh">  [
-</span></span></span><span class="line"><span class="cl"><span class="sh">    {
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;priority&#34;: &#34;</span><span class="nv">$priority</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;facility&#34;: &#34;</span><span class="nv">$facility</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;appname&#34;:  &#34;</span><span class="nv">$appname</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;hostname&#34;: &#34;</span><span class="nv">$hostname</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_esxi_vm_name&#34;: &#34;</span><span class="nv">$vmw_esxi_vm_name</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_vcenter&#34;: &#34;</span><span class="nv">$vmw_vcenter</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_cluster&#34;: &#34;</span><span class="nv">$vmw_cluster</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;vmw_host&#34;: &#34;</span><span class="nv">$vmw_host</span><span class="sh">&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="sh">      &#34;text&#34;: &#34;</span><span class="nv">$Text</span><span class="sh">&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sh">    }
-</span></span></span><span class="line"><span class="cl"><span class="sh">  ]
-</span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span> <span class="c"># End Body</span>
+</span></span><span class="line"><span class="cl"><span class="o">---</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Send the POST request to the API endpoint within a try-catch block for error handling.</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="c"># Invoke-RestMethod is used to send the API request and return the response.</span>
-</span></span><span class="line"><span class="cl">      <span class="nv">$response</span> <span class="p">=</span> <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$Uri</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-Headers</span> <span class="nv">$headers</span> <span class="n">-Body</span> <span class="nv">$body</span> <span class="n">-SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## Example Code:  </span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="c"># Output the API response if successful.</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">Write-Host</span> <span class="s2">&#34;API response: &#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
-</span></span><span class="line"><span class="cl">      <span class="nv">$response</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="c"># Handle any errors that occur during the request and output the error message.</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">Write-Host</span> <span class="s2">&#34;Error occurred: </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="py">Exception</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">&#34;</span> <span class="n">-ForegroundColor</span> <span class="n">Red</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c"># End try/catch</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="n">Functions</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="n">Function</span> <span class="n">to</span> <span class="n">Send</span> <span class="n">event</span> <span class="n">logs</span> <span class="n">to</span> <span class="n">VCF</span> <span class="n">Operations</span> <span class="k">for</span> <span class="n">Logs</span> <span class="n">API</span>  
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="n">Function</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">VCF</span> <span class="n">Operations</span> <span class="k">for</span> <span class="n">Logs</span> <span class="n">URL</span>  
+</span></span><span class="line"><span class="cl"><span class="o">*</span> <span class="n">Function</span> <span class="n">to</span> <span class="n">send</span> <span class="n">the</span> <span class="n">email</span> <span class="n">with</span> <span class="n">the</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">email</span> <span class="n">body</span>  
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># Function End</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="err">```</span><span class="n">PowerShell</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Example usage of the Send-ApiEvent function.</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Customize the message text, add relevant data to $text, and invoke the function.</span>
-</span></span><span class="line"><span class="cl"><span class="c">#$text = &#34;VM Build: &#34; + &#34;A new process has been created with ID 9876&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c">#Send-ApiEvent -Text $text -vmw_esxi_vm_name &#39;vCROCS-W2K22-02&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Function to send event data to Aria Operations for Logs</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">Send</span><span class="o">-</span><span class="n">ApiEvent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># Parameters with default values, can be overridden as needed.</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">Uri</span>              <span class="o">=</span> <span class="s1">&#39;https://vaol-vip.vcrocs.local:9543/api/v2/events&#39;</span><span class="p">,</span>  <span class="c1"># API Endpoint to send the event data</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">priority</span>         <span class="o">=</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>                    <span class="c1"># Event priority (info, warning, error, etc.)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">facility</span>         <span class="o">=</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span>                    <span class="c1"># Source generating the event (user, system, etc.)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">appname</span>          <span class="o">=</span> <span class="s1">&#39;VCF_Automation&#39;</span><span class="p">,</span>          <span class="c1"># Application name logging the event</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">hostname</span>         <span class="o">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c1"># Hostname of the system (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">vmw_esxi_vm_name</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c1"># Name of the VM or ESXi host (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">vmw_vcenter</span>      <span class="o">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c1"># Name of the vCenter (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">vmw_cluster</span>      <span class="o">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c1"># Name of the vCenter cluster (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">vmw_host</span>         <span class="o">=</span> <span class="s1">&#39;NA&#39;</span><span class="p">,</span>                      <span class="c1"># Name of the vCenter Host (optional)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">Text</span>             <span class="o">=</span> <span class="s2">&#34;Custom Script execution&#34;</span>  <span class="c1"># Custom text describing the event</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="c1"># End Param</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Define headers for the REST API call, using JSON for content type and response format.</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">headers</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;accept&#39;</span>       <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;Content-Type&#39;</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c1"># End headers</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Construct the JSON body for the API request using a here-string.</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">body</span> <span class="o">=</span> <span class="err">@</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;priority&#34;</span><span class="p">:</span> <span class="s2">&#34;$priority&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;facility&#34;</span><span class="p">:</span> <span class="s2">&#34;$facility&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;appname&#34;</span><span class="p">:</span>  <span class="s2">&#34;$appname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;hostname&#34;</span><span class="p">:</span> <span class="s2">&#34;$hostname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;vmw_esxi_vm_name&#34;</span><span class="p">:</span> <span class="s2">&#34;$vmw_esxi_vm_name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;vmw_vcenter&#34;</span><span class="p">:</span> <span class="s2">&#34;$vmw_vcenter&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;vmw_cluster&#34;</span><span class="p">:</span> <span class="s2">&#34;$vmw_cluster&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;vmw_host&#34;</span><span class="p">:</span> <span class="s2">&#34;$vmw_host&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;text&#34;</span><span class="p">:</span> <span class="s2">&#34;$Text&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;@ # End Body</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1"># Send the POST request to the API endpoint within a try-catch block for error handling.</span>
+</span></span><span class="line"><span class="cl">  <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># Invoke-RestMethod is used to send the API request and return the response.</span>
+</span></span><span class="line"><span class="cl">      <span class="o">$</span><span class="n">response</span> <span class="o">=</span> <span class="n">Invoke</span><span class="o">-</span><span class="n">RestMethod</span> <span class="o">-</span><span class="n">Uri</span> <span class="o">$</span><span class="n">Uri</span> <span class="o">-</span><span class="n">Method</span> <span class="n">Post</span> <span class="o">-</span><span class="n">Headers</span> <span class="o">$</span><span class="n">headers</span> <span class="o">-</span><span class="n">Body</span> <span class="o">$</span><span class="n">body</span> <span class="o">-</span><span class="n">SkipCertificateCheck</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1"># Output the API response if successful.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;API response: &#34;</span> <span class="o">-</span><span class="n">ForegroundColor</span> <span class="n">Green</span>
+</span></span><span class="line"><span class="cl">      <span class="o">$</span><span class="n">response</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># Handle any errors that occur during the request and output the error message.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;Error occurred: $($_.Exception.Message)&#34;</span> <span class="o">-</span><span class="n">ForegroundColor</span> <span class="n">Red</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="c1"># End try/catch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1"># Function End</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Example usage of the Send-ApiEvent function.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Customize the message text, add relevant data to $text, and invoke the function.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#$text = &#34;VM Build: &#34; + &#34;A new process has been created with ID 9876&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#Send-ApiEvent -Text $text -vmw_esxi_vm_name &#39;vCROCS-W2K22-02&#39;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Email Function using Gmail</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Email Function using Gmail</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Send-ServerBuildEmail</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">param</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$fromEmail</span> <span class="p">=</span> <span class="s2">&#34;dale.hassinger@gmail.com&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$toEmail</span> <span class="p">=</span> <span class="s2">&#34;dale.hassinger@vcrocs.info&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmName</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$finalUrl</span>
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">Send</span><span class="o">-</span><span class="n">ServerBuildEmail</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">fromEmail</span> <span class="o">=</span> <span class="s2">&#34;dale.hassinger@gmail.com&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">toEmail</span> <span class="o">=</span> <span class="s2">&#34;dale.hassinger@vcrocs.info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">vmName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">finalUrl</span>
 </span></span><span class="line"><span class="cl">  <span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Gmail email settings</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$appPassword</span> <span class="p">=</span> <span class="s2">&#34;klj-Hack-Me-ytl&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$smtpServer</span>  <span class="p">=</span> <span class="s2">&#34;smtp.gmail.com&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$smtpPort</span>    <span class="p">=</span> <span class="mf">587</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Gmail email settings</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">appPassword</span> <span class="o">=</span> <span class="s2">&#34;klj-Hack-Me-ytl&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">smtpServer</span>  <span class="o">=</span> <span class="s2">&#34;smtp.gmail.com&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">smtpPort</span>    <span class="o">=</span> <span class="mi">587</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Email subject</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$subject</span> <span class="p">=</span> <span class="s2">&#34;New Server Build: </span><span class="nv">$vmName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Email subject</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">subject</span> <span class="o">=</span> <span class="s2">&#34;New Server Build: $vmName&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Build the Email body</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$body</span> <span class="p">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;vCROCS Automation&lt;/title&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s1">      &lt;style&gt;
-</span></span></span><span class="line"><span class="cl"><span class="s1">          body {
-</span></span></span><span class="line"><span class="cl"><span class="s1">              background-color: #ffffff;
-</span></span></span><span class="line"><span class="cl"><span class="s1">              color: #000000;
-</span></span></span><span class="line"><span class="cl"><span class="s1">              font-family: Arial, sans-serif;
-</span></span></span><span class="line"><span class="cl"><span class="s1">              font-size: 14px;
-</span></span></span><span class="line"><span class="cl"><span class="s1">              margin: 0;
-</span></span></span><span class="line"><span class="cl"><span class="s1">              padding: 20px;
-</span></span></span><span class="line"><span class="cl"><span class="s1">          }
-</span></span></span><span class="line"><span class="cl"><span class="s1">      &lt;/style&gt;&lt;/head&gt;&lt;body&gt;&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$body</span> <span class="p">+=</span> <span class="s1">&#39;&lt;body&gt;&lt;p&gt;New Server Build: &#39;</span> <span class="p">+</span> <span class="nv">$vmName</span> <span class="p">+</span> <span class="s1">&#39; is Complete.&lt;/p&gt;&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$body</span> <span class="p">+=</span> <span class="s1">&#39;&lt;p&gt;Link to View Server Build Logs within VCF Operations for Logs: &lt;a href=&#34;&#39;</span> <span class="p">+</span> <span class="nv">$finalUrl</span> <span class="p">+</span> <span class="s1">&#39;&#34;&gt;Click Here&lt;/a&gt;&lt;/p&gt;&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$body</span> <span class="p">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Build the Email body</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;vCROCS Automation&lt;/title&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">style</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">body</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#ffffff;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">color</span><span class="p">:</span> <span class="c1">#000000;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">font</span><span class="o">-</span><span class="n">family</span><span class="p">:</span> <span class="n">Arial</span><span class="p">,</span> <span class="n">sans</span><span class="o">-</span><span class="n">serif</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="mi">14</span><span class="n">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">padding</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;&lt;/</span><span class="n">head</span><span class="o">&gt;&lt;</span><span class="n">body</span><span class="o">&gt;</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">body</span> <span class="o">+=</span> <span class="s1">&#39;&lt;body&gt;&lt;p&gt;New Server Build: &#39;</span> <span class="o">+</span> <span class="o">$</span><span class="n">vmName</span> <span class="o">+</span> <span class="s1">&#39; is Complete.&lt;/p&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">body</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Link to View Server Build Logs within VCF Operations for Logs: &lt;a href=&#34;&#39;</span> <span class="o">+</span> <span class="o">$</span><span class="n">finalUrl</span> <span class="o">+</span> <span class="s1">&#39;&#34;&gt;Click Here&lt;/a&gt;&lt;/p&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">body</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Create the email message</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$emailMessage</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">mailmessage</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$emailMessage</span><span class="p">.</span><span class="py">From</span> <span class="p">=</span> <span class="nv">$fromEmail</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$emailMessage</span><span class="p">.</span><span class="py">To</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$toEmail</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Subject</span> <span class="p">=</span> <span class="nv">$subject</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$emailMessage</span><span class="p">.</span><span class="py">Body</span> <span class="p">=</span> <span class="nv">$body</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$emailMessage</span><span class="p">.</span><span class="py">IsBodyHtml</span> <span class="p">=</span> <span class="vm">$true</span>  <span class="c"># Set to true to send HTML emails</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Create the email message</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">emailMessage</span> <span class="o">=</span> <span class="n">New</span><span class="o">-</span><span class="ne">Object</span> <span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">mailmessage</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">emailMessage</span><span class="o">.</span><span class="n">From</span> <span class="o">=</span> <span class="o">$</span><span class="n">fromEmail</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">emailMessage</span><span class="o">.</span><span class="n">To</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="o">$</span><span class="n">toEmail</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">emailMessage</span><span class="o">.</span><span class="n">Subject</span> <span class="o">=</span> <span class="o">$</span><span class="n">subject</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">emailMessage</span><span class="o">.</span><span class="n">Body</span> <span class="o">=</span> <span class="o">$</span><span class="n">body</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">emailMessage</span><span class="o">.</span><span class="n">IsBodyHtml</span> <span class="o">=</span> <span class="o">$</span><span class="bp">true</span>  <span class="c1"># Set to true to send HTML emails</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Configure the SMTP client</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$smtpClient</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">system</span><span class="p">.</span><span class="py">net</span><span class="p">.</span><span class="py">mail</span><span class="p">.</span><span class="py">smtpclient</span><span class="p">(</span><span class="nv">$smtpServer</span><span class="p">,</span> <span class="nv">$smtpPort</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$smtpClient</span><span class="p">.</span><span class="py">EnableSsl</span> <span class="p">=</span> <span class="vm">$true</span>  <span class="c"># Gmail requires SSL</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Credentials</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="py">NetworkCredential</span><span class="p">(</span><span class="nv">$fromEmail</span><span class="p">,</span> <span class="nv">$appPassword</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Configure the SMTP client</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">smtpClient</span> <span class="o">=</span> <span class="n">New</span><span class="o">-</span><span class="ne">Object</span> <span class="n">system</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">smtpclient</span><span class="p">(</span><span class="o">$</span><span class="n">smtpServer</span><span class="p">,</span> <span class="o">$</span><span class="n">smtpPort</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">smtpClient</span><span class="o">.</span><span class="n">EnableSsl</span> <span class="o">=</span> <span class="o">$</span><span class="bp">true</span>  <span class="c1"># Gmail requires SSL</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">smtpClient</span><span class="o">.</span><span class="n">Credentials</span> <span class="o">=</span> <span class="n">New</span><span class="o">-</span><span class="ne">Object</span> <span class="n">System</span><span class="o">.</span><span class="n">Net</span><span class="o">.</span><span class="n">NetworkCredential</span><span class="p">(</span><span class="o">$</span><span class="n">fromEmail</span><span class="p">,</span> <span class="o">$</span><span class="n">appPassword</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Send the email</span>
-</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Send</span><span class="p">(</span><span class="nv">$emailMessage</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">Write-Host</span> <span class="s2">&#34;Email sent successfully.&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">Write-Host</span> <span class="s2">&#34;Failed to send email: </span><span class="nv">$_</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Send the email</span>
+</span></span><span class="line"><span class="cl">  <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">$</span><span class="n">smtpClient</span><span class="o">.</span><span class="n">Send</span><span class="p">(</span><span class="o">$</span><span class="n">emailMessage</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;Email sent successfully.&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">&#34;Failed to send email: $_&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Clean up</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$smtpClient</span><span class="p">.</span><span class="py">Dispose</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Clean up</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">smtpClient</span><span class="o">.</span><span class="n">Dispose</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Example usage of the email function</span>
-</span></span><span class="line"><span class="cl"><span class="c">#Send-ServerBuildEmail -toEmail &#34;dale.hassinger@vcrocs.info&#34; -vmName &#34;vcrocs-w2k22-02&#34; -finalUrl $Global:finalUrl</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Example usage of the email function</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#Send-ServerBuildEmail -toEmail &#34;dale.hassinger@vcrocs.info&#34; -vmName &#34;vcrocs-w2k22-02&#34; -finalUrl $Global:finalUrl</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Function to build URL for VCF Operations for Logs that will auto filter logs based on date|time, VM Name and text</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Function to build URL for VCF Operations for Logs that will auto filter logs based on date|time, VM Name and text</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">set-filterURL</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">set</span><span class="o">-</span><span class="n">filterURL</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">param</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$appname</span> <span class="p">=</span> <span class="s2">&#34;vcf_automation&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$text</span> <span class="p">=</span> <span class="s2">&#34;VM Build:&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$vmwEsxiVmName</span> <span class="p">=</span> <span class="s2">&#34;vcrocs-w2k22-01&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="c"># End Param</span>
+</span></span><span class="line"><span class="cl">  <span class="n">param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">appname</span> <span class="o">=</span> <span class="s2">&#34;vcf_automation&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&#34;VM Build:&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="o">$</span><span class="n">vmwEsxiVmName</span> <span class="o">=</span> <span class="s2">&#34;vcrocs-w2k22-01&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="c1"># End Param</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># ----- [ Get current time and 24 hours ago ] ----- </span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># ----- [ Get current time and 24 hours ago ] ----- </span>
 </span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="c"># Get the current date and time, add 5 minutes</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$currentDate</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="py">AddMinutes</span><span class="p">(</span><span class="mf">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Get the current date and time, add 5 minutes</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">currentDate</span> <span class="o">=</span> <span class="p">(</span><span class="n">Get</span><span class="o">-</span><span class="n">Date</span><span class="p">)</span><span class="o">.</span><span class="n">AddMinutes</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">  <span class="c"># Calculate the date and time 24 hours ago</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$pastDate</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="py">AddHours</span><span class="p">(</span><span class="mf">-24</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Calculate the date and time 24 hours ago</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">pastDate</span> <span class="o">=</span> <span class="p">(</span><span class="n">Get</span><span class="o">-</span><span class="n">Date</span><span class="p">)</span><span class="o">.</span><span class="n">AddHours</span><span class="p">(</span><span class="o">-</span><span class="mi">24</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Convert both dates to Unix timestamps in milliseconds</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$epoch</span> <span class="p">=</span> <span class="p">[</span><span class="no">datetime</span><span class="p">]</span><span class="s2">&#34;1970-01-01 00:00:00&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Convert both dates to Unix timestamps in milliseconds</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">epoch</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="p">]</span><span class="s2">&#34;1970-01-01 00:00:00&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Convert the current date to a Unix timestamp in milliseconds</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$currentTimestampMillis</span> <span class="p">=</span> <span class="p">[</span><span class="no">int64</span><span class="p">]((</span><span class="nv">$currentDate</span><span class="p">.</span><span class="py">ToUniversalTime</span><span class="p">()</span> <span class="p">-</span> <span class="nv">$epoch</span><span class="p">).</span><span class="n">TotalMilliseconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Convert the current date to a Unix timestamp in milliseconds</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">currentTimestampMillis</span> <span class="o">=</span> <span class="p">[</span><span class="n">int64</span><span class="p">]((</span><span class="o">$</span><span class="n">currentDate</span><span class="o">.</span><span class="n">ToUniversalTime</span><span class="p">()</span> <span class="o">-</span> <span class="o">$</span><span class="n">epoch</span><span class="p">)</span><span class="o">.</span><span class="n">TotalMilliseconds</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Convert the past date (24 hours ago) to a Unix timestamp in milliseconds</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$pastTimestampMillis</span> <span class="p">=</span> <span class="p">[</span><span class="no">int64</span><span class="p">]((</span><span class="nv">$pastDate</span><span class="p">.</span><span class="py">ToUniversalTime</span><span class="p">()</span> <span class="p">-</span> <span class="nv">$epoch</span><span class="p">).</span><span class="n">TotalMilliseconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Convert the past date (24 hours ago) to a Unix timestamp in milliseconds</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">pastTimestampMillis</span> <span class="o">=</span> <span class="p">[</span><span class="n">int64</span><span class="p">]((</span><span class="o">$</span><span class="n">pastDate</span><span class="o">.</span><span class="n">ToUniversalTime</span><span class="p">()</span> <span class="o">-</span> <span class="o">$</span><span class="n">epoch</span><span class="p">)</span><span class="o">.</span><span class="n">TotalMilliseconds</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Output the results</span>
-</span></span><span class="line"><span class="cl">  <span class="c">#&#34;Current time in milliseconds: $currentTimestampMillis&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="c">#&#34;24 hours ago in milliseconds: $pastTimestampMillis&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Output the results</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">#&#34;Current time in milliseconds: $currentTimestampMillis&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">#&#34;24 hours ago in milliseconds: $pastTimestampMillis&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Define the base URL</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$baseUrl</span> <span class="p">=</span> <span class="s2">&#34;https://192.168.6.97/explorer/?existingChartQuery=&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Define the base URL</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">baseUrl</span> <span class="o">=</span> <span class="s2">&#34;https://192.168.6.97/explorer/?existingChartQuery=&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Define the JSON object with placeholders for the parameters</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$jsonObject</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">query</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">startTimeMillis</span> <span class="p">=</span> <span class="nv">$pastTimestampMillis</span>
-</span></span><span class="line"><span class="cl">      <span class="n">endTimeMillis</span> <span class="p">=</span> <span class="nv">$currentTimestampMillis</span>
-</span></span><span class="line"><span class="cl">      <span class="n">piqlFunctionGroups</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">          <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">              <span class="kd">function</span><span class="nb">s</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                  <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">label</span> <span class="p">=</span> <span class="s2">&#34;Count&#34;</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">value</span> <span class="p">=</span> <span class="s2">&#34;COUNT&#34;</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">requiresField</span> <span class="p">=</span> <span class="vm">$false</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">numericOnly</span> <span class="p">=</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Define the JSON object with placeholders for the parameters</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">jsonObject</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">query</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">startTimeMillis</span> <span class="o">=</span> <span class="o">$</span><span class="n">pastTimestampMillis</span>
+</span></span><span class="line"><span class="cl">      <span class="n">endTimeMillis</span> <span class="o">=</span> <span class="o">$</span><span class="n">currentTimestampMillis</span>
+</span></span><span class="line"><span class="cl">      <span class="n">piqlFunctionGroups</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">functions</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                  <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">label</span> <span class="o">=</span> <span class="s2">&#34;Count&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">value</span> <span class="o">=</span> <span class="s2">&#34;COUNT&#34;</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">requiresField</span> <span class="o">=</span> <span class="o">$</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">numericOnly</span> <span class="o">=</span> <span class="o">$</span><span class="bp">false</span>
 </span></span><span class="line"><span class="cl">                  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">              <span class="p">)</span>
-</span></span><span class="line"><span class="cl">              <span class="n">field</span> <span class="p">=</span> <span class="vm">$null</span>
+</span></span><span class="line"><span class="cl">              <span class="n">field</span> <span class="o">=</span> <span class="o">$</span><span class="n">null</span>
 </span></span><span class="line"><span class="cl">          <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="n">dateFilterPreset</span> <span class="p">=</span> <span class="s2">&#34;LAST_24_HOURS&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">shouldGroupByTime</span> <span class="p">=</span> <span class="vm">$true</span>
-</span></span><span class="line"><span class="cl">      <span class="n">includeAllContentPackFields</span> <span class="p">=</span> <span class="vm">$true</span>
-</span></span><span class="line"><span class="cl">      <span class="n">eventSortOrder</span> <span class="p">=</span> <span class="s2">&#34;DESC&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">summarySortOrder</span> <span class="p">=</span> <span class="s2">&#34;DESC&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">compareQueryOrderBy</span> <span class="p">=</span> <span class="s2">&#34;TREND&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">compareQuerySortOrder</span> <span class="p">=</span> <span class="s2">&#34;DESC&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">compareQueryOptions</span> <span class="p">=</span> <span class="vm">$null</span>
-</span></span><span class="line"><span class="cl">      <span class="n">messageViewType</span> <span class="p">=</span> <span class="s2">&#34;EVENTS&#34;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">constraintToggle</span> <span class="p">=</span> <span class="s2">&#34;ALL&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">dateFilterPreset</span> <span class="o">=</span> <span class="s2">&#34;LAST_24_HOURS&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">shouldGroupByTime</span> <span class="o">=</span> <span class="o">$</span><span class="bp">true</span>
+</span></span><span class="line"><span class="cl">      <span class="n">includeAllContentPackFields</span> <span class="o">=</span> <span class="o">$</span><span class="bp">true</span>
+</span></span><span class="line"><span class="cl">      <span class="n">eventSortOrder</span> <span class="o">=</span> <span class="s2">&#34;DESC&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">summarySortOrder</span> <span class="o">=</span> <span class="s2">&#34;DESC&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">compareQueryOrderBy</span> <span class="o">=</span> <span class="s2">&#34;TREND&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">compareQuerySortOrder</span> <span class="o">=</span> <span class="s2">&#34;DESC&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">compareQueryOptions</span> <span class="o">=</span> <span class="o">$</span><span class="n">null</span>
+</span></span><span class="line"><span class="cl">      <span class="n">messageViewType</span> <span class="o">=</span> <span class="s2">&#34;EVENTS&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constraintToggle</span> <span class="o">=</span> <span class="s2">&#34;ALL&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="n">piqlFunction</span> <span class="p">=</span> <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">          <span class="n">label</span> <span class="p">=</span> <span class="s2">&#34;Count&#34;</span>
-</span></span><span class="line"><span class="cl">          <span class="n">value</span> <span class="p">=</span> <span class="s2">&#34;COUNT&#34;</span>
-</span></span><span class="line"><span class="cl">          <span class="n">requiresField</span> <span class="p">=</span> <span class="vm">$false</span>
-</span></span><span class="line"><span class="cl">          <span class="n">numericOnly</span> <span class="p">=</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl">      <span class="n">piqlFunction</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">label</span> <span class="o">=</span> <span class="s2">&#34;Count&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">value</span> <span class="o">=</span> <span class="s2">&#34;COUNT&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">requiresField</span> <span class="o">=</span> <span class="o">$</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl">          <span class="n">numericOnly</span> <span class="o">=</span> <span class="o">$</span><span class="bp">false</span>
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="n">piqlFunctionField</span> <span class="p">=</span> <span class="vm">$null</span>
-</span></span><span class="line"><span class="cl">      <span class="n">fieldConstraints</span> <span class="p">=</span> <span class="vm">@</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">          <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">              <span class="n">internalName</span> <span class="p">=</span> <span class="s2">&#34;appname&#34;</span>
-</span></span><span class="line"><span class="cl">              <span class="n">operator</span> <span class="p">=</span> <span class="s2">&#34;STARTS_WITH&#34;</span>
-</span></span><span class="line"><span class="cl">              <span class="n">value</span> <span class="p">=</span> <span class="nv">$appname</span>
+</span></span><span class="line"><span class="cl">      <span class="n">piqlFunctionField</span> <span class="o">=</span> <span class="o">$</span><span class="n">null</span>
+</span></span><span class="line"><span class="cl">      <span class="n">fieldConstraints</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">internalName</span> <span class="o">=</span> <span class="s2">&#34;appname&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">operator</span> <span class="o">=</span> <span class="s2">&#34;STARTS_WITH&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">value</span> <span class="o">=</span> <span class="o">$</span><span class="n">appname</span>
 </span></span><span class="line"><span class="cl">          <span class="p">},</span>
-</span></span><span class="line"><span class="cl">          <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">              <span class="n">internalName</span> <span class="p">=</span> <span class="s2">&#34;text&#34;</span>
-</span></span><span class="line"><span class="cl">              <span class="n">operator</span> <span class="p">=</span> <span class="s2">&#34;CONTAINS&#34;</span>
-</span></span><span class="line"><span class="cl">              <span class="n">value</span> <span class="p">=</span> <span class="nv">$text</span>
+</span></span><span class="line"><span class="cl">          <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">internalName</span> <span class="o">=</span> <span class="s2">&#34;text&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">operator</span> <span class="o">=</span> <span class="s2">&#34;CONTAINS&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">value</span> <span class="o">=</span> <span class="o">$</span><span class="n">text</span>
 </span></span><span class="line"><span class="cl">          <span class="p">},</span>
-</span></span><span class="line"><span class="cl">          <span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">              <span class="n">internalName</span> <span class="p">=</span> <span class="s2">&#34;vmw_esxi_vm_name&#34;</span>
-</span></span><span class="line"><span class="cl">              <span class="n">operator</span> <span class="p">=</span> <span class="s2">&#34;CONTAINS&#34;</span>
-</span></span><span class="line"><span class="cl">              <span class="n">value</span> <span class="p">=</span> <span class="nv">$vmwEsxiVmName</span>
+</span></span><span class="line"><span class="cl">          <span class="err">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">internalName</span> <span class="o">=</span> <span class="s2">&#34;vmw_esxi_vm_name&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">operator</span> <span class="o">=</span> <span class="s2">&#34;CONTAINS&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="n">value</span> <span class="o">=</span> <span class="o">$</span><span class="n">vmwEsxiVmName</span>
 </span></span><span class="line"><span class="cl">          <span class="p">}</span>
 </span></span><span class="line"><span class="cl">      <span class="p">)</span>
-</span></span><span class="line"><span class="cl">      <span class="n">supplementalConstraints</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">      <span class="n">groupByFields</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">      <span class="n">contentPacksToIncludeFields</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">      <span class="n">extractedFields</span> <span class="p">=</span> <span class="vm">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="n">supplementalConstraints</span> <span class="o">=</span> <span class="err">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="n">groupByFields</span> <span class="o">=</span> <span class="err">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="n">contentPacksToIncludeFields</span> <span class="o">=</span> <span class="err">@</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="n">extractedFields</span> <span class="o">=</span> <span class="err">@</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Convert the object to JSON</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$jsonString</span> <span class="p">=</span> <span class="nv">$jsonObject</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Compress</span> <span class="n">-Depth</span> <span class="mf">10</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Convert the object to JSON</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">jsonString</span> <span class="o">=</span> <span class="o">$</span><span class="n">jsonObject</span> <span class="o">|</span> <span class="n">ConvertTo</span><span class="o">-</span><span class="n">Json</span> <span class="o">-</span><span class="n">Compress</span> <span class="o">-</span><span class="n">Depth</span> <span class="mi">10</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># URL encode the JSON string</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$encodedJson</span> <span class="p">=</span> <span class="p">[</span><span class="no">System.Web.HttpUtility</span><span class="p">]::</span><span class="n">UrlEncode</span><span class="p">(</span><span class="nv">$jsonString</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># URL encode the JSON string</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">encodedJson</span> <span class="o">=</span> <span class="p">[</span><span class="n">System</span><span class="o">.</span><span class="n">Web</span><span class="o">.</span><span class="n">HttpUtility</span><span class="p">]::</span><span class="n">UrlEncode</span><span class="p">(</span><span class="o">$</span><span class="n">jsonString</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Chart options (URL encoded)</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$chartOptions</span> <span class="p">=</span> <span class="s2">&#34;%7B%22logaxis%22%3Afalse%2C%22trendline%22%3Afalse%2C%22spline%22%3Afalse%7D&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Chart options (URL encoded)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">chartOptions</span> <span class="o">=</span> <span class="s2">&#34;%7B</span><span class="si">%22lo</span><span class="s2">gaxis</span><span class="si">%22%</span><span class="s2">3Afalse%2C%22trendline</span><span class="si">%22%</span><span class="s2">3Afalse%2C</span><span class="si">%22s</span><span class="s2">pline</span><span class="si">%22%</span><span class="s2">3Afalse%7D&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Construct the final URL</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$global:finalUrl</span> <span class="p">=</span> <span class="nv">$baseUrl</span> <span class="p">+</span> <span class="nv">$encodedJson</span> <span class="p">+</span> <span class="s2">&#34;&amp;chartOptions=&#34;</span> <span class="p">+</span> <span class="nv">$chartOptions</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Construct the final URL</span>
+</span></span><span class="line"><span class="cl">  <span class="o">$</span><span class="n">global</span><span class="p">:</span><span class="n">finalUrl</span> <span class="o">=</span> <span class="o">$</span><span class="n">baseUrl</span> <span class="o">+</span> <span class="o">$</span><span class="n">encodedJson</span> <span class="o">+</span> <span class="s2">&#34;&amp;chartOptions=&#34;</span> <span class="o">+</span> <span class="o">$</span><span class="n">chartOptions</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c"># Output the final URL</span>
-</span></span><span class="line"><span class="cl">  <span class="c">#$global:finalUrl</span>
+</span></span><span class="line"><span class="cl">  <span class="c1"># Output the final URL</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">#$global:finalUrl</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nb">Set-Clipboard</span> <span class="nv">$global:finalUrl</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Set</span><span class="o">-</span><span class="n">Clipboard</span> <span class="o">$</span><span class="n">global</span><span class="p">:</span><span class="n">finalUrl</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c"># End Function</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1"># End Function</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Call Function to build Filter URL Example</span>
-</span></span><span class="line"><span class="cl"><span class="c">#$vmName = &#34;vcrocs-w2k22-02&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="c">#set-filterURL -vmwEsxiVmName $vmName</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Call Function to build Filter URL Example</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#$vmName = &#34;vcrocs-w2k22-02&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#set-filterURL -vmwEsxiVmName $vmName</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Open URL in default browser</span>
-</span></span><span class="line"><span class="cl"><span class="c">#Start-Process $global:finalUrl</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Open URL in default browser</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#Start-Process $global:finalUrl</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
@@ -956,7 +967,6 @@
 <ul>
 <li>Shows how to use the (3) Functions in the example code above</li>
 </ul>
-<p><small><span style="color: red; font-weight: bold;">Click arrow to expand the code:</span></small></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
