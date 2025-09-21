@@ -1,27 +1,233 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Aria Operations on vCROCS</title>
-    <link>https://www.vcrocs.info/tags/aria-operations/</link>
-    <description>Recent content in Aria Operations on vCROCS</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 04 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://www.vcrocs.info/tags/aria-operations/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Aria Operations | Aria Appliances Observability</title>
-      <link>https://www.vcrocs.info/aria-appliances-observability/</link>
-      <pubDate>Tue, 04 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>https://www.vcrocs.info/aria-appliances-observability/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;How to monitor VMware Aria Appliances within your environment&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Aria Operations | vCenter Observability</title>
-      <link>https://www.vcrocs.info/vcenter-observability/</link>
-      <pubDate>Fri, 31 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://www.vcrocs.info/vcenter-observability/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;How to monitor vCenter VM(s) within your environment&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-  </channel>
+    <channel>
+        <title>Aria Operations on Dale Hassinger</title>
+        <link>https://vcrocs.info/tags/aria-operations/</link>
+        <description>Recent content in Aria Operations on Dale Hassinger</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Dale Hassinger</copyright>
+        <lastBuildDate>Tue, 04 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/tags/aria-operations/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Aria Operations | Aria Appliances Observability</title>
+        <link>https://vcrocs.info/aria-operations-aria-appliances-observability/</link>
+        <pubDate>Tue, 04 Jun 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://vcrocs.info/aria-operations-aria-appliances-observability/</guid>
+        <description>&lt;img src="https://vcrocs.info/aria-operations-aria-appliances-observability/featured-image.png" alt="Featured image of post Aria Operations | Aria Appliances Observability" /&gt;&lt;p&gt;&lt;strong&gt;How to monitor VMware Aria Appliances within your environment&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;I believe that if you show people the problems and you show them the solutions, they will be moved to act.” - Bill Gates&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;aria-appliance-observability&#34;&gt;Aria Appliance Observability
+&lt;/h2&gt;&lt;p&gt;In my previous blog, I discussed &lt;strong&gt;VMware vCenter&lt;/strong&gt; appliance observability. &lt;a class=&#34;link&#34; href=&#34;https://www.vcrocs.info/vcenter-observability/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Click here to read the blog&lt;/a&gt;. Building on those ideas, I now want to demonstrate how to monitor &lt;strong&gt;VMware Aria&lt;/strong&gt; Appliances. Monitoring and observing VMware Aria Appliance VMs is crucial in a VMware environment where many such appliances are present.&lt;/p&gt;
+&lt;p&gt;For VMware Aria Appliances, I created a Custom Group within VMware Aria Operations. These appliances have a property named &amp;ldquo;Summary|Configuration|Product Name&amp;rdquo;. By using a filter that checks if the Product Name contains &amp;ldquo;Aria&amp;rdquo;, &amp;ldquo;vRealize&amp;rdquo;, or &amp;ldquo;Log Insight&amp;rdquo;, I was able to group all VMware Aria Appliance VMs together. See Screen Shot below.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;This filter is applicable to the following Aria Appliances:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aria Operations&lt;/li&gt;
+&lt;li&gt;Aria Operations for Logs&lt;/li&gt;
+&lt;li&gt;Aria Automation&lt;/li&gt;
+&lt;li&gt;Aria Suite LifeCycle&lt;/li&gt;
+&lt;li&gt;Aria Cloud Proxies&lt;/li&gt;
+&lt;li&gt;Aria Operations for Networks&lt;/li&gt;
+&lt;li&gt;Aria Management Pack Builder&lt;/li&gt;
+&lt;li&gt;vCenter Orchestrator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;After creating the Custom Group to select only VMware Aria Appliance VMs, I proceeded to build a comprehensive VMware Aria Appliance Monitoring Dashboard. At the top, I included some donut charts (my favorite) to display key metrics such as VMware Aria Appliances Health, Workload, Snapshots, and Uptime in days.&lt;/p&gt;
+&lt;p&gt;I have a strong preference against VMs running on snapshots for extended periods, which is why I included a chart for Snapshots. Uptime is also a crucial metric, as it provides insight into a VMs maintenance status. When I see a VM running for hundreds of days, my first thought is that it hasn&amp;rsquo;t been patched or upgraded in a while. To ensure the best reliability and access to the latest features, it&amp;rsquo;s important to keep Aria Appliances patched and upgraded regularly.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;steps-to-create-the-dashboard&#34;&gt;Steps to Create the Dashboard
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Create the (5) Views
+&lt;ul&gt;
+&lt;li&gt;Show all Aria Appliance VMs with details&lt;/li&gt;
+&lt;li&gt;Show VM Health&lt;/li&gt;
+&lt;li&gt;Show VM Workload&lt;/li&gt;
+&lt;li&gt;Show Snapshot Status&lt;/li&gt;
+&lt;li&gt;Show Uptime (Days)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Create the Dashboard&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To simplify getting started, all the Views and the Dashboard are available in my GitHub repository for download. &lt;a class=&#34;link&#34; href=&#34;https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/Aria-Appliances-Observability&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Click Here to Download the files.&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;custom-group-filter-to-select-aria-appliance-vms&#34;&gt;Custom Group Filter to Select Aria Appliance VMs
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Filter Definition:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/aria-operations-aria-appliances-observability/aria-appliances-02.png&#34;
+	width=&#34;5118&#34;
+	height=&#34;2588&#34;
+	srcset=&#34;https://vcrocs.info/aria-operations-aria-appliances-observability/aria-appliances-02_hu_f98d8ddd57a214d1.png 480w, https://vcrocs.info/aria-operations-aria-appliances-observability/aria-appliances-02_hu_635c9a368edfd402.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;197&#34;
+		data-flex-basis=&#34;474px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Dashboard Screen Shot:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/aria-operations-aria-appliances-observability/aria-appliances-01.png&#34;
+	width=&#34;5106&#34;
+	height=&#34;2586&#34;
+	srcset=&#34;https://vcrocs.info/aria-operations-aria-appliances-observability/aria-appliances-01_hu_c3aab96847be6384.png 480w, https://vcrocs.info/aria-operations-aria-appliances-observability/aria-appliances-01_hu_3f4e37ec9b705b92.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;197&#34;
+		data-flex-basis=&#34;473px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Dashboard Usage:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure &gt;
+  &lt;img src=&#34;aria-appliances-03.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;links-to-resources-discussed-is-this-blog-post&#34;&gt;Links to resources discussed is this Blog Post:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/Aria-Appliances-Observability&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Dale&amp;rsquo;s Github Repository&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;product-version-used-for-blog-post&#34;&gt;Product Version used for Blog Post:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Aria Operations: 8.17.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;lessons-learned&#34;&gt;Lessons Learned:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;I can use the Virtual Machine property named &amp;ldquo;Summary|Configuration|Product Name&amp;rdquo; to group all VMware Aria Appliances together. The filter within the Custom Group is what enables this Dashboard to work.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&amp;rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&amp;rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js&#34; data-name=&#34;bmc-button&#34; data-slug=&#34;dalehassinger&#34; data-color=&#34;#FFDD00&#34; data-emoji=&#34;&#34;  data-font=&#34;Cookie&#34; data-text=&#34;Buy me a coffee&#34; data-outline-color=&#34;#000000&#34; data-font-color=&#34;#000000&#34; data-coffee-color=&#34;#ffffff&#34; &gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;hr&gt;</description>
+        </item>
+        <item>
+        <title>Aria Operations | vCenter Observability</title>
+        <link>https://vcrocs.info/aria-operations-vcenter-observability/</link>
+        <pubDate>Fri, 31 May 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://vcrocs.info/aria-operations-vcenter-observability/</guid>
+        <description>&lt;img src="https://vcrocs.info/aria-operations-vcenter-observability/featured-image.png" alt="Featured image of post Aria Operations | vCenter Observability" /&gt;&lt;p&gt;&lt;strong&gt;How to monitor vCenter VM(s) within your environment&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;It&amp;rsquo;s really hard to design products by focus groups. A lot of times, people don&amp;rsquo;t know what they want until you show it to them.” - Steve Jobs&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;vcenter-observability&#34;&gt;vCenter Observability
+&lt;/h2&gt;&lt;p&gt;I was recently asked how to monitor the VM that &lt;strong&gt;VMware vCenter&lt;/strong&gt; runs on using &lt;strong&gt;VMware Aria Operations&lt;/strong&gt;. The main request was to show the disk space used on the volumes to prevent them from filling up. In an environment with over 100 vCenters, I decided to create a view to show all the VMs running vCenter. While Aria Operations allows selecting all vCenters in a view, it does not natively show the VM name that vCenter runs on.&lt;/p&gt;
+&lt;p&gt;Creating a Custom Group in Aria Operations to specify the vCenter VMs manually seemed impractical. Initially, I considered using tags in vCenter and creating a Custom Group based on these tags. However, tagging over 100 vCenter VMs and ensuring they are properly tagged would be labor-intensive.&lt;/p&gt;
+&lt;p&gt;After some thought, I realized that the volume names for vCenter VMs were unique. I created an Aria Operations View to select VMs based on the existence of vCenter volumes. This approach allowed me to add the view to any environment, displaying only the vCenter VMs.&lt;/p&gt;
+&lt;p&gt;After creating the view to select only vCenter VMs, I aimed to build a comprehensive vCenter Monitoring Dashboard. At the top, I included counts of vCenters, clusters, hosts, and VMs, etc… as these metrics are frequently requested by management. The dashboard features widgets to display all VM volumes (the primary reason for creating the dashboard), vCenter VM performance, CPU/memory history, and a list of vCenters.&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s important to note that in VMware Aria Operations, showing VMware vCenter VMs is different from showing VMware vCenters. When a vCenter is selected in the vCenter Details widget, the dashboard displays host CPU/memory information.&lt;/p&gt;
+&lt;p&gt;To prevent ESXi hosts from being left in maintenance mode accidentally, I added a donut widget to show their status. Additionally, since cluster DRS can sometimes be disabled for changes and forgotten to be re-enabled, another donut widget shows the DRS status.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;steps-to-create-the-dashboard&#34;&gt;Steps to Create the Dashboard
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Create the (4) Views
+&lt;ul&gt;
+&lt;li&gt;Select all vCenter VMs&lt;/li&gt;
+&lt;li&gt;Show vCenter Details&lt;/li&gt;
+&lt;li&gt;Show Hosts Maintenance Mode Status&lt;/li&gt;
+&lt;li&gt;Show Clusters DRS Status&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Create the Dashboard&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To simplify getting started, all the Views and the Dashboard are available in my GitHub repository for download. &lt;a class=&#34;link&#34; href=&#34;https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/vCenter-Observability&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Click Here to Download the files.&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;view-to-select-vcenter-vms&#34;&gt;View to Select vCenter VMs
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;View Data:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-02.png&#34;
+	width=&#34;1994&#34;
+	height=&#34;1235&#34;
+	srcset=&#34;https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-02_hu_c4a4347751616769.png 480w, https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-02_hu_32adce7c9bb81a2a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;161&#34;
+		data-flex-basis=&#34;387px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;View Filter:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In the view filter, I specified two metrics: “guestfilesystem:/storage/imagebuilder|capacity” and “guestfilesystem:/storage/autodeploy|capacity”. If a VM contains these metrics, it will be selected. These volume names are unique to vCenter VMs, making this approach effective.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-01.png&#34;
+	width=&#34;1992&#34;
+	height=&#34;855&#34;
+	srcset=&#34;https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-01_hu_c25bce271f1d6652.png 480w, https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-01_hu_4dbbe8cb0402c059.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;232&#34;
+		data-flex-basis=&#34;559px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Dashboard Screen Shot:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-03.png&#34;
+	width=&#34;1989&#34;
+	height=&#34;1240&#34;
+	srcset=&#34;https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-03_hu_20838f01052241d4.png 480w, https://vcrocs.info/aria-operations-vcenter-observability/vcenter-observability-03_hu_9421807e8c174e03.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Dashboard Usage:&lt;/strong&gt;&lt;/p&gt;
+&lt;figure &gt;
+  &lt;img src=&#34;vcenter-observability-04.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Stay tuned for future blog posts. I plan to create dashboards for monitoring Aria appliances, similar to what I did for VMware vCenter. It&amp;rsquo;s crucial to ensure these appliances are well monitored and maintained, like a Swiss watch.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Update: &lt;a class=&#34;link&#34; href=&#34;https://www.vcrocs.info/aria-appliances-observability/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Link to Aria Appliances Observability Blog&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;links-to-resources-discussed-is-this-blog-post&#34;&gt;Links to resources discussed is this Blog Post:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Dashboards/vCenter-Observability&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Dale&amp;rsquo;s Github Repository&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;product-version-used-for-blog-post&#34;&gt;Product Version used for Blog Post:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Aria Operations: 8.17.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;lessons-learned&#34;&gt;Lessons Learned:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;The relationship between VMware vCenter and the VM it runs on is not available out of the box in VMware Aria Operations. However, by identifying VMs through their unique volume names, I created a view that can be added to any environment to filter out the VMs running vCenter. The filter within that View is what enables this Dashboard to work.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&amp;rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&amp;rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js&#34; data-name=&#34;bmc-button&#34; data-slug=&#34;dalehassinger&#34; data-color=&#34;#FFDD00&#34; data-emoji=&#34;&#34;  data-font=&#34;Cookie&#34; data-text=&#34;Buy me a coffee&#34; data-outline-color=&#34;#000000&#34; data-font-color=&#34;#000000&#34; data-coffee-color=&#34;#ffffff&#34; &gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;hr&gt;</description>
+        </item>
+        
+    </channel>
 </rss>

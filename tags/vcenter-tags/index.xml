@@ -1,20 +1,105 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>VCenter TAGs on vCROCS</title>
-    <link>https://www.vcrocs.info/tags/vcenter-tags/</link>
-    <description>Recent content in VCenter TAGs on vCROCS</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 26 Jan 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://www.vcrocs.info/tags/vcenter-tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details</title>
-      <link>https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/</link>
-      <pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://www.vcrocs.info/aria-operations-vcenter-tags-vm-info/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-  </channel>
+    <channel>
+        <title>VCenter TAGs on Dale Hassinger</title>
+        <link>https://vcrocs.info/tags/vcenter-tags/</link>
+        <description>Recent content in VCenter TAGs on Dale Hassinger</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Dale Hassinger</copyright>
+        <lastBuildDate>Fri, 26 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/tags/vcenter-tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details</title>
+        <link>https://vcrocs.info/vmware-aria-operations-use-vcenter-tags/custom-groups/super-metrics-to-get-vm-details/</link>
+        <pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://vcrocs.info/vmware-aria-operations-use-vcenter-tags/custom-groups/super-metrics-to-get-vm-details/</guid>
+        <description>&lt;img src="https://vcrocs.info/vmware-aria-operations-use-vcenter-tags/custom-groups/super-metrics-to-get-vm-details/featured-image.png" alt="Featured image of post VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details" /&gt;&lt;p&gt;&lt;strong&gt;How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;vmware-aria-operations&#34;&gt;VMware Aria Operations
+&lt;/h2&gt;&lt;p&gt;VMware Aria Operations 8.14.1 was used for this Blog Post. When new versions of VMware Aria Operations are released, the code or process may need to be changed.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;I was recently asked how to create a VMware Aria Operations Dashboard that groups VMs together by vCenter TAGs. IE: If there is 100 VMs in vCenter that have a TAG Named &amp;ldquo;Servers-DB&amp;rdquo;, they wanted to see the CPU, Memory, Disk Space, and Critical Alerts Totals for all VMs with that vCenter TAG. They have many vCenter TAGs and each TAG would be on a single line with only Total Values shown.&lt;/p&gt;
+&lt;p&gt;See the screenshot that shows the final Dashboard Design.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;dashboard-design&#34;&gt;Dashboard Design
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;The left side of the Dashboard shows all the Custom Groups that were created based on vCenter TAGs. The values shown on each row are the Metric Totals for all VMs that have the same vCenter TAG.&lt;/li&gt;
+&lt;li&gt;The left side is a View so that all the data can be exported as a CSV file.&lt;/li&gt;
+&lt;li&gt;The right side of the Dashboard is a view that shows the VM details. The right side is optional. I added the right side to show that the Super Metrics were calculating the metric totals correct.&lt;/li&gt;
+&lt;li&gt;Each metric shown requires a Super Metric to Sum the values within the Custom Group.&lt;/li&gt;
+&lt;li&gt;Each row shown requires a Custom Group to define which vCenter TAG to use.&lt;/li&gt;
+&lt;li&gt;Watch the videos below to see the details on how to create this Dashboard.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;screen-shot-of-dashboard&#34;&gt;Screen Shot of Dashboard
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/vmware-aria-operations-use-vcenter-tags/custom-groups/super-metrics-to-get-vm-details/vm-info-vcenter-tags-02.png&#34;
+	width=&#34;1486&#34;
+	height=&#34;836&#34;
+	srcset=&#34;https://vcrocs.info/vmware-aria-operations-use-vcenter-tags/custom-groups/super-metrics-to-get-vm-details/vm-info-vcenter-tags-02_hu_d0ed3ebe6dfc7145.png 480w, https://vcrocs.info/vmware-aria-operations-use-vcenter-tags/custom-groups/super-metrics-to-get-vm-details/vm-info-vcenter-tags-02_hu_8e954f7bb61e973c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;To group VMs together in VMware Aria Operations based on vCenter TAGs, you use Custom Groups. Custom Groups have a group type. I created (2) new Group Types for this Dashboard. I named one Group Type &amp;ldquo;Applications&amp;rdquo; and one Group Type &amp;ldquo;All-APPs&amp;rdquo;. &amp;ldquo;All-APPs&amp;rdquo; is the Parent Group and &amp;ldquo;Applications&amp;rdquo; is the child group.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Watch video to see how to define VMware Aria Operations Custom Group membership based on a vCenter TAG Name:&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/gt099N3DpXU&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;To show the Metric Totals of each Custom Group, we created Super Metrics to sum the value of all the VMs within the Custom Group. If you were only using one vCenter TAG and one Custom Group, you would not need to do this. We wanted to show the Metric Values of a 100+ vCenter TAGs and each vCenter TAG would be on a separate line. That is why we created the Super Metrics.&lt;/p&gt;
+&lt;p&gt;Watch video to see how to create VMware Aria Operations Super Metrics to total Virtual Machine Metrics:&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/MpyVlj4whvc&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;To show all the Custom Groups names and Super Metric values we created a View. Main reason to create the View was to be able to export the data as a CSV file.&lt;/p&gt;
+&lt;p&gt;Watch video to see how to create VMware Aria Operations View that shows the Custom Groups with VM metric totals:&lt;/p&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/mqODM3-6LCA&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;lessons-learned-and-acknowledgements&#34;&gt;Lessons Learned and acknowledgements:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Thank You to &lt;a class=&#34;link&#34; href=&#34;https://www.BrockPeterson.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Brock Peterson&lt;/a&gt; on providing input on how to get metric value totals by using Super Metrics.&lt;/li&gt;
+&lt;li&gt;Thank You to my customer for the challenging question. I did not create a Dashboard like this before. I am glad we were able to create a Dashboard that answered your request and I am able to share the technique with the vCommunity.&lt;/li&gt;
+&lt;li&gt;You CAN group VMs in VMware Aria Operations together by using vCenter TAGs and total the Metric Values on a single line within a List View.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;If you found this Blog article useful and it helped you, Buy me a coffee to start my day.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js&#34; data-name=&#34;bmc-button&#34; data-slug=&#34;dalehassinger&#34; data-color=&#34;#FFDD00&#34; data-emoji=&#34;&#34;  data-font=&#34;Cookie&#34; data-text=&#34;Buy me a coffee&#34; data-outline-color=&#34;#000000&#34; data-font-color=&#34;#000000&#34; data-coffee-color=&#34;#ffffff&#34; &gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;hr&gt;</description>
+        </item>
+        
+    </channel>
 </rss>

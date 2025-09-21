@@ -1,20 +1,120 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>VMware VCenter on vCROCS</title>
-    <link>https://www.vcrocs.info/categories/vmware-vcenter/</link>
-    <description>Recent content in VMware VCenter on vCROCS</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 11 Oct 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://www.vcrocs.info/categories/vmware-vcenter/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>ESXi on Raspberry PI</title>
-      <link>https://www.vcrocs.info/esxi_arm_raspberry-pi/</link>
-      <pubDate>Sun, 11 Oct 2020 00:00:00 +0000</pubDate>
-      <guid>https://www.vcrocs.info/esxi_arm_raspberry-pi/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;ESXi on Raspberry PI&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-  </channel>
+    <channel>
+        <title>VMware VCenter on Dale Hassinger</title>
+        <link>https://vcrocs.info/categories/vmware-vcenter/</link>
+        <description>Recent content in VMware VCenter on Dale Hassinger</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Dale Hassinger</copyright>
+        <lastBuildDate>Sun, 11 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/categories/vmware-vcenter/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ESXi on Raspberry PI</title>
+        <link>https://vcrocs.info/esxi-on-raspberry-pi/</link>
+        <pubDate>Sun, 11 Oct 2020 00:00:00 +0000</pubDate>
+        
+        <guid>https://vcrocs.info/esxi-on-raspberry-pi/</guid>
+        <description>&lt;img src="https://vcrocs.info/esxi-on-raspberry-pi/featured-image.png" alt="Featured image of post ESXi on Raspberry PI" /&gt;&lt;p&gt;&lt;strong&gt;ESXi on Raspberry PI&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;I have always be fascinated with everything that you can do with a Raspberry PI.  When VMware released their Fling to install ESXi on the Raspberry PI I have become even more fascinated. An ESXi Host for the Home Lab for $50. Sign me up.&lt;/p&gt;
+&lt;p&gt;During VMworld 2020, VMware announced that they would be releasing a Fling to install ESXi on the Raspberry PI.  Before the VMworld session was over I had a new Raspberry PI ordered and it was delivered the next day, ahead of the Fling release, so that I would be ready.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_06.png&#34;
+	width=&#34;200&#34;
+	height=&#34;144&#34;
+	srcset=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_06_hu_d708874b3d220c4a.png 480w, https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_06_hu_d63ba59a801b1504.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;138&#34;
+		data-flex-basis=&#34;333px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;I downloaded the ESXi Arm Edition Fling as soon as I seen it was available.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lessons Learned:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Read all the documentation on how to install ESXi on Raspberry PI.  Very important steps need to be followed.&lt;/li&gt;
+&lt;li&gt;If you want to use more than one USB drive for storage use this ESXi Host advanced setting - USB.arbitratorAutoStartDisabled Set to 1&lt;/li&gt;
+&lt;li&gt;Use a minimum size of 256 GB for the USB drive. Read the Fling Documentation for preferred USB drive to use.&lt;/li&gt;
+&lt;li&gt;The ARM version of Ubuntu server installed without any issues.  I installed the Apache Web Server and Samba on the ARM Ubuntu Server and had no issues.&lt;/li&gt;
+&lt;li&gt;Hugo Blog files run GREAT on ARM version of Ubuntu Server, with Apache web server, running on ESXi, installed on Raspberry PI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I am going to be adding information to this Blog post as I discover more cool information with running ESXi on Raspberry PI.  Check back often.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://flings.vmware.com/esxi-arm-edition&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Link to ESXi Arm Edition - VMware Fling&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;esxi-70-on-raspberry-pi---cool-host-name-&#34;&gt;ESXi 7.0 on RAspberry PI - Cool Host Name :)
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_02.jpeg&#34;
+	width=&#34;4032&#34;
+	height=&#34;3024&#34;
+	srcset=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_02_hu_2dba328939e489e8.jpeg 480w, https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_02_hu_229c1ae4879e647d.jpeg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;esxi-70-on-raspberry-pi-login-screen&#34;&gt;ESXi 7.0 on RAspberry PI Login Screen:
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_03.png&#34;
+	width=&#34;1306&#34;
+	height=&#34;859&#34;
+	srcset=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_03_hu_80482c6e3595c0ac.png 480w, https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_03_hu_c74754a0e54ceef5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;364px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;esxi-managemnet-screen&#34;&gt;ESXi Managemnet Screen:
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_04.png&#34;
+	width=&#34;1792&#34;
+	height=&#34;828&#34;
+	srcset=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_04_hu_ba829667570ecd60.png 480w, https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_04_hu_1eeaf327ff49e884.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;216&#34;
+		data-flex-basis=&#34;519px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;esxi-on-raspberry-pi-added-to-vcenter&#34;&gt;ESXi on Raspberry PI added to vCenter:
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_05.png&#34;
+	width=&#34;2553&#34;
+	height=&#34;1181&#34;
+	srcset=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_05_hu_c0a5ff02932600e9.png 480w, https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_05_hu_3d8a5c0bdaf536a5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;216&#34;
+		data-flex-basis=&#34;518px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;esxi-on-raspbeery-pi-added-to-vrealize-operations-82&#34;&gt;ESXi on Raspbeery PI added to vRealize Operations 8.2:
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_01.png&#34;
+	width=&#34;1879&#34;
+	height=&#34;1057&#34;
+	srcset=&#34;https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_01_hu_a9ca08067358ddb8.png 480w, https://vcrocs.info/esxi-on-raspberry-pi/esxi_raspberry_pi_01_hu_fd524f9e900c7f04.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;If you found this Blog article useful and it helped you, Buy me a coffee to start my day.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js&#34; data-name=&#34;bmc-button&#34; data-slug=&#34;dalehassinger&#34; data-color=&#34;#FFDD00&#34; data-emoji=&#34;&#34;  data-font=&#34;Cookie&#34; data-text=&#34;Buy me a coffee&#34; data-outline-color=&#34;#000000&#34; data-font-color=&#34;#000000&#34; data-coffee-color=&#34;#ffffff&#34; &gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;hr&gt;</description>
+        </item>
+        
+    </channel>
 </rss>

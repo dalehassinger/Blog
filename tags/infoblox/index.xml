@@ -1,20 +1,85 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>InfoBlox on vCROCS</title>
-    <link>https://www.vcrocs.info/tags/infoblox/</link>
-    <description>Recent content in InfoBlox on vCROCS</description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://www.vcrocs.info/tags/infoblox/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Infoblox 1.1 plugin for vRA 8.1</title>
-      <link>https://www.vcrocs.info/infoblox/</link>
-      <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>https://www.vcrocs.info/infoblox/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Infoblox 1.1 plugin for vRA 8.1&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-  </channel>
+    <channel>
+        <title>InfoBlox on Dale Hassinger</title>
+        <link>https://vcrocs.info/tags/infoblox/</link>
+        <description>Recent content in InfoBlox on Dale Hassinger</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Dale Hassinger</copyright>
+        <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/tags/infoblox/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Infoblox 1.1 plugin for vRA 8.1</title>
+        <link>https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/</link>
+        <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
+        
+        <guid>https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/</guid>
+        <description>&lt;img src="https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/featured-image.png" alt="Featured image of post Infoblox 1.1 plugin for vRA 8.1" /&gt;&lt;p&gt;&lt;strong&gt;Infoblox 1.1 plugin for vRA 8.1&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;I recently setup the Infoblox 1.1 plugin for vRA 8.1 and ran into an interesting challenge that I thought I would share. The setup of the plugin is straight forward; follow the documentation and you’ll likely be set. However, if you use custom DNS views in Infoblox (internal, external, etc.) then some additional configuration is required that’s not easily identified. Out of the box, the Infoblox IPAM integration comes with only a few default properties. I left these values in place when creating my first VM build blueprint but the &lt;strong&gt;Infoblox_AllocateIP&lt;/strong&gt; action would always fail. Action Run logs under the Extensibility tab are a great way to troubleshoot. They were displaying the following error:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-01.png&#34;
+	width=&#34;540&#34;
+	height=&#34;44&#34;
+	srcset=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-01_hu_66cb585e50de8b24.png 480w, https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-01_hu_ed2a7330bb25f1e2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1227&#34;
+		data-flex-basis=&#34;2945px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The fix for this issue is to add a custom property called &lt;strong&gt;Infoblox.IPAM.Network.dnsView&lt;/strong&gt; and set the appropriate value. This property needs to be added in both the integration settings as well as in the blueprint.&lt;/p&gt;
+&lt;h2 id=&#34;integration-settings&#34;&gt;Integration Settings:
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-02.png&#34;
+	width=&#34;387&#34;
+	height=&#34;221&#34;
+	srcset=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-02_hu_d5b9df9a48a0af7d.png 480w, https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-02_hu_fe50d654682ac4b2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;420px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;blueprint&#34;&gt;Blueprint:
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-03.png&#34;
+	width=&#34;274&#34;
+	height=&#34;271&#34;
+	srcset=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-03_hu_2db2655d3ff7fb4c.png 480w, https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-03_hu_aec3a9cce3b001f4.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;101&#34;
+		data-flex-basis=&#34;242px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Once you complete these steps, you’ll find that the &lt;strong&gt;Infoblox_AllocateIP&lt;/strong&gt; action will successfully complete.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-04.png&#34;
+	width=&#34;310&#34;
+	height=&#34;156&#34;
+	srcset=&#34;https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-04_hu_9f6d59734e502589.png 480w, https://vcrocs.info/infoblox-1.1-plugin-for-vra-8.1/infoblox-04_hu_80b171f2554ec1f7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;476px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;For the record, the ability to test deployments without actually kicking off a build is fantastic. I confirmed that the test was accurate by running a deployment and verifying that an IP was assigned and a DNS record was registered.&lt;/p&gt;
+&lt;p&gt;Hope this helps.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dan Grove&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;If you found this Blog article useful and it helped you, Buy me a coffee to start my day.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js&#34; data-name=&#34;bmc-button&#34; data-slug=&#34;dalehassinger&#34; data-color=&#34;#FFDD00&#34; data-emoji=&#34;&#34;  data-font=&#34;Cookie&#34; data-text=&#34;Buy me a coffee&#34; data-outline-color=&#34;#000000&#34; data-font-color=&#34;#000000&#34; data-coffee-color=&#34;#ffffff&#34; &gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;hr&gt;</description>
+        </item>
+        
+    </channel>
 </rss>
