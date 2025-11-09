@@ -13,7 +13,7 @@
         <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
         
         <guid>https://vcrocs.info/vcommunity-mp-windows-servers-services/</guid>
-        <description>&lt;img src="https://vcrocs.info/vcommunity-mp-windows-servers-services/featured-image.png" alt="Featured image of post vCommunity MP | Windows Servers Services" /&gt;&lt;p&gt;&lt;strong&gt;Use the vCommunity MP to monitor Windows Server Services Agent-less.&lt;/strong&gt;&lt;/p&gt;
+        <description>&lt;img src="https://vcrocs.info/vcommunity-mp-windows-servers-services/featured-image.png" alt="Featured image of post vCommunity MP | Windows Servers Services" /&gt;&lt;p&gt;&lt;strong&gt;Use the vCommunity MP to monitor Windows Server Services agent-less.&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A community-built VMware Cloud Foundation Operations Management Pack using Python and the VCF Operations Integration SDK to extend monitoring, reporting, and dashboard capabilities.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;hr&gt;
@@ -21,7 +21,7 @@
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/vmbro/VCF-Operations-vCommunity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;vCommunity MP | GitHub repository | Link&lt;/a&gt;:&lt;/p&gt;
 &lt;p&gt;Head over to the vCommunity MP GitHub repository and review the System Requirements carefully—you’ll need a Cloud Proxy plus a few other prerequisites in place.&lt;/p&gt;
-&lt;p&gt;Check out Brock Peterson&amp;rsquo;s vCommunity MP Blogs that cover a lot of the details. &lt;a class=&#34;link&#34; href=&#34;https://www.brockpeterson.com/post/vcommunity-management-pack-for-vcf-operations&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;Check out Brock Peterson&amp;rsquo;s vCommunity MP blogs, which cover many of the details. &lt;a class=&#34;link&#34; href=&#34;https://www.brockpeterson.com/post/vcommunity-management-pack-for-vcf-operations&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Click Here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;In this blog, I’ll be focusing on Windows Server Services.&lt;/p&gt;
 &lt;ul&gt;
@@ -44,12 +44,12 @@
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;I don’t want the Print Spooler service to be running, which is why its status is shown in red when it’s Running.&lt;/li&gt;
+&lt;li&gt;I don’t want the Print Spooler service running, which is why its status is shown in red when it’s running.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;management-packs-configuration&#34;&gt;Management Packs Configuration:
 &lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Add all the Service Names you want to monitor in the windows_service_list.xml section&lt;/li&gt;
+&lt;li&gt;Add all the service names you want to monitor in the windows_service_list.xml section&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://vcrocs.info/vcommunity-mp-windows-servers-services/windows-services-01.png&#34;
 	width=&#34;3408&#34;
@@ -84,7 +84,7 @@
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;windowsServices&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!--Remove comments if you want to monitor Windows Services.--&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!--You can add any service name as following--&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!--You can add any service name as follows--&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- Dhcp --&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- WinDefend --&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Dnscache,
@@ -104,7 +104,7 @@
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Make sure to have a Cloud Proxy in place before installing this MP.&lt;/li&gt;
 &lt;li&gt;You can monitor any Windows Service. All you need to do is add the service name to the windows_service_list.xml.&lt;/li&gt;
-&lt;li&gt;No Agents required to gather the Metrics and Properties&lt;/li&gt;
+&lt;li&gt;No agents are required to gather the metrics and properties.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&amp;rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&amp;rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.&lt;/p&gt;
