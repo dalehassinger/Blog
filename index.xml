@@ -7,7 +7,118 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>vCROCS</copyright>
-        <lastBuildDate>Sat, 11 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 08 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>vCommunity MP | Windows Servers Services</title>
+        <link>https://vcrocs.info/vcommunity-mp-windows-servers-services/</link>
+        <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://vcrocs.info/vcommunity-mp-windows-servers-services/</guid>
+        <description>&lt;img src="https://vcrocs.info/vcommunity-mp-windows-servers-services/featured-image.png" alt="Featured image of post vCommunity MP | Windows Servers Services" /&gt;&lt;p&gt;&lt;strong&gt;Use the vCommunity MP to monitor Windows Server Services Agent-less.&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A community-built VMware Cloud Foundation Operations Management Pack using Python and the VCF Operations Integration SDK to extend monitoring, reporting, and dashboard capabilities.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;vcommunity-mp&#34;&gt;vCommunity MP:
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/vmbro/VCF-Operations-vCommunity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;vCommunity MP | GitHub repository | Link&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;Head over to the vCommunity MP GitHub repository and review the System Requirements carefully—you’ll need a Cloud Proxy plus a few other prerequisites in place.&lt;/p&gt;
+&lt;p&gt;Check out Brock Peterson&amp;rsquo;s vCommunity MP Blogs that cover a lot of the details. &lt;a class=&#34;link&#34; href=&#34;https://www.brockpeterson.com/post/vcommunity-management-pack-for-vcf-operations&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Click Here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In this blog, I’ll be focusing on Windows Server Services.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I’ll demonstrate how you can monitor any Windows Service.&lt;/li&gt;
+&lt;li&gt;The vCommunity MP uses an agent-less approach to retrieve Windows Service status.&lt;/li&gt;
+&lt;li&gt;For example, I’ll cover monitoring Active Directory, RDS, Defender AV, Veeam, and Print Spooler services.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;dashboard-example&#34;&gt;Dashboard Example:
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/vcommunity-mp-windows-servers-services/windows-services-02.png&#34;
+	width=&#34;2984&#34;
+	height=&#34;2208&#34;
+	srcset=&#34;https://vcrocs.info/vcommunity-mp-windows-servers-services/windows-services-02_hu_3090d4882828d92f.png 480w, https://vcrocs.info/vcommunity-mp-windows-servers-services/windows-services-02_hu_aec90aa182d31f8b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;135&#34;
+		data-flex-basis=&#34;324px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I don’t want the Print Spooler service to be running, which is why its status is shown in red when it’s Running.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;management-packs-configuration&#34;&gt;Management Packs Configuration:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Add all the Service Names you want to monitor in the windows_service_list.xml section&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/vcommunity-mp-windows-servers-services/windows-services-01.png&#34;
+	width=&#34;3408&#34;
+	height=&#34;1800&#34;
+	srcset=&#34;https://vcrocs.info/vcommunity-mp-windows-servers-services/windows-services-01_hu_c51fd9cf0efd7891.png 480w, https://vcrocs.info/vcommunity-mp-windows-servers-services/windows-services-01_hu_e633582970877080.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;189&#34;
+		data-flex-basis=&#34;454px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;windowsServices&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!--Remove comments if you want to monitor Windows Services.--&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!--You can add any service name as following--&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- Dhcp --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- WinDefend --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Dnscache,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  MpsSvc,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  spooler,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  sshd,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  TermService,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  DNS,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  NTDS,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  WinDefend,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  VeeamBackupSvc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/windowsServices&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;lessons-learned&#34;&gt;Lessons Learned:
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Make sure to have a Cloud Proxy in place before installing this MP.&lt;/li&gt;
+&lt;li&gt;You can monitor any Windows Service. All you need to do is add the service name to the windows_service_list.xml.&lt;/li&gt;
+&lt;li&gt;No Agents required to gather the Metrics and Properties&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&amp;rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&amp;rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;If you found this blog helpful, consider buying me a coffee to kickstart my day.&lt;/p&gt;
+&lt;center&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js&#34; data-name=&#34;bmc-button&#34; data-slug=&#34;dalehassinger&#34; data-color=&#34;#FFDD00&#34; data-emoji=&#34;&#34;  data-font=&#34;Cookie&#34; data-text=&#34;Buy me a coffee&#34; data-outline-color=&#34;#000000&#34; data-font-color=&#34;#000000&#34; data-coffee-color=&#34;#ffffff&#34; &gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>Podcast Guest | Virtually Speaking and vCommunity</title>
         <link>https://vcrocs.info/podcast-guest-virtually-speaking-and-vcommunity/</link>
         <pubDate>Sat, 11 Oct 2025 00:00:00 +0000</pubDate>
