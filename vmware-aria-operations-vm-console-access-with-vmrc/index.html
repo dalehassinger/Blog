@@ -442,8 +442,101 @@
 <p>The blog post begins with an intriguing scenario where Brock, responding to a customer&rsquo;s query about launching the VMRC client to display a VM&rsquo;s console within Aria Operations (a functionality not native to the product), highlighted the collaborative spirit of the team. Having previously created a similar dashboard as a customer, I offered to replicate it in my lab area for Brock, emphasizing the team&rsquo;s culture of sharing existing solutions and code. Brock liked what I created in my lab and suggested that we share this knowledge with the vCommunity by creating a Blog, recognizing the potential interest from other customers in implementing such a solution. This shows the team&rsquo;s commitment to collaboration and knowledge sharing.</p>
 <p>Please explore the blog post to witness the exceptional outcomes a great team can achieve. Enjoy!</p>
 <hr>
-<figure >
-  <img src="vmrc.gif" alt=""  loading="lazy" /></figure>
+<a href="vmrc.gif" class="gif-lightbox" data-title="">
+  <img src="vmrc.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
+<style>
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('.gif-lightbox');
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'gif-lightbox-overlay active';
+
+        const img = document.createElement('img');
+        img.src = link.href;
+        img.alt = link.querySelector('img').alt;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.onclick = () => overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', escHandler);
+          }
+        };
+        document.addEventListener('keydown', escHandler);
+      });
+    });
+  })();
+</script>
+
+
 <hr>
 <p>All the source code for this Blog is saved in my GitHub Repository. Click on the links below.</p>
 <hr>

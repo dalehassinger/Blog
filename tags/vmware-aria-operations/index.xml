@@ -328,8 +328,101 @@ Registration is open!&lt;/p&gt;
 &lt;p&gt;The blog post begins with an intriguing scenario where Brock, responding to a customer&amp;rsquo;s query about launching the VMRC client to display a VM&amp;rsquo;s console within Aria Operations (a functionality not native to the product), highlighted the collaborative spirit of the team. Having previously created a similar dashboard as a customer, I offered to replicate it in my lab area for Brock, emphasizing the team&amp;rsquo;s culture of sharing existing solutions and code. Brock liked what I created in my lab and suggested that we share this knowledge with the vCommunity by creating a Blog, recognizing the potential interest from other customers in implementing such a solution. This shows the team&amp;rsquo;s commitment to collaboration and knowledge sharing.&lt;/p&gt;
 &lt;p&gt;Please explore the blog post to witness the exceptional outcomes a great team can achieve. Enjoy!&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;vmrc.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;vmrc.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;vmrc.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;p&gt;All the source code for this Blog is saved in my GitHub Repository. Click on the links below.&lt;/p&gt;
 &lt;hr&gt;
@@ -1339,8 +1432,101 @@ The templates are located at: /usr/lib/vmware-vcops/user/plugins/inbound/service
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Jobs: List of all Jobs you created.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;aria-operations-02.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;aria-operations-02.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;aria-operations-02.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;h2 id=&#34;lessons-learned&#34;&gt;Lessons Learned
 &lt;/h2&gt;&lt;ul&gt;
@@ -1404,8 +1590,101 @@ The templates are located at: /usr/lib/vmware-vcops/user/plugins/inbound/service
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Metric&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Virtual&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Machine&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;where&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CPU&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Ready&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ms&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;750&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ms&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;metric-search-02.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;metric-search-02.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;metric-search-02.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;p&gt;Now lets take the search used above and define the results further by specifying host or cluster.
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1565,8 +1844,12 @@ Your thought process is the most powerful automation tool you’ll ever have! - 
 &gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Demo of doing Multiple Searches in a row and all the text is entered by the Stream Deck.&lt;/p&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;stream-deck-02.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;stream-deck-02.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;stream-deck-02.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;h2 id=&#34;how-to-use-the-kebab-menu-to-go-to-the-troubleshooting-workbench&#34;&gt;How to use the Kebab menu to go to the TroubleShooting Workbench
 &lt;/h2&gt;&lt;p&gt;Here is an example of all the steps above and then also choosing the kebab menu to go to the troubleshooting workbench.&lt;/p&gt;
@@ -1640,8 +1923,101 @@ Your thought process is the most powerful automation tool you’ll ever have! - 
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Screen shot of Dashboard&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;rvtools-dashboard-01.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;rvtools-dashboard-01.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;rvtools-dashboard-01.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;h2 id=&#34;powershell-script&#34;&gt;PowerShell Script:
 &lt;/h2&gt;&lt;ul&gt;

@@ -467,8 +467,101 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Metric</span><span class="p">:</span><span class="w"> </span><span class="n">Virtual</span><span class="w"> </span><span class="n">Machine</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">CPU</span><span class="o">|</span><span class="n">Ready</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">750</span><span class="w"> </span><span class="n">ms</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-<figure >
-  <img src="metric-search-02.gif" alt=""  loading="lazy" /></figure>
+<a href="metric-search-02.gif" class="gif-lightbox" data-title="">
+  <img src="metric-search-02.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
+<style>
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('.gif-lightbox');
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'gif-lightbox-overlay active';
+
+        const img = document.createElement('img');
+        img.src = link.href;
+        img.alt = link.querySelector('img').alt;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.onclick = () => overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', escHandler);
+          }
+        };
+        document.addEventListener('keydown', escHandler);
+      });
+    });
+  })();
+</script>
+
+
 <p>Now lets take the search used above and define the results further by specifying host or cluster.
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -628,8 +721,12 @@ Your thought process is the most powerful automation tool you’ll ever have! - 
 ></p>
 <hr>
 <p>Demo of doing Multiple Searches in a row and all the text is entered by the Stream Deck.</p>
-<figure >
-  <img src="stream-deck-02.gif" alt=""  loading="lazy" /></figure>
+<a href="stream-deck-02.gif" class="gif-lightbox" data-title="">
+  <img src="stream-deck-02.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <h2 id="how-to-use-the-kebab-menu-to-go-to-the-troubleshooting-workbench">How to use the Kebab menu to go to the TroubleShooting Workbench
 </h2><p>Here is an example of all the steps above and then also choosing the kebab menu to go to the troubleshooting workbench.</p>

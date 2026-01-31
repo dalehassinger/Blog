@@ -496,8 +496,101 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><hr>
-<figure >
-  <img src="ansible-install-step-01.gif" alt=""  loading="lazy" /></figure>
+<a href="ansible-install-step-01.gif" class="gif-lightbox" data-title="">
+  <img src="ansible-install-step-01.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
+<style>
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('.gif-lightbox');
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'gif-lightbox-overlay active';
+
+        const img = document.createElement('img');
+        img.src = link.href;
+        img.alt = link.querySelector('img').alt;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.onclick = () => overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', escHandler);
+          }
+        };
+        document.addEventListener('keydown', escHandler);
+      });
+    });
+  })();
+</script>
+
+
 <hr>
 <h2 id="edit-the-hosts-file">Edit the hosts file:
 </h2><ul>
@@ -535,8 +628,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">ansible_password=&#39;VMware1!&#39;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure >
-  <img src="ansible-install-step-02.gif" alt=""  loading="lazy" /></figure>
+</div><a href="ansible-install-step-02.gif" class="gif-lightbox" data-title="">
+  <img src="ansible-install-step-02.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <h2 id="edit-the-ansiblecfg-file">Edit the ansible.cfg file:
 </h2><ul>
@@ -569,8 +666,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">vault_password_file = /etc/ansible/vault-pass.txt</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><figure >
-  <img src="ansible-install-step-03.gif" alt=""  loading="lazy" /></figure>
+</div><a href="ansible-install-step-03.gif" class="gif-lightbox" data-title="">
+  <img src="ansible-install-step-03.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <h2 id="test-ansible-install">Test Ansible Install
 </h2><p><strong>To test the Ansible install you can do a ping:</strong></p>
@@ -584,8 +685,12 @@
 </span></span><span class="line"><span class="cl">ansible rocky -m ping
 </span></span></code></pre></td></tr></table>
 </div>
-</div><figure >
-  <img src="ansible-install-step-04.gif" alt=""  loading="lazy" /></figure>
+</div><a href="ansible-install-step-04.gif" class="gif-lightbox" data-title="">
+  <img src="ansible-install-step-04.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <h2 id="vmware-aria-automation-configuration">VMware Aria Automation Configuration
 </h2><p><strong>Add Ansible Integration to VMware Aria Automation:</strong></p>

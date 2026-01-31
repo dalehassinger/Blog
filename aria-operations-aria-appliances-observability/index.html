@@ -501,8 +501,101 @@
 ></p>
 <hr>
 <p><strong>Dashboard Usage:</strong></p>
-<figure >
-  <img src="aria-appliances-03.gif" alt=""  loading="lazy" /></figure>
+<a href="aria-appliances-03.gif" class="gif-lightbox" data-title="">
+  <img src="aria-appliances-03.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
+<style>
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('.gif-lightbox');
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'gif-lightbox-overlay active';
+
+        const img = document.createElement('img');
+        img.src = link.href;
+        img.alt = link.querySelector('img').alt;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.onclick = () => overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', escHandler);
+          }
+        };
+        document.addEventListener('keydown', escHandler);
+      });
+    });
+  })();
+</script>
+
+
 <hr>
 <h2 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:
 </h2><ul>
@@ -600,13 +693,13 @@
         
         
             <div class="article-image">
-                <img src="/vcf-operations-custom-summary/featured-image.5a416034635a90e0d069c2202a5ba9eb_hu_7e2a53da11c658f1.png" 
+                <img src="/vcf-operations-custom-summary/featured-image.18f5cff4463a6e34b72b95c67b95618e_hu_84d8d53a63616e28.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post VCF Operations | Custom Summary"
                         
-                        data-hash="md5-WkFgNGNakODQacIgKlup6w==">
+                        data-hash="md5-GPXP9EY6bjS3K5XGe5Vhjg==">
                 
             </div>
         

@@ -75,8 +75,101 @@
 &lt;li&gt;Script can be used to show any web page and data you can create. Think about some cool use cases.&lt;/li&gt;
 &lt;li&gt;The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ps-web-api-server-01.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ps-web-api-server-01.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ps-web-api-server-01.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -353,8 +446,12 @@
 &lt;li&gt;Script can be used to show any web page and data you can create. Think about some cool use cases.&lt;/li&gt;
 &lt;li&gt;The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ps-web-api-server-02.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ps-web-api-server-02.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ps-web-api-server-02.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -711,8 +808,12 @@
 &lt;li&gt;Returns Tiered Memory usage of VMs in my Lab&lt;/li&gt;
 &lt;li&gt;Script can be used to return any data you can create. Think about some cool use cases.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ps-web-api-server-03.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ps-web-api-server-03.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ps-web-api-server-03.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -1285,8 +1386,12 @@
 &lt;li&gt;There is a 2nd PS script that runs and collects the Tiered Memory Metrics every five minutes and saves the data as a json file that is used with the web page&lt;/li&gt;
 &lt;li&gt;100s of use cases&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ps-web-api-server-04.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ps-web-api-server-04.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ps-web-api-server-04.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;p&gt;I have been using Rocky Linux more in my lab for testing PowerShell Automation scripts.&lt;/p&gt;
 &lt;p&gt;Here is how I install PowerShell on Rocky Linux:&lt;/p&gt;
@@ -1420,12 +1525,20 @@
 &gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;&lt;small&gt;Running a simple PS script on a remote Linux server that uses the VMware PowerCLI module.&lt;/small&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ps-web-api-server-09.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ps-web-api-server-09.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ps-web-api-server-09.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;&lt;small&gt;I can edit any type of file I need to on the remote Linux server using this technique&lt;/small&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ps-web-api-server-10.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ps-web-api-server-10.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ps-web-api-server-10.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;Steps to create a Self Signed SSL Certifcate to test with:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -2355,8 +2468,101 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
 &lt;h2 id=&#34;workflow-design&#34;&gt;Workflow Design:
-&lt;/h2&gt;&lt;figure &gt;
-  &lt;img src=&#34;linux0ps-host-01.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;/h2&gt;&lt;a href=&#34;linux0ps-host-01.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;linux0ps-host-01.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/dalehassinger/unlocking-the-potential/blob/main/VMware-Aria-Automation/Workflows/SSH-Run-PowerShell-Script.package&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -3067,8 +3273,101 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;powercli-yaml-01.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;powercli-yaml-01.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;powercli-yaml-01.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;Sample Script to connect to vCenter using variables from a YAML file:&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -9367,13 +9666,110 @@ This script automates the setup of VCF Cloud Builder and prepares the configurat
 &lt;h2 id=&#34;ollama-models&#34;&gt;ollama Models:
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;There are many models to pick from to use with ollama&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ollama-03.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ollama-03.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ollama-03.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;p&gt;Once you&amp;rsquo;ve chosen the desired model, the web site will provide you with the necessary command prompts to get started. No need to dig through complex documentation or struggle with unfamiliar code - just follow the straightforward instructions and you&amp;rsquo;re good to go!&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ollama-04.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ollama-04.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ollama-04.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;h2 id=&#34;how-to-run-ollama-from-cli&#34;&gt;How to run ollama from cli:
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Here is a quick video to show how to get started from the CLI&lt;/strong&gt;&lt;/p&gt;
@@ -9385,8 +9781,12 @@ This script automates the setup of VCF Cloud Builder and prepares the configurat
 &lt;p&gt;Hands-on experience with this tool? A breeze! Not only is it incredibly user-friendly, but the performance on my laptop has been impressive too. And what really stands out is the speed at which responses are delivered - no waiting around here! The unedited video itself
 is a testament to its fast processing capabilities.&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ollama-05.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ollama-05.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ollama-05.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;p&gt;&lt;span style=&#34;font-size: 13px; color: red; font-weight: bold;&#34;&gt;Code:&lt;/span&gt;&lt;br&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -9595,8 +9995,12 @@ is a testament to its fast processing capabilities.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ollama-07.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ollama-07.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ollama-07.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;Code questions that I have used:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -9703,8 +10107,12 @@ is a testament to its fast processing capabilities.&lt;/p&gt;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;In this video, the ollama commands were run using a Stream Deck Button. Realtime speed, no video edits:&lt;/p&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;ollama-09.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;ollama-09.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;ollama-09.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
 &lt;hr&gt;
 &lt;h2 id=&#34;links-to-resources-discussed-is-this-blog-post&#34;&gt;Links to resources discussed is this Blog Post:
 &lt;/h2&gt;&lt;ul&gt;
@@ -9753,8 +10161,101 @@ is a testament to its fast processing capabilities.&lt;/p&gt;
 &lt;p&gt;The blog post begins with an intriguing scenario where Brock, responding to a customer&amp;rsquo;s query about launching the VMRC client to display a VM&amp;rsquo;s console within Aria Operations (a functionality not native to the product), highlighted the collaborative spirit of the team. Having previously created a similar dashboard as a customer, I offered to replicate it in my lab area for Brock, emphasizing the team&amp;rsquo;s culture of sharing existing solutions and code. Brock liked what I created in my lab and suggested that we share this knowledge with the vCommunity by creating a Blog, recognizing the potential interest from other customers in implementing such a solution. This shows the team&amp;rsquo;s commitment to collaboration and knowledge sharing.&lt;/p&gt;
 &lt;p&gt;Please explore the blog post to witness the exceptional outcomes a great team can achieve. Enjoy!&lt;/p&gt;
 &lt;hr&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;vmrc.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;vmrc.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;vmrc.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;p&gt;All the source code for this Blog is saved in my GitHub Repository. Click on the links below.&lt;/p&gt;
 &lt;hr&gt;
@@ -11701,8 +12202,101 @@ VMware Explore Conference: 08/21/2023-08/24/2023&lt;/p&gt;
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Screen shot of Dashboard&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;rvtools-dashboard-01.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;rvtools-dashboard-01.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;rvtools-dashboard-01.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;hr&gt;
 &lt;h2 id=&#34;powershell-script&#34;&gt;PowerShell Script:
 &lt;/h2&gt;&lt;ul&gt;

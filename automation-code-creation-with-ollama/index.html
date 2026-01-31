@@ -493,13 +493,110 @@
 <h2 id="ollama-models">ollama Models:
 </h2><p><strong>There are many models to pick from to use with ollama&hellip;</strong></p>
 <hr>
-<figure >
-  <img src="ollama-03.gif" alt=""  loading="lazy" /></figure>
+<a href="ollama-03.gif" class="gif-lightbox" data-title="">
+  <img src="ollama-03.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
+<style>
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('.gif-lightbox');
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'gif-lightbox-overlay active';
+
+        const img = document.createElement('img');
+        img.src = link.href;
+        img.alt = link.querySelector('img').alt;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.onclick = () => overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', escHandler);
+          }
+        };
+        document.addEventListener('keydown', escHandler);
+      });
+    });
+  })();
+</script>
+
+
 <hr>
 <p>Once you&rsquo;ve chosen the desired model, the web site will provide you with the necessary command prompts to get started. No need to dig through complex documentation or struggle with unfamiliar code - just follow the straightforward instructions and you&rsquo;re good to go!</p>
 <hr>
-<figure >
-  <img src="ollama-04.gif" alt=""  loading="lazy" /></figure>
+<a href="ollama-04.gif" class="gif-lightbox" data-title="">
+  <img src="ollama-04.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <h2 id="how-to-run-ollama-from-cli">How to run ollama from cli:
 </h2><p><strong>Here is a quick video to show how to get started from the CLI</strong></p>
@@ -511,8 +608,12 @@
 <p>Hands-on experience with this tool? A breeze! Not only is it incredibly user-friendly, but the performance on my laptop has been impressive too. And what really stands out is the speed at which responses are delivered - no waiting around here! The unedited video itself
 is a testament to its fast processing capabilities.</p>
 <hr>
-<figure >
-  <img src="ollama-05.gif" alt=""  loading="lazy" /></figure>
+<a href="ollama-05.gif" class="gif-lightbox" data-title="">
+  <img src="ollama-05.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <p><span style="font-size: 13px; color: red; font-weight: bold;">Code:</span><br>
 <div class="highlight"><div class="chroma">
@@ -721,8 +822,12 @@ is a testament to its fast processing capabilities.</p>
 </div>
 </div></p>
 <hr>
-<figure >
-  <img src="ollama-07.gif" alt=""  loading="lazy" /></figure>
+<a href="ollama-07.gif" class="gif-lightbox" data-title="">
+  <img src="ollama-07.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <p><strong>Code questions that I have used:</strong></p>
 <ul>
@@ -829,8 +934,12 @@ is a testament to its fast processing capabilities.</p>
 	
 ></p>
 <p>In this video, the ollama commands were run using a Stream Deck Button. Realtime speed, no video edits:</p>
-<figure >
-  <img src="ollama-09.gif" alt=""  loading="lazy" /></figure>
+<a href="ollama-09.gif" class="gif-lightbox" data-title="">
+  <img src="ollama-09.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
 <hr>
 <h2 id="links-to-resources-discussed-is-this-blog-post">Links to resources discussed is this Blog Post:
 </h2><ul>

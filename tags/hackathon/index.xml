@@ -127,8 +127,101 @@
 		data-flex-basis=&#34;203px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;figure &gt;
-  &lt;img src=&#34;vmware-explore-2025-02.gif&#34; alt=&#34;&#34;  loading=&#34;lazy&#34; /&gt;&lt;/figure&gt;
+&lt;a href=&#34;vmware-explore-2025-02.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;vmware-explore-2025-02.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+
 &lt;p&gt;&lt;img src=&#34;https://vcrocs.info/vmware-explore-2025-success-vcommunity-and-inspiration/vmware-explore-2025-03.png&#34;
 	width=&#34;3000&#34;
 	height=&#34;2562&#34;
