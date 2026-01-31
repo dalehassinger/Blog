@@ -432,44 +432,115 @@
 <hr>
 <h2 id="vcommunity-vcf-operations-custom-summary">vCommunity VCF Operations Custom Summary:
 </h2><p><strong>Standard vs. Custom:</strong> Check out this video comparison to see how much more visibility you gain with a Custom Summary versus the default Out-of-the-Box experience.<br>
-<img src="/vcf-operations-custom-summary/custom-summaries-01.gif"
-	width="1080"
-	height="608"
-	srcset="/vcf-operations-custom-summary/custom-summaries-01_hu_ae72db0d061ef006.gif 480w, /vcf-operations-custom-summary/custom-summaries-01_hu_4afd63027a8e1cc7.gif 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="177"
-		data-flex-basis="426px"
-	
-></p>
+<a href="custom-summaries-01.gif" class="gif-lightbox" data-title="">
+  <img src="custom-summaries-01.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+
+<style>
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('click', function(e) {
+        const link = e.target.closest('.gif-lightbox');
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement('div');
+        overlay.className = 'gif-lightbox-overlay active';
+
+        const img = document.createElement('img');
+        img.src = link.href;
+        img.alt = link.querySelector('img').alt;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'close-btn';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.onclick = () => overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener('click', function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === 'Escape') {
+            overlay.remove();
+            document.removeEventListener('keydown', escHandler);
+          }
+        };
+        document.addEventListener('keydown', escHandler);
+      });
+    });
+  })();
+</script>
+
+</p>
 <p><strong>Step-by-step:</strong> Configuring VCF Operations to use a Custom Summary for the &ldquo;Virtual Machine&rdquo; object type.<br>
-<img src="/vcf-operations-custom-summary/custom-summaries-02.gif"
-	width="2000"
-	height="1051"
-	srcset="/vcf-operations-custom-summary/custom-summaries-02_hu_81892fa4395eb7e9.gif 480w, /vcf-operations-custom-summary/custom-summaries-02_hu_8c022287b94b77a4.gif 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="190"
-		data-flex-basis="456px"
-	
-></p>
+<a href="custom-summaries-02.gif" class="gif-lightbox" data-title="">
+  <img src="custom-summaries-02.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+</p>
 <p><strong>Step-by-Step:</strong> Restoring the Default Summary for the Virtual Machine object type in VCF Operations.<br>
-<img src="/vcf-operations-custom-summary/custom-summaries-03.gif"
-	width="2000"
-	height="1051"
-	srcset="/vcf-operations-custom-summary/custom-summaries-03_hu_cd980d546649af12.gif 480w, /vcf-operations-custom-summary/custom-summaries-03_hu_cafa8f0a33d86ff5.gif 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="190"
-		data-flex-basis="456px"
-	
-></p>
+<a href="custom-summaries-03.gif" class="gif-lightbox" data-title="">
+  <img src="custom-summaries-03.gif" alt="" style="max-width: 100%; cursor: pointer; border-radius: 8px;" />
+</a>
+
+
+</p>
 <hr>
 <h2 id="lessons-learned">Lessons Learned:
 </h2><ul>
