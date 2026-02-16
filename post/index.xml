@@ -7,7 +7,222 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>vCROCS</copyright>
-        <lastBuildDate>Sun, 15 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 16 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://vcrocs.info/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Custom App | Claude Code</title>
+        <link>https://vcrocs.info/custom-app-claude-code/</link>
+        <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://vcrocs.info/custom-app-claude-code/</guid>
+        <description>&lt;img src="https://vcrocs.info/custom-app-claude-code/featured-image.png" alt="Featured image of post Custom App | Claude Code" /&gt;&lt;p&gt;&lt;strong&gt;Designing Custom Apps with Prompts&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Soon, the ability to build personalized, functional apps will no longer require years of development experience.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;my-first-apple-swift-app&#34;&gt;My First Apple Swift App
+&lt;/h3&gt;&lt;p&gt;I am comfortable creating scripts for automation and configuration management, but I had not yet built a functional native app for iPhone, iPad, and Mac. When Apple integrated support for AI coding assistants into Xcode, I wanted to see if I could build an app immediately using prompts.&lt;/p&gt;
+&lt;p&gt;I work with VMware products and maintain a home lab to test ideas. For my first Swift project, I wanted to connect to VMware VCF Operations and vCenter to display lab data on my iPhone.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Goals and Use Case:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Connect to VMware vCenter and VCF Operations.&lt;/li&gt;
+&lt;li&gt;Achieve a native Apple look and feel, like the Apple Reminders App.&lt;/li&gt;
+&lt;li&gt;Include a settings area so others can use the app.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To guide the UI design, I used a screenshot of the Apple Reminders app and prompted the AI to use it as a visual template.&lt;/p&gt;
+&lt;p&gt;I started with existing scripts that already pulled the data from VMware vCenter. I pasted these into the prompt and instructed Claude to convert the logic into Swift. The conversion was successful, though Claude occasionally struggled with specific API calls. On several occasions, I provided working &lt;code&gt;curl&lt;/code&gt; commands to help Claude generate the correct Swift code.&lt;/p&gt;
+&lt;p&gt;Initially, my new app used full-width buttons. As I added features, I needed to save UI space and prompted Claude to switch to a two-column button layout. While the visual change worked, the underlying logic broke; every button linked to the same &amp;ldquo;Electricity&amp;rdquo; section. Claude could not fix the UI mapping. I did a lot of prompts to explain how the UI was working but it could not fix the UI issue. So I switched to OpenAI to see if it would be able to fix the UI issue. ChatGPT set to minimal reasoning was also not able to fix the UI issue. I changed ChatGPT to use low reasoning and it was able to fix the UI issue on the first prompt.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson Learned:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Do not stop when an app fails to function as intended. Experiment with different prompts and various AI coding assistants. Much like human programmers, these tools have different strengths and approaches to writing code.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Providing tools to someone who already understands automation and APIs is a major shift. I am comfortable with VMware PowerCLI, but I did not know Swift. By combining my product knowledge with AI-generated Swift code, I am excited about future possibilities.&lt;/p&gt;
+&lt;p&gt;I have now built three projects using AI assistants:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;VMware Lab Dashboard:&lt;/strong&gt; An Apple native app that connects to VCF Operations and vCenter, while also displaying data from Shelly Smart Electrical Switches.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cross-Platform Solitaire:&lt;/strong&gt; An Electron-based app prompted in just two steps that runs identically on macOS and Ubuntu.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Raspberry Pi Kiosk:&lt;/strong&gt; An Electron app that displays full-screen web pages at boot on the GeeekPi 7.84 inch 1280x400 LCD Touch Screen 2U Rack Mount Monitor mounted in my GeeekPi 12U Server Cabinet, 10 inch Server Rack for Network and Servers. It cycles through VCF Operations dashboards, local weather, and the Broadcom (AVGO) stock price, all managed via a built-in web admin page.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;examples&#34;&gt;Examples
+&lt;/h3&gt;&lt;p&gt;Here are some images and short videos showing what I was able to create using prompts:&lt;/p&gt;
+&lt;p&gt;Main Screen and App Settings:
+&lt;img src=&#34;https://vcrocs.info/custom-app-claude-code/first-app-01.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1005&#34;
+	srcset=&#34;https://vcrocs.info/custom-app-claude-code/first-app-01_hu_10b0f40b5c670918.png 480w, https://vcrocs.info/custom-app-claude-code/first-app-01_hu_1603fed004c75d3b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;VMs | Filtered | VM Details:
+&lt;img src=&#34;https://vcrocs.info/custom-app-claude-code/first-app-02.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1005&#34;
+	srcset=&#34;https://vcrocs.info/custom-app-claude-code/first-app-02_hu_3a11411014dd88f6.png 480w, https://vcrocs.info/custom-app-claude-code/first-app-02_hu_473d9569b5814012.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Hosts | Hosts Details | CPU/Memory Gauges:
+&lt;img src=&#34;https://vcrocs.info/custom-app-claude-code/first-app-03.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1005&#34;
+	srcset=&#34;https://vcrocs.info/custom-app-claude-code/first-app-03_hu_23d57ac5bd5687eb.png 480w, https://vcrocs.info/custom-app-claude-code/first-app-03_hu_92a0701a36d98753.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Smart Switch | Smart Switch Config | Customizable UI:
+&lt;img src=&#34;https://vcrocs.info/custom-app-claude-code/first-app-04.png&#34;
+	width=&#34;1920&#34;
+	height=&#34;1005&#34;
+	srcset=&#34;https://vcrocs.info/custom-app-claude-code/first-app-04_hu_e57c500a509ce518.png 480w, https://vcrocs.info/custom-app-claude-code/first-app-04_hu_954dfcc21872a520.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;App usage:&lt;br&gt;
+&lt;a href=&#34;first-app-06.gif&#34; class=&#34;gif-lightbox&#34; data-title=&#34;&#34;&gt;
+  &lt;img src=&#34;first-app-06.gif&#34; alt=&#34;&#34; style=&#34;max-width: 100%; cursor: pointer; border-radius: 8px;&#34; /&gt;
+&lt;/a&gt;
+
+
+
+&lt;style&gt;
+  .gif-lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gif-lightbox-overlay.active {
+    display: flex;
+  }
+
+  .gif-lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+  }
+
+  .gif-lightbox-overlay .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .gif-lightbox-overlay .close-btn:hover {
+    color: #ccc;
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+  (function() {
+    if (window.gifLightboxInit) return;
+    window.gifLightboxInit = true;
+
+    document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+      document.body.addEventListener(&#39;click&#39;, function(e) {
+        const link = e.target.closest(&#39;.gif-lightbox&#39;);
+        if (!link) return;
+
+        e.preventDefault();
+
+        
+        const overlay = document.createElement(&#39;div&#39;);
+        overlay.className = &#39;gif-lightbox-overlay active&#39;;
+
+        const img = document.createElement(&#39;img&#39;);
+        img.src = link.href;
+        img.alt = link.querySelector(&#39;img&#39;).alt;
+
+        const closeBtn = document.createElement(&#39;button&#39;);
+        closeBtn.className = &#39;close-btn&#39;;
+        closeBtn.innerHTML = &#39;&amp;times;&#39;;
+        closeBtn.onclick = () =&gt; overlay.remove();
+
+        overlay.appendChild(img);
+        overlay.appendChild(closeBtn);
+        document.body.appendChild(overlay);
+
+        
+        overlay.addEventListener(&#39;click&#39;, function(e) {
+          if (e.target === this) overlay.remove();
+        });
+
+        
+        const escHandler = function(e) {
+          if (e.key === &#39;Escape&#39;) {
+            overlay.remove();
+            document.removeEventListener(&#39;keydown&#39;, escHandler);
+          }
+        };
+        document.addEventListener(&#39;keydown&#39;, escHandler);
+      });
+    });
+  })();
+&lt;/script&gt;
+
+&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://vcrocs.info/custom-app-claude-code/first-app-05.png&#34;
+	width=&#34;1024&#34;
+	height=&#34;1024&#34;
+	srcset=&#34;https://vcrocs.info/custom-app-claude-code/first-app-05_hu_1478452574da8518.png 480w, https://vcrocs.info/custom-app-claude-code/first-app-05_hu_751b1fb89d083d89.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;100&#34;
+		data-flex-basis=&#34;240px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;lessons-learned&#34;&gt;Lessons Learned:
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Build from scratch:&lt;/strong&gt; You can now create custom applications entirely through prompting.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Domain knowledge is required:&lt;/strong&gt; Generating apps is not magic; you must understand how applications function and how to connect to data sources for the AI to be effective.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use multiple tools:&lt;/strong&gt; Achieving the desired result often requires several AI assistants and multiple rounds of prompting.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I&amp;rsquo;ve shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There&amp;rsquo;s no definitive right or wrong way to accomplish the tasks discussed in this article.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;If you found this blog helpful, consider buying me a coffee to kickstart my day.&lt;/p&gt;
+&lt;center&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js&#34; data-name=&#34;bmc-button&#34; data-slug=&#34;dalehassinger&#34; data-color=&#34;#FFDD00&#34; data-emoji=&#34;&#34;  data-font=&#34;Cookie&#34; data-text=&#34;Buy me a coffee&#34; data-outline-color=&#34;#000000&#34; data-font-color=&#34;#000000&#34; data-coffee-color=&#34;#ffffff&#34; &gt;&lt;/script&gt;
+&lt;/center&gt;
+</description>
+        </item>
+        <item>
         <title>Chisoku: Knowing When Technology Is Enough</title>
         <link>https://vcrocs.info/chisoku-knowing-when-technology-is-enough/</link>
         <pubDate>Sun, 15 Feb 2026 00:00:00 +0000</pubDate>
