@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="How to use PowerShell Scripts as a Web Server or RESTful API Front End Server&hellip;\n">
 <title>PowerShell Script as a Web/API Server</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_8a0013c19430d939.png" width="300"
+                        <img src="/img/avatar_hu_105f7dfc01887715.png" width="300"
                             height="318" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -351,8 +351,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/powershell-script-as-a-web/api-server/">
-                <img src="/powershell-script-as-a-web/api-server/featured-image_hu_45f3b0a4ba9fcec5.png"
-                        srcset="/powershell-script-as-a-web/api-server/featured-image_hu_45f3b0a4ba9fcec5.png 800w, /powershell-script-as-a-web/api-server/featured-image_hu_97ae9bf66866453d.png 1600w"
+                <img src="/powershell-script-as-a-web/api-server/featured-image_hu_f98b39895c2e2ffa.png"
+                        srcset="/powershell-script-as-a-web/api-server/featured-image_hu_f98b39895c2e2ffa.png 800w, /powershell-script-as-a-web/api-server/featured-image_hu_2f17291cf54fa755.png 1600w"
                         width="800" 
                         height="399" 
                         loading="lazy"
@@ -1655,7 +1655,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="sh">Content-Type: </span><span class="p">$(</span><span class="nv">$apiResponse</span><span class="p">.</span><span class="n">ContentType</span><span class="p">)</span><span class="sh">
 </span></span></span><span class="line"><span class="cl"><span class="sh">Content-Length: </span><span class="p">$(</span><span class="nv">$body</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span><span class="sh">
 </span></span></span><span class="line"><span class="cl"><span class="sh">
-</span></span></span><span class="line"><span class="cl"><span class="sh"></span><span class="nv">$body</span><span class="sh">
+</span></span></span><span class="line"><span class="cl"><span class="nv">$body</span><span class="sh">
 </span></span></span><span class="line"><span class="cl"><span class="sh">&#34;@</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">                <span class="nv">$writer</span><span class="p">.</span><span class="py">Write</span><span class="p">(</span><span class="nv">$response</span><span class="p">)</span>
@@ -1724,27 +1724,27 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># vCenter Connection</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">vCenter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">vCenter</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l">vcsa8x.vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator@vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ignoreCertErrors</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># A Single ESXi Host Connection</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Host101</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># A Single ESXi Host Connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">Host101</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.101</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># VCF Operations</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">OPS</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># VCF Operations</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">OPS</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsURL</span><span class="p">:</span><span class="w"> </span><span class="l">https://vao.vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsUsername</span><span class="p">:</span><span class="w"> </span><span class="l">admin</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">authSource</span><span class="p">:</span><span class="w">  </span><span class="l">local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># VCF Automation</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Automation</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># VCF Automation</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">Automation</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">autoURL</span><span class="p">:</span><span class="w"> </span><span class="l">vaa.vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">autoUsername</span><span class="p">:</span><span class="w"> </span><span class="l">configadmin</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">autoPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
@@ -1886,7 +1886,7 @@
 <p><img src="/powershell-script-as-a-web/api-server/ps-web-api-server-08.png"
 	width="3968"
 	height="3290"
-	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-08_hu_fd265d93f974bad.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-08_hu_d9c0dce171e145da.png 1024w"
+	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-08_hu_610220c75577c90.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-08_hu_16db4d8466e7a333.png 1024w"
 	loading="lazy"
 	
 	
@@ -1991,7 +1991,7 @@
 <img src="/powershell-script-as-a-web/api-server/ps-web-api-server-05.png"
 	width="3212"
 	height="2474"
-	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-05_hu_28c150b2a40ca743.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-05_hu_68a1ec76e118b311.png 1024w"
+	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-05_hu_c03775baf701debe.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-05_hu_20e29cdb191cdb.png 1024w"
 	loading="lazy"
 	
 	
@@ -2005,7 +2005,7 @@
 <img src="/powershell-script-as-a-web/api-server/ps-web-api-server-06.png"
 	width="3212"
 	height="2474"
-	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-06_hu_96fb842ef51557c9.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-06_hu_d591a34c5daa73e9.png 1024w"
+	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-06_hu_e19ba3deb9500da7.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-06_hu_3d9eacb30f49cfad.png 1024w"
 	loading="lazy"
 	
 	
@@ -2019,7 +2019,7 @@
 <img src="/powershell-script-as-a-web/api-server/ps-web-api-server-07.png"
 	width="3212"
 	height="2474"
-	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-07_hu_1aae054ead51de01.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-07_hu_4390e79bea30f05d.png 1024w"
+	srcset="/powershell-script-as-a-web/api-server/ps-web-api-server-07_hu_19a694f3f655651b.png 480w, /powershell-script-as-a-web/api-server/ps-web-api-server-07_hu_fd8abaa2905192a2.png 1024w"
 	loading="lazy"
 	
 	
@@ -2105,7 +2105,7 @@
         
         
             <div class="article-image">
-                <img src="/vcf-automation-customproperties/featured-image.90d601ad47973f3ae3c4f2a3e42c05da_hu_9775fb68599cdb69.png" 
+                <img src="/vcf-automation-customproperties/featured-image.90d601ad47973f3ae3c4f2a3e42c05da_hu_1776b439b3a995d3.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2129,7 +2129,7 @@
         
         
             <div class="article-image">
-                <img src="/vcf-automation-linux-powershell-host/featured-image.aa48329e06a9f87d9e20b07a5eb4aa1f_hu_2c7bb636abb69215.png" 
+                <img src="/vcf-automation-linux-powershell-host/featured-image.aa48329e06a9f87d9e20b07a5eb4aa1f_hu_4f9918bb7307a55b.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2153,7 +2153,7 @@
         
         
             <div class="article-image">
-                <img src="/powercli-and-yaml/featured-image.efa5069f554eda59598e6f23eb1b7c11_hu_92fbdf1f7ef6e95f.png" 
+                <img src="/powercli-and-yaml/featured-image.efa5069f554eda59598e6f23eb1b7c11_hu_18487ff658df8a79.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2177,7 +2177,7 @@
         
         
             <div class="article-image">
-                <img src="/powercli-on-mac-linux-and-windows/featured-image.625462ed3f68229085be1a170cb1590c_hu_d76fee8660f6f5b0.png" 
+                <img src="/powercli-on-mac-linux-and-windows/featured-image.625462ed3f68229085be1a170cb1590c_hu_192b65e4b7226781.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -2201,7 +2201,7 @@
         
         
             <div class="article-image">
-                <img src="/vcf-automation-input-arrays/featured-image.ac1f95ceafce3af253c9f3e54a99ce6f_hu_7cf9d1405eff6ce4.png" 
+                <img src="/vcf-automation-input-arrays/featured-image.ac1f95ceafce3af253c9f3e54a99ce6f_hu_aa0f98ecccb48318.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"

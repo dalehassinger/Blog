@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Streamlining PowerCLI Scripts: Using YAML for Variable Management\n">
 <title>PowerCLI and YAML</title>
@@ -18,7 +18,7 @@
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
       <script>
         var doNotTrack = false;
-        if ( false ) {
+        if ( true ) {
           var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
           var doNotTrack = (dnt == "1" || dnt == "yes");
         }
@@ -72,7 +72,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_8a0013c19430d939.png" width="300"
+                        <img src="/img/avatar_hu_105f7dfc01887715.png" width="300"
                             height="318" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -350,8 +350,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/powercli-and-yaml/">
-                <img src="/powercli-and-yaml/featured-image_hu_6b0d713e2459ddc8.png"
-                        srcset="/powercli-and-yaml/featured-image_hu_6b0d713e2459ddc8.png 800w, /powercli-and-yaml/featured-image_hu_5927a9fddabf7a1a.png 1600w"
+                <img src="/powercli-and-yaml/featured-image_hu_80f8d2cf6fe7372d.png"
+                        srcset="/powercli-and-yaml/featured-image_hu_80f8d2cf6fe7372d.png 800w, /powercli-and-yaml/featured-image_hu_47221fc28a067027.png 1600w"
                         width="800" 
                         height="399" 
                         loading="lazy"
@@ -517,8 +517,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-YAML" data-lang="YAML"><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># NH is Nested Host</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">NH</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># NH is Nested Host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">NH</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VIServer</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.100</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VIUsername</span><span class="p">:</span><span class="w"> </span><span class="l">administrator@vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">VIPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
@@ -551,21 +551,21 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">IP</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.4.180</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Create</span><span class="p">:</span><span class="w"> </span><span class="kc">True</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># vCenter Connection</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">vCenter</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># vCenter Connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">vCenter</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l">vcsa8x.vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">administrator@vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ignoreCertErrors</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># A Single ESXi Host Connection</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Host101</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># A Single ESXi Host Connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">Host101</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="m">192.168.6.101</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># VCF Operations</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">OPS</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="c"># VCF Operations</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">OPS</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsURL</span><span class="p">:</span><span class="w"> </span><span class="l">https://vao.vcrocs.local</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsUsername</span><span class="p">:</span><span class="w"> </span><span class="l">admin</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">opsPassword</span><span class="p">:</span><span class="w"> </span><span class="l">VMware1!</span><span class="w">
@@ -1247,7 +1247,7 @@
         
         
             <div class="article-image">
-                <img src="/vcf-automation-customproperties/featured-image.90d601ad47973f3ae3c4f2a3e42c05da_hu_9775fb68599cdb69.png" 
+                <img src="/vcf-automation-customproperties/featured-image.90d601ad47973f3ae3c4f2a3e42c05da_hu_1776b439b3a995d3.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1271,7 +1271,7 @@
         
         
             <div class="article-image">
-                <img src="/vcf-automation-linux-powershell-host/featured-image.aa48329e06a9f87d9e20b07a5eb4aa1f_hu_2c7bb636abb69215.png" 
+                <img src="/vcf-automation-linux-powershell-host/featured-image.aa48329e06a9f87d9e20b07a5eb4aa1f_hu_4f9918bb7307a55b.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1295,7 +1295,7 @@
         
         
             <div class="article-image">
-                <img src="/powercli-on-mac-linux-and-windows/featured-image.625462ed3f68229085be1a170cb1590c_hu_d76fee8660f6f5b0.png" 
+                <img src="/powercli-on-mac-linux-and-windows/featured-image.625462ed3f68229085be1a170cb1590c_hu_192b65e4b7226781.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1319,7 +1319,7 @@
         
         
             <div class="article-image">
-                <img src="/vcf-automation-input-arrays/featured-image.ac1f95ceafce3af253c9f3e54a99ce6f_hu_7cf9d1405eff6ce4.png" 
+                <img src="/vcf-automation-input-arrays/featured-image.ac1f95ceafce3af253c9f3e54a99ce6f_hu_aa0f98ecccb48318.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
@@ -1343,7 +1343,7 @@
         
         
             <div class="article-image">
-                <img src="/powershell-script-as-a-web/api-server/featured-image.76345ad1283fd0896506e4ce97e09f8e_hu_35d4c94ad8c2e213.png" 
+                <img src="/powershell-script-as-a-web/api-server/featured-image.76345ad1283fd0896506e4ce97e09f8e_hu_c2db19dedebf7df1.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
