@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerCLI on Mac, Linux, and Windows - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>PowerCLI on Mac, Linux, and Windows</h1>
+                        <div class="post-meta">
+                            <time datetime="2025-02-21T05:00:00Z">
+                                February 21, 2025
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
+                        <div class="tags"><a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/automation.html" class="tag">#Automation</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/powercli.html" class="tag">#PowerCLI</a> <a href="tags/vmware-code-coach.html" class="tag">#VMware Code Coach</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a></div>
+                    </header>
+                    
+                    <img src="images/powercli-on-mac-linux-and-windows-featured.png" alt="PowerCLI on Mac, Linux, and Windows" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>Home Lab Automation!</strong></p>
+<hr>
+<blockquote>The real power of innovation comes not from the tools we use, but from the mindset we bring. Think outside the box, and any type of computer can become the key to endless possibilities.</blockquote>
+<hr>
+<h2>Let's get Started:</h2>
+<p><strong>Ready to dive into automation? Excellent choice!</strong></p>
+<p><strong>Planning to automate on a Mac, Linux, or Windows? Fantastic!</strong></p>
+<p>I love that <strong>VMware PowerCLI</strong> is built as a PowerShell module, making automation seamless across Mac, Linux, and Windows. Since VMware is my primary focus for automation, PowerShell is my go-to tool—thanks to PowerCLI. So far in my Automation journey, there hasn’t been a process I couldn’t automate with PowerShell.</p>
+<hr>
+<p>For 2025, I’ve been invited to be a <strong>VMware Community {code} Coach</strong>! This year, my blogs will feature even more code examples to help others get started with automation, VMware solutions, and much more...</p>
+<hr>
+<p>In my home lab, I needed a quick and easy way to power on and off my VMs. Some VMs I want to shut down every evening and start up again each morning—not just to save electricity, but also to give my MS-01s a bit of a break. In this blog, I’ll share the scripts I created to automate this process.</p>
+<hr>
+<p>I have a VCF environment running in my lab on a nested ESXi host, <small><a href="https://www.vcrocs.info/vcf-deploy-home-lab/" target="_blank" rel="noopener noreferrer">(See my Blog to create an VCF in your lab with a script)</a></small>. My goal is to log into the ESXi host, gracefully shut down all VCF VMs, then log into vCenter to shut down the nested ESXi host. To ensure a clean shutdown, I’ve added logic to verify that all VMs are powered off before proceeding to the next steps. In this blog, I’ll share the code I use to automate this process.</p>
+<p>--</p>
+<h2>Code Examples:</h2>
+<p>Script to Shutdown my VCF VMs:</p>
+<pre><code>
+###
+# PowerShell Script for Shutting Down VMs
+# Author: Dale Hassinger
+# Description: This script shuts down specific VMs on an ESXi host and vCenter.
+# It also ensures proper logging and handles connections cleanly.
+###
+
+# ------------ Configuration Section ------------
+
+# ESXi connection parameters
+$ESXiHost = &quot;192.168.4.179&quot;
+$ESXiUser = &quot;root&quot;
+$ESXiPassword = &quot;VMware1!&quot;
+
+# vCenter connection parameters
+$vCenterServer = &quot;192.168.6.100&quot;
+$vCenterUser = &quot;administrator@vcrocs.local&quot;
+$vCenterPassword = &quot;VMware1!&quot;
+
+# Log file location
+$logFile = &quot;/home/administrator/power-off.log&quot;
+
+# VMs to shut down on ESXi
+$VMsToShutdown = @(&quot;vcf-m01-sddcm01&quot;, &quot;vcf-m01-vc01&quot;, &quot;vcf-m01-nsx01a&quot;)
+
+# VM to shut down on vCenter (Nested ESXi)
+$VMToShutdown = &quot;VCF-DDC-ESX179&quot;
+
+# ------------ Log Function ------------
+
+# Function to write log messages with timestamps
+function Write-Log {
+    param (
+        [string]$Message
+    )
+    $LogDate = &quot;[ &quot; + (Get-Date).ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) + &quot; ] - &quot;
+    $Output = $LogDate + $Message
+    Write-Host $Output
+    Add-Content -Path $logFile -Value $Output
+}
+
+# ------------ Log File Setup ------------
+
+# Remove existing log file if it exists
+if (Test-Path $logFile) {
+    Remove-Item -Path $logFile -Force
+}
+
+# Create a new empty log file
+New-Item -Path $logFile -ItemType File -Force | Out-Null
+
+# ------------ Connect to vCenter ------------
+Write-Log &quot;Connecting to vCenter...&quot;
+$vCenterConnection = Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPassword -Force -Protocol https
+
+# Check if the nested ESXi host is running
+Write-Log &quot;Checking if nested ESXi Host $VMToShutdown is running...&quot;
+$vm = Get-VM -Name $VMToShutdown -ErrorAction SilentlyContinue
+
+if ($vm -and $vm.PowerState -eq &quot;PoweredOn&quot;) {
+    Write-Log &quot;Host is running. Connecting...&quot;
+    $vCenterConnection = Connect-VIServer -Server $ESXiHost -User $ESXiUser -Password $ESXiPassword -Force -Protocol https
+    Write-Log &quot;Connected to Host $ESXiHost.&quot;
+} else {
+    Write-Log &quot;Host is not running. Exiting script.&quot;
+    Disconnect-VIServer -Server * -Confirm:$false
+    exit
+}
+
+# ------------ Shutdown VMs on ESXi ------------
+foreach ($vmName in $VMsToShutdown) {
+    $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+    if ($vm -and $vm.PowerState -eq &quot;PoweredOn&quot;) {
+        Write-Log &quot;Shutting down VM: $vmName&quot;
+        $shutdownVM = Shutdown-VMGuest -VM $vm -Confirm:$false
+        
+        # Wait for VM to fully shut down
+        Write-Log &quot;Waiting for VM $vmName to fully shut down...&quot;
+        do {
+            Start-Sleep -Seconds 5
+            $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+        } while ($vm -and $vm.PowerState -ne &quot;PoweredOff&quot;)
+        Write-Log &quot;VM $vmName is now fully shut down.&quot;
+    } else {
+        Write-Log &quot;VM $vmName is already powered off or not found.&quot;
+    }
+}
+
+# Disconnect from ESXi host
+Write-Log &quot;Disconnecting from ESXi host...&quot;
+Disconnect-VIServer -Server $ESXiHost -Confirm:$false
+Write-Log &quot;Disconnected from ESXi host.&quot;
+
+# ------------ Shutdown Nested Host on vCenter ------------
+Write-Log &quot;Shutting down VM: $VMToShutdown on vCenter&quot;
+$vm = Get-VM -Name $VMToShutdown -ErrorAction SilentlyContinue
+if ($vm -and $vm.PowerState -eq &quot;PoweredOn&quot;) {
+    $shutdownVM = Shutdown-VMGuest -VM $vm -Confirm:$false
+    
+    # Wait for VM to fully shut down
+    Write-Log &quot;Waiting for VM $VMToShutdown to fully shut down...&quot;
+    do {
+        Start-Sleep -Seconds 5
+        $vm = Get-VM -Name $VMToShutdown -ErrorAction SilentlyContinue
+    } while ($vm -and $vm.PowerState -ne &quot;PoweredOff&quot;)
+    Write-Log &quot;VM $VMToShutdown is now fully shut down.&quot;
+} else {
+    Write-Log &quot;VM $VMToShutdown is already powered off or not found.&quot;
+}
+
+# ------------ Cleanup and Disconnect --------------------
+Write-Log &quot;Disconnecting from vCenter...&quot;
+Disconnect-VIServer -Server * -Confirm:$false
+Write-Log &quot;Disconnected from vCenter.&quot;
+
+Write-Log &quot;Script execution completed.&quot;
+
+</code></pre>
+<hr>
+<p>Script to PowerOn my VCF VMs:</p>
+<pre><code>
+###
+# PowerShell Script for Powering On VMs
+# Author: Dale Hassinger
+# Description: This script starts specific VMs on an ESXi host and vCenter.
+# It also ensures proper logging and handles connections cleanly.
+###
+
+# ------------ Configuration Section ------------
+
+# vCenter connection parameters
+$vCenterServer = &quot;192.168.6.100&quot;
+$vCenterUser = &quot;administrator@vcrocs.local&quot;
+$vCenterPassword = &quot;VMware1!&quot;
+
+# ESXi connection parameters
+$ESXiHost = &quot;192.168.4.179&quot;
+$ESXiUser = &quot;root&quot;
+$ESXiPassword = &quot;VMware1!&quot;
+
+# Log file location
+$logFile = &quot;/home/administrator/power-on.log&quot;
+
+# VMs to start on ESXi
+$VMsToStart = @(&quot;vcf-m01-sddcm01&quot;, &quot;vcf-m01-vc01&quot;, &quot;vcf-m01-nsx01a&quot;)
+
+# VM to start on vCenter
+$VMToStart = &quot;VCF-DDC-ESX179&quot;
+
+# ------------ Log Function ------------
+
+# Function to write log messages with timestamps
+function Write-Log {
+    param (
+        [string]$Message
+    )
+    $LogDate = &quot;[ &quot; + (Get-Date).ToString(&quot;MM-dd-yyyy HH:mm:ss&quot;) + &quot; ] - &quot;
+    $Output = $LogDate + $Message
+    Write-Host $Output
+    Add-Content -Path $logFile -Value $Output
+}
+
+# ------------ Log File Setup ------------
+
+# Remove existing log file if it exists
+if (Test-Path $logFile) {
+    Remove-Item -Path $logFile -Force
+}
+
+# Create a new empty log file
+New-Item -Path $logFile -ItemType File -Force | Out-Null
+
+# ------------ Connect to vCenter ------------
+Write-Log &quot;Connecting to vCenter...&quot;
+$vcenterConnection = Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPassword -Force -Protocol https
+
+# Check if VM is powered off before starting
+$vm = Get-VM -Name $VMToStart -ErrorAction SilentlyContinue
+if ($vm -and $vm.PowerState -ne &quot;PoweredOn&quot;) {
+    Write-Log &quot;Starting VM: $VMToStart&quot;
+    $startVM = Start-VM -VM $VMToStart -Confirm:$false
+    
+    # Wait for VM to be fully powered on
+    Write-Log &quot;Waiting for VM to fully power on...&quot;
+    do {
+        Start-Sleep -Seconds 5
+        $vm = Get-VM -Name $VMToStart -ErrorAction SilentlyContinue
+    } while ($vm -and $vm.PowerState -ne &quot;PoweredOn&quot;)
+    Write-Log &quot;VM $VMToStart is now fully powered on.&quot;
+} else {
+    Write-Log &quot;VM $VMToStart is already powered on or not found.&quot;
+}
+
+# Disconnect from vCenter
+Write-Log &quot;Disconnecting from vCenter...&quot;
+Disconnect-VIServer -Server * -Confirm:$false
+Write-Log &quot;Disconnected from vCenter.&quot;
+
+# Wait for Nested ESXi host to start
+Write-Log &quot;Waiting 2 minutes for Nested host to start...&quot;
+Start-Sleep -Seconds 120
+
+# ------------ Connect to ESXi Host ------------
+Write-Log &quot;Connecting to ESXi host $ESXiHost...&quot;
+$vcenterConnection = Connect-VIServer -Server $ESXiHost -User $ESXiUser -Password $ESXiPassword -Force -Protocol https
+Write-Log &quot;Connected to ESXi host $ESXiHost.&quot;
+
+# Start the VMs one at a time and wait until each is running before proceeding
+foreach ($vmName in $VMsToStart) {
+    $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+    if ($vm -and $vm.PowerState -ne &quot;PoweredOn&quot;) {
+        Write-Log &quot;Starting VM: $vmName&quot;
+        $startVM = Start-VM -VM $vmName -Confirm:$false
+
+        # Wait for VM to be fully powered on
+        Write-Log &quot;Waiting for VM $vmName to fully power on...&quot;
+        do {
+            Start-Sleep -Seconds 5
+            $vm = Get-VM -Name $vmName -ErrorAction SilentlyContinue
+        } while ($vm -and $vm.PowerState -ne &quot;PoweredOn&quot;)
+        Write-Log &quot;VM $vmName is now fully powered on.&quot;
+    } else {
+        Write-Log &quot;VM $vmName is already powered on or not found.&quot;
+    }
+}
+
+# ------------ Cleanup and Disconnect ------------
+Write-Log &quot;Disconnecting from ESXi host...&quot;
+Disconnect-VIServer -Server $ESXiHost -Confirm:$false
+Write-Log &quot;Disconnected from ESXi host.&quot;
+
+Write-Log &quot;Script execution completed.&quot;
+</code></pre>
+<hr>
+<h2>Screenshots:</h2>
+<p><small>A screenshot of the nested ESXi host within vCenter to illustrate what the script will power on and off:</small></p>
+<img src="images/vcf-lab-01.png" alt="">
+<hr>
+<p><small>A screenshot of the nested ESXi host VCF VMs to illustrate what the script will power on and off:</small></p>
+<img src="images/vcf-lab-02.png" alt="">
+<hr>
+<p>To automate tasks in my lab, I use a <strong>Rocky Linux</strong> VM with <strong>PowerShell</strong> installed. I’ve set up cron jobs to execute my PowerShell scripts on a schedule. Here are some details on how I configured these cron jobs to streamline automation.</p>
+<p>A great resource for setting up cron jobs properly? <strong>ChatGPT!</strong> It’s a handy tool for troubleshooting and getting the syntax just right.</p>
+<p>Proper format to run PowerShell Scripts with a cron job.</p>
+<pre><code># Power On VCF Lab @ 5:00 am everyday
+0 5 * * * /usr/bin/pwsh /home/administrator/power-on.ps1 &gt;&gt; /home/administrator/power-on.log 2&gt;&amp;1
+
+# Power Off VCF Lab @ 11:59 pm everyday
+59 11 * * * /usr/bin/pwsh /home/administrator/power-off.ps1 &gt;&gt; /home/administrator/power-off.log 2&gt;&amp;1
+
+# cron format for day/time
+* * * * * command_to_run
+│ │ │ │ │
+│ │ │ │ └── Day of the week (0-7, Sunday = 0 or 7)
+│ │ │ └──── Month (1-12)
+│ │ └────── Day of the month (1-31)
+│ └──────── Hour (0-23)
+└────────── Minute (0-59)
+  </code></pre>
+<pre><code># edit cron jobs
+crontab -e
+
+# List cron jobs
+crontab -l
+
+# restart cron service
+sudo systemctl restart crond
+  </code></pre>
+<h2>Examples of Cron Expressions</h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Cron Expression</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>0 0 <em> </em> *</code></td><td>Runs at midnight every day</td></tr>
+<tr><td><code>0 12 <em> </em> 1-5</code></td><td>Runs at noon (12:00 PM) Monday to Friday</td></tr>
+<tr><td><code><em>/15 </em> <em> </em> *</code></td><td>Runs every 15 minutes</td></tr>
+<tr><td><code>30 9 1 <em> </em></code></td><td>Runs at 9:30 AM on the 1st day of every month</td></tr>
+<tr><td><code>0 18 <em> </em> 5</code></td><td>Runs at 6:00 PM every Friday</td></tr>
+<tr><td><code>0 3 <em> </em> 1,3,5</code></td><td>Runs at 3:00 AM on Monday, Wednesday, and Friday</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2>Lessons learned:</h2>
+<ul>
+<li>Automating VM power on and off helps ensure consistency in your workflows.</li>
+<li>All the scripts in this blog were created and tested on a Mac using PowerShell.</li>
+<li>In the lab, the scripts are scheduled and executed on a Rocky Linux VM with PowerShell installed.</li>
+<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!</li>
+<hr>
+</ul>
+<p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
+<p><a href="https://youtu.be/QChe8ogU_sY" target="_blank" rel="noopener noreferrer">vCROCS Deep Dive Podcast | PowerCLI on Mac, Linux and Windows</a></p>
+<hr>
+<p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
+<hr>
+<p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
+<hr>
+<p>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</p>
+<p><center></p>
+<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
+<p></center></p>
+<hr>
+
+                    </div>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
