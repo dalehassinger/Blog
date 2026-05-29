@@ -170,27 +170,27 @@
 <hr>
 <h2>Details on how to use a ABX Script with a PowerShell Host:</h2>
 <div style="background-color:#d9d9d9; Padding:20px;" >
-<p><b>Step 1:</b></p>
-<p><ul></p>
-<p><li>Create a Cloud Template. (See included yaml code and screen shot).</li></p>
-<p><li>Create inputs for the parameters you need to send to a PS script that will run on the PS Host. The inputs are the values that are used for the resource/properties. (See included yaml code)</li></p>
-<p><li>Create Properties in the resources section of the yaml for the inputs you just created. These properties will be the parameters that get passed to the PS Script. The properties get passed to the ABX script using $payload. (See included PS code)</li></p>
-<p></ul></p>
-<p><ul></p>
-<p><b>Step 2:</b></p>
-<p><li>Create a PowerShell ABX Action. (See included PS code and screen shot)</li></p>
-<p><li>To get the custom properties from the Cloud Template you need to use $payload.</li></p>
-<p><li>$payload.customProperties."Properties Name" is how you get the values from the $payload.</li></p>
-<p><li>You can assign the custom properties to a variable within the ABX PS code.</li></p>
-<p><li>I use Invoke-VMScript to run the PS Script on the PS Host because my environment is also a Zero Trust Environment. Invoke-VMScript allows me to run PS scripts on remote servers without opening ports to the remote servers.</li></p>
-<p></ul></p>
-<p><ul></p>
-<p><b>Step 3:</b></p>
-<p><li>Create a Subscription. See Screenshot.</li></p>
-<p><li>The subscription is want runs the ABX scripts.</li></p>
-<p><li>A subscription can be Fired before or after a compute resource gets provisioned.  I create a subscription for both in my environment.</li></p>
-<p><li>Within the subscription is where you define which ABX script is run. If you would want to string several ABX scripts together, the subscription could also run a ABX Flow.</li></p>
-<p></ul></p>
+<b>Step 1:</b>
+<ul>
+  <li>Create a Cloud Template. (See included yaml code and screen shot).</li>
+  <li>Create inputs for the parameters you need to send to a PS script that will run on the PS Host. The inputs are the values that are used for the resource/properties. (See included yaml code)</li>
+  <li>Create Properties in the resources section of the yaml for the inputs you just created. These properties will be the parameters that get passed to the PS Script. The properties get passed to the ABX script using $payload. (See included PS code)</li>
+</ul>
+<ul>
+<b>Step 2:</b>
+  <li>Create a PowerShell ABX Action. (See included PS code and screen shot)</li>
+  <li>To get the custom properties from the Cloud Template you need to use $payload.</li>
+  <li>$payload.customProperties."Properties Name" is how you get the values from the $payload.</li>
+  <li>You can assign the custom properties to a variable within the ABX PS code.</li>
+  <li>I use Invoke-VMScript to run the PS Script on the PS Host because my environment is also a Zero Trust Environment. Invoke-VMScript allows me to run PS scripts on remote servers without opening ports to the remote servers.</li>
+</ul>
+<ul>
+<b>Step 3:</b>
+  <li>Create a Subscription. See Screenshot.</li>
+  <li>The subscription is want runs the ABX scripts.</li>
+  <li>A subscription can be Fired before or after a compute resource gets provisioned.  I create a subscription for both in my environment.</li>
+  <li>Within the subscription is where you define which ABX script is run. If you would want to string several ABX scripts together, the subscription could also run a ABX Flow.</li>
+</ul>
 </div>
 <h2>Sample Code and Screen Shots:</h2>
 <h2>Cloud Template:</h2>
@@ -378,24 +378,22 @@ resources:
 <img src="images/pshost-03.PNG" alt="">
 <hr>
 <div style="background-color:#9ae59a; Padding:20px;" ><b>Lessons Learned:</b>
-<p><ul></p>
-<p><li>vRA 7.6 and 8.2 can share the same PS Host and Scripts.</li></p>
-<p><li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused/shared.</li></p>
-<p><li>Using a PS Host does require an additional VM.</li></p>
-<p><li>Within ABX scripts I have always changed the default "Custom limits and retry options". I set the "Memory Limit" to 1024 and "Timeouts" to 900.</li></p>
-<p><li>Anytime I speak to others about Automation the one item I stress is there is no right way or wrong way to accomplish your tasks. Build on the skills that your Team already has. The environment I work in is 90% Windows Servers so we use PowerShell a lot. That is why I needed to be able to use all the PS Modules that I have installed on the PS Host.</li></p>
-<p></ul></p>
-</div>
-<hr>
 <ul>
-<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+  <li>vRA 7.6 and 8.2 can share the same PS Host and Scripts.</li>
+  <li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused/shared.</li>
+  <li>Using a PS Host does require an additional VM.</li>
+  <li>Within ABX scripts I have always changed the default "Custom limits and retry options". I set the "Memory Limit" to 1024 and "Timeouts" to 900.</li>
+  <li>Anytime I speak to others about Automation the one item I stress is there is no right way or wrong way to accomplish your tasks. Build on the skills that your Team already has. The environment I work in is 90% Windows Servers so we use PowerShell a lot. That is why I needed to be able to use all the PS Modules that I have installed on the PS Host.</li>
 </ul>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
+</div>
 
                     </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
                     
                     <section class="comments-section">
     <p><center><script src="https://giscus.app/client.js"

@@ -166,7 +166,7 @@
 <hr>
 <blockquote>Use CustomProperties in VMware VCF Automation to drive CMDB integration—keeping users and process logic out of vCenter where they don't belong.</blockquote>
 <hr>
-<p><small><strong>Note: VCF Automation 8.18.1 was used to create this Blog</strong></small></p>
+<small>**Note: VCF Automation 8.18.1 was used to create this Blog**</small>  
 <p>I recently received a great question about using CustomProperties in VMware VCF Automation to keep the CMDB up to date—without relying on direct access to vCenter. I'm a big fan of this approach. Many organizations aim to limit who and what can access vCenter to maintain a secure and streamlined environment. The fewer hands in vCenter, the better—keep it lean and mean.</p>
 <p>As part of the conversation, I was also asked how to capture a VM property that isn't available out of the box in VCF Automation: the "bios id". While you can retrieve it with PowerCLI by connecting to vCenter, the goal was to avoid pulling data from vCenter continuously just to populate the CMDB.</p>
 <p>Fortunately, I found a <a href="https://techdocs.broadcom.com/us/en/vmware-cis/aria/aria-automation/8-17/aria-automation-api-programming-guide-on-prem-8-17/automation-assembler-api-tutorials/deploying-and-managing-resources/update-custom-properties-of-a-machine.html" target="_blank" rel="noopener noreferrer">Broadcom TechDoc</a> that explains how to add CustomProperties to an existing VM deployment. I'm all about real-world examples, so below is how I added the "bios id" as a custom property to a deployed VM—no direct vCenter calls required to keep CMDB accurate and current.</p>
@@ -429,7 +429,6 @@ resources:
 <li>PowerShell Code to make an API Call to VCF Automation to get a deployment CustomProperty values</li>
 <li>This sample code demonstrates how any process can retrieve customProperty values from VCF Automation. It uses an API call, so the logic remains consistent across use cases.</li>
 <pre><code>
-
 # ------------- Code to Get VCF Automation Deployment customProperty Values --------------
 # Code works in DDC Lab
 # Date: 2025.03.28
@@ -534,19 +533,14 @@ Automation:
 <hr>
 <p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
 <hr>
-<p>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</p>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
-<hr>
-<p>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</p>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
 
                     </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
                     
                     <section class="comments-section">
     <p><center><script src="https://giscus.app/client.js"

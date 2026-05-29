@@ -205,19 +205,11 @@ function Connect-SSCServer
 
 } # End Function
 
-
-
-
-
 # Function to Disconnect from SSC Server
 function Disconnect-SSCServer
 {
     Remove-SSHSession -SessionId 0
 } # End Function
-
-
-
-
 
 # Sync Minion grains
 function invoke-SSC.sync.grains
@@ -231,7 +223,6 @@ function invoke-SSC.sync.grains
     $sshCommand = &#39;salt &quot;&#39; + $minion + &#39;&quot; saltutil.sync_grains --output=json&#39;
     #$sshCommand
 
-
     $Params = @{
         &quot;SessionId&quot; = 0
         &quot;Command&quot;   = $sshCommand
@@ -242,10 +233,6 @@ function invoke-SSC.sync.grains
     return $results.Output
     
 } # End Function
-
-
-
-
 
 # Minion Grain Append
 function set-SSC.grains.append
@@ -272,10 +259,6 @@ function set-SSC.grains.append
 
 } # End Function
 
-
-
-
-
 # Minion Grain DelKey
 function set-SSC.grains.delkey
 {
@@ -298,10 +281,6 @@ function set-SSC.grains.delkey
 
 } # End Function
 
-
-
-
-
 # Minion Test Ping
 function invoke-SSC.test.ping
 {
@@ -317,9 +296,6 @@ function invoke-SSC.test.ping
     return $results.Output[1].Trim()
 
 } # End Function
-
-
-
 
 # ----- [ End of Functions ] --------------------------------------------------------------------------------------------------------------</code></pre>
 <h2>Examples to show how to use the Salt PowerShell Functions above:</h2>
@@ -342,12 +318,8 @@ $Params = @{
 # Connect to SSC
 Connect-SSCServer @Params
 
-
-
 # ----- [ Disconnect to SSC Server ] -----------------------------------------------
 Disconnect-SSCServer
-
-
 
 # ----- [ Sync Minion grains ] -------------------------------------------------------
 # Set Parameter Values
@@ -360,8 +332,6 @@ $Params = @{
 
 # Run Function
 invoke-SSC.sync.grains @Params
-
-
 
 # ----- [ Minion grain append ] ----------------------------------------------------
 # Set Parameter Values
@@ -387,8 +357,6 @@ $Params = @{
 # Run Function
 invoke-SSC.sync.grains @Params
 
-
-
 # ----- [ Minion grain DelKey ] ----------------------------------------------------
 # Set Parameter Values
 $minion = &#39;DBH-211&#39;
@@ -410,8 +378,6 @@ $Params = @{
 
 # Run Function
 invoke-SSC.sync.grains @Params
-
-
 
 # ----- [ Minion test.ping ] ----------------------------------------------------
 # Set Paramter Values
@@ -443,16 +409,14 @@ invoke-SSC.test.ping @Params</code></pre>
 <div style="background-color:#ccffcc; Padding:20px;" >
 <p>When I write about <b>vRealize Automation</b> ("vRA") I always say there are many ways to accomplish the same task.  <b>SaltStack Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your vRealize Suite Advanced/Enterprise license. If you own the vRealize Suite, you own SaltStack Config.</p>
 </div>
-<hr>
-<ul>
-<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
-</ul>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
 
                     </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
                     
                     <section class="comments-section">
     <p><center><script src="https://giscus.app/client.js"

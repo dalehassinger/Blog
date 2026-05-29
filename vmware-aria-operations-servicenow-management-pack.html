@@ -253,7 +253,6 @@ $opsPassword = &quot;VMware1!&quot;
 $vmName      = &quot;LINUX-U-170&quot;
 $authSource  = &quot;local&quot;
 
-
 # ----- Get Aria Operations token
 $uri = &quot;$opsURL/suite-api/api/auth/token/acquire?_no_links=true&quot;
 #$uri
@@ -277,7 +276,6 @@ $token = Invoke-RestMethod -Uri $uri -Method Post -Headers @{
 
 $authorization = &quot;OpsToken &quot; + $token.token
 #$authorization
-
 
 # ----- Get the VM Operations identifier
 #$uri = &quot;$opsURL/suite-api/api/resources?maintenanceScheduleId=&amp;name=$vmName&amp;page=0&amp;pageSize=1000&amp;_no_links=true&quot;
@@ -310,9 +308,6 @@ else {
     Write-Output &quot;No VirtualMachine resourceKindKey found&quot;
 } # End Else
 
-
-
-
 # ----- Get Field Names and Values
 $uri = &quot;$opsURL/suite-api/api/resources/properties?resourceId=$vmidentifier&amp;_no_links=true&quot;
 #$uri
@@ -334,7 +329,6 @@ $opsUsername = &quot;admin&quot;
 $opsPassword = &quot;VMware1!&quot;
 $hostName      = &quot;esxi8-04.corp.local&quot;
 $authSource  = &quot;local&quot;
-
 
 # ----- Get Aria Operations token
 $uri = &quot;$opsURL/suite-api/api/auth/token/acquire?_no_links=true&quot;
@@ -391,9 +385,6 @@ else {
     Write-Output &quot;No VirtualMachine resourceKindKey found&quot;
 } # End Else
 
-
-
-
 # ----- Get Field Names and Values
 $uri = &quot;$opsURL/suite-api/api/resources/properties?resourceId=$vmidentifier&amp;_no_links=true&quot;
 #$uri
@@ -445,16 +436,14 @@ Write-Output $outPut</code></pre>
 <hr>
 </ul>
 <p>When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</p>
-<hr>
-<ul>
-<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
-</ul>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
 
                     </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
                     
                     <section class="comments-section">
     <p><center><script src="https://giscus.app/client.js"

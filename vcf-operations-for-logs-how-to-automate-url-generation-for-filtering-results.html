@@ -166,16 +166,16 @@
 <hr>
 <blockquote>I have not failed. I’ve just found 10,000 ways that won’t work. – Thomas Edison</blockquote>
 <hr>
-<p><small><strong>Note: VCF Operations for Logs 8.18.0 was used to create this Blog</strong></small></p>
+<small>**Note: VCF Operations for Logs 8.18.0 was used to create this Blog**</small>
 <p>In my previous blog, I focused on how to send log events to the <strong>VCF Operations for Logs API</strong>. <a href="https://www.vcrocs.info/vcf-operations-for-logs-syslog-api/" target="_blank" rel="noopener noreferrer">Click here to read...</a> In this blog, I’ll demonstrate how to <strong>generate a URL</strong> that connects to VCF Operations for Logs and automatically applies a <strong>filter</strong> based on the log events you’ve just sent.</p>
 <p>When running an automation script, as shown in the example below, I want the results to be saved in <strong>VCF Operations for Logs</strong>. To make it easier for the person running the script to view the logged events, I’ve incorporated the generation of the VCF Operations for Logs URL directly into the automation script. When reviewing the VCF Operations for Logs URL format, I found that it wasn’t very human-readable.</p>
 <hr>
 <p>Example URL to filter events for VCF Operations for Logs:</p>
-<p><small></p>
+<small>
 <pre><code>
 https://vaol.vcrocs.local/explorer/?existingChartQuery=%7B%22query%22%3A%22%22%2C%22startTimeMillis%22%3A1729528045745%2C%22endTimeMillis%22%3A1729614745743%2C%22piqlFunctionGroups%22%3A%5B%7B%22functions%22%3A%5B%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%5D%2C%22field%22%3Anull%7D%5D%2C%22dateFilterPreset%22%3A%22CUSTOM%22%2C%22shouldGroupByTime%22%3Atrue%2C%22includeAllContentPackFields%22%3Atrue%2C%22eventSortOrder%22%3A%22DESC%22%2C%22summarySortOrder%22%3A%22DESC%22%2C%22compareQueryOrderBy%22%3A%22TREND%22%2C%22compareQuerySortOrder%22%3A%22DESC%22%2C%22compareQueryOptions%22%3Anull%2C%22messageViewType%22%3A%22EVENTS%22%2C%22constraintToggle%22%3A%22ALL%22%2C%22piqlFunction%22%3A%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%2C%22piqlFunctionField%22%3Anull%2C%22fieldConstraints%22%3A%5B%7B%22internalName%22%3A%22appname%22%2C%22operator%22%3A%22STARTS_WITH%22%2C%22value%22%3A%22vcf_automation%22%7D%2C%7B%22internalName%22%3A%22text%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22VM%20Build%3A%22%7D%2C%7B%22internalName%22%3A%22vmw_esxi_vm_name%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22vCROCS-W2K22-06%22%7D%5D%2C%22supplementalConstraints%22%3A%5B%5D%2C%22groupByFields%22%3A%5B%5D%2C%22contentPacksToIncludeFields%22%3A%5B%5D%2C%22extractedFields%22%3A%5B%5D%7D&amp;chartOptions=%7B%22logaxis%22%3Afalse%2C%22trendline%22%3Afalse%2C%22spline%22%3Afalse%7D
  </code></pre>
-<p></small></p>
+</small>
 <hr>
 <p>To simplify the generation of the VCF Operations for Logs URL that includes a filter, I created a function that accepts parameters for the required filter items. In my example, I’m embedding the generated URL in an email, making it easy to click and have VCF Operations for Logs open  directly to your filtered data. I love Automation!</p>
 <hr>
@@ -246,9 +246,6 @@ function Send-ApiEvent {
 #$text = &quot;VM Build: &quot; + &quot;A new process has been created with ID 9876&quot;
 #Send-ApiEvent -Text $text -vmw_esxi_vm_name &#39;vCROCS-W2K22-02&#39;
 
-
-
-
 # Email Function using Gmail
 
 function Send-ServerBuildEmail {
@@ -310,10 +307,6 @@ function Send-ServerBuildEmail {
 
 # Example usage of the email function
 #Send-ServerBuildEmail -toEmail &quot;dale.hassinger@vcrocs.info&quot; -vmName &quot;vcrocs-w2k22-02&quot; -finalUrl $Global:finalUrl
-
-
-
-
 
 # Function to build URL for VCF Operations for Logs that will auto filter logs based on date|time, VM Name and text
 
@@ -433,7 +426,6 @@ function set-filterURL {
 
 # Open URL in default browser
 #Start-Process $global:finalUrl
-
 </code></pre>
 <hr>
 </ul>
@@ -496,13 +488,13 @@ Send-ServerBuildEmail -toEmail &quot;dale.hassinger@vcrocs.info&quot; -vmName $v
 <hr>
 </ul>
 <h2>Screen Shots:</h2>
-<p><small>Screen Shot of the VCF Operations for Logs - Filter query and results:</small></p>
+<small>Screen Shot of the VCF Operations for Logs - Filter query and results:</small>  
 <img src="images/logs-url-01.png" alt="">
 <hr>
-<p><small>Screen Shot of the Email with a VCF Operations Log link included:</small></p>
+<small>Screen Shot of the Email with a VCF Operations Log link included:</small>  
 <img src="images/logs-url-02.png" alt="">
 <hr>
-<p><small>Screen Shot of the Email on a mobile device with a VCF Operations Log link included:</small></p>
+<small>Screen Shot of the Email on a mobile device with a VCF Operations Log link included:</small>  
 <img src="images/logs-url-03.png" alt="">
 <hr>
 <h2>Lessons Learned:</h2>
@@ -523,14 +515,14 @@ Send-ServerBuildEmail -toEmail &quot;dale.hassinger@vcrocs.info&quot; -vmName $v
 <p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
 <hr>
 <p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
-<hr>
-<p>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</p>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
 
                     </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
                     
                     <section class="comments-section">
     <p><center><script src="https://giscus.app/client.js"

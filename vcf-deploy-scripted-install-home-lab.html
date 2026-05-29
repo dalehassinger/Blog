@@ -247,22 +247,18 @@
 # Author: Dale Hassinger
 # Based on Script by: William Lam and other vCommunity Web Sites
 
-
 # vCenter Server used to deploy VMware Cloud Foundation Lab
 $VIServer   = &quot;192.168.6.100&quot;
 $VIUsername = &quot;administrator@vcrocs.local&quot;
 $VIPassword = &quot;VMware1!&quot;
 
-
 # Full Path to the Nested ESXi
 $NestedESXiApplianceOVA = &quot;/Users/dalehassinger/Downloads/Nested_ESXi8.0u3c_Appliance_Template_v1.ova&quot;
-
 
 # Nested ESXi VMs for Management Domain
 $NestedESXiHostnameToIPsForManagementDomain = @{
     &quot;VCF-DDC-ESX179&quot;   = &quot;192.168.4.179&quot;
 } # End Nested Names
-
 
 # Nested ESXi VM Resources for Management Domain
 $NestedESXiMGMTvCPU          = &quot;12&quot;
@@ -270,7 +266,6 @@ $NestedESXiMGMTvMEM          = &quot;88&quot; #GB
 $NestedESXiMGMTCachingvDisk  = &quot;4&quot; #GB
 $NestedESXiMGMTCapacityvDisk = &quot;500&quot; #GB
 $NestedESXiMGMTBootDisk      = &quot;32&quot; #GB
-
 
 # General Deployment Configuration for Nested ESXi
 # These Values are for existing existing vCenter Install
@@ -286,7 +281,6 @@ $VMPassword   = &quot;VMware1!&quot;
 $VMDomain     = &quot;vcrocs.local&quot;
 $VMSyslog     = &quot;192.168.6.94&quot;
 #$VMFolder     = &quot;VCF-VMs&quot;
-
 
 #### DO NOT EDIT BEYOND HERE ####
 # 1 = yes
@@ -315,8 +309,6 @@ Function New-LogEvent {
     $logMessage = &quot;[$timeStamp] $message&quot;
     $logMessage | Out-File -Append -LiteralPath $verboseLogFile
 } # End Function
-
-
 
 if($confirmDeployment -eq 1) {
     Write-Host -ForegroundColor Magenta &quot;`nNested ESXi Build Details:`n&quot;
@@ -364,9 +356,6 @@ if($confirmDeployment -eq 1) {
  
 } # End If
 
-
-
-
 # Connect to vCenter
 if($deployNestedESXiVMsForMgmt -eq 1 -or $deployNestedESXiVMsForWLD -eq 1 -or $deployCloudBuilder -eq 1 -or $moveVMsIntovApp -eq 1) {
     New-LogEvent &quot;Connecting to Management vCenter Server: $VIServer ...&quot;
@@ -376,10 +365,6 @@ if($deployNestedESXiVMsForMgmt -eq 1 -or $deployNestedESXiVMsForWLD -eq 1 -or $d
     $cluster = Get-Cluster -Server $viConnection -Name $VMCluster
     $vmhost = $cluster | Get-VMHost | Get-Random -Count 1
 }
-
-
-
-
 
 # --- Start Nested ESXi MGT Hosts Build
 if($deployNestedESXiVMsForMgmt -eq 1) {
@@ -442,15 +427,10 @@ if($deployNestedESXiVMsForMgmt -eq 1) {
 
 } # End If
 
-
-
-
 if($deployNestedESXiVMsForMgmt -eq 1 -or $deployNestedESXiVMsForWLD -eq 1 -or $deployCloudBuilder -eq 1) {
     New-LogEvent &quot;Disconnecting from $VIServer ...&quot;
     Disconnect-VIServer -Server $viConnection -Confirm:$false
 }
-
-
 
 $EndTime = Get-Date
 $duration = [math]::Round((New-TimeSpan -Start $StartTime -End $EndTime).TotalMinutes,2)
@@ -459,7 +439,6 @@ New-LogEvent &quot;VCF Lab Nested ESXi Host Build Complete!&quot;
 New-LogEvent &quot;StartTime: $StartTime&quot;
 New-LogEvent &quot;EndTime: $EndTime&quot;
 New-LogEvent &quot;Duration: $duration minutes to Deploy Nested ESXi Hosts&quot;
-
 </code></pre>
 <hr>
 <p><strong>Script Overview - Step 2</strong></p>
@@ -477,17 +456,14 @@ New-LogEvent &quot;Duration: $duration minutes to Deploy Nested ESXi Hosts&quot;
 # Author: Dale Hassinger
 # Based on Script by: William Lam and some other examples I saw on vCommunity sites
 
-
 # vCenter Server used to deploy VMware Cloud Foundation Lab
 $VIServer   = &quot;192.168.6.100&quot;
 $VIUsername = &quot;administrator@vcrocs.local&quot;
 $VIPassword = &quot;VMware1!&quot;
 
-
 # Full Path to Cloud Builder OVA
 #$CloudBuilderOVA = &quot;/Users/dalehassinger/Downloads/VMware-Cloud-Builder-5.2.0.0-24108943_OVF10.ova&quot;
 $CloudBuilderOVA = &quot;/Users/dalehassinger/Downloads/VMware-Cloud-Builder-5.2.1.0-24307856_OVF10.ova&quot;
-
 
 # VCF Licenses or leave blank for evaluation mode (requires VCF 5.1.1 or later)
 $VCSALicense = &quot;&quot;
@@ -495,11 +471,9 @@ $ESXILicense = &quot;&quot;
 $VSANLicense = &quot;&quot;
 $NSXLicense  = &quot;&quot;
 
-
 # VCF Configurations
 $VCFManagementDomainPoolName  = &quot;vcf-m01-rp01&quot;
 $VCFManagementDomainJSONFile  = &quot;vcf-mgmt.json&quot;
-
 
 # Cloud Builder Configurations
 $CloudbuilderVMHostname    = &quot;vcf-m01-cb01&quot;
@@ -509,7 +483,6 @@ $CloudbuilderAdminUsername = &quot;admin&quot;
 $CloudbuilderAdminPassword = &quot;VMw@re123!VMw@re123!&quot;
 $CloudbuilderRootPassword  = &quot;VMw@re123!VMw@re123!&quot;
 
-
 # SDDC Manager Configuration
 $SddcManagerHostname      = &quot;vcf-m01-sddcm01&quot;
 $SddcManagerIP            = &quot;192.168.4.181&quot;
@@ -518,11 +491,9 @@ $SddcManagerRootPassword  = &quot;VMware1!VMware1!&quot;
 $SddcManagerRestPassword  = &quot;VMware1!VMware1!&quot;
 $SddcManagerLocalPassword = &quot;VMware1!VMware1!&quot;
 
-
 $NestedESXiHostnameToIPsForManagementDomain = @{
     &quot;VCF-DDC-ESX179&quot; = &quot;192.168.4.179&quot;
 }
-
 
 # Nested ESXi VM Resources for Management Domain
 $NestedESXiMGMTvCPU          = &quot;12&quot;
@@ -530,13 +501,11 @@ $NestedESXiMGMTvMEM          = &quot;78&quot; #GB
 $NestedESXiMGMTCachingvDisk  = &quot;4&quot; #GB
 $NestedESXiMGMTCapacityvDisk = &quot;500&quot; #GB
 
-
 # Nested ESXi VM Resources for Workload Domain
 $NestedESXiWLDvCPU          = &quot;8&quot;
 $NestedESXiWLDvMEM          = &quot;36&quot; #GB
 $NestedESXiWLDCachingvDisk  = &quot;4&quot; #GB
 $NestedESXiWLDCapacityvDisk = &quot;200&quot; #GB
-
 
 # ESXi Network Configuration
 $NestedESXiManagementNetworkCidr = &quot;192.168.4.0/22&quot; # should match $VMNetwork configuration
@@ -544,14 +513,12 @@ $NestedESXivMotionNetworkCidr    = &quot;192.168.8.0/24&quot;
 $NestedESXivSANNetworkCidr       = &quot;192.168.9.0/24&quot;
 $NestedESXiNSXTepNetworkCidr     = &quot;192.168.10.0/24&quot;
 
-
 # vCenter Configuration
 $VCSAName         = &quot;vcf-m01-vc01&quot;
 $VCSAIP           = &quot;192.168.4.182&quot;
 $VCSARootPassword = &quot;VMware1!&quot;
 $VCSASSOPassword  = &quot;VMware1!&quot;
 $EnableVCLM       = $true
-
 
 # NSX Configuration
 $NSXManagerSize          = &quot;medium&quot;
@@ -562,7 +529,6 @@ $NSXManagerNode1IP       = &quot;192.168.4.184&quot;
 $NSXRootPassword         = &quot;VMware1!VMware1!&quot;
 $NSXAdminPassword        = &quot;VMware1!VMware1!&quot;
 $NSXAuditPassword        = &quot;VMware1!VMware1!&quot;
-
 
 # General Deployment Configuration for Nested ESXi &amp; Cloud Builder VM
 # This is information from you current vCenter lab environment
@@ -578,7 +544,6 @@ $VMPassword   = &quot;VMware1!&quot;
 $VMDomain     = &quot;vcrocs.local&quot;
 $VMSyslog     = &quot;192.168.6.94&quot;
 $VMFolder     = &quot;VCF-VMs&quot;
-
 
 #### DO NOT EDIT BEYOND HERE ####
 
@@ -598,8 +563,6 @@ $deployCloudBuilder            = 1
 $moveVMsIntovApp               = 1
 $generateMgmJson               = 1
 
-
-
 $StartTime = Get-Date
 
 Function New-LogEvent {
@@ -615,8 +578,6 @@ Function New-LogEvent {
     $logMessage = &quot;[$timeStamp] $message&quot;
     $logMessage | Out-File -Append -LiteralPath $verboseLogFile
 } # End Function
-
-
 
 if($preCheck -eq 1) {
     # Detect VCF version based on Cloud Builder OVA (support is 5.1.0+)
@@ -734,7 +695,6 @@ if($confirmDeployment -eq 1) {
 
 } # End If
 
-
 if($deployNestedESXiVMsForMgmt -eq 1 -or $deployNestedESXiVMsForWLD -eq 1 -or $deployCloudBuilder -eq 1 -or $moveVMsIntovApp -eq 1) {
     New-LogEvent &quot;Connecting to Management vCenter Server $VIServer ...&quot;
     $viConnection = Connect-VIServer $VIServer -User $VIUsername -Password $VIPassword -WarningAction SilentlyContinue -Protocol https -Force
@@ -743,7 +703,6 @@ if($deployNestedESXiVMsForMgmt -eq 1 -or $deployNestedESXiVMsForWLD -eq 1 -or $d
     $cluster = Get-Cluster -Server $viConnection -Name $VMCluster
     $vmhost = $cluster | Get-VMHost | Get-Random -Count 1
 } # End if
-
 
 # Start Create Cloud Builder VM
 if($deployCloudBuilder -eq 1) {
@@ -769,7 +728,6 @@ if($deployCloudBuilder -eq 1) {
     New-LogEvent &quot;Powering On $CloudbuilderVMHostname ...&quot;
     $vm | Start-Vm -RunAsync | Out-Null
 }
-
 
 # Move VMs into vApp. Keeps all the VCF VMs together.
 if($moveVMsIntovApp -eq 1) {
@@ -812,9 +770,6 @@ if($moveVMsIntovApp -eq 1) {
         New-LogEvent &quot;vApp $VAppName will NOT be created as DRS is NOT enabled on vSphere Cluster ${cluster} ...&quot;
     }
 }
-
-
-
 
 # Create Cloud Builder json file used to deploy VCF
 
@@ -1127,13 +1082,11 @@ $o = Invoke-VMScript -VM $VM -ScriptText &quot;systemctl status vcf-bringup.serv
 $outPut = ($o.ScriptOutput -split &quot;`n&quot;)[2] -replace &#39;since.*&#39;, &#39;&#39; -replace &#39;^\s+&#39;, &#39;&#39;
 Write-Host &quot;VCF Bringup Service:&quot;$outPut
 
-
 # Disconnect from vCenter
 if($deployNestedESXiVMsForMgmt -eq 1 -or $deployNestedESXiVMsForWLD -eq 1 -or $deployCloudBuilder -eq 1) {
     New-LogEvent &quot;Disconnecting from $VIServer ...&quot;
     Disconnect-VIServer -Server $viConnection -Confirm:$false
 }
-
 
 $EndTime = Get-Date
 $duration = [math]::Round((New-TimeSpan -Start $StartTime -End $EndTime).TotalMinutes,2)
@@ -1145,80 +1098,80 @@ New-LogEvent &quot;Duration: $duration minutes to Deploy CloudBuilder&quot;</cod
 <hr>
 </ul>
 <h4>Screen Shots:</h4>
-<p><small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, before any installs:</p>
+<small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, before any installs:
 <ul>
 <li>The server is equipped with 96 GB of physical memory. Using ESXi Tiered Memory, the total available memory is approximately 478 GB.</small></li>
 </ul>
 <img src="images/vcf-deploy-09.png" alt="">
 <hr>
-<p><small>Screen Shot of the Nested ESXi install PowerShell Script output:</p>
+<small>Screen Shot of the Nested ESXi install PowerShell Script output:
 <ul>
 <li>Total Script Run Time is less than one minute</small></li>
 </ul>
 <img src="images/vcf-deploy-10.png" alt="">
 <hr>
-<p><small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, after the Nested ESXi install:</p>
+<small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, after the Nested ESXi install:
 <ul>
 <li>Very little CPU/Memory Usage</small></li>
 </ul>
 <img src="images/vcf-deploy-11.png" alt="">
 <hr>
-<p><small>Screen Shot of the VCF Cloud Builder VM install PowerShell Script output:</p>
+<small>Screen Shot of the VCF Cloud Builder VM install PowerShell Script output:
 <ul>
 <li>Total Script Run Time is ~6.5 minutes</small></li>
 </ul>
 <img src="images/vcf-deploy-12.png" alt="">
 <hr>
-<p><small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, after the Nested ESXi and VCF Cloud Builder install:</p>
+<small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, after the Nested ESXi and VCF Cloud Builder install:
 <ul>
 <li>Still very little CPU/Memory Usage</li>
 <li>Both VMs moved to a vAPP by the Script</small></li>
 </ul>
 <img src="images/vcf-deploy-13.png" alt="">
 <hr>
-<p><small>Screen Shot of VCF Cloud Builder Deploy wizard, step 1:</small></p>
+<small>Screen Shot of VCF Cloud Builder Deploy wizard, step 1:</small>  
 <img src="images/vcf-deploy-14.png" alt="">
 <hr>
-<p><small>Screen Shot of VCF Cloud Builder Deploy wizard, step 2:</small></p>
+<small>Screen Shot of VCF Cloud Builder Deploy wizard, step 2:</small>  
 <img src="images/vcf-deploy-15.png" alt="">
 <hr>
-<p><small>Screen Shot of VCF Cloud Builder Deploy wizard, step 3:</small></p>
+<small>Screen Shot of VCF Cloud Builder Deploy wizard, step 3:</small>  
 <img src="images/vcf-deploy-16.png" alt="">
 <hr>
-<p><small>Screen Shot of VCF Cloud Builder Deploy wizard, step 4:</small></p>
+<small>Screen Shot of VCF Cloud Builder Deploy wizard, step 4:</small>  
 <img src="images/vcf-deploy-17.png" alt="">
 <hr>
-<p><small>Screen Shot of VCF Cloud Builder Deploy wizard, step 5:</small></p>
+<small>Screen Shot of VCF Cloud Builder Deploy wizard, step 5:</small>  
 <img src="images/vcf-deploy-18.png" alt="">
 <hr>
-<p><small>Screen Shot of the VCF Cloud Builder - All validation is successful:</small></p>
+<small>Screen Shot of the VCF Cloud Builder - All validation is successful:</small>  
 <img src="images/vcf-deploy-03.png" alt="">
 <hr>
-<p><small>Screen Shot of VCF Cloud Builder Deploy wizard, step 6, start the VCF SDDC Deploy:</small></p>
+<small>Screen Shot of VCF Cloud Builder Deploy wizard, step 6, start the VCF SDDC Deploy:</small>  
 <img src="images/vcf-deploy-19.png" alt="">
 <hr>
-<p><small>Screen Shot of the VCF Cloud Builder - A successful VCF deployment!</small></p>
+<small>Screen Shot of the VCF Cloud Builder - A successful VCF deployment!</small>  
 <img src="images/vcf-deploy-20.png" alt="">
 <hr>
-<p><small>Screen Shot of the VCF Cloud Builder - Press button to launch SDDC Manager.</small></p>
+<small>Screen Shot of the VCF Cloud Builder - Press button to launch SDDC Manager.</small>  
 <img src="images/vcf-deploy-21.png" alt="">
 <hr>
-<p><small>Screen Shot of the VCF SDDC Manager.</small></p>
+<small>Screen Shot of the VCF SDDC Manager.</small>  
 <img src="images/vcf-deploy-05.png" alt="">
 <hr>
-<p><small>Screen Shot of the VCF SDDC Manager - By installing version 5.2.1, I also have the opportunity to upgrade to 5.2.1.1 and learn the upgrade process:</small></p>
+<small>Screen Shot of the VCF SDDC Manager - By installing version 5.2.1, I also have the opportunity to upgrade to 5.2.1.1 and learn the upgrade process:</small>  
 <img src="images/vcf-deploy-06.png" alt="">
 <hr>
-<p><small>Screen Shot of the VCF SDDC Manager - You can see that the performance is good for a Home Lab environment:</small></p>
+<small>Screen Shot of the VCF SDDC Manager - You can see that the performance is good for a Home Lab environment:</small>  
 <img src="images/vcf-deploy-07.png" alt="">
 <hr>
-<p><small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, after the installs are complete:</p>
+<small>Screen Shot of the Physical Host (MS-01), Capacity and Usage, after the installs are complete:
 <ul>
 <li>CPU/Memory/Storage all look OK</small></li>
 </ul>
 <img src="images/vcf-deploy-22.png" alt="">
 <hr>
-<p><small>Screen Shot of the Physical ESXi Host vSwitch Security settings that is running the nested ESXi Host:</small></p>
+<small>Screen Shot of the Physical ESXi Host vSwitch Security settings that is running the nested ESXi Host:</small>  
 <img src="images/vcf-deploy-08.png" alt="">
 <hr>
 <h4>Lessons Learned:</h4>
@@ -1262,14 +1215,14 @@ New-LogEvent &quot;Duration: $duration minutes to Deploy CloudBuilder&quot;</cod
 <p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
 <hr>
 <p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
-<hr>
-<p>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</p>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
 
                     </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
                     
                     <section class="comments-section">
     <p><center><script src="https://giscus.app/client.js"

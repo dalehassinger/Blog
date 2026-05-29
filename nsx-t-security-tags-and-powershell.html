@@ -213,14 +213,12 @@ Add-Type @&quot;
 &quot;@  
 [ServerCertificateValidationCallback]::Ignore(); 
 
-
 # ----- [ This section connects you to vCenter ] ------------------------------------------------------------------
 $vCenterName = &#39;vCenter.vCROCS.info&#39;
 Connect-VIServer $vCenterName -Credential $cred
 
 # Connect to vCenter and fetch virtual machine info.
 $vmInfo = Get-VM -Name DBH-213 | Get-View
-
 
 # ----- [ This section defines the API header ] ------------------------------------------------------------------
 # Set Username/Password info for API
@@ -246,7 +244,6 @@ Invoke-RestMethod -Uri $posturl -Headers $headers -Method Post -Body $JSON -Cont
 
 # ----- [ End Add a Single TAG ] --------------------------------------------------
 
-
 # ----- [ Start Get NSX-T TAGs assigned to VM ] --------------------------------------------------
 
 $vmid = $vm.Config.InstanceUuid
@@ -256,7 +253,6 @@ $currenttags = $getrequest.results.tags.Tag
 $currenttags
 
 # ----- [ End Get NSX-T TAGs assigned to VM ] --------------------------------------------------
-
 
 # ----- [ Start remove NSX-T TAG from VM ] --------------------------------------------------
 
@@ -275,7 +271,6 @@ $posturl = &quot;https://$nsxmanager/api/v1/fabric/virtual-machines?action=remov
 Invoke-RestMethod -Uri $posturl -Headers $headers -Method Post -Body $JSON -ContentType &quot;application/json&quot;
 
 # ----- [ End remove NSX-T TAG from VM ] --------------------------------------------------
-
 
 # ----- [ Start Get VMs assigned to a TAG NSX-T ] --------------------------------------------------
 
@@ -298,15 +293,15 @@ Write-Host $result.results.target_display_name
 <li><a href="https://docs.saltproject.io/en/getstarted/" target="_blank" rel="noopener noreferrer">SaltStack Tutorials</a></li>
 <li><a href="https://docs.saltproject.io/en/latest/contents.html" target="_blank" rel="noopener noreferrer">SaltStack Documentation</a></li>
 <li><a href="https://saltstackcommunity.slack.com" target="_blank" rel="noopener noreferrer">SaltStack Community Slack Channel</a></li>
-<hr>
-<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
 </ul>
-<p><center></p>
-<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
-<p></center></p>
-<hr>
 
                     </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
                     
                     <section class="comments-section">
     <p><center><script src="https://giscus.app/client.js"
