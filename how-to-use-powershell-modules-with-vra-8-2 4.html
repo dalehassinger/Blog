@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to use PowerShell Modules with vRA 8.2 - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>How to use PowerShell Modules with vRA 8.2</h1>
+                        <div class="post-meta">
+                            <time datetime="2021-01-18T05:00:00Z">
+                                January 18, 2021
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
+                        <div class="tags"><a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/vra.html" class="tag">#vRA</a> <a href="tags/abx.html" class="tag">#ABX</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/vmware-aria.html" class="tag">#VMware Aria</a></div>
+                    </header>
+                    
+                    <img src="images/how-to-use-powershell-modules-with-vra-8-2-featured.png" alt="How to use PowerShell Modules with vRA 8.2" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>Options to use PowerShell Modules</strong></p>
+<hr>
+<p>I like to review VMware vRA (vRealize Automation) 8.2 as a Microsoft Windows Server Admin.  Most of the reviews you see are creating Linux VMs and customizing the OS using tools for Linux. I create Windows/Linux VMs and customize the OS using a new feature added to vRA 8.x, Action Based Extensibility (ABX) with PowerShell.</p>
+<p>In my vRA 7.6 environment, I use a PowerShell Host to run processes and on the PowerShell Host is where I install all the PS Modules that I use. When I started looking at how to use PowerShell with vRA 8.2 the one item that I needed to understand was how to use PowerShell Modules. VMware does have a Blog Post on how to include PowerShell modules with ABX Actions/vRO Work Flows - <a href="https://blogs.vmware.com/management/2020/07/how-to-abx-vro-powershell-additional-modules.html" target="_blank">Click Here to see the Blog Post</a>. After doing some testing and reviewing my options I decided to continue to use a PowerShell Host with vRA 8.2. What this allows me to do is use the same exact PowerShell Host for 7.6 and 8.2. The existing PS scripts that I have also work with both 7.6 and 8.2. No changes to any scripts and the PS Host. I like how VMware included PS as an options for all scripts within vRA 8.2. Hopefully in the future VMware will allow you to install your own PS Modules directly in the vRA Appliance. The one item that some people may not like about this setup is it does require an additional Windows Server that a standard vRA setup does not require. But to be able to use an existing Windows PS Host that can be shared between vRA 7.6 and 8.2 until I get my environment to 100% vRA 8.2 also has it positives. With Automation there is always many ways to complete the same task.</p>
+<p>I wrote a Blog Post previously that describes how to pass Cloud Template inputs/properties to ABX Actions. This Post is really using that same technique but instead of only running an ABX Action, this ABX Action Script is passing the inputs/customproperties onto a PowerShell Host. Here is link to previous post: <a href="https://www.vcrocs.info/blog/vra81-abx-ps/" target="_blank">VREALIZE AUTOMATION 8.2 - POWERSHELL ABX</a>. By passing the custom properties as parameters to a PS Host I can also use PS Modules to connect to SQL servers and many other options. Basically any PS Module that is available can be used.</p>
+<hr>
+<h2>Details on how to use a ABX Script with a PowerShell Host:</h2>
+<div style="background-color:#d9d9d9; Padding:20px;" >
+<p><b>Step 1:</b></p>
+<p><ul></p>
+<p><li>Create a Cloud Template. (See included yaml code and screen shot).</li></p>
+<p><li>Create inputs for the parameters you need to send to a PS script that will run on the PS Host. The inputs are the values that are used for the resource/properties. (See included yaml code)</li></p>
+<p><li>Create Properties in the resources section of the yaml for the inputs you just created. These properties will be the parameters that get passed to the PS Script. The properties get passed to the ABX script using $payload. (See included PS code)</li></p>
+<p></ul></p>
+<p><ul></p>
+<p><b>Step 2:</b></p>
+<p><li>Create a PowerShell ABX Action. (See included PS code and screen shot)</li></p>
+<p><li>To get the custom properties from the Cloud Template you need to use $payload.</li></p>
+<p><li>$payload.customProperties."Properties Name" is how you get the values from the $payload.</li></p>
+<p><li>You can assign the custom properties to a variable within the ABX PS code.</li></p>
+<p><li>I use Invoke-VMScript to run the PS Script on the PS Host because my environment is also a Zero Trust Environment. Invoke-VMScript allows me to run PS scripts on remote servers without opening ports to the remote servers.</li></p>
+<p></ul></p>
+<p><ul></p>
+<p><b>Step 3:</b></p>
+<p><li>Create a Subscription. See Screenshot.</li></p>
+<p><li>The subscription is want runs the ABX scripts.</li></p>
+<p><li>A subscription can be Fired before or after a compute resource gets provisioned.  I create a subscription for both in my environment.</li></p>
+<p><li>Within the subscription is where you define which ABX script is run. If you would want to string several ABX scripts together, the subscription could also run a ABX Flow.</li></p>
+<p></ul></p>
+</div>
+<h2>Sample Code and Screen Shots:</h2>
+<h2>Cloud Template:</h2>
+<img src="images/pshost-01.PNG" alt="">
+<p>The properties under resources in the yaml code will be used like parameters in a PS Script. Since I have a background in PowerShell that is how I am using the properties. When you deploy the Cloud Template, the values entered that I defined will not be used until the ABX script runs. The ABX Script will run after the subscription is triggered. The values will be passed from the Cloud Template to the ABX Script using $payload.  Just like passing parameters to a PS script.</p>
+<hr>
+<p>Click to expand code:</p>
+<pre><code># Created by Dale Hassinger - vCrocs.info
+# Date: 01/14/2021
+# Send Property Values to ABX Script that runs script on PS Host with all Zero Trust Permissions and Modules
+# Version: 1
+formatVersion: 1
+# ---------- [ Inputs ] ---------- #
+inputs:
+  cpu:
+    type: integer
+    description: CPUs
+    default: 2
+  mem:
+    type: integer
+    description: Memory(MB)
+    default: 8192
+  VMName:
+    type: string
+    title: Enter VM Name
+    minLength: 1
+    maxLength: 15
+    default: DBH-001
+  TemplateName:
+    type: string
+    description: &lt;b&gt; Select Windows or Ubuntu.&lt;/b&gt; &lt;br&gt;
+    default: vRA_Ubuntu_18.04.4
+    title: OS
+    oneOf:
+      - title: Ubuntu
+        const: vRA_Ubuntu_18.04.4
+      - title: Windows 2016
+        const: vRA_TEMPLATE_2016
+      - title: Windows 2019
+        const: vRA_TEMPLATE_2019
+  CustomizationSpec:
+    type: string
+    default: vRA_Ubuntu
+  description:
+    type: string
+    default: vRA 8.2 TEST VM
+  environment:
+    type: string
+    description: &#39;&lt;b&gt; Select Environment.&lt;/b&gt; &lt;br&gt;&#39;
+    default: &#39;environment:Management&#39;
+    title: Environment
+    oneOf:
+      - title: Compute
+        const: &#39;environment:Compute&#39;
+      - title: Management
+        const: &#39;environment:Management&#39;
+      - title: DevTest
+        const: &#39;environment:DevTest&#39;
+  department:
+    type: string
+    description: &lt;b&gt; Select Application Team.&lt;/b&gt; &lt;br&gt;
+    default: &#39;department:APP Team 1&#39;
+    title: Application Team
+    oneOf:
+      - title: APP Team 1
+        const: &#39;department:APP Team 1&#39;
+      - title: APP Team 2
+        const: &#39;department:APP Team 2&#39;
+      - title: APP Team 3
+        const: &#39;department:APP Team 3&#39;
+  IP:
+    type: string
+    default: 192.168.86.200
+  emailAddress:
+    type: string
+    default: Dale.Hassinger@vCROCS.info
+  RootPartition:
+    type: integer
+    default: 20
+  BuildBY:
+    type: string
+    default: DaleHassinger
+  BuildRequestor:
+    type: string
+    default: KirkShaffer
+  OSVersion:
+    type: string
+    default: Ubuntu18044
+# ---------- [ Resources ] ---------- #
+resources:
+  Cloud_Network_1:
+    type: Cloud.Network
+    properties:
+      networkType: existing
+      address: &#39;${input.IP}&#39;
+      constraints:
+        - tag: &#39;${input.environment}&#39;
+        - tag: &#39;${input.department}&#39;
+  Cloud_vSphere_Machine_1:
+    type: Cloud.vSphere.Machine
+    properties:
+      image: &#39;${input.TemplateName}&#39;
+      flavor: std
+      cpu: &#39;${input.cpu}&#39;
+      mem: &#39;${input.mem}&#39;
+      customizationSpec: &#39;${input.CustomizationSpec}&#39;
+      emailAddress: &#39;${input.emailAddress}&#39;
+      RootPartition: &#39;${input.RootPartition}&#39;
+      BuildBY: &#39;${input.BuildBY}&#39;
+      BuildRequestor: &#39;${input.BuildRequestor}&#39;
+      OSVersion: &#39;${input.OSVersion}&#39;
+      constraints:
+        - tag: &#39;${input.environment}&#39;
+      networks:
+        - network: &#39;${resource.Cloud_Network_1.id}&#39;
+          assignment: static
+          address: &#39;${input.IP}&#39;
+      name: &#39;${input.VMName}&#39;
+      description: &#39;${input.description}&#39;</code></pre>
+<h2>ABX Action Script:</h2>
+<img src="images/pshost-02.PNG" alt="">
+<p>In my PowerShell code I am using Write-Host to help show how the Cloud Template passes values to the ABX Action using the $payload. I use the code to troubleshoot and understand how it is working. I am able to take values from the payload customProperties and assign to variables. The customProperties are defined in the Cloud Template yaml code as resources/properties. I can then make decisions in the code based on these values. For production the write-host lines could be removed.</p>
+<hr>
+<p>Click to expand code:</p>
+<pre><code>function handler($context, $payload) {
+
+  # Build PowerShell variables
+  $VMName = $payload.resourceNames
+  $cpu = $payload.customProperties.cpu
+  $mem = $payload.customProperties.mem
+  $description = $payload.customProperties.description
+  $IPaddress = $payload.addresses
+  $emailAddress = $payload.customProperties.emailAddress
+  $RootPartition = $payload.customProperties.RootPartition
+  $BuildBY = $payload.customProperties.BuildBY
+  $BuildRequestor = $payload.customProperties.BuildRequestor
+  $OSVersion = $payload.customProperties.OSVersion
+    
+  # Show PS variables
+  Write-Host &#39;VMName:&#39; $VMName
+  Write-Host &#39;CPU:&#39; $cpu
+  Write-Host &#39;Memory:&#39; $mem
+  Write-Host &#39;Description:&#39; $description
+  Write-Host &#39;IPaddress:&#39; $IPaddress
+  Write-Host &#39;Email:&#39; $emailAddress
+  Write-Host &#39;Root:&#39; $RootPartition
+  Write-Host &#39;Build By:&#39; $BuildBY
+  Write-Host &#39;Build BuildRequestor:&#39; $BuildRequestor
+  Write-Host &#39;OS Version:&#39; $OSVersion
+
+  # ----- [ Define Username/ Get Password ] ------------------------------------------------------------------
+  $HashiVaultPW = &#39;vCROCS#1&#39;
+
+  Write-Host $HashiVaultPW
+
+  $username = &#39;administrator@vsphere.local&#39;
+  Write-Host $username
+
+  # ----- [ Connect vCenter and run PS Script on PS Host ] ------------------------------------------------------------------
+  
+  # Connect to vCenter to be able to connect to PS Host
+  Connect-VIServer -Server vCenter01.vCROCS.info -User $username -Password $HashiVaultPW -Protocol https -Force
+  
+  # PS Host Name
+  $PSHost = &#39;vCROCSPSHost&#39;
+  Write-Host &#39;PS Host:&#39;$PSHost
+  
+  # PS Script text
+  $PSParameters = &quot;-VMNAME &#39;&quot; + $VMName + &quot;&#39; -emailAddress &#39;&quot; + $emailAddress + &quot;&#39; -RootPartition &#39;&quot; + $RootPartition + &quot;&#39;&quot;
+  Write-Host &#39;PS Parameters:&#39;$PSParameters
+  
+  $PSScript = &#39;G:\Scripts\Create-Linux-Server-Step-3-v01.ps1&#39;
+  Write-Host &#39;PS Script:&#39;$PSScript
+  
+  $PSText = &#39;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe &quot;&#39; + $PSScript + &#39;&quot; &#39; + $PSParameters
+  Write-Host &#39;Complete PS String:&#39;$PSText
+  
+  # Run PS Script on PS Host
+  $result = Invoke-VMScript -VM $PSHost -ScriptType Bat -ScriptText $PSText -GuestUser $username -GuestPassword $HashiVaultPW
+  Write-Host $result.ScriptOutput
+  
+  return $LASTEXITCODE
+}</code></pre>
+<h2>Subscription:</h2>
+<img src="images/pshost-03.PNG" alt="">
+<hr>
+<div style="background-color:#9ae59a; Padding:20px;" ><b>Lessons Learned:</b>
+<p><ul></p>
+<p><li>vRA 7.6 and 8.2 can share the same PS Host and Scripts.</li></p>
+<p><li>A lot of the PowerShell code and logic I use in vRA 7.6 will be able to be reused/shared.</li></p>
+<p><li>Using a PS Host does require an additional VM.</li></p>
+<p><li>Within ABX scripts I have always changed the default "Custom limits and retry options". I set the "Memory Limit" to 1024 and "Timeouts" to 900.</li></p>
+<p><li>Anytime I speak to others about Automation the one item I stress is there is no right way or wrong way to accomplish your tasks. Build on the skills that your Team already has. The environment I work in is 90% Windows Servers so we use PowerShell a lot. That is why I needed to be able to use all the PS Modules that I have installed on the PS Host.</li></p>
+<p></ul></p>
+</div>
+<hr>
+<ul>
+<li>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</li>
+</ul>
+<p><center></p>
+<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
+<p></center></p>
+<hr>
+
+                    </div>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>

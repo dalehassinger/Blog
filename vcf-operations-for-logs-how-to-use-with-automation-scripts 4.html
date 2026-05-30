@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCF Operations for Logs | How to use with Automation Scripts - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VCF Operations for Logs | How to use with Automation Scripts</h1>
+                        <div class="post-meta">
+                            <time datetime="2024-10-19T04:00:00Z">
+                                October 19, 2024
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
+                        <div class="tags"><a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/automation.html" class="tag">#Automation</a> <a href="tags/deployments.html" class="tag">#Deployments</a> <a href="tags/operations.html" class="tag">#Operations</a> <a href="tags/syslog.html" class="tag">#syslog</a> <a href="tags/powershell.html" class="tag">#PowerShell</a></div>
+                    </header>
+                    
+                    <img src="images/vcf-operations-for-logs-how-to-use-with-automation-scripts-featured.png" alt="VCF Operations for Logs | How to use with Automation Scripts" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>How to send Automation Script Execution Log Events to VCF Operations for Logs.</strong></p>
+<hr>
+<blockquote>Surround yourself with people that push you to do better. No drama or negativity. Just higher goals and higher motivation. Good times and positive energy. No jealousy or hate. Simply bring out the absolute best in each other. – Warren Buffett</blockquote>
+<hr>
+<p><small><strong>Note: VCF Operations and Operations for Logs 8.18.0 was used to create this Blog</strong></small></p>
+<p>I’ve always felt that <strong>VCF Operations for Logs</strong> deserves more attention, it is a great product. With the Diagnostics Feature <small>(Skyline Replacement)</small> now included in VCF Operations, having VCF Operations for Logs installed <small>(Requirement for Operations Diagnostics Feature)</small> and configured for integration is a <strong>game changer</strong>. It excites me because now, many of the customers I work with will have access to VCF Operations for Logs in their environment, going beyond just collecting vCenter and ESXi Host logs.</p>
+<p>When developing <strong>Automation Scripts</strong> and processes, I always prioritize execution logging. In the past, I relied on generating text-based log files. However, my latest approach is to route all script logging data directly to VCF Operations for Logs. Once you learn to format the log data in a way that makes it easily searchable, you’ll find yourself wanting to use VCF Operations for Logs for all your logging needs. It transforms log management into an <strong>efficient and streamlined</strong> process that enhances script visibility and performance monitoring.</p>
+<p>In this blog, I’ll share some sample script files demonstrating how to send logging information to Log Insight. Sending log data to VCF Operations for Logs via the API is straightforward and requires minimal code. One of the key advantages is that no authentication is needed to send log data, which not only simplifies the scripts but also improves execution speed.</p>
+<p>I’ve also included some sample filter queries that can be used within VCF Operations for Logs. If you’ve read my other blog posts, you’ll know I’m a big fan of creating custom VCF Operations <strong>Dashboards</strong> to present data in a <strong>user-friendly</strong> format. My goal is to ensure the data is formatted for quick visibility, allowing you to immediately spot issues that require attention. In this post, I’ll demonstrate how to use the Logs Widget within custom VCF Operations Dashboards to enhance your monitoring and troubleshooting experience.</p>
+<hr>
+<h2>Example Code:</h2>
+<p>Code details to make filter queries easier and exact:</p>
+<ul>
+<li>The parameters in the code are the fields used in VCF Operations for Logs event</li>
+<li>You will use these fields to filter events</li>
+<li>Fields in my example code</li>
+<li>Uri              = # API Endpoint to send the event data</li>
+<li>priority         = # Event priority (info, warning, error, etc.)</li>
+<li>facility         = # Source generating the event (user, system, etc.)</li>
+<li>appname          = # Application name logging the event</li>
+<li>hostname         = # Hostname of the system (optional)</li>
+<li>vmw_esxi_vm_name = # Name of the VM or ESXi host (optional)</li>
+<li>vmw_vcenter      = # Name of the vCenter (optional)</li>
+<li>vmw_cluster      = # Name of the vCenter cluster (optional)</li>
+<li>vmw_host         = # Name of the vCenter Host (optional)</li>
+<li>Text             = # Custom text describing the event</li>
+<li>Think about how to filter when creating the log events. Don't just add events without making sure a filter can find the precise results.</li>
+<pre><code>
+# This is a Fuction to send log events to VCF Operations for Logs
+
+function Send-ApiEvent {
+  Param (
+      # Parameters with default values, can be overridden as needed.
+      [string]$Uri              = &#39;https://vaol-vip.vcrocs.local:9543/api/v2/events&#39;,  # API Endpoint to send the event data. url and port listed.
+      [string]$priority         = &#39;info&#39;,                    # Event priority (info, warning, error, etc.)
+      [string]$facility         = &#39;user&#39;,                    # Source generating the event (user, system, etc.)
+      [string]$appname          = &#39;VCF_Automation&#39;,          # Application name logging the event
+      [string]$hostname         = &#39;NA&#39;,                      # Hostname of the system (optional)
+      [string]$vmw_esxi_vm_name = &#39;NA&#39;,                      # Name of the VM or ESXi host (optional)
+      [string]$vmw_vcenter      = &#39;NA&#39;,                      # Name of the vCenter (optional)
+      [string]$vmw_cluster      = &#39;NA&#39;,                      # Name of the vCenter cluster (optional)
+      [string]$vmw_host         = &#39;NA&#39;,                      # Name of the vCenter Host (optional)
+      [string]$Text             = &quot;Custom Script execution&quot;  # Custom text describing the event
+  ) # End Param
+
+  # Define headers for the REST API call, using JSON for content type and response format.
+  $headers = @{
+      &#39;accept&#39;       = &#39;application/json&#39;
+      &#39;Content-Type&#39; = &#39;application/json&#39;
+  } # End headers
+
+  # Construct the JSON body for the API request using a here-string.
+  $body = @&quot;
+  [
+    {
+      &quot;priority&quot;: &quot;$priority&quot;,
+      &quot;facility&quot;: &quot;$facility&quot;,
+      &quot;appname&quot;:  &quot;$appname&quot;,
+      &quot;hostname&quot;: &quot;$hostname&quot;,
+      &quot;vmw_esxi_vm_name&quot;: &quot;$vmw_esxi_vm_name&quot;,
+      &quot;vmw_vcenter&quot;: &quot;$vmw_vcenter&quot;,
+      &quot;vmw_cluster&quot;: &quot;$vmw_cluster&quot;,
+      &quot;vmw_host&quot;: &quot;$vmw_host&quot;,
+      &quot;text&quot;: &quot;$Text&quot;
+    }
+  ]
+&quot;@ # End Body
+
+  # Send the POST request to the API endpoint within a try-catch block for error handling.
+  try {
+      # Invoke-RestMethod is used to send the API request and return the response.
+      $response = Invoke-RestMethod -Uri $Uri -Method Post -Headers $headers -Body $body -SkipCertificateCheck
+
+      # Output the API response if successful.
+      Write-Host &quot;API response: &quot; -ForegroundColor Green
+      $response
+  } catch {
+      # Handle any errors that occur during the request and output the error message.
+      Write-Host &quot;Error occurred: $($_.Exception.Message)&quot; -ForegroundColor Red
+  } # End try/catch
+
+} # Function End
+
+# Example usage of the Send-ApiEvent function.
+# Customize the message text, add relevant data to $text, and invoke the function.
+$text = &quot;PowerShell: &quot; + &quot;A new process has been created with ID 9876&quot;
+Send-ApiEvent -Text $text
+ </code></pre>
+<hr>
+<pre><code>
+# This is a example script to give you ideas on how to use the function listed above.
+
+# Load the Syslog function script, which will be used for logging events via Aria Operations for Logs API.
+. /Path-To-Script/aria-operations-for-logs-syslog-api.ps1
+
+# Define the VM name and the script process description
+$vmName = &quot;vCROCS-W2K22-02&quot;
+$scriptProcess = &quot;VM Build: &quot; + $vmName
+
+# --- Connect to vCenter ---
+
+# Define the parameters for connecting to the vCenter Server
+$ConnectVIServerParams = @{
+    Server   = &#39;192.168.6.100&#39;                     # vCenter Server IP or FQDN
+    User     = &#39;administrator@vcrocs.local&#39;        # vCenter Admin Username
+    Password = &#39;VMware1!&#39;                          # vCenter Admin Password
+    Protocol = &#39;https&#39;                             # Secure Protocol
+    Force    = $true                               # Force connection even if already connected
+}
+
+# Log the connection attempt to Aria Operations for Logs
+$text = $scriptProcess + &quot; - Connecting to vCenter Server: &quot; + $ConnectVIServerParams.Server
+Send-ApiEvent -text $text -vmw_vcenter $ConnectVIServerParams.Server -vmw_esxi_vm_name $vmName
+
+# Establish the connection to vCenter
+$vCenterConnect = Connect-VIServer @ConnectVIServerParams
+
+# Log successful connection status to vCenter
+$text = $scriptProcess + &quot; - Connection to vCenter Server: &quot; + $ConnectVIServerParams.Server + &quot; Successful: &quot; + $vCenterConnect.IsConnected
+Send-ApiEvent -text $text -vmw_vcenter $ConnectVIServerParams.Server -vmw_esxi_vm_name $vmName
+
+# --- Add Your VM Build Steps Here ---
+# Insert your VM build process code below. This section is a placeholder for any actions you will take on the VM during the build.
+
+# Example Log Event - Add specific operations during VM build (e.g., software installation, configuration, etc.)
+$text = $scriptProcess + &quot; - Installing VCF Operations for Logs Agent&quot;
+Send-ApiEvent -text $text -vmw_vcenter $ConnectVIServerParams.Server -vmw_esxi_vm_name $vmName
+
+# --- Disconnect from vCenter ---
+
+# Log the disconnection attempt from vCenter
+$text = $scriptProcess + &quot; - Disconnecting from vCenter Server&quot;
+Send-ApiEvent -text $text -vmw_vcenter $ConnectVIServerParams.Server -vmw_esxi_vm_name $vmName
+
+# Disconnect from the vCenter Server without confirmation prompts
+Disconnect-VIServer -Server $ConnectVIServerParams.Server -Confirm:$false
+ </code></pre>
+<hr>
+</ul>
+<h2>Filter Examples:</h2>
+<ul>
+<li>See first screen shot for a visual example</li>
+<li>appname contains vcf_automation</li>
+<li>text contains VM Build:</li>
+<li>vmw_esxi_vm_name contains vcrocs-w2k22-02</li>
+<hr>
+</ul>
+<h2>Screen Shots:</h2>
+<p><small>Screen Shot of the VCF Operations for Logs - Filter query and results:</small></p>
+<img src="images/logs-api-01.png" alt="">
+<hr>
+<p><small>Screen Shot of the VCF Operations Log Analysis - Filter query and results:</small></p>
+<img src="images/logs-api-02.png" alt="">
+<hr>
+<p><small>Screen Shot of the VCF Operations custom Dashboard using the Log Widget:</small></p>
+<img src="images/logs-api-03.png" alt="">
+<hr>
+<p><small>Screen Shot of a custom VCF Operations for Logs Dashboard:</p>
+<ul>
+<li>Define the filter to show the information you need.</small></li>
+</ul>
+<img src="images/logs-api-04.png" alt="">
+<hr>
+<h2>RFC 3164 Code Example:</h2>
+<p>I often say there are many ways to achieve the same outcome. While researching for this blog, I came across examples of sending syslog data to VCF Operations for Logs using the RFC 3164 standard. I created a script, tested it in my lab, and it works well. Personally, I prefer using the VCF Operations for Logs API, but I recognize that others may have a use case for this approach. I’m sharing it here in hopes that it might be helpful to someone.</p>
+<pre><code> 
+function Send-SyslogMessage {
+    Param (
+        [string]$IP             = &quot;192.168.6.94&quot;,        # Default Syslog server IP
+        [int]$Port              = 514,                   # Default Syslog server UDP port
+        [string]$Facility       = &quot;syslog&quot;,              # Default Syslog facility
+        [string]$Severity       = &quot;info&quot;,                # Default Syslog severity
+        [string]$Content        = &quot;No Content provided&quot;, # Default Message content
+        [string]$SourceHostname = &quot;VCF-Automation&quot;,      # Default Hostname
+        [string]$Tag            = &quot;PS-Script&quot;            # Default Tag for the message
+    )
+
+    # Map RFC 3164 facilities to numeric values
+    $facilityMap = @{
+        kern      = 0; user      = 1; mail      = 2;  daemon   = 3; 
+        auth      = 4; syslog    = 5; lpr       = 6;  news     = 7;
+        uucp      = 8; cron      = 9; authpriv  = 10; ftp      = 11;
+        ntp       = 12; audit    = 13; alert    = 14; clock    = 15;
+        local0    = 16; local1   = 17; local2   = 18; local3   = 19;
+        local4    = 20; local5   = 21; local6   = 22; local7   = 23;
+    }
+
+    # Map RFC 3164 severities to numeric values
+    $severityMap = @{
+        emerg     = 0; alert     = 1; crit      = 2; err       = 3;
+        warn      = 4; notice    = 5; info      = 6; debug     = 7;
+    }
+
+    # Resolve facility and severity values
+    $facilityValue = $facilityMap[$Facility.ToLower()]
+    $severityValue = $severityMap[$Severity.ToLower()]
+
+    if (-not $facilityValue) { $facilityValue = $facilityMap[&quot;syslog&quot;] }  # Default to syslog
+    if (-not $severityValue) { $severityValue = $severityMap[&quot;info&quot;] }    # Default to informational
+
+    # Calculate the syslog priority value
+    $pri = &quot;&lt;&quot; + (($facilityValue * 8) + $severityValue) + &quot;&gt;&quot;
+
+    # Timestamp in RFC 3164 format
+    $timestamp = (Get-Date).ToString(&quot;MMM dd HH:mm:ss&quot;)
+
+    # Create the syslog message
+    $header = &quot;$timestamp $SourceHostname &quot;
+    $msg = $pri + $header + $Tag + &quot;: &quot; + $Content
+
+    # Display the message to be sent
+    # Write-Host &quot;Sending syslog message: $msg&quot;
+
+    # Convert message to ASCII bytes
+    $byteArray = [System.Text.Encoding]::ASCII.GetBytes($msg)
+
+    # Send the message via UDP
+    $udpClient = New-Object System.Net.Sockets.UdpClient
+    $udpClient.Connect($IP, $Port)
+    $udpClient.Send($byteArray, $byteArray.Length) | Out-Null
+    $udpClient.Close()
+
+    $output = &quot;Syslog message sent to &quot; + $IP + &quot;:&quot; + $Port
+    Write-Host $output
+}
+
+# Example usage of the function
+Send-SyslogMessage -Content &quot;Creating PS Script for Syslog&quot;
+ </code></pre>
+<hr>
+<h2>Lessons Learned:</h2>
+<ul>
+<li>VCF Operations for Logs is an excellent syslog solution, offering intuitive and user-friendly filtering tools.</li>
+<li>Always format events in a way that simplifies the creation of filters.</li>
+<li>Explore other products in your environment that can send log events to a syslog server. Make VCF Operations for Logs your company standard for syslog events and so much more...</li>
+<li>Leveraging VCF Operations for Logs can be a cost-effective solution if you have VMware Cloud Foundation licenses, as it comes included without any additional cost.</li>
+<li>A special thanks to Brock Peterson for providing valuable tips and tricks that contributed to the content of this blog. It’s a privilege to work alongside someone who consistently helps the team understand and master the full range of features in the VCF Automation and Operations products.</li>
+<hr>
+</ul>
+<h2>Links to resources discussed is this Blog Post:</h2>
+<ul>
+<li><a href="https://docs.vmware.com/en/VMware-Aria-Operations-for-Logs/index.html" target="_blank" rel="noopener noreferrer">VCF Operations for Logs - Official Documentation</a></li>
+<hr>
+</ul>
+<p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
+<p><a href="https://youtu.be/vbnpwtVqjas?si=CxRDxh-btsm3PYNh" target="_blank" rel="noopener noreferrer">vCROCS Deep Dive Podcast | VCF Operations for Logs | How to use with Automation Scripts</a></p>
+<hr>
+<p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
+<hr>
+<p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
+<hr>
+<p>If you found this blog article helpful and it assisted you, consider buying me a coffee to kickstart my day.</p>
+<p><center></p>
+<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
+<p></center></p>
+<hr>
+
+                    </div>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>

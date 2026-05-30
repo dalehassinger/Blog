@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerCLI and YAML - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>PowerCLI and YAML</h1>
+                        <div class="post-meta">
+                            <time datetime="2025-03-08T05:00:00Z">
+                                March 8, 2025
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
+                        <div class="tags"><a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/automation.html" class="tag">#Automation</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/powercli.html" class="tag">#PowerCLI</a> <a href="tags/vmware-code-coach.html" class="tag">#VMware Code Coach</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a> <a href="tags/yaml.html" class="tag">#yaml</a></div>
+                    </header>
+                    
+                    <img src="images/powercli-and-yaml-featured.png" alt="PowerCLI and YAML" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>Streamlining PowerCLI Scripts: Using YAML for Variable Management</strong></p>
+<hr>
+<blockquote>The true power of automation lies in simplicity—storing all your home lab variables in a single YAML file transforms complexity into clarity, making every deployment seamless and every configuration effortless.</blockquote>
+<hr>
+<h2>Why am I using a YAML file:</h2>
+<p>Many automation tools and platforms rely on YAML files for configuration due to their readability and flexibility. In VMware VCF Automation—something I frequently work with—YAML is used extensively for Design Templates. To maintain consistency across my automation scripts, I centralized all my Home Lab variables in a single YAML file.</p>
+<p>To work with YAML in PowerShell, I’m using the "PowerShell-YAML" module, which provides a simple and efficient way to read and write YAML data. In this blog post, I’ll share several sample scripts demonstrating how easy it is to integrate YAML into PowerShell-based automation.</p>
+<p>All required variables for the PowerShell scripts are centralized in a single YAML configuration file for streamlined management.</p>
+<hr>
+<blockquote>For 2025, I’ve been invited to be a <strong>VMware Community {code} Coach</strong>! This year, my blogs will feature even more code examples to help others get started with automation, VMware solutions, and much more...</blockquote>
+<hr>
+<hr>
+<h2>Code Examples:</h2>
+<p><strong>The sample YAML file contains all the variables for my home lab:</strong></p>
+<ul>
+<li>You can see that I have defined variables for several products within my home lab</li>
+<li>The YAML file is organized into major categories, such as NH, vCenter, Host101, and OPS, each representing a different area of configuration for my Lab</li>
+<li>Within each top-level section, specific settings are defined using key-value pairs. For example, in NH, values like VIServer, VIUsername, and VIPassword store configuration details for a nested host setup</li>
+<li>Some sections, like NH → Hosts, contain lists (denoted by -), where multiple items (e.g., ESXi hosts) are grouped together with attributes such as Hostname, IP, and Create</li>
+<li>Separate Functional Areas</li>
+<li>NH configures the nested ESXi environment</li>
+<li>vCenter stores vCenter connection details</li>
+<li>Host101 provides credentials for a single ESXi host</li>
+<li>OPS defines login details for VCF Operations</li>
+<pre><code>
+# NH is Nested Host
+NH:
+  VIServer: 192.168.6.100
+  VIUsername: administrator@vcrocs.local
+  VIPassword: VMware1!
+  NestedESXiApplianceOVA: /Users/dalehassinger/Downloads/Nested_ESXi8.0u3c_Appliance_Template_v1.ova
+  verboseLogFile: /Users/dalehassinger/Documents/GitHub/PS-TAM-Lab/VCF-Nested-Step-1-Host-Only-YAML.log
+  NestedESXiMGMTvCPU: 12
+  NestedESXiMGMTvMEM: 88
+  NestedESXiMGMTCachingvDisk: 4
+  NestedESXiMGMTCapacityvDisk: 500
+  NestedESXiMGMTBootDisk: 32
+  VMDatastore: ESX-04-2TB-02
+  VMCluster: CLUSTER-03-VCF
+  VMNetwork: VMs
+  VMNetmask: 255.255.252.0
+  VMGateway: 192.168.4.1
+  VMDNS: 192.168.6.1
+  VMNTP: time.google.com
+  VMPassword: VMware1!
+  VMDomain: vcrocs.local
+  VMSyslog: 192.168.6.94
+
+  Hosts:
+    - Hostname: VCF-DDC-ESX178
+      IP: 192.168.4.178
+      Create: True
+    - Hostname: VCF-DDC-ESX179
+      IP: 192.168.4.179
+      Create: False
+    - Hostname: VCF-DDC-ESX180
+      IP: 192.168.4.180
+      Create: True
+
+# vCenter Connection
+vCenter:
+  server: vcsa8x.vcrocs.local
+  username: administrator@vcrocs.local
+  password: VMware1!
+  ignoreCertErrors: true
+
+# A Single ESXi Host Connection
+Host101:
+  server: 192.168.6.101
+  username: root
+  password: VMware1!
+
+# VCF Operations
+OPS:
+  opsURL: https://vao.vcrocs.local
+  opsUsername: admin
+  opsPassword: VMware1!
+  authSource:  local
+</code></pre>
+<hr>
+<p><strong>Sample Script to create Nested ESXi VMs:</strong></p>
+<li>The initial lines of code ensure that the necessary PowerShell modules are installed before executing the script</li>
+<li>The PowerShell code then reads the Home-Lab-Config.yaml file, loads its content as a raw string, and converts it from YAML format into a structured PowerShell object stored in $cfg</li>
+<li>The PowerShell code accesses the properties within the NH section of the $cfg object, which was previously loaded from a YAML configuration file</li>
+<li>The code references the NH section of the YAML configuration, accessing its VIServer value, where NH represents a structured key within the YAML file, organizing configuration settings into hierarchical sections.</li>
+<pre><code>
+# Ensure required modules are installed before proceeding
+$requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
+foreach ($module in $requiredModules) {
+    if (-not (Get-Module -ListAvailable -Name $module)) {
+        Write-Host &quot;$module is not installed. Install it using &#39;Install-Module $module&#39;.&quot; -ForegroundColor Red
+        exit
+    }
+}
+
+# Read YAML configuration
+$cfgFile = &quot;/Users/dalehassinger/Documents/GitHub/PS-TAM-Lab/Home-Lab-Config.yaml&quot;
+$cfg = Get-Content -Path $cfgFile -Raw | ConvertFrom-Yaml
+
+# Function to display configuration details
+Function Show-ConfigValue {
+    param (
+        [string]$label,
+        [string]$value,
+        [switch]$newLine
+    )
+    Write-Host -NoNewline -ForegroundColor Green &quot;${label}: &quot;
+    Write-Host -ForegroundColor White $value
+    if ($newLine) { Write-Host &quot;`n&quot; }
+}
+
+# Display Nested ESXi Build Details
+Write-Host -ForegroundColor Magenta &quot;`nNested ESXi Build Details:`n&quot;
+
+Write-Host -ForegroundColor Yellow &quot;---- vCenter Server used to Build Nested ESXi Host(s) ----&quot;
+Show-ConfigValue &quot;vCenter Server Address&quot; $cfg.NH.VIServer -newLine
+Show-ConfigValue &quot;VM Network&quot; $cfg.NH.VMNetwork
+Show-ConfigValue &quot;VM Storage&quot; $cfg.NH.VMDatastore
+Show-ConfigValue &quot;VM Cluster&quot; $cfg.NH.VMCluster -newLine
+
+Write-Host -ForegroundColor Yellow &quot;---- ESXi Configuration for VCF Management Domain ----&quot;
+$hostnames = ($cfg.NH.Hosts | Where-Object { $_.Create } | ForEach-Object { $_.Hostname }) -join &quot;, &quot;
+Show-ConfigValue &quot;ESXi VM Name(s)&quot; $hostnames
+$hostips = ($cfg.NH.Hosts | Where-Object { $_.Create } | ForEach-Object { $_.ip }) -join &quot;, &quot;
+Show-ConfigValue &quot;IP Address(s)&quot; $hostips
+Show-ConfigValue &quot;vCPU&quot; $cfg.NH.NestedESXiMGMTvCPU
+Show-ConfigValue &quot;vMEM&quot; &quot;$($cfg.NH.NestedESXiMGMTvMEM) GB&quot;
+Show-ConfigValue &quot;Caching VMDK&quot; &quot;$($cfg.NH.NestedESXiMGMTCachingvDisk) GB&quot;
+Show-ConfigValue &quot;Capacity VMDK&quot; &quot;$($cfg.NH.NestedESXiMGMTCapacityvDisk) GB&quot; -newLine
+
+Show-ConfigValue &quot;Netmask&quot; $cfg.NH.VMNetmask
+Show-ConfigValue &quot;Gateway&quot; $cfg.NH.VMGateway
+Show-ConfigValue &quot;DNS&quot; $cfg.NH.VMDNS
+Show-ConfigValue &quot;NTP&quot; $cfg.NH.VMNTP
+Show-ConfigValue &quot;Syslog&quot; $cfg.NH.VMSyslog -newLine
+
+# Build Start Time
+$StartTime = Get-Date
+
+# Function to log events
+Function New-LogEvent {
+    param([string]$message)
+    $timeStamp = Get-Date -Format &quot;MM-dd-yyyy HH:mm:ss&quot;
+    Write-Host &quot;[$timeStamp] $message&quot; -ForegroundColor Green
+    &quot;[$timeStamp] $message&quot; | Out-File -Append -LiteralPath $cfg.NH.verboseLogFile
+}
+
+# Connect to vCenter
+New-LogEvent &quot;Connecting to vCenter: $($cfg.NH.VIServer)...&quot;
+$viConnection = Connect-VIServer $cfg.NH.VIServer -User $cfg.NH.VIUsername -Password $cfg.NH.VIPassword -WarningAction SilentlyContinue -Protocol https -Force
+
+# Get datastore, cluster, and random ESXi host
+$datastore = Get-Datastore -Server $viConnection -Name $cfg.NH.VMDatastore | Select-Object -First 1
+$cluster = Get-Cluster -Server $viConnection -Name $cfg.NH.VMCluster
+$vmhost = $cluster | Get-VMHost | Get-Random -Count 1
+
+# Iterate over each Nested ESXi Host in YAML
+foreach ($nestedhost in $cfg.NH.Hosts) {
+    if (-not $nestedhost.Create) {
+        New-LogEvent &quot;Skipping host: $($nestedhost.Hostname) as per configuration.&quot;
+        continue
+    }
+
+    # Check if the VM already exists
+    if (Get-VM -Name $nestedhost.Hostname -ErrorAction SilentlyContinue) { 
+        New-LogEvent &quot;Nested ESXi Host: $($nestedhost.Hostname) already exists. Skipping deployment.&quot;
+        continue
+    }
+
+    # Configure VM settings
+    $VMHostName = &quot;$($nestedhost.Hostname).$($cfg.NH.VMDomain)&quot;
+
+    $ovfconfig = Get-OvfConfiguration $cfg.NH.NestedESXiApplianceOVA
+    $networkMapLabel = ($ovfconfig.ToHashTable().keys | Where {$_ -Match &quot;NetworkMapping&quot;}).replace(&quot;NetworkMapping.&quot;,&quot;&quot;).replace(&quot;-&quot;,&quot;_&quot;).replace(&quot; &quot;,&quot;_&quot;)
+    $ovfconfig.NetworkMapping.$networkMapLabel.value = $cfg.NH.VMNetwork
+    $ovfconfig.common.guestinfo.hostname.value = $VMHostName
+    $ovfconfig.common.guestinfo.ipaddress.value = $nestedhost.IP
+    $ovfconfig.common.guestinfo.netmask.value = $cfg.NH.VMNetmask
+    $ovfconfig.common.guestinfo.gateway.value = $cfg.NH.VMGateway
+    $ovfconfig.common.guestinfo.dns.value = $cfg.NH.VMDNS
+    $ovfconfig.common.guestinfo.domain.value = $cfg.NH.VMDomain
+    $ovfconfig.common.guestinfo.ntp.value = $cfg.NH.VMNTP
+    $ovfconfig.common.guestinfo.syslog.value = $cfg.NH.VMSyslog
+    $ovfconfig.common.guestinfo.password.value = $cfg.NH.VMPassword
+    $ovfconfig.common.guestinfo.ssh.value = $true
+
+    New-LogEvent &quot;Deploying Nested ESXi VM: $($nestedhost.Hostname) with IP $($nestedhost.IP) ...&quot;
+    $vm = Import-VApp -Source $cfg.NH.NestedESXiApplianceOVA -OvfConfiguration $ovfconfig -Name $nestedhost.Hostname -Location $cfg.NH.VMCluster -VMHost $vmhost -Datastore $datastore -DiskStorageFormat thin -Force
+
+    New-LogEvent &quot;Updating vCPU: $($cfg.NH.NestedESXiMGMTvCPU) &amp; vMEM: $($cfg.NH.NestedESXiMGMTvMEM) GB ...&quot;
+    Set-VM -VM $vm -NumCpu $cfg.NH.NestedESXiMGMTvCPU -CoresPerSocket $cfg.NH.NestedESXiMGMTvCPU -MemoryGB $cfg.NH.NestedESXiMGMTvMEM -Confirm:$false | Out-File -Append -LiteralPath $cfg.NH.verboseLogFile
+
+    New-LogEvent &quot;Updating vSAN Disks (Boot: $($cfg.NH.NestedESXiMGMTBootDisk) GB, Cache: $($cfg.NH.NestedESXiMGMTCachingvDisk) GB, Capacity: $($cfg.NH.NestedESXiMGMTCapacityvDisk) GB)...&quot;
+    Get-HardDisk -VM $vm -Name &quot;Hard disk 1&quot; | Set-HardDisk -CapacityGB $cfg.NH.NestedESXiMGMTBootDisk -Confirm:$false | Out-File -Append -LiteralPath $cfg.NH.verboseLogFile
+    Get-HardDisk -VM $vm -Name &quot;Hard disk 2&quot; | Set-HardDisk -CapacityGB $cfg.NH.NestedESXiMGMTCachingvDisk -Confirm:$false | Out-File -Append -LiteralPath $cfg.NH.verboseLogFile
+    Get-HardDisk -VM $vm -Name &quot;Hard disk 3&quot; | Set-HardDisk -CapacityGB $cfg.NH.NestedESXiMGMTCapacityvDisk -Confirm:$false | Out-File -Append -LiteralPath $cfg.NH.verboseLogFile
+
+    New-LogEvent &quot;Powering On $($nestedhost.Hostname) ...&quot;
+    $vm | Start-Vm -RunAsync | Out-Null
+}
+
+# Disconnect from vCenter
+New-LogEvent &quot;Disconnecting from vCenter...&quot;
+Disconnect-VIServer -Server * -Confirm:$false
+
+$EndTime = Get-Date
+$duration = [math]::Round((New-TimeSpan -Start $StartTime -End $EndTime).TotalMinutes,2)
+
+New-LogEvent &quot;VCF Lab Nested ESXi Hosts Build Complete!&quot;
+New-LogEvent &quot;StartTime: $StartTime&quot;
+New-LogEvent &quot;EndTime: $EndTime&quot;
+New-LogEvent &quot;Duration: $duration minutes to deploy Nested ESXi Hosts&quot;
+</code></pre>
+<hr>
+</ul>
+<img src="images/powercli-yaml-01.gif" alt="">
+<hr>
+<p><strong>Sample Script to connect to vCenter using variables from a YAML file:</strong></p>
+<pre><code>
+# Ensure required modules are installed before proceeding
+$requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
+foreach ($module in $requiredModules) {
+    if (-not (Get-Module -ListAvailable -Name $module)) {
+        Write-Host &quot;$module is not installed. Install it using &#39;Install-Module $module&#39;.&quot; -ForegroundColor Red
+        exit
+    }
+}
+
+# Read YAML configuration
+$cfgFile = &quot;/Users/dalehassinger/Documents/GitHub/PS-TAM-Lab/Home-Lab-Config.yaml&quot;
+$cfg = Get-Content -Path $cfgFile -Raw | ConvertFrom-Yaml
+
+# Connect to vCenter
+$credential = New-Object PSCredential ($cfg.vCenter.username, (ConvertTo-SecureString $cfg.vCenter.password -AsPlainText -Force))
+$vCenter = Connect-VIServer -Server $cfg.vCenter.server -Credential $credential -Force
+
+Get-VM | Select-Object Name | Sort-Object Name
+
+Disconnect-VIServer -Server * -Confirm:$false
+</code></pre>
+<hr>
+<p><strong>Sample Script to Connect to an ESXi Host Using Variables from a YAML File:</strong></p>
+<pre><code>
+# Ensure required modules are installed before proceeding
+$requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
+foreach ($module in $requiredModules) {
+    if (-not (Get-Module -ListAvailable -Name $module)) {
+        Write-Host &quot;$module is not installed. Install it using &#39;Install-Module $module&#39;.&quot; -ForegroundColor Red
+        exit
+    }
+}
+
+# Read YAML configuration
+$cfgFile = &quot;/Users/dalehassinger/Documents/GitHub/PS-TAM-Lab/Home-Lab-Config.yaml&quot;
+$cfg = Get-Content -Path $cfgFile -Raw | ConvertFrom-Yaml
+
+# Connect to a ESXi Host
+$credential = New-Object PSCredential ($cfg.Host101.username, (ConvertTo-SecureString $cfg.Host101.password -AsPlainText -Force))
+$hostConnection = Connect-VIServer -Server $cfg.Host101.server -Credential $credential -Force
+
+Get-VM | Select-Object Name | Sort-Object Name
+
+Disconnect-VIServer -Server * -Confirm:$false
+</code></pre>
+<hr>
+<p><strong>Sample Script to Connect to a VCF Operations Appliance Using Variables from a YAML File:</strong></p>
+<pre><code>
+# Ensure required modules are installed before proceeding
+$requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
+foreach ($module in $requiredModules) {
+    if (-not (Get-Module -ListAvailable -Name $module)) {
+        Write-Host &quot;$module is not installed. Install it using &#39;Install-Module $module&#39;.&quot; -ForegroundColor Red
+        exit
+    }
+}
+
+# Define YAML configuration file path
+$cfgFile = &quot;/Users/dalehassinger/Documents/GitHub/PS-TAM-Lab/Home-Lab-Config.yaml&quot;
+
+# Read YAML configuration into PowerShell object
+$cfg = Get-Content -Path $cfgFile -Raw | ConvertFrom-Yaml
+
+# Extract Aria Operations (OPS) credentials from the YAML file
+$opsURL      = $cfg.OPS.opsURL
+$opsUsername = $cfg.OPS.opsUsername
+$authSource  = $cfg.OPS.authSource
+$opsPassword = $cfg.OPS.opsPassword
+
+# ----- Obtain Aria Operations authentication token -----
+$authUri = &quot;$opsURL/suite-api/api/auth/token/acquire?_no_links=true&quot;
+
+# Construct the request body as a hashtable
+$bodyHashtable = @{
+    username   = $opsUsername
+    authSource = $authSource
+    password   = $opsPassword
+}
+
+# Convert the hashtable to JSON format
+$body = $bodyHashtable | ConvertTo-Json
+
+# Execute REST API call to retrieve the authentication token
+$tokenResponse = Invoke-RestMethod -Uri $authUri -Method Post -Headers @{
+    &quot;accept&quot;       = &quot;application/json&quot;
+    &quot;Content-Type&quot; = &quot;application/json&quot;
+} -Body $body -SkipCertificateCheck
+
+# Extract the token from the API response
+$authorization = &quot;OpsToken &quot; + $tokenResponse.token
+
+# ----- Retrieve the VM Operations identifier -----
+$resourceUri = &quot;$opsURL/suite-api/api/resources?resourceKind=HostSystem&amp;page=0&amp;pageSize=1000&amp;_no_links=true&quot;
+
+# Execute REST API call to fetch ESXi host system resources
+$resourceResponse = Invoke-RestMethod -Uri $resourceUri -Method Get -Headers @{
+    &quot;accept&quot;        = &quot;application/json&quot;
+    &quot;Authorization&quot; = $authorization
+} -SkipCertificateCheck
+
+# Extract resource list and convert to JSON for better readability
+$identifierList = $resourceResponse.resourceList | ConvertTo-Json -Depth 10
+
+# Convert the JSON string back to a PowerShell object
+$data = $identifierList | ConvertFrom-Json
+
+# Display the names of all retrieved ESXi hosts
+$data.resourceKey.name
+</code></pre>
+<hr>
+<h2>Lessons Learned:</h2>
+<ul>
+<li>I enjoy bringing consistency to my scripts by leveraging a YAML file, similar to the approach used in automation platforms I work with.</li>
+<li>All the scripts in this blog were created and tested on a Mac using PowerShell.</li>
+<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!</li>
+<li>Integrating PowerShell with YAML has been something I’ve wanted to explore for a while. I’m glad I took the time to develop the necessary code and share it with the vCommunity.</li>
+<hr>
+</ul>
+<p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
+<p><a href="https://youtu.be/0qF9ONBxcwA" target="_blank" rel="noopener noreferrer">vCROCS Deep Dive Podcast | PowerCLI and YAML</a></p>
+<hr>
+<p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
+<hr>
+<p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
+<hr>
+<p>If you found this blog helpful, consider buying me a coffee to kickstart my day.</p>
+<p><center></p>
+<p><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></p>
+<p></center></p>
+<hr>
+
+                    </div>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
