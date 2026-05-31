@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCF Operations Dashboard | ESXi Tiered Memory - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VCF Operations Dashboard | ESXi Tiered Memory</h1>
+                        <div class="post-meta">
+                            <time datetime="2024-10-05T04:00:00Z">
+                                October 5, 2024
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
+                        <div class="tags"><a href="tags/esxi.html" class="tag">#ESXi</a> <a href="tags/tiered-memory.html" class="tag">#Tiered Memory</a> <a href="tags/vcf-operations.html" class="tag">#VCF Operations</a> <a href="tags/dashboard.html" class="tag">#Dashboard</a> <a href="tags/fastapi.html" class="tag">#FastAPI</a> <a href="tags/powershell.html" class="tag">#PowerShell</a></div>
+                    </header>
+                    
+                    <img src="images/vcf-operations-dashboard-esxi-tiered-memory-featured.png" alt="VCF Operations Dashboard | ESXi Tiered Memory" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>How to show ESXi Tiered Memory Metrics in VCF Operations.</strong></p>
+<hr>
+<blockquote>Using VCF Operations Management Pack Builder alongside a product like FastAPI will elevate your observability to a whole new level...</blockquote>
+<hr>
+<p>Here’s a use case that demonstrates the powerful capabilities of the <strong>VCF Operations Manager Pack Builder</strong> in your environment. With the introduction of <strong>Tiered Memory</strong> in ESXi 8.0.3, VMware hasn’t yet integrated tiered memory metrics visibility for VMs using tiered memory into <strong>VCF Operations</strong>. However, <strong>William Lam</strong> has provided a <strong>Blog</strong> outlining the necessary commands to retrieve the tiered memory metrics. <a href="https://williamlam.com/2024/09/how-much-virtual-machine-memory-is-using-nvme-tiering.html" target="_blank" rel="noopener noreferrer">Click here to see Blog</a></p>
+<p>To build an Operations Management Pack (MP) that captures this data, you need to utilize APIs. In my approach, I used <strong>FastAPI</strong> to execute a <strong>PowerShell Script</strong> that connects to vCenter to gather a list of ESXi hosts. The script then establishes an SSH connection to each host, retrieves the VM tiered memory metrics, and sends the results back to FastAPI. These metrics are then made available for Management Pack Builder, allowing you to incorporate the new metrics into the existing VM object within Operations.</p>
+<p>Once the VM tiered memory metrics are available in Operations, you can create some impressive dashboards to display this information. These dashboards provide a clear, visual representation of how tiered memory is being utilized across your environment, giving you deeper insights and making it easier to monitor and optimize performance.</p>
+<p>Using a tool like FastAPI to provide additional metrics to Operations opens up a world of possibilities. Once you understand the steps involved, your thought process becomes your most powerful observability tool. This approach empowers you to extend the capabilities of Operations, allowing you to gather and visualize critical metrics that might not be available out of the box.</p>
+<p>To get started, you’ll need to set up a server with FastAPI installed. In my lab, I created a Rocky Linux 9.4 VM and installed the latest version of FastAPI. Additionally, I installed the latest version of PowerShell along with the VMware PowerCLI and Posh-SSH modules, enabling the necessary functionality for this setup.</p>
+<p>To create and edit code on my Rocky Linux server, I prefer using the Remote SSH add-in for VSCode, which I have installed on my Apple MacBook. This approach allows me to avoid using the graphical version of Rocky Linux Server, keeping the setup lean and mean. I use PowerShell on Linux servers all the time—I’ve loved it ever since PowerShell became cross-platform.</p>
+<p>While working on this blog and sharing links to the discussed resources, I came across another  post by William Lam that also explains how to retrieve Host Tiered Memory settings. I adapted William's script to work with MPB and added the new properties to my FastAPI Management Pack. <a href="https://williamlam.com/2024/10/useful-nvme-tiering-reporting-using-vsphere-8-0-update-3-apis.html" target="_blank" rel="noopener noreferrer">Click here to see Blog</a></p>
+<p>I encourage you to install the VCF Operations Management Pack Builder appliance and download the MP export file linked at the end of this blog. My goal is for you to understand how Management Packs (MPs) work. While simply using a pre-built MP is easy, taking the time to learn how this MP works will inspire you with new ideas for integrating properties and metrics from other products into your enterprise environment.</p>
+<hr>
+<h2>FastAPI</h2>
+<p>The steps I used to install FastAPI on Rocky Linux Server 9.4:</p>
+<ul>
+<li>A very simple process to install FastAPI and get started.</li>
+<pre><code>
+# Update the System:
+sudo dnf update -y
+
+# Install Python:
+sudo dnf install python3 -y
+
+# Install Pip (Python Package Manager):
+sudo dnf install python3-pip -y
+
+# Install FastAPI and Uvicorn:
+pip3 install fastapi uvicorn
+
+# Create a Sample FastAPI Application:
+nano app.py
+
+# Add the following content to app.py:
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get(&quot;/&quot;)
+def read_root():
+    return {&quot;Hello&quot;: &quot;World&quot;}
+
+# You can run your app using uvicorn:
+uvicorn app:app --host 0.0.0.0 --port 8000
+
+# Your FastAPI app should now be accessible at:
+http://&lt;your_server_ip&gt;:8000
+</code></pre>
+</ul>
+<h2>FastAPI application python code:</h2>
+<p><strong>URLs used in my Lab:</strong></p>
+<ul>
+<li>For VM Tiered Memory you would use http://192.168.6.83:8000/tieredVM</li>
+<li>You can have many urls. See the sample FastAPI Python code.</li>
+<li>To return simple json information use http://192.168.6.83:8000/</li>
+<li>To run a PowerShell script to get Host Tiered Memory settings http://192.168.6.83:8000/tieredHost</li>
+<li>I converted the data to json in the PowerShell Script. I wanted FastAPI to just return plaintext. See the Python code on how to do this.</li>
+<pre><code>
+import subprocess
+from fastapi import FastAPI
+from fastapi.responses import PlainTextResponse
+
+app = FastAPI()
+
+@app.get(&quot;/&quot;)
+def read_root():
+    return {&quot;Hello&quot;: &quot;Welcome to the FastAPI Server by vCROCS!&quot;}
+
+@app.get(&quot;/tieredVM&quot;)
+async def run_powershell_script():
+    try:
+        # Run the PowerShell script and capture the output
+        result = subprocess.run([&quot;pwsh&quot;, &quot;-File&quot;, &quot;/root/tieredVM.ps1&quot;], capture_output=True, text=True)
+        
+        # Check if there&#39;s an error in the execution
+        if result.returncode != 0:
+            return PlainTextResponse(content=result.stderr, status_code=500)
+
+        # Return the raw output from the PowerShell script without modification
+        return PlainTextResponse(content=result.stdout.strip())
+    
+    except Exception as e:
+        return PlainTextResponse(content=str(e), status_code=500)
+
+ 
+@app.get(&quot;/tieredHost&quot;)
+async def run_powershell_script():
+    try:
+        # Run the PowerShell script and capture the output
+        result = subprocess.run([&quot;pwsh&quot;, &quot;-File&quot;, &quot;/root/tieredHost.ps1&quot;], capture_output=True, text=True)
+        
+        # Check if there&#39;s an error in the execution
+        if result.returncode != 0:
+            return PlainTextResponse(content=result.stderr, status_code=500)
+
+        # Return the raw output from the PowerShell script without modification
+        return PlainTextResponse(content=result.stdout.strip())
+    
+    except Exception as e:
+        return PlainTextResponse(content=str(e), status_code=500)
+</code></pre>
+<hr>
+</ul>
+<h2>PowerShell Script</h2>
+<p>PowerShell script to collect the VM Tiered Memory metrics from the ESXi Hosts:</p>
+<pre><code>
+# The Posh-SSH and VMware PowerCLI modules are required to run this script
+# Import the Posh-SSH and VMware PowerCLI modules
+#Import-Module Posh-SSH
+#Import-Module VMware.PowerCLI
+
+# Define parameters for the Connect-VIServer cmdlet using splatting. Use a more secure method for passwords.
+$ConnectionParams = @{
+    Server   = &quot;192.168.6.100&quot;
+    User     = &quot;administrator@vcrocs.local&quot;
+    Password = &quot;VMware1!&quot;
+    Force    = $true
+}
+
+# Connect to the vCenter Server
+$vCenter = Connect-VIServer @ConnectionParams
+
+# Get all ESXi hosts in the vCenter
+$esxiHosts = Get-VMHost
+
+# Create an empty array to store combined results
+$combinedResults = @()
+
+# Loop through each host
+foreach ($esxiHost in $esxiHosts) {
+    # Define ESXi SSH connection details
+    $server = $esxiHost.Name
+    $username = &quot;root&quot;
+    $password = &quot;VMware1!&quot;  # Use a more secure method for passwords
+
+    # Convert the password to a SecureString and create a PSCredential object
+    $securePassword = ConvertTo-SecureString -String $password -AsPlainText -Force
+    $credential = New-Object System.Management.Automation.PSCredential($username, $securePassword)
+
+    # Try to establish an SSH session, skip host if connection fails
+    Try {
+        #Write-Host &quot;Attempting to connect to $server...&quot;
+        $sshSession = New-SSHSession -ComputerName $server -Credential $credential -AcceptKey -ErrorAction Stop
+        #Write-Host &quot;Connected to $server.&quot;
+    }
+    Catch {
+        #Write-Host &quot;Failed to connect to $server. Skipping host...&quot; -ForegroundColor Yellow
+        Continue
+    }
+
+    # If SSH session is successful, execute the commands
+    if ($sshSession) {
+        # Define and execute the first SSH command to get the VMX Cartel IDs and Display Names
+        $vmCommand = &quot;esxcli --formatter csv vm process list | cut -d &#39;,&#39; -f 2,5&quot;
+        $vmResult = Invoke-SSHCommand -SessionId $sshSession.SessionId -Command $vmCommand
+        $VMXCartelID = $vmResult.Output | ConvertFrom-Csv
+
+        # Define and execute the second SSH command to get memory statistics
+        $memCommand = &#39;memstats -r vmtier-stats -u mb -s name:memSize:active:tier0Consumed:tier1Consumed&#39;
+        $memResult = Invoke-SSHCommand -SessionId $sshSession.SessionId -Command $memCommand
+
+        # Process the memory statistics output
+        $lines = $memResult.Output -split &quot;`n&quot; | ForEach-Object { $_.Trim() } | Where-Object {
+            $_ -notmatch &#39;^-{2,}|Total|Start|No.|VIRTUAL|Unit|Selected&#39;
+        }
+
+        # Regex pattern for memory statistics
+        $pattern = &#39;^(?&lt;name&gt;\S+)\s+(?&lt;memSize&gt;\d+)\s+(?&lt;active&gt;\d+)\s+(?&lt;tier0Consumed&gt;\d+)\s+(?&lt;tier1Consumed&gt;\d+)$&#39;
+
+        # Array to store parsed memory stats
+        $tieredMEM = @()
+
+        # Parse the memory stats
+        foreach ($line in $lines) {
+            if ($line -match $pattern) {
+                $tieredMEM += [pscustomobject]@{
+                    Name               = $matches[&#39;name&#39;]
+                    vm_MemSize_MB      = [int]$matches[&#39;memSize&#39;]
+                    vm_Active_Mem_MB   = [int]$matches[&#39;active&#39;]
+                    &quot;vm_Tier0_RAM_MB&quot;  = [int]$matches[&#39;tier0Consumed&#39;]
+                    &quot;vm_Tier1_NVMe_MB&quot; = [int]$matches[&#39;tier1Consumed&#39;]
+                }
+            }
+        }
+
+        # Remove &#39;vm.&#39; prefix from each VM Name
+        $tieredMEM | ForEach-Object { $_.Name = $_.Name -replace &#39;^vm\.&#39;, &#39;&#39; }
+
+        # Create a hashtable for easy mapping of VMX Cartel IDs to Display Names
+        $vmNameMap = @{}
+        foreach ($entry in $VMXCartelID) {
+            $vmNameMap[$entry.VMXCartelID] = $entry.DisplayName
+        }
+
+        # Replace the Name field in $tieredMEM with the corresponding DisplayName
+        foreach ($vm in $tieredMEM) {
+            if ($vmNameMap.ContainsKey($vm.Name)) {
+                $vm.Name = $vmNameMap[$vm.Name]
+            }
+        }
+
+        # Filter out rows where the Name starts with &quot;vCLS-&quot;
+        $tieredMEM = $tieredMEM | Where-Object { $_.Name -notlike &quot;vCLS-*&quot; }
+
+        # Append the results from this host to the combined results array
+        $combinedResults += $tieredMEM
+
+        # Close the SSH session for this host
+        $removeSession = Remove-SSHSession -SessionId $sshSession.SessionId
+    }
+}
+
+# Convert the combined result to json
+$returnData = $combinedResults | ConvertTo-Json -Compress
+
+return $returnData
+
+# Disconnect from vCenter
+Disconnect-VIServer -Confirm:$false
+</code></pre>
+<hr>
+<p>PowerShell script to collect the Host Tiered Memory Properties:</p>
+<pre><code>
+# Most of this Code from William Lam Blog Post
+# https://williamlam.com/2024/10/useful-nvme-tiering-reporting-using-vsphere-8-0-update-3-apis.html
+# I changed the code to test in my Lab. Select all hosts 8.0.3 or greater. Convert results to json to work with MPB.
+
+# Define parameters for the Connect-VIServer cmdlet using splatting
+$ConnectionParams = @{
+    Server   = &quot;192.168.6.100&quot;
+    User     = &quot;administrator@vcrocs.local&quot;
+    Password = &quot;VMware1!&quot;
+    Force    = $true
+}
+
+# Connect to the vCenter Server
+$vCenter = Connect-VIServer @ConnectionParams
+
+$vmHosts = Get-VMhost | Where-Object {$_.Version -ge &quot;8.0.3&quot;} | Sort-Object Name
+
+$results = @()
+foreach ($vmhost in $vmHosts) {
+    $hostID = $vmhost.Id
+    $hostID = $hostID.Replace(&quot;HostSystem-&quot;, &quot;&quot;)
+    
+    $tieringType = $vmhost.ExtensionData.Hardware.memoryTieringType
+
+    $totalMemory = [math]::round($vmhost.ExtensionData.Hardware.MemorySize /1GB,2).ToString() + &quot; GB&quot;
+    $tieringRatio = ($vmhost | Get-AdvancedSetting Mem.TierNvmePct).Value.toString() + &quot;%&quot;
+    
+    $tieringEnabled = $false
+    if($tieringType -eq &quot;softwareTiering&quot;) {
+        $tieringEnabled = $true
+
+        $dramTotal = [math]::round(($vmhost.ExtensionData.Hardware.MemoryTierInfo | Where-Object {$_.Name -eq &quot;DRAM&quot;}).Size /1GB,2).ToString() + &quot; GB&quot;
+        $nvmeTotal = [math]::round(($vmhost.ExtensionData.Hardware.MemoryTierInfo | Where-Object {$_.Name -eq &quot;NVMe&quot;}).Size /1GB,2).ToString() + &quot; GB&quot;
+
+        $storageSystem = Get-View $vmhost.ExtensionData.ConfigManager.StorageSystem
+        $nvmeDevice = ($storageSystem.StorageDeviceInfo.ScsiLun | where {$_.UsedByMemoryTiering -eq $true}).CanonicalName
+
+    } else {
+        $dramTotal = $totalMemory
+        $nvmeTotal = 0
+        $nvmeDevice = &quot;N/A&quot;
+    }
+
+    $tmp = [pscustomobject] @{
+        Id = $hostID
+        VMHost = $vmhost.Name
+        TieringEnabled = $tieringEnabled
+        TieringRatio = $tieringRatio
+        DRAMMemory = $dramTotal
+        NVMeMemory = $nvmeTotal
+        TotalSystemMemory = $totalMemory
+        NVMeDevice = $nvmeDevice
+    }
+    $results+=$tmp
+}
+
+$results | ConvertTo-Json -Compress
+
+# Disconnect from vCenter
+Disconnect-VIServer -Confirm:$false
+</code></pre>
+<hr>
+<h2>VCF Operations:</h2>
+<ul>
+<li>These metrics will allow you to create some great operational insights, including cool dashboards.</li>
+<hr>
+</ul>
+<img src="images/tiered-01.png" alt="">
+<hr>
+<h2>MP Builder Details:</h2>
+<ul>
+<li>The following screen shots are all the details I used to create the MP</li>
+<li>I presented at VMware Explore 2024, and one of the sessions includes a video on MP Builder. I recommend checking it out to get more familiar with MPB. <a href="https://www.youtube.com/live/EcQNwO_skAA?si=xkLv3PvocHy5ka0f" target="_blank" rel="noopener noreferrer">Link to session | CODE1161LV</a></li>
+<li>Brock Peterson has a great Blog on building a MP. [Link to Blog](https://www.brockpeterson.com/post/building-a-management-pack-with-the-aria-operations-management-pack-builder</li>
+</ul>
+<p>)</p>
+<ul>
+<li>After building and saving the MP, you need to import into VCF Operations Repository and add account. I show those details in my VMware Explore session video.</li>
+<hr>
+</ul>
+<img src="images/tiered-02.png" alt="">
+<hr>
+<img src="images/tiered-03.png" alt="">
+<hr>
+<img src="images/tiered-04.png" alt="">
+<hr>
+<img src="images/tiered-05.png" alt="">
+<hr>
+<img src="images/tiered-06.png" alt="">
+<hr>
+<img src="images/tiered-07.png" alt="">
+<hr>
+<img src="images/tiered-08.png" alt="">
+<hr>
+<img src="images/tiered-09.png" alt="">
+<hr>
+<img src="images/tiered-10.png" alt="">
+<hr>
+<img src="images/tiered-11.png" alt="">
+<hr>
+<img src="images/tiered-12.png" alt="">
+<hr>
+<img src="images/tiered-13.png" alt="">
+<hr>
+<img src="images/tiered-14.png" alt="">
+<hr>
+<img src="images/tiered-15.png" alt="">
+<hr>
+<img src="images/tiered-16.png" alt="">
+<hr>
+<img src="images/tiered-17.png" alt="">
+<hr>
+<img src="images/tiered-18.png" alt="">
+<hr>
+<img src="images/tiered-19.png" alt="">
+<hr>
+<img src="images/tiered-20.png" alt="">
+<hr>
+<img src="images/tiered-21.png" alt="">
+<hr>
+<h2>Lessons learned:</h2>
+<ul>
+<li>Incorporating a FastAPI server adds an additional layer to your observability environment, but the capabilities it unlocks are remarkable. It enables you to gather and serve custom metrics, offering greater flexibility and control over your monitoring and performance analysis. This approach not only enhances visibility but also provides powerful tools to extend the insights available in your environment.</li>
+<li>Just because products don’t offer APIs out of the box for the metrics you need doesn’t mean you’re limited. You can always leverage custom scripts to gather the data you want. By combining tools like PowerShell, SSH, and FastAPI, you can extract and integrate those custom metrics into your observability platform, giving you the flexibility to get exactly the insights you need.</li>
+<hr>
+</ul>
+<h2>Links to resources discussed is this Blog Post:</h2>
+<ul>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Management-Packs/FastAPI" target="_blank" rel="noopener noreferrer">Download Link for the MP Export File, Dashboard and Views</a></li>
+<li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">FastAPI</a></li>
+<li><a href="https://rockylinux.org/download" target="_blank" rel="noopener noreferrer">Rocky Linux | Downloads</a></li>
+<li><a href="https://marketplace.cloud.vmware.com/services/details/draft-vmware-aria-operation-management-pack-builder-1-1?slug=true" target="_blank" rel="noopener noreferrer">VCF Operations | Management Pack Builder | Download</a></li>
+<li><a href="https://www.brockpeterson.com" target="_blank" rel="noopener noreferrer">Brock Peterson Blogs | Great place to get Dashboard Ideas and see MPB examples</a></li>
+<hr>
+</ul>
+<p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
+<hr>
+<p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
