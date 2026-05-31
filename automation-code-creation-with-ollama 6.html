@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Code Creation with ollama - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>Automation Code Creation with ollama</h1>
+                        <div class="post-meta">
+                            <time datetime="2024-04-27T04:00:00Z">
+                                April 27, 2024
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/technology.html" class="category">Technology</a></div>
+                        <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/ollama.html" class="tag">#ollama</a> <a href="tags/llama.html" class="tag">#llama</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/ai.html" class="tag">#AI</a></div>
+                    </header>
+                    
+                    <img src="images/automation-code-creation-with-ollama-featured.png" alt="Automation Code Creation with ollama" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>My review on using ollama to help create code for Automation</strong></p>
+<hr>
+<blockquote>"By harnessing the power of AI, I simplify my coding workflow, freeing up time to focus on creating blog posts that resonate with the vCommunity. With the help of AI, my writing becomes more precise, more creative, and more impactful.” - Dale Hassinger</blockquote>
+<hr>
+<h2>ollama</h2>
+<img src="images/ollama-01.png" alt="">
+<h2>ollama Web Site Link:</h2>
+<p><a href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Link to ollama web site.</a></p>
+<p>Building on my experience with ChatGPT, I decided to explore Ollama Local on my trusty Apple MacBook Pro M1. As a user-friendly AI enthusiast, I was eager to see how seamless the installation process would be. To my delight, setting up Ollama Local on Mac is incredibly straightforward.</p>
+<p>To get started, simply head to the <a href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama website</a> and download the application as a zip file. Expand the contents of the archive and copy the Ollama Application file into your Applications folder. Double-clicking the icon will launch the app in no time – it's that easy!</p>
+<p>For this review, I'll be using the Llama3 Large Language Model (LLM) to demonstrate Ollama Local's capabilities. The first time you run the application, it will automatically download the necessary LLM files for you. Like I said, very easy to use.</p>
+<p>With Ollama Local up and running, let's dive into its features and see what kind of AI-powered magic it can create.</p>
+<p>Go to a terminal and type "ollama run llama3" to get started.</p>
+<hr>
+<span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
+<pre><code>ollama run llama3</code></pre>
+<hr>
+<img src="images/ollama-02.png" alt="">
+<hr>
+<h2>ollama Models:</h2>
+<p><strong>There are many models to pick from to use with ollama...</strong></p>
+<hr>
+<img src="images/ollama-03.gif" alt="">
+<hr>
+<p>Once you've chosen the desired model, the web site will provide you with the necessary command prompts to get started. No need to dig through complex documentation or struggle with unfamiliar code - just follow the straightforward instructions and you're good to go!</p>
+<hr>
+<img src="images/ollama-04.gif" alt="">
+<hr>
+<h2>How to run ollama from cli:</h2>
+<p><strong>Here is a quick video to show how to get started from the CLI</strong></p>
+<ul>
+<li>Run command to start ollama</li>
+<li>Ask a question and see the results</li>
+<li>type /bye to exit ollama</li>
+</ul>
+<p>Hands-on experience with this tool? A breeze! Not only is it incredibly user-friendly, but the performance on my laptop has been impressive too. And what really stands out is the speed at which responses are delivered - no waiting around here! The unedited video itself</p>
+<p>is a testament to its fast processing capabilities.</p>
+<hr>
+<img src="images/ollama-05.gif" alt="">
+<hr>
+<span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
+<pre><code>ollama run llama3
+&gt;&gt;&gt; Who Created PowerShell
+&gt;&gt;&gt; /bye</code></pre>
+<hr>
+<h2>ollama "Real World" Examples:</h2>
+<p>Now I will show some examples of how I use ollama everyday for coding and writing. They are my main uses cases for AI.</p>
+<hr>
+<h2>ollama PowerShell Function</h2>
+<p>In my previous blogs, I've highlighted the versatility of PowerShell in automating various tasks. In this blog, I'll show how to harness the power of PowerShell to interact with AI assistants like Ollama. To start, I created a custom function that enables you to ask Ollama questions directly from the PowerShell command line. Here's the sample code to get you started:</p>
+<span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
+<pre><code># Function to ask Ollama
+function ask-ollama {
+    
+    # Code to run when the function is called
+    param (
+      [Parameter(Mandatory=$true)]
+      $question
+    )
+  
+    # Set request body
+    $requestBody = @{
+        model = &quot;llama3&quot;;
+        prompt = &quot;$question&quot;;
+        stream = $false;
+    }
+      
+    # Set headers
+    $headers = @{&#39;Content-Type&#39;=&#39;application/json&#39;}
+    $Body = ($requestBody | ConvertTo-Json)
+      
+    # Send the request
+    $request =Invoke-WebRequest -Uri &#39;http://localhost:11434/api/generate&#39; -Method Post -Headers $headers -Body $Body
+    $response =$request.Content | ConvertFrom-Json
+
+    # Print response to console
+    Write-Host $response.response
+
+    # Copy response to clipboard
+    Set-Clipboard -Value $response.response
+    
+} # End Function
+
+# ----- Example Questions -----
+ask-ollama -question &quot;What is PowerCLI&quot;
+
+ask-ollama -question &quot;Create a PowerShell script to connect to a vCenter, Get a list of all VMs with a Snap&quot;
+
+ask-ollama -question &quot;Create a Salt State file to stop and disable a service with a name of Spooler&quot;
+
+ask-ollama -question &quot;Show me how to copy a powershell variable value to the clipboard&quot;</code></pre>
+<hr>
+<p>If you are a PowerShell enthusiast, you're probably accustomed to the flexibility of functions within your scripts. Feel free to adapt this example to your own workflow and coding style, regardless of whether you prefer to use it as is or modify it to fit your needs.</p>
+<hr>
+<h2>ollama Prompt Engineering Examples:</h2>
+<h2>Set the 'Role' to start:</h2>
+<p>One of my habits when working with ollama, or ChatGPT, is setting a specific 'role' for our conversations. By defining a clear context or persona, I've found that I'm able to receive more effective and insightful responses from the AI. This approach has been refined over time through experimentation and exploration of the product's capabilities, yielding better results and a more productive dialogue.</p>
+<ul>
+<li>Act as a PowerShell SME</li>
+<li>Act as a PowerCLI SME</li>
+<li>Act as a VMware SME</li>
+<li>Act as a vRealize SME</li>
+<li>Act as a Javascript SME to work with VMware Orchestrator</li>
+<li>Act as a Technology Blogger</li>
+<hr>
+</ul>
+<h2>Questions to generate code:</h2>
+<ul>
+<li>PowerCLI:</li>
+<li>Act as a PowerCLI SME</li>
+<li>Create a script to connect to a VMware vCenter. username is administrator@vsphere.local. password is Password123. vCenter name is vcenter8x.corp.local. List all VMs that have a snap. Export the list of VMs with a snap to c:\reports\vms-with-snaps.csv.</li>
+<p><strong>Unedited Code Returned:</strong></p>
+</ul>
+<span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
+<pre><code># Set the connection settings
+$vcenter = &quot;vcenter8x.corp.local&quot;
+$username = &quot;administrator@vsphere.local&quot;
+$password = &quot;Password123&quot;
+
+# Connect to the vCenter using PowerCLI
+Connect-VIServer -Server $vcenter -User $username -Password $password -ErrorAction Stop
+
+# Get a list of all VMs that have a snapshot
+$vmsWithSnaps = @()
+Get-VM | Where-Object {$_.HasSnapshot} | ForEach-Object {
+    $vm = $_.Name
+    Write-Host &quot;Found snapshot for VM: $vm&quot;
+    $vmsWithSnaps += $vm
+}
+
+# Export the list of VMs with a snap to a CSV file
+$vmsWithSnaps | Export-Csv -Path &quot;C:\reports\vms-with-snaps.csv&quot; -NoTypeInformation
+
+# Disconnect from the vCenter
+Disconnect-VIServer -Confirm:$false</code></pre>
+<p>Let me explain what each part of the script does:</p>
+<p>1. The first section sets the connection settings: <code>vcenter</code>, <code>username</code>, and <code>password</code>.</p>
+<p>2. The <code>Connect-VIServer</code> cmdlet connects to your VMware vCenter using the specified credentials.</p>
+<p>3. The <code>Get-VM</code> cmdlet retrieves a list of all virtual machines in the vCenter. We then use the <code>Where-Object</code> cmdlet to filter this list and</p>
+<p>only include VMs that have at least one snapshot (<code>$_.HasSnapshot</code>).</p>
+<p>4. We loop through each VM that has a snapshot using a <code>ForEach-Object</code> cmdlet, and add its name to an array <code>$vmsWithSnaps</code>.</p>
+<p>5. The final section exports the array of VM names to a CSV file named <code>vms-with-snaps.csv</code> in the <code>C:\reports</code> directory.</p>
+<p>6. Finally, we disconnect from the vCenter using the <code>Disconnect-VIServer</code> cmdlet.</p>
+<p>Save this script as a PowerShell file (e.g., <code>vms_with_snaps.ps1</code>) and run it to get the list of VMs with snapshots exported to the specified</p>
+<p>CSV file!</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
