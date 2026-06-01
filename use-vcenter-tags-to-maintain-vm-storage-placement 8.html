@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use vCenter TAGs to maintain VM Storage Placement - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>Use vCenter TAGs to maintain VM Storage Placement</h1>
+                        <div class="post-meta">
+                            <time datetime="2023-01-27T05:00:00Z">
+                                January 27, 2023
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
+                        <div class="tags"><a href="tags/powercli.html" class="tag">#PowerCLI</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/vcenter.html" class="tag">#vCenter</a> <a href="tags/storage.html" class="tag">#Storage</a></div>
+                    </header>
+                    
+                    <img src="images/use-vcenter-tags-to-maintain-vm-storage-placement-featured.png" alt="Use vCenter TAGs to maintain VM Storage Placement" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>Use vCenter TAGs to maintain VM Storage Placement.</strong></p>
+<hr>
+<p>A question was recently asked, How can we specify and maintain which DataStore Cluster a VM should use within the VMware vCenter UI? I like using vCenter TAGs for specifying details about VMs, so I thought I would use VMware vCenter TAGs to specify which DataStore Cluster to place a VM.</p>
+<p>I looked at using a Configuration management tool like salt but one of the requirements was to make it easy for the VMware Admin to specify and maintain VM DataStore placement within the VMware vCenter UI.</p>
+<p>I have included sample code that will:</p>
+<ul>
+<li>Create a VMware vCenter TAG Category</li>
+<li>Create a VMware vCenter TAG based on DataStore Cluster Name</li>
+<li>Add the DataStore Cluster VMware vCenter TAG to all VMs within a DataStore cluster</li>
+<li>Verify that each VM has only (1) vCenter DataStore Cluster TAG</li>
+<li>Verify that the VM is in the correct DataStore Cluster. Do a VM move if it is not in correct DataStore Cluster.</li>
+<hr>
+</ul>
+<h2>Use Case:</h2>
+<ul>
+<li>[x] Have a way to specify which DataStore Cluster the VM will use within VMware vCenter UI.</li>
+<li>[x] Have a process in place that will maintain which DataStore Cluster will be used with each VM within VMware vCenter.</li>
+<li>[x] If a user moves a VM to a DataStore Cluster that it shouldn't be located, move it back to the correct Datastore Cluster to match the assigned VMware vCenter TAG.</li>
+</ul>
+<h2>Solution:</h2>
+<ul>
+<li>[x] Create a VMware vCenter TAG for every DataStore Cluster within VMware vCenter.</li>
+<li>[x] Assign a VMware vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.</li>
+<li>[x] Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches VMware vCenter TAG assigned.</li>
+<hr>
+<p><strong>Steps to connect to VMware vCenter:</strong></p>
+<pre><code># Script created by: Dale Hassinger
+# Script provided for Demo Use Only
+# Date: 2023-01-27
+# Purpose: Create and Assign vCenter TAGs to be used for VM Storage placement
+# Notes: VMs with ISOs attached and Snap Shots may be listed in more than 1 Datastore Cluster
+# In my lab I made sure there were no SNAPs or ISOs attached before applying TAGs with Automation
+
+# ----- [ Connect to vCenter ] -----
+Connect-VIServer -Server &#39;vCenter.vCROCS.info&#39; -User &#39;administrator@vCROCS.info&#39; -Password &#39;HackMe1!&#39; -Force
+</code></pre>
+<hr>
+</ul>
+<h2>Code to create a VMware vCenter TAG Category:</h2>
+<ul>
+<li>For any custom VMware vCenter TAGs that I create to use with Automation, I use a TAG category "Automation".</li>
+<li>You don't need to do this step. You could use a category that already exists within VMware vCenter.</li>
+<pre><code># ----- [ Start Create vCenter TAG Category ] -----
+
+# New TAG Category Name
+$newCategory = &#39;Automation&#39;
+
+# Get all existing vCenter TAG Categories
+$allCategory = Get-TagCategory
+
+# Check to see if category already exists
+$allCategory = $allCategory.Name
+$categoryExists = $allCategory.Contains($newCategory)
+
+# If TAG category already exists it will not try to re-create
+if($categoryExists -eq $true){
+  Write-Output &#39;Category Already exists within vCenter!&#39;
+} # End if
+else{
+  $output = &#39;Creating New Category within vCenter: &#39; + $newCategory  
+  Write-Output $output
+
+  # Create New TAG Category in vCenter
+  New-TagCategory -Name $newCategory -Cardinality Multiple -Description &#39;Used with Automation&#39;
+} # End Else
+
+# ----- [ End Create vCenter TAG Category ] -----
+</code></pre>
+<hr>
+</ul>
+<h2>Code to create a VMware vCenter TAG for every Datastore Cluster:</h2>
+<ul>
+<li>The code gets all DataStore Cluster Names and creates a VMware vCenter TAG to match DataStore Cluster Name. I prefix the DataStore Cluster Name with "TAG-VM-".</li>
+<li>The code does check to see if the VMware vCenter TAG already exists. If the vCenter TAG does exist, it does not try and create a new vCenter TAG.</li>
+<li>include code to connect to vCenter</li>
+<pre><code># ----- [ Start Create vCenter TAG for every Datastore Cluster ] -----
+
+# New TAG Category Name
+$newCategory = &#39;Automation&#39;
+
+$allDatastoreClusters = Get-DatastoreCluster
+$allDatastoreClusters = $allDatastoreClusters.Name
+
+$allTAGs = Get-Tag
+$allTAGs = $allTAGs.Name
+
+$newTAGs = @()
+
+# Create new TAG Names
+foreach($newTAG in $allDatastoreClusters){
+  $newTAGname = &#39;TAG-VM-&#39; + $newTAG
+  $output = &#39;New TAG Name: &#39; + $newTAGname
+  Write-Output $output
+  $newTAGs+= $newTAGname
+
+} # end foreach
+
+# Add TAGs to vCenter if they don&#39;t already exist
+foreach($newTAG in $newTAGs){
+  # Check to see if category already exists
+  $TagExists = $allTAGs.Contains($newTAG)
+  if($TagExists -eq $true){
+
+    $output = &#39;Tag &#39; + $newTAG + &#39; already Exists: &#39; + $TagExists
+    Write-Output $output
+
+  } # end if
+  else{
+    $output = &#39;Tag &#39; + $newTAG + &#39; Exists: &#39; + $TagExists
+    Write-Output $output
+    
+    # Create New TAG
+    Get-TagCategory -Name $newCategory | New-Tag -Name $newTAG -Description &#39;VM Storage TAG used with Automation&#39;
+  } # end else
+} # end foreach
+
+# ----- [ End Create vCenter TAG for every Datastore Cluster ] -----
+</code></pre>
+<hr>
+</ul>
+<h2>Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:</h2>
+<ul>
+<li>You specify DataStore Cluster Name. The code with get all VM names and assign the correct VMware vCenter TAG. It will check to see if TAG is already assigned to the VM.</li>
+<li>include code to connect to vCenter</li>
+<pre><code># ----- [ Start add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----
+
+$datastoreCluster = &#39;DS-CLSTR-03&#39;
+#$datastoreCluster = &#39;DS-CLSTR-04&#39;
+$TAGname = &#39;TAG-VM-&#39; + $datastoreCluster
+
+$allVMs = Get-DatastoreCluster -Name $datastoreCluster | Get-VM
+$allVMs = $allVMs.Name
+
+foreach($vm in $allVMs){
+
+  # Get existing TAGs assigned to VM
+  #$assignedTAGs = &#39;&#39;
+  $assignedTAGs = Get-VM $vm | Get-TagAssignment
+  $assignedTAGs = $assignedTAGs.Tag.Name
+
+  if(!$assignedTAGs){
+    $output = &#39;VM: &#39; + $vm + &#39; has no tags&#39;
+    Write-Output $output
+    New-TagAssignment -Tag $TAGname -Entity $vm
+  } # end if
+  else{
+    $TagExists = $assignedTAGs.Contains($TAGname)
+
+      if($TagExists -eq $false){
+      New-TagAssignment -Tag $TAGname -Entity $vm
+
+      $output = &#39;Assigned TAG: &#39; + $TAGname + &#39; to VM: &#39; + $vm
+      Write-Output $output
+
+    } # end if
+    else{
+      $output = &#39;TAG: &#39; + $TAGname + &#39; already assigned to VM: &#39; + $vm
+      Write-Output $output
+    }
+  
+  } # end else
+
+} # end foreach
+
+# ----- [ End add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----
+</code></pre>
+<hr>
+</ul>
+<h2>Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:</h2>
+<ul>
+<li>The code looks to see if one than (1) DataStore Cluster TAG is assigned.</li>
+<li>If a VM has an iso mounted from a 2nd Datastore that could make (2) TAGs get assigned.</li>
+<li>If a VM was located on a DataStore Cluster and had a SNAP Shot and was moved to a 2nd DataStore Cluster, it could get (2) DataStore Cluster TAGs assigned until the SNAP is Deleted.</li>
+<li>For this use case, I ONLY want (1) Datastore Cluster to be used per VM.</li>
+<li>include code to connect to vCenter</li>
+<pre><code># ----- [ Start Verify that VM has only (1) DS Cluster TAG ] -----
+
+$allVMs = Get-VM
+$allVMs = $allVMs.Name
+$allVMs = $allvms | Sort-Object
+
+Write-Output &#39;Starting TAG count check...&#39;
+
+foreach($vm in $allVMs){
+  $assignedTAGs = Get-VM $vm | Get-TagAssignment
+  $assignedTAGs = $assignedTAGs.Tag.Name
+  $assignedTAGs = $assignedTAGs | Where-Object {$_ -like &#39;TAG-VM-DS-CLSTR-*&#39;}
+
+  $tagCount = $assignedTAGs.count
+
+  if($tagCount -gt 1){
+    $output = &#39;VM: &#39; + $vm + &#39; has more than 1 DS Cluter Tag Assigned!&#39;
+    Write-Output $output
+
+  } # end if
+
+} # End foreach
+
+Write-Output &#39;TAG count check complete&#39;
+
+# ----- [ End Verify that VM has only (1) DS Cluster TAG ] -----
+</code></pre>
+<hr>
+</ul>
+<h2>Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:</h2>
+<ul>
+<li>The code gets all the DataStore Cluster VMware vCenter TAGs.</li>
+<li>The code then gets all VMs assigned a TAG and verifies that the VM is located in the correct DataStore Cluster.</li>
+<li>If the VM is NOT located in the DataStore Cluster that matches the vCenter TAG, it moves the VM to the correct DataStore Cluster.</li>
+<li>include code to connect to vCenter</li>
+<pre><code># ----- [ Start Verify that VM is in correct DS Cluster based in TAG ] -----
+
+$newCategory = &#39;Automation&#39;
+
+$allTAGs = Get-Tag
+$allTAGs = $allTAGs.Name
+$allTAGs = $allTAGs | Where-Object {$_ -like &#39;TAG-VM-DS-CLSTR-*&#39;} | Sort-Object
+
+foreach($tag in $allTAGs){
+  $output = &#39;--- TAG: &#39; + $tag
+  Write-Output $output
+
+  $dsCluster = $tag
+  $dsCluster = $dsCluster.replace(&#39;TAG-VM-&#39;,&#39;&#39;)
+
+  $tagfilter = $newCategory + &#39;/&#39; + $tag
+  $vmList = Get-TagAssignment | Where-Object {$_.Tag -like $tagfilter}
+
+  $vmList = $vmList.Entity.Name | Sort-Object
+
+  foreach($vm in $vmlist){
+    $currentDSCluster = Get-VM $vm | Get-DatastoreCluster
+    $currentDSCluster = $currentDSCluster.Name
+
+    if($currentDSCluster -eq $dsCluster){
+      $output = &#39;Already in DS Cluster: &#39; + $dsCluster + &#39; - VM: &#39; + $vm
+      Write-Output $output
+    
+    } # end if
+    else{
+      $output = &#39;*Moving to DS Cluster: &#39; + $dsCluster + &#39; - VM: &#39; + $vm
+      Write-Output $output
+
+      Move-VM -VM $vm -Datastore $dsCluster
+    } # End else
+
+  } # End foreach
+
+} # end foreach
+
+# ----- [ End Verify that VM is in correct DS Cluster based in TAG ] -----
+</code></pre>
+<hr>
+</ul>
+<h2>Code to Disconnect CD from all VMs:</h2>
+<ul>
+<li>include code to connect to vCenter</li>
+<li>Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a iso attached. Here is the code to disconnect all iso images mounted to a VM.</li>
+<pre><code># Code Disconnect CD from all VMs
+Get-VM | Where-Object {$_.PowerState –eq “PoweredOn”} | Get-CDDrive | Set-CDDrive -NoMedia -Confirm:$False
+</code></pre>
+<hr>
+</ul>
+<h2>Lessons Learned</h2>
+<ul>
+<li>You can use this code to maintain VM placement, but you could also use this code to move VMs to new DatStore Clusters. Assign a new TAG to the VM and the process will do a Storage vMotion for you. Great way to move VMs if you get a new SAN.</li>
+<li>I located the VM based on DataStore Cluster. You could change code slightly and specify a specific DataStore.</li>
+<li>If there is a member on your VMware Team that changes which DataStore Cluster a VM should be located for no reason, you could also fix the issue by giving that Team Member 30 days in the electric chair so they don't do it again. :)</li>
+<hr>
+</ul>
+<p>When I write about <b>vRealize Aria Automation</b>,  I always say there are many ways to accomplish the same task.  This article is just one way that you could accomplish this task.  I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete automation as long as it completes successfully and consistently.</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMware Aria Automation | How to send messages and updates - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VMware Aria Automation | How to send messages and updates</h1>
+                        <div class="post-meta">
+                            <time datetime="2024-03-17T04:00:00Z">
+                                March 17, 2024
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
+                        <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/teams-messages.html" class="tag">#Teams Messages</a> <a href="tags/google-spaces.html" class="tag">#Google Spaces</a> <a href="tags/alerts.html" class="tag">#Alerts</a> <a href="tags/messages.html" class="tag">#Messages</a></div>
+                    </header>
+                    
+                    <img src="images/vmware-aria-automation-how-to-send-messages-and-updates-featured.png" alt="VMware Aria Automation | How to send messages and updates" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>How to send messages/updates to a Microsoft Teams Channel or Google Spaces.</strong></p>
+<hr>
+<blockquote>"If everyone is moving forward together, then success takes care of itself.” - Henry Ford</blockquote>
+<hr>
+<h2>VMware Aria Automation</h2>
+<p>Whenever new VMs are deployed or Day 2 operations are executed via the VMware Aria Automation Catalog, I find it crucial to update our team through a common messaging platform about the ongoing creations or modifications. In this blog, I'll demonstrate how to dispatch notifications to both Microsoft Teams and Google Spaces via a Webhook. This technique can be adapted for any messaging service such as Slack, Zoom, Discord, etc., by simply altering the JSON body formatting code and creating a Webhook for message delivery.</p>
+<p>I will guide you through the process of sending alerts from VMware Aria Automation utilizing ABX Actions and Orchestrator Workflows. Though the procedure remains largely the same, there are minor variations in acquiring Property Values. Presenting both methods offers you, the Automation Specialists, the freedom to choose the approach that seamlessly integrates into your workflows. My philosophy in automation is that there are countless ways to achieve the same outcome.</p>
+<hr>
+<p>In this blog, I'll walk you through the creation of a new virtual machine (VM). At the onset of the build process, I have configured an Extensibility Subscription that triggers the sending of notifications to both Microsoft Teams and Google Spaces. This is accomplished through the use of an ABX Action and an Orchestrator Workflow.</p>
+<hr>
+<p>Besides notifying your team when a new VM is created, I'll demonstrate how to dispatch a message through an Orchestrator Workflow for a Day 2 Automation process.</p>
+<hr>
+<h2>Create a New VM and Send Message</h2>
+<p><strong>Steps:</strong></p>
+<p>1. Within the Design section of Aria Automation, create a template. For the purpose of this tutorial, we will construct a straightforward Rocky Linux VM. | Refer to <a href="#screen-shot-01">Screen Shot 1</a>.</p>
+<p>2. Ensure that all properties you wish to include in your notification are incorporated into the template's YAML code. These property values will be transmitted to both ABX Actions and Orchestrator Workflows. | Refer to <a href="#screen-shot-02">Screen Shot 2</a>.</p>
+<ul>
+<li>You have the flexibility to include any property in your messages, provided it is specified in the template's YAML code.</li>
+</ul>
+<p>3. Proceed to set up an Extensibility Action. | See <a href="#screen-shot-03">Screen Shot 3</a> and <a href="#screen-shot-04">Screen Shot 4</a>.</p>
+<p>4. Establish an Extensibility Subscription that will initiate the ABX Action or Orchestrator Workflow as required. | Refer to <a href="#screen-shot-05">Screen Shot 5</a>.</p>
+<p>5. Here's an example of how to define a subscription. | See <a href="#screen-shot-06">Screen Shot 6</a>.</p>
+<p>6. Initiate the creation of an Orchestrator Workflow. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.</p>
+<ul>
+<li>Incorporate an input property into the Orchestrator Workflow. | See <a href="#screen-shot-08">Screen Shot 8</a>.</li>
+<li>Outline the schema within the Orchestrator Workflow. | Refer to <a href="#screen-shot-09">Screen Shot 9</a>.</li>
+<li>Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-10">Screen Shot 10</a> and <a href="#screen-shot-11">Screen Shot 11</a>.</li>
+</ul>
+<p>7. Deploy a new VM and confirm that the Extensibility Subscription successfully triggered the ABX Action you defined.</p>
+<p>8. Check your preferred messaging system to ensure the notification was received.</p>
+<ul>
+<li>Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.</li>
+<li>Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.</li>
+</ul>
+<p>9. If all steps were executed successfully, it's time for a celebration!</p>
+<p>10. <a href="#screen-shot-14">Screen Shot 14</a> illustrates the process of creating a Google Spaces Webhook.</p>
+<hr>
+<h2>Orchestrator Workflow Day 2 Automation and Send Message</h2>
+<p><strong>Steps:</strong></p>
+<p>1. Initiate the creation of an Orchestrator Workflow. Creating a new Workflow is the same for Day 2 Automation Processes as when a Workflow was created for building a New VM. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.</p>
+<ul>
+<li>Incorporate an input property into the Orchestrator Workflow for every question needed to complete the Day 2 Automation. | See <a href="#screen-shot-15">Screen Shot 15</a>.</li>
+<li>Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-16">Screen Shot 16</a>.</li>
+</ul>
+<p>2. Run the Workflow and confirm that the code successfully ran and created the message .</p>
+<p>3. Check your preferred messaging system to ensure the notification was received. The Messages with look the same as when you created a New VM. YOU define what information is shown.</p>
+<ul>
+<li>Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.</li>
+<li>Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.</li>
+</ul>
+<p>4. If all steps were executed successfully, it's time for a high five!</p>
+<p>5. Example of a Day 2 Automation Microsoft Teams Message | See <a href="#screen-shot-17">Screen Shot 17</a>.</p>
+<hr>
+<h2>Screen Shots of the Steps:</h2>
+<h2>Screen Shot 01:</h2>
+<p>Design Template with YAML Code that has all the required Properties.</p>
+<img src="images/aria-automation-messages-01.png" alt="">
+<hr>
+<p><strong>Design Template Example YAML Code:</strong></p>
+<p>This YAML code shows all the Properties that I want to send to a ABX Action or Orchestrator Workflow.</p>
+<pre><code>  
+formatVersion: 1
+name: Ubuntu-20-with-minion
+version: 9
+inputs:
+  CustomizationSpec:
+    type: string
+    description: Customization Specification
+    default: Customization-Ubuntu-22
+    title: &#39;Customization Spec:&#39;
+  VMName:
+    type: string
+    title: &#39;VM Name:&#39;
+    minLength: 1
+    maxLength: 15
+    default: LINUX-U-16
+  IP:
+    type: string
+    default: 192.168.69.16
+  BuildTime:
+    type: string
+    title: &#39;Build Time:&#39;
+    format: date-time
+  vCenterFolders:
+    type: string
+    title: &#39;vCenter Folder:&#39;
+    default: Blogs
+    $dynamicEnum: /data/vro-actions/TAM/DBH_vCenter_Folders
+resources:
+  Cloud_vSphere_Machine_1:
+    type: Cloud.vSphere.Machine
+    properties:
+      image: vCenter-ubuntu-20
+      flavor: vCenter-1CPU-2GB
+      name: ${input.VMName}
+      BuildTime: ${input.BuildTime}
+      folderName: ${input.vCenterFolders}
+      customizationSpec: ${input.CustomizationSpec}
+      vmIP: ${input.IP}
+      remoteAccess:
+        authentication: usernamePassword
+        username: administrator
+        password: VMware1!
+      constraints:
+        - tag: Cluster:PROD
+      networks:
+        - network: ${resource.Cloud_vSphere_Network_1.id}
+          assignment: static
+          address: ${input.IP}
+  Cloud_vSphere_Network_1:
+    type: Cloud.vSphere.Network
+    properties:
+      networkType: existing
+      constraints:
+        - tag: Network:vCenter-VMs</code></pre>
+<hr>
+<h2>Screen Shot 02:</h2>
+<p>Highlight of YAML Code showing Properties.</p>
+<img src="images/aria-automation-messages-02.png" alt="">
+<hr>
+<h2>Screen Shot 03:</h2>
+<p>Where to create Extensibility ABX Actions.</p>
+<img src="images/aria-automation-messages-03-1.png" alt="">
+<hr>
+<h2>Screen Shot 04:</h2>
+<p>Example Extensibility ABX Action.</p>
+<img src="images/aria-automation-messages-03-2.png" alt="">
+<hr>
+<p><strong>Extensibility ABX Action Code:</strong></p>
+<p>Code Snippets.</p>
+<ul>
+<li>Each ABX Action starts with identical code to retrieve Property Values.</li>
+<li>The variation arises in the methodology of dispatching this information to the respective messaging systems.</li>
+</ul>
+<p>Here's an example script for sending notifications to Microsoft Teams.</p>
+<pre><code>  
+
+function handler($context, $inputs) {
+
+    # Build PowerShell variables
+    if(!$inputs.resourceNames){
+        $vmName = &quot;NA&quot;
+    }else{
+        $vmName = $inputs.resourceNames
+    }
+    if(!$inputs.customProperties.image){
+        $image = &quot;NA&quot;
+    }else{
+        $image = $inputs.customProperties.image
+    }
+    if(!$inputs.customProperties.flavor){
+        $flavor = &quot;NA&quot;
+    }else{
+        $flavor = $inputs.customProperties.flavor
+    }
+    if(!$inputs.customProperties.folderName){
+        $folder = &quot;NA&quot;
+    }else{
+        $folder = $inputs.customProperties.folderName
+    }
+    if(!$inputs.customProperties.vmIP){
+        $vmIP = &quot;NA&quot;
+    }else{
+        $vmIP = $inputs.customProperties.vmIP
+    }
+    if(!$inputs.__metadata.userName){
+        $userName = &quot;NA&quot;
+    }else{
+        $userName = $inputs.__metadata.userName
+    }
+    
+    Write-Host &quot;--vmName:&quot;$vmName
+    Write-Host &quot;---image:&quot;$image
+    Write-Host &quot;--flavor:&quot;$flavor
+    Write-Host &quot;--folder:&quot;$folder
+    Write-Host &quot;userName:&quot;$userName
+    Write-Host &quot;----vmIP:&quot;$vmIP
+
+    # --- [ Start Add Alert to Teams Channel ] ---
+    
+    # Define the webhook URL
+    $webhookUrl = &#39;https://vcrocs.webhook.office.com/webhookb2/ac73a8c3-bd4572@015568c1-bbe7-hack-me-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2f-hack-you-12/925b-9960-4590-9251-65db25f05419&#39;
+
+    # --- Create the message card
+$messageCard = @{
+    &quot;@type&quot;    = &quot;MessageCard&quot;
+    &quot;@context&quot; = &quot;http://schema.org/extensions&quot;
+    &quot;summary&quot;  = &quot;Issue 176715375&quot;
+    &quot;sections&quot; = @(
+        @{
+            &quot;activityTitle&quot;    = &quot;vRA Automated VM Build:&quot;
+            &quot;facts&quot;            = @(
+                @{
+                    &quot;name&quot;  = &quot;VM Name:&quot;
+                    &quot;value&quot; = &quot;$vmName&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;VM IP:&quot;
+                    &quot;value&quot; = &quot;$vmIP&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;Created By:&quot;
+                    &quot;value&quot; = &quot;$userName&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;VM Image:&quot;
+                    &quot;value&quot; = &quot;$image&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;vCenter Folder:&quot;
+                    &quot;value&quot; = &quot;$folder&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;VM Flavor:&quot;
+                    &quot;value&quot; = &quot;$flavor&quot;
+                }
+            )
+            &quot;markdown&quot; = $true
+        }
+    )
+} | ConvertTo-Json -Depth 10
+
+    # Send the message card
+    Invoke-RestMethod -Uri $webhookUrl -Method Post -ContentType &#39;application/json&#39; -Body $messageCard
+
+    $outPut = &quot;Done&quot;
+    return $outPut
+}</code></pre>
+<hr>
+<p>This code is to send a message to Google Spaces.</p>
+<pre><code>  
+
+function handler($context, $inputs) {
+
+    # Build PowerShell variables
+    if(!$inputs.resourceNames){
+        $vmName = &quot;NA&quot;
+    }else{
+        $vmName = $inputs.resourceNames
+    }
+    if(!$inputs.customProperties.image){
+        $image = &quot;NA&quot;
+    }else{
+        $image = $inputs.customProperties.image
+    }
+    if(!$inputs.customProperties.flavor){
+        $flavor = &quot;NA&quot;
+    }else{
+        $flavor = $inputs.customProperties.flavor
+    }
+    if(!$inputs.customProperties.folderName){
+        $folder = &quot;NA&quot;
+    }else{
+        $folder = $inputs.customProperties.folderName
+    }
+    if(!$inputs.customProperties.vmIP){
+        $vmIP = &quot;NA&quot;
+    }else{
+        $vmIP = $inputs.customProperties.vmIP
+    }
+    if(!$inputs.__metadata.userName){
+        $userName = &quot;NA&quot;
+    }else{
+        $userName = $inputs.__metadata.userName
+    }
+    
+    Write-Host &quot;--vmName:&quot;$vmName
+    Write-Host &quot;---image:&quot;$image
+    Write-Host &quot;--flavor:&quot;$flavor
+    Write-Host &quot;--folder:&quot;$folder
+    Write-Host &quot;userName:&quot;$userName
+    Write-Host &quot;----vmIP:&quot;$vmIP
+
+    # --- [ Start Add Alert to Google Chat ] ---
+    
+    # --- Create json body for Google Alert   
+$messageBody = @{
+    cards = @(
+        @{
+            header = @{
+                title    = &quot;New VM Build&quot;
+            }
+            sections = @(
+                @{
+                    widgets = @(
+                        @{
+                            keyValue = @{
+                                topLabel         = &quot;VM Name:&quot;
+                                content          = &quot;$vmname&quot;
+                                contentMultiline = $true
+                            }
+                        },
+                        @{
+                            keyValue = @{
+                                topLabel         = &quot;VM IP:&quot;
+                                content          = &quot;$vmIP&quot;
+                                contentMultiline = $true
+                            }
+                        },
+                        @{
+                            keyValue = @{
+                                topLabel         = &quot;Created By:&quot;
+                                content          = &quot;$username&quot;
+                                contentMultiline = $true
+                            }
+                        },
+                        @{
+                            keyValue = @{
+                                topLabel         = &quot;VM Image:&quot;
+                                content          = &quot;$image&quot;
+                                contentMultiline = $true
+                            }
+                        },
+                        @{
+                            keyValue = @{
+                                topLabel         = &quot;vCenter Folder:&quot;
+                                content          = &quot;$folder&quot;
+                                contentMultiline = $true
+                            }
+                        },
+                        @{
+                            keyValue = @{
+                                topLabel         = &quot;VM Flavor:&quot;
+                                content          = &quot;$flavor&quot;
+                                contentMultiline = $true
+                            }
+                        }
+                    )
+                }
+            )
+        }
+    )
+}
+    
+    $jsonMessage = $messageBody | ConvertTo-Json -Depth 10
+    
+    # Output the JSON to verify
+    #$jsonMessage
+
+    # Define the webhook URL (replace it with your actual webhook URL)
+    $webhookUrl = &#39;https://chat.googleapis.com/v1/spaces/AAAAvSYSmfg/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&amp;token=Vj-NoThfrmjLnkIW_iQRQw71qcE2CGxG1tkjs2ArM7o&#39;
+
+    # Send the message
+    $results = Invoke-RestMethod -Uri $webhookUrl -Method Post -Body $jsonMessage -ContentType &quot;application/json&quot;
+
+    #$outPut = &quot;WebHook Date/Time: &quot; + $results.createTime
+    #Write-Host $outPut
+    
+    $outPut = &quot;Done&quot;
+
+  return $outPut
+}</code></pre>
+<hr>
+<h2>Screen Shot 05:</h2>
+<p>Subscriptions used to start ABX Actions or Orchestrator Workflows.</p>
+<img src="images/aria-automation-messages-03.png" alt="">
+<hr>
+<h2>Screen Shot 06:</h2>
+<p>Subscription definition example.</p>
+<img src="images/aria-automation-messages-04.png" alt="">
+<hr>
+<h2>Screen Shot 07:</h2>
+<p>Create a new Orchestrator Workflow.</p>
+<img src="images/aria-automation-messages-07.png" alt="">
+<hr>
+<h2>Screen Shot 08:</h2>
+<p>Add Input named "inputProperties" to the Orchestrator Workflow.</p>
+<img src="images/aria-automation-messages-08.png" alt="">
+<hr>
+<h2>Screen Shot 09:</h2>
+<p>Create the Orchestrator Workflow Schema.</p>
+<img src="images/aria-automation-messages-09.png" alt="">
+<hr>
+<h2>Screen Shot 10:</h2>
+<p>Add the code to the Orchestrator Workflow.</p>
+<img src="images/aria-automation-messages-10.png" alt="">
+<hr>
+<p><strong>Orchestrator Workflow Code:</strong></p>
+<p>Code Examples. At the start of each Orchestrator Workflow, the code for retrieving Property Values is consistent. The variation comes in how the information is sent to each messaging system.</p>
+<ul>
+<li>For sending messages to Microsoft Teams, use the following code.</li>
+<li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
+<li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.</li>
+<pre><code>  
+function Handler($context, $inputs) {
+
+    # Build PowerShell variables
+    if(!$inputs.inputProperties.resourceNames){
+        $vmName = &quot;NA&quot;
+    }else{
+        $vmName = $inputs.inputProperties.resourceNames
+    }
+    if(!$inputs.inputProperties.customProperties.image){
+        $image = &quot;NA&quot;
+    }else{
+        $image = $inputs.inputProperties.customProperties.image
+    }
+    if(!$inputs.inputProperties.customProperties.flavor){
+        $flavor = &quot;NA&quot;
+    }else{
+        $flavor = $inputs.inputProperties.customProperties.flavor
+    }
+    if(!$inputs.inputProperties.customProperties.folderName){
+        $folder = &quot;NA&quot;
+    }else{
+        $folder = $inputs.inputProperties.customProperties.folderName
+    }
+    if(!$inputs.inputProperties.customProperties.vmIP){
+        $vmIP = &quot;NA&quot;
+    }else{
+        $vmIP = $inputs.inputProperties.customProperties.vmIP
+    }
+    if(!$inputs.__metadata_userName){
+        $userName = &quot;NA&quot;
+    }else{
+        $userName = $inputs.__metadata_userName
+    }
+    
+    Write-Host &quot;--vmName:&quot;$vmName
+    Write-Host &quot;---image:&quot;$image
+    Write-Host &quot;--flavor:&quot;$flavor
+    Write-Host &quot;--folder:&quot;$folder
+    Write-Host &quot;userName:&quot;$userName
+    Write-Host &quot;----vmIP:&quot;$vmIP
+
+    # Define the webhook URL
+    $webhookUrl = &#39;https://vcrocs.webhook.office.com/webhookb2/ac73a8c3-59a2-hack-me-bd4572@015568c1-bbe7-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2fcbd-hack-you-0212/925be554-9960-4590-9251-65db25f05419&#39;
+
+# Create the message card
+$messageCard = @{
+    &quot;@type&quot;    = &quot;MessageCard&quot;
+    &quot;@context&quot; = &quot;http://schema.org/extensions&quot;
+    &quot;summary&quot;  = &quot;Issue 176715375&quot;
+    &quot;sections&quot; = @(
+        @{
+            &quot;activityTitle&quot;    = &quot;vRA Automated VM Build:&quot;
+            &quot;facts&quot;            = @(
+                @{
+                    &quot;name&quot;  = &quot;VM Name:&quot;
+                    &quot;value&quot; = &quot;$vmName&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;VM IP:&quot;
+                    &quot;value&quot; = &quot;$vmIP&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;Created By:&quot;
+                    &quot;value&quot; = &quot;$userName&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;VM Image:&quot;
+                    &quot;value&quot; = &quot;$image&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;vCenter Folder:&quot;
+                    &quot;value&quot; = &quot;$folder&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;VM Flavor:&quot;
+                    &quot;value&quot; = &quot;$flavor&quot;
+                }
+            )
+            &quot;markdown&quot; = $true
+        }
+    )
+} | ConvertTo-Json -Depth 10
+
+    # Send the message card
+    Invoke-RestMethod -Uri $webhookUrl -Method Post -ContentType &#39;application/json&#39; -Body $messageCard
+
+    $output=@{status = &#39;done&#39;}
+
+    return $output
+}</code></pre>
+<hr>
+</ul>
+<h2>Screen Shot 11:</h2>
+<p>Code difference between a Orchestrator Workflow and a ABX Action.</p>
+<img src="images/aria-automation-messages-11.png" alt="">
+<hr>
+<h2>Message Examples:</h2>
+<h2>Screen Shot 12:</h2>
+<p>When all is configured and functioning properly, the Google Space message containing the New VM Build Details will appear as follows. Quite impressive!</p>
+<img src="images/aria-automation-messages-google-space.png" alt="">
+<hr>
+<h2>Screen Shot 13:</h2>
+<p>Microsoft Teams Message with New VM Build Details. Very Cool!</p>
+<img src="images/aria-automation-messages-teams-message.png" alt="">
+<hr>
+<h2>Screen Shot 14:</h2>
+<p>How to create a Google Spaces Webhook. Link included below on how to create a Microsoft Teams Webhook.</p>
+<img src="images/aria-automation-messages-12.png" alt="">
+<hr>
+<h2>Start of Day 2 Automation Screen Shots:</h2>
+<h2>Screen Shot 15:</h2>
+<p>Add all the required inputs to the Workflow for the Day 2 Automation process.</p>
+<img src="images/aria-automation-messages-15.png" alt="">
+<hr>
+<h2>Screen Shot 16:</h2>
+<p>Add the code to the Orchestrator Workflow.</p>
+<img src="images/aria-automation-messages-16.png" alt="">
+<hr>
+<p><strong>Orchestrator Workflow Code for Day 2 Automation:</strong></p>
+<p>Code Example.</p>
+<ul>
+<li>The difference between this Workflow for day 2 Automation Code and when I used a Workflow to create a new VM is how you get the input values.</li>
+<li>For sending messages to Microsoft Teams, use the following code.</li>
+<li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
+<li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.</li>
+<pre><code>  
+
+function Handler($context, $inputs) {
+
+    # Build PowerShell variables
+    if(!$inputs.vmName){
+        $vmName = &quot;NA&quot;
+    }else{
+        $vmName = $inputs.vmName
+    }
+    if(!$inputs.snapName){
+        $snapName = &quot;NA&quot;
+    }else{
+        $snapName = $inputs.snapName
+    }
+    if(!$inputs.snapDescription){
+        $snapDescription = &quot;NA&quot;
+    }else{
+        $snapDescription = $inputs.snapDescription
+    }
+
+    Write-Host &quot;---------vmName:&quot;$vmName
+    Write-Host &quot;-------snapName:&quot;$snapName
+    Write-Host &quot;snapDescription:&quot;$snapDescription
+
+    # Define the webhook URL
+    $webhookUrl = &#39;https://vcrocs.webhook.office.com/webhookb2/ac73a8c3-hack-me-e2fbd4572@015568c1-bbe7-4050-add6-6f36b7b44adb/IncomingWebhook/b41cd4d2fcb-hack-you-2/925be554-9960-4590-9251-65db25f05419&#39;
+
+# Create the message card
+$messageCard = @{
+    &quot;@type&quot;    = &quot;MessageCard&quot;
+    &quot;@context&quot; = &quot;http://schema.org/extensions&quot;
+    &quot;summary&quot;  = &quot;Issue 176715375&quot;
+    &quot;sections&quot; = @(
+        @{
+            &quot;activityTitle&quot;    = &quot;VM SNAP Shot:&quot;
+            &quot;facts&quot;            = @(
+                @{
+                    &quot;name&quot;  = &quot;VM Name:&quot;
+                    &quot;value&quot; = &quot;$vmName&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;Snap Name:&quot;
+                    &quot;value&quot; = &quot;$snapName&quot;
+                },
+                @{
+                    &quot;name&quot;  = &quot;Snap Description:&quot;
+                    &quot;value&quot; = &quot;$snapDescription&quot;
+                }
+            )
+            &quot;markdown&quot; = $true
+        }
+    )
+} | ConvertTo-Json -Depth 10
+
+    # Send the message card
+    Invoke-RestMethod -Uri $webhookUrl -Method Post -ContentType &#39;application/json&#39; -Body $messageCard
+
+    # Use this section to add the code to do whatever day 2 process you want to run
+    # --- Start the Code
+
+    # --- end the Code
+
+    $output=@{status = &#39;done&#39;}
+
+    return $output
+}</code></pre>
+<hr>
+</ul>
+<h2>Screen Shot 17:</h2>
+<p>Microsoft Teams Message with Day 2 Automation Details. Awesome!</p>
+<img src="images/aria-automation-messages-17.png" alt="">
+<hr>
+<h2>Links to resources discussed is this Blog Post:</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=newteams%2Cdotnet" target="_blank" rel="noopener noreferrer">Link to learn how to create a Microsoft Teams Webhook.</a></li>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/" target="_blank" rel="noopener noreferrer">Link to my GitHub Repository for sample code like what is included in this Blog Post.</a></li>
+<hr>
+</ul>
+<h2>Aria Automation Version used for Blog Post:</h2>
+<p>VMware Aria Automation 8.16.0 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code or process may need to be changed.</p>
+<hr>
+<p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>

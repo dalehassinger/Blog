@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMware Explore 2024 - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VMware Explore 2024</h1>
+                        <div class="post-meta">
+                            <time datetime="2024-05-01T04:00:00Z">
+                                May 1, 2024
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
+                        <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-explore.html" class="tag">#VMware Explore</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/vmware-aria-operations-for-logs.html" class="tag">#VMware Aria Operations for Logs</a> <a href="tags/vegas.html" class="tag">#Vegas</a></div>
+                    </header>
+                    
+                    <img src="images/vmware-explore-2024-featured.png" alt="VMware Explore 2024" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p><strong>Why I enjoy going to VMware Explore. First as a Customer. Now as a Employee.</strong></p>
+<hr>
+<blockquote>"Innovate like a startup, deliver like an enterprise” - Pat Gelsinger</blockquote>
+<hr>
+<h2>VMware Explore 2024</h2>
+<p>Website: <a href="https://www.vmware.com/explore/us" target="_blank" rel="noopener noreferrer">VMware Explore 2024.</a></p>
+<p>Las Vegas Date: August 26 – 29, 2024</p>
+<p>The Venetian Convention and Expo Center</p>
+<p>Registration is open!</p>
+<hr>
+<h2>Why Attend</h2>
+<p><strong>When I was a VMware Customer, I tried to go to VMware Explore every year. Here is a list of reasons why I enjoyed the conference:</strong></p>
+<ul>
+<li>To meet other people in the same field as myself. Exchange stories, ideas, contact information, etc.. The Community side of the event alone, is worth the cost to go.</li>
+<li>To attend sessions that are done by people that you follow their blogs or socials, is an exciting experience.</li>
+<li>The Key Note Sessions get you excited to see what is coming with the next releases of the VMware Products.</li>
+<li>Vendor Parties are a great way to meet people and have good food and drink.</li>
+<li>Other Highlights for evening Parties for me:</li>
+<li>vExpert Party</li>
+<li>VMUG Party</li>
+<li>Event Concert on the last night (Black Keys Concert was my favorite)</li>
+<hr>
+<p><strong>As a Employee my reasons are different to attend. Here is a list:</strong></p>
+<li>To meet people in person that I work with everyday. We are located across the country and don't get to meet in person. Even if we went into a office everyday, we would never get to meet.</li>
+<li>Get Sessions accepted and share the knowledge with the products I work with every day. I like doing presentations on the Automation, Monitoring and Logging Products.</li>
+<li>I like to participate in the Hackathon that is part of the conference. In 2023 my Team received 2nd place.</li>
+<hr>
+</ul>
+<h2>Sessions</h2>
+<p>I submitted a couple sessions that hope get accepted in 2024, Fingers Crossed. One session I will be presenting with a customer, and 2 sessions I included TAMs to present with me. I am excited about the topics. When the sessions get announced, check back on this blog. I will update what was accepted.</p>
+<hr>
+<h2>Sessions Update!</h2>
+<p>I am very excited to announce that I will be doing (3) presentations at VMware Explore 2024.</p>
+<ul>
+<li>Streamlining Healthcare with Automation: How VMware Can Help | <a href="https://event.vmware.com/flow/vmware/explore2024lv/content/page/catalog?search=INDB1917LV" target="_blank" rel="noopener noreferrer">INDB1917LV</a></li>
+<li>Transform VCF Automation Inputs to ABX and Orchestrator Workflow Variables | <a href="https://event.vmware.com/flow/vmware/explore2024lv/content/page/catalog?search=CODE1164LV" target="_blank" rel="noopener noreferrer">CODE1164LV</a></li>
+<li>Maximizing VMware Workstation/Fusion for Business, Education, and Home Labs | <a href="https://event.vmware.com/flow/vmware/explore2024lv/content/page/catalog?search=CODE1162LV" target="_blank" rel="noopener noreferrer">CODE1162LV</a></li>
+<hr>
+</ul>
+<p><a href="https://event.vmware.com/flow/vmware/explore2024lv/content/page/catalog?search=Hassinger" target="_blank" rel="noopener noreferrer">Link to all my sessions in the VMware Explore 2024 Content Catalog</a></p>
+<hr>
+<p><strong>Session Details:</strong></p>
+<img src="images/vmware-explore-2024-01.png" alt="">
+<hr>
+<h2>My favorite places to eat or things to do while at VMware Explore:</h2>
+<p><strong>Eating - Places that I have gone and enjoyed:</strong></p>
+<ul>
+<li><a href="https://www.joes.net/las-vegas/" target="_blank" rel="noopener noreferrer">Joes's Prime Steak and Stone Crab</a> - I have always had a great experience here</li>
+<li><a href="https://www.venetianlasvegas.com/restaurants/delmonico-steakhouse.html" target="_blank" rel="noopener noreferrer">Delmonico Steakhouse</a> - You can't leave without having EMERIL’S BANANA CREAM PIE!</li>
+<li><a href="https://www.venetianlasvegas.com/restaurants/grand-lux-cafe-palazzo.html" target="_blank" rel="noopener noreferrer">Grand Lux Café at The Palazzo</a> is great for Breakfast!</li>
+<li><a href="https://www.venetianlasvegas.com/restaurants/yardbird.html" target="_blank" rel="noopener noreferrer">Yardbird</a> is close to conference entrance and food to very good</li>
+<li><a href="https://www.in-n-out.com/menu" target="_blank" rel="noopener noreferrer">IN-N-Out BURGER</a> | If you live in the US East and have never gone to an IN-N-Out BURGER, you need to go at least one time.</li>
+<p><strong>Things to do that I have done and enjoyed:</strong></p>
+<li><a href="https://www.usbr.gov/lc/hooverdam/index.html" target="_blank" rel="noopener noreferrer">Hoover Damn</a> was nice to go see. Pictures can't replace a visit in person.</li>
+<li><a href="https://www.clarkcountynv.gov/government/departments/parks___recreation/shooting_complex/guest_services.php" target="_blank" rel="noopener noreferrer">Sporting Clays at Clark County Shooting Complex</a> - World-Class Shotgun Center</li>
+<li><a href="https://www.blm.gov/programs/national-conservation-lands/nevada/red-rock-canyon" target="_blank" rel="noopener noreferrer">Red Rock Canyon National Conservation Area</a></li>
+<hr>
+</ul>
+<h2>Links to resources discussed is this Blog Post:</h2>
+<ul>
+<li><a href="https://www.vmware.com/explore/us" target="_blank" rel="noopener noreferrer">VMware Explore 2024.</a></li>
+<li><a href="https://event.vmware.com/flow/vmware/explore2024lv/reg/login" target="_blank" rel="noopener noreferrer">VMware Explore 2024 | Registration Link.</a></li>
+</ul>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
