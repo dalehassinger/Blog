@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCF 9.1 | Minimum Lab Build - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VCF 9.1 | Minimum Lab Build</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-06-05T16:37:34Z">
+                                June 5, 2026
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf.html" class="category">VCF</a></div>
+                        <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a></div>
+                    </header>
+                    
+                    <img src="images/vcf-minimum-featured.png" alt="VCF 9.1 | Minimum Lab Build" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>What is the Minimum You Need to Build a VCF 9.1 Lab?</h3>
+<p>This post details the minimum requirements to build a lab environment for evaluating VMware Cloud Foundation (VCF) 9.1. If you want to learn VCF 9.1 but lack the hardware resources for a full deployment, this minimal footprint is an option. I completed this process in my lab using four Minisforum servers and wanted to share the workflow with the vCommunity. A single Minisforum server would have enough resources to start.</p>
+<hr>
+<p>To start, you need access to support.broadcom.com to download the software. For home lab access, I highly recommend joining the VMUG Advantage Program.</p>
+<p><a href="https://vmug.com/memberships" target="_blank" rel="noopener noreferrer">VMUG Advantage Official Web Site</a></p>
+<hr>
+<h3>Deployment Order and Component Installation</h3>
+<p>To complete this minimal setup, deploy the components in the following order:</p>
+<p>1. <strong>ESX 9.1</strong></p>
+<p>2. <strong>vCenter 9.1</strong></p>
+<p>3. <strong>VCF 9.1 Operations</strong></p>
+<p>4. <strong>VCF 9.1 License Server</strong></p>
+<hr>
+<h4>1. ESX 9.1</h4>
+<p>I performed a greenfield installation of VCF 9.1. First, I updated the lab hosts by installing ESX 9.1 on each server via a USB drive.</p>
+<hr>
+<p>For storage, I use NFS with my Synology NAS.</p>
+<p>Simple Storage layout:</p>
+<ul>
+<li>3 Shared NFS drives and each host also has local NVMe Storage</li>
+</ul>
+<img src="images/vcf-minimum-storage.png" alt="Image">
+<hr>
+<h4>Tiered Memory:</h4>
+<p>I am using Memory Tiering on all the ESX Hosts in my lab. With a minimum VCF install I wasn't able to use the vCenter GUI to enable the tiered memory so I ran these commands from the CLI.</p>
+<p>Tiered Memory is a game changer for home labs. I highly recommend you take advantage of this feature, plus it lets you do some testing in a lab environment to see how the performance works. Personally, I have had no issues with Tiered Memory in my Home Lab. 👍🏻</p>
+<pre><code>
+# List the storage adapters and the devices attached to each adapter.
+# Use this command to identify the NVMe device you want to use for tiered memory.
+# Look for the correct NVMe disk UID before running the enable command.
+esxcli storage core adapter device list
+
+# Place the ESX host into Maintenance Mode before enabling tiered memory.
+# This helps ensure the host is in a safe state before changing memory tiering configuration.
+esxcli system maintenanceMode set --enable true
+
+# Enable Memory Tiering on the selected NVMe device.
+# Replace &lt;NVMe-UID&gt; with the actual NVMe disk identifier from the device list command.
+#
+# -d specifies the NVMe device to use for the memory tier.
+# -r sets the tiering ratio. In this example, 400 means a 4:1 ratio.
+#    Example: 256 GB of DRAM could be expanded with up to 1 TB of NVMe-backed tiered memory.
+esxcli memtier enable -d /vmfs/devices/disks/&lt;NVMe-UID&gt; -r 400
+
+# Check the current Memory Tiering status on the ESX host.
+# This confirms whether tiered memory is enabled and shows the configured ratio.
+esxcli memtier status get
+
+# List the devices currently configured for Memory Tiering.
+# Use this to verify that the expected NVMe device is assigned to the memory tier.
+esxcli memtier device list
+
+# Exit Maintenance Mode after tiered memory has been enabled and verified.
+# The host can now return to normal operation.
+esxcli system maintenanceMode set --enable false
+
+reboot
+</code></pre>
+<p>Screenshot of Tiered Memory in vCenter:</p>
+<img src="images/vcf-minimum-tiered.png" alt="Image">
+<hr>
+<h4>2. vCenter 9.1</h4>
+<p>Once ESX 9.1 was running on all hosts, I deployed vCenter using the standard method: mounting the vCenter ISO and completing the GUI installation.</p>
+<hr>
+<h4>3. VCF Operations 9.1 & VCF License Server</h4>
+<p>Next, I manually deployed VCF Operations using the OVA file. This step must happen before setting up licensing, as VCF 9.1 requires a license server, which is managed through VCF Operations. The license server was also deployed using the OVA file.</p>
+<p>The minimum install allows you to use most of the VCF Operations OOTB features that are not specific to a full VCF install.</p>
+<ul>
+<li>Here is a TAM Management Pack Dashboard</li>
+</ul>
+<img src="images/vcf-minimum-operations.png" alt="Image">
+<p>Add a License Server within VCF Operations:</p>
+<ul>
+<li>Very Similar to adding a Cloud Proxy Server to VCF Operations.</li>
+</ul>
+<img src="images/vcf-minimum-lic-server-install.png" alt="Image">
+<p>License Server within VCF Operations:</p>
+<img src="images/vcf-minimum-lic-server.png" alt="Image">
+<hr>
+<h4>Post-Installation Notes</h4>
+<ul>
+<li><strong>ESX 9.1 Host GUI:</strong> Features an updated user interface with a similar look and feel to vCenter. 👍🏻</li>
+</ul>
+<img src="images/vcf-minimum-esx-gui.png" alt="Image">
+<ul>
+<li><strong>Tiered Memory:</strong> vCenter now displays Tiered0 and Tiered1 memory metrics at the host and cluster level when Tiered Memory is active.</li>
+</ul>
+<img src="images/vcf-minimum-tiered-widget.png" alt="Image">
+<ul>
+<li><strong>License Server:</strong> Configuration changes cannot be made post-deployment. The license server architecture favors deploying a new instance over troubleshooting existing deployments.</li>
+</ul>
+<img src="images/vcf-minimum-lic-server-ui.png" alt="Image">
+<ul>
+<li><strong>VCF 9.1 Topology:</strong> The inventory shows the active vCenter and required core VMs.</li>
+</ul>
+<img src="images/vcf-minimum-vms.png" alt="Image">
+<ul>
+<li>vCenter, Operations, License Server, (2) DCs</li>
+<li>Very Simple Install</li>
+<hr>
+<p><strong>Lab Architecture Notes:</strong></p>
+<li><strong>Infrastructure Prerequisites:</strong> Active Directory and DNS services were offloaded to two pre-existing Windows Servers.</li>
+<li><strong>Lab Philosophy:</strong> I always recommend keeping a home lab simple when you first start learning. You can add components as you acquire more resources and time.</li>
+<li><strong>Scalability:</strong> While my ultimate goal is a full VCF deployment, this approach demonstrates how to start small and scale over time.</li>
+<li><strong>Next Steps:</strong> As I expand this environment, my next focus areas for learning and integration will be VCF Operations for Logs and VCF Automation.</li>
+<hr>
+</ul>
+<h3>Conclusion</h3>
+<p>The standard VCF 9.1 installer was not used for this minimal lab environment.</p>
+<p>This method allows you to stand up a basic VCF 9.1 environment for educational purposes without standard hardware prerequisites. With current hardware procurement lead times stretching out and the high cost of memory making lab expansions expensive, this minimal architecture offers a path to start learning VCF 9.1 immediately.</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
