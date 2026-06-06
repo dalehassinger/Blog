@@ -1,8 +1,37 @@
-{
+window.vcrocsSearchIndex = {
   "posts" : [
     {
       "categories" : [
-
+        "VCF Operations"
+      ],
+      "content" : "The new Dashboard sections feature in VCF Operations 9.1 is a small change, but easily one of my favorite highlights of this release. >Dashboard Sections provide a Simple layout, but serious power. 😎 Dashboard Sections in use: - Select a host to view data, then minimize the section to eliminate scrolling and hide unnecessary widgets. - Performance metrics update based on the selected host; minimize the section once your review is complete. - With the top sections collapsed, the dashboard focuses entirely on VM data, maintaining a clean, simple workspace. - Sections keep the Dashboard very clean looking and easy to use without a lot of scrolling. --- Steps to add sections to a Dashboard: - To start the Dashboard has no sections. - Edit the dashboard. - Select \"Add Section\" located above the widgets. - Rename your new sections. - Drag and drop widgets into the desired sections. - You can now Collapse sections as needed to minimize scrolling and streamline the workspace. --- After you install VCF Operations 9.1: - Explore the Out of the Box (OOTB) dashboards included with VCF Operations 9.1. - Many of these standard dashboards now feature integrated sections by default. ---",
+      "date" : "2026-05-31T10:55:24Z",
+      "excerpt" : "The new Dashboard sections feature in VCF Operations 9.1 is a small change, but easily one of my favorite highlights of this release. >Dashboard Sections provide a Simple layout, but serious power. 😎 ",
+      "tags" : [
+        "VCF Operations",
+        "vExpert"
+      ],
+      "title" : "VCF Operations 9.1 | Dashboard Sections",
+      "url" : "vcf-operations-dashboard-sections.html"
+    },
+    {
+      "categories" : [
+        "vCommunity"
+      ],
+      "content" : "Honored to be Selected for the VMware vExpert VCF Sub-Program 2026! I am incredibly honored to be selected for the VMware vExpert VCF Sub-Program for 2026! This sub-program is full of amazing community members, and I have a ton of ideas lined up for blog content this year. To kick things off, I’ve already submitted several VCF-focused session proposals for VMware Explore, and I’m hoping to share some of this knowledge live on stage. My home lab has been busy lately. I recently stood up VCF 9.1, and it is packed with new features that I can't wait to dive into and share here on the blog. What’s coming next? - VCF Salt (formerly SaltStack): Now that Salt is part of the VCF Advanced Cyber Compliance (ACC) add-on , I’ll be starting a new deep-dive blogging series on it. - Open Source Contributions: Beyond blogging, I want to give back to the Salt open-source project by helping update and streamline the documentation, making it easier than ever for people to get started. Get ready for a lot of deep dives into VCF Automation, Operations, and Salt—I can't wait to share what I've been working on this year! --- ---",
+      "date" : "2026-05-30T11:37:33Z",
+      "excerpt" : "Honored to be Selected for the VMware vExpert VCF Sub-Program 2026! I am incredibly honored to be selected for the VMware vExpert VCF Sub-Program for 2026! This sub-program is full of amazing communit",
+      "tags" : [
+        "vExpert",
+        "vCommunity",
+        "VCF"
+      ],
+      "title" : "VMware vExpert | VCF Sub-Program 2026",
+      "url" : "vmware-vexpert-vcf-sub-program.html"
+    },
+    {
+      "categories" : [
+        "vCommunity"
       ],
       "content" : "From Listener to Guest: Sharing My vCommunity Story on the Virtually Speaking Podcast There are certain moments in a career that stand out—not just for the professional achievement, but for the personal connections involved. Being a guest on the Virtually Speaking Podcast during VMUG Connect in Minneapolis was exactly one of those highlights for me. As a dedicated listener of the show, sitting behind the microphone was a fun experience. Making it even more special was sharing the episode with my good friend and mentor, Brock Peterson. It isn't every day you get to discuss your passion for the vCommunity alongside the people who have helped shape your journey. Why the vCommunity Matters In this episode, we dive into the \"why\" behind our involvement in the community and how sharing knowledge through blogging and networking can transform a career. Whether you are just starting out or are a seasoned architect, the vCommunity has something to offer. You can watch the full conversation here: Link to Virtually Speak Podcast Episode 📺 Get Involved If you find the discussion inspiring, I highly encourage you to look up your local VMUG chapter. These events are more than just technical deep dives into VMware products; they are the best place to meet people who are genuinely passionate about sharing knowledge. Grab some popcorn, enjoy the episode, and I hope to see you at a VMUG event soon! ---",
       "date" : "2026-05-29T15:54:06Z",
@@ -47,7 +76,7 @@
       "categories" : [
 
       ],
-      "content" : "Resources --- Tools & Repositories: | Resource | Description | |---|---| | vCROCS GitHub | Collection of items for the VMware VCF Admin — Automation · Monitoring · Logging | | Salt Formulas | Saltstack Formulas Repository | --- Bloggers: | Author | Focus | |---|---| | Brock Peterson | VMware VCF Operations Master | | Cosmin Trif | VMware VCF Automation Master | | Don Horrox | VMware vExpert | --- Podcasts: | Podcast | Description | |---|---| | The PowerShell Podcast | Weekly show about building your career with PowerShell | | Virtually Speaking Podcast | Weekly technical podcast covering VMware private and hybrid cloud topics | | Mac Power Users | Getting the most from your Apple technology — focused topics and workflow guests | | VMware Communities Roundtable | VMware experts discuss virtualization live every Wednesday at noon PT |",
+      "content" : "Resources --- Tools & Repositories: | Resource | Description | |---|---| | vCROCS GitHub | Collection of items for the VMware VCF Admin — Automation · Monitoring · Logging | | Salt Formulas | Saltstack Formulas Repository | | Brock Peterson - GitHub Repository | VCF Operations and Automations | --- Bloggers: | Author | Focus | |---|---| | Brock Peterson | VMware VCF Operations Master | | Cosmin Trif | VMware VCF Automation Master | | Don Horrox | VMware vExpert | --- Podcasts: | Podcast | Description | |---|---| | The PowerShell Podcast | Weekly show about building your career with PowerShell | | Virtually Speaking Podcast | Weekly technical podcast covering VMware private and hybrid cloud topics | | Mac Power Users | Getting the most from your Apple technology — focused topics and workflow guests | | VMware Communities Roundtable | VMware experts discuss virtualization live every Wednesday at noon PT |",
       "date" : "2026-05-05T10:19:38Z",
       "excerpt" : "Resources --- Tools & Repositories: | Resource | Description | |---|---| | vCROCS GitHub | Collection of items for the VMware VCF Admin — Automation · Monitoring · Logging | | Salt Formulas | Saltstac",
       "tags" : [
@@ -191,10 +220,6 @@
       "date" : "2025-12-26T05:00:00Z",
       "excerpt" : "Most-Read Blog Posts of 2025 plus other highlights --- >Automate boldly. Monitor smarter. Share openly. Build community. --- 2025 Stats Recap 📊 Blog Site: - ✨ 100k+ Views - 15k+ users - 130+ countries",
       "tags" : [
-        "Blogs",
-        "Stats",
-        "2025",
-        "Career",
         "vCommunity"
       ],
       "title" : "Highlights of 2025",
@@ -491,9 +516,7 @@
       "date" : "2024-12-22T05:00:00Z",
       "excerpt" : "Most-Read Blog Posts of 2024 --- >I’m astonished by how many people have read my blogs—especially since I was certain only my dog cared. – Unknown --- 2024 Stats Recap 📊 Blog Site: ✨ 69,000+ Views Lin",
       "tags" : [
-        "Blogs",
-        "Stats",
-        "2024"
+        "vCommunity"
       ],
       "title" : "Top Blog Highlights of 2024",
       "url" : "top-blog-highlights-of-2024.html"
@@ -607,12 +630,7 @@
       "date" : "2024-10-05T04:00:00Z",
       "excerpt" : "How to show ESXi Tiered Memory Metrics in VCF Operations. --- >Using VCF Operations Management Pack Builder alongside a product like FastAPI will elevate your observability to a whole new level... ---",
       "tags" : [
-        "ESXi",
-        "Tiered Memory",
-        "VCF Operations",
-        "Dashboard",
-        "FastAPI",
-        "PowerShell"
+        "VCF Operations"
       ],
       "title" : "VCF Operations Dashboard | ESXi Tiered Memory",
       "url" : "vcf-operations-dashboard-esxi-tiered-memory.html"
@@ -644,11 +662,7 @@
       "date" : "2024-07-13T04:00:00Z",
       "excerpt" : "Highly Successful Event and a very positive customer discussion about VMware Cloud Foundation --- On July 12, 2024, the Healthcare Virtualization Community (HVC) hosted an in-person event for Healthca",
       "tags" : [
-        "VMware",
-        "HVC",
-        "Culture",
-        "vCommunity",
-        "Healthcare"
+        "vCommunity"
       ],
       "title" : "VMware | The HVC Community remains strong and active",
       "url" : "vmware-the-hvc-community-remains-strong-and-active.html"
@@ -813,11 +827,7 @@
       "date" : "2024-03-09T05:00:00Z",
       "excerpt" : "How to learn about and use VMware Products in a Home Lab --- I was inspired to create this Blog after VMware EOA (End of Availability) the free ESXi product. There were some articles saying that peopl",
       "tags" : [
-        "VMware",
-        "ESXi",
-        "vCenter",
-        "Home Lab",
-        "VMware Workstation"
+        "vExpert"
       ],
       "title" : "How to learn about VMware Products",
       "url" : "how-to-learn-about-vmware-products.html"
@@ -897,11 +907,7 @@
       "date" : "2024-01-07T05:00:00Z",
       "excerpt" : "How to use VMware Aria Automation Orchestrator Actions to make sure AD (Active Directory) OU (Organizational Unit) structure is in place BEFORE creating new Servers. --- VMware Aria Automation VMware ",
       "tags" : [
-        "VMware",
-        "VMware Aria Automation",
-        "Active Directory",
-        "Organizational Units",
-        "Actions"
+        "VCF Automation"
       ],
       "title" : "VMware Aria Automation Orchestrator | Active Directory OUs",
       "url" : "vmware-aria-automation-orchestrator-active-directory-ous.html"
@@ -1370,10 +1376,8 @@
       "date" : "2022-11-01T04:00:00Z",
       "excerpt" : "New Job | August 2022 | Technical Account Manager (TAM) --- On August 1, 2022 I became an employee of VMware as a Technical Account Manager, TAM. I was hired to be a TAM with a focus on the vRealize S",
       "tags" : [
-        "VMware",
-        "Culture",
-        "Benefits",
-        "vExpert"
+        "vExpert",
+        "vCommunity"
       ],
       "title" : "What have I been up to? | 2nd half 2022",
       "url" : "what-have-i-been-up-to-2nd-half-2022.html"
@@ -1528,18 +1532,8 @@
       "date" : "2022-01-01T05:00:00Z",
       "excerpt" : "Get-Review 2021 --- 2021 was a good year for me with my career. I spent the entire year working from home and I find myself to be more productive when WFH. My wife and I moved into a different home an",
       "tags" : [
-        "vExpert 2021",
-        "VMworld 2021",
-        "SaltConf21",
-        "VMware",
-        "vRealize Automation",
-        "vRealize Operations",
-        "vRealize",
-        "Salt",
-        "SaltStack Config",
-        "PowerShell",
-        "Year in Review",
-        "Goals"
+        "vCommunity",
+        "vExpert"
       ],
       "title" : "Year in Review - 2021 | 2022 Goals",
       "url" : "year-in-review-2021-2022-goals.html"
@@ -1776,12 +1770,7 @@
       "date" : "2021-02-20T05:00:00Z",
       "excerpt" : "The New Features I use the most. --- --- 1. Donut Charts. This is one of my favorite new features. The donut chart allows you to show a lot of information in a smaller space and makes the Dashboards l",
       "tags" : [
-        "vROPS",
-        "vRealize Operations",
-        "Donut Charts",
-        "Top-N Charts",
-        "Ping Monitoring",
-        "VMware Aria"
+        "VCF Operations"
       ],
       "title" : "vRealize Operations 8.x - New Features",
       "url" : "vrealize-operations-8-x-new-features.html"
@@ -1852,10 +1841,7 @@
       "date" : "2020-10-11T04:00:00Z",
       "excerpt" : "ESXi on Raspberry PI --- I have always be fascinated with everything that you can do with a Raspberry PI. When VMware released their Fling to install ESXi on the Raspberry PI I have become even more f",
       "tags" : [
-        "ESXi",
-        "Raspberry PI",
-        "ARM",
-        "vRealize Operations"
+        "Raspberry PI"
       ],
       "title" : "ESXi on Raspberry PI",
       "url" : "esxi-on-raspberry-pi.html"
@@ -2053,4 +2039,4 @@
       "url" : "clay-thrower-powered-by-raspberry-pi.html"
     }
   ]
-}
+};

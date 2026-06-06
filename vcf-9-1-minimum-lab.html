@@ -186,7 +186,7 @@
 <img src="images/vcf-minimum-storage.png" alt="Image">
 <hr>
 <h4>Tiered Memory:</h4>
-<p>I am using Memory Tiering on all the ESX Hosts in my lab. With a minimum VCF install I wasn't able to use the vCenter GUI to enable the tiered memory so I ran these commands from the CLI.</p>
+<p>I am using Memory Tiering on all the ESX Hosts in my lab. With a minimum VCF install I wasn't able to use the vCenter GUI to enable the tiered memory so I ran these commands from the CLI on each host.</p>
 <p>Tiered Memory is a game changer for home labs. I highly recommend you take advantage of this feature, plus it lets you do some testing in a lab environment to see how the performance works. Personally, I have had no issues with Tiered Memory in my Home Lab. 👍🏻</p>
 <pre><code>
 # List the storage adapters and the devices attached to each adapter.
@@ -220,7 +220,7 @@ esxcli system maintenanceMode set --enable false
 
 reboot
 </code></pre>
-<p>Screenshot of Tiered Memory in vCenter:</p>
+<p>Screenshot of Tiered Memory usage in vCenter:</p>
 <img src="images/vcf-minimum-tiered.png" alt="Image">
 <hr>
 <h4>2. vCenter 9.1</h4>
@@ -262,7 +262,12 @@ reboot
 <li>vCenter, Operations, License Server, (2) DCs</li>
 <li>Very Simple Install</li>
 <hr>
+</ul>
+<p>Operations View that shows Total vCPU, Memory, Disk</p>
+<img src="images/vcf-minimum-vms-cpu-mem.png" alt="Image">
+<hr>
 <p><strong>Lab Architecture Notes:</strong></p>
+<ul>
 <li><strong>Infrastructure Prerequisites:</strong> Active Directory and DNS services were offloaded to two pre-existing Windows Servers.</li>
 <li><strong>Lab Philosophy:</strong> I always recommend keeping a home lab simple when you first start learning. You can add components as you acquire more resources and time.</li>
 <li><strong>Scalability:</strong> While my ultimate goal is a full VCF deployment, this approach demonstrates how to start small and scale over time.</li>
