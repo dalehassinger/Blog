@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCF 9.1 | Minimum Lab updated (Level 2) - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VCF 9.1 | Minimum Lab updated (Level 2)</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-06-10T23:44:40Z">
+                                June 10, 2026
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf.html" class="category">VCF</a></div>
+                        <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a></div>
+                    </header>
+                    
+                    <img src="images/Screenshot 2026-06-10 at 16-19-51.png" alt="VCF 9.1 | Minimum Lab updated (Level 2)" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>The Minimum VCF 9.1 Lab (Level 1) updated with additional platform features (Level 2).</h3>
+<p>My previous post detailed the minimum requirements for a VMware Cloud Foundation (VCF) 9.1 evaluation environment: <a href="https://www.vcrocs.info/vcf-9-1-minimum-lab.html" target="_blank" rel="noopener noreferrer">VCF 9.1 - Minimum Lab Build</a>.</p>
+<p>The initial minimum build served as a functional starting point. After testing the available features for a few days, the next step was adding Fleet Management features. Deploying the minimum installation first allows the existing ESXi, vCenter, and VCF Operations infrastructure to carry forward, simplifying the expansion.</p>
+<hr>
+<h3>Next Steps: Deployment Order and Component Installation</h3>
+<p>Deploy the components in the following order to complete the setup:</p>
+<p>1. <strong>Offline Software Depot</strong></p>
+<p>2. <strong>VCF Installer</strong></p>
+<p>3. <strong>VCF 9.1 Operations Logs</strong></p>
+<hr>
+<h4>Offline Software Depot</h4>
+<p>The offline software depot functions as a web server. For this environment I used Rocky Linux with the Apache Web Server, but any Linux distribution and web server combination works.</p>
+<p>To populate the repository with VCF installation files, use the VMware Cloud Foundation Download Tool (VCFDT). For detailed configuration steps and optimization tips, reference the guides published on <a href="https://www.williamlam.com" target="_blank" rel="noopener noreferrer">William Lam's</a> blog.</p>
+<p><strong>Example interface when the Offline Depot is configured:</strong></p>
+<img src="images/offline-deopt.gif" alt="Image">
+<hr>
+<h4>VCF Installer</h4>
+<p>The VCF installer was deployed using the vCenter server from the initial minimum installation, leveraging the existing infrastructure. After the VCF 9.1 installer was running, a couple of configuration changes were required to adapt it for a compact home lab environment.</p>
+<p><strong>VCF 9.1 Installer before running the script:</strong></p>
+<img src="images/offlinedepot-1.png" alt="Image">
+<p><strong>VCF 9.1 Installer after ruuning the script:</strong></p>
+<img src="images/offlinedepot-2.png" alt="Image">
+<p>Here are the changes I made to the VCF 9.1 installer.</p>
+<ul>
+<li>I used this Script that was published on <a href="https://williamlam.com/2026/05/vcf-9-1-new-http-offline-depot-support-for-vcf-installer-fleet-depot-service.html" target="_blank" rel="noopener noreferrer">William Lam - VCF 9.1 - New HTTP Offline Depot Support for VCF Installer & Fleet Depot Service</a></li>
+<pre><code>
+# ------------------------- Update to your installer FQDN
+$VCFInstallerFQDN         = &quot;vcf91sddc.vcrocs.local&quot;          
+$VCFInstallerRootPassword = &quot;VMware1!VMware1!&quot;
+# -------------------------- Your HTTP depot URL
+$VCFInstallerOfflineDepot = &quot;http://192.168.100.46&quot;  
+
+# Authenticate
+$payload = @{
+    username = &quot;admin@local&quot;
+    password = $VCFInstallerRootPassword
+} | ConvertTo-Json
+
+$params = @{
+    Uri                  = &quot;https://${VCFInstallerFQDN}/v1/tokens&quot;
+    Method               = &#39;POST&#39;
+    Headers              = @{ &#39;Content-Type&#39; = &#39;application/json&#39; }
+    SkipCertificateCheck = $true
+    Body                 = $payload
+}
+
+$requests = Invoke-WebRequest @params
+
+if ($requests.StatusCode -eq 200) {
+    $accessToken = ($requests.Content | ConvertFrom-Json).accessToken
+}
+
+# Set HTTP Offline Depot
+$depotBody = @{
+    depotConfiguration = @{
+        isOfflineDepot = $true
+        url            = $VCFInstallerOfflineDepot
+    }
+} | ConvertTo-Json
+
+$params = @{
+    Uri                  = &quot;https://${VCFInstallerFQDN}/v1/system/settings/depot&quot;
+    Method               = &#39;PUT&#39;
+    Headers              = @{
+        Authorization  = &quot;Bearer ${accessToken}&quot;
+        &#39;Content-Type&#39; = &#39;application/json&#39;
+    }
+    SkipCertificateCheck = $true
+    Body                 = $depotBody
+}
+
+Invoke-WebRequest @params
+</code></pre>
+<li>After running this script, when I logged in to the VCF installer the offline depot was configured and connected. I made no additional changes to connect to my offline depot.</li>
+<li>I downloaded all the install files to the VCF 9.1 installer.</li>
+<p><strong>VCF Installer Property Changes:</strong></p>
+<pre><code>
+- Workarounds — feature.properties
+- Edit /home/vcf/feature.properties on VCF Installer:
+
+# Enable single or dual ESX host deployment
+feature.vcf.vgl-29121.single.host.domain = true
+
+# Disable vSAN ESA HCL check
+feature.vcf.vgl-43370.vsan.esa.sddc.managed.disk.claim = true
+
+# ----------------------------------
+
+- Workarounds — application.properties
+- Edit /etc/vmware/vcf/domainmanager/application.properties:
+
+# Disable 10GbE pNIC speed check
+enable.speed.of.physical.nics.validation = false
+
+# Disable vSAN ESA HCL check
+vsan.esa.sddc.managed.disk.claim = true
+
+# Disable vMotion connectivity checks
+validation.disable.vmotion.connectivity.check = true
+validation.disable.vmotion.l3.gateway.connectivity.check = true
+
+# Disable vSAN connectivity check
+validation.disable.vsan.connectivity.check = true
+
+# Disable NSX TEP MTU check
+validation.disable.network.connectivity.check = true
+nsxt.mtu.validation.skip = true
+
+# Disable NFS connectivity check (single host + NFS principal storage)
+validation.disable.nfs.configuration.connectivity.check = true
+
+# Increase general deployment retries
+orchestrator.task.retry.max = 5
+
+# Increase NSX Manager deployment timeout
+nsxt.manager.wait.minutes = 180
+
+# Increase NSX Edge deployment timeout
+edge.node.vm.creation.max.wait.minutes = 90
+
+# Increase VCF Management Services deployment timeouts
+vsp.bootstrap.task.timeout.minutes = 240
+vsp.bootstrap.command.timeout.minutes = 200
+
+# Increase Avi Load Balancer deployment timeout
+nsxt.alb.image.upload.retry.check.interval.seconds = 90
+
+# ----
+
+# Reboot the VCF Installer
+</code></pre>
+<li>After making the required changes, I started the VCF deployment wizard.</li>
+<li>The validation stage identified a couple of configuration changes that needed to be done to the VCF 9.1 minimum vCenter installation. Once resolved, the deployment proceeded after acknowledging a warning regarding sub-minimum lab hardware resources.</li>
+<li>Don't forget to review, download and save the password file that is generated.</li>
+<li>I also recommend to save the JSON Spec file used for the VCF installation.</li>
+<li>The VCF 9.1 installation completed successfully on the lab hardware in approximately 5 hours.</li>
+<p><strong>VCF 9.1 before starting the install:</strong></p>
+</ul>
+<img src="images/offlinedepot-3.png" alt="Image">
+<p><strong>VCF 9.1 install Completed:</strong></p>
+<img src="images/vcf91-install-completed.png" alt="Image">
+<hr>
+<h4>3. VCF 9.1 Operations Logs:</h4>
+<p>After the VCF 9.1 installation completed, I verified everything was working OK and then added the VCF Operations Logs component using VCF Lifecycle -> Add Component.</p>
+<p><strong>VCF Lifecycle Add Component:</strong></p>
+<img src="images/vcf-logs-install.png" alt="Image">
+<p><strong>VCF 9.1 Logs:</strong></p>
+<img src="images/vcf91-ops-logs.png" alt="Image">
+<hr>
+<p>After the VCF 9.1 Full install completed I gained these components of the VCF Platform.</p>
+<p><strong>VCF Dashboards:</strong></p>
+<img src="images/vcf-dashboard-01.png" alt="Image">
+<img src="images/vcf-dashboard-02.png" alt="Image">
+<p><strong>VCF Lifecycle:</strong></p>
+<img src="images/vcf-lifecycle.png" alt="Image">
+<p><strong>VCF Fleet Management:</strong></p>
+<img src="images/vcf-fleet-management.png" alt="Image">
+<hr>
+<h4>Lessons Learned:</h4>
+<ul>
+<li>Without the tips and tricks from <a href="https://www.williamlam.com" target="_blank" rel="noopener noreferrer">William Lam's blog</a>, setting up a VCF 9.1 Home Lab would be nearly impossible for the vCommunity.</li>
+<li>Modifying the VCF installer property changes is the key step that enables home lab deployments.</li>
+<li><a href="https://www.williamlam.com" target="_blank" rel="noopener noreferrer">William's</a> shared knowledge allows professionals worldwide to build Home Lab environments, learn the VCF platform, and apply those skills to their daily work and the broader vCommunity.</li>
+<li>Starting with a Full VCF 9.1 deployment is not required. Beginning with a minimum installation allows you to evaluate the capabilities of a compact environment first. Adding additional components leverages the existing setup, reducing the workload for the VCF installer during the Full VCF 9.1 process.</li>
+</ul>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
