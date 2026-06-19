@@ -175,21 +175,22 @@
 <h2>Example Code:</h2>
 <p>Code details to make filter queries easier and exact:</p>
 <ul>
-<li>The parameters in the code are the fields used in VCF Operations for Logs event</li>
-<li>You will use these fields to filter events</li>
-<li>Fields in my example code</li>
-<li>Uri              = # API Endpoint to send the event data</li>
-<li>priority         = # Event priority (info, warning, error, etc.)</li>
-<li>facility         = # Source generating the event (user, system, etc.)</li>
-<li>appname          = # Application name logging the event</li>
-<li>hostname         = # Hostname of the system (optional)</li>
-<li>vmw_esxi_vm_name = # Name of the VM or ESXi host (optional)</li>
-<li>vmw_vcenter      = # Name of the vCenter (optional)</li>
-<li>vmw_cluster      = # Name of the vCenter cluster (optional)</li>
-<li>vmw_host         = # Name of the vCenter Host (optional)</li>
-<li>Text             = # Custom text describing the event</li>
-<li>Think about how to filter when creating the log events. Don't just add events without making sure a filter can find the precise results.</li>
-<pre><code>
+<li>The parameters in the code are the fields used in VCF Operations for Logs event  </li>
+<li>You will use these fields to filter events  </li>
+<li>Fields in my example code  <ul>
+<li>Uri              = # API Endpoint to send the event data  </li>
+<li>priority         = # Event priority (info, warning, error, etc.)  </li>
+<li>facility         = # Source generating the event (user, system, etc.)  </li>
+<li>appname          = # Application name logging the event  </li>
+<li>hostname         = # Hostname of the system (optional)  </li>
+<li>vmw_esxi_vm_name = # Name of the VM or ESXi host (optional)  </li>
+<li>vmw_vcenter      = # Name of the vCenter (optional)  </li>
+<li>vmw_cluster      = # Name of the vCenter cluster (optional)  </li>
+<li>vmw_host         = # Name of the vCenter Host (optional)  </li>
+<li>Text             = # Custom text describing the event  </li>
+</ul>
+</li>
+<li>Think about how to filter when creating the log events. Don't just add events without making sure a filter can find the precise results.  <pre><code>
 # This is a Fuction to send log events to VCF Operations for Logs
 
 function Send-ApiEvent {
@@ -250,6 +251,8 @@ function Send-ApiEvent {
 $text = &quot;PowerShell: &quot; + &quot;A new process has been created with ID 9876&quot;
 Send-ApiEvent -Text $text
  </code></pre>
+</li>
+</ul>
 <hr>
 <pre><code>
 # This is a example script to give you ideas on how to use the function listed above.
@@ -300,15 +303,14 @@ Send-ApiEvent -text $text -vmw_vcenter $ConnectVIServerParams.Server -vmw_esxi_v
 Disconnect-VIServer -Server $ConnectVIServerParams.Server -Confirm:$false
  </code></pre>
 <hr>
-</ul>
 <h2>Filter Examples:</h2>
 <ul>
 <li>See first screen shot for a visual example</li>
 <li>appname contains vcf_automation</li>
 <li>text contains VM Build:</li>
 <li>vmw_esxi_vm_name contains vcrocs-w2k22-02</li>
-<hr>
 </ul>
+<hr>
 <h2>Screen Shots:</h2>
 <small>Screen Shot of the VCF Operations for Logs - Filter query and results:</small>  
 <img src="images/logs-api-01.png" alt="">
@@ -399,13 +401,13 @@ Send-SyslogMessage -Content &quot;Creating PS Script for Syslog&quot;
 <li>Explore other products in your environment that can send log events to a syslog server. Make VCF Operations for Logs your company standard for syslog events and so much more...</li>
 <li>Leveraging VCF Operations for Logs can be a cost-effective solution if you have VMware Cloud Foundation licenses, as it comes included without any additional cost.</li>
 <li>A special thanks to Brock Peterson for providing valuable tips and tricks that contributed to the content of this blog. It’s a privilege to work alongside someone who consistently helps the team understand and master the full range of features in the VCF Automation and Operations products.</li>
-<hr>
 </ul>
+<hr>
 <h2>Links to resources discussed is this Blog Post:</h2>
 <ul>
-<li><a href="https://docs.vmware.com/en/VMware-Aria-Operations-for-Logs/index.html" target="_blank" rel="noopener noreferrer">VCF Operations for Logs - Official Documentation</a></li>
-<hr>
+<li><a href="https://docs.vmware.com/en/VMware-Aria-Operations-for-Logs/index.html" target="_blank" rel="noopener noreferrer">VCF Operations for Logs - Official Documentation</a>  </li>
 </ul>
+<hr>
 <p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
 <p><a href="https://youtu.be/vbnpwtVqjas?si=CxRDxh-btsm3PYNh" target="_blank" rel="noopener noreferrer">vCROCS Deep Dive Podcast | VCF Operations for Logs | How to use with Automation Scripts</a></p>
 <hr>
@@ -417,11 +419,12 @@ Send-SyslogMessage -Content &quot;Creating PS Script for Syslog&quot;
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

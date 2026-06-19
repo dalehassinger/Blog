@@ -172,24 +172,26 @@
 <li>[x] Automated Salt minion installation</li>
 <li>[x] Ability to add grains data to minion when the minion installation completes. See example yaml code.</li>
 <li>[x] The minion key is auto-accepted in SaltStack Config</li>
-<li>[x] If you delete the VM deployment in VMware Aria Automation, the minion key will be automatically removed from VMware Aria Automation Config. Built-in decommission.</li>
+<li>[x] If you delete the VM deployment in VMware Aria Automation, the minion key will be automatically removed from VMware Aria Automation Config. Built-in decommission.  </li>
 <li>[x] Ability to run a state file when the minion installation completes. See example yaml code.</li>
-<hr>
 </ul>
+<hr>
 <p>Requirements:</p>
 <ul>
 <li>[x] This blog was created using VMware Aria Automation version 8.11.0. The process may vary for different version of VMware Aria Automation.</li>
 <li>[x] TCP Port 445 needs to be open between VMware Aria Automation Config server and the new Server that the minion is being installed on.</li>
 <li>[x] Check the VMware Aria Automation Config server. The OS that you are using for the new server must have an agent file in the /etc/salt/cloud.deploy.d folder.</li>
 <li>[x] Check the VMware Aria Automation Config server. The version of the agent files in the /etc/salt/cloud.deploy.d folder must match the version of the salt master.</li>
-<li>[x] The script that creates the grains file when using the SaltStack Config Resource and VMware Aria cloud templates with Windows Servers needs to be manually replaced on the VMware Aria Automation Config Server (salt master). Future VMware Aria Automation Config installs with LCM (VMware Aria Suite LifeCycle) will include this fix. The script creates the grains file in the incorrect folder.</li>
+<li>[x] The script that creates the grains file when using the SaltStack Config Resource and VMware Aria cloud templates with Windows Servers needs to be manually replaced on the VMware Aria Automation Config Server (salt master). Future VMware Aria Automation Config installs with LCM (VMware Aria Suite LifeCycle) will include this fix. The script creates the grains file in the incorrect folder. <ul>
 <li>Location of script on salt master: /lib64/python3.7/site-packages/salt/utils/cloud.py</li>
 <li>Make a copy of the original cloud.py before replacing with updated version.</li>
-<li>Where to get new script: https://github.com/saltstack/salt/blob/master/salt/utils/cloud.py</li>
+<li>Where to get new script: https://github.com/saltstack/salt/blob/master/salt/utils/cloud.py  </li>
 <li>The grains file will be created in "C:\ProgramData\Salt Project\Salt\conf" after the script is updated.</li>
-<li><strong>Update:</strong> When I installed VMware Aria Automation Config 8.12, 8.13 and 8.14 I still needed to update the cloud.py file for the grains to be created properly.</li>
-<hr>
+<li><strong>Update:</strong> When I installed VMware Aria Automation Config 8.12, 8.13 and 8.14 I still needed to update the cloud.py file for the grains to be created properly. </li>
 </ul>
+</li>
+</ul>
+<hr>
 <h2>Current OS support:</h2>
 <img src="images/ssc-03.png" alt="">
 <p>Any OS not listed is currently not supported at this time.</p>
@@ -199,11 +201,10 @@
 <hr>
 <ul>
 <li>Windows 2019 Server cloud template yaml code:</li>
-<li>You <strong>MUST</strong> add the remoteAccess code in the Virtual_Machine section for minion installation.</li>
-<li>grains data is added in the additionalMinionParams section of the yaml code.</li>
+<li>You <strong>MUST</strong> add the remoteAccess code in the Virtual_Machine section for minion installation.  </li>
+<li>grains data is added in the additionalMinionParams section of the yaml code.  </li>
 <li>When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You do not need to accept the minion key.</li>
-<li>click to expand yaml code</li>
-<pre><code>FEformatVersion: 1
+<li>click to expand yaml code<pre><code>FEformatVersion: 1
 inputs:
   CustomizationSpec:
     type: string
@@ -302,16 +303,16 @@ resources:
             - ${input.FDrive}
           vCROCS_SQL:
             - ${input.SQL}</code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Cloud Template | Ubuntu 20 Server:</h2>
 <ul>
 <li>Ubuntu 20 Server cloud template yaml code:</li>
-<li>You <strong>MUST</strong> add the remoteAccess code in the Virtual_Machine section for minion installation.</li>
-<li>grains data is added in the additionalMinionParams section of the yaml code.</li>
+<li>You <strong>MUST</strong> add the remoteAccess code in the Virtual_Machine section for minion installation.  </li>
+<li>grains data is added in the additionalMinionParams section of the yaml code.  </li>
 <li>When the minion agent installation is complete, you will see the new minion listed in the targets automatically. You do not need to accept the minion key.</li>
-<li>click to expand yaml code</li>
-<pre><code>formatVersion: 1
+<li>click to expand yaml code<pre><code>formatVersion: 1
 inputs:
   CustomizationSpec:
     type: string
@@ -364,12 +365,15 @@ resources:
         grains:
           roles:
             - webserver</code></pre>
+</li>
+</ul>
 <hr>
-<li>This screen shot shows how to get the "masterId" to use in the Cloud Template yaml code.</li>
+<ul>
+<li>This screen shot shows how to get the "masterId" to use in the Cloud Template yaml code.  </li>
 </ul>
 <img src="images/ssc-05.png" alt="">
 <ul>
-<li>This screen shot shows how to see the SaltMaster version.</li>
+<li>This screen shot shows how to see the SaltMaster version.  </li>
 </ul>
 <img src="images/ssc-06.png" alt="">
 <hr>
@@ -391,17 +395,17 @@ resources:
 <li>See "Requirements" listed above</li>
 <li>See "What the SaltStack Config Resource provides" above</li>
 <li>If you need to update the minion agent files on the salt master server, in folder /etc/salt/cloud.deploy.d, you will have to have your VMware account team download the files for you or open an SR. The files are not public facing.</li>
-<hr>
 </ul>
+<hr>
 <h2>Helpful Links</h2>
 <ul>
 <li><a href="https://docs.vmware.com/en/vRealize-Automation/8.11/Using-and-Managing-Cloud-Assembly/GUID-5555BD8D-506C-40C9-8CE9-138297FB8F30.html#GUID-5555BD8D-506C-40C9-8CE9-138297FB8F30" target="_blank" rel="noopener noreferrer">Configure a SaltStack Config integration in vRealize Automation</a></li>
 <li><a href="https://docs.vmware.com/en/vRealize-Automation/8.11/Using-and-Managing-Cloud-Assembly/GUID-70F29C74-848F-41F2-91B1-8E96A918DD93.html" target="_blank" rel="noopener noreferrer">Add the SaltStack Config resource to the cloud template</a></li>
-<hr>
 </ul>
+<hr>
 <p>When I write about <b>VMware Aria Automation</b>, I always say there are many ways to accomplish the same task.  <b>VMware Aria Automation Config</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Salt. This is a <b>GREAT Tool</b> that is included with your VMware Aria Suite Advanced/Enterprise license. If you own the VMware Aria Suite, you own VMware Aria Automation Config.</p>
 <ul>
-<li>VMware Aria Automation = vRealize Automation</li>
+<li>VMware Aria Automation = vRealize Automation </li>
 <li>VMware Aria Automation Config = SaltStack Config</li>
 </ul>
 
@@ -409,11 +413,12 @@ resources:
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

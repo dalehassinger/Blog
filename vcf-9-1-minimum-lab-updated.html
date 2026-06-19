@@ -156,7 +156,7 @@
                              • by Dale Hassinger
                         </div>
                         <div class="categories"><a href="categories/vcf.html" class="category">VCF</a></div>
-                        <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a></div>
+                        <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/openai.html" class="tag">#OpenAI</a> <a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/claude.html" class="tag">#Claude</a></div>
                     </header>
                     
                     <img src="images/Screenshot 2026-06-10 at 16-19-51.png" alt="VCF 9.1 | Minimum Lab updated (Level 2)" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
@@ -186,8 +186,7 @@
 <img src="images/offlinedepot-2.png" alt="Image">
 <p>Here are the changes I made to the VCF 9.1 installer.</p>
 <ul>
-<li>I used this Script that was published on <a href="https://williamlam.com/2026/05/vcf-9-1-new-http-offline-depot-support-for-vcf-installer-fleet-depot-service.html" target="_blank" rel="noopener noreferrer">William Lam - VCF 9.1 - New HTTP Offline Depot Support for VCF Installer & Fleet Depot Service</a></li>
-<pre><code>
+<li>I used this Script that was published on <a href="https://williamlam.com/2026/05/vcf-9-1-new-http-offline-depot-support-for-vcf-installer-fleet-depot-service.html" target="_blank" rel="noopener noreferrer">William Lam - VCF 9.1 - New HTTP Offline Depot Support for VCF Installer & Fleet Depot Service</a> <pre><code>
 # ------------------------- Update to your installer FQDN
 $VCFInstallerFQDN         = &quot;vcf91sddc.vcrocs.local&quot;          
 $VCFInstallerRootPassword = &quot;VMware1!VMware1!&quot;
@@ -235,8 +234,10 @@ $params = @{
 
 Invoke-WebRequest @params
 </code></pre>
+</li>
 <li>After running this script, when I logged in to the VCF installer the offline depot was configured and connected. I made no additional changes to connect to my offline depot.</li>
 <li>I downloaded all the install files to the VCF 9.1 installer.</li>
+</ul>
 <p><strong>VCF Installer Property Changes:</strong></p>
 <pre><code>
 - Workarounds — feature.properties
@@ -293,13 +294,14 @@ nsxt.alb.image.upload.retry.check.interval.seconds = 90
 
 # Reboot the VCF Installer
 </code></pre>
+<ul>
 <li>After making the required changes, I started the VCF deployment wizard.</li>
 <li>The validation stage identified a couple of configuration changes that needed to be done to the VCF 9.1 minimum vCenter installation. Once resolved, the deployment proceeded after acknowledging a warning regarding sub-minimum lab hardware resources.</li>
 <li>Don't forget to review, download and save the password file that is generated.</li>
 <li>I also recommend to save the JSON Spec file used for the VCF installation.</li>
 <li>The VCF 9.1 installation completed successfully on the lab hardware in approximately 5 hours.</li>
-<p><strong>VCF 9.1 before starting the install:</strong></p>
 </ul>
+<p><strong>VCF 9.1 before starting the install:</strong></p>
 <img src="images/offlinedepot-3.png" alt="Image">
 <p><strong>VCF 9.1 install Completed:</strong></p>
 <img src="images/vcf91-install-completed.png" alt="Image">
@@ -326,19 +328,20 @@ nsxt.alb.image.upload.retry.check.interval.seconds = 90
 <li>Modifying the VCF installer property changes is the key step that enables home lab deployments.</li>
 <li><a href="https://www.williamlam.com" target="_blank" rel="noopener noreferrer">William's</a> shared knowledge allows professionals worldwide to build Home Lab environments, learn the VCF platform, and apply those skills to their daily work and the broader vCommunity.</li>
 <li>Starting with a Full VCF 9.1 deployment is not required. Beginning with a minimum installation allows you to evaluate the capabilities of a compact environment first. Adding additional components leverages the existing setup, reducing the workload for the VCF installer during the Full VCF 9.1 process.</li>
-<hr>
 </ul>
+<hr>
 <p>Here is the link ⛓️‍💥 to the <a href="https://vmware.github.io/vcf-upgrade-planner/" target="_blank" rel="noopener noreferrer">VCF 9.1 - Interactive Upgrade Planning Tool</a> . A good resource to plan your VCF 9.1 upgrade journey.</p>
 
                     </div>
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

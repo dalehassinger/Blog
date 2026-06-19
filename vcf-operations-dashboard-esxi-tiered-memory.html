@@ -178,8 +178,7 @@
 <h2>FastAPI</h2>
 <p>The steps I used to install FastAPI on Rocky Linux Server 9.4:</p>
 <ul>
-<li>A very simple process to install FastAPI and get started.</li>
-<pre><code>
+<li>A very simple process to install FastAPI and get started.  <pre><code>
 # Update the System:
 sudo dnf update -y
 
@@ -210,16 +209,18 @@ uvicorn app:app --host 0.0.0.0 --port 8000
 # Your FastAPI app should now be accessible at:
 http://&lt;your_server_ip&gt;:8000
 </code></pre>
+</li>
 </ul>
 <h2>FastAPI application python code:</h2>
 <p><strong>URLs used in my Lab:</strong></p>
 <ul>
-<li>For VM Tiered Memory you would use http://192.168.6.83:8000/tieredVM</li>
-<li>You can have many urls. See the sample FastAPI Python code.</li>
-<li>To return simple json information use http://192.168.6.83:8000/</li>
-<li>To run a PowerShell script to get Host Tiered Memory settings http://192.168.6.83:8000/tieredHost</li>
-<li>I converted the data to json in the PowerShell Script. I wanted FastAPI to just return plaintext. See the Python code on how to do this.</li>
-<pre><code>
+<li>For VM Tiered Memory you would use http://192.168.6.83:8000/tieredVM  </li>
+<li>You can have many urls. See the sample FastAPI Python code.  <ul>
+<li>To return simple json information use http://192.168.6.83:8000/  </li>
+<li>To run a PowerShell script to get Host Tiered Memory settings http://192.168.6.83:8000/tieredHost  </li>
+</ul>
+</li>
+<li>I converted the data to json in the PowerShell Script. I wanted FastAPI to just return plaintext. See the Python code on how to do this.  <pre><code>
 import subprocess
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
@@ -263,8 +264,9 @@ async def run_powershell_script():
     except Exception as e:
         return PlainTextResponse(content=str(e), status_code=500)
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>PowerShell Script</h2>
 <p>PowerShell script to collect the VM Tiered Memory metrics from the ESXi Hosts:</p>
 <pre><code>
@@ -449,22 +451,22 @@ Disconnect-VIServer -Confirm:$false
 <hr>
 <h2>VCF Operations:</h2>
 <ul>
-<li>These metrics will allow you to create some great operational insights, including cool dashboards.</li>
-<hr>
+<li>These metrics will allow you to create some great operational insights, including cool dashboards.  </li>
 </ul>
+<hr>
 <img src="images/tiered-01.png" alt="">
 <hr>
 <h2>MP Builder Details:</h2>
 <ul>
 <li>The following screen shots are all the details I used to create the MP</li>
-<li>I presented at VMware Explore 2024, and one of the sessions includes a video on MP Builder. I recommend checking it out to get more familiar with MPB. <a href="https://www.youtube.com/live/EcQNwO_skAA?si=xkLv3PvocHy5ka0f" target="_blank" rel="noopener noreferrer">Link to session | CODE1161LV</a></li>
+<li>I presented at VMware Explore 2024, and one of the sessions includes a video on MP Builder. I recommend checking it out to get more familiar with MPB. <a href="https://www.youtube.com/live/EcQNwO_skAA?si=xkLv3PvocHy5ka0f" target="_blank" rel="noopener noreferrer">Link to session | CODE1161LV</a>  </li>
 <li>Brock Peterson has a great Blog on building a MP. [Link to Blog](https://www.brockpeterson.com/post/building-a-management-pack-with-the-aria-operations-management-pack-builder</li>
 </ul>
 <p>)</p>
 <ul>
-<li>After building and saving the MP, you need to import into VCF Operations Repository and add account. I show those details in my VMware Explore session video.</li>
-<hr>
+<li>After building and saving the MP, you need to import into VCF Operations Repository and add account. I show those details in my VMware Explore session video.   </li>
 </ul>
+<hr>
 <img src="images/tiered-02.png" alt="">
 <hr>
 <img src="images/tiered-03.png" alt="">
@@ -509,17 +511,17 @@ Disconnect-VIServer -Confirm:$false
 <ul>
 <li>Incorporating a FastAPI server adds an additional layer to your observability environment, but the capabilities it unlocks are remarkable. It enables you to gather and serve custom metrics, offering greater flexibility and control over your monitoring and performance analysis. This approach not only enhances visibility but also provides powerful tools to extend the insights available in your environment.</li>
 <li>Just because products don’t offer APIs out of the box for the metrics you need doesn’t mean you’re limited. You can always leverage custom scripts to gather the data you want. By combining tools like PowerShell, SSH, and FastAPI, you can extract and integrate those custom metrics into your observability platform, giving you the flexibility to get exactly the insights you need.</li>
-<hr>
 </ul>
+<hr>
 <h2>Links to resources discussed is this Blog Post:</h2>
 <ul>
-<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Management-Packs/FastAPI" target="_blank" rel="noopener noreferrer">Download Link for the MP Export File, Dashboard and Views</a></li>
-<li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">FastAPI</a></li>
-<li><a href="https://rockylinux.org/download" target="_blank" rel="noopener noreferrer">Rocky Linux | Downloads</a></li>
-<li><a href="https://marketplace.cloud.vmware.com/services/details/draft-vmware-aria-operation-management-pack-builder-1-1?slug=true" target="_blank" rel="noopener noreferrer">VCF Operations | Management Pack Builder | Download</a></li>
-<li><a href="https://www.brockpeterson.com" target="_blank" rel="noopener noreferrer">Brock Peterson Blogs | Great place to get Dashboard Ideas and see MPB examples</a></li>
-<hr>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Management-Packs/FastAPI" target="_blank" rel="noopener noreferrer">Download Link for the MP Export File, Dashboard and Views</a>  </li>
+<li><a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">FastAPI</a>  </li>
+<li><a href="https://rockylinux.org/download" target="_blank" rel="noopener noreferrer">Rocky Linux | Downloads</a>  </li>
+<li><a href="https://marketplace.cloud.vmware.com/services/details/draft-vmware-aria-operation-management-pack-builder-1-1?slug=true" target="_blank" rel="noopener noreferrer">VCF Operations | Management Pack Builder | Download</a>  </li>
+<li><a href="https://www.brockpeterson.com" target="_blank" rel="noopener noreferrer">Brock Peterson Blogs | Great place to get Dashboard Ideas and see MPB examples</a>  </li>
 </ul>
+<hr>
 <p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
 <hr>
 <p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
@@ -528,11 +530,12 @@ Disconnect-VIServer -Confirm:$false
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

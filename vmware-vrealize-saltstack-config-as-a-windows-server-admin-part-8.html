@@ -171,15 +171,15 @@
 <li>Windows Server Features | Roles</li>
 <li>Windows Server Installed Software</li>
 <li>Windows Server Running Services</li>
-<hr>
 </ul>
+<hr>
 <p>These are the steps that I use to maintain custom grain data with a Windows Server:</p>
 <ul>
 <li>Create a PowerShell Script that can run locally on a minion. Add the script to the SaltStack Config File Manager. Use salt-call to run salt.functions locally on a minion. See screen shot and my code examples below.</li>
-<li>Create a SaltStack Config Job to execute the PowerShell Script remotely on the minion. See Screen Shot.</li>
+<li>Create a SaltStack Config Job to execute the PowerShell Script remotely on the minion. See Screen Shot. </li>
 <li>Create a SaltStack Config Schedule to run the job that you create. The job can run every day, once a week, every 4 hours. Whatever makes sense for your use case. See Screen Shot.</li>
-<hr>
 </ul>
+<hr>
 <p>If you want to run a script locally on a minion and use salt functions that is where you use the salt-call command. After you learn the salt-functions and are logged into a Windows Server locally, you can still use salt commands by using salt-call.</p>
 <pre><code># --- example code
 salt-call --version
@@ -472,8 +472,8 @@ Invoke-Expression -Command $saltCommand
 <li>Windows Server installed software also makes a great way to target minions.</li>
 <li>Windows Server Running Services is a good way to target minions.</li>
 <li>If you add custom grain data when the server is created you also need a way to maintain the grain data so it stays up to date and is current.</li>
-<hr>
 </ul>
+<hr>
 <h2>Salt Links I found to be very helpful:</h2>
 <ul>
 <li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
@@ -491,11 +491,12 @@ Invoke-Expression -Command $saltCommand
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

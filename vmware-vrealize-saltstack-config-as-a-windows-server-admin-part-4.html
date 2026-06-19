@@ -171,15 +171,15 @@
 <p>This is what I learned about salt grains when using with a Windows OS.</p>
 <ul>
 <li>The default location of the grains file is in directory "C:\salt\conf\".</li>
-<li>The grains file is named grains with no extension.</li>
+<li>The grains file is named grains with no extension.  </li>
 </ul>
 <h2>Example grains file:</h2>
 <pre><code>vCenterTags: TAG-VM-vCROCS|TAG-VM-WebServer|TAG-App-Hugo</code></pre>
 <ul>
 <li>"Grain Name": "The value of the grain".</li>
 <li>In my example I wanted the grain to be named "vCenterTags" and the values will be the vCenter TAG names "TAG-VM-vCROCS|TAG-VM-WebServer|TAG-App-Hugo". I have (3) vCenter TAGs assigned to this VM.  I will be able to create a SaltStack Config Target based on any of the TAGs.</li>
-<hr>
 </ul>
+<hr>
 <h2>SaltStack Config Targets:</h2>
 <p>When I add the vCenter TAG information to the grains file I am then able to create SaltStack Config Targets based on the grain "vCenterTags".</p>
 <h2>SaltStack Config Targets:</h2>
@@ -347,8 +347,8 @@ Cleanup_Tag_File:
 <li>Grains are a good way to create SaltStack Config Targets. Allows you to group VMs together the same way you can in vCenter.</li>
 <li>The Grains file is basically a Database that can be any information that you want to show about your VMs. In this Blog post I am adding vCenter TAGs to the minions but the information could be anything that helps you target VMs.</li>
 <li>If the default list of grains OOTB doesn't show the information you want to see, you can easily add your own gains with a little bit of code.</li>
-<hr>
 </ul>
+<hr>
 <h2>Salt Links I found to be very helpful:</h2>
 <ul>
 <li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
@@ -366,11 +366,12 @@ Cleanup_Tag_File:
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

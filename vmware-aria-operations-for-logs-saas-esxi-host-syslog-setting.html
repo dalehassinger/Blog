@@ -175,34 +175,36 @@
 <li>The script will count the number of VMware vCenter ESXi Hosts in the vCenter Specified</li>
 <li>The script will equally distribute the number of vCenter ESXi Hosts per Cloud Proxy</li>
 <li>The script will set the Advanced System Setting "Syslog.global.logHost" on each ESXi Host</li>
+</ul>
 <hr>
 <p><strong>ESXi Host Advanced System Settings:</strong></p>
-<li>This is how to manually set the "Syslog.global.logHost" on each ESXi Host</li>
+<ul>
+<li>This is how to manually set the "Syslog.global.logHost" on each ESXi Host  </li>
 </ul>
 <img src="images/syslog-01.png" alt="">
 <hr>
 <p><strong>Cloud Proxies:</strong></p>
 <ul>
-<li>Go to Configuration/Cloud Proxies to see all the Proxies added</li>
+<li>Go to Configuration/Cloud Proxies to see all the Proxies added  </li>
 </ul>
 <img src="images/syslog-04.png" alt="">
 <hr>
 <p><strong>Cloud Proxy Information:</strong></p>
 <ul>
-<li>Cloud Proxy Details like State, CPU, Memory</li>
+<li>Cloud Proxy Details like State, CPU, Memory  </li>
 </ul>
 <img src="images/syslog-03.png" alt="">
 <hr>
 <p><strong>vSphere Integration:</strong></p>
 <ul>
-<li>Go to Configuration/vSphere Integration to see all the vCenters added</li>
+<li>Go to Configuration/vSphere Integration to see all the vCenters added  </li>
 </ul>
 <img src="images/syslog-05.png" alt="">
 <hr>
 <p><strong>vCenter Server Configuration:</strong></p>
 <ul>
-<li>vCenter Server Configuration</li>
-<li>You can use this screen to set which Cloud Proxy to use but if you have 100s or 1000s of Hosts, I find it easier to use the script included in this Blog Post.</li>
+<li>vCenter Server Configuration  </li>
+<li>You can use this screen to set which Cloud Proxy to use but if you have 100s or 1000s of Hosts, I find it easier to use the script included in this Blog Post.  </li>
 </ul>
 <img src="images/syslog-06.png" alt="">
 <hr>
@@ -212,6 +214,7 @@
 <li>Sample Script to set the "Syslog.global.logHost" value on each ESXi Host</li>
 <li>The script will balance the usage of the Cloud Proxies</li>
 <li>The script could be scheduled to run every day to maintain the correct settings.</li>
+</ul>
 <p><strong>Code:</strong></p>
 <pre><code>  
 
@@ -342,10 +345,10 @@ foreach($esxiName in $hostList){
 # ----- Disconnect from the vCenter Server or ESXi host
 Disconnect-VIServer -Server $vcServer -Confirm:$false</code></pre>
 <hr>
-</ul>
 <h2>Get current “Syslog.global.logHost” value on all Hosts</h2>
 <ul>
 <li>Here is a sample script that can be used to show the current "Syslog.global.logHost" values</li>
+</ul>
 <p><strong>Code:</strong></p>
 <pre><code>  
 
@@ -389,13 +392,15 @@ foreach($hostName in $hostList){
 # ----- Disconnect from the vCenter Server or ESXi host
 Disconnect-VIServer -Server $vcServer -Confirm:$false</code></pre>
 <hr>
-<li>Sample Output from script:</li>
+<ul>
+<li>Sample Output from script:  </li>
 </ul>
 <img src="images/syslog-02.png" alt="">
 <hr>
 <h2>Set “Syslog.global.logHost” value to null on all Hosts</h2>
 <ul>
-<li>Sample script if you would ever want to set the "Syslog.global.logHost" values to null on all the ESXi Hosts.</li>
+<li>Sample script if you would ever want to set the "Syslog.global.logHost" values to null on all the ESXi Hosts.  </li>
+</ul>
 <p><strong>Code:</strong></p>
 <pre><code># ----- [ Set sysloghost value to null on all Hosts ] -----
 
@@ -426,33 +431,33 @@ foreach($hostName in $hostList){
 # ----- Disconnect from the vCenter Server or ESXi host
 Disconnect-VIServer -Server $vcServer -Confirm:$false</code></pre>
 <hr>
-</ul>
 <h2>Get “Syslog.global.logHost” address on a specific Host</h2>
 <ul>
 <li>Very simple script to get the "Syslog.global.logHost" values on a single ESXi host.</li>
+</ul>
 <p><strong>Code:</strong></p>
 <pre><code># ----- Simple Get syslogserver address on a specific Host
 Get-VMHostSysLogServer -VMHost &#39;esxi8-05.corp.local&#39;</code></pre>
 <hr>
-</ul>
 <h2>Lessons Learned</h2>
 <ul>
 <li>When you use VMware Aria Operations for Logs | SaaS Version, you may need more than one Cloud Proxy</li>
 <li>If you have more than one Cloud Proxy, you will need a way to balance the usage between the Proxies</li>
 <li>If you have 10s, 100s or 1000s of ESXi Hosts, using a script will be the easiest and quickest way to specify "Syslog.global.logHost” values.</li>
-<hr>
 </ul>
+<hr>
 <p>When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</p>
 
                     </div>
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

@@ -170,10 +170,10 @@
 <p>When VCF Automation introduced the Overview Tab in Deployments, I quickly began using it in my lab to streamline communication. Previously, I sent emails with crucial details about new server VM builds to the user initiating the deployment. Now, I’ve shifted to adding this information directly into the Deployment Overview Tab.</p>
 <p>Here are some use cases where adding information to the Deployments Overview Tab is beneficial for new Server VMs:</p>
 <ul>
-<li>Linux VMs: For Linux VMs in my lab, I use Cockpit for a web-based interface to monitor server stats, logs, and more. I include the Cockpit URL in the Overview Tab for easy access.</li>
-<li>VM Specifications: I often include the CPU, memory, and IP details of the VM as it was initially created. This helps answer common questions about how the VM has changed since it was first provisioned. We’ve all experienced situations where a VM was requested with fewer resources than needed, only for resource adjustments to be requested soon after.</li>
-<li>Monitoring Links: You can also add links to monitoring tools like VCF Operations. This will not show monitoring data but give you quick access to the application GUI.</li>
-<li>Additional URLs: Any helpful URLs, like management or configuration portals, can be added to enhance accessibility. Links to the applications only.</li>
+<li>Linux VMs: For Linux VMs in my lab, I use Cockpit for a web-based interface to monitor server stats, logs, and more. I include the Cockpit URL in the Overview Tab for easy access.  </li>
+<li>VM Specifications: I often include the CPU, memory, and IP details of the VM as it was initially created. This helps answer common questions about how the VM has changed since it was first provisioned. We’ve all experienced situations where a VM was requested with fewer resources than needed, only for resource adjustments to be requested soon after.  </li>
+<li>Monitoring Links: You can also add links to monitoring tools like VCF Operations. This will not show monitoring data but give you quick access to the application GUI.  </li>
+<li>Additional URLs: Any helpful URLs, like management or configuration portals, can be added to enhance accessibility. Links to the applications only.  </li>
 </ul>
 <small>Note: Keep in mind that the information added to the Deployment Tab cannot be edited later, so avoid including details that may change frequently.</small>
 <hr>
@@ -187,10 +187,9 @@
 <h2>VCF Automation Design Template</h2>
 <p>Example Template Yaml Code:</p>
 <ul>
-<li>To utilize the Overview Tab, you <u>MUST</u> include "formatVersion: 2". Refer to the example code below.</li>
-<li>The “outputs:” section in the YAML defines the data displayed in the Overview Tab.</li>
-<li>You can incorporate “${input.xxx}” values to display specific data in the Overview Tab.</li>
-<pre><code>
+<li>To utilize the Overview Tab, you <u>MUST</u> include "formatVersion: 2". Refer to the example code below.  </li>
+<li>The “outputs:” section in the YAML defines the data displayed in the Overview Tab.  </li>
+<li>You can incorporate “${input.xxx}” values to display specific data in the Overview Tab.  <pre><code>
 formatVersion: 2
 name: Rocky-Basic
 outputs:
@@ -284,18 +283,19 @@ resources:
           assignment: static
           address: ${input.IP}
 </code></pre>
+</li>
 </ul>
 <h2>Lessons learned:</h2>
 <ul>
-<li>The Deployment Overview Tab is an excellent tool for displaying static key information about VM server builds.</li>
-<li>Adding URLs to the deployment Overview Tab provides a convenient way to connect directly to the VM for management.</li>
-<hr>
+<li>The Deployment Overview Tab is an excellent tool for displaying static key information about VM server builds.  </li>
+<li>Adding URLs to the deployment Overview Tab provides a convenient way to connect directly to the VM for management.  </li>
 </ul>
+<hr>
 <h2>Links to resources discussed is this Blog Post:</h2>
 <ul>
-<li><a href="https://docs.vmware.com/en/VMware-Aria-Automation/8.18/Using-Automation-Assembler/GUID-DFA8D0C2-AED5-4E44-A3F4-E4F6AD0FDE60.html" target="_blank" rel="noopener noreferrer">Specifying formatVersion in your Automation Assembler cloud template</a></li>
-<hr>
+<li><a href="https://docs.vmware.com/en/VMware-Aria-Automation/8.18/Using-Automation-Assembler/GUID-DFA8D0C2-AED5-4E44-A3F4-E4F6AD0FDE60.html" target="_blank" rel="noopener noreferrer">Specifying formatVersion in your Automation Assembler cloud template</a>  </li>
 </ul>
+<hr>
 <p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
 <p><a href="https://youtu.be/rRrZOXFLod8?si=k7eSEH5FQG8IyTR7" target="_blank" rel="noopener noreferrer">vCROCS Deep Dive Podcast | VCF Automation Overview Tab</a></p>
 <hr>
@@ -307,11 +307,12 @@ resources:
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

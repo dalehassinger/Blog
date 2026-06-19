@@ -173,8 +173,8 @@
 <li>Add the DataStore Cluster VMware vCenter TAG to all VMs within a DataStore cluster</li>
 <li>Verify that each VM has only (1) vCenter DataStore Cluster TAG</li>
 <li>Verify that the VM is in the correct DataStore Cluster. Do a VM move if it is not in correct DataStore Cluster.</li>
-<hr>
 </ul>
+<hr>
 <h2>Use Case:</h2>
 <ul>
 <li>[x] Have a way to specify which DataStore Cluster the VM will use within VMware vCenter UI.</li>
@@ -186,6 +186,7 @@
 <li>[x] Create a VMware vCenter TAG for every DataStore Cluster within VMware vCenter.</li>
 <li>[x] Assign a VMware vCenter TAG to every VM within vCenter, to specify which DataStore Cluster it should be located.</li>
 <li>[x] Schedule a VMware Aria Automation Orchestrator Workflow to run everyday to make sure VM DataStore Cluster placement matches VMware vCenter TAG assigned.</li>
+</ul>
 <hr>
 <p><strong>Steps to connect to VMware vCenter:</strong></p>
 <pre><code># Script created by: Dale Hassinger
@@ -199,12 +200,10 @@
 Connect-VIServer -Server &#39;vCenter.vCROCS.info&#39; -User &#39;administrator@vCROCS.info&#39; -Password &#39;HackMe1!&#39; -Force
 </code></pre>
 <hr>
-</ul>
 <h2>Code to create a VMware vCenter TAG Category:</h2>
 <ul>
 <li>For any custom VMware vCenter TAGs that I create to use with Automation, I use a TAG category "Automation".</li>
-<li>You don't need to do this step. You could use a category that already exists within VMware vCenter.</li>
-<pre><code># ----- [ Start Create vCenter TAG Category ] -----
+<li>You don't need to do this step. You could use a category that already exists within VMware vCenter.<pre><code># ----- [ Start Create vCenter TAG Category ] -----
 
 # New TAG Category Name
 $newCategory = &#39;Automation&#39;
@@ -230,14 +229,14 @@ else{
 
 # ----- [ End Create vCenter TAG Category ] -----
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Code to create a VMware vCenter TAG for every Datastore Cluster:</h2>
 <ul>
 <li>The code gets all DataStore Cluster Names and creates a VMware vCenter TAG to match DataStore Cluster Name. I prefix the DataStore Cluster Name with "TAG-VM-".</li>
 <li>The code does check to see if the VMware vCenter TAG already exists. If the vCenter TAG does exist, it does not try and create a new vCenter TAG.</li>
-<li>include code to connect to vCenter</li>
-<pre><code># ----- [ Start Create vCenter TAG for every Datastore Cluster ] -----
+<li>include code to connect to vCenter<pre><code># ----- [ Start Create vCenter TAG for every Datastore Cluster ] -----
 
 # New TAG Category Name
 $newCategory = &#39;Automation&#39;
@@ -280,13 +279,13 @@ foreach($newTAG in $newTAGs){
 
 # ----- [ End Create vCenter TAG for every Datastore Cluster ] -----
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Code to add DataStore Cluster vCenter TAG to VMs for a specific Datastore Cluster:</h2>
 <ul>
 <li>You specify DataStore Cluster Name. The code with get all VM names and assign the correct VMware vCenter TAG. It will check to see if TAG is already assigned to the VM.</li>
-<li>include code to connect to vCenter</li>
-<pre><code># ----- [ Start add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----
+<li>include code to connect to vCenter<pre><code># ----- [ Start add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----
 
 $datastoreCluster = &#39;DS-CLSTR-03&#39;
 #$datastoreCluster = &#39;DS-CLSTR-04&#39;
@@ -328,16 +327,16 @@ foreach($vm in $allVMs){
 
 # ----- [ End add Storage vCenter TAG to VMs for a specific DataStore Cluster ] -----
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Code to Verify that each VM only has (1) DataStore Cluster TAG assigned:</h2>
 <ul>
 <li>The code looks to see if one than (1) DataStore Cluster TAG is assigned.</li>
 <li>If a VM has an iso mounted from a 2nd Datastore that could make (2) TAGs get assigned.</li>
 <li>If a VM was located on a DataStore Cluster and had a SNAP Shot and was moved to a 2nd DataStore Cluster, it could get (2) DataStore Cluster TAGs assigned until the SNAP is Deleted.</li>
-<li>For this use case, I ONLY want (1) Datastore Cluster to be used per VM.</li>
-<li>include code to connect to vCenter</li>
-<pre><code># ----- [ Start Verify that VM has only (1) DS Cluster TAG ] -----
+<li>For this use case, I ONLY want (1) Datastore Cluster to be used per VM.  </li>
+<li>include code to connect to vCenter  <pre><code># ----- [ Start Verify that VM has only (1) DS Cluster TAG ] -----
 
 $allVMs = Get-VM
 $allVMs = $allVMs.Name
@@ -364,15 +363,15 @@ Write-Output &#39;TAG count check complete&#39;
 
 # ----- [ End Verify that VM has only (1) DS Cluster TAG ] -----
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Code to verify that each VM is located in the correct DataStore Cluster based in vCenter TAG:</h2>
 <ul>
 <li>The code gets all the DataStore Cluster VMware vCenter TAGs.</li>
 <li>The code then gets all VMs assigned a TAG and verifies that the VM is located in the correct DataStore Cluster.</li>
 <li>If the VM is NOT located in the DataStore Cluster that matches the vCenter TAG, it moves the VM to the correct DataStore Cluster.</li>
-<li>include code to connect to vCenter</li>
-<pre><code># ----- [ Start Verify that VM is in correct DS Cluster based in TAG ] -----
+<li>include code to connect to vCenter<pre><code># ----- [ Start Verify that VM is in correct DS Cluster based in TAG ] -----
 
 $newCategory = &#39;Automation&#39;
 
@@ -414,35 +413,37 @@ foreach($tag in $allTAGs){
 
 # ----- [ End Verify that VM is in correct DS Cluster based in TAG ] -----
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Code to Disconnect CD from all VMs:</h2>
 <ul>
 <li>include code to connect to vCenter</li>
-<li>Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a iso attached. Here is the code to disconnect all iso images mounted to a VM.</li>
-<pre><code># Code Disconnect CD from all VMs
+<li>Before I assigned the vCenter TAGs to the VMs using a script to automate the process, I made sure that none of the VMs had a SNAP or a iso attached. Here is the code to disconnect all iso images mounted to a VM.<pre><code># Code Disconnect CD from all VMs
 Get-VM | Where-Object {$_.PowerState –eq “PoweredOn”} | Get-CDDrive | Set-CDDrive -NoMedia -Confirm:$False
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Lessons Learned</h2>
 <ul>
 <li>You can use this code to maintain VM placement, but you could also use this code to move VMs to new DatStore Clusters. Assign a new TAG to the VM and the process will do a Storage vMotion for you. Great way to move VMs if you get a new SAN.</li>
 <li>I located the VM based on DataStore Cluster. You could change code slightly and specify a specific DataStore.</li>
 <li>If there is a member on your VMware Team that changes which DataStore Cluster a VM should be located for no reason, you could also fix the issue by giving that Team Member 30 days in the electric chair so they don't do it again. :)</li>
-<hr>
 </ul>
+<hr>
 <p>When I write about <b>vRealize Aria Automation</b>,  I always say there are many ways to accomplish the same task.  This article is just one way that you could accomplish this task.  I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete automation as long as it completes successfully and consistently.</p>
 
                     </div>
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

@@ -564,6 +564,16 @@ article img {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+article p + img,
+article h1 + img,
+article h2 + img,
+article h3 + img,
+article h4 + img,
+article ul + img,
+article ol + img {
+    margin-top: 0.5rem;
+}
+
 /* Code Blocks */
 code {
     font-family: 'SF Mono', Monaco, 'Cascadia Code', Consolas, monospace;
@@ -596,6 +606,11 @@ pre code {
 article ul, article ol {
     margin-bottom: 1.5rem;
     padding-left: 2rem;
+}
+
+article ul:has(+ img),
+article ol:has(+ img) {
+    margin-bottom: 0.5rem;
 }
 
 article li {

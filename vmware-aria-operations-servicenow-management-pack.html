@@ -179,12 +179,12 @@
 <p><a href="servicenow-cmdb-sync-only-configuration.pdf" target="_blank" rel="noopener noreferrer">Instructions to setup Servicenow to allow the MP to send data to CMDB | Click Here to View PDF</a></p>
 <p>For the Servicenow user permissions I did the following:</p>
 <ul>
-<li>Created a Servicenow user named LPU (Least Privilege User)</li>
-<li>Created a Servicenow Role and named it vROPS_MP</li>
-<li>Added the user to the role.</li>
-<li>Added the role to all the Servicenow ACLs listed in the document. If there were more than one ACL with the same name with read permissions, I used the newest ACL. I did not add to all ACLs with the same name.</li>
-<li>I gave the role “read” and “edit_ci_relations” to the tables listed in the document.</li>
-<li>I used the moid_populate_only.json config that is OOTB (Out of the Box) with no changes to start to make sure everything was working correct.</li>
+<li>Created a Servicenow user named LPU (Least Privilege User)  </li>
+<li>Created a Servicenow Role and named it vROPS_MP  </li>
+<li>Added the user to the role.  </li>
+<li>Added the role to all the Servicenow ACLs listed in the document. If there were more than one ACL with the same name with read permissions, I used the newest ACL. I did not add to all ACLs with the same name.  </li>
+<li>I gave the role “read” and “edit_ci_relations” to the tables listed in the document.  </li>
+<li>I used the moid_populate_only.json config that is OOTB (Out of the Box) with no changes to start to make sure everything was working correct.  </li>
 </ul>
 <p>When I added the account to the management pack in Aria Operations, it did a good job to let me know if everything was set up correctly in Servicenow and if the json config file was setup correct. I had a permission wrong and it showed me what was wrong when I did a Validate Connection. I fixed the permission like it showed me and then everything worked. My lab data is now showing up in Servicenow CMDB.</p>
 <hr>
@@ -430,22 +430,23 @@ Write-Output $outPut</code></pre>
 <hr>
 <h2>Links to resources about VMware Aria Operations | Servicenow | Management Pack:</h2>
 <ul>
-<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Management-Packs/Servicenow" target="_blank" rel="noopener noreferrer">Source code used in this Blog Post.</a></li>
-<li><a href="https://www.brockpeterson.com/post/updated-vrtvs-management-pack-for-servicenow" target="_blank" rel="noopener noreferrer">Brock Peterson Blog Post | Updated vRTVS Management Pack for ServiceNow</a>. This Blog Post does a great job discussing how to send VMware Aria Operations Alerts to Servicenow.</li>
-<li><a href="https://docs.vmware.com/en/VMware-Aria-Operations-for-Integrations/9.0/Management-Pack-for-ServiceNow/GUID-271D9F75-15C7-4395-96B1-EF024A1485C0.html" target="_blank" rel="noopener noreferrer">VMware Aria Operations Servicenow Management Pack documentation.</a></li>
-<hr>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/tree/main/VMware-Aria-Operations/Management-Packs/Servicenow" target="_blank" rel="noopener noreferrer">Source code used in this Blog Post.</a>  </li>
+<li><a href="https://www.brockpeterson.com/post/updated-vrtvs-management-pack-for-servicenow" target="_blank" rel="noopener noreferrer">Brock Peterson Blog Post | Updated vRTVS Management Pack for ServiceNow</a>. This Blog Post does a great job discussing how to send VMware Aria Operations Alerts to Servicenow.  </li>
+<li><a href="https://docs.vmware.com/en/VMware-Aria-Operations-for-Integrations/9.0/Management-Pack-for-ServiceNow/GUID-271D9F75-15C7-4395-96B1-EF024A1485C0.html" target="_blank" rel="noopener noreferrer">VMware Aria Operations Servicenow Management Pack documentation.</a>  </li>
 </ul>
+<hr>
 <p>When I write my blogs, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete the tasks in this article.</p>
 
                     </div>
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

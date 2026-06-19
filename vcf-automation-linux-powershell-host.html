@@ -185,6 +185,7 @@ pwsh -file /home/administrator/Home-Lab-PS.ps1 -vmName &quot;VM-01&quot; -PowerS
 <ul>
 <li><a href="https://github.com/dalehassinger/unlocking-the-potential/blob/main/VMware-Aria-Automation/Workflows/SSH-Run-PowerShell-Script.package" target="_blank" rel="noopener noreferrer">Click to download the workflow</a></li>
 <li>Import the Package into Orchestrator</li>
+</ul>
 <hr>
 <p><strong>Java Script used in the Workflow to SSH to the Rocky Linux PowerShell Host and run a PS Script:</strong></p>
 <pre><code>var session = null;
@@ -227,20 +228,20 @@ try {
 }
 </code></pre>
 <hr>
-</ul>
 <h2>Code Examples:</h2>
 <ul>
-<li>YAML file to store values to be used with scripts</li>
-<pre><code># vCenter Connection Values
+<li>YAML file to store values to be used with scripts<pre><code># vCenter Connection Values
 vCenter:
   server: vcsa8x.vcrocs.local
   username: administrator@vcrocs.local
   password: VMware1!
   ignoreCertErrors: true</code></pre>
+</li>
+</ul>
 <hr>
 <p><strong>Sample PowerShell Script:</strong></p>
-<li>Sample script that I used to show that Rocky Linux can be used as a PowerShell Host</li>
-<pre><code># Ensure required modules are installed before proceeding
+<ul>
+<li>Sample script that I used to show that Rocky Linux can be used as a PowerShell Host<pre><code># Ensure required modules are installed before proceeding
 $requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
 foreach ($module in $requiredModules) {
     if (-not (Get-Module -ListAvailable -Name $module)) {
@@ -279,16 +280,19 @@ catch {
     return &quot;Error: $_&quot;
 }
 </code></pre>
+</li>
+</ul>
 <hr>
-<li>VCF Automation Catalog with an Option to run the Orchestrator Workflow that was created to run the script on Rocky Linux</li>
+<ul>
+<li>VCF Automation Catalog with an Option to run the Orchestrator Workflow that was created to run the script on Rocky Linux  </li>
 </ul>
 <img src="images/linux0ps-host-02.png" alt="">
 <hr>
 <ul>
-<li>Orchestrator Workflow as a Catalog Item</li>
-<li>This is a simple example to give you ideas. The script that will run could bascially Automate anything</li>
+<li>Orchestrator Workflow as a Catalog Item  </li>
+<li>This is a simple example to give you ideas. The script that will run could bascially Automate anything  </li>
 <li>Script Parameters become fields on a custom form</li>
-<li>If you can write a script for the process, you can Automate it with Orchestrator</li>
+<li>If you can write a script for the process, you can Automate it with Orchestrator  </li>
 </ul>
 <img src="images/linux0ps-host-03.png" alt="">
 <hr>
@@ -310,13 +314,13 @@ sudo systemctl restart sshd
 <hr>
 <h2>Lessons Learned:</h2>
 <ul>
-<li>If you like to use Linux for Servers, this is a good use case for running PowerShell scripts</li>
-<li>If you have existing PowerShell scripts that run on a Windows Server, most scripts should run on Linux with little to no modifications</li>
-<li>I enjoy bringing consistency to my scripts by leveraging a YAML file, similar to the approach used in automation platforms I work with</li>
-<li>All the scripts in this blog were created and tested on a Mac using PowerShell</li>
-<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!</li>
-<hr>
+<li>If you like to use Linux for Servers, this is a good use case for running PowerShell scripts  </li>
+<li>If you have existing PowerShell scripts that run on a Windows Server, most scripts should run on Linux with little to no modifications  </li>
+<li>I enjoy bringing consistency to my scripts by leveraging a YAML file, similar to the approach used in automation platforms I work with  </li>
+<li>All the scripts in this blog were created and tested on a Mac using PowerShell  </li>
+<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!  </li>
 </ul>
+<hr>
 <p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
 <hr>
 <p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
@@ -325,11 +329,12 @@ sudo systemctl restart sshd
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

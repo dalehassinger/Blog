@@ -179,22 +179,28 @@
 <p>1. Within the Design section of Aria Automation, create a template. For the purpose of this tutorial, we will construct a straightforward Rocky Linux VM. | Refer to <a href="#screen-shot-01">Screen Shot 1</a>.</p>
 <p>2. Ensure that all properties you wish to include in your notification are incorporated into the template's YAML code. These property values will be transmitted to both ABX Actions and Orchestrator Workflows. | Refer to <a href="#screen-shot-02">Screen Shot 2</a>.</p>
 <ul>
+<ul>
 <li>You have the flexibility to include any property in your messages, provided it is specified in the template's YAML code.</li>
+</ul>
 </ul>
 <p>3. Proceed to set up an Extensibility Action. | See <a href="#screen-shot-03">Screen Shot 3</a> and <a href="#screen-shot-04">Screen Shot 4</a>.</p>
 <p>4. Establish an Extensibility Subscription that will initiate the ABX Action or Orchestrator Workflow as required. | Refer to <a href="#screen-shot-05">Screen Shot 5</a>.</p>
 <p>5. Here's an example of how to define a subscription. | See <a href="#screen-shot-06">Screen Shot 6</a>.</p>
 <p>6. Initiate the creation of an Orchestrator Workflow. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.</p>
 <ul>
+<ul>
 <li>Incorporate an input property into the Orchestrator Workflow. | See <a href="#screen-shot-08">Screen Shot 8</a>.</li>
 <li>Outline the schema within the Orchestrator Workflow. | Refer to <a href="#screen-shot-09">Screen Shot 9</a>.</li>
 <li>Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-10">Screen Shot 10</a> and <a href="#screen-shot-11">Screen Shot 11</a>.</li>
 </ul>
+</ul>
 <p>7. Deploy a new VM and confirm that the Extensibility Subscription successfully triggered the ABX Action you defined.</p>
 <p>8. Check your preferred messaging system to ensure the notification was received.</p>
 <ul>
+<ul>
 <li>Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.</li>
 <li>Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.</li>
+</ul>
 </ul>
 <p>9. If all steps were executed successfully, it's time for a celebration!</p>
 <p>10. <a href="#screen-shot-14">Screen Shot 14</a> illustrates the process of creating a Google Spaces Webhook.</p>
@@ -203,14 +209,18 @@
 <p><strong>Steps:</strong></p>
 <p>1. Initiate the creation of an Orchestrator Workflow. Creating a new Workflow is the same for Day 2 Automation Processes as when a Workflow was created for building a New VM. | Refer to <a href="#screen-shot-07">Screen Shot 7</a>.</p>
 <ul>
+<ul>
 <li>Incorporate an input property into the Orchestrator Workflow for every question needed to complete the Day 2 Automation. | See <a href="#screen-shot-15">Screen Shot 15</a>.</li>
 <li>Inject the necessary code into the Orchestrator Workflow. | See <a href="#screen-shot-16">Screen Shot 16</a>.</li>
+</ul>
 </ul>
 <p>2. Run the Workflow and confirm that the code successfully ran and created the message .</p>
 <p>3. Check your preferred messaging system to ensure the notification was received. The Messages with look the same as when you created a New VM. YOU define what information is shown.</p>
 <ul>
+<ul>
 <li>Example of a Google Spaces Message | Refer to <a href="#screen-shot-12">Screen Shot 12</a>.</li>
 <li>Example of a Microsoft Teams Message | See <a href="#screen-shot-13">Screen Shot 13</a>.</li>
+</ul>
 </ul>
 <p>4. If all steps were executed successfully, it's time for a high five!</p>
 <p>5. Example of a Day 2 Automation Microsoft Teams Message | See <a href="#screen-shot-17">Screen Shot 17</a>.</p>
@@ -293,7 +303,7 @@ resources:
 <p><strong>Extensibility ABX Action Code:</strong></p>
 <p>Code Snippets.</p>
 <ul>
-<li>Each ABX Action starts with identical code to retrieve Property Values.</li>
+<li>Each ABX Action starts with identical code to retrieve Property Values. </li>
 <li>The variation arises in the methodology of dispatching this information to the respective messaging systems.</li>
 </ul>
 <p>Here's an example script for sending notifications to Microsoft Teams.</p>
@@ -545,8 +555,7 @@ $messageBody = @{
 <li>For sending messages to Microsoft Teams, use the following code.</li>
 <li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
 <li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
-<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.</li>
-<pre><code>  
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.<pre><code>  
 function Handler($context, $inputs) {
 
     # Build PowerShell variables
@@ -637,8 +646,9 @@ $messageCard = @{
 
     return $output
 }</code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Screen Shot 11:</h2>
 <p>Code difference between a Orchestrator Workflow and a ABX Action.</p>
 <img src="images/aria-automation-messages-11.png" alt="">
@@ -672,8 +682,7 @@ $messageCard = @{
 <li>For sending messages to Microsoft Teams, use the following code.</li>
 <li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
 <li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
-<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.</li>
-<pre><code>  
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.<pre><code>  
 
 function Handler($context, $inputs) {
 
@@ -740,18 +749,19 @@ $messageCard = @{
 
     return $output
 }</code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Screen Shot 17:</h2>
 <p>Microsoft Teams Message with Day 2 Automation Details. Awesome!</p>
 <img src="images/aria-automation-messages-17.png" alt="">
 <hr>
 <h2>Links to resources discussed is this Blog Post:</h2>
 <ul>
-<li><a href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=newteams%2Cdotnet" target="_blank" rel="noopener noreferrer">Link to learn how to create a Microsoft Teams Webhook.</a></li>
-<li><a href="https://github.com/dalehassinger/unlocking-the-potential/" target="_blank" rel="noopener noreferrer">Link to my GitHub Repository for sample code like what is included in this Blog Post.</a></li>
-<hr>
+<li><a href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=newteams%2Cdotnet" target="_blank" rel="noopener noreferrer">Link to learn how to create a Microsoft Teams Webhook.</a>  </li>
+<li><a href="https://github.com/dalehassinger/unlocking-the-potential/" target="_blank" rel="noopener noreferrer">Link to my GitHub Repository for sample code like what is included in this Blog Post.</a>  </li>
 </ul>
+<hr>
 <h2>Aria Automation Version used for Blog Post:</h2>
 <p>VMware Aria Automation 8.16.0 was used for this Blog Post. When new versions of VMware Aria Automation are released, the code or process may need to be changed.</p>
 <hr>
@@ -761,11 +771,12 @@ $messageCard = @{
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

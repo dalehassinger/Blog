@@ -172,15 +172,15 @@
 <li>Customer used RVTools to see data about their VMware environment.</li>
 <li>Customer used VMware Aria Operations for all monitoring.</li>
 <li>Customer wanted to have a VMware Aria Operations Dashboard that showed RVTools data to create a "Single Pane of Glass" experience.</li>
-<hr>
 </ul>
+<hr>
 <h2>Steps to complete the process:</h2>
 <ul>
 <li>[x] Automate the process to generate the RVTools xlsx file everyday.</li>
 <li>[x] Generate html files from the RVTools xlsx file, to display in a VMware Aria Operations Dashboard.</li>
 <li>[x] Need access to a Web Server of your choice to save the html files. The files are static, so any flavor of web server will work.</li>
-<hr>
 </ul>
+<hr>
 <h2>RVTools vHealth data in a VMware Aria Operations Dashboard:</h2>
 <ul>
 <li>Screen shot of Dashboard</li>
@@ -192,8 +192,7 @@
 <li>The script was created to be dynamic. No worksheet names or field names are hard coded. If new Worksheets or fields are added to RVTools in the future, they will automatically be picked up with this script.</li>
 <li>RVTools provides a program to encrypt your password that will be used with the script. The program is named "RVToolsPasswordEncryption.exe".</li>
 <li>The PowerShell Script uses the importexcel PowerShell Module to see the data in the RVTools xlsx file. If you have never used the importexcel module, please review to see if you would have other use cases. No need to have Excel Installed. Works Awesome, one of my Favorite PowerShell Modules. Thanks <a href="https://github.com/dfinke" target="_blank" rel="noopener noreferrer">Doug Finke </a></li>
-<li><strong>Click to expand PowerShell code</strong></li>
-<pre><code># Created By: Dale Hassinger
+<li><strong>Click to expand PowerShell code</strong><pre><code># Created By: Dale Hassinger
 # Blog Site: www.vCROCS.info
 # Notes:
 # This script uses the importexcel powershell module
@@ -376,20 +375,21 @@ foreach($workSheet in $worksheetNames.Name){
 	Create-HTML -workSheet $workSheet
 } # End Foreach
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Results of script:</h2>
 <ul>
 <li>For my example, I am using a Windows Server and IIs Web Server.</li>
 <li>All html files are saved in the folder C:\inetpub\wwwroot\rvtools\ on the IIS Server.</li>
-<li>A html file is created for ever Worksheet within the xlsx file.</li>
+<li>A html file is created for ever Worksheet within the xlsx file.  </li>
 </ul>
 <img src="images/rvtools-dashboard-02.png" alt="">
 <h2>VMware Aria Operation Dashboard Design:</h2>
 <ul>
 <li>Use the Text Display Widget to show the results of a html within the Dashboard.</li>
 <li>Add a Text Display Widget for every Worksheet that you want to display within the Dashboard.</li>
-<li>Add the url to the Text Display Widget. You <strong>MUST</strong> use a secure url. IE: https://192.168.110.202/rvtools/vHealth.htm</li>
+<li>Add the url to the Text Display Widget. You <strong>MUST</strong> use a secure url. IE: https://192.168.110.202/rvtools/vHealth.htm  </li>
 </ul>
 <img src="images/rvtools-dashboard-03.png" alt="">
 <img src="images/rvtools-dashboard-04.png" alt="">
@@ -398,26 +398,27 @@ foreach($workSheet in $worksheetNames.Name){
 <ul>
 <li>I use a Workflow within VMware Aria Automation Orchestrator that is built-in to VMware Aria Automation. You can also you a stand alone VMware Aria Automation Orchestrator install if you don't use VMware Aria Automation.</li>
 <li>There is a OOTB (Out of the Box) Workflow that allows you to run a PowerShell script on a PowerShell Host. I clone that Workflow and edit to match my environment.</li>
-<li>I schedule the Workflow to run everyday at 5:00 am.</li>
-<hr>
+<li>I schedule the Workflow to run everyday at 5:00 am.  </li>
 </ul>
+<hr>
 <h2>Lessons Learned</h2>
 <ul>
 <li>The Text Display Widget is a nice way to display data in a VMware Aria Operations Dashboard from any html file.</li>
 <li>Using the Text Display Widget allows you to create that "Single Pane of Glass" experience with VMware Aria Operations.</li>
-<hr>
 </ul>
+<hr>
 <p>When I write about Automation, I always say there are many ways to accomplish the same task. This article is just one way that you could accomplish this task. I am showing what I felt was a good way to complete the use case but every organization/environment will be different. There is no right or wrong way to complete automation as long as it completes successfully and consistently.</p>
 
                     </div>
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

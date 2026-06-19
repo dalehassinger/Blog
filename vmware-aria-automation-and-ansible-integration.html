@@ -173,8 +173,9 @@
 <hr>
 <h2>Create a Ansible Control Server and install Ansible:</h2>
 <ul>
-<li>[x] Create a new Server. I created a clean Rocky Linux VM.</li>
-<li>[x] This server will be used as the Ansible Control Node.</li>
+<li>[x] Create a new Server. I created a clean Rocky Linux VM.  </li>
+<li>[x] This server will be used as the Ansible Control Node.  </li>
+</ul>
 <p><strong>Steps to install Ansible:</strong></p>
 <pre><code># Step 1 | Install Rocky Linux EPEL repository
 dnf install epel-release -y
@@ -185,7 +186,6 @@ dnf install ansible -y
 # Check Ansible Version after Install
 ansible --version</code></pre>
 <hr>
-</ul>
 <p>Results from ansible --version:</p>
 <pre><code>ansible [core 2.13.3]
   config file = /etc/ansible/ansible.cfg
@@ -202,32 +202,32 @@ ansible --version</code></pre>
 <h2>Edit the hosts file:</h2>
 <ul>
 <li>[x] Edit the /etc/ansible/hosts file:</li>
-<li>[x] I like to use nano to edit files. To save file changes in Nano use cntrl-o. To exit Nano use cntrl-x.</li>
-<pre><code># the cmd at the cli to edit the hosts file
+<li>[x] I like to use nano to edit files. To save file changes in Nano use cntrl-o. To exit Nano use cntrl-x.<pre><code># the cmd at the cli to edit the hosts file
 nano /etc/ansible/hosts</code></pre>
-<li>This is the contents of the /etc/ansible/hosts file:</li>
-<pre><code>[rocky]
+</li>
+<li>This is the contents of the /etc/ansible/hosts file:<pre><code>[rocky]
 192.168.110.201
 
 [rocky:vars]
 ansible_user=root
 ansible_password=&#39;VMware1!&#39;</code></pre>
+</li>
 </ul>
 <img src="images/ansible-install-step-02.gif" alt="">
 <hr>
 <h2>Edit the ansible.cfg file:</h2>
 <ul>
-<li>[x] Edit the /etc/ansible/ansible.cfg file:</li>
-<pre><code># the cmd at the cli to edit the ansible.cfg file
+<li>[x] Edit the /etc/ansible/ansible.cfg file:<pre><code># the cmd at the cli to edit the ansible.cfg file
 nano /etc/ansible/ansible.cfg</code></pre>
+</li>
 </ul>
 <p>This is the minium contents of the /etc/ansible/ansible.cfg file:</p>
 <ul>
 <li><strong>BOTH</strong> of these lines <strong>MUST</strong> be in the ansible.cfg file to add Ansible to VMware Aria Automation. If they are not present, adding the Integration will fail!</li>
-<li>The vault password file can be named something different, <strong>BUT IT MUST BE SPECIFIED!</strong></li>
-<pre><code>[defaults]
+<li>The vault password file can be named something different, <strong>BUT IT MUST BE SPECIFIED!</strong><pre><code>[defaults]
 host_key_checking = False
 vault_password_file = /etc/ansible/vault-pass.txt</code></pre>
+</li>
 </ul>
 <img src="images/ansible-install-step-03.gif" alt="">
 <hr>
@@ -242,13 +242,13 @@ ansible rocky -m ping</code></pre>
 <img src="images/ansible-vra-integration.png" alt="">
 <ul>
 <li>You need to specify the Inventory File path. Default is /etc/ansible/hosts</li>
-<li>You need to make sure the /etc/ansible/ansible.cfg file has the following two lines of code to add as an VMware Aria Automation Integration.</li>
+<li>You need to make sure the /etc/ansible/ansible.cfg file has the following two lines of code to add as an VMware Aria Automation Integration. </li>
+</ul>
 <p><strong>ansible.cfg file:</strong></p>
 <pre><code>[defaults]
 host_key_checking = False
 vault_password_file = /etc/ansible/vault-pass.txt</code></pre>
 <p><strong>Ansible Integration screen:</strong></p>
-</ul>
 <img src="images/ansible-vra-integration-details.png" alt="">
 <h2>VMware Aria Automation Cloud Template</h2>
 <p><strong>Add Ansible to Cloud Template</strong></p>
@@ -325,8 +325,7 @@ resources:
           address: ${input.IP}</code></pre>
 <ul>
 <li>Example Ansible Playbook</li>
-<li>Creates a txt file, adds text to txt file, installs web server, starts web server service, enables cockpit, installs git, and does a git pull request from GitHub to copy web site files to new server.</li>
-<pre><code># web-server-rocky.yml
+<li>Creates a txt file, adds text to txt file, installs web server, starts web server service, enables cockpit, installs git, and does a git pull request from GitHub to copy web site files to new server.<pre><code># web-server-rocky.yml
 - hosts: rocky
   name: Ansible Playbook to Install Web Server
   tasks:
@@ -363,9 +362,10 @@ resources:
         dest: /var/www/html
         single_branch: yes
         version: master</code></pre>
+</li>
+</ul>
 <hr>
 <p><strong>VMware Aria Automation Service Broker Catalog:</strong></p>
-</ul>
 <img src="images/ansible-catalog.png" alt="">
 <hr>
 <ul>
@@ -378,26 +378,27 @@ resources:
 <ul>
 <li>The VMware Aria Automation | Ansible Integration works well if you follow all the configuration steps.</li>
 <li>Ansible installation is very easy when you follow the directions.</li>
-<hr>
 </ul>
+<hr>
 <h2>Helpful Links</h2>
 <ul>
 <li><a href="https://www.ansible.com" target="_blank" rel="noopener noreferrer">Red Hat Ansible Web Site</a></li>
 <li><a href="https://blogs.vmware.com/management/2020/07/deeper-look-at-the-vrealize-automation-and-ansible-open-source-integration.html" target="_blank" rel="noopener noreferrer">Deeper look at the vRealize Automation and Ansible Open Source Integration</a></li>
 <li><a href="https://docs.vmware.com/en/vRealize-Automation/8.10/Using-and-Managing-Cloud-Assembly/GUID-9244FFDE-2039-48F6-9CB1-93508FCAFA75.html" target="_blank" rel="noopener noreferrer">Configure Ansible Open Source integration in Cloud Assembly</a></li>
-<hr>
 </ul>
+<hr>
 <p>When I write about <b>VMware Aria Automation</b> I always say there are many ways to accomplish the same task.  <b>Ansible</b> is the same way.  I am showing what I felt was important to see but every organization/environment will be different. There is no right or wrong way to use Ansible.</p>
 
                     </div>
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

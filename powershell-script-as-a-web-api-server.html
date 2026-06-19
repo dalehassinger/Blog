@@ -177,8 +177,8 @@
 <h2>Code Examples:</h2>
 <p>This example is a simple <strong>Web Server</strong> (non-ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
 <ul>
-<li>Script can be used to show any web page and data you can create. Think about some cool use cases.</li>
-<li>The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.</li>
+<li>Script can be used to show any web page and data you can create. Think about some cool use cases.  </li>
+<li>The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.  </li>
 </ul>
 <img src="images/ps-web-api-server-01.gif" alt="">
 <pre><code># Web Server for Home Lab Use and a Nice way to see how PowerShell can be used.
@@ -317,8 +317,8 @@ finally {
 <hr>
 <p>This example is a simple <strong>Web Server</strong> (with ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
 <ul>
-<li>Script can be used to show any web page and data you can create. Think about some cool use cases.</li>
-<li>The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.</li>
+<li>Script can be used to show any web page and data you can create. Think about some cool use cases.  </li>
+<li>The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.  </li>
 </ul>
 <img src="images/ps-web-api-server-02.gif" alt="">
 <pre><code># Web Server for Home Lab Use and a Nice way to see how PowerShell can be used.
@@ -496,11 +496,11 @@ finally {
 <p>This example is a simple <strong>RESTful API front end</strong> that returns any data that you have in the PS script.</p>
 <p>(4) Sample API calls:</p>
 <ul>
-<li>Returns Status</li>
-<li>Returns a simple Hello</li>
-<li>Returns all the VM Names in my lab vCenter</li>
-<li>Returns Tiered Memory usage of VMs in my Lab</li>
-<li>Script can be used to return any data you can create. Think about some cool use cases.</li>
+<li>Returns Status  </li>
+<li>Returns a simple Hello  </li>
+<li>Returns all the VM Names in my lab vCenter  </li>
+<li>Returns Tiered Memory usage of VMs in my Lab  </li>
+<li>Script can be used to return any data you can create. Think about some cool use cases.  </li>
 </ul>
 <img src="images/ps-web-api-server-03.gif" alt="">
 <pre><code># API Server for Home Lab Use and a Nice way to see how PowerShell can be used.
@@ -754,9 +754,8 @@ finally {
 </code></pre>
 <hr>
 <ul>
-<li>YAML file contents to use with the PowerShell Script</li>
-<li>I've been using a YAML file with all my current scripts to store values for connecting to vCenter, VCF Operations, VCF Automation, and more. If anything changes, I just update the YAML file, and all the scripts continue to work without any issues.</li>
-<pre><code># vCenter Connection
+<li>YAML file contents to use with the PowerShell Script  </li>
+<li>I've been using a YAML file with all my current scripts to store values for connecting to vCenter, VCF Operations, VCF Automation, and more. If anything changes, I just update the YAML file, and all the scripts continue to work without any issues.<pre><code># vCenter Connection
 vCenter:
   server: vcsa8x.vcrocs.local
   username: administrator@vcrocs.local
@@ -783,10 +782,13 @@ Automation:
   autoPassword: VMware1!
   autoDomain:  System Domain
 </code></pre>
+</li>
+</ul>
 <hr>
 <p><strong>Here is a sample PowerShell Script web page that is used with the Text Display Widget within a VCF Operations Dashboard.</strong></p>
-<li>The PowerShell Script is running as a service within a Linux VM</li>
-<li>There is a 2nd PS script that runs and collects the Tiered Memory Metrics every five minutes and saves the data as a json file that is used with the web page</li>
+<ul>
+<li>The PowerShell Script is running as a service within a Linux VM  </li>
+<li>There is a 2nd PS script that runs and collects the Tiered Memory Metrics every five minutes and saves the data as a json file that is used with the web page  </li>
 <li>100s of use cases</li>
 </ul>
 <img src="images/ps-web-api-server-04.gif" alt="">
@@ -847,9 +849,9 @@ sudo systemctl stop vcrocs-api.service
 <hr>
 <p><strong>Use Visual Studio Code (VS Code) to create, edit, and run PowerShell scripts on your remote Linux-based PowerShell servers:</strong></p>
 <ul>
-<li>Try using the VS Code Remote-SSH extension with a Linux server — it’s a setup I really enjoy. Your code is saved and executed directly on the remote Linux machine.</li>
-<hr>
+<li>Try using the VS Code Remote-SSH extension with a Linux server — it’s a setup I really enjoy. Your code is saved and executed directly on the remote Linux machine.  </li>
 </ul>
+<hr>
 <img src="images/ps-web-api-server-08.png" alt="">
 <hr>
 <p><strong><small>Running a simple PS script on a remote Linux server that uses the VMware PowerCLI module.</small></strong></p>
@@ -872,10 +874,12 @@ openssl pkcs12 -export -out vcrocs.pfx -inkey vcrocs.key -in vcrocs.crt
 <hr>
 <p><strong>If you’re primarily a Windows user and hesitant about using Linux, here’s a quick tip: try installing Cockpit — it provides a user-friendly GUI to help manage your Linux VM with ease.</strong></p>
 <ul>
-<li>Here’s some IT career advice: Get comfortable working with both Windows and Linux. Both operating systems play key roles in enterprise environments.</li>
-<li>If you’re a Linux user, don’t shy away from using PowerShell. With VMware PowerCLI, automation becomes much easier and more powerful.</li>
-<hr>
+<li>Here’s some IT career advice: Get comfortable working with both Windows and Linux. Both operating systems play key roles in enterprise environments.<ul>
+<li>If you’re a Linux user, don’t shy away from using PowerShell. With VMware PowerCLI, automation becomes much easier and more powerful.  </li>
 </ul>
+</li>
+</ul>
+<hr>
 <p>Steps to install Cockpit on Rocky Liunux:</p>
 <pre><code>
 # Update the server
@@ -906,12 +910,12 @@ sudo nano /etc/cockpit/disallowed-users
 <hr>
 <h2>Lessons learned:</h2>
 <ul>
-<li>A PowerShell Script can be a Web Server or a RESTful API front end</li>
+<li>A PowerShell Script can be a Web Server or a RESTful API front end  </li>
 <li>Great way to test web pages in a lab or simple web server</li>
-<li>The above scripts are cross platform. Can run on Windows, Mac or Linux</li>
-<li>I like that I can take a bare bones Linux VM, install PowerShell, add the script and I have web pages available or a RESTful API front end</li>
-<hr>
+<li>The above scripts are cross platform. Can run on Windows, Mac or Linux  </li>
+<li>I like that I can take a bare bones Linux VM, install PowerShell, add the script and I have web pages available or a RESTful API front end  </li>
 </ul>
+<hr>
 <p>In my blogs, I often emphasize that there are multiple methods to achieve the same objective. This article presents just one of the many ways you can tackle this task. I've shared what I believe to be an effective approach for this particular use case, but keep in mind that every organization and environment varies. There's no definitive right or wrong way to accomplish the tasks discussed in this article.</p>
 <hr>
 <p>Always test new setups and processes, like those discussed in this blog, in a lab environment before implementing them in a production environment.</p>
@@ -920,11 +924,12 @@ sudo nano /etc/cockpit/disallowed-users
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

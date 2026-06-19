@@ -235,8 +235,7 @@
 <h2>VCF Automation Design Template</h2>
 <p><strong>Example Template Yaml Code:</strong></p>
 <ul>
-<li><small><strong>Code from the screen shots above.</strong></small></li>
-<pre><code>
+<li><small><strong>Code from the screen shots above.</strong></small>  <pre><code>
 formatVersion: 2
 name: Rocky-Basic
 outputs:
@@ -347,14 +346,14 @@ resources:
           assignment: static
           address: ${input.IP}
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>VCF Automation Design Template</h2>
 <p><strong>Example ABX Action Code:</strong></p>
 <ul>
 <li><small><strong>Code from the screen shots above.</strong></small></li>
-<li><small><strong>My example code simply outputs the values to demonstrate how to create the array and validate that the code works. Once you have this structure in place, you can extend the <code>foreach</code> section to automate any tasks you need.</strong></small></li>
-<pre><code>
+<li><small><strong>My example code simply outputs the values to demonstrate how to create the array and validate that the code works. Once you have this structure in place, you can extend the <code>foreach</code> section to automate any tasks you need.</strong></small><pre><code>
 function handler($context, $inputs) {
 
     if(!$inputs.customProperties.vmAdminUsers){
@@ -384,14 +383,15 @@ function handler($context, $inputs) {
   return $inputs
 }
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Lessons learned:</h2>
 <ul>
-<li>Using Array Inputs are a great way to use multiple values for processes needed to build new VMs.</li>
-<li>After you take the YAML array string and turn it into a PowerShell array, you can use the values to automate anything you can script.</li>
-<hr>
+<li>Using Array Inputs are a great way to use multiple values for processes needed to build new VMs.  </li>
+<li>After you take the YAML array string and turn it into a PowerShell array, you can use the values to automate anything you can script.  </li>
 </ul>
+<hr>
 <p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
 <p><a href="https://youtu.be/8jPQHbtK1s8" target="_blank" rel="noopener noreferrer">vCROCS Deep Dive Podcast | VCF Automation | Input Arrays</a></p>
 <hr>
@@ -403,11 +403,12 @@ function handler($context, $inputs) {
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

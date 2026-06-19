@@ -168,8 +168,8 @@
 <p><strong>If you want to work with the VMware Aria Automation Config API please use this newer Blog Post that I created:</strong></p>
 <ul>
 <li><a href="https://www.vcrocs.info/unlocking-the-potential-vmware-aria-automation-config-api/" target="_blank" rel="noopener noreferrer">Unlocking the Potential | VMware Aria Automation Config API</a></li>
-<hr>
 </ul>
+<hr>
 <p>This post is to show how to use PowerShell to make RESTful API calls to SaltStack Config. This is something that I have wanted to do for awhile. I could never find any examples in my Google searches, so I took the time to learn how the examples that use curl work and translated that into PowerShell Code. I hope some Windows Server Admins will find this post helpful. I like using salt to do Windows Server Configuration Management more than remote PowerShell. You can run changes against many servers at the exact same time instead of looping thru a list of servers names.</p>
 <p>I am also going to look at use salt-api with vRealize Automation ABX action scripts.</p>
 <p>In some previous posts I used the POSH-SSH module but when you use the salt-api, the PowerShell Module POSH-SSH is no longer needed.</p>
@@ -191,16 +191,16 @@
   <br>
 </div>
 <ul>
-<li>Install CherryPy:</li>
-<pre><code>pip3 install cherrypy</code></pre>
-<li>Install the PyOpenSSL package:</li>
-<pre><code>pip3 install pyopenssl</code></pre>
-<li>Generate a self-signed certificate:</li>
-<pre><code>salt-call --local tls.create_self_signed_cert</code></pre>
-<li>open firewall port 8000:</li>
-<pre><code>iptables -A INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT</code></pre>
-<li>Edit /etc/salt/master file:</li>
-<pre><code>vi /etc/salt/master</code></pre>
+<li>Install CherryPy:<pre><code>pip3 install cherrypy</code></pre>
+</li>
+<li>Install the PyOpenSSL package:<pre><code>pip3 install pyopenssl</code></pre>
+</li>
+<li>Generate a self-signed certificate: <pre><code>salt-call --local tls.create_self_signed_cert</code></pre>
+</li>
+<li>open firewall port 8000:<pre><code>iptables -A INPUT -i eth0 -p tcp --dport 8000 -j ACCEPT</code></pre>
+</li>
+<li>Edit /etc/salt/master file: <pre><code>vi /etc/salt/master</code></pre>
+</li>
 </ul>
 <p>Add these lines to the /etc/salt/master file:</p>
 <pre><code>external_auth:
@@ -213,19 +213,18 @@ rest_cherrypy:
   ssl_crt: /etc/pki/tls/certs/localhost.crt
   ssl_key: /etc/pki/tls/certs/localhost.key</code></pre>
 <ul>
-<li>Restart salt-master and check service status for any errors:</li>
-<pre><code>systemctl restart salt-master
+<li>Restart salt-master and check service status for any errors:<pre><code>systemctl restart salt-master
 systemctl status salt-master</code></pre>
-<li>Enable | Start salt-api and check service status for any errors:</li>
-<pre><code>systemctl enable salt-api
+</li>
+<li>Enable | Start salt-api and check service status for any errors:<pre><code>systemctl enable salt-api
 systemctl start salt-api
 systemctl status salt-api</code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <h2>Tests to make sure SaltStack Config Changes are working:</h2>
 <ul>
-<li>I did all this PowerShell code from my mac.  To use self-signed certs I use -SkipCertificateCheck. On a Windows OS the code is different.</li>
-<pre><code># --- PowerShell Code ---
+<li>I did all this PowerShell code from my mac.  To use self-signed certs I use -SkipCertificateCheck. On a Windows OS the code is different.<pre><code># --- PowerShell Code ---
 Invoke-WebRequest -Uri &#39;https://192.168.86.141:8000&#39; -SkipCertificateCheck
 
 Results:
@@ -247,9 +246,9 @@ InputFields       : {}
 Links             : {}
 RawContentLength  : 146
 RelationLink      : {}</code></pre>
+</li>
 <li>Make sure you see StatusCode: 200</li>
-<li>Next step is to make sure you get a token:</li>
-<pre><code># --- PowerShell Code ---
+<li>Next step is to make sure you get a token:<pre><code># --- PowerShell Code ---
 # --- In my code I show the PassWord. In Production DO NOT DO THIS.
 # --- There are so many different ways to include encrypted PWs in the code. 
 # --- Use what works best in your environment.
@@ -279,13 +278,13 @@ return
 ------
 {@{token=6696846c802f78d5326a69b79d36e95015d37f5a; expire=1655025071.22838; start=1654981871.22838; user=root; eauth=pam; perms=System.Object[]}}
 6696846c802f78d5326a69b79d36e95015d37f5a</code></pre>
+</li>
 <li>You will see "token=" in the return data</li>
-<hr>
 </ul>
+<hr>
 <h2>PowerShell API Code Examples:</h2>
 <ul>
-<li>Run a test.ping</li>
-<pre><code># --- PowerShell Code ---
+<li>Run a test.ping<pre><code># --- PowerShell Code ---
 $minionName        = &#39;2019DC&#39;
 $saltServerAddress = &#39;https://192.168.86.110:8000&#39;
 $userName          = &#39;root&#39;
@@ -311,8 +310,8 @@ $fetch = Invoke-RestMethod @Params -SkipCertificateCheck
 #$fetch
 $fetch.return
 $fetch.return.$minionName</code></pre>
-<li>Check disk.usage</li>
-<pre><code># --- PowerShell Code ---
+</li>
+<li>Check disk.usage<pre><code># --- PowerShell Code ---
 $minionName        = &#39;2019DC&#39;
 $saltServerAddress = &#39;https://192.168.86.110:8000&#39;
 $userName          = &#39;root&#39;
@@ -339,8 +338,8 @@ $fetch.return
 $fetch.return.$minionName
 $fetch.return.$minionName.&#39;C:\&#39;
 $fetch.return.$minionName.&#39;C:\&#39;.capacity</code></pre>
-<li>Check Service Status</li>
-<pre><code># --- PowerShell Code ---
+</li>
+<li>Check Service Status<pre><code># --- PowerShell Code ---
 $minionName        = &#39;2019DC&#39;
 $saltServerAddress = &#39;https://192.168.86.110:8000&#39;
 $userName          = &#39;root&#39;
@@ -365,8 +364,8 @@ $fetch = Invoke-RestMethod @Params -SkipCertificateCheck
 
 # --- Service Status | True = Running | False = Stopped
 $fetch.return.$minionName</code></pre>
-<li>Stop Service</li>
-<pre><code># --- PowerShell Code ---
+</li>
+<li>Stop Service<pre><code># --- PowerShell Code ---
 $minionName        = &#39;2019DC&#39;
 $saltServerAddress = &#39;https://192.168.86.110:8000&#39;
 $userName          = &#39;root&#39;
@@ -391,8 +390,8 @@ $fetch = Invoke-RestMethod @Params -SkipCertificateCheck
 
 # --- Service Stopped | True = Stopped | False = Not Stopped
 $fetch.return.$minionName</code></pre>
-<li>Disable Service</li>
-<pre><code># --- PowerShell Code ---
+</li>
+<li>Disable Service<pre><code># --- PowerShell Code ---
 $minionName        = &#39;2019DC&#39;
 $saltServerAddress = &#39;https://192.168.86.110:8000&#39;
 $userName          = &#39;root&#39;
@@ -417,9 +416,10 @@ $fetch = Invoke-RestMethod @Params -SkipCertificateCheck
 
 # --- Service Disabled | True = Disabled | False = Not Disabled
 $fetch.return.$minionName</code></pre>
+</li>
 <li>I hope the code was helpful to get started.</li>
-<hr>
 </ul>
+<hr>
 <h2>Lessons Learned:</h2>
 <ul>
 <li>OOTB (Out of the Box) a SaltStack Config Server is NOT setup to use CherryPY to use api calls.</li>
@@ -428,8 +428,8 @@ $fetch.return.$minionName</code></pre>
 <li>To get the proper args for a salt function I always test from the CLI.</li>
 <li><a href="https://docs.saltproject.io/en/latest/ref/netapi/all/salt.netapi.rest_cherrypy.html" target="_blank">SaltStack REST_CHERRYPY Documentation</a></li>
 <li><a href="https://docs.saltproject.io/en/latest/topics/eauth/index.html"                       target="_blank">SaltStack EXTERNAL AUTHENTICATION SYSTEM Documentation</a></li>
-<hr>
 </ul>
+<hr>
 <h2>Salt Links I found to be very helpful:</h2>
 <ul>
 <li><a href="https://sites.google.com/site/mrxpalmeiras/saltstack/salt-cheat-sheet" target="_blank">SaltStack Cheat Sheet</a></li>
@@ -447,11 +447,12 @@ $fetch.return.$minionName</code></pre>
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"

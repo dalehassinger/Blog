@@ -177,16 +177,15 @@
 <h2>Code Examples:</h2>
 <p><strong>The sample YAML file contains all the variables for my home lab:</strong></p>
 <ul>
-<li>You can see that I have defined variables for several products within my home lab</li>
-<li>The YAML file is organized into major categories, such as NH, vCenter, Host101, and OPS, each representing a different area of configuration for my Lab</li>
-<li>Within each top-level section, specific settings are defined using key-value pairs. For example, in NH, values like VIServer, VIUsername, and VIPassword store configuration details for a nested host setup</li>
+<li>You can see that I have defined variables for several products within my home lab  </li>
+<li>The YAML file is organized into major categories, such as NH, vCenter, Host101, and OPS, each representing a different area of configuration for my Lab  </li>
+<li>Within each top-level section, specific settings are defined using key-value pairs. For example, in NH, values like VIServer, VIUsername, and VIPassword store configuration details for a nested host setup  </li>
 <li>Some sections, like NH → Hosts, contain lists (denoted by -), where multiple items (e.g., ESXi hosts) are grouped together with attributes such as Hostname, IP, and Create</li>
-<li>Separate Functional Areas</li>
-<li>NH configures the nested ESXi environment</li>
-<li>vCenter stores vCenter connection details</li>
-<li>Host101 provides credentials for a single ESXi host</li>
-<li>OPS defines login details for VCF Operations</li>
-<pre><code>
+<li>Separate Functional Areas  <ul>
+<li>NH configures the nested ESXi environment  </li>
+<li>vCenter stores vCenter connection details  </li>
+<li>Host101 provides credentials for a single ESXi host  </li>
+<li>OPS defines login details for VCF Operations  <pre><code>
 # NH is Nested Host
 NH:
   VIServer: 192.168.6.100
@@ -241,13 +240,17 @@ OPS:
   opsPassword: VMware1!
   authSource:  local
 </code></pre>
+</li>
+</ul>
+</li>
+</ul>
 <hr>
 <p><strong>Sample Script to create Nested ESXi VMs:</strong></p>
-<li>The initial lines of code ensure that the necessary PowerShell modules are installed before executing the script</li>
+<ul>
+<li>The initial lines of code ensure that the necessary PowerShell modules are installed before executing the script  </li>
 <li>The PowerShell code then reads the Home-Lab-Config.yaml file, loads its content as a raw string, and converts it from YAML format into a structured PowerShell object stored in $cfg</li>
 <li>The PowerShell code accesses the properties within the NH section of the $cfg object, which was previously loaded from a YAML configuration file</li>
-<li>The code references the NH section of the YAML configuration, accessing its VIServer value, where NH represents a structured key within the YAML file, organizing configuration settings into hierarchical sections.</li>
-<pre><code>
+<li>The code references the NH section of the YAML configuration, accessing its VIServer value, where NH represents a structured key within the YAML file, organizing configuration settings into hierarchical sections.<pre><code>
 # Ensure required modules are installed before proceeding
 $requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
 foreach ($module in $requiredModules) {
@@ -375,8 +378,9 @@ New-LogEvent &quot;StartTime: $StartTime&quot;
 New-LogEvent &quot;EndTime: $EndTime&quot;
 New-LogEvent &quot;Duration: $duration minutes to deploy Nested ESXi Hosts&quot;
 </code></pre>
-<hr>
+</li>
 </ul>
+<hr>
 <img src="images/powercli-yaml-01.gif" alt="">
 <hr>
 <p><strong>Sample Script to connect to vCenter using variables from a YAML file:</strong></p>
@@ -493,12 +497,12 @@ $data.resourceKey.name
 <hr>
 <h2>Lessons Learned:</h2>
 <ul>
-<li>I enjoy bringing consistency to my scripts by leveraging a YAML file, similar to the approach used in automation platforms I work with.</li>
-<li>All the scripts in this blog were created and tested on a Mac using PowerShell.</li>
-<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!</li>
-<li>Integrating PowerShell with YAML has been something I’ve wanted to explore for a while. I’m glad I took the time to develop the necessary code and share it with the vCommunity.</li>
-<hr>
+<li>I enjoy bringing consistency to my scripts by leveraging a YAML file, similar to the approach used in automation platforms I work with.  </li>
+<li>All the scripts in this blog were created and tested on a Mac using PowerShell.  </li>
+<li>Don’t dismiss PowerShell just because it was created by Microsoft. Embrace it to enhance your automation journey!  </li>
+<li>Integrating PowerShell with YAML has been something I’ve wanted to explore for a while. I’m glad I took the time to develop the necessary code and share it with the vCommunity.  </li>
 </ul>
+<hr>
 <p>I created a Google NotebookLM Podcast based on the content of this blog. While it may not be entirely accurate, is any podcast ever 100% perfect, even when real people are speaking? Take a moment to listen and share your thoughts with me!</p>
 <p><a href="https://youtu.be/0qF9ONBxcwA" target="_blank" rel="noopener noreferrer">vCROCS Deep Dive Podcast | PowerCLI and YAML</a></p>
 <hr>
@@ -510,11 +514,12 @@ $data.resourceKey.name
                     
                     <section class="buy-me-a-coffee-section">
     <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
 <center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
                     
                     <section class="comments-section">
-    <p><center></center><script src="https://giscus.app/client.js"
+    <p><center><script src="https://giscus.app/client.js"
         data-repo="dalehassinger/Blog"
         data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
         data-category="General"
