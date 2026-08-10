@@ -181,7 +181,9 @@
 <li>The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.  </li>
 </ul>
 <img src="images/ps-web-api-server-01.gif" alt="">
-<pre><code># Web Server for Home Lab Use and a Nice way to see how PowerShell can be used.
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Web Server for Home Lab Use and a Nice way to see how PowerShell can be used.
 # Created By: Dale Hassinger
 
 param(
@@ -314,6 +316,7 @@ finally {
     Remove-Event -SourceIdentifier ConsoleBreak -ErrorAction SilentlyContinue
 }
 </code></pre>
+</div>
 <hr>
 <p>This example is a simple <strong>Web Server</strong> (with ssl) that displays text along with the current date and time, which updates on every page load or refresh.</p>
 <ul>
@@ -321,7 +324,9 @@ finally {
 <li>The image demonstrates how the time updates on each page refresh, highlighting that the web page is dynamic.  </li>
 </ul>
 <img src="images/ps-web-api-server-02.gif" alt="">
-<pre><code># Web Server for Home Lab Use and a Nice way to see how PowerShell can be used.
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Web Server for Home Lab Use and a Nice way to see how PowerShell can be used.
 # Created By: Dale Hassinger
 
 param(
@@ -492,6 +497,7 @@ finally {
     Remove-Event -SourceIdentifier ConsoleBreak -ErrorAction SilentlyContinue
 }
 </code></pre>
+</div>
 <hr>
 <p>This example is a simple <strong>RESTful API front end</strong> that returns any data that you have in the PS script.</p>
 <p>(4) Sample API calls:</p>
@@ -503,7 +509,9 @@ finally {
 <li>Script can be used to return any data you can create. Think about some cool use cases.  </li>
 </ul>
 <img src="images/ps-web-api-server-03.gif" alt="">
-<pre><code># API Server for Home Lab Use and a Nice way to see how PowerShell can be used.
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># API Server for Home Lab Use and a Nice way to see how PowerShell can be used.
 # Created By: Dale Hassinger
 
 param(
@@ -752,10 +760,13 @@ finally {
     Remove-Event -SourceIdentifier ConsoleBreak -ErrorAction SilentlyContinue
 }
 </code></pre>
+</div>
 <hr>
 <ul>
 <li>YAML file contents to use with the PowerShell Script  </li>
-<li>I've been using a YAML file with all my current scripts to store values for connecting to vCenter, VCF Operations, VCF Automation, and more. If anything changes, I just update the YAML file, and all the scripts continue to work without any issues.<pre><code># vCenter Connection
+<li>I've been using a YAML file with all my current scripts to store values for connecting to vCenter, VCF Operations, VCF Automation, and more. If anything changes, I just update the YAML file, and all the scripts continue to work without any issues.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># vCenter Connection
 vCenter:
   server: vcsa8x.vcrocs.local
   username: administrator@vcrocs.local
@@ -782,6 +793,7 @@ Automation:
   autoPassword: VMware1!
   autoDomain:  System Domain
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>
@@ -795,7 +807,9 @@ Automation:
 <hr>
 <p>I have been using Rocky Linux more in my lab for testing PowerShell Automation scripts.</p>
 <p>Here is how I install PowerShell on Rocky Linux:</p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Install PowerShell
 sudo dnf install https://github.com/PowerShell/PowerShell/releases/download/v7.5.0/powershell-7.5.0-1.rh.x86_64.rpm
 
@@ -808,9 +822,12 @@ sudo dnf install epel-release
 sudo dnf install sshpass
 sshpass -V
 </code></pre>
+</div>
 <hr>
 <p><strong>How to setup a PowerShell Script to run as a service with Rocky Linux:</strong></p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Create a new service file (e.g., myscript.service) under /etc/systemd/system/:
 sudo nano /etc/systemd/system/vcrocs-api.service
 
@@ -846,6 +863,7 @@ sudo systemctl status vcrocs-api.service
 # Stop the Service
 sudo systemctl stop vcrocs-api.service
 </code></pre>
+</div>
 <hr>
 <p><strong>Use Visual Studio Code (VS Code) to create, edit, and run PowerShell scripts on your remote Linux-based PowerShell servers:</strong></p>
 <ul>
@@ -861,7 +879,9 @@ sudo systemctl stop vcrocs-api.service
 <img src="images/ps-web-api-server-10.gif" alt="">
 <hr>
 <p><strong>Steps to create a Self Signed SSL Certifcate to test with:</strong></p>
-<pre><code># Using openssl
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Using openssl
 openssl genrsa -out vcrocs.key 2048
 
 openssl req -new -key vcrocs.key -out vcrocs.csr
@@ -871,6 +891,7 @@ openssl x509 -req -days 365 -in vcrocs.csr -signkey vcrocs.key -out vcrocs.crt
 openssl pkcs12 -export -out vcrocs.pfx -inkey vcrocs.key -in vcrocs.crt
   
 </code></pre>
+</div>
 <hr>
 <p><strong>If you’re primarily a Windows user and hesitant about using Linux, here’s a quick tip: try installing Cockpit — it provides a user-friendly GUI to help manage your Linux VM with ease.</strong></p>
 <ul>
@@ -881,7 +902,9 @@ openssl pkcs12 -export -out vcrocs.pfx -inkey vcrocs.key -in vcrocs.crt
 </ul>
 <hr>
 <p>Steps to install Cockpit on Rocky Liunux:</p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Update the server
 sudo dnf update -y
 
@@ -898,6 +921,7 @@ sudo firewall-cmd --reload
 sudo nano /etc/cockpit/disallowed-users
 # Remove root
 </code></pre>
+</div>
 <hr>
 <p>Nice UI for Linux Management:</p>
 <img src="images/ps-web-api-server-05.png" alt="">

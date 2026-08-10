@@ -168,7 +168,9 @@
 <p>Use PowerShell to see if ports are open to a remote server.</p>
 <p>Living in a zero trust environment can be challenging. Here is some code that I have been using to test for open ports from a Windows server to any type of destination. Just change PortNumber and Destination for your use case.</p>
 <hr>
-<pre><code>$PortNumber = &#39;443&#39;
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$PortNumber = &#39;443&#39;
 $Destination = &#39;Server.vCrocs.info&#39;
 
 $socket = New-Object Net.Sockets.TcpClient
@@ -183,11 +185,15 @@ else{
 } # end else
 
 Write-Output  $PortOpened</code></pre>
+</div>
 <hr>
 <h2>Linux Commands</h2>
 <p>If you work with VMware vRealize Suite of appliances here are some commands (curl and Netcat) that can be used with Linux OS to test if ports are open to destination servers.</p>
-<pre><code>curl -v telnet://server01.vCROCS.info:443
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>curl -v telnet://server01.vCROCS.info:443
 nc -ztv server01.vCROCS.info 443 -w 3</code></pre>
+</div>
 <hr>
 <hr>
 <p>Article Updated: 2021-04-24</p>

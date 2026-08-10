@@ -172,7 +172,9 @@
 </ul>
 <p>In this example you can use Invoke-VMScript to run commands on a VM to install Trend Deep Security. All commands run with VM in a zero trust state.</p>
 <hr>
-<pre><code>$VMName = &#39;VM Name&#39;
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$VMName = &#39;VM Name&#39;
 
 #Copy file to the VM
 $PSText = &#39;wget https://server01.vCrocs.info/software/agent/Ubuntu_18.04/x86_64/agent.deb&#39;
@@ -193,10 +195,13 @@ Invoke-VMScript -VM $VMName -ScriptType Bash -ScriptText $PSText -GuestCredentia
 #Run command to get service staus.
 $PSText = &#39;service ds_agent status&#39;
 $DeepSecurityServiceStatus = Invoke-VMScript -VM $VMName -ScriptType Bash -ScriptText $PSText -GuestCredential $SSHcred | Select-Object -ExpandProperty ScriptOutput</code></pre>
+</div>
 <hr>
 <p>In this example you can use Copy-VMGuestFile to copy a file to a VM and use invoke-VMScript to run commands on a VM to install agent. All commands run with VM in a zero trust state.</p>
 <hr>
-<pre><code>$VMName = &#39;VM Name&#39;
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$VMName = &#39;VM Name&#39;
 
 Copy-VMGuestFile -Source G:\splunkforwarder-8.0.1-6db836e2fb9e-linux-2.6-amd64.deb -Destination /home/vcrocsadmin -VM $VMNAME -LocalToGuest -GuestCredential $SSHcredsmadmin
 
@@ -215,6 +220,7 @@ Invoke-VMScript -VM $VMName -ScriptType Bash -ScriptText $PSText -GuestCredentia
 #Run command to get service staus.
 $PSText = &#39;sudo -S &lt;&lt;&lt; &quot;Password1&quot; service splunkd status&#39;
 Invoke-VMScript -VM $VMName -ScriptType Bash -ScriptText $PSText -GuestCredential $SSHcred | Select-Object -ExpandProperty ScriptOutput</code></pre>
+</div>
 
                     </div>
                     

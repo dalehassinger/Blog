@@ -179,7 +179,9 @@
 <p>--</p>
 <h2>Code Examples:</h2>
 <p>Script to Shutdown my VCF VMs:</p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 ###
 # PowerShell Script for Shutting Down VMs
 # Author: Dale Hassinger
@@ -297,9 +299,12 @@ Write-Log &quot;Disconnected from vCenter.&quot;
 
 Write-Log &quot;Script execution completed.&quot;
 </code></pre>
+</div>
 <hr>
 <p>Script to PowerOn my VCF VMs:</p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 ###
 # PowerShell Script for Powering On VMs
 # Author: Dale Hassinger
@@ -412,6 +417,7 @@ Write-Log &quot;Disconnected from ESXi host.&quot;
 
 Write-Log &quot;Script execution completed.&quot;
 </code></pre>
+</div>
 <hr>
 <h2>Screenshots:</h2>
 <small>A screenshot of the nested ESXi host within vCenter to illustrate what the script will power on and off:</small>  
@@ -423,7 +429,9 @@ Write-Log &quot;Script execution completed.&quot;
 <p>To automate tasks in my lab, I use a <strong>Rocky Linux</strong> VM with <strong>PowerShell</strong> installed. I’ve set up cron jobs to execute my PowerShell scripts on a schedule. Here are some details on how I configured these cron jobs to streamline automation.</p>
 <p>A great resource for setting up cron jobs properly? <strong>ChatGPT!</strong> It’s a handy tool for troubleshooting and getting the syntax just right.</p>
 <p>Proper format to run PowerShell Scripts with a cron job.</p>
-<pre><code># Power On VCF Lab @ 5:00 am everyday
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Power On VCF Lab @ 5:00 am everyday
 0 5 * * * /usr/bin/pwsh /home/administrator/power-on.ps1 &gt;&gt; /home/administrator/power-on.log 2&gt;&amp;1
 
 # Power Off VCF Lab @ 11:59 pm everyday
@@ -438,7 +446,10 @@ Write-Log &quot;Script execution completed.&quot;
 │ └──────── Hour (0-23)
 └────────── Minute (0-59)
   </code></pre>
-<pre><code># edit cron jobs
+</div>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># edit cron jobs
 crontab -e
 
 # List cron jobs
@@ -447,6 +458,7 @@ crontab -l
 # restart cron service
 sudo systemctl restart crond
   </code></pre>
+</div>
 <h2>Examples of Cron Expressions</h2>
 <div class="table-wrapper">
 <table>

@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCF PowerCLI 9.1 |  VCF SDDC - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VCF PowerCLI 9.1 |  VCF SDDC</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-08-08T00:53:09Z">
+                                August 7, 2026
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcf.html" class="category">VCF</a></div>
+                        <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a> <a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/powercli.html" class="tag">#PowerCLI</a></div>
+                    </header>
+                    
+                    <img src="images/VCF-PowerCLI.png" alt="VCF PowerCLI 9.1 |  VCF SDDC" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>VCF PowerCLI How-To | SDDC Manager and Operations</h3>
+<p>Managing <strong>VMware Cloud Foundation</strong> with <strong>VCF PowerCLI 9.1</strong></p>
+<ul>
+<li>Connect to SDDC Manager, inspect the VCF Management Domain, Workload Domains, VCF Hosts, VCF Storage and VCF VMs.</li>
+<li>Use Operations to get the information you need across all vCenters within a VCF instance.</li>
+<li>After years of using VMware PowerCLI, what I appreciate most about <strong>VCF PowerCLI</strong> is how effortlessly it gathers insights across a complete VCF instance. <ul>
+<li>Management Domain and all Workload Domains no longer requires looping through multiple vCenter targets—VCF PowerCLI handles it natively in your scripts.</li>
+<li>Connecting to SDDC Manager or Operations gives you immediate visibility across the entire environment—hosts, VMs, and datastores—no matter how many Workload Domains (vCenters) you have.</li>
+<li>There's no need to write code that loops through multiple vCenters or rely on Enhanced Linked Mode.</li>
+</ul>
+</li>
+<li>There’s so much more you can do with VCF PowerCLI beyond the basics outlined here. Think of this post as a getting-started framework—now it’s your turn to dive in, experiment, and build something awesome.</li>
+</ul>
+<hr>
+<h4>PowerCLI Details:</h4>
+<ul>
+<li>Every command in this guide was executed and verified against a live VCF <strong>9.1.0.0.25371088</strong></li>
+<li>Using <strong>VCF PowerCLI 9.1.0.25380678</strong></li>
+<li><strong>PowerShell was version 7.5.4</strong>. Sample output is from a VCF Lab.</li>
+</ul>
+<hr>
+<h4>Table of Contents:</h4>
+<ul>
+<li>What you need</li>
+<li>Setup</li>
+<li>Connecting to SDDC Manager and Operations</li>
+<li>The Management Domain</li>
+<li>Hosts and Clusters</li>
+<li>The VCF-Managed Components</li>
+<li>Lifecycle: Releases, BOM, and Bundles</li>
+<li>Credentials, Tasks, and Licensing</li>
+<li>Gotchas</li>
+<li>Cmdlet Quick Reference</li>
+<li>VCF Health-Check Script</li>
+</ul>
+<hr>
+<h4>What you need:</h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Requirement</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>PowerShell 7.x</td><td>Works on Windows, macOS, Linux</td></tr>
+<tr><td><strong>VCF.PowerCLI 9.1</strong></td><td>The current module for VCF 9.x</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h4>VMware PowerCLI is now VCF PowerCLI</h4>
+<ul>
+<li>As of VCF 9.x, <strong>VMware.PowerCLI</strong> has been renamed to <strong>VCF.PowerCLI</strong>.  </li>
+<li>Broadcom's module description states: <em>"This module is a continuation of the module VMware.PowerCLI... All existing cmdlets, modules, and automation scripts continue to work as expected."</em></li>
+</ul>
+<hr>
+<p>Install PowerCLI:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Install-Module VCF.PowerCLI -Scope CurrentUser -Force -AllowClobber
+</code></pre>
+</div>
+<p>VCF PowerCLI 9.1 adds three modules the old PowerCLI 13.3 did not have:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>VMware.Sdk.Vcf.Ops</code></td><td>Native VCF Operations SDK — 822 cmdlets</td></tr>
+<tr><td><code>VMware.Sdk.Vcf.Installer</code></td><td>The VCF 9 Installer, which replaced Cloud Builder</td></tr>
+<tr><td><code>VMware.Vcf.SddcManager</code>, <code>VMware.Vcf.Sso</code></td><td>Higher-level wrappers above the generated SDK</td></tr>
+</tbody>
+</table>
+</div>
+<p>Confirm PowerCLI Modules installed:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Get-Module -ListAvailable VCF.PowerCLI, VMware.Sdk.Vcf.* | Select-Object Name, Version
+</code></pre>
+</div>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name                        Version
+----                        -------
+VCF.PowerCLI                9.1.0.25380678
+VMware.Sdk.Vcf.CloudBuilder 13.5.0.25380678
+VMware.Sdk.Vcf.Installer    13.5.0.25380678
+VMware.Sdk.Vcf.Ops          13.5.0.25380678
+VMware.Sdk.Vcf.SddcManager  13.5.0.25380678
+</code></pre>
+</div>
+<hr>
+<ul>
+<li><strong>If you are on PowerCLI 13.3</strong>, most of this guide still works, but the version properties are named differently, see Gotcha 1. Pin the module version explicitly so you know which one you are testing:</li>
+<li><code>Import-Module VMware.Sdk.Vcf.SddcManager -RequiredVersion 13.5.0.25380678</code></li>
+</ul>
+<hr>
+<h4>Setup:</h4>
+<p>Lab and test environments use self-signed certificates. Do this first or every call fails:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -Scope Session
+</code></pre>
+</div>
+<p>Set your variables once so the rest of the guide is copy-paste:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+$SddcManager = &#39;192.168.100.45&#39;
+$VcfUser     = &#39;administrator@vcrocs.local&#39;
+$VcfPass     = &#39;VMware1!VMware1!&#39;
+</code></pre>
+</div>
+<ul>
+<li><strong>Do not commit credentials.</strong> If this file lives in a Git repo, keep real passwords out of it.</li>
+<li>Use <code>Read-Host -AsSecureString</code>, a credential file, or a secrets vault for anything beyond a throwaway lab.</li>
+</ul>
+<hr>
+<h4>Connecting to SDDC Manager:</h4>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Import-Module VMware.Sdk.Vcf.SddcManager
+
+Connect-VcfSddcManagerServer -Server $SddcManager -User $VcfUser -Password $VcfPass
+</code></pre>
+</div>
+<p>Results from a successful connection to VCF SDDC Manager:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+ServerUri      : https://192.168.100.45/
+User           : administrator@vcrocs.local
+IsConnected    : True
+Name           : 192.168.100.45
+Port           : 443
+ProductVersion : 9.1.0.0.25371088
+AccessToken    : eyJhbGciOiJIUzI1NiJ9...
+RefreshToken   : 0827fe5a-aff8-4126-8b23-a1d723cd7847
+</code></pre>
+</div>
+<p><strong>In scripts, you can suppress this output by adding " | Out-Null" at the end of the line</strong>:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Connect-VcfSddcManagerServer -Server $SddcManager -User $VcfUser -Password $VcfPass | Out-Null
+</code></pre>
+</div>
+<p>The access token is valid for <strong>1 hour</strong>. Reconnect when calls start returning 401.</p>
+<p>Disconnect from SDDC Manager when finished:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Disconnect-VcfSddcManagerServer -Server $SddcManager
+</code></pre>
+</div>
+<hr>
+<h4>Connecting to Operations:</h4>
+<p>Set your variables once so the rest of the guide is copy-paste:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$OpsServer = &#39;192.168.101.9&#39;
+$OpsUser   = &#39;admin&#39;
+$OpsPass   = &#39;VMware1!VMware1!&#39;</code></pre>
+</div>
+<h4>Connecting to Operations:</h4>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Import-Module VMware.Sdk.Vcf.Ops
+
+Connect-VcfOpsServer -Server $OpsServer -User $OpsUser -Password $OpsPass
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name           : 192.168.101.9
+User           : admin
+ProductVersion : VCF Operations 9.1.0.0
+IsConnected    : True
+</code></pre>
+</div>
+<hr>
+<p>Show VMs with Snaps using Operations:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfOpsGetResources -ResourceKind VirtualMachine -PageSize 5000).ResourceList | %{ $n=$_.ResourceKey.Name; $t=((Invoke-VcfOpsGetResourcePropertiesList -ResourceId ([string]$_.Identifier)).ResourcePropertiesList.Property|?{$_.Name -eq &#39;diskspace|snapshot|oldestSnapshotTimestamp&#39;}).Value; if($t -gt 0){ [pscustomobject]@{ VM=$n; HasSnap=&#39;Yes&#39;; AgeDays=[math]::Round(((Get-Date)-[datetimeoffset]::FromUnixTimeMilliseconds([long][double]$t).LocalDateTime).TotalDays,1) } } } | Sort-Object AgeDays -Descending
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+VM       HasSnap AgeDays
+--       ------- -------
+minion01 Yes       1.400
+minion02 Yes       1.400
+</code></pre>
+</div>
+<hr>
+<h4>The Management Domain:</h4>
+<p>The very useful VCF one-liner — show the Management Domain:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetDomains).Elements | Where-Object {$_.Type -eq &#39;MANAGEMENT&#39;} | Select-Object Name,Type,Status,SsoName,@{n=&#39;Clusters&#39;;e={$_.Clusters.Count}}
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name        Type       Status SsoName      Clusters
+----        ----       ------ -------      --------
+MGMT-vCROCS MANAGEMENT ACTIVE vcrocs.local        3
+</code></pre>
+</div>
+<hr>
+<p>All domains — Management plus any Workload Domains:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetDomains).Elements | Select-Object Name,Type,Status,UpgradeState,IsManagementSsoDomain | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name        Type       Status UpgradeState IsManagementSsoDomain
+----        ----       ------ ------------ ---------------------
+MGMT-vCROCS MANAGEMENT ACTIVE AVAILABLE                     True
+</code></pre>
+</div>
+<hr>
+<p>Detail for domain by Type = Management:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Invoke-VcfGetDomain -Id ((Invoke-VcfGetDomains).Elements | Where-Object {$_.Type -eq &#39;MANAGEMENT&#39;}).Id | Select-Object Name,Type,Status,SsoName
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name        Type       Status SsoName
+----        ----       ------ -------
+MGMT-vCROCS MANAGEMENT ACTIVE vcrocs.local
+</code></pre>
+</div>
+<p>Useful properties on a vcf domain object:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Id, Name, OrgName, Status, UpgradeState, UpgradeStatus, Type, Owners, Vcenters, VspClusters, SsoId, SsoName, IsManagementSsoDomain, Clusters, NsxtCluster, LicensingInfo, Capacity, Tags, ElmStatus, LifecycleManagementMode, IsNetworkSeparationEnabled, IsSecurityEnabled, IsPrimaryDomainForNsx, DnsServers, NtpServers, HcxManagers, AlbCluster
+</code></pre>
+</div>
+<hr>
+<p>Show VCF Instance DNS and NTP:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+[pscustomobject]@{ DNS=((Invoke-VcfGetDnsConfiguration).DnsServers.IpAddress -join &#39;, &#39;); NTP=((Invoke-VcfGetNtpConfiguration).NtpServers.IpAddress -join &#39;, &#39;) }
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+DNS                          NTP
+---                          ---
+192.168.100.2, 192.168.100.3 time.google.com
+</code></pre>
+</div>
+<hr>
+<h4>Hosts and Clusters:</h4>
+<p>Every ESX host, its version, and which domain it is a member of:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetHosts).Elements | Select-Object Fqdn,EsxiVersion,Status,@{n=&#39;Domain&#39;;e={$_.Domain.Name}},HardwareModel | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Fqdn                 EsxiVersion      Status   Domain      HardwareModel
+----                 -----------      ------   ------      -------------
+esx9-01.vcrocs.local 9.1.0.0.25370933 ASSIGNED MGMT-vCROCS Venus Series
+esx9-02.vcrocs.local 9.1.0.0.25370933 ASSIGNED MGMT-vCROCS Venus Series
+esx9-03.vcrocs.local 9.1.0.0.25370933 ASSIGNED MGMT-vCROCS Venus Series
+esx9-04.vcrocs.local 9.1.0.0.25370933
+</code></pre>
+</div>
+<ul>
+<li>A host with a blank Domain/Status is in inventory but not assigned to a workload domain.</li>
+</ul>
+<hr>
+<p>More example Host capacity scripts:</p>
+<p>ESX Host Cores, CPU_GHz, MemGB, NICs:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetHosts).Elements | Select-Object Fqdn,@{n=&#39;Cores&#39;;e={$_.Cpu.Cores}},@{n=&#39;CPU_GHz&#39;;e={[math]::Round($_.Cpu.FrequencyMHz/1000,1)}},@{n=&#39;MemGB&#39;;e={[math]::Round($_.Memory.TotalCapacityMB/1024)}},@{n=&#39;NICs&#39;;e={$_.PhysicalNics.Count}} | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Fqdn                 Cores CPU_GHz MemGB NICs
+----                 ----- ------- ----- ----
+esx9-01.vcrocs.local    12    38.2   319    4
+esx9-02.vcrocs.local     6    18.0   479    4
+esx9-03.vcrocs.local     6    18.0   479    4
+esx9-04.vcrocs.local           0.0     0    0
+</code></pre>
+</div>
+<p>ESX Host Fqdn, Cores, MemGB:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetHosts).Elements | Select-Object Fqdn,@{n=&#39;Cores&#39;;e={$_.Cpu.Cores}},@{n=&#39;MemGB&#39;;e={[math]::Round($_.Memory.TotalCapacityMB/1024)}} | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Fqdn                 Cores   MemGB
+----                 -----   -----
+esx9-01.vcrocs.local    12 319.000
+esx9-02.vcrocs.local     6 479.000
+esx9-03.vcrocs.local     6 479.000
+esx9-04.vcrocs.local         0.000
+</code></pre>
+</div>
+<p>ESX Host Fqdn, Status, Cores, MemGB:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetHosts).Elements | Where-Object {$_.Status -eq &#39;ASSIGNED&#39;} | Select-Object Fqdn,Status,@{n=&#39;Cores&#39;;e={[int]$_.Cpu.Cores}},@{n=&#39;MemGB&#39;;e={[int]($_.Memory.TotalCapacityMB/1024)}} | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Fqdn                 Status   Cores MemGB
+----                 ------   ----- -----
+esx9-01.vcrocs.local ASSIGNED    12   319
+esx9-02.vcrocs.local ASSIGNED     6   479
+esx9-03.vcrocs.local ASSIGNED     6   479
+</code></pre>
+</div>
+<p>ESX Host Fqdn, Model, Sockets, Cores:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetHosts).Elements | Select-Object Fqdn,@{n=&#39;Model&#39;;e={$_.Cpu.CpuCores[0].Model}},@{n=&#39;Sockets&#39;;e={$_.Cpu.CpuCores.Count}},@{n=&#39;Cores&#39;;e={$_.Cpu.Cores}}
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Fqdn                 Model                                Sockets Cores
+----                 -----                                ------- -----
+esx9-01.vcrocs.local 12th Gen Intel(R) Core(TM) i5-12600H       1    12
+esx9-02.vcrocs.local 13th Gen Intel(R) Core(TM) i9-13900H       1     6
+esx9-03.vcrocs.local 13th Gen Intel(R) Core(TM) i9-13900H       1     6
+esx9-04.vcrocs.local                                            0
+</code></pre>
+</div>
+<hr>
+<h4>VCF Instance totals:</h4>
+<p>Total core count across every host, in one line:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+((Invoke-VcfGetHosts).Elements.Cpu.Cores | Measure-Object -Sum).Sum
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+24
+</code></pre>
+</div>
+<p>Results Labelled, so it reads as a report line rather than a bare number:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+&quot;Total cores: &quot; + ((Invoke-VcfGetHosts).Elements.Cpu.Cores | Measure-Object -Sum).Sum
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Total cores: 24
+</code></pre>
+</div>
+<p>Full fleet capacity — hosts, cores, GHz, and memory in a single object:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+$h=(Invoke-VcfGetHosts).Elements; [pscustomobject]@{Hosts=$h.Count; Cores=[int](($h.Cpu.Cores|Measure-Object -Sum).Sum); TotalGHz=[math]::Round((($h.Cpu.FrequencyMHz|Measure-Object -Sum).Sum)/1000,1); TotalMemGB=[int](($h.Memory.TotalCapacityMB|Measure-Object -Sum).Sum/1024)}
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Hosts Cores TotalGHz TotalMemGB
+----- ----- -------- ----------
+    4    24   74.200       1276
+</code></pre>
+</div>
+<p>Broken out per workload domain — usually the more useful view:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetHosts).Elements | Group-Object {$_.Domain.Name} | Select-Object @{n=&#39;Domain&#39;;e={$_.Name}},@{n=&#39;Hosts&#39;;e={$_.Count}},@{n=&#39;Cores&#39;;e={[int](($_.Group.Cpu.Cores|Measure-Object -Sum).Sum)}}
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Domain      Hosts Cores
+------      ----- -----
+                1     0
+MGMT-vCROCS     3    24
+</code></pre>
+</div>
+<p>To count only hosts CPU Cores actually in a domain:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+((Invoke-VcfGetHosts).Elements | Where-Object {$_.Domain.Name}).Cpu.Cores | Measure-Object -Sum | Select-Object -ExpandProperty Sum
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+24
+</code></pre>
+</div>
+<hr>
+<h4>Clusters:</h4>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetClusters).Elements | Select-Object Name,PrimaryDatastoreType,IsDefault,IsStretched,Status | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name  PrimaryDatastoreType IsDefault IsStretched Status
+----  -------------------- --------- ----------- ------
+CL-01 NFS                      False       False ACTIVE
+CL-02 NFS                       True       False ACTIVE
+</code></pre>
+</div>
+<p>Datastores attached to a cluster:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+$cl = (Invoke-VcfGetClusters).Elements[0]; Invoke-VcfGetClusterDatastores -Id $cl.Id | Select-object Name,DatastoreType,TotalCapacityGB,FreeCapacityGB| Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name        DatastoreType TotalCapacityGB FreeCapacityGB
+----        ------------- --------------- --------------
+ESX9-01-2TB VMFS                 1734.750       1385.673
+SYN-HDD     NFS                 14287.656      11466.874
+SYN-SSD-04  NFS                  1821.094       1558.340
+SYN-SSD-05  NFS                  1821.094       1744.791
+</code></pre>
+</div>
+<hr>
+<h4>The VCF-Managed Components:</h4>
+<h4>Lifecycle: Releases, BOM, and Bundles</h4>
+<p>Current system release:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Invoke-VcfGetSystemRelease | Select-Object Product,Version,ReleaseDate,Description
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Product Version ReleaseDate          Description
+------- ------- -----------          -----------
+VCF     9.1.0.0 2026-05-12T04:04:55Z VCF version 9.1.0.0
+</code></pre>
+</div>
+<p>The full <strong>Bill of Materials</strong> — every component version VCF certifies as a matched set. This is the command that best explains the VCF BOM:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetSystemRelease).Bom | Select-Object Name,Version | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name          Version
+----          ----------------
+SDDC_MANAGER  9.1.0.0.25371088
+HOST          9.1.0.0.25370933
+NSX_T_MANAGER 9.1.0.0.25318225
+VCENTER       9.1.0.0.25370922
+HCX           9.1.0.0.25318520
+</code></pre>
+</div>
+<p>Upgrade bundles staged in the local depot and ready to apply:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetBundles).Elements | Where-Object {$_.DownloadStatus -eq &#39;SUCCESSFUL&#39;} | Select-Object Version,@{n=&#39;Component&#39;;e={$_.Components[0].Type}},SizeMB | Sort-Object Component
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Version        Component                            SizeMB
+-------        ---------                            ------
+9.1.0-25371105 DEPOT_SERVICE                       547.773
+9.1.0-25433460 HOST                                711.186
+9.1.0-25470810 NSX_T_MANAGER                      6532.686
+9.1.0-25470810 NSX_T_MANAGER                      7720.010
+9.1.0-25428926 SDDC_MANAGER                       2463.135
+9.1.0-25371088 SDDC_MANAGER                       2334.502
+</code></pre>
+</div>
+<hr>
+<h4>Credentials, Tasks, and Licensing:</h4>
+<h4>Credential inventory:</h4>
+<p>SDDC Manager is the credential vault for the whole fleet. Inventory it <strong>without exposing secrets</strong>:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetCredentials).Elements | Select-Object @{n=&#39;Resource&#39;;e={$_.Resource.ResourceName}},AccountType,CredentialType,Username | Format-Table -AutoSize
+</code></pre>
+</div>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Resource               AccountType CredentialType Username
+--------               ----------- -------------- ---------------
+vcf91sddc.vcrocs.local SYSTEM      FTP            backup
+esx9-01.vcrocs.local   SERVICE     SSH            svc-vcf-esx9-01
+esx9-02.vcrocs.local   SERVICE     SSH            svc-vcf-esx9-02
+nsx01.vcrocs.local     SYSTEM      API            admin
+nsx01.vcrocs.local     SYSTEM      AUDIT          audit
+</code></pre>
+</div>
+<p>Summarize by type:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetCredentials).Elements | Group-Object CredentialType | Select-Object Name,Count
+</code></pre>
+</div>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name  Count
+----  -----
+API       2
+AUDIT     1
+FTP       1
+SSH       6
+SSO       2
+</code></pre>
+</div>
+<h4>Tasks:</h4>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetTasks).Elements | Select-Object -First 10 Name,Status,CreationTimestamp | Format-Table -AutoSize
+</code></pre>
+</div>
+<p>Results:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Name                                              Status CreationTimestamp
+----                                              ------ -----------------
+Downloading Esx metadata, vibs and vendor add-ons FAILED 2026-08-10T12:19:38.439Z
+Downloading Esx metadata, vibs and vendor add-ons FAILED 2026-08-09T12:19:07.295Z
+Credentials rotate operation                      FAILED 2026-08-09T00:00:00.588Z
+</code></pre>
+</div>
+<p>Failures only — the practical version:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+(Invoke-VcfGetTasks).Elements | Where-Object {$_.Status -match &#39;Fail&#39;} | Select-Object Name,Status,CreationTimestamp
+</code></pre>
+</div>
+<ul>
+<li>Isolated environments with no depot connectivity produce a daily stream of failed <code>Downloading Esx metadata...</code> and <code>Synchronize Inventory Versions</code> tasks. That is expected offline, not a real fault.</li>
+</ul>
+<h3>Licensing</h3>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Invoke-VcfGetSystemLicensingInfo | Select-Object ResourceType,LicensingMode,SubscriptionStatus,IsRegistered,IsSubscribed
+</code></pre>
+</div>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+ResourceType LicensingMode SubscriptionStatus IsRegistered IsSubscribed
+------------ ------------- ------------------ ------------ ------------
+SYSTEM       PERPETUAL     UNSUBSCRIBED              False        False
+</code></pre>
+</div>
+<hr>
+<h4>Gotchas:</h4>
+<ul>
+<li><strong>The version property name depends on your module version.</strong></li>
+<li>This is the single biggest trap when following older blog posts.</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Version property</th><th>Type property</th></tr>
+</thead>
+<tbody>
+<tr><td><code>VMware.Sdk.Vcf.SddcManager</code> <strong>13.5</strong> (VCF PowerCLI 9.1)</td><td><code>Version</code></td><td><code>Type</code></td></tr>
+<tr><td><code>VMware.Sdk.Vcf.SddcManager</code> <strong>13.3</strong> (PowerCLI 13.3)</td><td><code>_Version</code></td><td><code>_Type</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>The 13.3 generator prefixed names that collide with reserved members using an underscore; 13.5</p>
+<p>fixed it. Either way, <code>Select-Object</code> on the wrong name returns a <strong>blank column with no error</strong>.</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+# VCF PowerCLI 9.1 / module 13.5
+(Invoke-VcfGetVcenters).Elements | Select-Object Fqdn,Version
+
+# PowerCLI 13.3 / module 13.3
+(Invoke-VcfGetVcenters).Elements | Select-Object Fqdn,_Version
+</code></pre>
+</div>
+<p>The full <code>Cpu</code> object:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>FrequencyMHz     : 38246.39453125     total across all cores
+UsedFrequencyMHz : 3012
+Cores            : 12                 &lt;- core count
+CpuCores         : {CpuCore}          &lt;- one entry per socket: Model, Manufacturer, FrequencyMHz</code></pre>
+</div>
+<p><code>PhysicalNics.Count</code> <em>is</em> a genuine count (4 per host here). The inconsistency between the two is</p>
+<p>exactly why you inspect before trusting a <code>.Count</code>:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$h = (Invoke-VcfGetHosts).Elements[0]; $h.Cpu | Format-List; $h.Memory | Format-List</code></pre>
+</div>
+<hr>
+<p>##### Cmdlet Quick Reference</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Task</th><th>Cmdlet</th></tr>
+</thead>
+<tbody>
+<tr><td>Connect</td><td><code>Connect-VcfSddcManagerServer</code></td></tr>
+<tr><td>Disconnect</td><td><code>Disconnect-VcfSddcManagerServer</code></td></tr>
+<tr><td>Workload domains</td><td><code>Invoke-VcfGetDomains</code> / <code>Invoke-VcfGetDomain -Id</code></td></tr>
+<tr><td>ESXi hosts</td><td><code>Invoke-VcfGetHosts</code> / <code>Invoke-VcfGetHost -Id</code></td></tr>
+<tr><td>Clusters</td><td><code>Invoke-VcfGetClusters</code> / <code>Invoke-VcfGetClusterDatastores</code></td></tr>
+<tr><td>vCenter servers</td><td><code>Invoke-VcfGetVcenters</code></td></tr>
+<tr><td>NSX managers</td><td><code>Invoke-VcfGetNsxClusters</code></td></tr>
+<tr><td>NSX transport zones</td><td><code>Invoke-VcfGetNsxTransportZones</code></td></tr>
+<tr><td>Edge clusters</td><td><code>Invoke-VcfGetEdgeClusters</code></td></tr>
+<tr><td>SDDC Manager</td><td><code>Invoke-VcfGetSddcManagers</code></td></tr>
+<tr><td>Current release + BOM</td><td><code>Invoke-VcfGetSystemRelease</code></td></tr>
+<tr><td>Available upgrades</td><td><code>Invoke-VcfGetFutureReleases</code></td></tr>
+<tr><td>Upgrade bundles</td><td><code>Invoke-VcfGetBundles</code></td></tr>
+<tr><td>Credentials</td><td><code>Invoke-VcfGetCredentials</code></td></tr>
+<tr><td>Tasks</td><td><code>Invoke-VcfGetTasks</code></td></tr>
+<tr><td>Licensing</td><td><code>Invoke-VcfGetSystemLicensingInfo</code></td></tr>
+<tr><td>Network pools</td><td><code>Invoke-VcfGetNetworkPool</code></td></tr>
+<tr><td>Certificates</td><td><code>Invoke-VcfGetDomainCertificates -Id</code></td></tr>
+<tr><td>Backup config</td><td><code>Invoke-VcfGetBackupConfiguration</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Find anything else:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>Get-Command -Module VMware.Sdk.Vcf.SddcManager -Name &#39;*Get*&#39; | Select-String &#39;Cert&#39;</code></pre>
+</div>
+<hr>
+<h4>VCF Health-Check Script:</h4>
+<p>Save as <code>Get-VcfSummary.ps1</code>:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+param(
+    [Parameter(Mandatory)][string]$Server,
+    [Parameter(Mandatory)][string]$User,
+    [Parameter(Mandatory)][string]$Password
+)
+
+$WarningPreference = &#39;SilentlyContinue&#39;
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -Scope Session | Out-Null
+Import-Module VMware.Sdk.Vcf.SddcManager
+
+$conn = Connect-VcfSddcManagerServer -Server $Server -User $User -Password $Password
+Write-Host &quot;`nConnected to $($conn.Name)  |  VCF $($conn.ProductVersion)&quot; -ForegroundColor Green
+
+# Render tables at a fixed width. A non-interactive console defaults to 80 chars and
+# Format-Table silently DROPS trailing columns that don&#39;t fit -- see Gotcha 11.
+function Show($Title, $Data) {
+    Write-Host &quot;`n--- $Title ---&quot; -ForegroundColor Cyan
+    $Data | Format-Table -AutoSize | Out-String -Width 200 | Write-Host
+}
+
+Show &#39;WORKLOAD DOMAINS&#39; (
+    (Invoke-VcfGetDomains).Elements |
+        Select-Object Name, Type, Status, SsoName, @{n=&#39;Clusters&#39;;e={$_.Clusters.Count}}
+)
+
+Show &#39;ESXi HOSTS&#39; (
+    (Invoke-VcfGetHosts).Elements | Select-Object Fqdn, EsxiVersion, Status,
+        @{n=&#39;Domain&#39;; e={$_.Domain.Name}},
+        @{n=&#39;Cores&#39;;  e={[int]$_.Cpu.Cores}},
+        @{n=&#39;MemGB&#39;;  e={[int]($_.Memory.TotalCapacityMB/1024)}}
+)
+
+# NOTE: $( ) not ( ) -- a grouping expression cannot contain an assignment
+# followed by another statement. See Gotcha 13.
+Show &#39;FLEET TOTALS&#39; $(
+    $h = (Invoke-VcfGetHosts).Elements
+    [pscustomobject]@{
+        Hosts      = $h.Count
+        Cores      = [int](($h.Cpu.Cores | Measure-Object -Sum).Sum)
+        TotalGHz   = [int](($h.Cpu.FrequencyMHz | Measure-Object -Sum).Sum / 1000)
+        TotalMemGB = [int](($h.Memory.TotalCapacityMB | Measure-Object -Sum).Sum / 1024)
+    }
+)
+
+Show &#39;CLUSTERS&#39; (
+    (Invoke-VcfGetClusters).Elements |
+        Select-Object Name, PrimaryDatastoreType, IsDefault, Status
+)
+
+Show &#39;BILL OF MATERIALS&#39; (
+    (Invoke-VcfGetSystemRelease).Bom | Select-Object Name, Version
+)
+
+Show &#39;BUNDLES READY TO APPLY&#39; (
+    (Invoke-VcfGetBundles).Elements |
+        Where-Object { $_.DownloadStatus -eq &#39;SUCCESSFUL&#39; } |
+        Select-Object Version, Type, SizeMB
+)
+
+Show &#39;FAILED TASKS (last 10)&#39; (
+    (Invoke-VcfGetTasks).Elements |
+        Where-Object { $_.Status -match &#39;Fail&#39; } |
+        Select-Object -First 10 Name, Status, CreationTimestamp
+)
+
+Show &#39;LICENSING&#39; (
+    Invoke-VcfGetSystemLicensingInfo |
+        Select-Object ResourceType, LicensingMode, SubscriptionStatus, IsRegistered
+)
+
+Disconnect-VcfSddcManagerServer -Server $Server
+</code></pre>
+</div>
+<p>Run it:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+./Get-VcfSummary.ps1 -Server 192.168.100.45 -User administrator@vcrocs.local -Password &#39;VMware1!VMware1!&#39;
+</code></pre>
+</div>
+<hr>
+<h4>Reference:</h4>
+<ul>
+<li>VCF API docs: 'https://<sddc-manager-fqdn>/v1/api-docs' (live Swagger on the appliance)</li>
+<li><a href="https://developer.broadcom.com/powercli/installation-guide" target="_blank" rel="noopener noreferrer">VCF PowerCLI guide:</a></li>
+<li><code>Get-Help Invoke-VcfGetDomains -Full</code></li>
+</ul>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>

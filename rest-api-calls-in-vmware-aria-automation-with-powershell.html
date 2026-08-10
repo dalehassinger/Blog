@@ -177,7 +177,9 @@
 <h2>Step 1:</h2>
 <p>So, I need to provide a set of credentials to the CSP login URI. This will give me a refresh token which I can then feed to the IaaS login URI to get my access token. The access token will be what I can use to make the necessary calls into my Aria Automation environment. The URI’s and some more detail are provided in <a href="https://kb.vmware.com/s/article/89129" target="_blank" rel="noopener noreferrer">VMware KB 89129</a>.</p>
 <p>There are some potentially easier methods to authenticate to Aria Automation and invoke a REST API call (like the PowerVRA Module), but for my example below, I used all native PowerShell.</p>
-<pre><code>#BasicInfo:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>#BasicInfo:
 $vraServer = &quot;vra.corp.local&quot;
  
 #Get Credentials to build auth:
@@ -210,27 +212,39 @@ $accessToken = &quot;Bearer &quot; + $accessToken.token
  
 #add access token to Header
 $header.Add(&quot;Authorization&quot;,$accessToken)</code></pre>
+</div>
 <hr>
 <h2>Step 2:</h2>
 <p>Now that I have the $accessToken variable set and added to my header, I can make any REST API calls I need.</p>
 <p>For this example, we wanted to add a bunch of fabric-networks (in vSphere parlance DvPGs) to a network profile. In VMware Aria Automation, these are already available with the addition of my vCenter Cloud Account, just not associated with a network profile.</p>
 <p>In order to enumerate the available fabric-networks, I am going to take my $header variable with the newly generated $accessToken added and call a ‘Get’ against the /iaas/api/fabric-networks/ URI.</p>
-<pre><code>#Get Fabric Network Ids:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>#Get Fabric Network Ids:
 $uri = &quot;https://&quot; + $vraServer + &quot;/iaas/api/fabric-networks&quot;
 $fabricNetworks = Invoke-RestMethod -uri $uri -Method GET -Headers $header -</code></pre>
+</div>
 <p>Now that I have a full list, I wanted to isolate the list down to those on a specific Distributed Virtual Switch using the following:</p>
-<pre><code>$dvPGs = $fabricNetworks.content | Where {$_.name -like &#39;*DvPG*&#39;}</code></pre>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$dvPGs = $fabricNetworks.content | Where {$_.name -like &#39;*DvPG*&#39;}</code></pre>
+</div>
 <hr>
 <h2>Step 3:</h2>
 <p>Now that I have my list of fabric-networks, I wanted to build a JSON body that I could send to Aria Automation to add them to the network-profile in question. So, I used the following request to pull the necessary info:</p>
-<pre><code>#Get Network Profiles:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>#Get Network Profiles:
 $uri = &quot;https://&quot; + $vraServer + &quot;/iaas/api/network-profiles&quot;
 $networkProfiles = Invoke-RestMethod -uri $uri -Method GET -Headers $header -SkipCertificateCheck</code></pre>
+</div>
 <p>In my lab I had a single network profile, so if I just run $networkProfiles | ConvertTo-JSON in PowerShell, we get the info we need for our body.</p>
 <p>The fun with this specific example is that the info in the ‘GET’ request is slightly different than how we have to format it for the ‘PATCH’ request. Looking at the SwaggerUI interface (https://"YourAriaAutomationServer"/iaas/api/swagger) and looking at the Network Profile Section, I can see the URI for the PATCH call (/iaas/api/network-profiles/{id}) and that we need to feed an array of ID’s to a property called ‘fabricNetworkIds’. A couple of other good points to call out is to pay attention to any field or property marked as ‘Required’. If you’re unfamiliar with the SwaggerUI interface, selecting the ‘Model’ link within a Specific URI will give you that information. In my example, I see I need to have the ID for the network profile, the name of the network profile, and the regionID of the network profile.</p>
 <p>(Side note… depending on what is in the REST Body, exercise some caution and testing with a PATCH or PUT command as in this specific case with the NetworkID’s, they will only add what is in the body and remove anything else. Essentially the body replaces what is already there instead of appending to an already existing list.)</p>
 <p>Now that I have my body, we just repeat the process and invoke the call to the appropriate URI. The example below only has a couple of fabricNetworkIds specified, but the actual ask was for several hundred.</p>
-<pre><code>$body = @{
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$body = @{
     &quot;name&quot; = &quot;REST_API&quot;
     &quot;id&quot;=  &quot;cce57ddd-d206-9999-870d-25b8775fb365&quot;
     &quot;orgId&quot; = &quot;12131928-3bdd-9999-9e69-3edf5c318a7d&quot;
@@ -248,6 +262,7 @@ $networkProfiles = Invoke-RestMethod -uri $uri -Method GET -Headers $header -Ski
  
 $uri = &quot;https://&quot; + $vraServer + &quot;/iaas/api/network-profiles/&quot; + $npId
 Invoke-RestMethod -uri $uri -Method PATCH -Headers $header -Body ($body | ConvertTo-JSON -Depth 5) -SkipCertificateCheck</code></pre>
+</div>
 <hr>
 <img src="images/dave01.png" alt="">
 <hr>

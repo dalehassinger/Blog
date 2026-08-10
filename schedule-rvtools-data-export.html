@@ -168,7 +168,9 @@
 <h2>PowerShell Code</h2>
 <p>I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday.  Here is a sample PowerShell script that could be used. The script is also on a 7 day rotation of files and automatically deletes old files. On the 1st of every month a file will also be created for history that is not deleted.</p>
 <p>PowerShell Code:</p>
-<pre><code># Script to create RVTools files and delete files older than 7 Days.
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Script to create RVTools files and delete files older than 7 Days.
 # Also creates an Archive RVTools file on the first of every Month.
 
 # ----- [ Set parameters for RVTools export ] -----
@@ -227,6 +229,7 @@ $fileToChange
 
 (Get-Item $fileToChange).LastWriteTime = Get-Date &quot;02/01/2024 01:00&quot;
 #&gt;</code></pre>
+</div>
 <hr>
 <blockquote>Blog Updated: 02/08/2024</blockquote>
 <blockquote>Changes: Updated script to work with newest version of RVTools</blockquote>

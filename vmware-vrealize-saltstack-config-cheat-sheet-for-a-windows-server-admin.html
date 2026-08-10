@@ -169,7 +169,9 @@
 <p><a href="https://docs.saltproject.io/en/latest/py-modindex.html" target="_blank" rel="noopener noreferrer">Link to salt module Documentation</a></p>
 <hr>
 <h2>Ping - Make sure server responds:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command:
 salt &quot;vCROCS01&quot; test.ping OR salt &quot;*&quot; test.ping OR salt &quot;vC*&quot; test.ping
 
@@ -185,8 +187,11 @@ salt &quot;vCROCS01&quot; test.ping --output=json
     &quot;vCROCS01&quot;: true
 }
  </code></pre>
+</div>
 <h2>Windows Disk Usage:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command:
 salt &quot;vCROCS01&quot; disk.usage
 
@@ -241,8 +246,11 @@ salt &quot;vCROCS01&quot; disk.usage --output=json
     }
 }
  </code></pre>
+</div>
 <h2>Windows Services:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command stop a Windows Service:
 salt &quot;vCROCS01&quot; service.stop &quot;spooler&quot;
 
@@ -271,8 +279,11 @@ salt &quot;vCROCS01&quot; service.enabled &quot;spooler&quot;
 vCROCS01:
     False
 </code></pre>
+</div>
 <h2>Copy files to | Delete files from | Windows Server:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command Copy a file to a Windows Service - Source File | Destination File:
 salt &quot;vCROCS01&quot; cp.get_file &quot;salt://installer_file.msi&quot; &quot;C:\install_files\installer_file.msi&quot;
 
@@ -287,8 +298,11 @@ salt &quot;vCROCS01&quot; file.remove &#39;C:\install_files\installer_file.msi&#
 vCROCS01:
     True
  </code></pre>
+</div>
 <h2>minion grain data:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command add grain data to a minion:
 salt &quot;vCROCS01&quot; grains.append azure_vm &quot;True&quot;
 vCROCS01:
@@ -338,8 +352,11 @@ salt &quot;vCROCS01&quot; saltutil.sync_grains
 vCROCS01:
  
 </code></pre>
+</div>
 <h2>PowerShell:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command run powershell command:
 salt &quot;vCROCS01&quot; cmd.run &#39;Get-Service | Where-Object {$_.Status -eq &quot;Running&quot;}&#39; shell=PowerShell
 
@@ -363,8 +380,11 @@ salt &quot;vCROCS01&quot; cmd.script source=&quot;salt://dev/qualys_install_azur
 &gt; Results:
 Runs all line of code in script the same as if script was saved local on minion.
  </code></pre>
+</div>
 <h2>Minion Reboot:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command minion reboot:
 salt &quot;vCROCS01&quot; system.reboot 0
 
@@ -372,13 +392,19 @@ salt &quot;vCROCS01&quot; system.reboot 0
 vCROCS01:
     True
  </code></pre>
+</div>
 <h2>Join Domain:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command join minion to a Windows Domain. You can also specify OU that computer object will be located:
 salt &quot;vCROCS01&quot; system.join_domain domain=&#39;vcrocs.info&#39; username=&#39;vcrocs\administrator&#39; password=&#39;VMware1!&#39; account_ou=&#39;OU=Dev,OU=Servers,DC=vcrocs,DC=info&#39; account_exists=False restart=True
  </code></pre>
+</div>
 <h2>Windows Registry:</h2>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 &gt; Command add a registry key to minion or change value of an existing registry key:
 salt &quot;vCROCS01&quot; reg.set_value HKEY_LOCAL_MACHINE &#39;SYSTEM\vCROCS&#39; &#39;Created_by_User&#39; &#39;dhassinger&#39;
 
@@ -386,6 +412,7 @@ salt &quot;vCROCS01&quot; reg.set_value HKEY_LOCAL_MACHINE &#39;SYSTEM\vCROCS&#3
 vCROCS01:
     True
  </code></pre>
+</div>
 <img src="images/registry01.png" alt="">
 <div><br></div>
 <div style="background-color:#fff5e6; Padding:20px; color: black;" >

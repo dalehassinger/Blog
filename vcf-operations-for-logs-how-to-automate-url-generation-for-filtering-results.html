@@ -172,9 +172,12 @@
 <hr>
 <p>Example URL to filter events for VCF Operations for Logs:</p>
 <small>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 https://vaol.vcrocs.local/explorer/?existingChartQuery=%7B%22query%22%3A%22%22%2C%22startTimeMillis%22%3A1729528045745%2C%22endTimeMillis%22%3A1729614745743%2C%22piqlFunctionGroups%22%3A%5B%7B%22functions%22%3A%5B%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%5D%2C%22field%22%3Anull%7D%5D%2C%22dateFilterPreset%22%3A%22CUSTOM%22%2C%22shouldGroupByTime%22%3Atrue%2C%22includeAllContentPackFields%22%3Atrue%2C%22eventSortOrder%22%3A%22DESC%22%2C%22summarySortOrder%22%3A%22DESC%22%2C%22compareQueryOrderBy%22%3A%22TREND%22%2C%22compareQuerySortOrder%22%3A%22DESC%22%2C%22compareQueryOptions%22%3Anull%2C%22messageViewType%22%3A%22EVENTS%22%2C%22constraintToggle%22%3A%22ALL%22%2C%22piqlFunction%22%3A%7B%22label%22%3A%22Count%22%2C%22value%22%3A%22COUNT%22%2C%22requiresField%22%3Afalse%2C%22numericOnly%22%3Afalse%7D%2C%22piqlFunctionField%22%3Anull%2C%22fieldConstraints%22%3A%5B%7B%22internalName%22%3A%22appname%22%2C%22operator%22%3A%22STARTS_WITH%22%2C%22value%22%3A%22vcf_automation%22%7D%2C%7B%22internalName%22%3A%22text%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22VM%20Build%3A%22%7D%2C%7B%22internalName%22%3A%22vmw_esxi_vm_name%22%2C%22operator%22%3A%22CONTAINS%22%2C%22value%22%3A%22vCROCS-W2K22-06%22%7D%5D%2C%22supplementalConstraints%22%3A%5B%5D%2C%22groupByFields%22%3A%5B%5D%2C%22contentPacksToIncludeFields%22%3A%5B%5D%2C%22extractedFields%22%3A%5B%5D%7D&amp;chartOptions=%7B%22logaxis%22%3Afalse%2C%22trendline%22%3Afalse%2C%22spline%22%3Afalse%7D
  </code></pre>
+</div>
 </small>
 <hr>
 <p>To simplify the generation of the VCF Operations for Logs URL that includes a filter, I created a function that accepts parameters for the required filter items. In my example, I’m embedding the generated URL in an email, making it easy to click and have VCF Operations for Logs open  directly to your filtered data. I love Automation!</p>
@@ -184,7 +187,9 @@ https://vaol.vcrocs.local/explorer/?existingChartQuery=%7B%22query%22%3A%22%22%2
 <ul>
 <li>Function to Send event logs to VCF Operations for Logs API  </li>
 <li>Function to generate the VCF Operations for Logs URL  </li>
-<li>Function to send the email with the link in the email body  <pre><code>
+<li>Function to send the email with the link in the email body  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Function to send event data to Aria Operations for Logs
 
 function Send-ApiEvent {
@@ -426,12 +431,15 @@ function set-filterURL {
 # Open URL in default browser
 #Start-Process $global:finalUrl
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>
 <p>Automation Script Example:</p>
 <ul>
-<li>Shows how to use the (3) Functions in the example code above   <pre><code>
+<li>Shows how to use the (3) Functions in the example code above   <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Load the Create Events, Create URL and Send Email functions script, which will be used for logging events via Aria Operations for Logs API.
 . /Path-to-Script/aria-operations-for-logs-syslog-api.ps1
 
@@ -484,6 +492,7 @@ set-filterURL -vmwEsxiVmName $vmName
 Send-ServerBuildEmail -toEmail &quot;dale.hassinger@vcrocs.info&quot; -vmName $vmName -finalUrl $Global:finalUrl
 
  </code></pre>
+</div>
 </li>
 </ul>
 <hr>

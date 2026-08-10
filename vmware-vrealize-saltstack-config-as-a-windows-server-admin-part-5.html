@@ -176,12 +176,15 @@
 <li>The grains file is named grains with no extension.  </li>
 </ul>
 <h2>Example grains file:</h2>
-<pre><code>NSXSecurityTAGs:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>NSXSecurityTAGs:
 - vCROCS.Apps.VMware.SaltStack.Minion
 vCenterTAGs:
 - TAG-VM-WebServer
 - TAG-VM-vCROCS
 - TAG-App-Hugo</code></pre>
+</div>
 <ul>
 <li>"Grain Name": "The value of the grain".</li>
 <li>In my example I wanted the grain to be named "vCenterTags" and the values will be the vCenter TAG names "TAG-VM-vCROCS, TAG-VM-WebServer, TAG-App-Hugo". I have (3) vCenter TAGs assigned to this VM.  I will be able to create a SaltStack Config Target based on any of the TAGs.</li>
@@ -197,7 +200,9 @@ vCenterTAGs:
 <p>How to add the vCenter TAGs to the grains file on all your VMs in SaltStack Config:</p>
 <p>Get the VM Names and All Assigned vCenter TAGs</p>
 <p>PowerShell Script:</p>
-<pre><code># ----- [ SSH SaltStack Config Server - Add vCenter TAGs to Minion Grains ] --------------------------
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- [ SSH SaltStack Config Server - Add vCenter TAGs to Minion Grains ] --------------------------
 
 # Connect to vCenter before running this code
 # Define your Credentials
@@ -232,6 +237,7 @@ foreach($vmName in $VMNames){
 
 # ----- [ Terminate SSH Session ] -----------------------------
 Remove-SSHSession -SessionId 0</code></pre>
+</div>
 <h2>Lessons Learned:</h2>
 <ul>
 <li>Adding the POSH-SSH PowerShell module so you can create a SSH connection to the salt master opens up a lot of possibilities for your PowerShell Automation as a Windows Server Admin.</li>

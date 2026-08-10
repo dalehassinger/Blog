@@ -201,17 +201,22 @@
 <hr>
 <p>Here is the moid_populate_only.json with no changes.</p>
 <p><strong>Code:</strong></p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 {
   &quot;cmdbSync&quot;: {
     &quot;syncMode&quot;: &quot;POPULATE_ONLY&quot;,
     &quot;objectIdentifierSource&quot;: &quot;MOID&quot;
   }
 }</code></pre>
+</div>
 <hr>
 <p>After I verified everything was working with OOTB settings, I wanted to add some additional data to the Servicenow CMDB. The VM (virtual machine) IP address is not sent to Servicenow CMDB with default settings. Here is the json file I have in my lab to  send VM IP and Host CPU info.</p>
 <p><strong>Code:</strong></p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 {
   &quot;cmdbSync&quot;: {
     &quot;syncMode&quot;: &quot;POPULATE_ONLY&quot;,
@@ -240,12 +245,15 @@
     }
   }
 }</code></pre>
+</div>
 <hr>
 <p>In the VMware documentation it says to use the vropsField name in the json config file but I did not see where it told you how to get the vropsField name. Here are some examples on how to get the vROPS field names.</p>
 <hr>
 <p>vROPS VM Field Names available (PowerShell Script):</p>
 <p><strong>Code:</strong></p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 
 $opsURL      = &quot;https://vao-ent.corp.local&quot;
 $opsUsername = &quot;admin&quot;
@@ -319,10 +327,13 @@ $resourcePropertiesList = Invoke-RestMethod -Uri $uri -Method Get -Headers @{
 
 $outPut = $resourcePropertiesList.resourcePropertiesList.property
 Write-Output $outPut</code></pre>
+</div>
 <hr>
 <p>vROPS Host Field Names available (PowerShell Script):</p>
 <p><strong>Code:</strong></p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 
 $opsURL      = &quot;https://vao-ent.corp.local&quot;
 $opsUsername = &quot;admin&quot;
@@ -396,6 +407,7 @@ $resourcePropertiesList = Invoke-RestMethod -Uri $uri -Method Get -Headers @{
 
 $outPut = $resourcePropertiesList.resourcePropertiesList.property
 Write-Output $outPut</code></pre>
+</div>
 <hr>
 <p>Here is the results of running the PowerShell scripts to get the vropsField names. The column "name" is what you need to use in the json config file.</p>
 <img src="images/snow-mp-02.png" alt="">

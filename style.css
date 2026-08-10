@@ -585,6 +585,11 @@ code {
     border: 1px solid var(--border-color);
 }
 
+.code-block {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
 pre {
     background: var(--vcrocs-dark);
     color: #f8f9fa;
@@ -595,11 +600,49 @@ pre {
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+.code-block pre {
+    margin: 0;
+    padding-top: 3.25rem;
+}
+
 pre code {
     background: none;
     padding: 0;
     color: #f8f9fa;
     border: none;
+}
+
+.copy-code-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 1;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.12);
+    color: #f8f9fa;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.copy-code-button:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.4);
+}
+
+.copy-code-button:focus-visible {
+    outline: 2px solid var(--vcrocs-accent);
+    outline-offset: 2px;
+}
+
+.copy-code-button.copied {
+    background: #198754;
+    border-color: #198754;
+    color: white;
 }
 
 /* Lists */

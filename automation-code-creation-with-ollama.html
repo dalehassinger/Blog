@@ -177,7 +177,10 @@
 <p>Go to a terminal and type "ollama run llama3" to get started.</p>
 <hr>
 <span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
-<pre><code>ollama run llama3</code></pre>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>ollama run llama3</code></pre>
+</div>
 <hr>
 <img src="images/ollama-02.png" alt="">
 <hr>
@@ -203,9 +206,12 @@
 <img src="images/ollama-05.gif" alt="">
 <hr>
 <span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
-<pre><code>ollama run llama3
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>ollama run llama3
 &gt;&gt;&gt; Who Created PowerShell
 &gt;&gt;&gt; /bye</code></pre>
+</div>
 <hr>
 <h2>ollama "Real World" Examples:</h2>
 <p>Now I will show some examples of how I use ollama everyday for coding and writing. They are my main uses cases for AI.</p>
@@ -213,7 +219,9 @@
 <h2>ollama PowerShell Function</h2>
 <p>In my previous blogs, I've highlighted the versatility of PowerShell in automating various tasks. In this blog, I'll show how to harness the power of PowerShell to interact with AI assistants like Ollama. To start, I created a custom function that enables you to ask Ollama questions directly from the PowerShell command line. Here's the sample code to get you started:</p>
 <span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
-<pre><code># Function to ask Ollama
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Function to ask Ollama
 function ask-ollama {
     
     # Code to run when the function is called
@@ -253,6 +261,7 @@ ask-ollama -question &quot;Create a PowerShell script to connect to a vCenter, G
 ask-ollama -question &quot;Create a Salt State file to stop and disable a service with a name of Spooler&quot;
 
 ask-ollama -question &quot;Show me how to copy a powershell variable value to the clipboard&quot;</code></pre>
+</div>
 <hr>
 <p>If you are a PowerShell enthusiast, you're probably accustomed to the flexibility of functions within your scripts. Feel free to adapt this example to your own workflow and coding style, regardless of whether you prefer to use it as is or modify it to fit your needs.</p>
 <hr>
@@ -278,7 +287,9 @@ ask-ollama -question &quot;Show me how to copy a powershell variable value to th
 </ul>
 <p><strong>Unedited Code Returned:</strong></p>
 <span style="font-size: 13px; color: red; font-weight: bold;">Code:</span>  
-<pre><code># Set the connection settings
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Set the connection settings
 $vcenter = &quot;vcenter8x.corp.local&quot;
 $username = &quot;administrator@vsphere.local&quot;
 $password = &quot;Password123&quot;
@@ -299,6 +310,7 @@ $vmsWithSnaps | Export-Csv -Path &quot;C:\reports\vms-with-snaps.csv&quot; -NoTy
 
 # Disconnect from the vCenter
 Disconnect-VIServer -Confirm:$false</code></pre>
+</div>
 <p>Let me explain what each part of the script does:</p>
 <p>1. The first section sets the connection settings: <code>vcenter</code>, <code>username</code>, and <code>password</code>.</p>
 <p>2. The <code>Connect-VIServer</code> cmdlet connects to your VMware vCenter using the specified credentials.</p>

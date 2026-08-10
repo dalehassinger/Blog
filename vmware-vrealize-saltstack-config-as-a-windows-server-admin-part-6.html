@@ -174,7 +174,9 @@
 </div>
 <hr>
 <h2>Salt PowerShell Functions:</h2>
-<pre><code># ----- [ Start of Functions ] --------------------------------------------------------------------------------------------------------------
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- [ Start of Functions ] --------------------------------------------------------------------------------------------------------------
 # The POSH-SSH PS module MUST be installed to use these functions.
 
 # Function to Connect to SSC Server
@@ -298,8 +300,11 @@ function invoke-SSC.test.ping
 } # End Function
 
 # ----- [ End of Functions ] --------------------------------------------------------------------------------------------------------------</code></pre>
+</div>
 <h2>Examples to show how to use the Salt PowerShell Functions above:</h2>
-<pre><code># ----- [ Connect to SSC Server ] --------------------------------------------------
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- [ Connect to SSC Server ] --------------------------------------------------
 
 # DO NOT use plain text PW&#39;s in your Code. I am only showing PW to make it easier to understand the code. 
 
@@ -390,6 +395,7 @@ $Params = @{
 
 # Run Function
 invoke-SSC.test.ping @Params</code></pre>
+</div>
 <h2>Lessons Learned:</h2>
 <ul>
 <li>Adding the POSH-SSH PowerShell module so you can create a SSH connection to the salt master opens up a lot of possibilities for your PowerShell Automation as a Windows Server Admin.</li>

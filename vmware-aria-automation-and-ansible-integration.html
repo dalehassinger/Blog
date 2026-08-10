@@ -177,7 +177,9 @@
 <li>[x] This server will be used as the Ansible Control Node.  </li>
 </ul>
 <p><strong>Steps to install Ansible:</strong></p>
-<pre><code># Step 1 | Install Rocky Linux EPEL repository
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Step 1 | Install Rocky Linux EPEL repository
 dnf install epel-release -y
 
 # Step 2 | Install Ansible
@@ -185,9 +187,12 @@ dnf install ansible -y
 
 # Check Ansible Version after Install
 ansible --version</code></pre>
+</div>
 <hr>
 <p>Results from ansible --version:</p>
-<pre><code>ansible [core 2.13.3]
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>ansible [core 2.13.3]
   config file = /etc/ansible/ansible.cfg
   configured module search path = [&#39;/root/.ansible/plugins/modules&#39;, &#39;/usr/share/ansible/plugins/modules&#39;]
   ansible python module location = /usr/lib/python3.9/site-packages/ansible
@@ -196,45 +201,61 @@ ansible --version</code></pre>
   python version = 3.9.14 (main, Nov  7 2022, 00:00:00) [GCC 11.3.1 20220421 (Red Hat 11.3.1-2)]
   jinja version = 3.1.2
   libyaml = True</code></pre>
+</div>
 <hr>
 <img src="images/ansible-install-step-01.gif" alt="">
 <hr>
 <h2>Edit the hosts file:</h2>
 <ul>
 <li>[x] Edit the /etc/ansible/hosts file:</li>
-<li>[x] I like to use nano to edit files. To save file changes in Nano use cntrl-o. To exit Nano use cntrl-x.<pre><code># the cmd at the cli to edit the hosts file
+<li>[x] I like to use nano to edit files. To save file changes in Nano use cntrl-o. To exit Nano use cntrl-x.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># the cmd at the cli to edit the hosts file
 nano /etc/ansible/hosts</code></pre>
+</div>
 </li>
-<li>This is the contents of the /etc/ansible/hosts file:<pre><code>[rocky]
+<li>This is the contents of the /etc/ansible/hosts file:<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>[rocky]
 192.168.110.201
 
 [rocky:vars]
 ansible_user=root
 ansible_password=&#39;VMware1!&#39;</code></pre>
+</div>
 </li>
 </ul>
 <img src="images/ansible-install-step-02.gif" alt="">
 <hr>
 <h2>Edit the ansible.cfg file:</h2>
 <ul>
-<li>[x] Edit the /etc/ansible/ansible.cfg file:<pre><code># the cmd at the cli to edit the ansible.cfg file
+<li>[x] Edit the /etc/ansible/ansible.cfg file:<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># the cmd at the cli to edit the ansible.cfg file
 nano /etc/ansible/ansible.cfg</code></pre>
+</div>
 </li>
 </ul>
 <p>This is the minium contents of the /etc/ansible/ansible.cfg file:</p>
 <ul>
 <li><strong>BOTH</strong> of these lines <strong>MUST</strong> be in the ansible.cfg file to add Ansible to VMware Aria Automation. If they are not present, adding the Integration will fail!</li>
-<li>The vault password file can be named something different, <strong>BUT IT MUST BE SPECIFIED!</strong><pre><code>[defaults]
+<li>The vault password file can be named something different, <strong>BUT IT MUST BE SPECIFIED!</strong><div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>[defaults]
 host_key_checking = False
 vault_password_file = /etc/ansible/vault-pass.txt</code></pre>
+</div>
 </li>
 </ul>
 <img src="images/ansible-install-step-03.gif" alt="">
 <hr>
 <h2>Test Ansible Install</h2>
 <p><strong>To test the Ansible install you can do a ping:</strong></p>
-<pre><code># the cmd at the cli to run a ping
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># the cmd at the cli to run a ping
 ansible rocky -m ping</code></pre>
+</div>
 <img src="images/ansible-install-step-04.gif" alt="">
 <hr>
 <h2>VMware Aria Automation Configuration</h2>
@@ -245,16 +266,21 @@ ansible rocky -m ping</code></pre>
 <li>You need to make sure the /etc/ansible/ansible.cfg file has the following two lines of code to add as an VMware Aria Automation Integration. </li>
 </ul>
 <p><strong>ansible.cfg file:</strong></p>
-<pre><code>[defaults]
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>[defaults]
 host_key_checking = False
 vault_password_file = /etc/ansible/vault-pass.txt</code></pre>
+</div>
 <p><strong>Ansible Integration screen:</strong></p>
 <img src="images/ansible-vra-integration-details.png" alt="">
 <h2>VMware Aria Automation Cloud Template</h2>
 <p><strong>Add Ansible to Cloud Template</strong></p>
 <img src="images/ansible-cloud-template.png" alt="">
 <p><strong>Cloud Template YAML code</strong></p>
-<pre><code># Cloud Template using Ansible Integration
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Cloud Template using Ansible Integration
 formatVersion: 1
 inputs:
   CustomizationSpec:
@@ -323,9 +349,12 @@ resources:
         - network: ${resource.Cloud_Network_1.id}
           assignment: static
           address: ${input.IP}</code></pre>
+</div>
 <ul>
 <li>Example Ansible Playbook</li>
-<li>Creates a txt file, adds text to txt file, installs web server, starts web server service, enables cockpit, installs git, and does a git pull request from GitHub to copy web site files to new server.<pre><code># web-server-rocky.yml
+<li>Creates a txt file, adds text to txt file, installs web server, starts web server service, enables cockpit, installs git, and does a git pull request from GitHub to copy web site files to new server.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># web-server-rocky.yml
 - hosts: rocky
   name: Ansible Playbook to Install Web Server
   tasks:
@@ -362,6 +391,7 @@ resources:
         dest: /var/www/html
         single_branch: yes
         version: master</code></pre>
+</div>
 </li>
 </ul>
 <hr>

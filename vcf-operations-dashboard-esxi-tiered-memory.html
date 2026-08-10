@@ -178,7 +178,9 @@
 <h2>FastAPI</h2>
 <p>The steps I used to install FastAPI on Rocky Linux Server 9.4:</p>
 <ul>
-<li>A very simple process to install FastAPI and get started.  <pre><code>
+<li>A very simple process to install FastAPI and get started.  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Update the System:
 sudo dnf update -y
 
@@ -209,6 +211,7 @@ uvicorn app:app --host 0.0.0.0 --port 8000
 # Your FastAPI app should now be accessible at:
 http://&lt;your_server_ip&gt;:8000
 </code></pre>
+</div>
 </li>
 </ul>
 <h2>FastAPI application python code:</h2>
@@ -220,7 +223,9 @@ http://&lt;your_server_ip&gt;:8000
 <li>To run a PowerShell script to get Host Tiered Memory settings http://192.168.6.83:8000/tieredHost  </li>
 </ul>
 </li>
-<li>I converted the data to json in the PowerShell Script. I wanted FastAPI to just return plaintext. See the Python code on how to do this.  <pre><code>
+<li>I converted the data to json in the PowerShell Script. I wanted FastAPI to just return plaintext. See the Python code on how to do this.  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 import subprocess
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
@@ -264,12 +269,15 @@ async def run_powershell_script():
     except Exception as e:
         return PlainTextResponse(content=str(e), status_code=500)
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>
 <h2>PowerShell Script</h2>
 <p>PowerShell script to collect the VM Tiered Memory metrics from the ESXi Hosts:</p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # The Posh-SSH and VMware PowerCLI modules are required to run this script
 # Import the Posh-SSH and VMware PowerCLI modules
 #Import-Module Posh-SSH
@@ -384,9 +392,12 @@ return $returnData
 # Disconnect from vCenter
 Disconnect-VIServer -Confirm:$false
 </code></pre>
+</div>
 <hr>
 <p>PowerShell script to collect the Host Tiered Memory Properties:</p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Most of this Code from William Lam Blog Post
 # https://williamlam.com/2024/10/useful-nvme-tiering-reporting-using-vsphere-8-0-update-3-apis.html
 # I changed the code to test in my Lab. Select all hosts 8.0.3 or greater. Convert results to json to work with MPB.
@@ -448,6 +459,7 @@ $results | ConvertTo-Json -Compress
 # Disconnect from vCenter
 Disconnect-VIServer -Confirm:$false
 </code></pre>
+</div>
 <hr>
 <h2>VCF Operations:</h2>
 <ul>

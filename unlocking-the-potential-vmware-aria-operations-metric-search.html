@@ -175,18 +175,26 @@
 <hr>
 <h2>Search Examples:</h2>
 <p>In this example the metric search found all VMs with CPU|Ready ms > 750 ms. When search is complete you can define the search further by selecting the parent host.</p>
-<pre><code># --- Find All VMs with CPU|Ready ms &gt; 750 ms
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># --- Find All VMs with CPU|Ready ms &gt; 750 ms
 Metric: Virtual Machine where CPU|Ready ms &gt; 750 ms</code></pre>
+</div>
 <img src="images/metric-search-02.gif" alt="">
 <p>Now lets take the search used above and define the results further by specifying host or cluster.</p>
-<pre><code># --- Find All VMs with CPU|Ready ms &gt; 750 ms WHERE the host is esx-02a.corp.local
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># --- Find All VMs with CPU|Ready ms &gt; 750 ms WHERE the host is esx-02a.corp.local
 Metric: Virtual Machine where CPU|Ready ms &gt; 750 ms childOf esx-02a.corp.local
 
 # --- Find All VMs with CPU|Ready ms &gt; 750 ms WHERE the cluster is Cluster-01
 Metric: Virtual Machine where CPU|Ready ms &gt; 750 ms childOf Cluster-01</code></pre>
+</div>
 <hr>
 <h2>Example Metric Searches for VMs:</h2>
-<pre><code># --- Find All VMs with CPU usage % greater than 90
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># --- Find All VMs with CPU usage % greater than 90
 Metric: Virtual Machine where CPU|Usage % &gt; 90
 
 # --- Find All VMs with Memory usage % greater than 90
@@ -206,9 +214,12 @@ Metric: Virtual Machine where CPU|Usage % &gt; 0 and Memory|Usage % &gt; 0 and C
 
 # --- Show CPU and Memory usage for all VMs in a specific Cluster
 Metric: Virtual Machine where CPU|Usage % &gt; 0 and Memory|Usage % &gt; 0 and Summary|Parent Cluster equals &#39;Cluster-02&#39;</code></pre>
+</div>
 <hr>
 <h2>Example Metric Searches for Hosts:</h2>
-<pre><code># --- Show Hosts with High CPU Usage
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># --- Show Hosts with High CPU Usage
 Metric: Host System where CPU|Usage % &gt; 80
 
 # --- Show Hosts with High Memory Usage
@@ -225,17 +236,24 @@ Metric: Host System where Badge|Workload % &gt; 75
 
 # --- Show CPU Usage and Memory Usage for all Hosts In a Specific Cluster
 Metric: Host System where CPU|Usage % &gt; 0 and Memory|Usage % &gt; 0 and Summary|Parent Cluster equals &#39;Cluster-01&#39;</code></pre>
+</div>
 <hr>
 <h2>Example Metric Searches for Clusters:</h2>
-<pre><code># --- Show Clusters where DRS was turned off
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># --- Show Clusters where DRS was turned off
 Metric: Cluster Configuration|DRS Configuration|Enabled of Cluster Compute Resource where Cluster Configuration|DRS Configuration|Enabled equals &#39;false&#39;</code></pre>
+</div>
 <hr>
 <h2>Example Metric Searches for Datastores:</h2>
-<pre><code># --- Show Datastores where Capacity used is greater than 75%
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># --- Show Datastores where Capacity used is greater than 75%
 Metric: Datastore where Capacity|Used Space % &gt; 75
 
 # --- Show Datastores where Health is less than 100%
 Metric: Datastore where Badge|Health % &lt; 100</code></pre>
+</div>
 <hr>
 <p>These metric search query examples should give you some good ideas of what you can do. Take these examples and change to make your own. Have Fun!</p>
 <hr>

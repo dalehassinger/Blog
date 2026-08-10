@@ -232,7 +232,9 @@
 <hr>
 <p><strong>Design Template Example YAML Code:</strong></p>
 <p>This YAML code shows all the Properties that I want to send to a ABX Action or Orchestrator Workflow.</p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 formatVersion: 1
 name: Ubuntu-20-with-minion
 version: 9
@@ -287,6 +289,7 @@ resources:
       networkType: existing
       constraints:
         - tag: Network:vCenter-VMs</code></pre>
+</div>
 <hr>
 <h2>Screen Shot 02:</h2>
 <p>Highlight of YAML Code showing Properties.</p>
@@ -307,7 +310,9 @@ resources:
 <li>The variation arises in the methodology of dispatching this information to the respective messaging systems.</li>
 </ul>
 <p>Here's an example script for sending notifications to Microsoft Teams.</p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 
 function handler($context, $inputs) {
 
@@ -400,9 +405,12 @@ $messageCard = @{
     $outPut = &quot;Done&quot;
     return $outPut
 }</code></pre>
+</div>
 <hr>
 <p>This code is to send a message to Google Spaces.</p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 
 function handler($context, $inputs) {
 
@@ -524,6 +532,7 @@ $messageBody = @{
 
   return $outPut
 }</code></pre>
+</div>
 <hr>
 <h2>Screen Shot 05:</h2>
 <p>Subscriptions used to start ABX Actions or Orchestrator Workflows.</p>
@@ -555,7 +564,9 @@ $messageBody = @{
 <li>For sending messages to Microsoft Teams, use the following code.</li>
 <li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
 <li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
-<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.<pre><code>  
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 function Handler($context, $inputs) {
 
     # Build PowerShell variables
@@ -646,6 +657,7 @@ $messageCard = @{
 
     return $output
 }</code></pre>
+</div>
 </li>
 </ul>
 <hr>
@@ -682,7 +694,9 @@ $messageCard = @{
 <li>For sending messages to Microsoft Teams, use the following code.</li>
 <li>To send a message to Google Spaces in a Workflow, apply the same Google Spaces code used in ABX Actions.</li>
 <li>The Google Spaces code does not change between ABX Actions and Workflows.</li>
-<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.<pre><code>  
+<li>The difference in ABX Actions and Workflows is in the method of obtaining Property Values.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 
 function Handler($context, $inputs) {
 
@@ -749,6 +763,7 @@ $messageCard = @{
 
     return $output
 }</code></pre>
+</div>
 </li>
 </ul>
 <hr>

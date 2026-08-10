@@ -173,11 +173,14 @@
 <blockquote>For 2025, I’ve been invited to be a <strong>VMware Community {code} Coach</strong>! This year, my blogs will feature even more code examples to help others get started with automation, VMware solutions, and much more...</blockquote>
 <hr>
 <h2>Running PowerShell from the CLI and Executing a Script:</h2>
-<pre><code>pwsh -file /home/administrator/Home-Lab-PS.ps1
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>pwsh -file /home/administrator/Home-Lab-PS.ps1
 
 # If you want to use Script Parameters
 pwsh -file /home/administrator/Home-Lab-PS.ps1 -vmName &quot;VM-01&quot; -PowerState &quot;On&quot;
 </code></pre>
+</div>
 <hr>
 <h2>Workflow Design:</h2>
 <img src="images/linux0ps-host-01.gif" alt="">
@@ -188,7 +191,9 @@ pwsh -file /home/administrator/Home-Lab-PS.ps1 -vmName &quot;VM-01&quot; -PowerS
 </ul>
 <hr>
 <p><strong>Java Script used in the Workflow to SSH to the Rocky Linux PowerShell Host and run a PS Script:</strong></p>
-<pre><code>var session = null;
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>var session = null;
 try {
 	if (port) {
 		session = new SSHSession(hostNameOrIP, username, port);
@@ -227,21 +232,27 @@ try {
 	}
 }
 </code></pre>
+</div>
 <hr>
 <h2>Code Examples:</h2>
 <ul>
-<li>YAML file to store values to be used with scripts<pre><code># vCenter Connection Values
+<li>YAML file to store values to be used with scripts<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># vCenter Connection Values
 vCenter:
   server: vcsa8x.vcrocs.local
   username: administrator@vcrocs.local
   password: VMware1!
   ignoreCertErrors: true</code></pre>
+</div>
 </li>
 </ul>
 <hr>
 <p><strong>Sample PowerShell Script:</strong></p>
 <ul>
-<li>Sample script that I used to show that Rocky Linux can be used as a PowerShell Host<pre><code># Ensure required modules are installed before proceeding
+<li>Sample script that I used to show that Rocky Linux can be used as a PowerShell Host<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Ensure required modules are installed before proceeding
 $requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
 foreach ($module in $requiredModules) {
     if (-not (Get-Module -ListAvailable -Name $module)) {
@@ -280,6 +291,7 @@ catch {
     return &quot;Error: $_&quot;
 }
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>
@@ -297,7 +309,9 @@ catch {
 <img src="images/linux0ps-host-03.png" alt="">
 <hr>
 <h2>Install PowerShell on Rocky Linux:</h2>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Install PowerShell on Rocky Linux
 sudo dnf install -y powershell
 
@@ -311,6 +325,7 @@ echo &quot;Subsystem powershell /usr/bin/pwsh -sshs -NoProfile&quot; | sudo tee 
 # Restart the SSH service
 sudo systemctl restart sshd
 </code></pre>
+</div>
 <hr>
 <h2>Lessons Learned:</h2>
 <ul>

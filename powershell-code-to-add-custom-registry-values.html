@@ -167,12 +167,15 @@
 <h2>PowerShell Code</h2>
 <p>Add Registry Values to Windows Server</p>
 <hr>
-<pre><code>#vCrocs Registry Changes
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>#vCrocs Registry Changes
 invoke-command -computername $FQDNVMname -ScriptBlock {new-Item HKLM:\SOFTWARE\vCrocs -f }
 invoke-command -computername $FQDNVMname -ScriptBlock {param ($SG) Set-ItemProperty hklm:\software\vCrocs -Name SupportGroup -Value &quot;$SG&quot; -Force} -ArgumentList $SG
 invoke-command -computername $FQDNVMname -ScriptBlock {param ($APP) Set-ItemProperty hklm:\software\vCrocs -Name Application -Value &quot;$APP&quot; -Force} -ArgumentList $APP
 invoke-command -computername $FQDNVMname -ScriptBlock {param ($LOC) Set-ItemProperty hklm:\software\vCrocs -Name Location -Value &quot;$LOC&quot; -Force} -ArgumentList $LOC
 invoke-command -computername $FQDNVMname -ScriptBlock {param ($SL) Set-ItemProperty hklm:\software\vCrocs -Name ServiceLevel -Value &quot;$SL&quot; -Force} -ArgumentList $SL</code></pre>
+</div>
 
                     </div>
                     

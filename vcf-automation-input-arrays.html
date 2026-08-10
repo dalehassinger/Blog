@@ -235,7 +235,9 @@
 <h2>VCF Automation Design Template</h2>
 <p><strong>Example Template Yaml Code:</strong></p>
 <ul>
-<li><small><strong>Code from the screen shots above.</strong></small>  <pre><code>
+<li><small><strong>Code from the screen shots above.</strong></small>  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 formatVersion: 2
 name: Rocky-Basic
 outputs:
@@ -346,6 +348,7 @@ resources:
           assignment: static
           address: ${input.IP}
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>
@@ -353,7 +356,9 @@ resources:
 <p><strong>Example ABX Action Code:</strong></p>
 <ul>
 <li><small><strong>Code from the screen shots above.</strong></small></li>
-<li><small><strong>My example code simply outputs the values to demonstrate how to create the array and validate that the code works. Once you have this structure in place, you can extend the <code>foreach</code> section to automate any tasks you need.</strong></small><pre><code>
+<li><small><strong>My example code simply outputs the values to demonstrate how to create the array and validate that the code works. Once you have this structure in place, you can extend the <code>foreach</code> section to automate any tasks you need.</strong></small><div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 function handler($context, $inputs) {
 
     if(!$inputs.customProperties.vmAdminUsers){
@@ -383,6 +388,7 @@ function handler($context, $inputs) {
   return $inputs
 }
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>

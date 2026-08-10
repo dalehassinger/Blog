@@ -188,7 +188,9 @@
 <h2>Code to get bearer Token (PowerShell):</h2>
 <p>You can't use vRO REST API without getting bearer token first.</p>
 <h2>(Note: When vRealize Automation 8.4 was released there was a small change to api to get Bearer Token.  See the changes in the code area. Everything else has stayed the same for my processes.)</h2>
-<pre><code># Get Bearer Token from vRA REST API Call
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Get Bearer Token from vRA REST API Call
 
 # Some of the commented lines are in the code for testing.  I use to check variable
 # values when building the Automation.
@@ -236,8 +238,11 @@ $bearer_token = &quot;Bearer &quot; + $response.access_token
 $bearer_token = &quot;Bearer &quot; + $response.cspAuthToken
 
 # $bearer_token</code></pre>
+</div>
 <h2>Code to get execute a vRO Workflow using API Call (PowerShell):</h2>
-<pre><code># Run vRA Workflow using API Call
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Run vRA Workflow using API Call
 
 # --- [ Variables ] ---
 $vmName = &#39;DBH-1234&#39;
@@ -288,11 +293,15 @@ $body = $body -Replace(&quot;arguments_string&quot;,$PSText)
 $response = Invoke-RestMethod -SkipCertificateCheck &#39;https://vRA-FQDN.domain.name/vco/api/workflows/9cc3ac9d-062b-4e98-aa9d-e781e47f1234/executions&#39; -Method &#39;POST&#39; -Headers $headers -Body $body
 $response | ConvertTo-Json
 #$response</code></pre>
+</div>
 <h2>Orchestrator Workflow:</h2>
 <p>This is where you get the Workflow ID value. See highlighted area.:</p>
 <img src="images/vro-ss-01.png" alt="">
 <p>Sample Code to use Workflow ID:</p>
-<pre><code>$response = Invoke-RestMethod -SkipCertificateCheck &#39;https://vRA-FQDN.domain.name/vco/api/workflows/7452cce6-c715-482d-9127-1f3aa11523ba/executions&#39; -Method &#39;POST&#39; -Headers $headers -Body $body</code></pre>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>$response = Invoke-RestMethod -SkipCertificateCheck &#39;https://vRA-FQDN.domain.name/vco/api/workflows/7452cce6-c715-482d-9127-1f3aa11523ba/executions&#39; -Method &#39;POST&#39; -Headers $headers -Body $body</code></pre>
+</div>
 <p>This is where you get the input variable values. See highlighted area.:</p>
 <img src="images/vro-ss-02.png" alt="">
 <p>This is where you get the sdk-object variable values. See highlighted area.:</p>
@@ -301,13 +310,18 @@ $response | ConvertTo-Json
 <img src="images/vro-ss-04.png" alt="">
 <img src="images/vro-ss-05.png" alt="">
 <p>Sample Code to specify "VC:HostSystem" and ID value:</p>
-<pre><code>&lt;parameter name=&quot;vm&quot; type=&quot;VC:HostSystem&quot; scope=&quot;local&quot;&gt;
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>&lt;parameter name=&quot;vm&quot; type=&quot;VC:HostSystem&quot; scope=&quot;local&quot;&gt;
    &lt;sdk-object type=&quot;VC:VirtualMachine&quot; id=&quot;192.168.86.200,id:host-14&quot;/&gt;
 &lt;/parameter&gt;</code></pre>
+</div>
 <strong>![](/img/vro-ss-06.png)</strong>
 <h2><a href="/img/vro-ss-06.png" target="_blank" rel="noopener noreferrer">Click Here to see Larger Image of Screen Shot</a></h2>
 <p>Sample Code to specify "VC:VirtualMachine" and ID value (VM.ExtensionData.MoRef.Value):</p>
-<pre><code>&lt;parameter name=&quot;vm&quot; type=&quot;VC:VirtualMachine&quot; scope=&quot;local&quot;&gt;
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>&lt;parameter name=&quot;vm&quot; type=&quot;VC:VirtualMachine&quot; scope=&quot;local&quot;&gt;
    &lt;sdk-object type=&quot;VC:VirtualMachine&quot; id=&quot;192.168.86.200,id:vm-3006&quot;/&gt;
 &lt;/parameter&gt;
 
@@ -336,6 +350,7 @@ $body = $body -Replace(&quot;vmstring&quot;,$vmMoref)
 $body = $body -Replace(&quot;vCenterstring&quot;,$vCenter)
 
 $body</code></pre>
+</div>
 <hr>
 <p>I hope this helps you understand how to automate running vRO Workflows using REST API with PowerShell.</p>
 <p>Happy Automating...</p>

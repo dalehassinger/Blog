@@ -190,7 +190,9 @@
 <li>Text             = # Custom text describing the event  </li>
 </ul>
 </li>
-<li>Think about how to filter when creating the log events. Don't just add events without making sure a filter can find the precise results.  <pre><code>
+<li>Think about how to filter when creating the log events. Don't just add events without making sure a filter can find the precise results.  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # This is a Fuction to send log events to VCF Operations for Logs
 
 function Send-ApiEvent {
@@ -251,10 +253,13 @@ function Send-ApiEvent {
 $text = &quot;PowerShell: &quot; + &quot;A new process has been created with ID 9876&quot;
 Send-ApiEvent -Text $text
  </code></pre>
+</div>
 </li>
 </ul>
 <hr>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # This is a example script to give you ideas on how to use the function listed above.
 
 # Load the Syslog function script, which will be used for logging events via Aria Operations for Logs API.
@@ -302,6 +307,7 @@ Send-ApiEvent -text $text -vmw_vcenter $ConnectVIServerParams.Server -vmw_esxi_v
 # Disconnect from the vCenter Server without confirmation prompts
 Disconnect-VIServer -Server $ConnectVIServerParams.Server -Confirm:$false
  </code></pre>
+</div>
 <hr>
 <h2>Filter Examples:</h2>
 <ul>
@@ -329,7 +335,9 @@ Disconnect-VIServer -Server $ConnectVIServerParams.Server -Confirm:$false
 <hr>
 <h2>RFC 3164 Code Example:</h2>
 <p>I often say there are many ways to achieve the same outcome. While researching for this blog, I came across examples of sending syslog data to VCF Operations for Logs using the RFC 3164 standard. I created a script, tested it in my lab, and it works well. Personally, I prefer using the VCF Operations for Logs API, but I recognize that others may have a use case for this approach. I’m sharing it here in hopes that it might be helpful to someone.</p>
-<pre><code> 
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code> 
 function Send-SyslogMessage {
     Param (
         [string]$IP             = &quot;192.168.6.94&quot;,        # Default Syslog server IP
@@ -393,6 +401,7 @@ function Send-SyslogMessage {
 # Example usage of the function
 Send-SyslogMessage -Content &quot;Creating PS Script for Syslog&quot;
  </code></pre>
+</div>
 <hr>
 <h2>Lessons Learned:</h2>
 <ul>

@@ -179,8 +179,11 @@
 <hr>
 <p>These two lines of YAML code demonstrate how to specify the <code>cpuCount</code> and <code>totalMemoryMB</code> properties. This is the key to enabling both T-Shirt sizes and custom values:</p>
 <hr>
-<pre><code>cpuCount: &quot;${(input.Flavor == &#39;small&#39;) ? 1 : (input.Flavor == &#39;medium&#39;) ? 2 : (input.Flavor == &#39;large&#39;) ? 4 : (input.Flavor == &#39;other&#39;) ? input.CPU : 1}&quot;
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>cpuCount: &quot;${(input.Flavor == &#39;small&#39;) ? 1 : (input.Flavor == &#39;medium&#39;) ? 2 : (input.Flavor == &#39;large&#39;) ? 4 : (input.Flavor == &#39;other&#39;) ? input.CPU : 1}&quot;
 totalMemoryMB: &quot;${(input.Flavor == &#39;small&#39;) ? 2048 : (input.Flavor == &#39;medium&#39;) ? 4096 : (input.Flavor == &#39;large&#39;) ? 8192 : (input.Flavor == &#39;other&#39;) ? input.Memory * 1024 : 1024}&quot;</code></pre>
+</div>
 <hr>
 <p><strong>Design Templates within Aria Automation:</strong></p>
 <img src="images/t-shirt-01.png" alt="">
@@ -196,7 +199,9 @@ totalMemoryMB: &quot;${(input.Flavor == &#39;small&#39;) ? 2048 : (input.Flavor 
 <hr>
 <p><strong>Design Template Example YAML Code:</strong></p>
 <p>This full Design Template YAML code shows the inputs and how to specify the <code>cpuCount</code> and <code>totalMemoryMB</code> properties.</p>
-<pre><code>formatVersion: 1
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>formatVersion: 1
 inputs:
   CustomizationSpec:
     type: string
@@ -251,6 +256,7 @@ resources:
         - network: ${resource.Cloud_vSphere_Network_1.id}
           assignment: static
           address: ${input.IP}</code></pre>
+</div>
 <hr>
 <p><strong>Flavors:</strong></p>
 <p>In my lab, I already had some Flavor Mappings defined. To allow for larger sizes, I had to create a new Flavor Mapping for the maximum sizes I wanted to support. I couldn't specify CPU or memory sizes higher than the largest existing Flavor Mapping.</p>

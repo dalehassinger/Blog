@@ -176,7 +176,9 @@
 <p>Hope you find these snippets of code useful.</p>
 <hr>
 <p>Click to expand code:</p>
-<pre><code># Connect to vCenter
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># Connect to vCenter
 $vCenterName = &#39;vCenter.vCrocs.info&#39;
 Connect-VIServer $vCenterName -Credential $cred
 
@@ -280,6 +282,7 @@ $result = Invoke-RestMethod -Uri $geturl -Headers $headers -Method Get -Body $JS
 Write-Host $result.results.target_display_name
 
 # ----- [ End Get VMs assigned to a TAG NSX-T ] --------------------------------------------------</code></pre>
+</div>
 <hr>
 <h2>Lessons Learned:</h2>
 <ul>

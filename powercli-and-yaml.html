@@ -185,7 +185,9 @@
 <li>NH configures the nested ESXi environment  </li>
 <li>vCenter stores vCenter connection details  </li>
 <li>Host101 provides credentials for a single ESXi host  </li>
-<li>OPS defines login details for VCF Operations  <pre><code>
+<li>OPS defines login details for VCF Operations  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # NH is Nested Host
 NH:
   VIServer: 192.168.6.100
@@ -240,6 +242,7 @@ OPS:
   opsPassword: VMware1!
   authSource:  local
 </code></pre>
+</div>
 </li>
 </ul>
 </li>
@@ -250,7 +253,9 @@ OPS:
 <li>The initial lines of code ensure that the necessary PowerShell modules are installed before executing the script  </li>
 <li>The PowerShell code then reads the Home-Lab-Config.yaml file, loads its content as a raw string, and converts it from YAML format into a structured PowerShell object stored in $cfg</li>
 <li>The PowerShell code accesses the properties within the NH section of the $cfg object, which was previously loaded from a YAML configuration file</li>
-<li>The code references the NH section of the YAML configuration, accessing its VIServer value, where NH represents a structured key within the YAML file, organizing configuration settings into hierarchical sections.<pre><code>
+<li>The code references the NH section of the YAML configuration, accessing its VIServer value, where NH represents a structured key within the YAML file, organizing configuration settings into hierarchical sections.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Ensure required modules are installed before proceeding
 $requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
 foreach ($module in $requiredModules) {
@@ -378,13 +383,16 @@ New-LogEvent &quot;StartTime: $StartTime&quot;
 New-LogEvent &quot;EndTime: $EndTime&quot;
 New-LogEvent &quot;Duration: $duration minutes to deploy Nested ESXi Hosts&quot;
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>
 <img src="images/powercli-yaml-01.gif" alt="">
 <hr>
 <p><strong>Sample Script to connect to vCenter using variables from a YAML file:</strong></p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Ensure required modules are installed before proceeding
 $requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
 foreach ($module in $requiredModules) {
@@ -406,9 +414,12 @@ Get-VM | Select-Object Name | Sort-Object Name
 
 Disconnect-VIServer -Server * -Confirm:$false
 </code></pre>
+</div>
 <hr>
 <p><strong>Sample Script to Connect to an ESXi Host Using Variables from a YAML File:</strong></p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Ensure required modules are installed before proceeding
 $requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
 foreach ($module in $requiredModules) {
@@ -430,9 +441,12 @@ Get-VM | Select-Object Name | Sort-Object Name
 
 Disconnect-VIServer -Server * -Confirm:$false
 </code></pre>
+</div>
 <hr>
 <p><strong>Sample Script to Connect to a VCF Operations Appliance Using Variables from a YAML File:</strong></p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # Ensure required modules are installed before proceeding
 $requiredModules = @(&quot;powershell-yaml&quot;, &quot;VMware.PowerCLI&quot;)
 foreach ($module in $requiredModules) {
@@ -494,6 +508,7 @@ $data = $identifierList | ConvertFrom-Json
 # Display the names of all retrieved ESXi hosts
 $data.resourceKey.name
 </code></pre>
+</div>
 <hr>
 <h2>Lessons Learned:</h2>
 <ul>

@@ -186,7 +186,9 @@
 <img src="images/offlinedepot-2.png" alt="Image">
 <p>Here are the changes I made to the VCF 9.1 installer.</p>
 <ul>
-<li>I used this Script that was published on <a href="https://williamlam.com/2026/05/vcf-9-1-new-http-offline-depot-support-for-vcf-installer-fleet-depot-service.html" target="_blank" rel="noopener noreferrer">William Lam - VCF 9.1 - New HTTP Offline Depot Support for VCF Installer & Fleet Depot Service</a> <pre><code>
+<li>I used this Script that was published on <a href="https://williamlam.com/2026/05/vcf-9-1-new-http-offline-depot-support-for-vcf-installer-fleet-depot-service.html" target="_blank" rel="noopener noreferrer">William Lam - VCF 9.1 - New HTTP Offline Depot Support for VCF Installer & Fleet Depot Service</a> <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # ------------------------- Update to your installer FQDN
 $VCFInstallerFQDN         = &quot;vcf91sddc.vcrocs.local&quot;          
 $VCFInstallerRootPassword = &quot;VMware1!VMware1!&quot;
@@ -234,12 +236,15 @@ $params = @{
 
 Invoke-WebRequest @params
 </code></pre>
+</div>
 </li>
 <li>After running this script, when I logged in to the VCF installer the offline depot was configured and connected. I made no additional changes to connect to my offline depot.</li>
 <li>I downloaded all the install files to the VCF 9.1 installer.</li>
 </ul>
 <p><strong>VCF Installer Property Changes:</strong></p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 - Workarounds — feature.properties
 - Edit /home/vcf/feature.properties on VCF Installer:
 
@@ -294,6 +299,7 @@ nsxt.alb.image.upload.retry.check.interval.seconds = 90
 
 # Reboot the VCF Installer
 </code></pre>
+</div>
 <ul>
 <li>After making the required changes, I started the VCF deployment wizard.</li>
 <li>The validation stage identified a couple of configuration changes that needed to be done to the VCF 9.1 minimum vCenter installation. Once resolved, the deployment proceeded after acknowledging a warning regarding sub-minimum lab hardware resources.</li>

@@ -174,7 +174,10 @@
 <li>The grains file is named grains with no extension.  </li>
 </ul>
 <h2>Example grains file:</h2>
-<pre><code>vCenterTags: TAG-VM-vCROCS|TAG-VM-WebServer|TAG-App-Hugo</code></pre>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>vCenterTags: TAG-VM-vCROCS|TAG-VM-WebServer|TAG-App-Hugo</code></pre>
+</div>
 <ul>
 <li>"Grain Name": "The value of the grain".</li>
 <li>In my example I wanted the grain to be named "vCenterTags" and the values will be the vCenter TAG names "TAG-VM-vCROCS|TAG-VM-WebServer|TAG-App-Hugo". I have (3) vCenter TAGs assigned to this VM.  I will be able to create a SaltStack Config Target based on any of the TAGs.</li>
@@ -189,7 +192,9 @@
 <h2>How to add the vCenter TAGs to the grains file on all your VMs in SaltStack Config:</h2>
 <h2>Step 1: Get the VM Names and All Assigned vCenter TAGs into a csv file</h2>
 <p>Example PowerShell Code to get all vCenter VM Names and all vCenter TAGs assigned to the VMs</p>
-<pre><code># ----- [ Start Create CSV File with all VMs/TAGs Assigned ] ----------------------------
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- [ Start Create CSV File with all VMs/TAGs Assigned ] ----------------------------
 
 # I did not include code to connect to the vCenter. There are many ways to do this step.
 # Make sure you are connected to the vCenter BEFORE running this code.
@@ -231,6 +236,7 @@ New-Item $allvmstaginfoFile -ItemType File
 $allVMsTagInfo | Select-Object -Skip 1 | Set-Content $allvmstaginfoFile
 
 # ----- [ End Create CSV File with all VMs/TAGs Assigned ] ----------------------------</code></pre>
+</div>
 <h2>Step 2: Copy the csv file to the salt master</h2>
 <p>After I create the csv file I copy to the StackStack Config Server (Salt Master) in the folder /var/srv/salt.  This is where all files need to be saved when you use function cp.get_file.</p>
 <hr>
@@ -244,7 +250,9 @@ $allVMsTagInfo | Select-Object -Skip 1 | Set-Content $allvmstaginfoFile
 <h2>Job to run a PowerShell Script to create/update the grains file:</h2>
 <img src="images/Salt-44.PNG" alt="">
 <p>Example PowerShell Code to create/update grains file on a minion:</p>
-<pre><code># ----- [ Start Create Grain File with TAGs Assigned ] ----------------------------
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- [ Start Create Grain File with TAGs Assigned ] ----------------------------
 
 $allvmstaginfoFile = &quot;C:\vCROCS\allvmstaginfo.csv&quot;
 
@@ -292,6 +300,7 @@ else{
 } # End else
 
 # ----- [ End Create Grain File with TAGs Assigned ] ----------------------------</code></pre>
+</div>
 <hr>
 <h2>Step 5: Run job to do a sync_grains</h2>
 <p>Anytime you make any changes to the grains file you should run the function saltutil.sync_grains to update the SaltStack Config Server immediately.</p>
@@ -308,7 +317,9 @@ else{
 </ul>
 <img src="images/Salt-46.PNG" alt="">
 <p>Example Orchestration SLS file:</p>
-<pre><code>copy_tags:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>copy_tags:
   salt.function:
     - name: cp.get_file
     - tgt: &#39;os:Windows&#39;
@@ -339,6 +350,7 @@ Cleanup_Tag_File:
     - tgt_type: grain
     - arg:    
       - &#39;C:\vCROCS\allvmstaginfo.csv&#39;</code></pre>
+</div>
 <h2>Salt-Run Job to Orchestrate Copy File/Run Script/Run Sync/Delete File:</h2>
 <img src="images/Salt-47.PNG" alt="">
 <hr>

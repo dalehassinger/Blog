@@ -175,7 +175,9 @@
 </ul>
 <hr>
 <h2>Salt Functions:</h2>
-<pre><code># The POSH-SSH PowerShell module MUST be installed to use this code.
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># The POSH-SSH PowerShell module MUST be installed to use this code.
 
 # Name of Minion that you want to add grain data
 $minion = &#39;DBH-210&#39;
@@ -323,10 +325,13 @@ Write-Host &#39;Disconnecting from SaltStack Config Server...&#39;
 Remove-SSHSession -SessionId 0
 
 # ----- [ End of Code ] ---------------------------------------------------------------------------</code></pre>
+</div>
 <hr>
 <h2>Example grains file after running script</h2>
 <p>The default location of the grains file is in directory “C:\salt\conf"</p>
-<pre><code>vCROCS_Windows_Feature:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>vCROCS_Windows_Feature:
 - FileAndStorage-Services | File and Storage Services
 - NET-Framework-45-Core | .NET Framework 4.7
 - NET-Framework-45-Features | .NET Framework 4.7 Features
@@ -364,6 +369,7 @@ vCROCS_Windows_Installed_Software:
 - VMware Tools | 11.3.5.18557794
 vCROCS_last_grains_update:
 - 01/14/2022</code></pre>
+</div>
 <hr>
 <h2>SaltStack Target using Windows Server Software Installed:</h2>
 <p>Show all minions that have VMware Tools | 11.3.5.18557794 installed</p>

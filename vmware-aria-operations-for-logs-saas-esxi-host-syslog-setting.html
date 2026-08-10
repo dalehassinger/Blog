@@ -216,7 +216,9 @@
 <li>The script could be scheduled to run every day to maintain the correct settings.</li>
 </ul>
 <p><strong>Code:</strong></p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 
 # ----- Set Variable Values to use with Script
 $vcServer     = &quot;vcsa8x.corp.local&quot;
@@ -344,13 +346,16 @@ foreach($esxiName in $hostList){
 
 # ----- Disconnect from the vCenter Server or ESXi host
 Disconnect-VIServer -Server $vcServer -Confirm:$false</code></pre>
+</div>
 <hr>
 <h2>Get current “Syslog.global.logHost” value on all Hosts</h2>
 <ul>
 <li>Here is a sample script that can be used to show the current "Syslog.global.logHost" values</li>
 </ul>
 <p><strong>Code:</strong></p>
-<pre><code>  
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>  
 
 # ----- [ Get current sysloghost value on all Hosts ] -----
 
@@ -391,6 +396,7 @@ foreach($hostName in $hostList){
 
 # ----- Disconnect from the vCenter Server or ESXi host
 Disconnect-VIServer -Server $vcServer -Confirm:$false</code></pre>
+</div>
 <hr>
 <ul>
 <li>Sample Output from script:  </li>
@@ -402,7 +408,9 @@ Disconnect-VIServer -Server $vcServer -Confirm:$false</code></pre>
 <li>Sample script if you would ever want to set the "Syslog.global.logHost" values to null on all the ESXi Hosts.  </li>
 </ul>
 <p><strong>Code:</strong></p>
-<pre><code># ----- [ Set sysloghost value to null on all Hosts ] -----
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- [ Set sysloghost value to null on all Hosts ] -----
 
 # ----- Set Variable Values to use with Script
 $vcServer     = &quot;vcsa8x.corp.local&quot;
@@ -430,14 +438,18 @@ foreach($hostName in $hostList){
 
 # ----- Disconnect from the vCenter Server or ESXi host
 Disconnect-VIServer -Server $vcServer -Confirm:$false</code></pre>
+</div>
 <hr>
 <h2>Get “Syslog.global.logHost” address on a specific Host</h2>
 <ul>
 <li>Very simple script to get the "Syslog.global.logHost" values on a single ESXi host.</li>
 </ul>
 <p><strong>Code:</strong></p>
-<pre><code># ----- Simple Get syslogserver address on a specific Host
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- Simple Get syslogserver address on a specific Host
 Get-VMHostSysLogServer -VMHost &#39;esxi8-05.corp.local&#39;</code></pre>
+</div>
 <hr>
 <h2>Lessons Learned</h2>
 <ul>

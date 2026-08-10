@@ -189,7 +189,9 @@
 <h2>Design Template:</h2>
 <ul>
 <li>Sample Design Template YAML code  </li>
-<li>YAML code shows some examples that can be used with any VM build  <pre><code>
+<li>YAML code shows some examples that can be used with any VM build  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 formatVersion: 2
 name: Rocky-Basic
 outputs:
@@ -288,6 +290,7 @@ resources:
         - network: ${resource.Network_VMs.id}
           assignment: static
           address: ${input.IP}</code></pre>
+</div>
 </li>
 </ul>
 <hr>
@@ -320,7 +323,9 @@ resources:
 <li>Connects to vCenter to retrieve the "bios id" value  </li>
 <li>Connects to VCF Automation to obtain an access token  </li>
 <li>Adds a new customProperty to the VM deployment  </li>
-<li>Confirms that the customProperty value has been successfully set  <pre><code>function handler($context, $inputs) {
+<li>Confirms that the customProperty value has been successfully set  <div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>function handler($context, $inputs) {
 
     # Extract input values from ABX context and inputs
     $vmName                = $inputs.customProperties.biosName
@@ -427,6 +432,7 @@ resources:
     return $inputs
 }
 </code></pre>
+</div>
 </li>
 </ul>
 </li>
@@ -435,7 +441,9 @@ resources:
 <h2>Code to get customProperties from a deployment:</h2>
 <ul>
 <li>PowerShell Code to make an API Call to VCF Automation to get a deployment CustomProperty values</li>
-<li>This sample code demonstrates how any process can retrieve customProperty values from VCF Automation. It uses an API call, so the logic remains consistent across use cases.<pre><code>
+<li>This sample code demonstrates how any process can retrieve customProperty values from VCF Automation. It uses an API call, so the logic remains consistent across use cases.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # ------------- Code to Get VCF Automation Deployment customProperty Values --------------
 # Code works in DDC Lab
 # Date: 2025.03.28
@@ -497,12 +505,15 @@ $results = Invoke-RestMethod -uri $uri -Method GET -Headers $header -SkipCertifi
 # Output the customProperties
 $results.content.customProperties
 </code></pre>
+</div>
 </li>
 </ul>
 <hr>
 <ul>
 <li>YAML file contents to use with the PowerShell Script to get customProperties  </li>
-<li>I've been using a YAML file with all my current scripts to store values for connecting to vCenter, VCF Operations, VCF Automation, and more. If anything changes, I just update the YAML file, and all the scripts continue to work without any issues.<pre><code># vCenter Connection
+<li>I've been using a YAML file with all my current scripts to store values for connecting to vCenter, VCF Operations, VCF Automation, and more. If anything changes, I just update the YAML file, and all the scripts continue to work without any issues.<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># vCenter Connection
 vCenter:
   server: vcsa8x.vcrocs.local
   username: administrator@vcrocs.local
@@ -528,6 +539,7 @@ Automation:
   autoUsername: configadmin
   autoPassword: VMware1!
   autoDomain:  System Domain</code></pre>
+</div>
 </li>
 </ul>
 <hr>

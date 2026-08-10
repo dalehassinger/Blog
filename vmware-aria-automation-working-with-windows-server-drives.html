@@ -200,7 +200,9 @@
 <li>If the drive size input specified is equal to "0" then the drive count will be "0". Drive will NOT be created.</li>
 </ul>
 </li>
-<li><strong>Click to expand yaml code</strong><pre><code>formatVersion: 1
+<li><strong>Click to expand yaml code</strong><div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>formatVersion: 1
 inputs:
   CustomizationSpec:
     type: string
@@ -315,6 +317,7 @@ resources:
             - ${input.TDrive}
           vCROCS_SQL:
             - ${input.SQL}</code></pre>
+</div>
 </li>
 </ul>
 <hr>
@@ -340,11 +343,14 @@ resources:
 <img src="images/windows-drives-04.png" alt="">
 <ul>
 <li>The state file is very simple. Tells the minion which PowerShell script to run.</li>
-<li><strong>Click to expand yaml code</strong><pre><code>onlinenewdrives:
+<li><strong>Click to expand yaml code</strong><div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>onlinenewdrives:
   cmd.script:
     - name: newdrives
     - source: salt://scripts/windows-server-new-drives-ps.ps1
     - shell: PowerShell</code></pre>
+</div>
 </li>
 </ul>
 <hr>
@@ -358,7 +364,9 @@ resources:
 <li>If the drive letter capacity is greater than "0" it will execute.</li>
 <li>Script will only run on new drives in offline mode as a safety feature. Will not do anything with existing online drives. If state is run by accident after server is in production nothing will change.</li>
 <li>Script uses the grain data SQL to determine how to format the drives. If grains value SQL is equal to "True" the it will use 64k allocation unit size, otherwise it uses 4k allocation unit size.</li>
-<li><strong>Click to expand PowerShell code</strong><pre><code># ----- [ Get minion data ] -----
+<li><strong>Click to expand PowerShell code</strong><div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># ----- [ Get minion data ] -----
 $eDrive = salt-call grains.get vCROCS_Drive_E_Size --output=json | ConvertFrom-Json
 $eDrive = $eDrive.local
 $output = &#39;E-Drive: &#39; + $eDrive
@@ -450,6 +458,7 @@ if($tDrive -gt 0){
     set-driveOnline -driveLetter $driveLetter -diskNumber $global:diskNumber
 
 } # end if</code></pre>
+</div>
 </li>
 </ul>
 <hr>

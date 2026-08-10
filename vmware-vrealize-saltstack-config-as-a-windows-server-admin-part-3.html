@@ -169,13 +169,18 @@
 <h2>Beacons:</h2>
 <h2>Beacon File: Sends events to the event bus on the salt master from a minion</h2>
 <p>This beacon.conf example is for service state changes. The Beacon sends an event to the salt master if a Windows Service is started/stopped.</p>
-<pre><code>beacons:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>beacons:
   service:
     - services:
        Spooler:
          onchangeonly: true</code></pre>
+</div>
 <p>This is what the event will look like in the events if you are monitoring.</p>
-<pre><code>salt/beacon/DBH-211/service/Spooler     {
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>salt/beacon/DBH-211/service/Spooler     {
     &quot;Spooler&quot;: {
         &quot;running&quot;: true
     },
@@ -183,15 +188,21 @@
     &quot;id&quot;: &quot;DBH-211&quot;,
     &quot;service_name&quot;: &quot;Spooler&quot;
 }</code></pre>
+</div>
 <h2>Reactors:</h2>
 <h2>Reactor File: Monitors the event bus for events specified. IE: salt/beacon/*/service/Spooler</h2>
-<pre><code>reactor:
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>reactor:
   - &#39;salt/auth&#39;:                              # React to a new minion
     - salt://reactor/accept-key.sls           # Run this state to auto accept new minion
   - &#39;salt/beacon/*/service/Spooler&#39;:          # React to Spooler Service Change
     - salt://vCROCS/spooler_auto_stop.sls     # Run this state</code></pre>
+</div>
 <h2>How the beacons and reactors work together:</h2>
-<pre><code># What this line is doing in the reactor is watching for an beacon event from any minion
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># What this line is doing in the reactor is watching for an beacon event from any minion
 # The * means all minions. You could specify a minion name.
 # Looking for service events.  
 # The service event that is specified is the Spooler event.
@@ -207,23 +218,30 @@ salt/beacon/DBH-211/service/Spooler
 # This is the state specified in my example
 
     - salt://vCROCS/spooler_auto_stop.sls</code></pre>
+</div>
 <h2>State File:</h2>
 <h2>State File: Stops the Spooler Service if it was started</h2>
-<pre><code>{% if data[&#39;Spooler&#39;][&#39;running&#39;] == true %}
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>{% if data[&#39;Spooler&#39;][&#39;running&#39;] == true %}
 stop_service:
   local.service.stop:
     - tgt: {{ data[&#39;id&#39;] }}
     - arg:
       - Spooler
 {% endif %}</code></pre>
+</div>
 <h2>State File: Starts the Spooler Service if it was stopped</h2>
-<pre><code>{% if data[&#39;Spooler&#39;][&#39;running&#39;] == False %}
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>{% if data[&#39;Spooler&#39;][&#39;running&#39;] == False %}
 start_service:
   local.service.start:
     - tgt: {{ data[&#39;id&#39;] }}
     - arg:
       - Spooler
 {% endif %}</code></pre>
+</div>
 <hr>
 <h2>Beacons:</h2>
 <p>To copy the beacon file to the minions I created a Job that I can manually run.</p>

@@ -181,7 +181,9 @@
 </ul>
 <hr>
 <p>If you want to run a script locally on a minion and use salt functions that is where you use the salt-call command. After you learn the salt-functions and are logged into a Windows Server locally, you can still use salt commands by using salt-call.</p>
-<pre><code># --- example code
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code># --- example code
 salt-call --version
 salt-call test.ping
 
@@ -193,6 +195,7 @@ salt-call win_servermanager.list_installed
 
 # --- Show Installed Sofwtare
 salt-call pkg.list_pkgs</code></pre>
+</div>
 <p><a href="https://docs.saltproject.io/en/latest/ref/cli/salt-call.html" target="_blank" rel="noopener noreferrer">Link to salt-call Documentation</a></p>
 <hr>
 <h2>Step 1 - Add script to SaltStack Config File Manager:</h2>
@@ -204,7 +207,9 @@ salt-call pkg.list_pkgs</code></pre>
 <hr>
 <h2>Code Examples:</h2>
 <h2>- Add Windows Features | Roles as grain data:</h2>
-<pre><code>&lt;#
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>&lt;#
 .SYNOPSIS
   This Script is used to Get Windows Servers Features and add as Grain Data
 .DESCRIPTION
@@ -291,9 +296,12 @@ $saltCommand = &#39;salt-call saltutil.sync_grains&#39;
 Invoke-Expression -Command $saltCommand
 
 # ----- [ End of Code ] ---------------------------------------------------------------------------</code></pre>
+</div>
 <hr>
 <h2>- Add Windows Server Installed Packages|Software as grain data:</h2>
-<pre><code>&lt;#
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>&lt;#
 .SYNOPSIS
   This Script is used to Get Windows Installed Packages and add as Grain Data
 .DESCRIPTION
@@ -378,9 +386,12 @@ $saltCommand = &#39;salt-call saltutil.sync_grains&#39;
 Invoke-Expression -Command $saltCommand
 
 # ----- [ End of Code ] ---------------------------------------------------------------------------</code></pre>
+</div>
 <hr>
 <h2>- Add Windows Running Services as grain data:</h2>
-<pre><code>&lt;#
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>&lt;#
 .SYNOPSIS
   This Script is used to Get Windows Servers Running Services and add as Grain Data
 .DESCRIPTION
@@ -462,6 +473,7 @@ $saltCommand = &#39;salt-call saltutil.sync_grains&#39;
 Invoke-Expression -Command $saltCommand
 
 # ----- [ End of Code ] ---------------------------------------------------------------------------</code></pre>
+</div>
 <hr>
 <h2>SaltStack Config Target using Windows Server Running Service (SQL Server):</h2>
 <img src="images/Salt-52.PNG" alt="">

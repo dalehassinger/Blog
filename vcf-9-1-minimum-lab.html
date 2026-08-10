@@ -188,7 +188,9 @@
 <h4>Tiered Memory:</h4>
 <p>I am using Memory Tiering on all the ESX Hosts in my lab. With a minimum VCF install I wasn't able to use the vCenter GUI to enable the tiered memory so I ran these commands from the CLI on each host.</p>
 <p>Tiered Memory is a game changer for home labs. I highly recommend you take advantage of this feature, plus it lets you do some testing in a lab environment to see how the performance works. Personally, I have had no issues with Tiered Memory in my Home Lab. 👍🏻</p>
-<pre><code>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
 # List the storage adapters and the devices attached to each adapter.
 # Use this command to identify the NVMe device you want to use for tiered memory.
 # Look for the correct NVMe disk UID before running the enable command.
@@ -220,6 +222,7 @@ esxcli system maintenanceMode set --enable false
 
 reboot
 </code></pre>
+</div>
 <p>Screenshot of Tiered Memory usage in vCenter:</p>
 <img src="images/vcf-minimum-tiered.png" alt="Image">
 <hr>
