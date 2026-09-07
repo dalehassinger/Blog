@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMware Explore 2026 | My Eperience - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>VMware Explore 2026 | My Eperience</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-09-07T12:25:21Z">
+                                September 7, 2026
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/vcommunity.html" class="category">vCommunity</a> <a href="categories/ai.html" class="category">AI</a></div>
+                        <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a></div>
+                    </header>
+                    
+                    <img src="images/vCROCS-2026-09-07-at-19.39.29@2x.png" alt="VMware Explore 2026 | My Eperience" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>VMware Explore 2026 Recap: Hackathon, Hands-on Labs, Customers, AI, the People Who Make It Worthwhile, more...</h3>
+<hr>
+<p>VMware Explore is always one of the highlights of my year. It is a chance to reconnect with people, meet readers, work directly with customers, and spend the week having the kind of hands-on conversations that make this community so valuable. This year was no exception.</p>
+<hr>
+<h4>Saturday:</h4>
+<p>The week started smoothly with a nonstop Southwest flight from BWI to Las Vegas on Saturday, with no delays. Thank you, Southwest. I stayed at the Venetian. That evening, I had dinner with <a href="https://www.linkedin.com/in/cosmin-t-88412a17a/" target="_blank" rel="noopener noreferrer">Cosmin Trif</a>, which was a perfect way to set the tone for the week ahead.</p>
+<hr>
+<h4>Sunday:</h4>
+<p>Sunday was focused on Hands-on Labs preparation. We spent the day getting everything ready, checking in with the team, and making sure the expert-led workshops (ELWs) were in good shape for the week.</p>
+<p>Hands-on Labs Command Center:</p>
+<img src="images/2B324BF8-3E1B-4199-9F99-0C10D9CB43FD.jpg" alt="VMware Explore 2026">
+<p>HOL Team:</p>
+<img src="images/HOL.jpg" alt="VMware Explore 2026">
+<p>Sunday evening, I had dinner at Bouchon. Always great food at Bouchon. Here is a pic with <a href="https://www.linkedin.com/in/cosmin-t-88412a17a/" target="_blank" rel="noopener noreferrer">Cosmin Trif</a> and <a href="https://www.linkedin.com/in/brockpetersonbdcvmw/" target="_blank" rel="noopener noreferrer">Brock Peterson</a> before dinner.</p>
+<img src="images/7C31356C-B1AA-4557-9B38-E67818A27EBD.jpg" alt="VMware Explore 2026">
+<hr>
+<h4>Monday:</h4>
+<p>On Monday, I started in the Hands-on Labs, helping customers find sessions that matched their goals. I also had two excellent customer meetings, which I was able to line up with <strong>William Lam</strong> and <strong>Frank Denneman</strong>. Both conversations were exactly the kind of technical, practical discussions that make VMware Explore so useful.</p>
+<p>Monday night was one of my favorite parts of the week: <strong>The Hackathon</strong> 🥼</p>
+<p>To help start the <strong>Hackathon</strong>, I did a presentation and shared how I have been using AI in my own workflow. I walked through examples from Claude and OpenAI Codex, showed a few screenshots of the applications that I created using AI, and talked about how these tools are becoming part of the way I think through ideas, build faster, and explore new approaches.</p>
+<p>For the Hackathon itself, I pitched an idea I have wanted for years: a cross-platform app similar in purpose to RVTools, but not limited to Windows. We focused on the product and the workflow more than the code. In three hours, we had the same code base running on my Mac and a Windows laptop. That was a great moment.</p>
+<p>We ended up taking third place 🥉, which made the night even better.</p>
+<p>Links to some nice blogs and a video from people who were on my team:</p>
+<ul>
+<li><a href="https://hcidude.de/from-i-want-rvtools-on-my-mac-to-a-working-prototype-vibe-coding-at-vmware-explore-2026/" target="_blank" rel="noopener noreferrer">Lukas Klinger | Blog Post</a></li>
+<li><a href="https://thedxt.ca/2026/09/i-went-to-vmware-explore-2026/" target="_blank" rel="noopener noreferrer">Daniel Keer | Blog Post</a></li>
+<li><a href="https://youtu.be/Zu37UjemtXA?si=WcBZLX-_6ehCFqOq" target="_blank" rel="noopener noreferrer">Daniel Keer | YouTube Video</a></li>
+<li><a href="https://www.vcrocs.info/vmware-explore-2026-hackathon.html" target="_blank" rel="noopener noreferrer">Dale Hassinger | Blog Post</a></li>
+</ul>
+<p>Great blogs and video. Please take the time to read and watch. Worth your while.</p>
+<p>Hackathon Event Pics:</p>
+<p>Proper Hackathon Attire:</p>
+<img src="images/3AA1170C-2A91-420B-930D-6DFB809D7D04.jpg" alt="VMware Explore 2026">
+<p>Dale Hassinger Presentation:</p>
+<img src="images/6D2D08B1-20FE-41BB-8543-73EB669A6B4C.jpg" alt="Dale Hassinger Presentation">
+<p>Bob Plankers Presentation:</p>
+<img src="images/AF4954E4-0A16-4030-A0CF-4F4757042611.jpg" alt="Bob Plankers Presentation">
+<p>Hackathon Group Photo:</p>
+<img src="images/Explore-2026-Hackathon-people.jpg" alt="VMware Explore 2026">
+<p>Hackathon Project Screenshots:</p>
+<img src="images/vCROCS-2026-09-01-at-05.37.24@2x.png" alt="Image">
+<img src="images/vCROCS-2026-09-01-at-05.37.41@2x.png" alt="Image">
+<img src="images/vCROCS-2026-08-31-at-22.10.06.png" alt="Image">
+<img src="images/vCROCS-2026-09-01-at-05.38.41@2x.png" alt="Image">
+<hr>
+<h4>Tuesday:</h4>
+<p>Tuesday brought more time in the Hands-on Labs, followed by my quick talk in the Code Theater. It ended up being standing room only, which was flattering. Afterward, a few people came up to say they read my blog and use some of that work in production. That was humbling to hear. It is exactly the kind of feedback that keeps me writing.</p>
+<p>Session Information:</p>
+<p>Advanced Management Pack Strategies for VMware Cloud Foundation Operations [CODEQT1201LV]</p>
+<p>Pics from my session:</p>
+<img src="images/vCROCS-2026-09-07-at-19.06.16@2x.png" alt="VMware Explore 2026">
+<img src="images/Dale-session.jpg" alt="VMware Explore 2026">
+<img src="images/D682FBDF-3116-49B6-9066-7773EF7F9A90.jpg" alt="VMware Explore 2026">
+<img src="images/CB8D04E5-1C83-45CE-9FAD-ED6F238B964E.jpg" alt="VMware Explore 2026">
+<p>Session Survey Feedback:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>- Very well explained. Enjoyed the relatable Synology setup demo.
+- Great thought-provoking ideas.
+- Short and super helpful.
+- Didn&#39;t realize it was that easy.
+- Super engaged and knowledgeable.
+- Great demo and examples.
+- Dale always provides excellent and detailed walkthroughs and is a trusted resource in our community!</code></pre>
+</div>
+<hr>
+<h4>Wednesday:</h4>
+<p>Wednesday was another full day in the labs, along with my expert-led workshop on the VCF Upgrade Planner and PowerCLI.</p>
+<p>vSphere 9.1 Hardware ROI, Memory Tiering & Performance [ELW-HOL-2706-02-VCF-L]:</p>
+<img src="images/vCROCS-2026-09-07-at-19.06.44@2x.png" alt="VMware Explore 2026">
+<p>There were also roadmap discussions, more customer conversations, and dinner with a couple of co-workers to close out the day. We don't get to see each other often in person, so the time together is always good.</p>
+<hr>
+<h4>Thursday:</h4>
+<p>Thursday started early with a 6:50 AM flight from Las Vegas back to BWI. I left the hotel around 4:30 AM and had no problem getting an Uber that early in the morning.</p>
+<p>Travel went smoothly again, with no issues along the way. Thank you to Southwest for another good flight and to the Uber driver who picked me up at 4:30 AM and got me to the airport on time.</p>
+<p>From a travel standpoint, the week could not have gone much better.</p>
+<hr>
+<h4>Thoughts:</h4>
+<p>But what sticks with me most is not the flights, the sessions, or even the Hackathon result. It is the people.</p>
+<p>Customers learning something new. Readers taking the time to stop and say thanks. Teammates putting energy into every lab, every conversation, and every late night. Those are the moments that make the week matter.</p>
+<p>Thank you to everyone who stopped by, asked a question, joined a session, attended a lab, or shared a few minutes of your time. I appreciate every bit of it.</p>
+<p>Now it is time to start thinking about next year.</p>
+<img src="images/2027.jpg" alt="Image">
+<hr>
+<h3>Unexplored Territory Podcast:</h3>
+<p>While at VMware Explore, I had the opportunity to record a podcast segment with <strong>Duncan Epping</strong> about the VMware Explore Hackathon. We talked about the Hackathon experience, what our team worked on, and some of the ideas behind our project.</p>
+<p>As a long-time listener of the <strong>Unexplored Territory Podcast</strong>, it was an honor to be asked to join Duncan and record a segment. I’ve listened to the podcast for years, so being on the other side of the microphone was a great experience.</p>
+<p>You can listen to the podcast here:</p>
+<p><a href="https://podcasts.apple.com/us/podcast/126-vmware-explore-las-vegas-2026/id1587672642?i=1000788207196" target="_blank" rel="noopener noreferrer">#126 - VMware Explore Las Vegas 2026!</a></p>
+<img src="images/vCROCS-2026-09-07-at-19.16.51@2x.png" alt="Image">
+<hr>
+<p>Additional VMware Explore 2026 Pics:</p>
+<img src="images/16EAB67D-5197-4E85-B79E-8785F07F2B2F.jpg" alt="VMware Explore 2026">
+<img src="images/0A4742B9-D061-427C-960E-EAB9592657F2.jpg" alt="VMware Explore 2026">
+<img src="images/A380F7FF-2BCB-4F10-974D-74DFA13737F4.jpg" alt="VMware Explore 2026">
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
