@@ -12,7 +12,7 @@ window.vcrocsSearchIndex = {
         "vExpert",
         "vCommunity"
       ],
-      "title" : "VMware Explore 2026 | My Eperience",
+      "title" : "VMware Explore 2026 | My Experience",
       "url" : "vmware-explore-2026-my-eperience.html"
     },
     {
