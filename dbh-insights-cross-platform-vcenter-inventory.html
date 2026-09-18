@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBH Insights | Cross-Platform vCenter Inventory - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: 1fr;
+            max-width: 900px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-avatar">
+                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h2 class="sidebar-title">vCROCS</h2>
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <a href="index.html" class="back-link">← Back to all posts</a>
+                
+                <article>
+                    <header>
+                        <h1>DBH Insights | Cross-Platform vCenter Inventory</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-09-18T15:59:11Z">
+                                September 18, 2026
+                            </time>
+                             • by Dale Hassinger
+                        </div>
+                        <div class="categories"><a href="categories/ai.html" class="category">AI</a></div>
+                        <div class="tags"><a href="tags/ai.html" class="tag">#AI</a> <a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/vexpert.html" class="tag">#vExpert</a></div>
+                    </header>
+                    
+                    <img src="images/Insights.png" alt="DBH Insights | Cross-Platform vCenter Inventory" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>DBH Insights: My Hackathon Idea Became a Real Tool 🚀</h3>
+<p>Back in August I wrote about my idea for the VMware Explore 2026 Hackathon: a modern, cross-platform way to pull inventory out of vCenter. Multi-vCenter support, easy spreadsheet exports, and an "Impact Analyst" to show what is affected if a host is not available.</p>
+<p>After VMware Explore I couldn't stop thinking about it. So I kept building. It started as a voice conversation with Claude about how the pieces should fit together, and within a few days I had a working tool running against my VCF 9.1 lab.</p>
+<p>At the Hackathon my Team called it <strong>DBH Insights</strong>, and I wanted to share it with the vCommunity.</p>
+<hr>
+<h4>What is DBH Insights? 💡</h4>
+<p>DBH Insights is a website that reads your vCenter inventory and turns it into:</p>
+<ul>
+<li>A dashboard with the numbers everyone asks for</li>
+<li>A topology map of hosts and datastores</li>
+<li>An Impact view that answers "what if this host or datastore fails?"</li>
+<li>27 inventory sheets you can sort, filter, and export to Excel | RVTools type of data</li>
+</ul>
+<p>If you have used RVTools, the sheets will feel familiar. The difference is that everything runs in your browser, works with more than one vCenter at a time, and the helper runs on Mac and Windows today, with Linux coming.</p>
+<hr>
+<h4>How It Works 🔧</h4>
+<p>There are two pieces:</p>
+<ul>
+<li><strong>The website</strong> has all the screens and all the vCenter queries. When I add a new feature, everyone gets it the next time they open the page. Nothing to reinstall.</li>
+<li><strong>The DBH Insights Helper</strong> is a small app that runs on your computer. It sits in the menu bar or system tray and does the talking to vCenter.</li>
+</ul>
+<p>Why a helper? A browser can't talk to a vCenter on your local network, and it won't trust vCenter's self-signed certificate. More important, you should never type your vCenter password into a website. The helper solves all three. Your password is saved in your computer's keychain and never leaves your machine.</p>
+<p>The flow is simple:</p>
+<p><strong>Browser → DBH Insights Helper (on your computer) → vCenter</strong></p>
+<p>Add a vCenter once, click <strong>Save & test</strong>, and you're done. You can add as many vCenters as you want.</p>
+<h4>DBH Insights Helper (Screen Shot):</h4>
+<img src="images/Insight-Helper.png" alt="Image">
+<hr>
+<h4>Insights Dashboard 📊</h4>
+<p>This is the first thing you see. Total hosts, cores, storage, VMs, physical memory, and the vCPU to core ratio. It also shows storage used, capacity by datastore type, the fullest datastores, and every cluster. This screen shot is from my lab with 2 vCenters, 4 hosts, and 31 VMs.</p>
+<p>You can save the dashboard as a single HTML file to email or keep for later.</p>
+<img src="images/Insights.png" alt="Image">
+<hr>
+<h4>Topology 🗺️</h4>
+<p>Every host, grouped by cluster, with a line to each datastore it has mounted. Hover over a host or a datastore to see only its connections. This makes it easy to spot a datastore that only one host can see.</p>
+<img src="images/Topology.png" alt="Image">
+<hr>
+<h4>Impact | What If a Host Fails? ⚠️</h4>
+<p>This one was on my Hackathon wish list, and it is my favorite feature.</p>
+<p>Pick a host or a datastore and DBH Insights tells you what depends on it:</p>
+<ul>
+<li>Which VMs are running on it</li>
+<li>If vSphere HA would restart those VMs on another host</li>
+<li>If the other hosts in the cluster have enough memory to take the VMs</li>
+<li>Any datastore that only this host can reach</li>
+</ul>
+<p>The search box lets you find a host or datastore fast, even if you have hundreds of them.</p>
+<p>In this example, my host esx9-01 is the only host in its cluster and HA is off. If it failed, 13 running VMs would stay down. Good to know before it happens! 😎</p>
+<img src="images/Impact.png" alt="Image">
+<hr>
+<h4>27 Inventory Sheets 📋</h4>
+<p>The sheets are grouped the same way you think about vSphere:</p>
+<ul>
+<li><strong>Inventory</strong> | vHost, vCluster, vRP, vDatastore</li>
+<li><strong>Virtual machines</strong> | vInfo, vCPU, vMemory, vDisk, vPartition, vNetwork, vSnapshot, vCD, vUSB, vTools</li>
+<li><strong>Host network & storage</strong> | vHBA, vNIC, vSwitch, vPort, vSC_VMK</li>
+<li><strong>Distributed switch</strong> | dvSwitch, dvPort</li>
+<li><strong>Performance</strong> | vHost Performance, vInfo Performance</li>
+<li><strong>Health</strong> | vHealth</li>
+<li><strong>System</strong> | vSource, vLicense, vMetaData</li>
+</ul>
+<p>Every sheet can be sorted, filtered, and paged. When you pick "All vCenters", each row shows which vCenter it came from.</p>
+<h4>vInfo (Screen Shot):</h4>
+<img src="images/vInfo.png" alt="Image">
+<h4>vHost (Screen Shot):</h4>
+<img src="images/vHost.png" alt="Image">
+<hr>
+<h4>Export to Excel 📤</h4>
+<p>One click on <strong>Export XLSX</strong> and you get every sheet in one Excel workbook. Frozen header row, filters turned on, and real dates. The file is built right in your browser.</p>
+<hr>
+<h4>Read Only. Always. 🔒</h4>
+<p>I wanted this to be safe to run in any environment:</p>
+<ul>
+<li>DBH Insights only <strong>reads</strong> from vCenter. There is no setting to make changes.</li>
+<li>Your passwords stay in your computer's keychain (macOS Keychain or Windows Credential Manager).</li>
+<li>The helper only listens on your own computer (127.0.0.1).</li>
+<li>Only websites you approve can use the helper.</li>
+</ul>
+<hr>
+<h4>Hackathon Wish List | How Did I Do? ✅</h4>
+<p>Here is the list from my Hackathon blog, and where things stand today:</p>
+<ul>
+<li>✅ Multi-vCenter support</li>
+<li>✅ Easy spreadsheet exports</li>
+<li>✅ Impact Analyst: what is affected if a host is not available</li>
+<li>✅ Runs on macOS and Windows (Linux build coming)</li>
+<li>⏳ Built-in scheduler for automatic runs</li>
+<li>⏳ VCF Fleet Manager integration for automatic vCenter discovery</li>
+</ul>
+<p>Not bad for a few days of work. The last two are next on my list.</p>
+<hr>
+<h4>Try It 🔗</h4>
+<p>1. Go to <a href="https://dbh-insights.github.io" target="_blank" rel="noopener noreferrer">https://dbh-insights.github.io</a></p>
+<p>2. Download the DBH Insights Helper for macOS (Apple silicon) or Windows</p>
+<p>3. Open the helper, click <strong>Add vCenter</strong>, and click <strong>Save & test</strong></p>
+<p>4. Click <strong>Open DBH Insights</strong></p>
+<p>The helper is not signed yet, so your computer will warn you the first time.</p>
+<p>On <strong>macOS</strong>, if you see "DBH Insights Helper is damaged and can't be opened", it isn't damaged. Run this once in Terminal, then open the app again:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>xattr -dr com.apple.quarantine &quot;/Applications/DBH Insights Helper.app&quot;</code></pre>
+</div>
+<p>On <strong>Windows</strong>, if you see "Windows protected your PC", click <strong>More info</strong> and then <strong>Run anyway</strong>.</p>
+<hr>
+<h4>For the Techies 🤓</h4>
+<ul>
+<li>The helper is built with Tauri and Rust, so it is small and can be built for Mac, Windows, and Linux.</li>
+<li>The website is plain HTML and JavaScript. No build step.</li>
+<li>DBH Insights uses both vCenter APIs: REST, plus SOAP for details REST doesn't have, like host hardware, snapshots, and performance counters.</li>
+<li>I built it with Claude Code as my AI pair programmer. It was a great example of turning an idea into working code fast.</li>
+</ul>
+<hr>
+<p>I always appreciate feedback. Let me know what you like, and what you would add next. See you in the vCommunity!</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<br>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
