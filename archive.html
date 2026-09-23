@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive - vCROCS</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="search-index.js" defer></script>
     <script src="lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -23,8 +51,11 @@
 </script>
     <style>
         .archive-year-section {
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .archive-year-section:last-child {
+            border-bottom: none;
         }
 
         .archive-year-toggle {
@@ -33,7 +64,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
-            padding: 0.95rem 0;
+            padding: 0.85rem 0;
             background: transparent;
             border: none;
             color: inherit;
@@ -46,21 +77,21 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
         }
 
         .archive-year-title {
-            color: var(--text-dark);
+            color: var(--text);
         }
 
         .archive-year-count {
-            color: var(--text-light);
-            font-weight: 500;
+            color: var(--text-faint);
+            font-weight: 600;
         }
 
         .archive-year-chevron {
-            color: var(--text-light);
+            color: var(--text-faint);
             transition: transform 0.2s ease;
         }
 
@@ -69,10 +100,12 @@
         }
 
         .archive-year-posts {
-            padding: 0 0 1rem 0;
+            padding: 0 0 0.85rem 0;
         }
 
+        /* Archive rows are compact links, not the thumbnail grid used elsewhere */
         .archive-post-item {
+            display: block;
             margin: 0;
             padding: 0;
             background: transparent;
@@ -80,31 +113,39 @@
             box-shadow: none;
         }
 
+        .archive-post-item:hover {
+            background: transparent;
+        }
+
         .archive-post-link {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
             gap: 1rem;
-            padding: 0.65rem 0.15rem;
+            padding: 0.5rem 0.65rem;
             text-decoration: none;
             color: inherit;
-            border-radius: 8px;
-            transition: background 0.2s ease, transform 0.2s ease;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s ease;
         }
 
         .archive-post-link:hover {
-            background: rgba(0, 168, 255, 0.08);
-            transform: translateY(-1px);
+            background: var(--blue-soft);
         }
 
         .archive-post-title {
-            color: var(--text-dark);
+            color: var(--text);
             font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .archive-post-link:hover .archive-post-title {
+            color: var(--blue-hover);
         }
 
         .archive-post-date {
-            color: var(--text-light);
-            font-size: 0.9rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
             white-space: nowrap;
         }
 
@@ -118,13 +159,40 @@
     </style>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -168,7 +236,7 @@
                 </a>
             </li>
             <li>
-                <a href="archive.html">
+                <a href="archive.html" class="is-active">
                     <span class="icon">📚</span>
                     <span>Archives</span>
                 </a>
@@ -219,20 +287,32 @@
         });
     });
 </script>
-    
+
     <!-- Main Content -->
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
-                <a href="index.html" class="back-link">← Back to home</a>
-                
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <span>Archives</span>
+    </nav>
+    <h1 class="page-title">Archives</h1>
+    <p class="page-subtitle">Every published post, grouped by year.</p>
+</div>
+
                 <main>
-                    <header>
-                        <h1>Archives</h1>
-                        <p id="archiveCount">126 posts across 7 years</p>
-                    </header>
-                    
-                    <section class="archive-year-section" data-year="2026" id="year-2026">
+                    <section class="panel" id="archive-years">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">By Year<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">126 posts / 7 years</span>
+    </div>
+    <div class="panel-body" id="archive-years-body">
+        <section class="archive-year-section" data-year="2026" id="year-2026">
     <button class="archive-year-toggle" type="button" aria-expanded="false" aria-controls="archive-posts-2026">
         <span class="archive-year-label">
             <span class="archive-year-title">2026</span>
@@ -1065,19 +1145,39 @@
 </article>
     </div>
 </section>
+    </div>
+</section>
+                    <p id="archiveCount" hidden>126 posts across 7 years</p>
                 </main>
             </div>
-            
+
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -1117,10 +1217,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="categories/ai.html" class="category-item">AI</a>
 <a href="categories/vcf.html" class="category-item">VCF</a>
@@ -1128,10 +1228,10 @@
 <a href="categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="tags/ai.html" class="tag-item">#AI</a>
 <a href="tags/automation.html" class="tag-item">#Automation</a>
@@ -1150,7 +1250,7 @@
 </aside>
         </div>
     </div>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);

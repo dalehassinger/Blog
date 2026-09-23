@@ -6,6 +6,34 @@
     <title>vCROCS - Page 2</title>
     <link rel="stylesheet" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="vCROCS" href="feed.xml">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="search-index.js" defer></script>
     <script src="lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -24,13 +52,40 @@
 </script>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -68,7 +123,7 @@
     <nav class="sidebar-nav" id="site-navigation">
         <ul>
             <li>
-                <a href="index.html">
+                <a href="index.html" class="is-active">
                     <span class="icon">🏠</span>
                     <span>Home</span>
                 </a>
@@ -130,127 +185,201 @@
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Latest</a>
+                <span class="sep">/</span>
+                <span>Page 2</span>
+    </nav>
+    <h1 class="page-title">vCROCS</h1>
+    <p class="page-subtitle">VCF Automation, Monitoring, more...</p>
+</div>
+
                 <main>
-                    <div class="post-item">
-    <img src="images/2026-vExpert-VCF.png" alt="VMware vExpert | VCF Sub-Program 2026" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-vexpert-vcf-sub-program.html">VMware vExpert | VCF Sub-Program 2026</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-05-30T11:37:33Z">
-            May 30, 2026
-        </time>
-         &bull; by Dale Hassinger
+                    
+                    <section class="panel" id="recent-posts">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">Posts<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">Page 2 of 13</span>
     </div>
-    <div class="categories"><a href="categories/vcommunity.html" class="category">vCommunity</a></div>
-    <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/vcf.html" class="tag">#VCF</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmug-connect.png" alt="VMUG Connect | Virtually Speak Podcast" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmug-connect-virtually-speak-podcast.html">VMUG Connect | Virtually Speak Podcast</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-05-29T15:54:06Z">
-            May 29, 2026
-        </time>
-         &bull; by Dale Hassinger
+    <div class="panel-body" id="recent-posts-body">
+        <div class="post-list">
+<article class="post-item">
+            <a class="post-thumb" href="vmware-vexpert-vcf-sub-program.html" tabindex="-1" aria-hidden="true">
+    <img src="images/2026-vExpert-VCF.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-vexpert-vcf-sub-program.html">VMware vExpert | VCF Sub-Program 2026</a></h2>
+                <p class="post-excerpt">Honored to be Selected for the VMware vExpert VCF Sub Program 2026! I am incredibly honored to be selected for the VMware vExpert VCF Sub Program for 2026! This sub program is full of...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/vcf.html" class="tag">#VCF</a>
+                    <time class="post-date" datetime="2026-05-30T11:37:33Z">May 30, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmug-connect-virtually-speak-podcast.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmug-connect.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmug-connect-virtually-speak-podcast.html">VMUG Connect | Virtually Speak Podcast</a></h2>
+                <p class="post-excerpt">From Listener to Guest: Sharing My vCommunity Story on the Virtually Speaking Podcast There are certain moments in a career that stand out—not just for the professional achievement, but for...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="tags/vmug.html" class="tag">#VMUG</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/vexpert.html" class="tag">#vExpert</a>
+                    <time class="post-date" datetime="2026-05-29T15:54:06Z">May 29, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vcrocs-blog-framework.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vCROCS-2026-05-06-at-21.25.03.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vcrocs-blog-framework.html">vCROCS Blog Framework</a></h2>
+                <p class="post-excerpt">vCROCS Blog Framework I have been creating and sharing blog posts for 7 years. I started with WordPress and moved to Hugo after about a year. Hugo has worked well for me, but I always...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/ai.html" class="category">AI</a>
+            <a href="tags/ai.html" class="tag">#AI</a>
+            <a href="tags/claude.html" class="tag">#Claude</a>
+            <a href="tags/openai.html" class="tag">#OpenAI</a>
+                    <time class="post-date" datetime="2026-05-07T00:42:37Z">May 6, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmug-connect-2026-minneapolis.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmug-connect-2026-minneapolis-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmug-connect-2026-minneapolis.html">VMUG Connect 2026 | Minneapolis</a></h2>
+                <p class="post-excerpt">VMUG Connect 2026: VMUG Connect 2026 in Minneapolis is the first that I will be presenting outside of my local VMUG or VMware Explore. I am looking forward to the event to share my...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/career.html" class="tag">#Career</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="tags/vmug-connect.html" class="tag">#VMUG Connect</a>
+                    <time class="post-date" datetime="2026-04-10T04:00:00Z">April 10, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="keyboard-corsair-galleon-100-sd.html" tabindex="-1" aria-hidden="true">
+    <img src="images/keyboard-corsair-galleon-100-sd-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="keyboard-corsair-galleon-100-sd.html">Keyboard | Corsair Galleon 100 SD</a></h2>
+                <p class="post-excerpt">The more I use the Corsair Galleon 100 SD Keyboard, the more I ❤️ it!!! I have used a Stream Deck for many years. Integrating Stream Deck functionality directly into a keyboard is next...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/streamdeck.html" class="tag">#StreamDeck</a>
+            <a href="tags/keyboard.html" class="tag">#Keyboard</a>
+            <a href="tags/corsair.html" class="tag">#Corsair</a>
+            <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="tags/home-lab.html" class="tag">#Home Lab</a>
+                    <time class="post-date" datetime="2026-03-08T05:00:00Z">March 8, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="openclaw-apple-app-for-my-home-lab.html" tabindex="-1" aria-hidden="true">
+    <img src="images/openclaw-apple-app-for-my-home-lab-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="openclaw-apple-app-for-my-home-lab.html">OpenClaw | Apple App for my Home Lab</a></h2>
+                <p class="post-excerpt">The more I integrate OpenClaw into my home lab, the more it clicks. This isn&#39;t just another tool—it’s a roadmap for the future of Automation and Management. With each passing day, AI...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/ai.html" class="category">AI</a>
+            <a href="tags/openclaw.html" class="tag">#OpenClaw</a>
+            <a href="tags/vcf.html" class="tag">#VCF</a>
+            <a href="tags/operations.html" class="tag">#Operations</a>
+            <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="tags/home-lab.html" class="tag">#Home Lab</a>
+                    <time class="post-date" datetime="2026-03-01T05:00:00Z">March 1, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="custom-app-claude-code.html" tabindex="-1" aria-hidden="true">
+    <img src="images/custom-app-claude-code-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="custom-app-claude-code.html">Custom App | Claude Code</a></h2>
+                <p class="post-excerpt">Designing Custom Apps with Prompts Soon, the ability to build personalized, functional apps will no longer require years of development experience. My First Apple Swift App I am comfortable...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/ai.html" class="category">AI</a>
+            <a href="tags/vcf.html" class="tag">#VCF</a>
+            <a href="tags/operations.html" class="tag">#Operations</a>
+            <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="tags/home-lab.html" class="tag">#Home Lab</a>
+                    <time class="post-date" datetime="2026-02-16T05:00:00Z">February 16, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="chisoku-knowing-when-technology-is-enough.html" tabindex="-1" aria-hidden="true">
+    <img src="images/chisoku-knowing-when-technology-is-enough-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="chisoku-knowing-when-technology-is-enough.html">Chisoku: Knowing When Technology Is Enough</a></h2>
+                <p class="post-excerpt">Technology and the Philosophy of Chisoku I recently researched the Fujifilm X T30 III for a new camera purchase. It is not the model with the highest megapixel count, the most durable...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/career.html" class="tag">#Career</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="tags/chisoku.html" class="tag">#Chisoku</a>
+                    <time class="post-date" datetime="2026-02-15T05:00:00Z">February 15, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="why-i-give-back-my-7-year-vexpert-story.html" tabindex="-1" aria-hidden="true">
+    <img src="images/why-i-give-back-my-7-year-vexpert-story-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="why-i-give-back-my-7-year-vexpert-story.html">Why I Give Back: My 7-Year vExpert Story</a></h2>
+                <p class="post-excerpt">vExpert 2026: Reflecting on Seven Years of Community and Growth 2026 marks a significant milestone for me: my 7th year in the VMware vExpert program . As I look back on this journey, I...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/career.html" class="tag">#Career</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+                    <time class="post-date" datetime="2026-02-01T05:00:00Z">February 1, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vcf-operations-custom-summary.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vcf-operations-custom-summary-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vcf-operations-custom-summary.html">VCF Operations | Custom Summary</a></h2>
+                <p class="post-excerpt">Custom Summaries will change your workflow with VCF Operations. VCF Operations Custom Summaries = The ultimate &#39;Single Pane of Glass.&#39; Create a tailored view that shows your team exactly...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vcf.html" class="tag">#VCF</a>
+            <a href="tags/operations.html" class="tag">#Operations</a>
+            <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="tags/dashboard.html" class="tag">#Dashboard</a>
+                    <time class="post-date" datetime="2026-01-31T05:00:00Z">January 31, 2026</time>
+                </div>
+            </div>
+        </article>
+                </div>
     </div>
-    <div class="categories"><a href="categories/vcommunity.html" class="category">vCommunity</a></div>
-    <div class="tags"><a href="tags/vmug.html" class="tag">#VMUG</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/vexpert.html" class="tag">#vExpert</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vCROCS-2026-05-06-at-21.25.03.png" alt="vCROCS Blog Framework" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vcrocs-blog-framework.html">vCROCS Blog Framework</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-05-07T00:42:37Z">
-            May 6, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/ai.html" class="category">AI</a></div>
-    <div class="tags"><a href="tags/ai.html" class="tag">#AI</a> <a href="tags/claude.html" class="tag">#Claude</a> <a href="tags/openai.html" class="tag">#OpenAI</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmug-connect-2026-minneapolis-featured.png" alt="VMUG Connect 2026 | Minneapolis" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmug-connect-2026-minneapolis.html">VMUG Connect 2026 | Minneapolis</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-04-10T04:00:00Z">
-            April 10, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/career.html" class="tag">#Career</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a> <a href="tags/vmug-connect.html" class="tag">#VMUG Connect</a></div>
-</div>
-<div class="post-item">
-    <img src="images/keyboard-corsair-galleon-100-sd-featured.png" alt="Keyboard | Corsair Galleon 100 SD" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="keyboard-corsair-galleon-100-sd.html">Keyboard | Corsair Galleon 100 SD</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-03-08T05:00:00Z">
-            March 8, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/streamdeck.html" class="tag">#StreamDeck</a> <a href="tags/keyboard.html" class="tag">#Keyboard</a> <a href="tags/corsair.html" class="tag">#Corsair</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a> <a href="tags/home-lab.html" class="tag">#Home Lab</a></div>
-</div>
-<div class="post-item">
-    <img src="images/openclaw-apple-app-for-my-home-lab-featured.png" alt="OpenClaw | Apple App for my Home Lab" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="openclaw-apple-app-for-my-home-lab.html">OpenClaw | Apple App for my Home Lab</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-03-01T05:00:00Z">
-            March 1, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/ai.html" class="category">AI</a></div>
-    <div class="tags"><a href="tags/openclaw.html" class="tag">#OpenClaw</a> <a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/operations.html" class="tag">#Operations</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a> <a href="tags/home-lab.html" class="tag">#Home Lab</a></div>
-</div>
-<div class="post-item">
-    <img src="images/custom-app-claude-code-featured.png" alt="Custom App | Claude Code" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="custom-app-claude-code.html">Custom App | Claude Code</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-02-16T05:00:00Z">
-            February 16, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/ai.html" class="category">AI</a></div>
-    <div class="tags"><a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/operations.html" class="tag">#Operations</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a> <a href="tags/home-lab.html" class="tag">#Home Lab</a></div>
-</div>
-<div class="post-item">
-    <img src="images/chisoku-knowing-when-technology-is-enough-featured.png" alt="Chisoku: Knowing When Technology Is Enough" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="chisoku-knowing-when-technology-is-enough.html">Chisoku: Knowing When Technology Is Enough</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-02-15T05:00:00Z">
-            February 15, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/career.html" class="tag">#Career</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a> <a href="tags/chisoku.html" class="tag">#Chisoku</a></div>
-</div>
-<div class="post-item">
-    <img src="images/why-i-give-back-my-7-year-vexpert-story-featured.png" alt="Why I Give Back: My 7-Year vExpert Story" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="why-i-give-back-my-7-year-vexpert-story.html">Why I Give Back: My 7-Year vExpert Story</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-02-01T05:00:00Z">
-            February 1, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/career.html" class="tag">#Career</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vcf-operations-custom-summary-featured.png" alt="VCF Operations | Custom Summary" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vcf-operations-custom-summary.html">VCF Operations | Custom Summary</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-01-31T05:00:00Z">
-            January 31, 2026
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/operations.html" class="tag">#Operations</a> <a href="tags/vmware-vexpert.html" class="tag">#VMware vExpert</a> <a href="tags/dashboard.html" class="tag">#Dashboard</a></div>
-</div>
+</section>
                     <nav class="pagination">
     <a href="index.html" class="pagination-link">&laquo; Newer Posts</a>
             <span class="pagination-info">Page 2 of 13</span>
@@ -264,15 +393,32 @@
             </div>
 
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -312,10 +458,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="categories/ai.html" class="category-item">AI</a>
 <a href="categories/vcf.html" class="category-item">VCF</a>
@@ -323,10 +469,10 @@
 <a href="categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="tags/ai.html" class="tag-item">#AI</a>
 <a href="tags/automation.html" class="tag-item">#Automation</a>

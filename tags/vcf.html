@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts tagged "VCF" - vCROCS</title>
     <link rel="stylesheet" href="../style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="../search-index.js" defer></script>
     <script src="../lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -23,13 +51,40 @@
 </script>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="../index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="../images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="../" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="../images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -124,224 +179,498 @@
         });
     });
 </script>
-    
+
     <!-- Main Content -->
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
-                <a href="../index.html" class="back-link">← Back to all posts</a>
-                
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+                <span class="sep">/</span>
+                <span>Tags</span>
+                <span class="sep">/</span>
+                <span>#VCF</span>
+    </nav>
+    <h1 class="page-title">#VCF</h1>
+    <p class="page-subtitle">24 posts tagged with this keyword.</p>
+</div>
+
                 <main>
-                    <header>
-                        <h1>Posts tagged "VCF"</h1>
-                        <p>24 posts</p>
-                    </header>
-                    
-                    <div class="post-item">
-    <h2><a href="../dbh-insights-cross-platform-vcenter-inventory.html">DBH Insights | Cross-Platform vCenter Inventory</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-09-18T15:59:11Z">
-            September 18, 2026
-        </time>
+                    <section class="panel" id="tagged-posts">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">Tagged #VCF<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">24 posts</span>
     </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-9-1-powercli-for-sddc-and-operations.html">VCF PowerCLI 9.1 |  VCF SDDC</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-08-08T00:53:09Z">
-            August 7, 2026
-        </time>
+    <div class="panel-body" id="tagged-posts-body">
+        <div class="post-list">
+<article class="post-item">
+            <a class="post-thumb" href="../dbh-insights-cross-platform-vcenter-inventory.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/Insights.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../dbh-insights-cross-platform-vcenter-inventory.html">DBH Insights | Cross-Platform vCenter Inventory</a></h2>
+                <p class="post-excerpt">DBH Insights: My Hackathon Idea Became a Real Tool 🚀 Back in August I wrote about my idea for the VMware Explore 2026 Hackathon: a modern, cross platform way to pull inventory out of...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/ai.html" class="category">AI</a>
+            <a href="../tags/ai.html" class="tag">#AI</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+                    <time class="post-date" datetime="2026-09-18T15:59:11Z">September 18, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-9-1-powercli-for-sddc-and-operations.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/VCF-PowerCLI.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-9-1-powercli-for-sddc-and-operations.html">VCF PowerCLI 9.1 |  VCF SDDC</a></h2>
+                <p class="post-excerpt">VCF PowerCLI How To | SDDC Manager and Operations Managing VMware Cloud Foundation with VCF PowerCLI 9.1 Connect to SDDC Manager, inspect the VCF Management Domain, Workload Domains, VCF...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf.html" class="category">VCF</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/powercli.html" class="tag">#PowerCLI</a>
+                    <time class="post-date" datetime="2026-08-08T00:53:09Z">August 7, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-environment-host-cpu-details.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/Host-cpu-details-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-environment-host-cpu-details.html">VCF Environment | Host CPU Details</a></h2>
+                <p class="post-excerpt">VCF Environment Hosts I was recently asked for a dashboard focused on showing only VCF host physical CPU details. I looked at all the VCF Operations OOTB (Out of the Box) dashboards first...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/vcf-operations.html" class="tag">#VCF Operations</a>
+                    <time class="post-date" datetime="2026-06-27T11:13:59Z">June 27, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-9-1-minimum-lab-updated.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/Screenshot 2026-06-10 at 16-19-51.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-9-1-minimum-lab-updated.html">VCF 9.1 | Minimum Lab updated (Level 2)</a></h2>
+                <p class="post-excerpt">The Minimum VCF 9.1 Lab (Level 1) updated with additional platform features (Level 2). My previous post detailed the minimum requirements for a VMware Cloud Foundation (VCF) 9.1 evaluation...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf.html" class="category">VCF</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/openai.html" class="tag">#OpenAI</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/claude.html" class="tag">#Claude</a>
+                    <time class="post-date" datetime="2026-06-10T23:44:40Z">June 10, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmware-vexpert-vcf-sub-program.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/2026-vExpert-VCF.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmware-vexpert-vcf-sub-program.html">VMware vExpert | VCF Sub-Program 2026</a></h2>
+                <p class="post-excerpt">Honored to be Selected for the VMware vExpert VCF Sub Program 2026! I am incredibly honored to be selected for the VMware vExpert VCF Sub Program for 2026! This sub program is full of...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+                    <time class="post-date" datetime="2026-05-30T11:37:33Z">May 30, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../openclaw-apple-app-for-my-home-lab.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/openclaw-apple-app-for-my-home-lab-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../openclaw-apple-app-for-my-home-lab.html">OpenClaw | Apple App for my Home Lab</a></h2>
+                <p class="post-excerpt">The more I integrate OpenClaw into my home lab, the more it clicks. This isn&#39;t just another tool—it’s a roadmap for the future of Automation and Management. With each passing day, AI...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/ai.html" class="category">AI</a>
+            <a href="../tags/openclaw.html" class="tag">#OpenClaw</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/home-lab.html" class="tag">#Home Lab</a>
+                    <time class="post-date" datetime="2026-03-01T05:00:00Z">March 1, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../custom-app-claude-code.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/custom-app-claude-code-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../custom-app-claude-code.html">Custom App | Claude Code</a></h2>
+                <p class="post-excerpt">Designing Custom Apps with Prompts Soon, the ability to build personalized, functional apps will no longer require years of development experience. My First Apple Swift App I am comfortable...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/ai.html" class="category">AI</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/home-lab.html" class="tag">#Home Lab</a>
+                    <time class="post-date" datetime="2026-02-16T05:00:00Z">February 16, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-operations-custom-summary.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-operations-custom-summary-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-operations-custom-summary.html">VCF Operations | Custom Summary</a></h2>
+                <p class="post-excerpt">Custom Summaries will change your workflow with VCF Operations. VCF Operations Custom Summaries = The ultimate &#39;Single Pane of Glass.&#39; Create a tailored view that shows your team exactly...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/dashboard.html" class="tag">#Dashboard</a>
+                    <time class="post-date" datetime="2026-01-31T05:00:00Z">January 31, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcommunity-mp-windows-servers-services.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcommunity-mp-windows-servers-services-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcommunity-mp-windows-servers-services.html">vCommunity MP | Windows Servers Services</a></h2>
+                <p class="post-excerpt">Use the vCommunity MP to monitor Windows Server Services agent less. A community built VMware Cloud Foundation Operations Management Pack using Python and the VCF Operations Integration SDK...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/dashboard.html" class="tag">#Dashboard</a>
+            <a href="../tags/vcommunity-mp.html" class="tag">#vCommunity-MP</a>
+                    <time class="post-date" datetime="2025-11-08T05:00:00Z">November 8, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-operations-cpu-overcommit-details.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-operations-cpu-overcommit-details-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-operations-cpu-overcommit-details.html">VCF Operations | CPU|Overcommit Details</a></h2>
+                <p class="post-excerpt">See your CPU|Overcommit at the Datacenter, Cluster and Host level. My CPU usage is like my Energy Drink intake — dangerously high and probably not sustainable. CPU|Overcommit: Many of my...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/dashboard.html" class="tag">#Dashboard</a>
+            <a href="../tags/super-metric.html" class="tag">#Super Metric</a>
+                    <time class="post-date" datetime="2025-06-04T04:00:00Z">June 4, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-operations-zoom-mp.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-operations-zoom-mp-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-operations-zoom-mp.html">VCF Operations | Zoom MP</a></h2>
+                <p class="post-excerpt">Learn how to monitor SaaS solutions like Zoom by building a custom Management Pack. You start to see the true power of VCF Operations when you add Management Packs (MPs) tailored to the...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/zoom.html" class="tag">#Zoom</a>
+            <a href="../tags/management-pack.html" class="tag">#Management Pack</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/mp.html" class="tag">#MP</a>
+                    <time class="post-date" datetime="2025-04-20T04:00:00Z">April 20, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-automation-customproperties.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-automation-customproperties-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-automation-customproperties.html">VCF Automation | CustomProperties</a></h2>
+                <p class="post-excerpt">Add CustomProperties to a VM Deployment after the Virtual Machine is created. Use CustomProperties in VMware VCF Automation to drive CMDB integration—keeping users and process logic out of...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="../tags/powercli.html" class="tag">#PowerCLI</a>
+            <a href="../tags/vmware-code-coach.html" class="tag">#VMware Code Coach</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/cmdb.html" class="tag">#CMDB</a>
+            <a href="../tags/customproperties.html" class="tag">#CustomProperties</a>
+                    <time class="post-date" datetime="2025-03-30T04:00:00Z">March 30, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-automation-linux-powershell-host.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-automation-linux-powershell-host-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-automation-linux-powershell-host.html">VCF Automation | Linux PowerShell Host</a></h2>
+                <p class="post-excerpt">How to use a Rocky Linux PowerShell Host with VCF Automation Orchestrator. Linux ❤️ PowerShell! Streamline VMware Automation with VCF Automation, a Rocky Linux PowerShell host, custom...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="../tags/powercli.html" class="tag">#PowerCLI</a>
+            <a href="../tags/vmware-code-coach.html" class="tag">#VMware Code Coach</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/linux.html" class="tag">#Linux</a>
+                    <time class="post-date" datetime="2025-03-15T04:00:00Z">March 15, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../powercli-and-yaml.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/powercli-and-yaml-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../powercli-and-yaml.html">PowerCLI and YAML</a></h2>
+                <p class="post-excerpt">Streamlining PowerCLI Scripts: Using YAML for Variable Management The true power of automation lies in simplicity—storing all your home lab variables in a single YAML file transforms...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="../tags/powercli.html" class="tag">#PowerCLI</a>
+            <a href="../tags/vmware-code-coach.html" class="tag">#VMware Code Coach</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/yaml.html" class="tag">#yaml</a>
+                    <time class="post-date" datetime="2025-03-08T05:00:00Z">March 8, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../powercli-on-mac-linux-and-windows.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/powercli-on-mac-linux-and-windows-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../powercli-on-mac-linux-and-windows.html">PowerCLI on Mac, Linux, and Windows</a></h2>
+                <p class="post-excerpt">Home Lab Automation! The real power of innovation comes not from the tools we use, but from the mindset we bring. Think outside the box, and any type of computer can become the key to...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="../tags/powercli.html" class="tag">#PowerCLI</a>
+            <a href="../tags/vmware-code-coach.html" class="tag">#VMware Code Coach</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+                    <time class="post-date" datetime="2025-02-21T05:00:00Z">February 21, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-automation-input-arrays.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-automation-input-arrays-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-automation-input-arrays.html">VCF Automation | Input Arrays</a></h2>
+                <p class="post-excerpt">How to use Input Arrays with ABX Actions. Don’t automate for the sake of automation—automate to simplify, accelerate, and improve. Note: VCF Automation 8.18.1 was used to create this Blog I...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="../tags/powercli.html" class="tag">#PowerCLI</a>
+            <a href="../tags/vmware-code-coach.html" class="tag">#VMware Code Coach</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+                    <time class="post-date" datetime="2025-01-31T05:00:00Z">January 31, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-deploy-scripted-install-home-lab.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-deploy-scripted-install-home-lab-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-deploy-scripted-install-home-lab.html">VCF Deploy | Scripted Install | Home Lab</a></h2>
+                <p class="post-excerpt">How to script a VCF SDDC Manager install on a single Nested ESXi Host! You have to work hard to get your thinking clean to make it simple. But it&#39;s worth it in the end because once you get...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-sddc-manager.html" class="category">VCF SDDC Manager</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+                    <time class="post-date" datetime="2024-12-26T05:00:00Z">December 26, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-operations-extract-diagnostics-events-script.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-operations-extract-diagnostics-events-script-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-operations-extract-diagnostics-events-script.html">VCF Operations | Extract Diagnostics Events Script</a></h2>
+                <p class="post-excerpt">Example PowerShell Script to Extract Diagnostics Events from VCF Operations Alone we can do so little; together we can do so much. – Helen Keller Product Versions used for this Blog: VCF...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/diagnostics.html" class="tag">#Diagnostics</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/api.html" class="tag">#API</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+                    <time class="post-date" datetime="2024-12-21T05:00:00Z">December 21, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-operations-ideas-for-practical-and-effective-dashboards.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-operations-ideas-for-practical-and-effective-dashboards-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-operations-ideas-for-practical-and-effective-dashboards.html">VCF Operations | Ideas for Practical and Effective Dashboards</a></h2>
+                <p class="post-excerpt">Sample Dashboard Designs to review first thing in the morning while drinking your Coffee or Energy Drink. If you have an apple and I have an apple and we exchange these apples, then you and...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/dashboards.html" class="tag">#Dashboards</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/samples.html" class="tag">#Samples</a>
+            <a href="../tags/ideas.html" class="tag">#Ideas</a>
+                    <time class="post-date" datetime="2024-10-29T04:00:00Z">October 29, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-operations-for-logs-how-to-automate-url-generation-for-filtering-results.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-operations-for-logs-how-to-automate-url-generation-for-filtering-results-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-operations-for-logs-how-to-automate-url-generation-for-filtering-results.html">VCF Operations for Logs | How to Automate URL Generation for Filtering Results</a></h2>
+                <p class="post-excerpt">How to Create a URL for Filtering Log Results and Share It with Others. I have not failed. I’ve just found 10,000 ways that won’t work. – Thomas Edison Note: VCF Operations for Logs 8.18.0...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/deployments.html" class="tag">#Deployments</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/syslog.html" class="tag">#syslog</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+                    <time class="post-date" datetime="2024-10-21T04:00:00Z">October 21, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-operations-for-logs-how-to-use-with-automation-scripts.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-operations-for-logs-how-to-use-with-automation-scripts-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-operations-for-logs-how-to-use-with-automation-scripts.html">VCF Operations for Logs | How to use with Automation Scripts</a></h2>
+                <p class="post-excerpt">How to send Automation Script Execution Log Events to VCF Operations for Logs. Surround yourself with people that push you to do better. No drama or negativity. Just higher goals and higher...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/deployments.html" class="tag">#Deployments</a>
+            <a href="../tags/operations.html" class="tag">#Operations</a>
+            <a href="../tags/syslog.html" class="tag">#syslog</a>
+            <a href="../tags/powershell.html" class="tag">#PowerShell</a>
+                    <time class="post-date" datetime="2024-10-19T04:00:00Z">October 19, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-automation-deployments-overview-tab.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-automation-deployments-overview-tab-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-automation-deployments-overview-tab.html">VCF Automation Deployments | Overview Tab</a></h2>
+                <p class="post-excerpt">How to display important and useful information in the VCF Automation Overview Tab. Including information in the VCF Automation Deployments Overview Tab creates a user friendly experience...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/automation.html" class="tag">#Automation</a>
+            <a href="../tags/deployments.html" class="tag">#Deployments</a>
+                    <time class="post-date" datetime="2024-10-12T04:00:00Z">October 12, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../aria-operations-aria-appliances-observability.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/aria-operations-aria-appliances-observability-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../aria-operations-aria-appliances-observability.html">Aria Operations | Aria Appliances Observability</a></h2>
+                <p class="post-excerpt">How to monitor VMware Aria Appliances within your environment &quot;I believe that if you show people the problems and you show them the solutions, they will be moved to act.” Bill Gates Aria...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+            <a href="../tags/aria-operations.html" class="tag">#Aria Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/vcenter.html" class="tag">#vCenter</a>
+                    <time class="post-date" datetime="2024-06-04T04:00:00Z">June 4, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../aria-operations-vcenter-observability.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/aria-operations-vcenter-observability-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../aria-operations-vcenter-observability.html">Aria Operations | vCenter Observability</a></h2>
+                <p class="post-excerpt">How to monitor vCenter VM(s) within your environment &quot;It&#39;s really hard to design products by focus groups. A lot of times, people don&#39;t know what they want until you show it to them.” Steve...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+            <a href="../tags/aria-operations.html" class="tag">#Aria Operations</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/vcenter.html" class="tag">#vCenter</a>
+                    <time class="post-date" datetime="2024-05-31T04:00:00Z">May 31, 2024</time>
+                </div>
+            </div>
+        </article>
+                </div>
     </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-environment-host-cpu-details.html">VCF Environment | Host CPU Details</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-06-27T11:13:59Z">
-            June 27, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-9-1-minimum-lab-updated.html">VCF 9.1 | Minimum Lab updated (Level 2)</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-06-10T23:44:40Z">
-            June 10, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmware-vexpert-vcf-sub-program.html">VMware vExpert | VCF Sub-Program 2026</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-05-30T11:37:33Z">
-            May 30, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../openclaw-apple-app-for-my-home-lab.html">OpenClaw | Apple App for my Home Lab</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-03-01T05:00:00Z">
-            March 1, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../custom-app-claude-code.html">Custom App | Claude Code</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-02-16T05:00:00Z">
-            February 16, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-operations-custom-summary.html">VCF Operations | Custom Summary</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-01-31T05:00:00Z">
-            January 31, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcommunity-mp-windows-servers-services.html">vCommunity MP | Windows Servers Services</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-11-08T05:00:00Z">
-            November 8, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-operations-cpu-overcommit-details.html">VCF Operations | CPU|Overcommit Details</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-06-04T04:00:00Z">
-            June 4, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-operations-zoom-mp.html">VCF Operations | Zoom MP</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-04-20T04:00:00Z">
-            April 20, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-automation-customproperties.html">VCF Automation | CustomProperties</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-03-30T04:00:00Z">
-            March 30, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-automation-linux-powershell-host.html">VCF Automation | Linux PowerShell Host</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-03-15T04:00:00Z">
-            March 15, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../powercli-and-yaml.html">PowerCLI and YAML</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-03-08T05:00:00Z">
-            March 8, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../powercli-on-mac-linux-and-windows.html">PowerCLI on Mac, Linux, and Windows</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-02-21T05:00:00Z">
-            February 21, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-automation-input-arrays.html">VCF Automation | Input Arrays</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-01-31T05:00:00Z">
-            January 31, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-deploy-scripted-install-home-lab.html">VCF Deploy | Scripted Install | Home Lab</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-12-26T05:00:00Z">
-            December 26, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-operations-extract-diagnostics-events-script.html">VCF Operations | Extract Diagnostics Events Script</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-12-21T05:00:00Z">
-            December 21, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-operations-ideas-for-practical-and-effective-dashboards.html">VCF Operations | Ideas for Practical and Effective Dashboards</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-10-29T04:00:00Z">
-            October 29, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-operations-for-logs-how-to-automate-url-generation-for-filtering-results.html">VCF Operations for Logs | How to Automate URL Generation for Filtering Results</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-10-21T04:00:00Z">
-            October 21, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-operations-for-logs-how-to-use-with-automation-scripts.html">VCF Operations for Logs | How to use with Automation Scripts</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-10-19T04:00:00Z">
-            October 19, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-automation-deployments-overview-tab.html">VCF Automation Deployments | Overview Tab</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-10-12T04:00:00Z">
-            October 12, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../aria-operations-aria-appliances-observability.html">Aria Operations | Aria Appliances Observability</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-06-04T04:00:00Z">
-            June 4, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../aria-operations-vcenter-observability.html">Aria Operations | vCenter Observability</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-05-31T04:00:00Z">
-            May 31, 2024
-        </time>
-    </div>
-</div>
+</section>
                 </main>
             </div>
-            
+
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="../">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="../archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -381,10 +710,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="../categories/ai.html" class="category-item">AI</a>
 <a href="../categories/vcf.html" class="category-item">VCF</a>
@@ -392,10 +721,10 @@
 <a href="../categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="../tags/ai.html" class="tag-item">#AI</a>
 <a href="../tags/automation.html" class="tag-item">#Automation</a>

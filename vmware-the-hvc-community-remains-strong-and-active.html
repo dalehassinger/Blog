@@ -7,6 +7,34 @@
     <meta name="description" content="">
     <meta name="author" content="Dale Hassinger">
     <link rel="stylesheet" href="style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="search-index.js" defer></script>
     <script src="lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -26,25 +54,52 @@
     <style>
         /* Single column layout for individual post pages */
         .container.single-post {
-            grid-template-columns: 1fr;
-            max-width: 900px;
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 960px;
         }
         .container.single-post .content-area {
             max-width: 100%;
         }
-        .container.single-post article {
+        .container.single-post .post-article {
             max-width: 100%;
         }
     </style>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -139,24 +194,31 @@
         });
     });
 </script>
-    
+
     <!-- Main Content -->
     <div class="main-wrapper">
         <div class="container single-post">
             <div class="content-area">
-                <a href="index.html" class="back-link">← Back to all posts</a>
-                
-                <article>
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="categories/vmware-community.html">VMware Community</a>
+                <span class="sep">/</span>
+                <span>VMware | The HVC Community remains strong and active</span>
+    </nav>
+
+                <article class="post-article">
                     <header>
+                        <span class="featured-eyebrow">VMWARE COMMUNITY</span>
                         <h1>VMware | The HVC Community remains strong and active</h1>
                         <div class="post-meta">
                             <time datetime="2024-07-13T04:00:00Z">
                                 July 13, 2024
                             </time>
-                             • by Dale Hassinger
+                            <span>&middot;</span><span>Dale Hassinger</span>
                         </div>
-                        <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-                        <div class="tags"><a href="tags/vcommunity.html" class="tag">#vCommunity</a></div>
+                        <div class="tags"><a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a></div>
                     </header>
                     
                     <img src="images/vmware-the-hvc-community-remains-strong-and-active-featured.png" alt="VMware | The HVC Community remains strong and active" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">

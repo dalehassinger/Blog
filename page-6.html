@@ -6,6 +6,34 @@
     <title>vCROCS - Page 6</title>
     <link rel="stylesheet" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="vCROCS" href="feed.xml">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="search-index.js" defer></script>
     <script src="lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -24,13 +52,40 @@
 </script>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -68,7 +123,7 @@
     <nav class="sidebar-nav" id="site-navigation">
         <ul>
             <li>
-                <a href="index.html">
+                <a href="index.html" class="is-active">
                     <span class="icon">🏠</span>
                     <span>Home</span>
                 </a>
@@ -130,127 +185,209 @@
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Latest</a>
+                <span class="sep">/</span>
+                <span>Page 6</span>
+    </nav>
+    <h1 class="page-title">vCROCS</h1>
+    <p class="page-subtitle">VCF Automation, Monitoring, more...</p>
+</div>
+
                 <main>
-                    <div class="post-item">
-    <img src="images/aria-operations-vcenter-observability-featured.png" alt="Aria Operations | vCenter Observability" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="aria-operations-vcenter-observability.html">Aria Operations | vCenter Observability</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-05-31T04:00:00Z">
-            May 31, 2024
-        </time>
-         &bull; by Dale Hassinger
+                    
+                    <section class="panel" id="recent-posts">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">Posts<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">Page 6 of 13</span>
     </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/aria-operations.html" class="tag">#Aria Operations</a> <a href="tags/vcf.html" class="tag">#VCF</a> <a href="tags/vcenter.html" class="tag">#vCenter</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-explore-2024-featured.png" alt="VMware Explore 2024" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-explore-2024.html">VMware Explore 2024</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-05-01T04:00:00Z">
-            May 1, 2024
-        </time>
-         &bull; by Dale Hassinger
+    <div class="panel-body" id="recent-posts-body">
+        <div class="post-list">
+<article class="post-item">
+            <a class="post-thumb" href="aria-operations-vcenter-observability.html" tabindex="-1" aria-hidden="true">
+    <img src="images/aria-operations-vcenter-observability-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="aria-operations-vcenter-observability.html">Aria Operations | vCenter Observability</a></h2>
+                <p class="post-excerpt">How to monitor vCenter VM(s) within your environment &quot;It&#39;s really hard to design products by focus groups. A lot of times, people don&#39;t know what they want until you show it to them.” Steve...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/aria-operations.html" class="tag">#Aria Operations</a>
+            <a href="tags/vcf.html" class="tag">#VCF</a>
+            <a href="tags/vcenter.html" class="tag">#vCenter</a>
+                    <time class="post-date" datetime="2024-05-31T04:00:00Z">May 31, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-explore-2024.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-explore-2024-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-explore-2024.html">VMware Explore 2024</a></h2>
+                <p class="post-excerpt">Why I enjoy going to VMware Explore. First as a Customer. Now as a Employee. &quot;Innovate like a startup, deliver like an enterprise” Pat Gelsinger VMware Explore 2024 Website: VMware Explore...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-explore.html" class="tag">#VMware Explore</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/vmware-aria-operations-for-logs.html" class="tag">#VMware Aria Operations for Logs</a>
+            <a href="tags/vegas.html" class="tag">#Vegas</a>
+                    <time class="post-date" datetime="2024-05-01T04:00:00Z">May 1, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-vexpert-2024-fifth-year.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-vexpert-2024-fifth-year-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-vexpert-2024-fifth-year.html">VMware vExpert 2024 | Fifth Year</a></h2>
+                <p class="post-excerpt">VMware vExpert 2024 VMware vExpert 2020 Present I have been included in (2) vExpert Subprograms in 2024. vExpert Subprograms: vExpert Cloud Management vExpert vSphere 2024 is the 4th year...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/vmware-vexpert-2020-present.html" class="tag">#VMware vExpert 2020 - Present</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/giving-back.html" class="tag">#Giving Back</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+                    <time class="post-date" datetime="2024-04-27T04:00:00Z">April 27, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="automation-code-creation-with-ollama.html" tabindex="-1" aria-hidden="true">
+    <img src="images/automation-code-creation-with-ollama-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="automation-code-creation-with-ollama.html">Automation Code Creation with ollama</a></h2>
+                <p class="post-excerpt">My review on using ollama to help create code for Automation &quot;By harnessing the power of AI, I simplify my coding workflow, freeing up time to focus on creating blog posts that resonate...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/technology.html" class="category">Technology</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/ollama.html" class="tag">#ollama</a>
+            <a href="tags/llama.html" class="tag">#llama</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/ai.html" class="tag">#AI</a>
+                    <time class="post-date" datetime="2024-04-27T04:00:00Z">April 27, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-operations-broadcom-services-management-pack.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-operations-broadcom-services-management-pack-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-operations-broadcom-services-management-pack.html">VMware Aria Operations | Broadcom Services | Management Pack</a></h2>
+                <p class="post-excerpt">How to use the VMware Aria Operations Management Pack Builder for Day 2 monitoring VMware Aria Operations VMware Aria Operations 8.16.0 and Management Pack Builder 1.1.2 was used for this...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/management-pack.html" class="tag">#Management Pack</a>
+            <a href="tags/broadcom-services.html" class="tag">#Broadcom Services</a>
+            <a href="tags/management-pack-builder.html" class="tag">#Management Pack Builder</a>
+                    <time class="post-date" datetime="2024-04-01T04:00:00Z">April 1, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-automation-how-to-send-messages-and-updates.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-automation-how-to-send-messages-and-updates-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-automation-how-to-send-messages-and-updates.html">VMware Aria Automation | How to send messages and updates</a></h2>
+                <p class="post-excerpt">How to send messages/updates to a Microsoft Teams Channel or Google Spaces. &quot;If everyone is moving forward together, then success takes care of itself.” Henry Ford VMware Aria Automation...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/teams-messages.html" class="tag">#Teams Messages</a>
+            <a href="tags/google-spaces.html" class="tag">#Google Spaces</a>
+            <a href="tags/alerts.html" class="tag">#Alerts</a>
+            <a href="tags/messages.html" class="tag">#Messages</a>
+                    <time class="post-date" datetime="2024-03-17T04:00:00Z">March 17, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="how-to-learn-about-vmware-products.html" tabindex="-1" aria-hidden="true">
+    <img src="images/how-to-learn-about-vmware-products-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="how-to-learn-about-vmware-products.html">How to learn about VMware Products</a></h2>
+                <p class="post-excerpt">How to learn about and use VMware Products in a Home Lab I was inspired to create this Blog after VMware EOA (End of Availability) the free ESXi product. There were some articles saying...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/vexpert.html" class="tag">#vExpert</a>
+                    <time class="post-date" datetime="2024-03-09T05:00:00Z">March 9, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-operations-vm-console-access-with-vmrc.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-operations-vm-console-access-with-vmrc-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-operations-vm-console-access-with-vmrc.html">VMware Aria Operations | VM console access with VMRC</a></h2>
+                <p class="post-excerpt">How to use the VMware Aria Operations and a Text Display Widget to launch VMRC VMware Aria Operations I recently had the opportunity to work together on a Blog Post, Launch VMRC from Aria...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/vmrc.html" class="tag">#VMRC</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/text-display-widget.html" class="tag">#Text Display Widget</a>
+                    <time class="post-date" datetime="2024-02-18T05:00:00Z">February 18, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="schedule-rvtools-data-export.html" tabindex="-1" aria-hidden="true">
+    <img src="images/schedule-rvtools-data-export-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="schedule-rvtools-data-export.html">Schedule RVTools Data Export</a></h2>
+                <p class="post-excerpt">Export RVTools xlsx Files Everyday PowerShell Code I like to create a Scheduled Task in vRealize Orchestrator to create RVTools files everyday. Here is a sample PowerShell script that could...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/vrealize-orchestrator.html" class="tag">#vRealize Orchestrator</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/automation.html" class="tag">#Automation</a>
+            <a href="tags/rvtools.html" class="tag">#RVTools</a>
+                    <time class="post-date" datetime="2024-02-08T05:00:00Z">February 8, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-operations-use-vcenter-tags-custom-groups-super-metrics-to-get-vm-details.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-operations-use-vcenter-tags-custom-groups-super-metrics-to-get-vm-details-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-operations-use-vcenter-tags-custom-groups-super-metrics-to-get-vm-details.html">VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details</a></h2>
+                <p class="post-excerpt">How to group VMs together in VMware Aria Operations using vCenter TAGs and show resource usage totals across all VMs within the custom group VMware Aria Operations VMware Aria Operations...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/vcenter-tags.html" class="tag">#vCenter TAGs</a>
+            <a href="tags/super-metric.html" class="tag">#Super Metric</a>
+            <a href="tags/custom-groups.html" class="tag">#Custom Groups</a>
+                    <time class="post-date" datetime="2024-01-26T05:00:00Z">January 26, 2024</time>
+                </div>
+            </div>
+        </article>
+                </div>
     </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-explore.html" class="tag">#VMware Explore</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/vmware-aria-operations-for-logs.html" class="tag">#VMware Aria Operations for Logs</a> <a href="tags/vegas.html" class="tag">#Vegas</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-vexpert-2024-fifth-year-featured.png" alt="VMware vExpert 2024 | Fifth Year" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-vexpert-2024-fifth-year.html">VMware vExpert 2024 | Fifth Year</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-04-27T04:00:00Z">
-            April 27, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/vmware-vexpert-2020-present.html" class="tag">#VMware vExpert 2020 - Present</a> <a href="tags/vcommunity.html" class="tag">#vCommunity</a> <a href="tags/giving-back.html" class="tag">#Giving Back</a> <a href="tags/vmware.html" class="tag">#VMware</a></div>
-</div>
-<div class="post-item">
-    <img src="images/automation-code-creation-with-ollama-featured.png" alt="Automation Code Creation with ollama" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="automation-code-creation-with-ollama.html">Automation Code Creation with ollama</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-04-27T04:00:00Z">
-            April 27, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/technology.html" class="category">Technology</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/ollama.html" class="tag">#ollama</a> <a href="tags/llama.html" class="tag">#llama</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/ai.html" class="tag">#AI</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-aria-operations-broadcom-services-management-pack-featured.png" alt="VMware Aria Operations | Broadcom Services | Management Pack" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-operations-broadcom-services-management-pack.html">VMware Aria Operations | Broadcom Services | Management Pack</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-04-01T04:00:00Z">
-            April 1, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/management-pack.html" class="tag">#Management Pack</a> <a href="tags/broadcom-services.html" class="tag">#Broadcom Services</a> <a href="tags/management-pack-builder.html" class="tag">#Management Pack Builder</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-aria-automation-how-to-send-messages-and-updates-featured.png" alt="VMware Aria Automation | How to send messages and updates" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-automation-how-to-send-messages-and-updates.html">VMware Aria Automation | How to send messages and updates</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-03-17T04:00:00Z">
-            March 17, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/teams-messages.html" class="tag">#Teams Messages</a> <a href="tags/google-spaces.html" class="tag">#Google Spaces</a> <a href="tags/alerts.html" class="tag">#Alerts</a> <a href="tags/messages.html" class="tag">#Messages</a></div>
-</div>
-<div class="post-item">
-    <img src="images/how-to-learn-about-vmware-products-featured.png" alt="How to learn about VMware Products" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="how-to-learn-about-vmware-products.html">How to learn about VMware Products</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-03-09T05:00:00Z">
-            March 9, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/vexpert.html" class="tag">#vExpert</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-aria-operations-vm-console-access-with-vmrc-featured.png" alt="VMware Aria Operations | VM console access with VMRC" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-operations-vm-console-access-with-vmrc.html">VMware Aria Operations | VM console access with VMRC</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-02-18T05:00:00Z">
-            February 18, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/vmrc.html" class="tag">#VMRC</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/text-display-widget.html" class="tag">#Text Display Widget</a></div>
-</div>
-<div class="post-item">
-    <img src="images/schedule-rvtools-data-export-featured.png" alt="Schedule RVTools Data Export" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="schedule-rvtools-data-export.html">Schedule RVTools Data Export</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-02-08T05:00:00Z">
-            February 8, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/vrealize-orchestrator.html" class="tag">#vRealize Orchestrator</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/automation.html" class="tag">#Automation</a> <a href="tags/rvtools.html" class="tag">#RVTools</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-aria-operations-use-vcenter-tags-custom-groups-super-metrics-to-get-vm-details-featured.png" alt="VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-operations-use-vcenter-tags-custom-groups-super-metrics-to-get-vm-details.html">VMware Aria Operations | Use vCenter TAGS/Custom Groups/Super Metrics to get VM Details</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-01-26T05:00:00Z">
-            January 26, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/vcenter-tags.html" class="tag">#vCenter TAGs</a> <a href="tags/super-metric.html" class="tag">#Super Metric</a> <a href="tags/custom-groups.html" class="tag">#Custom Groups</a></div>
-</div>
+</section>
                     <nav class="pagination">
     <a href="page-5.html" class="pagination-link">&laquo; Newer Posts</a>
             <span class="pagination-info">Page 6 of 13</span>
@@ -264,15 +401,32 @@
             </div>
 
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -312,10 +466,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="categories/ai.html" class="category-item">AI</a>
 <a href="categories/vcf.html" class="category-item">VCF</a>
@@ -323,10 +477,10 @@
 <a href="categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="tags/ai.html" class="tag-item">#AI</a>
 <a href="tags/automation.html" class="tag-item">#Automation</a>

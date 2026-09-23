@@ -6,6 +6,34 @@
     <title>vCROCS - Page 11</title>
     <link rel="stylesheet" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="vCROCS" href="feed.xml">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="search-index.js" defer></script>
     <script src="lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -24,13 +52,40 @@
 </script>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -68,7 +123,7 @@
     <nav class="sidebar-nav" id="site-navigation">
         <ul>
             <li>
-                <a href="index.html">
+                <a href="index.html" class="is-active">
                     <span class="icon">🏠</span>
                     <span>Home</span>
                 </a>
@@ -130,127 +185,243 @@
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Latest</a>
+                <span class="sep">/</span>
+                <span>Page 11</span>
+    </nav>
+    <h1 class="page-title">vCROCS</h1>
+    <p class="page-subtitle">VCF Automation, Monitoring, more...</p>
+</div>
+
                 <main>
-                    <div class="post-item">
-    <img src="images/saltconf-2021-saltstack-config-session-featured.png" alt="SaltConf 2021 | SaltStack Config Session" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="saltconf-2021-saltstack-config-session.html">SaltConf 2021 | SaltStack Config Session</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-10-02T04:00:00Z">
-            October 2, 2021
-        </time>
-         &bull; by Dale Hassinger
+                    
+                    <section class="panel" id="recent-posts">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">Posts<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">Page 11 of 13</span>
     </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/salt.html" class="tag">#Salt</a> <a href="tags/saltstack.html" class="tag">#SaltStack</a> <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a> <a href="tags/windows-server.html" class="tag">#Windows Server</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vrealize.html" class="tag">#vRealize</a> <a href="tags/configuration-management.html" class="tag">#Configuration Management</a> <a href="tags/automation.html" class="tag">#Automation</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/vra.html" class="tag">#vRA</a> <a href="tags/saltconf-2021.html" class="tag">#SaltConf 2021</a> <a href="tags/salt-beacons.html" class="tag">#Salt Beacons</a> <a href="tags/salt-grains.html" class="tag">#Salt Grains</a> <a href="tags/salt-reactors.html" class="tag">#Salt Reactors</a> <a href="tags/salt-targets.html" class="tag">#Salt Targets</a> <a href="tags/salt-jobs.html" class="tag">#Salt Jobs</a> <a href="tags/salt-states.html" class="tag">#Salt States</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5-featured.png" alt="VMware vRealize SaltStack Config as a Windows Server Admin - Part 5" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 5</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-10-01T04:00:00Z">
-            October 1, 2021
-        </time>
-         &bull; by Dale Hassinger
+    <div class="panel-body" id="recent-posts-body">
+        <div class="post-list">
+<article class="post-item">
+            <a class="post-thumb" href="saltconf-2021-saltstack-config-session.html" tabindex="-1" aria-hidden="true">
+    <img src="images/saltconf-2021-saltstack-config-session-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="saltconf-2021-saltstack-config-session.html">SaltConf 2021 | SaltStack Config Session</a></h2>
+                <p class="post-excerpt">SaltConf 2021 | SaltStack Config Session I will be doing a SaltConf presentation for the first time at SaltConf 2021. I attended SaltConf 2020 for the first time after VMware purchased...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/salt.html" class="tag">#Salt</a>
+            <a href="tags/saltstack.html" class="tag">#SaltStack</a>
+            <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a>
+            <a href="tags/windows-server.html" class="tag">#Windows Server</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vrealize.html" class="tag">#vRealize</a>
+            <a href="tags/configuration-management.html" class="tag">#Configuration Management</a>
+            <a href="tags/automation.html" class="tag">#Automation</a>
+            <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a>
+            <a href="tags/vra.html" class="tag">#vRA</a>
+            <a href="tags/saltconf-2021.html" class="tag">#SaltConf 2021</a>
+            <a href="tags/salt-beacons.html" class="tag">#Salt Beacons</a>
+            <a href="tags/salt-grains.html" class="tag">#Salt Grains</a>
+            <a href="tags/salt-reactors.html" class="tag">#Salt Reactors</a>
+            <a href="tags/salt-targets.html" class="tag">#Salt Targets</a>
+            <a href="tags/salt-jobs.html" class="tag">#Salt Jobs</a>
+            <a href="tags/salt-states.html" class="tag">#Salt States</a>
+                    <time class="post-date" datetime="2021-10-02T04:00:00Z">October 2, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-5.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 5</a></h2>
+                <p class="post-excerpt">Part 5: How to use SaltStack Config with Windows Server and PowerShell The latest item on my journey with VMware vRealize SaltStack Config as a Windows Server Admin will be an update to...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/windows-server.html" class="tag">#Windows Server</a>
+            <a href="tags/configuration-management.html" class="tag">#Configuration Management</a>
+            <a href="tags/grains.html" class="tag">#Grains</a>
+            <a href="tags/posh-ssh.html" class="tag">#POSH-SSH</a>
+                    <time class="post-date" datetime="2021-10-01T04:00:00Z">October 1, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-4.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-4-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-4.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 4</a></h2>
+                <p class="post-excerpt">Part 4: How to use SaltStack Config with Windows Server and PowerShell The latest item on my journey with VMware vRealize SaltStack Config as a Windows Server Admin will be salt grains. I...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/windows-server.html" class="tag">#Windows Server</a>
+            <a href="tags/configuration-management.html" class="tag">#Configuration Management</a>
+            <a href="tags/grains.html" class="tag">#Grains</a>
+                    <time class="post-date" datetime="2021-09-05T04:00:00Z">September 5, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-3.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-3-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-3.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 3</a></h2>
+                <p class="post-excerpt">Part 3: How to use SaltStack Config with Windows Server and PowerShell The next steps on my journey with VMware vRealize SaltStack Config as a Windows Server Admin will be beacons and...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/windows-server.html" class="tag">#Windows Server</a>
+            <a href="tags/configuration-management.html" class="tag">#Configuration Management</a>
+            <a href="tags/beacons.html" class="tag">#Beacons</a>
+            <a href="tags/reactors.html" class="tag">#Reactors</a>
+                    <time class="post-date" datetime="2021-08-27T04:00:00Z">August 27, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmworld-2021-saltstack-config-session.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmworld-2021-saltstack-config-session-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmworld-2021-saltstack-config-session.html">VMworld 2021 - SaltStack Config Session</a></h2>
+                <p class="post-excerpt">Manage Windows Workloads Through vRealize Automation SaltStack Config [MCL1895] I will be doing a VMworld presentation for the first time at VMworld 2021. I have attended VMworld since 2012...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/salt.html" class="tag">#Salt</a>
+            <a href="tags/saltstack.html" class="tag">#SaltStack</a>
+            <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a>
+            <a href="tags/windows-server.html" class="tag">#Windows Server</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vrealize.html" class="tag">#vRealize</a>
+            <a href="tags/configuration-management.html" class="tag">#Configuration Management</a>
+            <a href="tags/automation.html" class="tag">#Automation</a>
+            <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a>
+            <a href="tags/vra.html" class="tag">#vRA</a>
+            <a href="tags/vmworld-2021.html" class="tag">#VMworld 2021</a>
+                    <time class="post-date" datetime="2021-08-12T04:00:00Z">August 12, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 1</a></h2>
+                <p class="post-excerpt">Part 1: How to use SaltStack Config with Windows Server and PowerShell I have recently started looking at using VMware vRealize SaltStack Config . This blog is a work in progress on my...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/windows-server.html" class="tag">#Windows Server</a>
+            <a href="tags/configuration-management.html" class="tag">#Configuration Management</a>
+                    <time class="post-date" datetime="2021-07-16T04:00:00Z">July 16, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="how-vrealize-operations-can-help-with-right-sizing-vms.html" tabindex="-1" aria-hidden="true">
+    <img src="images/how-vrealize-operations-can-help-with-right-sizing-vms-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="how-vrealize-operations-can-help-with-right-sizing-vms.html">How vRealize Operations can help with Right Sizing VMs</a></h2>
+                <p class="post-excerpt">Using vROPS Data to help show APP Owners Proper VM Sizing: vRealize Operations does a good job to show you what the correct number for vCPU/Memory settings should be based on monitoring...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vrops.html" class="tag">#vROPS</a>
+            <a href="tags/monitoring.html" class="tag">#Monitoring</a>
+            <a href="tags/vrealize-operations.html" class="tag">#vRealize Operations</a>
+            <a href="tags/right-size.html" class="tag">#Right Size</a>
+            <a href="tags/optimize.html" class="tag">#Optimize</a>
+            <a href="tags/performance.html" class="tag">#Performance</a>
+            <a href="tags/dashboard.html" class="tag">#Dashboard</a>
+            <a href="tags/tip-and-tricks.html" class="tag">#Tip and Tricks</a>
+            <a href="tags/vmware-aria.html" class="tag">#VMware Aria</a>
+                    <time class="post-date" datetime="2021-05-15T04:00:00Z">May 15, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="automating-automation-updated.html" tabindex="-1" aria-hidden="true">
+    <img src="images/automating-automation-updated-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="automating-automation-updated.html">Automating Automation (Updated)</a></h2>
+                <p class="post-excerpt">Using vRO REST API. (Updated for vRA 8.4) I recently had a use case where I wanted to execute a vRealize Orchestrator Workflow by using REST API. There is some documentation available but...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/vro.html" class="tag">#vRO</a>
+            <a href="tags/vrealize-orchestrator.html" class="tag">#vRealize Orchestrator</a>
+            <a href="tags/vra.html" class="tag">#vRA</a>
+            <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a>
+            <a href="tags/api.html" class="tag">#API</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/automation.html" class="tag">#Automation</a>
+                    <time class="post-date" datetime="2021-04-29T04:00:00Z">April 29, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="open-ports-zero-trust.html" tabindex="-1" aria-hidden="true">
+    <img src="images/open-ports-zero-trust-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="open-ports-zero-trust.html">Open Ports | Zero Trust</a></h2>
+                <p class="post-excerpt">How to check if ports are open to a remote server PowerShell Code Use PowerShell to see if ports are open to a remote server. Living in a zero trust environment can be challenging. Here is...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/powercli.html" class="tag">#PowerCLI</a>
+            <a href="tags/nsx.html" class="tag">#NSX</a>
+            <a href="tags/zero-trust.html" class="tag">#Zero Trust</a>
+                    <time class="post-date" datetime="2021-04-24T04:00:00Z">April 24, 2021</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vrealize-operations-8-x-new-features.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vrealize-operations-8-x-new-features-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vrealize-operations-8-x-new-features.html">vRealize Operations 8.x - New Features</a></h2>
+                <p class="post-excerpt">The New Features I use the most. 1. Donut Charts. This is one of my favorite new features. The donut chart allows you to show a lot of information in a smaller space and makes the...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vcf-operations.html" class="tag">#VCF Operations</a>
+                    <time class="post-date" datetime="2021-02-20T05:00:00Z">February 20, 2021</time>
+                </div>
+            </div>
+        </article>
+                </div>
     </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/windows-server.html" class="tag">#Windows Server</a> <a href="tags/configuration-management.html" class="tag">#Configuration Management</a> <a href="tags/grains.html" class="tag">#Grains</a> <a href="tags/posh-ssh.html" class="tag">#POSH-SSH</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-4-featured.png" alt="VMware vRealize SaltStack Config as a Windows Server Admin - Part 4" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-4.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 4</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-09-05T04:00:00Z">
-            September 5, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/windows-server.html" class="tag">#Windows Server</a> <a href="tags/configuration-management.html" class="tag">#Configuration Management</a> <a href="tags/grains.html" class="tag">#Grains</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-3-featured.png" alt="VMware vRealize SaltStack Config as a Windows Server Admin - Part 3" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-3.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 3</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-08-27T04:00:00Z">
-            August 27, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/windows-server.html" class="tag">#Windows Server</a> <a href="tags/configuration-management.html" class="tag">#Configuration Management</a> <a href="tags/beacons.html" class="tag">#Beacons</a> <a href="tags/reactors.html" class="tag">#Reactors</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmworld-2021-saltstack-config-session-featured.png" alt="VMworld 2021 - SaltStack Config Session" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmworld-2021-saltstack-config-session.html">VMworld 2021 - SaltStack Config Session</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-08-12T04:00:00Z">
-            August 12, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/salt.html" class="tag">#Salt</a> <a href="tags/saltstack.html" class="tag">#SaltStack</a> <a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a> <a href="tags/windows-server.html" class="tag">#Windows Server</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vrealize.html" class="tag">#vRealize</a> <a href="tags/configuration-management.html" class="tag">#Configuration Management</a> <a href="tags/automation.html" class="tag">#Automation</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/vra.html" class="tag">#vRA</a> <a href="tags/vmworld-2021.html" class="tag">#VMworld 2021</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1-featured.png" alt="VMware vRealize SaltStack Config as a Windows Server Admin - Part 1" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-vrealize-saltstack-config-as-a-windows-server-admin-part-1.html">VMware vRealize SaltStack Config as a Windows Server Admin - Part 1</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-07-16T04:00:00Z">
-            July 16, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/saltstack-config.html" class="tag">#SaltStack Config</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/windows-server.html" class="tag">#Windows Server</a> <a href="tags/configuration-management.html" class="tag">#Configuration Management</a></div>
-</div>
-<div class="post-item">
-    <img src="images/how-vrealize-operations-can-help-with-right-sizing-vms-featured.png" alt="How vRealize Operations can help with Right Sizing VMs" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="how-vrealize-operations-can-help-with-right-sizing-vms.html">How vRealize Operations can help with Right Sizing VMs</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-05-15T04:00:00Z">
-            May 15, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vrops.html" class="tag">#vROPS</a> <a href="tags/monitoring.html" class="tag">#Monitoring</a> <a href="tags/vrealize-operations.html" class="tag">#vRealize Operations</a> <a href="tags/right-size.html" class="tag">#Right Size</a> <a href="tags/optimize.html" class="tag">#Optimize</a> <a href="tags/performance.html" class="tag">#Performance</a> <a href="tags/dashboard.html" class="tag">#Dashboard</a> <a href="tags/tip-and-tricks.html" class="tag">#Tip and Tricks</a> <a href="tags/vmware-aria.html" class="tag">#VMware Aria</a></div>
-</div>
-<div class="post-item">
-    <img src="images/automating-automation-updated-featured.png" alt="Automating Automation (Updated)" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="automating-automation-updated.html">Automating Automation (Updated)</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-04-29T04:00:00Z">
-            April 29, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/vro.html" class="tag">#vRO</a> <a href="tags/vrealize-orchestrator.html" class="tag">#vRealize Orchestrator</a> <a href="tags/vra.html" class="tag">#vRA</a> <a href="tags/vrealize-automation.html" class="tag">#vRealize Automation</a> <a href="tags/api.html" class="tag">#API</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/automation.html" class="tag">#Automation</a></div>
-</div>
-<div class="post-item">
-    <img src="images/open-ports-zero-trust-featured.png" alt="Open Ports | Zero Trust" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="open-ports-zero-trust.html">Open Ports | Zero Trust</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-04-24T04:00:00Z">
-            April 24, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/powercli.html" class="tag">#PowerCLI</a> <a href="tags/nsx.html" class="tag">#NSX</a> <a href="tags/zero-trust.html" class="tag">#Zero Trust</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vrealize-operations-8-x-new-features-featured.png" alt="vRealize Operations 8.x - New Features" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vrealize-operations-8-x-new-features.html">vRealize Operations 8.x - New Features</a></h2>
-    <div class="post-meta">
-        <time datetime="2021-02-20T05:00:00Z">
-            February 20, 2021
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vcf-operations.html" class="tag">#VCF Operations</a></div>
-</div>
+</section>
                     <nav class="pagination">
     <a href="page-10.html" class="pagination-link">&laquo; Newer Posts</a>
             <span class="pagination-info">Page 11 of 13</span>
@@ -264,15 +435,32 @@
             </div>
 
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -312,10 +500,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="categories/ai.html" class="category-item">AI</a>
 <a href="categories/vcf.html" class="category-item">VCF</a>
@@ -323,10 +511,10 @@
 <a href="categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="tags/ai.html" class="tag-item">#AI</a>
 <a href="tags/automation.html" class="tag-item">#Automation</a>

@@ -11,7 +11,7 @@ class Lightbox {
     
     initialize() {
         // Find all images in article content
-        const contentImages = document.querySelectorAll('article .content img');
+        const contentImages = document.querySelectorAll('.post-article .content img');
         
         if (contentImages.length === 0) return;
         
@@ -565,7 +565,14 @@ class BlogSearch {
         if (!query) return;
 
         this.removeSuggestions();
-        window.location.href = window.vcrocsSearchUtils.sitePath('search-results.html') + '?q=' + encodeURIComponent(query);
+
+        // Set by script, so the click handler cannot stamp the scheme on it
+        let target = window.vcrocsSearchUtils.sitePath('search-results.html') + '?q=' + encodeURIComponent(query);
+        if (window.location.protocol === 'file:') {
+            target += '#theme=' + (document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+        }
+
+        window.location.href = target;
     }
 
     removeSuggestions() {
@@ -612,8 +619,137 @@ class BlogSearch {
     }
 }
 
+// Is this an internal page link we should carry the scheme override on?
+function isInternalPageLink(href) {
+    if (!href || /^(?:[a-z]+:|\/\/|#)/i.test(href)) {
+        return false;
+    }
+
+    return /\.html(?:[?#]|$)/.test(href);
+}
+
+// When the site is opened straight off disk, some browsers give every
+// file:// document its own localStorage, so a scheme override cannot
+// survive a click through to the next page. Stamp it onto the URL as the
+// link is clicked. Published http(s) sites keep clean URLs and use
+// localStorage, so this is a no-op there.
+function initializeLocalPreviewThemeLinks() {
+    if (window.location.protocol !== 'file:') {
+        return;
+    }
+
+    document.addEventListener('click', function(event) {
+        const link = event.target.closest ? event.target.closest('a[href]') : null;
+        if (!link) {
+            return;
+        }
+
+        const href = link.getAttribute('href');
+        if (!isInternalPageLink(href)) {
+            return;
+        }
+
+        const theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        link.setAttribute('href', href.split('#')[0] + '#theme=' + theme);
+    }, true);
+}
+
+// Light/dark scheme toggle - remembers the choice in localStorage
+function initializeThemeToggle() {
+    const STORAGE_KEY = 'vcrocs-theme';
+    const root = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+
+    // The effective scheme, which is the OS preference until the reader
+    // overrides it. Reading only the attribute would make the first click
+    // a no-op for anyone whose OS is already set to light.
+    function currentTheme() {
+        const pinned = root.getAttribute('data-theme');
+        if (pinned === 'light' || pinned === 'dark') {
+            return pinned;
+        }
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            return 'light';
+        }
+
+        return 'dark';
+    }
+
+    function apply(theme) {
+        if (theme === 'light') {
+            root.setAttribute('data-theme', 'light');
+        } else {
+            root.setAttribute('data-theme', 'dark');
+        }
+
+        if (toggle) {
+            toggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+            toggle.setAttribute('title', theme === 'light' ? 'Switch to Ops Dark' : 'Switch to Ops Light');
+        }
+    }
+
+    apply(currentTheme());
+
+    if (!toggle) {
+        return;
+    }
+
+    toggle.addEventListener('click', function() {
+        const next = currentTheme() === 'light' ? 'dark' : 'light';
+        apply(next);
+
+        try {
+            localStorage.setItem(STORAGE_KEY, next);
+        } catch (error) {
+            console.warn('Could not persist theme preference', error);
+        }
+    });
+}
+
+// Collapsible panel sections ("Minimize section")
+function initializePanelToggles() {
+    document.querySelectorAll('.panel-minimize').forEach(function(button) {
+        const panel = button.closest('.panel');
+        if (!panel) {
+            return;
+        }
+
+        const storageKey = 'vcrocs-panel-' + (panel.id || button.getAttribute('aria-controls') || 'panel');
+
+        function apply(collapsed) {
+            panel.classList.toggle('is-collapsed', collapsed);
+            button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            button.textContent = collapsed ? 'Expand section' : 'Minimize section';
+        }
+
+        let collapsed = false;
+        try {
+            collapsed = localStorage.getItem(storageKey) === 'collapsed';
+        } catch (error) {
+            collapsed = false;
+        }
+
+        apply(collapsed);
+
+        button.addEventListener('click', function() {
+            collapsed = !panel.classList.contains('is-collapsed');
+            apply(collapsed);
+
+            try {
+                localStorage.setItem(storageKey, collapsed ? 'collapsed' : 'expanded');
+            } catch (error) {
+                console.warn('Could not persist panel state', error);
+            }
+        });
+    });
+}
+
 // Initialize search when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    initializeThemeToggle();
+    initializeLocalPreviewThemeLinks();
+    initializePanelToggles();
     initializeCodeCopyButtons();
     new BlogSearch();
 });

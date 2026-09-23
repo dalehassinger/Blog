@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts tagged "vCommunity" - vCROCS</title>
     <link rel="stylesheet" href="../style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="../search-index.js" defer></script>
     <script src="../lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -23,13 +51,40 @@
 </script>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="../index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="../images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="../" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="../images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -124,216 +179,451 @@
         });
     });
 </script>
-    
+
     <!-- Main Content -->
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
-                <a href="../index.html" class="back-link">← Back to all posts</a>
-                
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+                <span class="sep">/</span>
+                <span>Tags</span>
+                <span class="sep">/</span>
+                <span>#vCommunity</span>
+    </nav>
+    <h1 class="page-title">#vCommunity</h1>
+    <p class="page-subtitle">23 posts tagged with this keyword.</p>
+</div>
+
                 <main>
-                    <header>
-                        <h1>Posts tagged "vCommunity"</h1>
-                        <p>23 posts</p>
-                    </header>
-                    
-                    <div class="post-item">
-    <h2><a href="../dbh-insights-cross-platform-vcenter-inventory.html">DBH Insights | Cross-Platform vCenter Inventory</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-09-18T15:59:11Z">
-            September 18, 2026
-        </time>
+                    <section class="panel" id="tagged-posts">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">Tagged #vCommunity<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">23 posts</span>
     </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmware-explore-2026-my-eperience.html">VMware Explore 2026 | My Experience</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-09-07T12:25:21Z">
-            September 7, 2026
-        </time>
+    <div class="panel-body" id="tagged-posts-body">
+        <div class="post-list">
+<article class="post-item">
+            <a class="post-thumb" href="../dbh-insights-cross-platform-vcenter-inventory.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/Insights.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../dbh-insights-cross-platform-vcenter-inventory.html">DBH Insights | Cross-Platform vCenter Inventory</a></h2>
+                <p class="post-excerpt">DBH Insights: My Hackathon Idea Became a Real Tool 🚀 Back in August I wrote about my idea for the VMware Explore 2026 Hackathon: a modern, cross platform way to pull inventory out of...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/ai.html" class="category">AI</a>
+            <a href="../tags/ai.html" class="tag">#AI</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+                    <time class="post-date" datetime="2026-09-18T15:59:11Z">September 18, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmware-explore-2026-my-eperience.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vCROCS-2026-09-07-at-19.39.29@2x.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmware-explore-2026-my-eperience.html">VMware Explore 2026 | My Experience</a></h2>
+                <p class="post-excerpt">VMware Explore 2026 Recap: Hackathon, Hands on Labs, Customers, AI, the People Who Make It Worthwhile, more... VMware Explore is always one of the highlights of my year. It is a chance to...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="../categories/ai.html" class="category">AI</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2026-09-07T12:25:21Z">September 7, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmware-explore-2026-hackathon.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/IMG_5642.jpeg" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmware-explore-2026-hackathon.html">VMware Explore 2026 | Hackathon</a></h2>
+                <p class="post-excerpt">VMware Explore 2026: Why I’m Returning as a Hackathon Team Captain 🥼 One of my favorite parts of VMware Explore isn’t a breakout session or a hands on lab. It’s the VMware {code} Hackathon...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/ai.html" class="tag">#AI</a>
+            <a href="../tags/hackathon.html" class="tag">#Hackathon</a>
+                    <time class="post-date" datetime="2026-08-23T12:57:17Z">August 23, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-9-1-minimum-lab-updated.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/Screenshot 2026-06-10 at 16-19-51.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-9-1-minimum-lab-updated.html">VCF 9.1 | Minimum Lab updated (Level 2)</a></h2>
+                <p class="post-excerpt">The Minimum VCF 9.1 Lab (Level 1) updated with additional platform features (Level 2). My previous post detailed the minimum requirements for a VMware Cloud Foundation (VCF) 9.1 evaluation...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf.html" class="category">VCF</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/openai.html" class="tag">#OpenAI</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/claude.html" class="tag">#Claude</a>
+                    <time class="post-date" datetime="2026-06-10T23:44:40Z">June 10, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-9-1-minimum-lab.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vcf-minimum-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-9-1-minimum-lab.html">VCF 9.1 | Minimum Lab Build</a></h2>
+                <p class="post-excerpt">What is the Minimum You Need to Build a VCF 9.1 Lab (Level 1)? This post details the minimum requirements to build a lab environment for evaluating VMware Cloud Foundation (VCF) 9.1. If you...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf.html" class="category">VCF</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2026-06-05T16:37:34Z">June 5, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmware-vexpert-vcf-sub-program.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/2026-vExpert-VCF.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmware-vexpert-vcf-sub-program.html">VMware vExpert | VCF Sub-Program 2026</a></h2>
+                <p class="post-excerpt">Honored to be Selected for the VMware vExpert VCF Sub Program 2026! I am incredibly honored to be selected for the VMware vExpert VCF Sub Program for 2026! This sub program is full of...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+                    <time class="post-date" datetime="2026-05-30T11:37:33Z">May 30, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmug-connect-virtually-speak-podcast.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vmug-connect.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmug-connect-virtually-speak-podcast.html">VMUG Connect | Virtually Speak Podcast</a></h2>
+                <p class="post-excerpt">From Listener to Guest: Sharing My vCommunity Story on the Virtually Speaking Podcast There are certain moments in a career that stand out—not just for the professional achievement, but for...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="../tags/vmug.html" class="tag">#VMUG</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+                    <time class="post-date" datetime="2026-05-29T15:54:06Z">May 29, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmug-connect-2026-minneapolis.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vmug-connect-2026-minneapolis-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmug-connect-2026-minneapolis.html">VMUG Connect 2026 | Minneapolis</a></h2>
+                <p class="post-excerpt">VMUG Connect 2026: VMUG Connect 2026 in Minneapolis is the first that I will be presenting outside of my local VMUG or VMware Explore. I am looking forward to the event to share my...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/career.html" class="tag">#Career</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/vmug-connect.html" class="tag">#VMUG Connect</a>
+                    <time class="post-date" datetime="2026-04-10T04:00:00Z">April 10, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../chisoku-knowing-when-technology-is-enough.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/chisoku-knowing-when-technology-is-enough-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../chisoku-knowing-when-technology-is-enough.html">Chisoku: Knowing When Technology Is Enough</a></h2>
+                <p class="post-excerpt">Technology and the Philosophy of Chisoku I recently researched the Fujifilm X T30 III for a new camera purchase. It is not the model with the highest megapixel count, the most durable...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/career.html" class="tag">#Career</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+            <a href="../tags/chisoku.html" class="tag">#Chisoku</a>
+                    <time class="post-date" datetime="2026-02-15T05:00:00Z">February 15, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../why-i-give-back-my-7-year-vexpert-story.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/why-i-give-back-my-7-year-vexpert-story-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../why-i-give-back-my-7-year-vexpert-story.html">Why I Give Back: My 7-Year vExpert Story</a></h2>
+                <p class="post-excerpt">vExpert 2026: Reflecting on Seven Years of Community and Growth 2026 marks a significant milestone for me: my 7th year in the VMware vExpert program . As I look back on this journey, I...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/career.html" class="tag">#Career</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vmware-vexpert.html" class="tag">#VMware vExpert</a>
+                    <time class="post-date" datetime="2026-02-01T05:00:00Z">February 1, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../highlights-of-2025.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/highlights-of-2025-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../highlights-of-2025.html">Highlights of 2025</a></h2>
+                <p class="post-excerpt">Most Read Blog Posts of 2025 plus other highlights Automate boldly. Monitor smarter. Share openly. Build community. 2025 Stats Recap 📊 Blog Site: ✨ 100k+ Views 15k+ users 130+ countries 80%...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../categories/career.html" class="category">Career</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2025-12-26T05:00:00Z">December 26, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmware-vexpert-2025-sixth-year.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vmware-vexpert-2025-sixth-year-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmware-vexpert-2025-sixth-year.html">VMware vExpert 2025 | Sixth Year</a></h2>
+                <p class="post-excerpt">VMware vExpert 2025 ⸻ Consistent contributions turn recognition into impact—community thrives when knowledge is shared. ⸻ VMware vExpert 2020–Present In 2025, I was also selected for the...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/giving-back.html" class="tag">#Giving Back</a>
+            <a href="../tags/code-coach.html" class="tag">#Code Coach</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+                    <time class="post-date" datetime="2025-06-08T04:00:00Z">June 8, 2025</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../top-blog-highlights-of-2024.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/top-blog-highlights-of-2024-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../top-blog-highlights-of-2024.html">Top Blog Highlights of 2024</a></h2>
+                <p class="post-excerpt">Most Read Blog Posts of 2024 I’m astonished by how many people have read my blogs—especially since I was certain only my dog cared. – Unknown 2024 Stats Recap 📊 Blog Site: ✨ 69,000+ Views...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/career.html" class="category">Career</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2024-12-22T05:00:00Z">December 22, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmware-the-hvc-community-remains-strong-and-active.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vmware-the-hvc-community-remains-strong-and-active-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmware-the-hvc-community-remains-strong-and-active.html">VMware | The HVC Community remains strong and active</a></h2>
+                <p class="post-excerpt">Highly Successful Event and a very positive customer discussion about VMware Cloud Foundation On July 12, 2024, the Healthcare Virtualization Community (HVC) hosted an in person event for...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2024-07-13T04:00:00Z">July 13, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vmware-vexpert-2024-fifth-year.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vmware-vexpert-2024-fifth-year-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vmware-vexpert-2024-fifth-year.html">VMware vExpert 2024 | Fifth Year</a></h2>
+                <p class="post-excerpt">VMware vExpert 2024 VMware vExpert 2020 Present I have been included in (2) vExpert Subprograms in 2024. vExpert Subprograms: vExpert Cloud Management vExpert vSphere 2024 is the 4th year...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vmware-vexpert-2020-present.html" class="tag">#VMware vExpert 2020 - Present</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/giving-back.html" class="tag">#Giving Back</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+                    <time class="post-date" datetime="2024-04-27T04:00:00Z">April 27, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../the-vmware-community-podcast-i-was-a-guest-on-the-show.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/the-vmware-community-podcast-i-was-a-guest-on-the-show-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../the-vmware-community-podcast-i-was-a-guest-on-the-show.html">The VMware Community Podcast | I was a Guest on the show</a></h2>
+                <p class="post-excerpt">The VMware Community Podcast, episode 659 | I was a Guest on the show Podcast Guest: I listen to Podcasts all the time. If the Podcast covers VMware Products, you will find it in my...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+            <a href="../tags/vmug.html" class="tag">#VMUG</a>
+            <a href="../tags/vmware-aria.html" class="tag">#VMware Aria</a>
+            <a href="../tags/vmware-explore-2023.html" class="tag">#VMware Explore 2023</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/podcast.html" class="tag">#Podcast</a>
+                    <time class="post-date" datetime="2023-09-06T04:00:00Z">September 6, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../the-powershell-podcast-i-was-a-guest-on-the-show.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/the-powershell-podcast-i-was-a-guest-on-the-show-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../the-powershell-podcast-i-was-a-guest-on-the-show.html">The PowerShell Podcast | I was a Guest on the show</a></h2>
+                <p class="post-excerpt">The PowerShell Podcast | I was a Guest on the show Podcast Guest: I listen to Podcasts all the time. This past year, I started listening to a new podcast, &quot;The PowerShell Podcast&quot; . This...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+            <a href="../tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="../tags/vmware-aria-automation-config.html" class="tag">#VMware Aria Automation Config</a>
+            <a href="../tags/powercli.html" class="tag">#PowerCLI</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/podcast.html" class="tag">#Podcast</a>
+                    <time class="post-date" datetime="2023-03-12T05:00:00Z">March 12, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../philly-vmug-vmware-aria-automation-and-operations.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/philly-vmug-vmware-aria-automation-and-operations-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../philly-vmug-vmware-aria-automation-and-operations.html">Philly VMUG | VMware Aria Automation and Operations</a></h2>
+                <p class="post-excerpt">Philly VMUG | VMware Aria Automation and Operations | Recorded Session now available! Presentation: On Friday, March 31, 2023, I will be doing at Presentation at the Philly VMUG . Click...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+            <a href="../tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="../tags/vmware-aria-automation-config.html" class="tag">#VMware Aria Automation Config</a>
+            <a href="../tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2023-03-10T05:00:00Z">March 10, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vexpert-2023-vexpert-cloud-management.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vexpert-2023-vexpert-cloud-management-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vexpert-2023-vexpert-cloud-management.html">vExpert 2023 | vExpert Cloud Management</a></h2>
+                <p class="post-excerpt">VMware vExpert 2020 Present | VMware vExpert Cloud Management 2021 Present VMware vExpert 2020 Present | VMware vExpert Cloud Management 2021 Present I am very proud to be part of the...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vmware-vexpert-2020-present.html" class="tag">#VMware vExpert 2020 - Present</a>
+            <a href="../tags/vmware-vexpert-cloud-management-2021-present.html" class="tag">#VMware vExpert Cloud Management 2021 - Present</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/giving-back.html" class="tag">#Giving Back</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+                    <time class="post-date" datetime="2023-02-17T05:00:00Z">February 17, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../what-have-i-been-up-to-2nd-half-2022.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/what-have-i-been-up-to-2nd-half-2022-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../what-have-i-been-up-to-2nd-half-2022.html">What have I been up to? | 2nd half 2022</a></h2>
+                <p class="post-excerpt">New Job | August 2022 | Technical Account Manager (TAM) On August 1, 2022 I became an employee of VMware as a Technical Account Manager, TAM . I was hired to be a TAM with a focus on the...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/career.html" class="category">Career</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2022-11-01T04:00:00Z">November 1, 2022</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../central-pa-vmug-august-2022.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/central-pa-vmug-august-2022-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../central-pa-vmug-august-2022.html">Central PA VMUG | August 2022</a></h2>
+                <p class="post-excerpt">VMware Explore 2022 | San Francisco VMware Explore is always one of the premiere Technology Events every year. Here is a collection of links and tips to some of the activities that I would...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+            <a href="../tags/vmware-explore.html" class="tag">#VMware Explore</a>
+            <a href="../tags/vmworld.html" class="tag">#VMWorld</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+                    <time class="post-date" datetime="2022-08-24T04:00:00Z">August 24, 2022</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vexpert-2022-vexpert-cloud-management.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vexpert-2022-vexpert-cloud-management-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vexpert-2022-vexpert-cloud-management.html">vExpert 2022 | vExpert Cloud Management</a></h2>
+                <p class="post-excerpt">VMware vExpert 2020 2022 | VMware vExpert Cloud Management 2021 2022 VMware vExpert 2020 2022 | VMware vExpert Cloud Management 2021 2022 I am very proud to be part of the VMware vExpert...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="../tags/vmware-vexpert-2020-22.html" class="tag">#VMware vExpert 2020 - 22</a>
+            <a href="../tags/vmware-vexpert-cloud-management-2021-22.html" class="tag">#VMware vExpert Cloud Management 2021 - 22</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/giving-back.html" class="tag">#Giving Back</a>
+            <a href="../tags/vmware.html" class="tag">#VMware</a>
+                    <time class="post-date" datetime="2022-02-22T05:00:00Z">February 22, 2022</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../year-in-review-2021-2022-goals.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/year-in-review-2021-2022-goals-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../year-in-review-2021-2022-goals.html">Year in Review - 2021 | 2022 Goals</a></h2>
+                <p class="post-excerpt">Get Review 2021 2021 was a good year for me with my career. I spent the entire year working from home and I find myself to be more productive when WFH. My wife and I moved into a different...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/career.html" class="category">Career</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+                    <time class="post-date" datetime="2022-01-01T05:00:00Z">January 1, 2022</time>
+                </div>
+            </div>
+        </article>
+                </div>
     </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmware-explore-2026-hackathon.html">VMware Explore 2026 | Hackathon</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-08-23T12:57:17Z">
-            August 23, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-9-1-minimum-lab-updated.html">VCF 9.1 | Minimum Lab updated (Level 2)</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-06-10T23:44:40Z">
-            June 10, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcf-9-1-minimum-lab.html">VCF 9.1 | Minimum Lab Build</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-06-05T16:37:34Z">
-            June 5, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmware-vexpert-vcf-sub-program.html">VMware vExpert | VCF Sub-Program 2026</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-05-30T11:37:33Z">
-            May 30, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmug-connect-virtually-speak-podcast.html">VMUG Connect | Virtually Speak Podcast</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-05-29T15:54:06Z">
-            May 29, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmug-connect-2026-minneapolis.html">VMUG Connect 2026 | Minneapolis</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-04-10T04:00:00Z">
-            April 10, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../chisoku-knowing-when-technology-is-enough.html">Chisoku: Knowing When Technology Is Enough</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-02-15T05:00:00Z">
-            February 15, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../why-i-give-back-my-7-year-vexpert-story.html">Why I Give Back: My 7-Year vExpert Story</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-02-01T05:00:00Z">
-            February 1, 2026
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../highlights-of-2025.html">Highlights of 2025</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-12-26T05:00:00Z">
-            December 26, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmware-vexpert-2025-sixth-year.html">VMware vExpert 2025 | Sixth Year</a></h2>
-    <div class="post-meta">
-        <time datetime="2025-06-08T04:00:00Z">
-            June 8, 2025
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../top-blog-highlights-of-2024.html">Top Blog Highlights of 2024</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-12-22T05:00:00Z">
-            December 22, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmware-the-hvc-community-remains-strong-and-active.html">VMware | The HVC Community remains strong and active</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-07-13T04:00:00Z">
-            July 13, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vmware-vexpert-2024-fifth-year.html">VMware vExpert 2024 | Fifth Year</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-04-27T04:00:00Z">
-            April 27, 2024
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../the-vmware-community-podcast-i-was-a-guest-on-the-show.html">The VMware Community Podcast | I was a Guest on the show</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-09-06T04:00:00Z">
-            September 6, 2023
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../the-powershell-podcast-i-was-a-guest-on-the-show.html">The PowerShell Podcast | I was a Guest on the show</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-03-12T05:00:00Z">
-            March 12, 2023
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../philly-vmug-vmware-aria-automation-and-operations.html">Philly VMUG | VMware Aria Automation and Operations</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-03-10T05:00:00Z">
-            March 10, 2023
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vexpert-2023-vexpert-cloud-management.html">vExpert 2023 | vExpert Cloud Management</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-02-17T05:00:00Z">
-            February 17, 2023
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../what-have-i-been-up-to-2nd-half-2022.html">What have I been up to? | 2nd half 2022</a></h2>
-    <div class="post-meta">
-        <time datetime="2022-11-01T04:00:00Z">
-            November 1, 2022
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../central-pa-vmug-august-2022.html">Central PA VMUG | August 2022</a></h2>
-    <div class="post-meta">
-        <time datetime="2022-08-24T04:00:00Z">
-            August 24, 2022
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vexpert-2022-vexpert-cloud-management.html">vExpert 2022 | vExpert Cloud Management</a></h2>
-    <div class="post-meta">
-        <time datetime="2022-02-22T05:00:00Z">
-            February 22, 2022
-        </time>
-    </div>
-</div>
-<div class="post-item">
-    <h2><a href="../year-in-review-2021-2022-goals.html">Year in Review - 2021 | 2022 Goals</a></h2>
-    <div class="post-meta">
-        <time datetime="2022-01-01T05:00:00Z">
-            January 1, 2022
-        </time>
-    </div>
-</div>
+</section>
                 </main>
             </div>
-            
+
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="../">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="../archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -373,10 +663,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="../categories/ai.html" class="category-item">AI</a>
 <a href="../categories/vcf.html" class="category-item">VCF</a>
@@ -384,10 +674,10 @@
 <a href="../categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="../tags/ai.html" class="tag-item">#AI</a>
 <a href="../tags/automation.html" class="tag-item">#Automation</a>

@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts tagged "OpenAI" - vCROCS</title>
     <link rel="stylesheet" href="../style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="../search-index.js" defer></script>
     <script src="../lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -23,13 +51,40 @@
 </script>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="../index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="../images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="../" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="../images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -124,48 +179,101 @@
         });
     });
 </script>
-    
+
     <!-- Main Content -->
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
-                <a href="../index.html" class="back-link">← Back to all posts</a>
-                
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+                <span class="sep">/</span>
+                <span>Tags</span>
+                <span class="sep">/</span>
+                <span>#OpenAI</span>
+    </nav>
+    <h1 class="page-title">#OpenAI</h1>
+    <p class="page-subtitle">2 posts tagged with this keyword.</p>
+</div>
+
                 <main>
-                    <header>
-                        <h1>Posts tagged "OpenAI"</h1>
-                        <p>2 posts</p>
-                    </header>
-                    
-                    <div class="post-item">
-    <h2><a href="../vcf-9-1-minimum-lab-updated.html">VCF 9.1 | Minimum Lab updated (Level 2)</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-06-10T23:44:40Z">
-            June 10, 2026
-        </time>
+                    <section class="panel" id="tagged-posts">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">Tagged #OpenAI<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">2 posts</span>
     </div>
-</div>
-<div class="post-item">
-    <h2><a href="../vcrocs-blog-framework.html">vCROCS Blog Framework</a></h2>
-    <div class="post-meta">
-        <time datetime="2026-05-07T00:42:37Z">
-            May 6, 2026
-        </time>
+    <div class="panel-body" id="tagged-posts-body">
+        <div class="post-list">
+<article class="post-item">
+            <a class="post-thumb" href="../vcf-9-1-minimum-lab-updated.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/Screenshot 2026-06-10 at 16-19-51.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcf-9-1-minimum-lab-updated.html">VCF 9.1 | Minimum Lab updated (Level 2)</a></h2>
+                <p class="post-excerpt">The Minimum VCF 9.1 Lab (Level 1) updated with additional platform features (Level 2). My previous post detailed the minimum requirements for a VMware Cloud Foundation (VCF) 9.1 evaluation...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/vcf.html" class="category">VCF</a>
+            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="../tags/openai.html" class="tag">#OpenAI</a>
+            <a href="../tags/vcf.html" class="tag">#VCF</a>
+            <a href="../tags/claude.html" class="tag">#Claude</a>
+                    <time class="post-date" datetime="2026-06-10T23:44:40Z">June 10, 2026</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="../vcrocs-blog-framework.html" tabindex="-1" aria-hidden="true">
+    <img src="../images/vCROCS-2026-05-06-at-21.25.03.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="../vcrocs-blog-framework.html">vCROCS Blog Framework</a></h2>
+                <p class="post-excerpt">vCROCS Blog Framework I have been creating and sharing blog posts for 7 years. I started with WordPress and moved to Hugo after about a year. Hugo has worked well for me, but I always...</p>
+                <div class="post-taxonomy">
+                    <a href="../categories/ai.html" class="category">AI</a>
+            <a href="../tags/ai.html" class="tag">#AI</a>
+            <a href="../tags/claude.html" class="tag">#Claude</a>
+            <a href="../tags/openai.html" class="tag">#OpenAI</a>
+                    <time class="post-date" datetime="2026-05-07T00:42:37Z">May 6, 2026</time>
+                </div>
+            </div>
+        </article>
+                </div>
     </div>
-</div>
+</section>
                 </main>
             </div>
-            
+
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="../">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="../archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -205,10 +313,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="../categories/ai.html" class="category-item">AI</a>
 <a href="../categories/vcf.html" class="category-item">VCF</a>
@@ -216,10 +324,10 @@
 <a href="../categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="../tags/ai.html" class="tag-item">#AI</a>
 <a href="../tags/automation.html" class="tag-item">#Automation</a>

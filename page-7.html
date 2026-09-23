@@ -6,6 +6,34 @@
     <title>vCROCS - Page 7</title>
     <link rel="stylesheet" href="style.css">
     <link rel="alternate" type="application/rss+xml" title="vCROCS" href="feed.xml">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
     <script src="search-index.js" defer></script>
     <script src="lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
@@ -24,13 +52,40 @@
 </script>
 </head>
 <body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">Blog</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
     <!-- Sidebar Navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-avatar">
-                    <img src="images/avatar.png" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
-        </div>
-        <h2 class="sidebar-title">vCROCS</h2>
         <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
         <div class="sidebar-social">
                         <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
@@ -68,7 +123,7 @@
     <nav class="sidebar-nav" id="site-navigation">
         <ul>
             <li>
-                <a href="index.html">
+                <a href="index.html" class="is-active">
                     <span class="icon">🏠</span>
                     <span>Home</span>
                 </a>
@@ -130,127 +185,209 @@
     <div class="main-wrapper">
         <div class="container">
             <div class="content-area">
+                <div class="page-head">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="index.html">Latest</a>
+                <span class="sep">/</span>
+                <span>Page 7</span>
+    </nav>
+    <h1 class="page-title">vCROCS</h1>
+    <p class="page-subtitle">VCF Automation, Monitoring, more...</p>
+</div>
+
                 <main>
-                    <div class="post-item">
-    <img src="images/vmware-aria-automation-custom-form-with-chatgpt-featured.png" alt="VMware Aria Automation | Custom Form with ChatGPT" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-automation-custom-form-with-chatgpt.html">VMware Aria Automation | Custom Form with ChatGPT</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-01-08T05:00:00Z">
-            January 8, 2024
-        </time>
-         &bull; by Dale Hassinger
+                    
+                    <section class="panel" id="recent-posts">
+    <div class="panel-head">
+        <div class="panel-tabs">
+            <span class="panel-title">Posts<span class="caret" aria-hidden="true">&#9662;</span></span>
+            
+        </div>
+        <span class="panel-count">Page 7 of 13</span>
     </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/custom-forms.html" class="tag">#Custom Forms</a> <a href="tags/chatgpt.html" class="tag">#ChatGPT</a> <a href="tags/ai.html" class="tag">#AI</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-aria-automation-orchestrator-active-directory-ous-featured.png" alt="VMware Aria Automation Orchestrator | Active Directory OUs" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-automation-orchestrator-active-directory-ous.html">VMware Aria Automation Orchestrator | Active Directory OUs</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-01-07T05:00:00Z">
-            January 7, 2024
-        </time>
-         &bull; by Dale Hassinger
+    <div class="panel-body" id="recent-posts-body">
+        <div class="post-list">
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-automation-custom-form-with-chatgpt.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-automation-custom-form-with-chatgpt-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-automation-custom-form-with-chatgpt.html">VMware Aria Automation | Custom Form with ChatGPT</a></h2>
+                <p class="post-excerpt">How to use add ChatGPT (AI) to a VMware Aria Automation Custom Form. VMware Aria Automation VMware Aria Automation 8.14.1 was used for this Blog Post. When new versions of VMware Aria...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/custom-forms.html" class="tag">#Custom Forms</a>
+            <a href="tags/chatgpt.html" class="tag">#ChatGPT</a>
+            <a href="tags/ai.html" class="tag">#AI</a>
+                    <time class="post-date" datetime="2024-01-08T05:00:00Z">January 8, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-automation-orchestrator-active-directory-ous.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-automation-orchestrator-active-directory-ous-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-automation-orchestrator-active-directory-ous.html">VMware Aria Automation Orchestrator | Active Directory OUs</a></h2>
+                <p class="post-excerpt">How to use VMware Aria Automation Orchestrator Actions to make sure AD (Active Directory) OU (Organizational Unit) structure is in place BEFORE creating new Servers. VMware Aria Automation...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/vcf-automation.html" class="tag">#VCF Automation</a>
+                    <time class="post-date" datetime="2024-01-07T05:00:00Z">January 7, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="end-of-year-review-2023.html" tabindex="-1" aria-hidden="true">
+    <img src="images/end-of-year-review-2023-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="end-of-year-review-2023.html">End of Year Review - 2023</a></h2>
+                <p class="post-excerpt">End Of Year Review 2023 The year 2023 was a good chapter in my career, emphasizing the importance of community contribution. I hold a belief that my endeavors are worthwhile if they benefit...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/career.html" class="category">Career</a>
+            <a href="tags/vexpert-2023.html" class="tag">#vExpert 2023</a>
+            <a href="tags/vmwware-explore-2023.html" class="tag">#VMwware Explore 2023</a>
+            <a href="tags/broadcom.html" class="tag">#Broadcom</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/aria.html" class="tag">#Aria</a>
+            <a href="tags/end-of-year-review.html" class="tag">#End of Year Review</a>
+            <a href="tags/goals.html" class="tag">#Goals</a>
+                    <time class="post-date" datetime="2024-01-01T05:00:00Z">January 1, 2024</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-operations-servicenow-management-pack.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-operations-servicenow-management-pack-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-operations-servicenow-management-pack.html">VMware Aria Operations | Servicenow | Management Pack</a></h2>
+                <p class="post-excerpt">How to use the VMware Aria Operations | Servicenow | Management Pack to add information to the Servicenow CMDB Blog Update: I presented the content from this Blog at a TECH BYTES session on...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/management-pack.html" class="tag">#Management Pack</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/servicenow.html" class="tag">#Servicenow</a>
+                    <time class="post-date" datetime="2023-12-22T05:00:00Z">December 22, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="productive-apps-2023.html" tabindex="-1" aria-hidden="true">
+    <img src="images/productive-apps-2023-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="productive-apps-2023.html">Productive APPs | 2023</a></h2>
+                <p class="post-excerpt">APPs that I use everyday to be Productive | 2023 In 2022, I shared a list of apps that were part of my daily routine. This year, I want to reveal the new apps I&#39;ve incorporated into my...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vmware-community.html" class="category">VMware Community</a>
+            <a href="tags/mac.html" class="tag">#MAC</a>
+            <a href="tags/apple.html" class="tag">#Apple</a>
+            <a href="tags/apps.html" class="tag">#APPs</a>
+                    <time class="post-date" datetime="2023-12-02T05:00:00Z">December 2, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="unlocking-the-potential-vmware-aria-automation-abx-action-constants-and-secrets.html" tabindex="-1" aria-hidden="true">
+    <img src="images/unlocking-the-potential-vmware-aria-automation-abx-action-constants-and-secrets-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="unlocking-the-potential-vmware-aria-automation-abx-action-constants-and-secrets.html">Unlocking the Potential | VMware Aria Automation | ABX Action Constants and Secrets</a></h2>
+                <p class="post-excerpt">Using VMware Aria Automation Action Constants and Secrets VMware Aria Automation VMware Aria Automation 8.14 was used for this Blog Post. When new versions of VMware Aria Automation are...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/action-constants.html" class="tag">#Action Constants</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/secrets.html" class="tag">#Secrets</a>
+                    <time class="post-date" datetime="2023-11-14T05:00:00Z">November 14, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="unlocking-the-potential-vmware-aria-automation-config-api.html" tabindex="-1" aria-hidden="true">
+    <img src="images/unlocking-the-potential-vmware-aria-automation-config-api-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="unlocking-the-potential-vmware-aria-automation-config-api.html">Unlocking the Potential | VMware Aria Automation Config API</a></h2>
+                <p class="post-excerpt">Using PowerShell with the VMware Aria Automation Config API VMware Aria Automation Config API: VMware Aria Automation 8.14 was used for this Blog Post. When new versions of VMware Aria...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-automation.html" class="category">VCF Automation</a>
+            <a href="tags/vmware.html" class="tag">#VMware</a>
+            <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a>
+            <a href="tags/vmware-aria-automation-config.html" class="tag">#VMware Aria Automation Config</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/api.html" class="tag">#API</a>
+                    <time class="post-date" datetime="2023-11-12T05:00:00Z">November 12, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="unlocking-the-potential-vmware-aria-operations-october-2023-powerblock.html" tabindex="-1" aria-hidden="true">
+    <img src="images/unlocking-the-potential-vmware-aria-operations-october-2023-powerblock-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="unlocking-the-potential-vmware-aria-operations-october-2023-powerblock.html">Unlocking the Potential | VMware Aria Operations | October 2023 PowerBlock</a></h2>
+                <p class="post-excerpt">Unlocking the Power of VMware Aria Operations: A Comprehensive Guide A Comprehensive Guide: Christopher Kusek and I teamed up to create this PowerBlock video, aimed at showcasing some of...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/snaps.html" class="tag">#Snaps</a>
+            <a href="tags/snapshot-age.html" class="tag">#Snapshot Age</a>
+            <a href="tags/automation-central.html" class="tag">#Automation Central</a>
+                    <time class="post-date" datetime="2023-10-25T04:00:00Z">October 25, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="unlocking-the-potential-vmware-aria-operations-automation-central-snapshot-age.html" tabindex="-1" aria-hidden="true">
+    <img src="images/unlocking-the-potential-vmware-aria-operations-automation-central-snapshot-age-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="unlocking-the-potential-vmware-aria-operations-automation-central-snapshot-age.html">Unlocking the Potential | VMware Aria Operations | Automation Central | Snapshot Age</a></h2>
+                <p class="post-excerpt">How to change “Snapshot Age older than” value in VMware Aria Operations | Automation Central. VMware Aria Operations | Automation Central: The question &quot;How to change “Snapshot Age older...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a>
+            <a href="tags/snaps.html" class="tag">#Snaps</a>
+            <a href="tags/snapshot-age.html" class="tag">#Snapshot Age</a>
+            <a href="tags/automation-central.html" class="tag">#Automation Central</a>
+                    <time class="post-date" datetime="2023-10-16T04:00:00Z">October 16, 2023</time>
+                </div>
+            </div>
+        </article>
+<article class="post-item">
+            <a class="post-thumb" href="vmware-aria-operations-for-logs-saas-esxi-host-syslog-setting.html" tabindex="-1" aria-hidden="true">
+    <img src="images/vmware-aria-operations-for-logs-saas-esxi-host-syslog-setting-featured.png" alt="" loading="lazy">
+</a>
+            <div class="post-row-body">
+                <h2><a href="vmware-aria-operations-for-logs-saas-esxi-host-syslog-setting.html">VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting</a></h2>
+                <p class="post-excerpt">How to Automate the ESXi Host &quot;Syslog.global.logHost&quot; setting, when using Cloud Proxies. This blog post is part of a series of blog posts that will be created to help you &quot;Unlock the...</p>
+                <div class="post-taxonomy">
+                    <a href="categories/vcf-operations.html" class="category">VCF Operations</a>
+            <a href="tags/vmware-aria-operations-for-logs.html" class="tag">#VMware Aria Operations for Logs</a>
+            <a href="tags/syslog.html" class="tag">#syslog</a>
+            <a href="tags/saas.html" class="tag">#SaaS</a>
+            <a href="tags/powershell.html" class="tag">#PowerShell</a>
+            <a href="tags/powercli.html" class="tag">#PowerCLI</a>
+                    <time class="post-date" datetime="2023-10-07T04:00:00Z">October 7, 2023</time>
+                </div>
+            </div>
+        </article>
+                </div>
     </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/vcf-automation.html" class="tag">#VCF Automation</a></div>
-</div>
-<div class="post-item">
-    <img src="images/end-of-year-review-2023-featured.png" alt="End of Year Review - 2023" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="end-of-year-review-2023.html">End of Year Review - 2023</a></h2>
-    <div class="post-meta">
-        <time datetime="2024-01-01T05:00:00Z">
-            January 1, 2024
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/career.html" class="category">Career</a></div>
-    <div class="tags"><a href="tags/vexpert-2023.html" class="tag">#vExpert 2023</a> <a href="tags/vmwware-explore-2023.html" class="tag">#VMwware Explore 2023</a> <a href="tags/broadcom.html" class="tag">#Broadcom</a> <a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/aria.html" class="tag">#Aria</a> <a href="tags/end-of-year-review.html" class="tag">#End of Year Review</a> <a href="tags/goals.html" class="tag">#Goals</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-aria-operations-servicenow-management-pack-featured.png" alt="VMware Aria Operations | Servicenow | Management Pack" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-operations-servicenow-management-pack.html">VMware Aria Operations | Servicenow | Management Pack</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-12-22T05:00:00Z">
-            December 22, 2023
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/management-pack.html" class="tag">#Management Pack</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/servicenow.html" class="tag">#Servicenow</a></div>
-</div>
-<div class="post-item">
-    <img src="images/productive-apps-2023-featured.png" alt="Productive APPs | 2023" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="productive-apps-2023.html">Productive APPs | 2023</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-12-02T05:00:00Z">
-            December 2, 2023
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vmware-community.html" class="category">VMware Community</a></div>
-    <div class="tags"><a href="tags/mac.html" class="tag">#MAC</a> <a href="tags/apple.html" class="tag">#Apple</a> <a href="tags/apps.html" class="tag">#APPs</a></div>
-</div>
-<div class="post-item">
-    <img src="images/unlocking-the-potential-vmware-aria-automation-abx-action-constants-and-secrets-featured.png" alt="Unlocking the Potential | VMware Aria Automation | ABX Action Constants and Secrets" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="unlocking-the-potential-vmware-aria-automation-abx-action-constants-and-secrets.html">Unlocking the Potential | VMware Aria Automation | ABX Action Constants and Secrets</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-11-14T05:00:00Z">
-            November 14, 2023
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/action-constants.html" class="tag">#Action Constants</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/secrets.html" class="tag">#Secrets</a></div>
-</div>
-<div class="post-item">
-    <img src="images/unlocking-the-potential-vmware-aria-automation-config-api-featured.png" alt="Unlocking the Potential | VMware Aria Automation Config API" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="unlocking-the-potential-vmware-aria-automation-config-api.html">Unlocking the Potential | VMware Aria Automation Config API</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-11-12T05:00:00Z">
-            November 12, 2023
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-automation.html" class="category">VCF Automation</a></div>
-    <div class="tags"><a href="tags/vmware.html" class="tag">#VMware</a> <a href="tags/vmware-aria-automation.html" class="tag">#VMware Aria Automation</a> <a href="tags/vmware-aria-automation-config.html" class="tag">#VMware Aria Automation Config</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/api.html" class="tag">#API</a></div>
-</div>
-<div class="post-item">
-    <img src="images/unlocking-the-potential-vmware-aria-operations-october-2023-powerblock-featured.png" alt="Unlocking the Potential | VMware Aria Operations | October 2023 PowerBlock" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="unlocking-the-potential-vmware-aria-operations-october-2023-powerblock.html">Unlocking the Potential | VMware Aria Operations | October 2023 PowerBlock</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-10-25T04:00:00Z">
-            October 25, 2023
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/snaps.html" class="tag">#Snaps</a> <a href="tags/snapshot-age.html" class="tag">#Snapshot Age</a> <a href="tags/automation-central.html" class="tag">#Automation Central</a></div>
-</div>
-<div class="post-item">
-    <img src="images/unlocking-the-potential-vmware-aria-operations-automation-central-snapshot-age-featured.png" alt="Unlocking the Potential | VMware Aria Operations | Automation Central | Snapshot Age" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="unlocking-the-potential-vmware-aria-operations-automation-central-snapshot-age.html">Unlocking the Potential | VMware Aria Operations | Automation Central | Snapshot Age</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-10-16T04:00:00Z">
-            October 16, 2023
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware-aria-operations.html" class="tag">#VMware Aria Operations</a> <a href="tags/snaps.html" class="tag">#Snaps</a> <a href="tags/snapshot-age.html" class="tag">#Snapshot Age</a> <a href="tags/automation-central.html" class="tag">#Automation Central</a></div>
-</div>
-<div class="post-item">
-    <img src="images/vmware-aria-operations-for-logs-saas-esxi-host-syslog-setting-featured.png" alt="VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-    <h2><a href="vmware-aria-operations-for-logs-saas-esxi-host-syslog-setting.html">VMware Aria Operations for Logs (SaaS) | ESXi Host syslog setting</a></h2>
-    <div class="post-meta">
-        <time datetime="2023-10-07T04:00:00Z">
-            October 7, 2023
-        </time>
-         &bull; by Dale Hassinger
-    </div>
-    <div class="categories"><a href="categories/vcf-operations.html" class="category">VCF Operations</a></div>
-    <div class="tags"><a href="tags/vmware-aria-operations-for-logs.html" class="tag">#VMware Aria Operations for Logs</a> <a href="tags/syslog.html" class="tag">#syslog</a> <a href="tags/saas.html" class="tag">#SaaS</a> <a href="tags/powershell.html" class="tag">#PowerShell</a> <a href="tags/powercli.html" class="tag">#PowerCLI</a></div>
-</div>
+</section>
                     <nav class="pagination">
     <a href="page-6.html" class="pagination-link">&laquo; Newer Posts</a>
             <span class="pagination-info">Page 7 of 13</span>
@@ -264,15 +401,32 @@
             </div>
 
             <aside class="right-sidebar">
-    <!-- Search Widget -->
-    <div class="widget search-widget">
-        <h3>🔍 Search</h3>
-        <input type="text" placeholder="Type something..." id="searchInput" data-site-root="">
+    <!-- Environment Counts -->
+    <div class="widget counts-widget">
+        <h3>Environment Counts</h3>
+        <div class="stat-grid">
+            <div class="stat-cell">
+                <div class="stat-value">126</div>
+                <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">23</div>
+                <div class="stat-label">2026</div>
+            </div>
+            <div class="stat-cell">
+                <div class="stat-value">106</div>
+                <div class="stat-label">Older</div>
+            </div>
+        </div>
     </div>
-    
+
     <!-- Archives Widget -->
     <div class="widget archives-widget">
-        <h3>∞ Archives</h3>
+        <h3>Archives</h3>
         <ul class="archives-list">
             <li>
     <a href="archive.html?year=2026" class="archive-filter-link" data-year="2026">
@@ -312,10 +466,10 @@
 </li>
         </ul>
     </div>
-    
+
     <!-- Categories Widget -->
     <div class="widget categories-widget">
-        <h3># Categories</h3>
+        <h3>Categories</h3>
         <div class="category-list">
             <a href="categories/ai.html" class="category-item">AI</a>
 <a href="categories/vcf.html" class="category-item">VCF</a>
@@ -323,10 +477,10 @@
 <a href="categories/vcommunity.html" class="category-item">vCommunity</a>
         </div>
     </div>
-    
+
     <!-- Tags Widget -->
     <div class="widget tags-widget">
-        <h3>🏷️ Tags</h3>
+        <h3>Tags</h3>
         <div class="tags-cloud">
             <a href="tags/ai.html" class="tag-item">#AI</a>
 <a href="tags/automation.html" class="tag-item">#Automation</a>
