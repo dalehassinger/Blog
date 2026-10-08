@@ -2097,20 +2097,6 @@ window.vcrocsSearchIndex = {
       "categories" : [
         "VCF Automation"
       ],
-      "content" : "PowerCLI Basics --- PowerCLI Code Some basic PowerCLI commands to get started. I have some simple scripts in production that are 10 lines of code and I have some scripts that do a lot that are 2500 lines of code. Take the time to learn all the commands that are available and you will be amazed at what you can automate. --- --- Why use PowerCLI Picking a scripting language for automation can be a hard decision. My 1 reason to use PowerShell was because of the PowerCLI PowerShell module that VMware maintains. You can use the PowerCLI module to automate almost all of the VMware Products. There hasn't been any automation process that I have not been able to use PowerShell to automate. PowerShell has a great collection of modules available to use with different products. PowerShell is also easy to use with Products that make APIs available. --- Happy Scripting! ---",
-      "date" : "2020-04-19T04:00:00Z",
-      "excerpt" : "PowerCLI Basics --- PowerCLI Code Some basic PowerCLI commands to get started. I have some simple scripts in production that are 10 lines of code and I have some scripts that do a lot that are 2500 li",
-      "tags" : [
-        "PowerShell",
-        "PowerCLI"
-      ],
-      "title" : "PowerCLI Getting Started",
-      "url" : "powercli-getting-started.html"
-    },
-    {
-      "categories" : [
-        "VCF Automation"
-      ],
       "content" : "Add Windows Server Registry Values --- PowerShell Code Add Registry Values to Windows Server --- ---",
       "date" : "2020-04-19T04:00:00Z",
       "excerpt" : "Add Windows Server Registry Values --- PowerShell Code Add Registry Values to Windows Server --- ---",
@@ -2121,22 +2107,6 @@ window.vcrocsSearchIndex = {
       ],
       "title" : "Powershell code to add custom Registry values",
       "url" : "powershell-code-to-add-custom-registry-values.html"
-    },
-    {
-      "categories" : [
-        "VCF Automation"
-      ],
-      "content" : "Add disk to a Remote Windows Server | VMware VM --- PowerShell Code Powershell code to add disk to a Remote Windows Server | VMware VM: --- ---",
-      "date" : "2020-04-19T04:00:00Z",
-      "excerpt" : "Add disk to a Remote Windows Server | VMware VM --- PowerShell Code Powershell code to add disk to a Remote Windows Server | VMware VM: --- ---",
-      "tags" : [
-        "PowerShell",
-        "PowerCLI",
-        "Add Disk",
-        "Windows Server"
-      ],
-      "title" : "Add disk to a Remote Windows Server | VMware VM",
-      "url" : "add-disk-to-a-remote-windows-server-vmware-vm.html"
     },
     {
       "categories" : [
@@ -2171,6 +2141,36 @@ window.vcrocsSearchIndex = {
       ],
       "title" : "Clay Thrower | Powered By: Raspberry PI",
       "url" : "clay-thrower-powered-by-raspberry-pi.html"
+    },
+    {
+      "categories" : [
+        "VCF Automation"
+      ],
+      "content" : "Add disk to a Remote Windows Server | VMware VM --- PowerShell Code Powershell code to add disk to a Remote Windows Server | VMware VM: --- ---",
+      "date" : "2020-04-19T04:00:00Z",
+      "excerpt" : "Add disk to a Remote Windows Server | VMware VM --- PowerShell Code Powershell code to add disk to a Remote Windows Server | VMware VM: --- ---",
+      "tags" : [
+        "PowerShell",
+        "PowerCLI",
+        "Add Disk",
+        "Windows Server"
+      ],
+      "title" : "Add disk to a Remote Windows Server | VMware VM",
+      "url" : "add-disk-to-a-remote-windows-server-vmware-vm.html"
+    },
+    {
+      "categories" : [
+        "VCF Automation"
+      ],
+      "content" : "PowerCLI Basics --- PowerCLI Code Some basic PowerCLI commands to get started. I have some simple scripts in production that are 10 lines of code and I have some scripts that do a lot that are 2500 lines of code. Take the time to learn all the commands that are available and you will be amazed at what you can automate. --- --- Why use PowerCLI Picking a scripting language for automation can be a hard decision. My 1 reason to use PowerShell was because of the PowerCLI PowerShell module that VMware maintains. You can use the PowerCLI module to automate almost all of the VMware Products. There hasn't been any automation process that I have not been able to use PowerShell to automate. PowerShell has a great collection of modules available to use with different products. PowerShell is also easy to use with Products that make APIs available. --- Happy Scripting! ---",
+      "date" : "2020-04-19T04:00:00Z",
+      "excerpt" : "PowerCLI Basics --- PowerCLI Code Some basic PowerCLI commands to get started. I have some simple scripts in production that are 10 lines of code and I have some scripts that do a lot that are 2500 li",
+      "tags" : [
+        "PowerShell",
+        "PowerCLI"
+      ],
+      "title" : "PowerCLI Getting Started",
+      "url" : "powercli-getting-started.html"
     }
   ]
 };
