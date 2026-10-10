@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode Styler | Bold and Italic Text for LinkedIn from the Mac Menu Bar - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 960px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post .post-article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">By: Dale Hassinger</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="categories/ai.html">AI</a>
+                <span class="sep">/</span>
+                <span>Unicode Styler | Bold and Italic Text for LinkedIn from the Mac Menu Bar</span>
+    </nav>
+
+                <article class="post-article">
+                    <header>
+                        <span class="featured-eyebrow">AI · VCOMMUNITY</span>
+                        <h1>Unicode Styler | Bold and Italic Text for LinkedIn from the Mac Menu Bar</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-10-10T11:05:17Z">
+                                October 10, 2026
+                            </time>
+                            <span>&middot;</span><span>Dale Hassinger</span>
+                        </div>
+                        <div class="tags"><a href="categories/ai.html" class="category">AI</a>
+            <a href="categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="tags/claude.html" class="tag">#Claude</a>
+            <a href="tags/ai.html" class="tag">#AI</a>
+            <a href="tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a></div>
+                    </header>
+                    
+                    <img src="images/unicode-styler.png" alt="Unicode Styler | Bold and Italic Text for LinkedIn from the Mac Menu Bar" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>Unicode Styler: Bold and Italic Text for My LinkedIn Posts, One Click from the Menu Bar 🚀</h3>
+<p>Every time I publish a blog post, I write a LinkedIn post to announce it. LinkedIn doesn't have a bold or italic button. If you want a headline to stand out in the feed, the trick is Unicode characters that look bold or italic. I was using a web page, <a href="https://yaytext.com/bold-italic/" target="_blank" rel="noopener noreferrer">YayText</a>, to convert my text, then copying it back into LinkedIn.</p>
+<p>It works. But it was a browser tab I had to find every time, with ads, for something I do several times a week. I asked Claude how I could duplicate what that web page does as a local app. It started as a PowerShell script, then became a small native Mac menu bar app. I'm sharing it with the vCommunity.</p>
+<hr>
+<h4>What is Unicode Styler? 💡</h4>
+<p>Unicode Styler is a free macOS menu bar app that turns plain text into styled text you can paste anywhere:</p>
+<ul>
+<li>Bold, italic and bold italic, in serif and sans-serif</li>
+<li>Four alternating patterns (Alternating Bold, Alternating Italic, Bold w/ Alternating Italic, Italic Switch Serifs)</li>
+<li>All 10 styles shown at once, with a live preview as you type</li>
+<li>Click any style to copy it</li>
+<li>Light, Dark or System appearance</li>
+<li>Optional start at login</li>
+</ul>
+<p>It works offline and sends nothing anywhere.</p>
+<h4>Unicode Styler (Screen Shot):</h4>
+<img src="images/UnicodeStyler-01.png" alt="Image">
+<hr>
+<h4>How I Use It for LinkedIn Posts 📝</h4>
+<p>LinkedIn only shows the first two or three lines of a post before <strong>…see more</strong>. That opening line has to do the work. Here is my routine:</p>
+<p>1. Write the post as plain text first</p>
+<p>2. Click the <strong>B/I/U</strong> icon in the menu bar</p>
+<p>3. Type the first line, click <strong>Bold (sans)</strong>, and paste it over the plain line in LinkedIn</p>
+<p>4. Do the same for the short section labels in the body</p>
+<p>5. Leave everything else as plain text</p>
+<p>Bold (sans) is my go-to on LinkedIn. It matches LinkedIn's own font better than the serif styles.</p>
+<p>Here is what a styled announcement looks like:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>I just published a new 𝗛𝗼𝗺𝗲 𝗟𝗮𝗯 𝗛𝗮𝗿𝗱𝘄𝗮𝗿𝗲 post covering the 𝗚𝗟𝗶𝗡𝗘𝗧 𝗖𝗼𝗺𝗲𝘁 𝗞𝗩𝗠.
+
+I have been using these for remote console access to my Home Lab ESX hosts, and they have worked very well with my Starlink and Twingate setup.  🛰️ </code></pre>
+</div>
+<h4>Copy and Paste into LinkedIn (Screen Shot):</h4>
+<img src="images/UnicodeStyler-02.png" alt="LinkedIn">
+<p>A few rules I follow:</p>
+<ul>
+<li><strong>Style the hook and the labels, not the whole post.</strong> A full post in bold is hard to read and looks like shouting.</li>
+<li><strong>Don't style hashtags.</strong> <code>#𝘃𝗘𝘅𝗽𝗲𝗿𝘁</code> is not the same hashtag as <code>#vExpert</code>, so it won't be found.</li>
+<li><strong>Keep names and product names plain</strong> when you want people to find the post in search.</li>
+</ul>
+<p>It works the same way in X, Slack, Teams, Bluesky and email.</p>
+<hr>
+<h4>The Website 🌐</h4>
+<p>The app has its own page: <a href="https://dalehassinger.github.io/UnicodeStyler" target="_blank" rel="noopener noreferrer">https://dalehassinger.github.io/UnicodeStyler</a></p>
+<p>You can try all 10 styles right on the page before downloading anything. Type in the box and click a style to copy it. The page also has the download, install steps, how it works, and release notes.</p>
+<h4>Unicode Styler Website (Screen Shot):</h4>
+<img src="images/unicode-styler-website.png" alt="Image">
+<hr>
+<h4>How It Works 🔧</h4>
+<p>The styled text isn't formatting. These are different characters.</p>
+<p>Unicode has a block called <strong>Mathematical Alphanumeric Symbols</strong> (U+1D400 to U+1D7FF). It was added for writing math, and it contains complete A to Z alphabets in bold, italic, sans-serif and more. Each alphabet starts at a fixed code point, so converting a letter is one addition:</p>
+<p><strong>styled letter = start of the style + (letter − A)</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Style</th><th>Starts at</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Bold</td><td><code>U+1D400</code></td><td>𝐀𝐁𝐂</td></tr>
+<tr><td>Italic</td><td><code>U+1D434</code></td><td>𝐴𝐵𝐶</td></tr>
+<tr><td>Bold italic</td><td><code>U+1D468</code></td><td>𝑨𝑩𝑪</td></tr>
+<tr><td>Sans bold</td><td><code>U+1D5D4</code></td><td>𝗔𝗕𝗖</td></tr>
+<tr><td>Sans italic</td><td><code>U+1D608</code></td><td>𝘈𝘉𝘊</td></tr>
+<tr><td>Sans bold italic</td><td><code>U+1D63C</code></td><td>𝘼𝘽𝘾</td></tr>
+</tbody>
+</table>
+</div>
+<p>Because they are real characters, the styling survives copy and paste into any app that takes text.</p>
+<hr>
+<h4>Settings ⚙️</h4>
+<p>The gear icon in the top right of the panel opens Settings.</p>
+<ul>
+<li><strong>Appearance</strong> | System, Light or Dark. Your choice is saved and applied every time the app starts.</li>
+<li><strong>Start at login</strong> | One switch adds the app to macOS Login Items. macOS may ask you to approve it the first time. If it does, the panel shows an <strong>Open Login Items…</strong> button that takes you there.</li>
+</ul>
+<h4>Settings (Screen Shot):</h4>
+<img src="images/UnicodeStyler-03.png" alt="Image">
+<hr>
+<h4>Gotchas ⚠️</h4>
+<ul>
+<li><strong>Italic h lives somewhere else.</strong><ul>
+<li>Unicode already had ℎ as the Planck constant (U+210E), so the italic alphabet has a gap where lowercase h should be. Without a special case you get an empty box. The app maps it separately.</li>
+</ul>
+</li>
+<li><strong>Italic styles have no digits.</strong><ul>
+<li>Bold has its own 𝟎 to 𝟗. Italic doesn't, so numbers stay plain in italic styles.</li>
+</ul>
+</li>
+<li><strong>Screen readers and search.</strong><ul>
+<li>Screen readers may read these characters one at a time or as math symbols, and search won't match 𝐁𝐨𝐥𝐝 to Bold. Another reason to use it for emphasis only.</li>
+</ul>
+</li>
+<li><strong>The Command Line Tools can't compile SwiftUI's <code>@State</code>.</strong><ul>
+<li>On newer macOS SDKs, <code>@State</code> is a macro whose plugin only ships with full Xcode. My first build failed with <code>plugin for module 'SwiftUIMacros' not found</code>. The app now uses an <code>ObservableObject</code> instead, so it builds with just the Command Line Tools.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4>Wish List | How Did I Do? ✅</h4>
+<ul>
+<li>✅ All 10 styles from the web page</li>
+<li>✅ Click to copy with a confirmation checkmark</li>
+<li>✅ Light, Dark and System appearance</li>
+<li>✅ Start at login</li>
+<li>✅ Universal app for Apple silicon and Intel</li>
+<li>✅ Project website with a live demo</li>
+<li>⏳ Signed and notarized with an Apple Developer ID</li>
+<li>⏳ A keyboard shortcut to open the panel</li>
+</ul>
+<p>It's a simple app, but it does exactly what I wanted.</p>
+<hr>
+<h4>Try It 🔗</h4>
+<p>1. Go to <a href="https://dalehassinger.github.io/UnicodeStyler" target="_blank" rel="noopener noreferrer">https://dalehassinger.github.io/UnicodeStyler</a></p>
+<p>2. Click <strong>Download for Mac</strong> and unzip <code>UnicodeStyler.zip</code></p>
+<p>3. Drag <strong>Unicode Styler</strong> into your Applications folder</p>
+<p>4. Open it, then look for the <strong>B/I/U</strong> icon in your menu bar</p>
+<p>The app is not signed with an Apple Developer ID yet, so your Mac will warn you the first time. It isn't damaged.</p>
+<p>On <strong>macOS</strong>, if you see "Apple could not verify Unicode Styler":</p>
+<p>1. Click <strong>Done</strong></p>
+<p>2. Go to <strong>System Settings › Privacy & Security</strong></p>
+<p>3. Scroll down and click <strong>Open Anyway</strong></p>
+<p>Or remove the download flag from Terminal:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>xattr -dr com.apple.quarantine &quot;/Applications/Unicode Styler.app&quot;</code></pre>
+</div>
+<p>You only do this once.</p>
+<h4>Download (Screen Shot):</h4>
+<img src="images/unicode-styler-download.png" alt="Image">
+<hr>
+<h4>Doesn't This Already Exist?</h4>
+<p>It does. <a href="https://yaytext.com/bold-italic/" target="_blank" rel="noopener noreferrer">YayText</a> and other sites do this well, and YayText gave me the idea. I wanted it local, offline and one click away in my menu bar.</p>
+<hr>
+<h4>For the Techies 🤓</h4>
+<ul>
+<li>One Swift file, under 350 lines, using SwiftUI's <code>MenuBarExtra</code></li>
+<li>No Xcode project. A <code>build.sh</code> script compiles with <code>swiftc</code>, builds the <code>.app</code> bundle and <code>Info.plist</code>, and makes a universal binary with <code>lipo</code></li>
+<li>Start at login uses Apple's <code>SMAppService</code> (macOS 13 and later)</li>
+<li>The website is a single HTML page on GitHub Pages, and the live demo uses the same character mapping as the app</li>
+<li>There's also a PowerShell version, <code>Convert-UnicodeStyle.ps1</code>, in the repo for Windows and Linux users</li>
+<li>Built with Claude, starting from "How could I duplicate what this web page does as a local app?"</li>
+<li>Source: <a href="https://github.com/dalehassinger/UnicodeStyler" target="_blank" rel="noopener noreferrer">https://github.com/dalehassinger/UnicodeStyler</a></li>
+</ul>
+<p>Build it yourself:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>git clone https://github.com/dalehassinger/UnicodeStyler.git
+cd UnicodeStyler
+./build.sh --install</code></pre>
+</div>
+<p>I always appreciate feedback. Let me know what you like, and what you would add next. See you in the vCommunity!</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center></center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
