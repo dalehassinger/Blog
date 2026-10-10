@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts tagged "VMUG" - vCROCS</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>Home Lab | GLiNET Comet KVM - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
     <script>
     (function() {
         var chosen = null;
@@ -33,8 +35,8 @@
         }
     })();
 </script>
-    <script src="../search-index.js" defer></script>
-    <script src="../lightbox.js" defer></script>
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
 <script>
   var doNotTrack = false;
@@ -49,11 +51,24 @@
     gtag('config', 'G-KSLC6FHF36');
   }
 </script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 960px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post .post-article {
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header class="site-topbar">
-    <a class="topbar-brand" href="../index.html">
-        <span class="topbar-logo" aria-hidden="true"><img src="../images/avatar.png" alt=""></span>
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
         <span class="topbar-titles">
             <span class="topbar-name">vCROCS</span>
             <span class="topbar-eyebrow">By: Dale Hassinger</span>
@@ -67,7 +82,7 @@
                 <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
             </svg>
         </span>
-        <input type="text" id="searchInput" data-site-root="../" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
     </div>
 
     <div class="topbar-actions">
@@ -97,7 +112,7 @@
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
             </a>
-                <a href="../feed.xml" title="RSS Feed">
+                <a href="feed.xml" title="RSS Feed">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
                     </svg>
@@ -122,31 +137,31 @@
     <nav class="sidebar-nav" id="site-navigation">
         <ul>
             <li>
-                <a href="../index.html">
+                <a href="index.html">
                     <span class="icon">🏠</span>
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="../archive.html">
+                <a href="archive.html">
                     <span class="icon">📚</span>
                     <span>Archives</span>
                 </a>
             </li>
                     <li>
-            <a href="../About.html">
+            <a href="About.html">
                 <span class="icon">👤</span>
                 <span>About</span>
             </a>
         </li>
         <li>
-            <a href="../Links.html">
+            <a href="Links.html">
                 <span class="icon">📖</span>
                 <span>Links</span>
             </a>
         </li>
         <li>
-            <a href="../Pics.html">
+            <a href="Pics.html">
                 <span class="icon">📷</span>
                 <span>Pics</span>
             </a>
@@ -182,170 +197,91 @@
 
     <!-- Main Content -->
     <div class="main-wrapper">
-        <div class="container">
+        <div class="container single-post">
             <div class="content-area">
-                <div class="page-head">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../index.html">Home</a>
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
                 <span class="sep">/</span>
-                <span>Tags</span>
+                <a href="index.html">Latest</a>
                 <span class="sep">/</span>
-                <span>#VMUG</span>
+                <span>Home Lab | GLiNET Comet KVM</span>
     </nav>
-    <h1 class="page-title">#VMUG</h1>
-    <p class="page-subtitle">2 posts tagged with this keyword.</p>
-</div>
 
-                <main>
-                    <section class="panel" id="tagged-posts">
-    <div class="panel-head">
-        <div class="panel-tabs">
-            <span class="panel-title">Tagged #VMUG<span class="caret" aria-hidden="true">&#9662;</span></span>
-            
-        </div>
-        <span class="panel-count">2 posts</span>
-    </div>
-    <div class="panel-body" id="tagged-posts-body">
-        <div class="post-list">
-<article class="post-item">
-            <a class="post-thumb" href="../vmug-connect-virtually-speak-podcast.html" tabindex="-1" aria-hidden="true">
-    <img src="../images/vmug-connect.png" alt="" loading="lazy">
-</a>
-            <div class="post-row-body">
-                <h2><a href="../vmug-connect-virtually-speak-podcast.html">VMUG Connect | Virtually Speak Podcast</a></h2>
-                <p class="post-excerpt">From Listener to Guest: Sharing My vCommunity Story on the Virtually Speaking Podcast There are certain moments in a career that stand out—not just for the professional achievement, but for...</p>
-                <div class="post-taxonomy">
-                    <a href="../categories/vcommunity.html" class="category">vCommunity</a>
-            <a href="../tags/vmug.html" class="tag">#VMUG</a>
-            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
-            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
-                    <time class="post-date" datetime="2026-05-29T15:54:06Z">May 29, 2026</time>
-                </div>
-            </div>
-        </article>
-<article class="post-item">
-            <a class="post-thumb" href="../the-vmware-community-podcast-i-was-a-guest-on-the-show.html" tabindex="-1" aria-hidden="true">
-    <img src="../images/the-vmware-community-podcast-i-was-a-guest-on-the-show-featured.png" alt="" loading="lazy">
-</a>
-            <div class="post-row-body">
-                <h2><a href="../the-vmware-community-podcast-i-was-a-guest-on-the-show.html">The VMware Community Podcast | I was a Guest on the show</a></h2>
-                <p class="post-excerpt">The VMware Community Podcast, episode 659 | I was a Guest on the show Podcast Guest: I listen to Podcasts all the time. If the Podcast covers VMware Products, you will find it in my...</p>
-                <div class="post-taxonomy">
-                    <a href="../categories/vmware-community.html" class="category">VMware Community</a>
-            <a href="../tags/vmware.html" class="tag">#VMware</a>
-            <a href="../tags/vmug.html" class="tag">#VMUG</a>
-            <a href="../tags/vmware-aria.html" class="tag">#VMware Aria</a>
-            <a href="../tags/vmware-explore-2023.html" class="tag">#VMware Explore 2023</a>
-            <a href="../tags/vexpert.html" class="tag">#vExpert</a>
-            <a href="../tags/vcommunity.html" class="tag">#vCommunity</a>
-            <a href="../tags/podcast.html" class="tag">#Podcast</a>
-                    <time class="post-date" datetime="2023-09-06T04:00:00Z">September 6, 2023</time>
-                </div>
-            </div>
-        </article>
-                </div>
-    </div>
+                <article class="post-article">
+                    <header>
+                        
+                        <h1>Home Lab | GLiNET Comet KVM</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-10-10T00:50:31Z">
+                                October 9, 2026
+                            </time>
+                            <span>&middot;</span><span>Dale Hassinger</span>
+                        </div>
+                        
+                    </header>
+                    
+                    <img src="images/shopify_rm1-01.jpg" alt="Home Lab | GLiNET Comet KVM" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <p>I recently picked up some new hardware for the Home Lab. 🥼</p>
+<p>I am away from where I keep my Home Lab hardware fairly often, and from time to time I need direct console access to one of my ESX hosts. That could be for troubleshooting a boot issue, making a BIOS change, working through a network problem, or handling something that cannot be done through the normal management interfaces.</p>
+<p>I have looked at the <a href="https://jetkvm.com/" target="_blank" rel="noopener noreferrer">JetKVM</a> several times but never ended up purchasing one.</p>
+<p>During a recent trip to a <a href="https://www.microcenter.com/" target="_blank" rel="noopener noreferrer">MicroCenter</a> store, I noticed they had the <a href="https://www.gl-inet.com/en-us/products/gl-rm1" target="_blank" rel="noopener noreferrer">GLiNET Comet KVM</a> on sale ($89.99). I decided to pick one up and test it in the Home Lab.</p>
+<p>Setup was very simple, and so far the performance has been good. I frequently connect back to my Home Lab remotely using a <a href="https://starlink.com/" target="_blank" rel="noopener noreferrer">StarLink</a> connection and <a href="https://www.twingate.com/" target="_blank" rel="noopener noreferrer">Twingate Remote Access</a>, and the Comet has worked very well over that connection.</p>
+<p>For me, the real value is having another layer of remote access when something goes wrong. If an ESX host is unavailable through vCenter, SSH, or the normal management network, I can still get to the console and see exactly what is happening.</p>
+<p>That is especially useful in a Home Lab where the hardware may be sitting somewhere that is not always easy to get to.</p>
+<p>When I find hardware that works well in my Home Lab, I like to share it with others. Home Lab hardware continues to get more expensive, so I think it is useful to share products that I have actually purchased, tested, and used in a real environment.</p>
+<p>Also, if you see me blog about hardware, it is not because I am trying to earn affiliate dollars. I do not use affiliate links. I simply like sharing hardware and tools that work well in my own Home Lab and might help someone else building or maintaining theirs.</p>
+<p>During Amazon's October Prime Big Deal Days, I picked up three more GLiNET Comet KVMs for $79.99 each 💵.</p>
+<hr>
+<p>To power ⚡️ the KVMs, I have them connected directly to USB ports on the ESX servers in the rack. For example, the KVM connected to ESX-01 gets its power from a USB port on ESX-02, and so forth.</p>
+<p>This eliminates the need for additional power adapters 🔌 and cables in the rack, and so far the setup has been working well.</p>
+<hr>
+<img src="images/shopify_rm1-02.webp" alt="Remote KVM">
+<img src="images/shopify_rm1-03.webp" alt="Remote KVM">
+<p>Login Screen:</p>
+<img src="images/CleanShot 2026-10-09 at 9.06.51 PM@2x.png" alt="Login Screen">
+<p>The Virtual Keyboard is nice for using the F2/F11/F12 keys:</p>
+<img src="images/CleanShot 2026-10-09 at 9.08.47 PM@2x.png" alt="Virtual Keyboard">
+<p>You can Name the Browser Tab to match the ESX Host you are connecting to:</p>
+<img src="images/CleanShot 2026-10-09 at 9.10.00 PM@2x.png" alt="Browser Tab">
+<hr>
+<p>There is a Fingerbot for Remote Power Control & Boot from Shutdown. I want to try one of these #soon.</p>
+<img src="images/51Wd68JwVTL._SL1500.jpg" alt="Fingerbot">
+<hr>
+<p>Overall, I am very happy with this product and would buy it again. I may also add a few more to my Home Lab for use with my Raspberry Pi's. 👍🏻</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
 </section>
-                </main>
+                    
+                    <section class="comments-section">
+    <p><center></center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
             </div>
-
-            <aside class="right-sidebar">
-    <!-- Environment Counts -->
-    <div class="widget counts-widget">
-        <h3>Environment Counts</h3>
-        <div class="stat-grid">
-            <div class="stat-cell">
-                <div class="stat-value">127</div>
-                <div class="stat-label">Posts</div>
-            </div>
-            <div class="stat-cell">
-                <div class="stat-value">4</div>
-                <div class="stat-label">Categories</div>
-            </div>
-            <div class="stat-cell">
-                <div class="stat-value">24</div>
-                <div class="stat-label">2026</div>
-            </div>
-            <div class="stat-cell">
-                <div class="stat-value">106</div>
-                <div class="stat-label">Older</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Archives Widget -->
-    <div class="widget archives-widget">
-        <h3>Archives</h3>
-        <ul class="archives-list">
-            <li>
-    <a href="../archive.html?year=2026" class="archive-filter-link" data-year="2026">
-        <span>2026</span>
-        <span class="count">24</span>
-    </a>
-</li>
-<li>
-    <a href="../archive.html?year=2025" class="archive-filter-link" data-year="2025">
-        <span>2025</span>
-        <span class="count">16</span>
-    </a>
-</li>
-<li>
-    <a href="../archive.html?year=2024" class="archive-filter-link" data-year="2024">
-        <span>2024</span>
-        <span class="count">27</span>
-    </a>
-</li>
-<li>
-    <a href="../archive.html?year=2023" class="archive-filter-link" data-year="2023">
-        <span>2023</span>
-        <span class="count">23</span>
-    </a>
-</li>
-<li>
-    <a href="../archive.html?year=2022" class="archive-filter-link" data-year="2022">
-        <span>2022</span>
-        <span class="count">12</span>
-    </a>
-</li>
-<li>
-    <a href="../archive.html?years=2021,2020" class="archive-filter-link" data-years="2021,2020">
-        <span>Older</span>
-        <span class="count">28</span>
-    </a>
-</li>
-        </ul>
-    </div>
-
-    <!-- Categories Widget -->
-    <div class="widget categories-widget">
-        <h3>Categories</h3>
-        <div class="category-list">
-            <a href="../categories/ai.html" class="category-item">AI</a>
-<a href="../categories/vcf.html" class="category-item">VCF</a>
-<a href="../categories/vcf-operations.html" class="category-item">VCF Operations</a>
-<a href="../categories/vcommunity.html" class="category-item">vCommunity</a>
-        </div>
-    </div>
-
-    <!-- Tags Widget -->
-    <div class="widget tags-widget">
-        <h3>Tags</h3>
-        <div class="tags-cloud">
-            <a href="../tags/ai.html" class="tag-item">#AI</a>
-<a href="../tags/automation.html" class="tag-item">#Automation</a>
-<a href="../tags/claude.html" class="tag-item">#Claude</a>
-<a href="../tags/hackathon.html" class="tag-item">#Hackathon</a>
-<a href="../tags/openai.html" class="tag-item">#OpenAI</a>
-<a href="../tags/powercli.html" class="tag-item">#PowerCLI</a>
-<a href="../tags/vcf.html" class="tag-item">#VCF</a>
-<a href="../tags/vcf-automation.html" class="tag-item">#VCF Automation</a>
-<a href="../tags/vcf-operations.html" class="tag-item">#VCF Operations</a>
-<a href="../tags/vmug.html" class="tag-item">#VMUG</a>
-<a href="../tags/vcommunity.html" class="tag-item">#vCommunity</a>
-<a href="../tags/vexpert.html" class="tag-item">#vExpert</a>
-        </div>
-    </div>
-</aside>
         </div>
     </div>
     <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
