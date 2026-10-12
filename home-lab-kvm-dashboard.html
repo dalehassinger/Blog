@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Lab | KVM Dashboard - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 960px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post .post-article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">By: Dale Hassinger</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="categories/vcommunity.html">vCommunity</a>
+                <span class="sep">/</span>
+                <span>Home Lab | KVM Dashboard</span>
+    </nav>
+
+                <article class="post-article">
+                    <header>
+                        <span class="featured-eyebrow">VCOMMUNITY · AI</span>
+                        <h1>Home Lab | KVM Dashboard</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-10-12T16:47:38Z">
+                                October 12, 2026
+                            </time>
+                            <span>&middot;</span><span>Dale Hassinger</span>
+                        </div>
+                        <div class="tags"><a href="categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="categories/ai.html" class="category">AI</a>
+            <a href="tags/vexpert.html" class="tag">#vExpert</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/ai.html" class="tag">#AI</a>
+            <a href="tags/claude.html" class="tag">#Claude</a></div>
+                    </header>
+                    
+                    <img src="images/KVM-Dashboard-01.png" alt="Home Lab | KVM Dashboard" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>KVM Dashboard: Four GL.iNet Comet KVMs, One Window 🚀</h3>
+<p>A few days ago I wrote a Blog about the <a href="https://www.vcrocs.info/home-lab-glinet-comet-kvm.html" target="_blank" rel="noopener noreferrer">GL.iNet Comet KVMs</a>. I have now added one to every ESX host in my home lab. I really like how they work. Within a day I had a new thought. Four KVMs means four browser windows, and I was tiling them by hand every time I wanted to watch the hosts boot.</p>
+<p>So I built a small Mac app that shows all four consoles in one window. I called it KVM Dashboard, and I wanted to share it with the vCommunity.</p>
+<hr>
+<h4>What is KVM Dashboard? 💡</h4>
+<p>KVM Dashboard is a native macOS app that:</p>
+<ul>
+<li>Shows your GL.iNet Comet (GLKVM) consoles in one window, 2 × 2 by default</li>
+<li>Lets any single console go full screen or maximize in the window with one click</li>
+<li>Lets you add, rename, hide, and re-order consoles in Settings</li>
+<li>Remembers your KVM logins between launches</li>
+<li>Uses a VMware Clarity / Aria Operations dark theme, with Light and System options</li>
+</ul>
+<p>If you have ever had four ESX host consoles open in four browser tabs, this is the same thing in one window.</p>
+<hr>
+<p>Working Demo:</p>
+<img src="images/KVM-Dashboard-04.gif" alt="Working Demo">
+<hr>
+<h4>My Lab 🔧</h4>
+<ul>
+<li><strong>4 × GL.iNet Comet KVM</strong>.</li>
+<li><strong>ESX hosts</strong> <code>esx9-01</code> … <code>esx9-04</code> running <strong>ESX 9.x</strong></li>
+<li>KVM consoles at <code>https://192.168.100.141</code> … <code>https://192.168.100.144</code></li>
+<li>Tested on <strong>macOS 27.0.1</strong>, Apple silicon</li>
+</ul>
+<hr>
+<h4>Why Not Just a Web Page? 🤔</h4>
+<p>That was my first try. A single static HTML page with four iframes, one per KVM. It would run anywhere, which is what I wanted.</p>
+<p>All four panes stayed blank.</p>
+<p>The KVMs did not send any headers that block framing. The real problem was the login. The GLKVM web app needs a session, and inside an iframe on a different page that session is treated as third-party. Browsers block third-party cookies and storage now, so the console app never starts.</p>
+<p>A native app gets around this. Each console runs in its own WebKit view as a top-level page, the same as opening it in its own browser tab. It also lets me accept each KVM's self-signed certificate for that one host only, which a web page can't do.</p>
+<p><strong>Mac App → one WebKit view per KVM → GL.iNet Comet KVM → ESX host</strong></p>
+<hr>
+<h4>The Dashboard 📊</h4>
+<p>Four ESX hosts at the DCUI, one window. Each pane has its own header with a status dot, the host name, and the URL.</p>
+<h4>KVM Dashboard (Screen Shot):</h4>
+<img src="images/KVM-Dashboard-01.png" alt="KVM Dashboard">
+<hr>
+<h4>Pane Controls 🖱️</h4>
+<p>Every pane has four icons. Hovering one highlights it and shows its name in the header.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Icon</th><th>Action</th></tr>
+</thead>
+<tbody>
+<tr><td>↻</td><td>Reload the console</td></tr>
+<tr><td>↗</td><td>Open the console in your default browser</td></tr>
+<tr><td>▢</td><td>Maximize in the window. Click again to go back to the grid</td></tr>
+<tr><td>⤢</td><td>Full screen. Hover the top-right corner for <strong>Exit Full Screen</strong>, or press ⌃⌘F</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Full Screen (GIF):</h4>
+<img src="images/KVM-Dashboard-02.gif" alt="Full Window">
+<hr>
+<h4>Settings ⚙️</h4>
+<p><strong>⌘,</strong> opens Settings. You can:</p>
+<ul>
+<li>Rename a KVM, change its URL, or hide it from the dashboard</li>
+<li>Re-order the consoles by dragging rows or using the arrows</li>
+<li>Pick a layout: 2 × 2, 1 row, 1 column, or Auto</li>
+<li>Pick a theme: Dark, Light, or System</li>
+<li>Export and Import the configuration as JSON</li>
+</ul>
+<p>Re-ordering or changing the layout does not reload a console. Your sessions stay logged in.</p>
+<h4>Settings (Screen Shot):</h4>
+<img src="images/KVM-Dashboard-03.png" alt="Settings">
+<hr>
+<h4>Security Notes 🔒</h4>
+<ul>
+<li><strong>No passwords are stored by the app.</strong> You log in to each KVM yourself, once. The session is kept in the app's WebKit data store, the same way Safari keeps it.</li>
+<li><strong>Certificates are trusted per host.</strong> The app accepts the self-signed certificate only for the KVM URLs you configured. Anything else gets normal certificate checks.</li>
+<li><strong>Links that open a new tab go to your default browser</strong>, not into the dashboard.</li>
+<li><strong>It only connects to the KVM URLs you configure.</strong></li>
+</ul>
+<hr>
+<h4>Wish List | How Did I Do? ✅</h4>
+<ul>
+<li>✅ Show four KVM consoles in one window</li>
+<li>✅ Full screen button on each console</li>
+<li>✅ Settings to choose and re-order the consoles</li>
+<li>✅ VMware Operations dark theme, plus Light and System</li>
+<li>✅ Hover highlights and labels on the pane icons</li>
+<li>✅ Custom app icon with a keyboard and mouse</li>
+<li>⏳ ⌘1–⌘4 to jump a console to full screen</li>
+<li>⏳ A signed, notarized download so you don't need to build it</li>
+</ul>
+<p>My original ask was a static web page that runs anywhere. That didn't survive contact with the KVM login, but the native app does everything else I wanted.</p>
+<hr>
+<h4>Try It 🔗</h4>
+<p>You need macOS 14 or later and the Xcode Command Line Tools. Full Xcode is not required.</p>
+<p>1. Install the Command Line Tools if you don't have them:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>xcode-select --install</code></pre>
+</div>
+<p>2. Clone the repo and build:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>git clone https://github.com/dalehassinger/KVM.git
+cd KVM
+mac/build.sh</code></pre>
+</div>
+<p>3. Copy the app to Applications:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>cp -R &quot;mac/build/KVM Dashboard.app&quot; /Applications/</code></pre>
+</div>
+<p>4. Open <strong>KVM Dashboard</strong>. When macOS asks to find devices on your local network, click <strong>Allow</strong>.</p>
+<p>5. Press <strong>⌘,</strong> and change the four URLs to your own KVM addresses.</p>
+<p>6. Log in to each pane once.</p>
+<p>The app is ad-hoc signed, not notarized. If you build it on your own Mac it opens with no warning. If you copy it to a different Mac, run this once on that Mac:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>xattr -dr com.apple.quarantine &quot;/Applications/KVM Dashboard.app&quot;</code></pre>
+</div>
+<p>The full README in the repo covers troubleshooting, the JSON format, and how to change the icon.</p>
+<hr>
+<h4>Home Lab Tips 💡</h4>
+<ul>
+<li><strong>Give each KVM a Static IP</strong> so the dashboard URLs never change.</li>
+<li><strong>Name the panes after the hosts.</strong> It sounds obvious, but it stops you typing into the wrong DCUI.</li>
+<li><strong>Remote access just works.</strong> I use Twingate over Starlink, as I covered in the <a href="https://www.vcrocs.info/home-lab-glinet-comet-kvm.html" target="_blank" rel="noopener noreferrer">Comet KVM post</a>. If you can reach the KVM URL, the dashboard can show it.</li>
+<li><strong>Set the EDID on each Comet</strong> to match your display for the sharpest image when a pane goes full screen.</li>
+</ul>
+<hr>
+<h4>For the Techies 🤓</h4>
+<ul>
+<li><strong>SwiftUI + WKWebView</strong>, one Swift file, roughly 600 lines</li>
+<li>Built with <code>swiftc</code> from the Command Line Tools. No Xcode project</li>
+<li>The Command Line Tools don't ship the SwiftUI macro plugin, so <code>@State</code> won't compile. The code uses a tiny <code>ObservableObject</code> wrapper instead</li>
+<li>The web views are cached per KVM and re-parented when the layout changes, which is why re-ordering never drops a session</li>
+<li>The app icon is drawn in code from SF Symbols, so it can be regenerated with one script</li>
+<li>I built it with <strong>Claude Code</strong>. It found the iframe login problem, made the switch to a native app, and did the build and the icon. I steered, tested, and kept asking for changes.</li>
+<li><a href="https://github.com/dalehassinger/KVM" target="_blank" rel="noopener noreferrer">GitHub Repository Link</a></li>
+</ul>
+<p>I always appreciate feedback. Let me know what you like, and what you would add next. See you in the vCommunity!</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center></center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
