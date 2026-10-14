@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering FQDN Filtering in vDefend Distributed Firewall: A Practical Guide - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Apoorv Malmane">
+    <link rel="stylesheet" href="style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 960px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post .post-article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">By: Dale Hassinger</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="categories/vcommunity.html">vCommunity</a>
+                <span class="sep">/</span>
+                <span>Mastering FQDN Filtering in vDefend Distributed Firewall: A Practical Guide</span>
+    </nav>
+
+                <article class="post-article">
+                    <header>
+                        <span class="featured-eyebrow">VCOMMUNITY · VCF</span>
+                        <h1>Mastering FQDN Filtering in vDefend Distributed Firewall: A Practical Guide</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-10-14T11:09:22Z">
+                                October 14, 2026
+                            </time>
+                            <span>&middot;</span><span>Apoorv Malmane</span>
+                        </div>
+                        <div class="tags"><a href="categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="categories/vcf.html" class="category">VCF</a>
+            <a href="tags/vcf.html" class="tag">#VCF</a>
+            <a href="tags/vdefend.html" class="tag">#vDefend</a></div>
+                    </header>
+                    
+                    
+                    
+                    <div class="content">
+                        <h2>Why FQDN Filtering Exists</h2>
+<p>Traditional firewall rules match on IP addresses and ports. That works for a segment of internal workloads, but it breaks down for SaaS and internet destinations like Microsoft 365. Their IP ranges are large, shared, and change often, so an IP-based allowlist is either out of date or too broad.</p>
+<p>FQDN filtering solves this by letting you write rules against domain names, such as <code>*.office365.com</code>. The vDefend Distributed Firewall (DFW) figures out which IP addresses currently belong to that name and enforces the rule on them.</p>
+<h2>Core Concepts</h2>
+<h3>Layer 7 Enforcement</h3>
+<p>FQDN filtering is a Layer 7 feature. The firewall inspects application-level information instead of only the IP and port in the packet header.</p>
+<p>In practice, you attach an FQDN to a rule through a context profile rather than entering it in the Source or Destination fields.</p>
+<h3>DNS Snooping</h3>
+<p>The firewall has no built-in list of which IP belongs to which domain. It learns the mapping by watching DNS traffic, which is called <strong>DNS snooping</strong>.</p>
+<p>When a VM asks a DNS server for a name and the answer comes back, the firewall records the name-to-IP mapping. Later, when the VM connects to that IP, the firewall knows which FQDN the traffic belongs to and can apply the matching rule.</p>
+<img src="images/fqdn_dns_snooping_flow.png" alt="DNS_SNOOPING">
+<p>This explains most of the feature's requirements and quirks:</p>
+<ul>
+<li><strong>The DNS exchange must be visible to the firewall:</strong> If DNS traffic isn't inspected, no mapping is learned and FQDN rules can't be enforced properly.</li>
+<li><strong>The VM must resolve names through a DNS server:</strong> Static entries, such as a hosts-file entry, produce no DNS response to snoop. FQDN filtering is not effective for those destinations.</li>
+</ul>
+<h3>TTL and the Mapping Cache</h3>
+<p>Every DNS answer carries a <strong>Time to Live (TTL)</strong>, which says how long the answer can be trusted. The firewall uses the TTL from the DNS response to decide how long to keep each IP-to-FQDN entry in its cache.</p>
+<img src="images/fqdn_ttl_mapping_lifecycle.png" alt="FQDN_TTL">
+<p>Two things follow from this:</p>
+<ul>
+<li><strong>VMs must honor the TTL:</strong> If a VM keeps using an IP after its TTL expires, the firewall may have already dropped the mapping and the traffic stops matching the FQDN rule.</li>
+<li><strong>You can override the TTL:</strong> A DNS security profile lets you replace the TTL from the response with a value you choose.</li>
+</ul>
+<h3>Wildcards Versus Plain Domains</h3>
+<p>A plain domain like <code>example.com</code> matches only that name and none of its subdomains.</p>
+<p>A wildcard like <code>*.example.com</code> also covers names such as:</p>
+<ul>
+<li><code>americas.example.com</code></li>
+<li><code>emea.example.com</code></li>
+</ul>
+<p>Use wildcards in most cases, because services rarely live on a single hostname.</p>
+<h3>Known Limitation: ICMP</h3>
+<p>FQDN filtering doesn't cover ICMP.</p>
+<p>If you deny all services to <code>example.com</code>, the following may fail:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>curl example.com</code></pre>
+</div>
+<p>However, the following may still receive a reply:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>ping example.com</code></pre>
+</div>
+<p>When testing FQDN filtering, use an application-layer tool such as <code>curl</code> rather than <code>ping</code>.</p>
+<h2>How the Rule Pair Works</h2>
+<p>FQDN filtering needs two rules working together:</p>
+<p>1. <strong>A Layer 7 DNS rule:</strong> Allows DNS traffic using the DNS context profile so the firewall can snoop the lookups.</p>
+<p>2. <strong>An FQDN allowlist or denylist rule:</strong> Evaluates the actual traffic to the named domains.</p>
+<img src="images/fqdn_dns_rule_and_fqdn_rule.png" alt="DNS_FQDN_RULE">
+<p>Rules are evaluated top-down and stop at the first hit, so noisy infrastructure traffic such as DNS is best matched early.</p>
+<p>As a best practice, place the Layer 7 DNS rule near the top of the table so DNS flows don't pass through many rules before reaching their match on every lookup.</p>
+<p>The order relative to the FQDN rule doesn't matter functionally. The FQDN rule relies on the mappings the DNS rule produces, but it doesn't need the DNS rule to sit above it.</p>
+<h2>Step-by-Step Configuration</h2>
+<h3>Step 1: Create the Layer 7 DNS Rule</h3>
+<p>1. Go to <strong>Security → Distributed Firewall</strong>.</p>
+<p>2. Click <strong>Category Specific Rules → Infrastructure</strong>.</p>
+<p>3. Click <strong>Add Policy</strong> and give the policy a name, such as <code>DNS Policy</code>.</p>
+<p>4. Select the checkbox next to the policy section and click <strong>Add Rule</strong>.</p>
+<p>5. Configure the rule using the following settings:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Name</strong></td><td>Something descriptive, such as <code>L7 DNS Rule</code></td></tr>
+<tr><td><strong>Source</strong></td><td><code>Any</code>, or a specific group</td></tr>
+<tr><td><strong>Destination</strong></td><td><code>Any</code>, or a specific group</td></tr>
+<tr><td><strong>Services</strong></td><td><code>DNS-TCP</code> and <code>DNS-UDP</code>, as applicable to your environment</td></tr>
+<tr><td><strong>Context Profiles</strong></td><td>The system-generated DNS context profile, which is present by default</td></tr>
+<tr><td><strong>Applied To</strong></td><td>The group of workloads the rule should protect</td></tr>
+<tr><td><strong>Action</strong></td><td><code>Allow</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>6. Click <strong>Publish</strong>.</p>
+<img src="images/Lab_DNS_rule.png" alt="DNS_RULE">
+<h3>Step 2: Create the FQDN Allowlist or Denylist Rule</h3>
+<p>1. Go to <strong>Security → Distributed Firewall</strong> and log in to NSX Manager with administrator privileges.</p>
+<p>2. Click <strong>Category Specific Rules → Application</strong>.</p>
+<p>3. Click <strong>Add Policy</strong> and give the policy a name, such as <code>FQDN Policy</code>.</p>
+<p>4. Select the checkbox next to the policy section and click <strong>Add Rule</strong>.</p>
+<p>5. Give the rule a clear name, such as <code>FQDN/URL Allowlist</code>.</p>
+<p>6. Configure the rule using the following settings:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Name</strong></td><td>Something descriptive, such as <code>FQDN/URL Allowlist</code></td></tr>
+<tr><td><strong>Source</strong></td><td><code>Any</code>, or a specific group</td></tr>
+<tr><td><strong>Destination</strong></td><td><code>Any</code>, or a specific group</td></tr>
+<tr><td><strong>Services</strong></td><td>HTTP, HTTPS, or another protocol applicable to the workload</td></tr>
+<tr><td><strong>Context Profiles</strong></td><td>Click the edit icon and choose <strong>Create Context Profile</strong>. Give the profile a name. In the Attributes column, choose <strong>Set → Add Attribute → Domain (FQDN) Name</strong>. Select FQDNs from the predefined list or define a custom one. Then click <strong>Add</strong> and <strong>Apply</strong>.</td></tr>
+<tr><td><strong>Applied To</strong></td><td>DFW or a specific group</td></tr>
+<tr><td><strong>Action</strong></td><td><code>Allow</code>, <code>Drop</code>, or <code>Reject</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>7. Click <strong>Publish</strong>.</p>
+<img src="images/Lab_FQDN_rule.png" alt="FQDN_RULE">
+<h2>Best Practices for Configuring the DNS Rule</h2>
+<p>The DNS rule is the foundation of FQDN filtering. If it's missing, misplaced, or too narrow, every FQDN rule can silently fail or misbehave.</p>
+<p>Here are design recommendations that you should validate in your environment.</p>
+<h3>1. Place the DNS Rule at the Top of the Rule Base</h3>
+<p>DNS is high-volume infrastructure traffic. A rule near the top means each lookup is matched immediately instead of being evaluated against many rules first, which reduces rule-processing overhead.</p>
+<p>This is a recommendation for efficiency. FQDN filtering still works if the DNS rule sits below.</p>
+<h3>2. Use the System DNS Context Profile with the DNS Services</h3>
+<p>Pair the default DNS context profile with:</p>
+<ul>
+<li><code>DNS-UDP</code></li>
+<li><code>DNS-TCP</code></li>
+</ul>
+<p>UDP carries most DNS lookups, but TCP is used for large responses and zone transfers. Including both avoids gaps.</p>
+<h3>3. Use an Allow Action</h3>
+<p>The purpose of the Layer 7 DNS rule is to let DNS flow so it can be snooped, not to restrict it.</p>
+<h3>4. Make Sure DNS Traffic Hits the Layer 7 DNS Rule</h3>
+<p>This is the real requirement.</p>
+<p>The Layer 7 DNS rule must be the first rule that matches DNS traffic, and it must carry the DNS context profile.</p>
+<p>Any earlier rule that matches DNS first can cause problems.</p>
+<h4>Drop or Reject Rules</h4>
+<p>These block DNS lookups outright, so the VM can't resolve the domain.</p>
+<h4>Allow Rules Without the DNS Context Profile</h4>
+<p>This is the more subtle case.</p>
+<p>For example, a high-priority rule may broadly allow infrastructure traffic, including DNS, without using the DNS context profile.</p>
+<p>DNS continues to work normally, but the traffic is never snooped. As a result, FQDN enforcement fails quietly.</p>
+<p>Review rule order across categories and policies, not just within one section, for anything that could match DNS before the Layer 7 DNS rule does.</p>
+<p>Confirm that the Layer 7 DNS rule is actually receiving DNS traffic by checking its hit counts and logs.</p>
+<h3>5. Scope "Applied To" to Match Your FQDN Rules</h3>
+<p>The DNS rule must apply to every workload that your FQDN rules apply to.</p>
+<p>Otherwise, those VMs' DNS lookups won't be snooped and the FQDN rule won't recognize their traffic.</p>
+<p>A common pattern is:</p>
+<ul>
+<li>One broad DNS rule applied to all workloads in scope.</li>
+<li>Several narrower FQDN rules.</li>
+</ul>
+<h3>6. Consider Restricting the Destination to Approved DNS Servers</h3>
+<p>The DNS rule can use <code>Any</code> or a specific group as the destination.</p>
+<p>In a mature environment, defining a group for your corporate DNS resolvers narrows the rule and prevents VMs from using arbitrary external resolvers.</p>
+<p>Make sure the group is complete, or you'll block legitimate lookups.</p>
+<h3>7. Keep VMs on a Real, Dynamic DNS Server</h3>
+<p>Don't rely on static DNS entries for domains you intend to filter.</p>
+<p>Static entries don't produce DNS responses for the firewall to snoop.</p>
+<h3>8. Plan for TTL Behavior</h3>
+<p>Confirm that your VMs and applications honor DNS TTLs.</p>
+<p>If an application caches addresses longer than the TTL, you may see intermittent blocks.</p>
+<p>If TTLs from the DNS server are very short or otherwise unsuitable, a DNS security profile can override the TTL.</p>
+<h3>9. Check for Encrypted DNS</h3>
+<p>If clients use:</p>
+<ul>
+<li>DNS over HTTPS (DoH)</li>
+<li>DNS over TLS (DoT)</li>
+</ul>
+<p>the lookups may not appear as plain DNS traffic, so DNS snooping can't see them.</p>
+<p>A common mitigation is to standardize clients on your internal DNS resolvers.</p>
+<h3>10. Validate with the Right Tools</h3>
+<p>After publishing the rules, test using:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>curl example.com</code></pre>
+</div>
+<p>or a web browser rather than:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>ping example.com</code></pre>
+</div>
+<p>FQDN filtering doesn't cover ICMP.</p>
+<p>Also check the rule hit counts and logs for both:</p>
+<ul>
+<li>The DNS rule</li>
+<li>The FQDN rule</li>
+</ul>
+<h3>11. Use Wildcard FQDNs</h3>
+<p>This isn't part of the DNS rule itself, but a perfectly configured DNS rule won't help if the FQDN rule uses:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>example.com</code></pre>
+</div>
+<p>when your applications actually access:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>app.example.com
+xyz.example.com</code></pre>
+</div>
+<p>In those cases, use:</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>*.example.com</code></pre>
+</div>
+<h2>Troubleshooting Checklist</h2>
+<p>If an FQDN rule isn't behaving as expected, check the following in order:</p>
+<ul>
+<li>Is the DNS rule published and applied to the same workloads?</li>
+<li>Is any earlier rule dropping or allowing the traffic before it reaches your FQDN rule?</li>
+<li>Is DNS traffic being matched by the Layer 7 DNS rule with the DNS context profile?</li>
+<li>Is the VM resolving through a DNS server rather than using a static entry?</li>
+<li>Is the application honoring the DNS TTL?</li>
+<li>Is the FQDN written as a wildcard if subdomains are involved?</li>
+<li>Are you testing with ICMP? If so, switch to an application-layer test such as <code>curl</code>.</li>
+</ul>
+<h2>Summary</h2>
+<p>FQDN filtering lets vDefend Distributed Firewall enforce policy by domain name instead of by IP address.</p>
+<p>It works by:</p>
+<p>1. Snooping DNS responses.</p>
+<p>2. Caching name-to-IP mappings for the duration of the DNS TTL.</p>
+<p>3. Applying a Layer 7 rule to the traffic that follows.</p>
+<p>The configuration requires two rules:</p>
+<p>1. A DNS rule.</p>
+<p>2. An FQDN rule.</p>
+<p>Placing the DNS rule near the top of the rule base is recommended, although it isn't mandatory as discussed above.</p>
+<p>Most FQDN problems come from a weak DNS rule, whether that's incorrect positioning, a gap in scope, or another rule higher in the rule base matching DNS traffic first.</p>
+<p>If you get the DNS rule right, the FQDN rules built on it are far more predictable.</p>
+<hr>
+<h4>Blog Author</h4>
+<p><strong>Apoorv Malmane</strong> is a Principal Engineer at Broadcom specializing in network and security virtualization, with a focus on vDefend and VMware Cloud Foundation. He has contributed to and authored VMware Hands-on Labs available to practitioners online, and is a content contributor to the VCP-PCS Administrator certification exam. He is a vExpert and an IEEE Senior Member, and has staffed the Expert Bar at VMworld and VMware Explore.</p>
+<hr>
+<blockquote><strong>Disclaimer:</strong> The views and opinions expressed in this article are my own and do not necessarily reflect those of my employer.</blockquote>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center></center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
