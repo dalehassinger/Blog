@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESXi Switch Port Map</title>
+<style>
+  :root {
+    --bg: #f4f6fa; --panel: #ffffff; --panel-2: #f8f9fc; --border: #e3e7ef; --text: #1b2333; --muted: #667085;
+    --face: linear-gradient(180deg, #2a3142, #1c2230); --face-text: #c9d1e3; --jack: #0f131c; --jack-border: #3a4357;
+    --led-up: #22c55e; --led-down: #475066; --warn: #d97706; --warn-bg: #fef3c7; --shadow: 0 1px 2px rgba(16,24,40,.06), 0 4px 16px rgba(16,24,40,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117; --panel: #161b24; --panel-2: #1b2130; --border: #2a3242; --text: #e6eaf2; --muted: #8b95a8;
+      --face: linear-gradient(180deg, #232a39, #161b26); --jack: #0a0d13; --jack-border: #343d51;
+      --warn: #fbbf24; --warn-bg: #3a2c0b; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1117; --panel: #161b24; --panel-2: #1b2130; --border: #2a3242; --text: #e6eaf2; --muted: #8b95a8;
+    --face: linear-gradient(180deg, #232a39, #161b26); --jack: #0a0d13; --jack-border: #343d51;
+    --warn: #fbbf24; --warn-bg: #3a2c0b; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+  h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: -.01em; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 8px; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; min-width: 92px; box-shadow: var(--shadow); }
+  .stat b { display: block; font-size: 18px; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 12px; }
+  .stat.warn b { color: var(--warn); }
+  .stage { position: relative; }
+  svg.wires { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 0; }
+  svg.wires path { fill: none; stroke-linecap: round; transition: opacity .15s, stroke-width .15s; pointer-events: stroke; cursor: default; }
+  .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; position: relative; z-index: 1; }
+  .hosts { margin-bottom: 96px; }
+  .others { margin-top: 96px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); padding: 14px; min-width: 0; transition: opacity .15s; }
+  .card h3 { margin: 0; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+  .card .meta { color: var(--muted); font-size: 12px; margin: 2px 0 12px; }
+  .swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+  .pill { font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 99px; background: var(--panel-2); border: 1px solid var(--border); color: var(--muted); margin-left: auto; }
+  .nics { display: flex; gap: 8px; flex-wrap: wrap; }
+  .nic { flex: 1 1 0; min-width: 48px; text-align: center; padding: 8px 6px 10px; border-radius: 10px; background: var(--panel-2); border: 1px solid var(--border); position: relative; }
+  .nic b { display: block; font-size: 12px; }
+  .nic span { display: block; font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .nic.linked { border-color: var(--c); box-shadow: inset 0 -3px 0 var(--c); }
+  .nic.unlinked { opacity: .55; border-style: dashed; }
+  .switch { background: var(--face); border-radius: 16px; padding: 16px 20px 18px; box-shadow: var(--shadow); color: var(--face-text); position: relative; z-index: 1; }
+  .switch .label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+  .switch .label b { font-size: 14px; color: #fff; letter-spacing: .08em; }
+  .ports { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 10px; }
+  .port { background: var(--jack); border: 1px solid var(--jack-border); border-radius: 8px; padding: 8px 4px 6px; text-align: center; font-size: 11px; position: relative; transition: opacity .15s; }
+  .port .jack { width: 30px; height: 22px; margin: 0 auto 6px; border-radius: 4px; border: 2px solid var(--jack-border); background: #05070b; position: relative; }
+  .port .jack::after { content: ""; position: absolute; left: 7px; right: 7px; bottom: -2px; height: 6px; background: var(--jack-border); border-radius: 2px 2px 0 0; }
+  .port .led { position: absolute; top: 6px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--led-down); }
+  .port.up .led { background: var(--led-up); box-shadow: 0 0 6px var(--led-up); }
+  .port.host { border-color: var(--c); box-shadow: 0 0 0 1px var(--c) inset; }
+  .port.host .jack { border-color: var(--c); }
+  .port .speed { color: #8b95a8; font-size: 10px; }
+  .dim { opacity: .18 !important; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; color: var(--muted); font-size: 12px; margin: 14px 0 0; justify-content: center; }
+  .legend i { display: inline-block; width: 26px; height: 0; border-top: 3px solid var(--muted); vertical-align: middle; margin-right: 6px; }
+  .legend i.dash { border-top-style: dashed; }
+  .tip { position: fixed; z-index: 10; pointer-events: none; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow); padding: 10px 12px; font-size: 12px; max-width: 300px; opacity: 0; transition: opacity .1s; }
+  .tip.show { opacity: 1; }
+  .tip b { font-size: 13px; }
+  .tip div { color: var(--muted); }
+  h2 { font-size: 15px; margin: 40px 0 12px; }
+  .table-wrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; background: var(--panel-2); }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; }
+  .flag { color: var(--warn); background: var(--warn-bg); border-radius: 6px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
+  .src { font-size: 11px; color: var(--muted); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>ESXi &harr; Switch Port Map</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="stage" id="stage">
+    <svg class="wires" id="wires"></svg>
+    <div class="row hosts" id="hosts"></div>
+    <div class="switch" id="switch">
+      <div class="label"><b id="model"></b><span id="swip"></span></div>
+      <div class="ports" id="ports"></div>
+    </div>
+    <div class="row others" id="others"></div>
+  </div>
+  <div class="legend">
+    <span><i></i>Matched by LLDP</span>
+    <span><i class="dash"></i>Matched by MAC table / no LLDP</span>
+    <span>Line width = link speed</span>
+  </div>
+
+  <h2>Links</h2>
+  <div class="table-wrap"><table id="links"></table></div>
+  <div id="unlinked"></div>
+</div>
+<div class="tip" id="tip"></div>
+
+<script type="application/json" id="data">{"Generated":"2026-10-20 08:57:25","vCenter":"vcsa91.vcrocs.local","Switch":{"Model":"TEG-7124WS","IP":"192.168.100.254","Ports":[{"Port":"Gi0/1","Status":"connected","Speed":"2.5 Gbps","SpeedMb":2500},{"Port":"Gi0/2","Status":"connected","Speed":"2.5 Gbps","SpeedMb":2500},{"Port":"Gi0/3","Status":"connected","Speed":"5 Gbps","SpeedMb":5000},{"Port":"Gi0/4","Status":"connected","Speed":"5 Gbps","SpeedMb":5000},{"Port":"Gi0/5","Status":"connected","Speed":"5 Gbps","SpeedMb":5000},{"Port":"Gi0/6","Status":"connected","Speed":"5 Gbps","SpeedMb":5000},{"Port":"Gi0/7","Status":"connected","Speed":"5 Gbps","SpeedMb":5000},{"Port":"Gi0/8","Status":"connected","Speed":"10 Gbps","SpeedMb":10000},{"Port":"Gi0/9","Status":"connected","Speed":"10 Gbps","SpeedMb":10000},{"Port":"Gi0/10","Status":"connected","Speed":"10 Gbps","SpeedMb":10000},{"Port":"Gi0/11","Status":"connected","Speed":"10 Gbps","SpeedMb":10000},{"Port":"Gi0/12","Status":"not connected","Speed":"1 Gbps","SpeedMb":1000}]},"Hosts":[{"Name":"esx9-01.vcrocs.local","ConnectionState":"Connected","Error":null,"Nics":[{"Device":"vmnic0","Mac":"58:47:ca:7a:e0:72","SpeedMb":10000,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 0"},{"Device":"vmnic1","Mac":"58:47:ca:7a:e0:73","SpeedMb":10000,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 1"},{"Device":"vmnic2","Mac":"58:47:ca:7a:e0:74","SpeedMb":2500,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 2"},{"Device":"vmnic3","Mac":"58:47:ca:7a:e0:75","SpeedMb":null,"LinkUp":false,"Switch":null,"Uplink":null}],"Vmks":[{"Device":"vmk0","Mac":"58:47:ca:7a:e0:73","IP":"192.168.101.11"},{"Device":"vmk1","Mac":"00:50:56:64:6b:ed","IP":"192.168.102.11"},{"Device":"vmk2","Mac":"00:50:56:60:46:8a","IP":"192.168.103.11"},{"Device":"vmk50","Mac":"00:50:56:6c:7b:55","IP":"169.254.1.1"}]},{"Name":"esx9-02.vcrocs.local","ConnectionState":"Connected","Error":null,"Nics":[{"Device":"vmnic0","Mac":"58:47:ca:78:bb:12","SpeedMb":10000,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 0"},{"Device":"vmnic1","Mac":"58:47:ca:78:bb:13","SpeedMb":10000,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 1"},{"Device":"vmnic2","Mac":"58:47:ca:78:bb:14","SpeedMb":2500,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 2"},{"Device":"vmnic3","Mac":"58:47:ca:78:bb:15","SpeedMb":null,"LinkUp":false,"Switch":null,"Uplink":null}],"Vmks":[{"Device":"vmk0","Mac":"58:47:ca:78:bb:13","IP":"192.168.101.12"},{"Device":"vmk1","Mac":"00:50:56:6f:a6:d6","IP":"192.168.102.12"},{"Device":"vmk2","Mac":"00:50:56:6e:30:94","IP":"192.168.103.12"},{"Device":"vmk50","Mac":"00:50:56:6c:3f:20","IP":"169.254.1.1"}]},{"Name":"esx9-03.vcrocs.local","ConnectionState":"Connected","Error":null,"Nics":[{"Device":"vmnic0","Mac":"58:47:ca:77:f3:e2","SpeedMb":10000,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 0"},{"Device":"vmnic1","Mac":"58:47:ca:77:f3:e3","SpeedMb":10000,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 1"},{"Device":"vmnic2","Mac":"58:47:ca:77:f3:e4","SpeedMb":2500,"LinkUp":true,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 2"},{"Device":"vmnic3","Mac":"58:47:ca:77:f3:e5","SpeedMb":null,"LinkUp":false,"Switch":"DSwitch-vCROCS","Uplink":"Uplink 3"}],"Vmks":[{"Device":"vmk0","Mac":"58:47:ca:77:f3:e3","IP":"192.168.101.13"},{"Device":"vmk1","Mac":"00:50:56:6e:c2:c0","IP":"192.168.102.13"},{"Device":"vmk2","Mac":"00:50:56:6f:79:63","IP":"192.168.103.13"},{"Device":"vmk3","Mac":"00:50:56:6c:dd:e0","IP":"192.168.100.180"},{"Device":"vmk50","Mac":"00:50:56:6d:7d:da","IP":"169.254.1.1"}]}],"Links":[{"Host":"esx9-01.vcrocs.local","Nic":"vmnic0","NicMac":"58:47:ca:7a:e0:72","NicSpeedMb":10000,"VirtualSwitch":"DSwitch-vCROCS","Uplink":"Uplink 0","SwitchPort":"Gi0/7","PortStatus":"connected","PortSpeedMb":5000,"SpeedMismatch":true,"Vlans":[102],"Vmks":["vmk1"],"Source":"LLDP"},{"Host":"esx9-01.vcrocs.local","Nic":"vmnic1","NicMac":"58:47:ca:7a:e0:73","NicSpeedMb":10000,"VirtualSwitch":"DSwitch-vCROCS","Uplink":"Uplink 1","SwitchPort":"Gi0/3","PortStatus":"connected","PortSpeedMb":5000,"SpeedMismatch":true,"Vlans":[1,101,103],"Vmks":["vmk0","vmk2"],"Source":"LLDP"},{"Host":"esx9-02.vcrocs.local","Nic":"vmnic0","NicMac":"58:47:ca:78:bb:12","NicSpeedMb":10000,"VirtualSwitch":"DSwitch-vCROCS","Uplink":"Uplink 0","SwitchPort":"Gi0/8","PortStatus":"connected","PortSpeedMb":10000,"SpeedMismatch":false,"Vlans":[102],"Vmks":["vmk1"],"Source":"LLDP"},{"Host":"esx9-02.vcrocs.local","Nic":"vmnic1","NicMac":"58:47:ca:78:bb:13","NicSpeedMb":10000,"VirtualSwitch":"DSwitch-vCROCS","Uplink":"Uplink 1","SwitchPort":"Gi0/4","PortStatus":"connected","PortSpeedMb":5000,"SpeedMismatch":true,"Vlans":[1,101,103],"Vmks":["vmk0","vmk2"],"Source":"LLDP"},{"Host":"esx9-03.vcrocs.local","Nic":"vmnic0","NicMac":"58:47:ca:77:f3:e2","NicSpeedMb":10000,"VirtualSwitch":"DSwitch-vCROCS","Uplink":"Uplink 0","SwitchPort":"Gi0/9","PortStatus":"connected","PortSpeedMb":10000,"SpeedMismatch":false,"Vlans":[],"Vmks":[],"Source":"LLDP"},{"Host":"esx9-03.vcrocs.local","Nic":"vmnic1","NicMac":"58:47:ca:77:f3:e3","NicSpeedMb":10000,"VirtualSwitch":"DSwitch-vCROCS","Uplink":"Uplink 1","SwitchPort":"Gi0/5","PortStatus":"connected","PortSpeedMb":5000,"SpeedMismatch":true,"Vlans":[1,101,103],"Vmks":["vmk0","vmk2"],"Source":"LLDP"}],"UnlinkedNics":[{"Host":"esx9-01.vcrocs.local","Nic":"vmnic2","NicMac":"58:47:ca:7a:e0:74","LinkUp":true,"SpeedMb":2500,"Reason":"Not seen on this switch"},{"Host":"esx9-01.vcrocs.local","Nic":"vmnic3","NicMac":"58:47:ca:7a:e0:75","LinkUp":false,"SpeedMb":null,"Reason":"Link down"},{"Host":"esx9-02.vcrocs.local","Nic":"vmnic2","NicMac":"58:47:ca:78:bb:14","LinkUp":true,"SpeedMb":2500,"Reason":"Not seen on this switch"},{"Host":"esx9-02.vcrocs.local","Nic":"vmnic3","NicMac":"58:47:ca:78:bb:15","LinkUp":false,"SpeedMb":null,"Reason":"Link down"},{"Host":"esx9-03.vcrocs.local","Nic":"vmnic2","NicMac":"58:47:ca:77:f3:e4","LinkUp":true,"SpeedMb":2500,"Reason":"Not seen on this switch"},{"Host":"esx9-03.vcrocs.local","Nic":"vmnic3","NicMac":"58:47:ca:77:f3:e5","LinkUp":false,"SpeedMb":null,"Reason":"Link down"}],"OtherDevices":[{"Name":"vCROCSLab","Lldp":true,"KnownDevice":false,"Vendor":null,"ManagementIP":"192.168.100.1","Ports":["Gi0/1"],"ChassisIds":["58:d6:1f:43:6c:99"],"PortDescriptions":["eth1"],"Vlans":[1,101,102,103],"MacCount":6,"Interfaces":[],"SeenBehind":[],"NotSeen":[]},{"Name":"Another switch (Gi0/2)","Lldp":false,"KnownDevice":false,"Vendor":null,"ManagementIP":null,"Ports":["Gi0/2"],"ChassisIds":[],"PortDescriptions":[],"Vlans":[1],"MacCount":15,"Interfaces":[],"SeenBehind":[{"Device":"DS1525+ NAS","Interface":"LAN 1","IP":"192.168.100.164","Mac":"90:09:d0:86:33:4b","Vendor":"Synology","Port":"Gi0/2"}],"NotSeen":[]},{"Name":"Unknown 58:47:ca:7f:db:xx","Lldp":true,"KnownDevice":false,"Vendor":null,"ManagementIP":null,"Ports":["Gi0/6","Gi0/10"],"ChassisIds":["58:47:ca:7f:db:db","58:47:ca:7f:db:da"],"PortDescriptions":[],"Vlans":[1,101,102],"MacCount":2,"Interfaces":[],"SeenBehind":[],"NotSeen":[]},{"Name":"DS1525+ NAS","Lldp":false,"KnownDevice":true,"Vendor":"Synology","ManagementIP":null,"Ports":["Gi0/11"],"ChassisIds":[],"PortDescriptions":[],"Vlans":[102],"MacCount":1,"Interfaces":[{"Device":"DS1525+ NAS","Interface":"LAN 3","IP":"192.168.102.253","Mac":"90:09:d0:83:27:b4","Vendor":"Synology","Port":"Gi0/11"}],"SeenBehind":[],"NotSeen":[{"Device":"DS1525+ NAS","Interface":"LAN 2","IP":"192.168.100.165","Mac":"90:09:d0:86:33:4c","Vendor":"Synology"}]}]}</script>
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById('data').textContent);
+  const arr = v => v == null ? [] : (Array.isArray(v) ? v : [v]);
+  const hosts = arr(D.Hosts), links = arr(D.Links), others = arr(D.OtherDevices), unlinked = arr(D.UnlinkedNics);
+  const ports = arr(D.Switch.Ports).filter(p => /^(Gi|Ex)/.test(p.Port));
+  const palette = ['#4f7cff', '#12b886', '#f59f00', '#e64980', '#7950f2', '#15aabf', '#fa5252', '#82c91e'];
+  const otherColor = '#8b95a8';
+  const color = {};
+  hosts.forEach((h, i) => color[h.Name] = palette[i % palette.length]);
+  const short = n => n.split('.')[0];
+  const gb = mb => mb == null ? '—' : (mb >= 1000 ? (mb / 1000) + ' Gb' : mb + ' Mb');
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const id = s => s.replace(/[^\w-]/g, '_');
+  const linkByPort = {}; links.forEach(l => linkByPort[l.SwitchPort] = l);
+  const otherByPort = {}; others.forEach(o => arr(o.Ports).forEach(p => otherByPort[p] = o));
+
+  document.getElementById('sub').textContent = `${D.Switch.Model} ${D.Switch.IP} · vCenter ${D.vCenter} · ${D.Generated}`;
+  document.getElementById('model').textContent = D.Switch.Model;
+  document.getElementById('swip').textContent = D.Switch.IP;
+
+  const mismatches = links.filter(l => l.SpeedMismatch).length;
+  const statData = [
+    [hosts.length, 'ESXi hosts'], [links.length, 'Uplinks mapped'],
+    [links.filter(l => l.Source === 'LLDP').length, 'LLDP verified'],
+    [ports.filter(p => p.Status === 'connected').length + ' / ' + ports.length, 'Ports in use'],
+    [mismatches, 'Speed mismatch', mismatches > 0]
+  ];
+  document.getElementById('stats').innerHTML = statData.map(([v, t, w]) => `<div class="stat${w ? ' warn' : ''}"><b>${esc(v)}</b><span>${esc(t)}</span></div>`).join('');
+
+  // Host cards
+  document.getElementById('hosts').innerHTML = hosts.map(h => {
+    const nics = arr(h.Nics).map(n => {
+      const l = links.find(x => x.Host === h.Name && x.Nic === n.Device);
+      return `<div class="nic ${l ? 'linked' : 'unlinked'}" id="nic-${id(h.Name)}-${n.Device}" data-host="${esc(h.Name)}" data-nic="${esc(n.Device)}">
+        <b>${esc(n.Device)}</b><span>${n.LinkUp ? gb(n.SpeedMb) : 'down'}</span><span>${esc(n.Uplink || '')}</span></div>`;
+    }).join('');
+    return `<div class="card host" data-host="${esc(h.Name)}" style="--c:${color[h.Name]}">
+      <h3><span class="swatch" style="background:${color[h.Name]}"></span>${esc(short(h.Name))}<span class="pill">${esc(h.ConnectionState)}</span></h3>
+      <div class="meta">${arr(h.Vmks).filter(v => !/^169\.254/.test(v.IP)).map(v => `${esc(v.Device)} ${esc(v.IP)}`).join(' · ') || '&nbsp;'}</div>
+      <div class="nics">${nics || '<span class="meta">' + esc(h.Error || 'No NICs') + '</span>'}</div></div>`;
+  }).join('');
+
+  // Switch faceplate
+  document.getElementById('ports').innerHTML = ports.map(p => {
+    const l = linkByPort[p.Port], o = otherByPort[p.Port];
+    const cls = ['port', p.Status === 'connected' ? 'up' : '', l ? 'host' : ''].join(' ');
+    return `<div class="${cls}" id="port-${id(p.Port)}" data-port="${esc(p.Port)}" style="${l ? '--c:' + color[l.Host] : ''}">
+      <span class="led"></span><div class="jack"></div><div>${esc(p.Port.replace(/^Gi0\//, ''))}</div>
+      <div class="speed">${p.Status === 'connected' ? esc(p.Speed.replace(' Gbps', 'G').replace(' Mbps', 'M')) : '&nbsp;'}</div></div>`;
+  }).join('');
+
+  // Other devices
+  document.getElementById('others').innerHTML = others.map((o, i) => `<div class="card other" id="other-${i}" data-other="${i}">
+      <h3><span class="swatch" style="background:${otherColor}"></span>${esc(o.Name)}<span class="pill">${o.KnownDevice ? esc(o.Vendor || 'known device') : o.Lldp ? 'LLDP' : 'no LLDP'}</span></h3>
+      <div class="meta">${o.ManagementIP ? esc(o.ManagementIP) + ' · ' : ''}${arr(o.Ports).map(esc).join(', ') || 'Not seen on this switch'} · VLAN ${arr(o.Vlans).join(', ') || '—'} · ${o.MacCount} MAC${o.MacCount === 1 ? '' : 's'}</div>
+      ${arr(o.Interfaces).length ? `<div class="meta" style="margin:0">${arr(o.Interfaces).map(k => `<b>${esc(k.Interface)}</b> ${esc(k.IP || '')} &rarr; ${esc(k.Port)}`).join('<br>')}</div>` : ''}
+      ${arr(o.SeenBehind).length ? `<div class="meta" style="margin:0">Behind this port: ${[...new Set(arr(o.SeenBehind).map(k => k.Device))].map(dev => `<b>${esc(dev)}</b> ${arr(o.SeenBehind).filter(k => k.Device === dev).map(k => `${esc(k.Interface)} ${esc(k.IP || '')}`).join(', ')}`).join('<br>')}</div>` : ''}
+      ${arr(o.NotSeen).length ? `<div class="meta" style="margin:0">Not in MAC table: ${arr(o.NotSeen).map(k => `${esc(k.Interface)} ${esc(k.IP || '')}`).join(', ')}</div>` : ''}
+      ${!arr(o.Interfaces).length && arr(o.ChassisIds).length ? `<div class="meta mono" style="margin:0">${arr(o.ChassisIds).map(esc).join('<br>')}</div>` : ''}</div>`).join('');
+
+  // Wires
+  const stage = document.getElementById('stage'), svg = document.getElementById('wires');
+  const NS = 'http://www.w3.org/2000/svg';
+  const width = mb => mb >= 10000 ? 4.5 : mb >= 5000 ? 3.5 : mb >= 2500 ? 2.75 : 2;
+  function anchor(el, side) {
+    const r = el.getBoundingClientRect(), s = stage.getBoundingClientRect();
+    return { x: r.left - s.left + r.width / 2, y: (side === 'top' ? r.top : r.bottom) - s.top };
+  }
+  function curve(a, b) {
+    const dy = Math.max(40, (b.y - a.y) * 0.5);
+    return `M${a.x},${a.y} C${a.x},${a.y + dy} ${b.x},${b.y - dy} ${b.x},${b.y}`;
+  }
+  function draw() {
+    svg.innerHTML = '';
+    links.forEach(l => {
+      const n = document.getElementById(`nic-${id(l.Host)}-${l.Nic}`), p = document.getElementById(`port-${id(l.SwitchPort)}`);
+      if (!n || !p) return;
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', curve(anchor(n, 'bottom'), anchor(p, 'top')));
+      path.setAttribute('stroke', color[l.Host]);
+      path.setAttribute('stroke-width', width(l.PortSpeedMb || l.NicSpeedMb));
+      if (l.Source !== 'LLDP') path.setAttribute('stroke-dasharray', '6 6');
+      path.dataset.host = l.Host; path.dataset.port = l.SwitchPort;
+      svg.appendChild(path);
+    });
+    others.forEach((o, i) => arr(o.Ports).forEach(pt => {
+      const p = document.getElementById(`port-${id(pt)}`), c = document.getElementById(`other-${i}`);
+      if (!p || !c) return;
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', curve(anchor(p, 'bottom'), anchor(c, 'top')));
+      path.setAttribute('stroke', otherColor);
+      path.setAttribute('stroke-width', 2);
+      if (!o.Lldp) path.setAttribute('stroke-dasharray', '6 6');
+      path.dataset.other = i; path.dataset.port = pt;
+      svg.appendChild(path);
+    }));
+  }
+
+  // Hover: focus one host, port or device
+  const tip = document.getElementById('tip');
+  function focus(match) {
+    document.querySelectorAll('.card, .port, svg.wires path').forEach(el => el.classList.toggle('dim', match ? !match(el) : false));
+  }
+  function relatedToHost(h) {
+    const hp = links.filter(l => l.Host === h).map(l => l.SwitchPort);
+    return el => el.dataset.host === h || hp.includes(el.dataset.port) && !el.dataset.other;
+  }
+  function tipFor(el) {
+    if (el.dataset.port) {
+      const p = ports.find(x => x.Port === el.dataset.port), l = linkByPort[el.dataset.port], o = otherByPort[el.dataset.port];
+      let h = `<b>${esc(p.Port)}</b><div>${esc(p.Status)} · ${esc(p.Speed)}</div>`;
+      if (l) h += `<div>${esc(short(l.Host))} ${esc(l.Nic)} · ${esc(l.Uplink || '')}</div><div>VLAN ${arr(l.Vlans).join(', ') || '—'}${arr(l.Vmks).length ? ' · ' + arr(l.Vmks).join(', ') : ''}</div>`;
+      if (o) h += `<div>${esc(o.Name)} · VLAN ${arr(o.Vlans).join(', ') || '—'}</div>`;
+      return h;
+    }
+    if (el.dataset.nic) {
+      const l = links.find(x => x.Host === el.dataset.host && x.Nic === el.dataset.nic);
+      const n = arr(hosts.find(x => x.Name === el.dataset.host).Nics).find(x => x.Device === el.dataset.nic);
+      return `<b>${esc(short(el.dataset.host))} ${esc(n.Device)}</b><div class="mono">${esc(n.Mac)}</div><div>${esc(n.Switch || 'No virtual switch')}${n.Uplink ? ' · ' + esc(n.Uplink) : ''}</div>` +
+        (l ? `<div>&rarr; ${esc(l.SwitchPort)} (${esc(l.Source)})</div>` : `<div>${n.LinkUp ? 'Not seen on this switch' : 'Link down'}</div>`);
+    }
+    return '';
+  }
+  document.querySelectorAll('.card.host').forEach(el => {
+    el.addEventListener('mouseenter', () => focus(relatedToHost(el.dataset.host)));
+    el.addEventListener('mouseleave', () => focus(null));
+  });
+  document.querySelectorAll('.card.other').forEach(el => {
+    const o = others[el.dataset.other];
+    el.addEventListener('mouseenter', () => focus(x => x.dataset.other === el.dataset.other || arr(o.Ports).includes(x.dataset.port) && !x.dataset.host));
+    el.addEventListener('mouseleave', () => focus(null));
+  });
+  document.querySelectorAll('.port, .nic').forEach(el => {
+    el.addEventListener('mouseenter', e => {
+      tip.innerHTML = tipFor(el); tip.classList.add('show');
+      const l = el.dataset.port ? linkByPort[el.dataset.port] : links.find(x => x.Host === el.dataset.host && x.Nic === el.dataset.nic);
+      const o = el.dataset.port ? otherByPort[el.dataset.port] : null;
+      if (l) focus(x => x.dataset.host === l.Host && (!x.dataset.port || x.dataset.port === l.SwitchPort) && (!x.dataset.nic || x.dataset.nic === l.Nic) || x.dataset.port === l.SwitchPort && !x.dataset.other);
+      else if (o) focus(x => x.dataset.port === el.dataset.port || x.dataset.other === String(others.indexOf(o)));
+    });
+    el.addEventListener('mousemove', e => {
+      const x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+      tip.style.left = x + 'px'; tip.style.top = (e.clientY + 14) + 'px';
+    });
+    el.addEventListener('mouseleave', () => { tip.classList.remove('show'); focus(null); });
+  });
+
+  // Links table
+  const rows = links.map(l => `<tr>
+    <td><span class="swatch" style="display:inline-block;background:${color[l.Host]};margin-right:6px"></span>${esc(short(l.Host))}</td>
+    <td>${esc(l.Nic)}</td><td class="mono">${esc(l.NicMac)}</td><td>${esc(l.VirtualSwitch || '')}${l.Uplink ? ' · ' + esc(l.Uplink) : ''}</td>
+    <td><b>${esc(l.SwitchPort)}</b></td>
+    <td class="num">${gb(l.NicSpeedMb)} / ${gb(l.PortSpeedMb)} ${l.SpeedMismatch ? '<span class="flag">mismatch</span>' : ''}</td>
+    <td>${arr(l.Vlans).join(', ') || '—'}</td><td>${arr(l.Vmks).join(', ') || '—'}</td><td class="src">${esc(l.Source)}</td></tr>`).join('');
+  document.getElementById('links').innerHTML = `<thead><tr><th>Host</th><th>vmnic</th><th>MAC</th><th>Virtual switch</th><th>Switch port</th><th>Speed host / switch</th><th>VLANs seen</th><th>VMkernel</th><th>Matched by</th></tr></thead><tbody>${rows}</tbody>`;
+
+  if (unlinked.length) {
+    document.getElementById('unlinked').innerHTML = `<h2>vmnics not on this switch</h2><div class="table-wrap"><table>
+      <thead><tr><th>Host</th><th>vmnic</th><th>MAC</th><th>Status</th></tr></thead><tbody>${unlinked.map(u =>
+        `<tr><td>${esc(short(u.Host))}</td><td>${esc(u.Nic)}</td><td class="mono">${esc(u.NicMac)}</td><td>${esc(u.Reason)}${u.LinkUp ? ' · ' + gb(u.SpeedMb) : ''}</td></tr>`).join('')}</tbody></table></div>`;
+  }
+
+  draw();
+  new ResizeObserver(draw).observe(stage);
+  if (document.fonts) document.fonts.ready.then(draw);
+})();
+</script>
+</body>
+</html>
