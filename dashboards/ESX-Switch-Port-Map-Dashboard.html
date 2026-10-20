@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESX Switch Port Map</title>
+<style>
+  :root {
+    --bg: #17242b;
+    --header: #0c1a21;
+    --card: #1f313a;
+    --card-2: #253a44;
+    --border: #3a4f5a;
+    --text: #e9eef1;
+    --muted: #9fb2bd;
+    --accent: #49afd9;
+    --ok: #5eb715;
+    --warn: #f0b429;
+    --crit: #f35e5a;
+    --off: #4a5a63;
+    --h1: #49afd9;
+    --h2: #a58bf0;
+    --h3: #f08bc4;
+    --dev: #8fa3ae;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 13px/1.45 "Clarity City", "Metropolis", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  header {
+    background: var(--header); border-bottom: 1px solid var(--border);
+    padding: 12px 24px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  header .logo {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: linear-gradient(135deg, #49afd9, #2e6fa3); display: grid; place-items: center;
+    font-weight: 700; font-size: 13px; color: #fff;
+  }
+  header .crumb { color: var(--muted); font-size: 12px; }
+  header h1 { margin: 0; font-size: 17px; font-weight: 600; }
+  header .meta { margin-left: auto; color: var(--muted); font-size: 12px; text-align: right; }
+  main { padding: 20px 24px 40px; max-width: 1400px; margin: 0 auto; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .kpi {
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+    padding: 12px 14px; border-top: 3px solid var(--accent);
+  }
+  .kpi.warn { border-top-color: var(--warn); }
+  .kpi.ok { border-top-color: var(--ok); }
+  .kpi.crit { border-top-color: var(--crit); }
+  .kpi .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+  .kpi .value { font-size: 26px; font-weight: 600; margin-top: 2px; font-variant-numeric: tabular-nums; }
+  .kpi .sub { color: var(--muted); font-size: 12px; }
+  .widget {
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 16px;
+  }
+  .widget-h {
+    display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+    border-bottom: 1px solid var(--border); background: var(--card-2);
+  }
+  .widget-h h2 { margin: 0; font-size: 13px; font-weight: 600; }
+  .widget-h .hint { margin-left: auto; color: var(--muted); font-size: 12px; }
+  .widget-b { padding: 14px; }
+  .diagram-wrap { overflow-x: auto; }
+  svg#diagram { display: block; width: 100%; min-width: 900px; height: auto; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 12px; padding-top: 10px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 22px; height: 0; border-top: 3px solid; display: inline-block; }
+  .sw.dash { border-top-style: dashed; }
+  .dot { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; background: var(--card-2); }
+  tbody tr:hover { background: rgba(73,175,217,.07); }
+  td.num { font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+  .b-ok { background: rgba(94,183,21,.18); color: #8fd651; }
+  .b-warn { background: rgba(240,180,41,.18); color: var(--warn); }
+  .b-crit { background: rgba(243,94,90,.18); color: #ff8b87; }
+  .b-info { background: rgba(73,175,217,.18); color: var(--accent); }
+  .b-mute { background: rgba(159,178,189,.15); color: var(--muted); }
+  .chip { display: inline-block; padding: 0 6px; margin-right: 3px; border: 1px solid var(--border); border-radius: 3px; font-size: 11px; color: var(--muted); }
+  .hostdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 1000px) { .grid2 { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { main { padding: 16px; } header { padding: 12px 16px; } header .meta { margin-left: 0; text-align: left; } }
+  #tip {
+    position: fixed; pointer-events: none; z-index: 10; display: none;
+    background: #0c1a21; border: 1px solid var(--border); border-radius: 4px;
+    padding: 8px 10px; font-size: 12px; box-shadow: 0 6px 18px rgba(0,0,0,.4); max-width: 300px;
+  }
+  #tip b { color: var(--accent); }
+  /* diagram interaction */
+  svg .cable { fill: none; stroke-width: 3; stroke-linecap: round; transition: opacity .15s, stroke-width .15s; }
+  svg .cable-hit { fill: none; stroke: transparent; stroke-width: 14; cursor: pointer; }
+  svg.focus .fx { opacity: .15; }
+  svg.focus .fx.hl { opacity: 1; }
+  svg.focus .cable.hl { stroke-width: 4.5; }
+  svg .hoverable { cursor: pointer; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">V</div>
+  <div>
+    <div class="crumb">Operations › Dashboards › Network</div>
+    <h1>ESXi Host ↔ Switch Port Map</h1>
+  </div>
+  <div class="meta" id="meta"></div>
+</header>
+
+<main>
+  <section class="kpis" id="kpis"></section>
+
+  <section class="widget">
+    <div class="widget-h"><h2>Physical Topology</h2><span class="hint">Hover a host, cable or port for details</span></div>
+    <div class="widget-b">
+      <div class="diagram-wrap"><svg id="diagram" viewBox="0 0 1200 660" role="img" aria-label="Diagram of ESXi host NICs cabled to switch ports"></svg></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </section>
+
+  <section class="widget">
+    <div class="widget-h"><h2>Host Uplink Map</h2><span class="hint" id="linkHint"></span></div>
+    <div class="table-wrap"><table id="linksTbl"></table></div>
+  </section>
+
+  <div class="grid2">
+    <section class="widget">
+      <div class="widget-h"><h2>Unmapped Host NICs</h2></div>
+      <div class="table-wrap"><table id="unlinkedTbl"></table></div>
+    </section>
+    <section class="widget">
+      <div class="widget-h"><h2>Other Devices on Switch</h2></div>
+      <div class="table-wrap"><table id="otherTbl"></table></div>
+    </section>
+  </div>
+</main>
+<div id="tip"></div>
+
+<script>
+const DATA = {
+  "Generated": "2026-10-20 12:53:47",
+  "Switch": "TEG-7124WS 192.168.100.254",
+  "Links": [
+    {"Host":"esx9-01.vcrocs.local","Nic":"vmnic0","SwitchPort":"Gi0/7","NicSpeedMb":10000,"PortSpeedMb":5000,"SpeedMismatch":true,"Uplink":"Uplink 0","Vlans":[102],"Vmks":["vmk1"],"Source":"LLDP"},
+    {"Host":"esx9-01.vcrocs.local","Nic":"vmnic1","SwitchPort":"Gi0/3","NicSpeedMb":10000,"PortSpeedMb":5000,"SpeedMismatch":true,"Uplink":"Uplink 1","Vlans":[1,101,103],"Vmks":["vmk0","vmk2"],"Source":"LLDP"},
+    {"Host":"esx9-02.vcrocs.local","Nic":"vmnic0","SwitchPort":"Gi0/8","NicSpeedMb":10000,"PortSpeedMb":10000,"SpeedMismatch":false,"Uplink":"Uplink 0","Vlans":[102],"Vmks":["vmk1"],"Source":"LLDP"},
+    {"Host":"esx9-02.vcrocs.local","Nic":"vmnic1","SwitchPort":"Gi0/4","NicSpeedMb":10000,"PortSpeedMb":5000,"SpeedMismatch":true,"Uplink":"Uplink 1","Vlans":[1,101,103],"Vmks":["vmk0","vmk2"],"Source":"LLDP"},
+    {"Host":"esx9-03.vcrocs.local","Nic":"vmnic0","SwitchPort":"Gi0/9","NicSpeedMb":10000,"PortSpeedMb":10000,"SpeedMismatch":false,"Uplink":"Uplink 0","Vlans":[102],"Vmks":["vmk1"],"Source":"LLDP"},
+    {"Host":"esx9-03.vcrocs.local","Nic":"vmnic1","SwitchPort":"Gi0/5","NicSpeedMb":10000,"PortSpeedMb":5000,"SpeedMismatch":true,"Uplink":"Uplink 1","Vlans":[1,101,103],"Vmks":["vmk0","vmk2"],"Source":"LLDP"}
+  ],
+  "UnlinkedNics": [
+    {"Host":"esx9-01.vcrocs.local","Nic":"vmnic2","NicMac":"58:47:ca:7a:e0:74","LinkUp":true,"SpeedMb":2500,"Reason":"Not seen on this switch"},
+    {"Host":"esx9-01.vcrocs.local","Nic":"vmnic3","NicMac":"58:47:ca:7a:e0:75","LinkUp":false,"SpeedMb":null,"Reason":"Link down"},
+    {"Host":"esx9-02.vcrocs.local","Nic":"vmnic2","NicMac":"58:47:ca:78:bb:14","LinkUp":true,"SpeedMb":2500,"Reason":"Not seen on this switch"},
+    {"Host":"esx9-02.vcrocs.local","Nic":"vmnic3","NicMac":"58:47:ca:78:bb:15","LinkUp":false,"SpeedMb":null,"Reason":"Link down"},
+    {"Host":"esx9-03.vcrocs.local","Nic":"vmnic2","NicMac":"58:47:ca:77:f3:e4","LinkUp":true,"SpeedMb":2500,"Reason":"Not seen on this switch"},
+    {"Host":"esx9-03.vcrocs.local","Nic":"vmnic3","NicMac":"58:47:ca:77:f3:e5","LinkUp":false,"SpeedMb":null,"Reason":"Link down"}
+  ],
+  "OtherDevices": [
+    {"Name":"vCROCSLab","Lldp":true,"DeviceType":null,"Description":null,"Vendor":null,"ManagementIP":"192.168.100.1","Ports":["Gi0/1"],"ChassisIds":["58:d6:1f:43:6c:99"],"PortDescriptions":["eth1"],"Vlans":[1,102,103],"MacCount":9,"Interfaces":[],"SeenBehind":[],"NotSeen":[]},
+    {"Name":"TP-Link TL-SG108S-M2","Lldp":false,"DeviceType":"Unmanaged switch","Description":"8-Port 2.5G Multi-Gigabit Desktop Switch","Vendor":null,"ManagementIP":null,"Ports":["Gi0/2"],"ChassisIds":[],"PortDescriptions":[],"Vlans":[1],"MacCount":15,"Interfaces":[],"SeenBehind":[{"Device":"DS1525+ NAS","Interface":"LAN 2","IP":"192.168.100.165","Mac":"90:09:d0:86:33:4c","Vendor":"Synology","Port":"Gi0/2"}],"NotSeen":[]},
+    {"Name":"Unknown 58:47:ca:7f:db:xx","Lldp":true,"DeviceType":null,"Description":null,"Vendor":null,"ManagementIP":null,"Ports":["Gi0/6","Gi0/10"],"ChassisIds":["58:47:ca:7f:db:db","58:47:ca:7f:db:da"],"PortDescriptions":[],"Vlans":[1,101,102],"MacCount":2,"Interfaces":[],"SeenBehind":[],"NotSeen":[]},
+    {"Name":"DS1525+ NAS","Lldp":false,"DeviceType":null,"Description":null,"Vendor":"Synology","ManagementIP":null,"Ports":["Gi0/11"],"ChassisIds":[],"PortDescriptions":[],"Vlans":[102],"MacCount":1,"Interfaces":[{"Device":"DS1525+ NAS","Interface":"LAN 3","IP":"192.168.102.253","Mac":"90:09:d0:83:27:b4","Vendor":"Synology","Port":"Gi0/11"}],"SeenBehind":[],"NotSeen":[{"Device":"DS1525+ NAS","Interface":"LAN 1","IP":"192.168.100.164","Mac":"90:09:d0:86:33:4b","Vendor":"Synology"}]}
+  ],
+  "HostErrors": []
+};
+
+const PORT_COUNT = 12;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const HOST_COLORS = [css('--h1'), css('--h2'), css('--h3'), '#6fd3c1', '#f5a25d'];
+const short = h => h.split('.')[0];
+const portNum = p => parseInt(String(p).split('/').pop(), 10);
+const spd = mb => mb == null ? '—' : (mb >= 1000 ? (mb / 1000) + 'G' : mb + 'M');
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// ---- model ----
+const hosts = [...new Set([...DATA.Links, ...DATA.UnlinkedNics].map(x => x.Host))].sort();
+const hostColor = Object.fromEntries(hosts.map((h, i) => [h, HOST_COLORS[i % HOST_COLORS.length]]));
+const nicsByHost = {};
+hosts.forEach(h => nicsByHost[h] = []);
+DATA.Links.forEach(l => nicsByHost[l.Host].push({ nic: l.Nic, link: l }));
+DATA.UnlinkedNics.forEach(u => nicsByHost[u.Host].push({ nic: u.Nic, unlinked: u }));
+hosts.forEach(h => nicsByHost[h].sort((a, b) => a.nic.localeCompare(b.nic, undefined, { numeric: true })));
+
+const portMap = {}; // port number -> {kind, ...}
+DATA.Links.forEach(l => portMap[portNum(l.SwitchPort)] = { kind: 'host', link: l });
+DATA.OtherDevices.forEach(d => d.Ports.forEach(p => portMap[portNum(p)] = { kind: 'dev', dev: d, port: p }));
+
+const [swModel, swIp] = DATA.Switch.split(' ');
+
+// ---- header + KPIs ----
+document.getElementById('meta').innerHTML =
+  `Switch <b>${esc(swModel)}</b> · ${esc(swIp)}<br>Collected ${esc(DATA.Generated)}`;
+
+const mismatches = DATA.Links.filter(l => l.SpeedMismatch).length;
+const usedPorts = Object.keys(portMap).length;
+const notSeen = DATA.UnlinkedNics.filter(u => u.LinkUp).length;
+const down = DATA.UnlinkedNics.filter(u => !u.LinkUp).length;
+const kpis = [
+  { label: 'ESXi Hosts', value: hosts.length, sub: DATA.HostErrors.length ? `${DATA.HostErrors.length} errors` : 'All hosts queried', cls: DATA.HostErrors.length ? 'crit' : 'ok' },
+  { label: 'Mapped vmnic Links', value: DATA.Links.length, sub: `of ${DATA.Links.length + DATA.UnlinkedNics.length} host NICs · via LLDP`, cls: '' },
+  { label: 'Speed Mismatches', value: mismatches, sub: '10G NIC negotiating 5G', cls: mismatches ? 'warn' : 'ok' },
+  { label: 'Switch Ports In Use', value: `${usedPorts}/${PORT_COUNT}`, sub: `${PORT_COUNT - usedPorts} free`, cls: '' },
+  { label: 'NICs Up, Not On Switch', value: notSeen, sub: 'Cabled elsewhere', cls: notSeen ? 'warn' : 'ok' },
+  { label: 'NICs Link Down', value: down, sub: 'No link', cls: down ? 'crit' : 'ok' },
+];
+document.getElementById('kpis').innerHTML = kpis.map(k =>
+  `<div class="kpi ${k.cls}"><div class="label">${k.label}</div><div class="value">${k.value}</div><div class="sub">${k.sub}</div></div>`).join('');
+
+// ---- diagram ----
+const svg = document.getElementById('diagram');
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs = {}, parent = svg, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (text != null) e.textContent = text;
+  parent.appendChild(e);
+  return e;
+}
+
+// defs
+const defs = el('defs');
+const g1 = el('linearGradient', { id: 'metal', x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+el('stop', { offset: '0%', 'stop-color': '#3c4c55' }, g1);
+el('stop', { offset: '8%', 'stop-color': '#2a3940' }, g1);
+el('stop', { offset: '100%', 'stop-color': '#1a252b' }, g1);
+const g2 = el('linearGradient', { id: 'hostg', x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+el('stop', { offset: '0%', 'stop-color': '#2a414c' }, g2);
+el('stop', { offset: '100%', 'stop-color': '#203540' }, g2);
+const glow = el('filter', { id: 'glow', x: '-50%', y: '-50%', width: '200%', height: '200%' }, defs);
+el('feGaussianBlur', { stdDeviation: 1.6, result: 'b' }, glow);
+const fm = el('feMerge', {}, glow);
+el('feMergeNode', { in: 'b' }, fm); el('feMergeNode', { in: 'SourceGraphic' }, fm);
+
+const layerCables = el('g');
+const layerSwitch = el('g');
+const layerNodes = el('g');
+
+// switch geometry
+const SW = { x: 100, y: 320, w: 1000, h: 120 };
+const P = { x0: 322, pitch: 62, y: 352, w: 48, h: 40 };
+const portX = n => P.x0 + (n - 1) * P.pitch;
+const portTop = n => ({ x: portX(n) + P.w / 2, y: P.y });
+const portBot = n => ({ x: portX(n) + P.w / 2, y: P.y + P.h });
+
+// ---- draw switch ----
+// rack ears
+[[SW.x - 26, SW.y + 4], [SW.x + SW.w, SW.y + 4]].forEach(([x, y]) => {
+  el('rect', { x, y, width: 26, height: SW.h - 8, rx: 3, fill: '#2b3a42', stroke: '#566872' }, layerSwitch);
+  el('circle', { cx: x + 13, cy: y + 18, r: 4.5, fill: '#121a1f', stroke: '#6b7d87' }, layerSwitch);
+  el('circle', { cx: x + 13, cy: y + SW.h - 26, r: 4.5, fill: '#121a1f', stroke: '#6b7d87' }, layerSwitch);
+});
+el('rect', { x: SW.x, y: SW.y, width: SW.w, height: SW.h, rx: 6, fill: 'url(#metal)', stroke: '#62747e', 'stroke-width': 1.2 }, layerSwitch);
+el('line', { x1: SW.x + 6, y1: SW.y + 1.5, x2: SW.x + SW.w - 6, y2: SW.y + 1.5, stroke: 'rgba(255,255,255,.15)' }, layerSwitch);
+// brand panel
+el('text', { x: SW.x + 22, y: SW.y + 34, fill: '#e9eef1', 'font-size': 15, 'font-weight': 700, 'letter-spacing': '.04em' }, layerSwitch, 'TRENDnet');
+el('text', { x: SW.x + 22, y: SW.y + 54, fill: css('--accent'), 'font-size': 13, 'font-weight': 600 }, layerSwitch, swModel);
+el('text', { x: SW.x + 22, y: SW.y + 71, fill: '#9fb2bd', 'font-size': 10.5 }, layerSwitch, `${PORT_COUNT}-Port Managed Switch`);
+el('text', { x: SW.x + 22, y: SW.y + 86, fill: '#9fb2bd', 'font-size': 10.5 }, layerSwitch, swIp);
+// status leds
+[['PWR', css('--ok')], ['SYS', css('--ok')]].forEach(([t, c], i) => {
+  const lx = SW.x + 22 + i * 46;
+  el('circle', { cx: lx + 4, cy: SW.y + 104, r: 3.5, fill: c, filter: 'url(#glow)' }, layerSwitch);
+  el('text', { x: lx + 12, y: SW.y + 107.5, fill: '#9fb2bd', 'font-size': 9 }, layerSwitch, t);
+});
+// divider
+el('line', { x1: P.x0 - 18, y1: SW.y + 14, x2: P.x0 - 18, y2: SW.y + SW.h - 14, stroke: '#45565f' }, layerSwitch);
+// port bay
+el('rect', { x: P.x0 - 8, y: SW.y + 16, width: PORT_COUNT * P.pitch - P.pitch + P.w + 16, height: SW.h - 30, rx: 4, fill: 'rgba(0,0,0,.18)' }, layerSwitch);
+
+const tipEls = [];
+function setTip(node, html) { node.classList.add('hoverable'); node.dataset.tip = html; tipEls.push(node); }
+
+for (let n = 1; n <= PORT_COUNT; n++) {
+  const x = portX(n), y = P.y, occ = portMap[n];
+  const g = el('g', { class: 'fx' }, layerSwitch);
+  if (occ?.kind === 'host') g.dataset.host = occ.link.Host;
+  if (occ?.kind === 'dev') g.dataset.dev = occ.dev.Name;
+  // number above port (left corner so cables land in the centre)
+  el('text', { x: x + 1, y: y - 6, fill: '#c3d0d7', 'font-size': 10, 'font-weight': 600 }, g, n);
+  // jack housing
+  el('rect', { x, y, width: P.w, height: P.h, rx: 3, fill: '#0b1115', stroke: occ ? '#7d909a' : '#4d5d66' }, g);
+  // RJ45 opening with latch notch
+  const ox = x + 7, oy = y + 6, ow = P.w - 14, oh = 20;
+  el('path', { d: `M${ox},${oy} h${ow} v${oh} h-${ow / 2 - 7} v5 h-14 v-5 h-${ow / 2 - 7} z`, fill: '#020507', stroke: '#26333a' }, g);
+  // LEDs: link (left) / speed (right)
+  let linkC = css('--off'), spdC = css('--off');
+  if (occ) {
+    linkC = css('--ok');
+    if (occ.kind === 'host') spdC = occ.link.SpeedMismatch ? css('--warn') : css('--ok');
+    else spdC = css('--ok');
+  }
+  el('rect', { x: x + 4, y: y + P.h - 7, width: 9, height: 4, rx: 1, fill: linkC, filter: occ ? 'url(#glow)' : null }, g);
+  el('rect', { x: x + P.w - 13, y: y + P.h - 7, width: 9, height: 4, rx: 1, fill: spdC, filter: occ ? 'url(#glow)' : null }, g);
+  // plug inserted
+  if (occ) {
+    const c = occ.kind === 'host' ? hostColor[occ.link.Host] : css('--dev');
+    el('rect', { x: x + 10, y: y + 4, width: P.w - 20, height: 22, rx: 2, fill: c, opacity: .9 }, g);
+    el('rect', { x: x + 14, y: y + 8, width: P.w - 28, height: 3, rx: 1, fill: 'rgba(0,0,0,.25)' }, g);
+  }
+  // tag under host-cabled ports
+  if (occ?.kind === 'host') {
+    const l = occ.link;
+    el('text', { x: x + P.w / 2, y: y + P.h + 14, 'text-anchor': 'middle', fill: hostColor[l.Host], 'font-size': 9.5, 'font-weight': 600 }, g, short(l.Host).replace('esx9-', 'esx'));
+    el('text', { x: x + P.w / 2, y: y + P.h + 25, 'text-anchor': 'middle', fill: l.SpeedMismatch ? css('--warn') : '#9fb2bd', 'font-size': 9 }, g, `${l.Nic.replace('vmnic', 'n')} · ${spd(l.PortSpeedMb)}${l.SpeedMismatch ? ' ⚠' : ''}`);
+  } else if (!occ) {
+    el('text', { x: x + P.w / 2, y: y + P.h + 14, 'text-anchor': 'middle', fill: '#6b7d87', 'font-size': 9 }, g, 'free');
+  }
+  const hit = el('rect', { x, y: y - 16, width: P.w, height: P.h + 44, fill: 'transparent' }, g);
+  let tip = `<b>Port ${n}</b> (Gi0/${n})<br>`;
+  if (!occ) tip += 'No link';
+  else if (occ.kind === 'host') {
+    const l = occ.link;
+    tip += `${esc(l.Host)} · ${l.Nic}<br>${l.Uplink} · NIC ${spd(l.NicSpeedMb)} / Port ${spd(l.PortSpeedMb)}` +
+      (l.SpeedMismatch ? `<br><span style="color:${css('--warn')}">⚠ Speed mismatch</span>` : '') +
+      `<br>VLANs ${l.Vlans.join(', ')} · ${l.Vmks.join(', ')}`;
+  } else {
+    tip += `${esc(occ.dev.Name)}<br>VLANs ${occ.dev.Vlans.join(', ')} · ${occ.dev.MacCount} MAC(s)`;
+  }
+  setTip(hit, tip);
+}
+
+// ---- hosts ----
+const HOST = { y: 30, w: 290, h: 166 };
+const hostCx = i => 1200 / (hosts.length + 1) * (i + 1);
+const nicAnchor = {}; // host|nic -> {x,y}
+
+hosts.forEach((h, i) => {
+  const cx = hostCx(i), x = cx - HOST.w / 2, y = HOST.y, color = hostColor[h];
+  const g = el('g', { class: 'fx' }, layerNodes);
+  g.dataset.host = h;
+  el('rect', { x, y, width: HOST.w, height: HOST.h, rx: 6, fill: 'url(#hostg)', stroke: color, 'stroke-width': 1.4 }, g);
+  el('rect', { x, y, width: HOST.w, height: 4, rx: 2, fill: color }, g);
+  // server glyph
+  for (let k = 0; k < 3; k++) {
+    el('rect', { x: x + 14, y: y + 16 + k * 9, width: 26, height: 7, rx: 1.5, fill: 'none', stroke: color }, g);
+    el('circle', { cx: x + 35, cy: y + 19.5 + k * 9, r: 1.3, fill: css('--ok') }, g);
+  }
+  el('text', { x: x + 50, y: y + 28, fill: '#e9eef1', 'font-size': 15, 'font-weight': 600 }, g, short(h));
+  el('text', { x: x + 50, y: y + 44, fill: '#9fb2bd', 'font-size': 10.5 }, g, h);
+  const linked = nicsByHost[h].filter(n => n.link);
+  const vlans = [...new Set(linked.flatMap(n => n.link.Vlans))].sort((a, b) => a - b);
+  const vmks = [...new Set(linked.flatMap(n => n.link.Vmks))].sort();
+  el('text', { x: x + 14, y: y + 70, fill: '#9fb2bd', 'font-size': 10.5 }, g, `VLANs ${vlans.join(', ')}`);
+  el('text', { x: x + 14, y: y + 85, fill: '#9fb2bd', 'font-size': 10.5 }, g, `${vmks.join(' · ')}`);
+  el('text', { x: x + HOST.w - 14, y: y + 70, 'text-anchor': 'end', fill: '#9fb2bd', 'font-size': 10.5 }, g, `${linked.length}/${nicsByHost[h].length} NICs mapped`);
+
+  // NIC ports along bottom edge
+  const nics = nicsByHost[h], nw = 60, gap = 8;
+  const total = nics.length * nw + (nics.length - 1) * gap;
+  nics.forEach((n, k) => {
+    const nx = cx - total / 2 + k * (nw + gap), ny = y + HOST.h - 52;
+    const ng = el('g', {}, g);
+    let stroke = '#4d5d66', fill = '#16252c', label2 = '', l2c = '#9fb2bd', dash = null;
+    if (n.link) { stroke = color; fill = 'rgba(255,255,255,.04)'; label2 = `${spd(n.link.NicSpeedMb)} · U${n.link.Uplink.split(' ').pop()}`; }
+    else if (n.unlinked.LinkUp) { dash = '3 2'; label2 = `${spd(n.unlinked.SpeedMb)} · off-sw`; l2c = css('--warn'); }
+    else { label2 = 'down'; l2c = css('--crit'); }
+    el('rect', { x: nx, y: ny, width: nw, height: 38, rx: 3, fill, stroke, 'stroke-dasharray': dash }, ng);
+    el('text', { x: nx + nw / 2, y: ny + 15, 'text-anchor': 'middle', fill: n.link ? '#e9eef1' : '#8a9aa3', 'font-size': 10.5, 'font-weight': 600 }, ng, n.nic);
+    el('text', { x: nx + nw / 2, y: ny + 29, 'text-anchor': 'middle', fill: l2c, 'font-size': 9.5 }, ng, label2);
+    if (n.link) {
+      el('rect', { x: nx + nw / 2 - 9, y: ny + 38, width: 18, height: 8, rx: 1.5, fill: color }, ng); // plug
+      nicAnchor[h + '|' + n.nic] = { x: nx + nw / 2, y: ny + 46 };
+    }
+    const tip = n.link
+      ? `<b>${esc(short(h))} · ${n.nic}</b><br>→ Port ${portNum(n.link.SwitchPort)} (${n.link.SwitchPort})<br>${n.link.Uplink} · NIC ${spd(n.link.NicSpeedMb)} / Port ${spd(n.link.PortSpeedMb)}`
+      : `<b>${esc(short(h))} · ${n.nic}</b><br>${esc(n.unlinked.Reason)}<br>MAC ${n.unlinked.NicMac}${n.unlinked.SpeedMb ? ' · ' + spd(n.unlinked.SpeedMb) : ''}`;
+    setTip(ng, tip);
+  });
+});
+
+// ---- host cables (NIC -> exact switch port) ----
+DATA.Links.forEach(l => {
+  const a = nicAnchor[l.Host + '|' + l.Nic], n = portNum(l.SwitchPort), b = portTop(n);
+  const d = `M${a.x},${a.y} C${a.x},${a.y + 70} ${b.x},${b.y - 80} ${b.x},${b.y + 4}`;
+  const c = el('path', { d, class: 'cable fx', stroke: hostColor[l.Host], 'stroke-dasharray': l.SpeedMismatch ? '7 4' : null }, layerCables);
+  c.dataset.host = l.Host;
+  const hit = el('path', { d, class: 'cable-hit' }, layerCables);
+  hit.dataset.host = l.Host;
+  setTip(hit, `<b>${esc(short(l.Host))} ${l.Nic} → Port ${n}</b><br>${l.Uplink} · NIC ${spd(l.NicSpeedMb)} / Port ${spd(l.PortSpeedMb)}` +
+    (l.SpeedMismatch ? `<br><span style="color:${css('--warn')}">⚠ Negotiated below NIC speed</span>` : '') +
+    `<br>VLANs ${l.Vlans.join(', ')} · ${l.Vmks.join(', ')} · ${l.Source}`);
+});
+
+// ---- other devices (below switch) ----
+const devs = [...DATA.OtherDevices].sort((a, b) => Math.min(...a.Ports.map(portNum)) - Math.min(...b.Ports.map(portNum)));
+const DEV = { y: 530, w: 232, h: 112 };
+const devCx = i => 1200 / (devs.length + 1) * (i + 1);
+devs.forEach((d, i) => {
+  const cx = devCx(i), x = cx - DEV.w / 2, y = DEV.y;
+  const g = el('g', { class: 'fx' }, layerNodes);
+  g.dataset.dev = d.Name;
+  el('rect', { x, y, width: DEV.w, height: DEV.h, rx: 6, fill: '#1c2d35', stroke: '#566872' }, g);
+  const isSwitch = /switch/i.test(d.DeviceType || '');
+  const isNas = /nas/i.test(d.Name) || d.Vendor === 'Synology';
+  const kind = isSwitch ? 'SWITCH' : isNas ? 'STORAGE' : d.ManagementIP && d.ManagementIP.endsWith('.1') ? 'GATEWAY' : d.Name.startsWith('Unknown') ? 'UNKNOWN' : 'DEVICE';
+  const kc = kind === 'UNKNOWN' ? css('--warn') : css('--accent');
+  el('rect', { x: x + 12, y: y + 12, width: kind.length * 7 + 12, height: 16, rx: 8, fill: 'none', stroke: kc }, g);
+  el('text', { x: x + 18, y: y + 24, fill: kc, 'font-size': 9.5, 'font-weight': 700, 'letter-spacing': '.05em' }, g, kind);
+  el('text', { x: x + DEV.w - 12, y: y + 24, 'text-anchor': 'end', fill: '#9fb2bd', 'font-size': 10 }, g, d.Ports.map(p => 'Port ' + portNum(p)).join(' + '));
+  const nm = d.Name.length > 28 ? d.Name.slice(0, 27) + '…' : d.Name;
+  el('text', { x: x + 12, y: y + 47, fill: '#e9eef1', 'font-size': 13, 'font-weight': 600 }, g, nm);
+  const lines = [];
+  if (d.Description) lines.push(d.Description);
+  if (d.ManagementIP) lines.push('Mgmt ' + d.ManagementIP + (d.PortDescriptions[0] ? ' · ' + d.PortDescriptions[0] : ''));
+  d.Interfaces.forEach(f => lines.push(`${f.Interface} · ${f.IP}`));
+  if (d.ChassisIds.length && !d.ManagementIP) lines.push('Chassis ' + d.ChassisIds.join(', ').replace(/58:47:ca:7f:/g, '…'));
+  d.SeenBehind.forEach(s => lines.push(`↳ ${s.Device} ${s.Interface} · ${s.IP}`));
+  d.NotSeen.forEach(s => lines.push(`✕ ${s.Interface} ${s.IP} not seen`));
+  lines.push(`VLANs ${d.Vlans.join(', ')} · ${d.MacCount} MAC${d.MacCount === 1 ? '' : 's'} · ${d.Lldp ? 'LLDP' : 'MAC table'}`);
+  lines.slice(0, 6).forEach((t, k) => {
+    const c = t.startsWith('✕') ? css('--crit') : t.startsWith('↳') ? css('--accent') : '#9fb2bd';
+    el('text', { x: x + 12, y: y + 66 + k * 15, fill: c, 'font-size': 10.5 }, g, t.length > 38 ? t.slice(0, 37) + '…' : t);
+  });
+  setTip(g, `<b>${esc(d.Name)}</b><br>${lines.map(esc).join('<br>')}`);
+
+  // cables from port bottom to device card
+  d.Ports.forEach((p, k) => {
+    const n = portNum(p), a = portBot(n);
+    const tx = cx + (d.Ports.length > 1 ? (k - (d.Ports.length - 1) / 2) * 40 : 0);
+    const dd = `M${a.x},${a.y - 4} C${a.x},${a.y + 70} ${tx},${y - 70} ${tx},${y}`;
+    const c = el('path', { d: dd, class: 'cable fx', stroke: css('--dev') }, layerCables);
+    c.dataset.dev = d.Name;
+    el('circle', { cx: tx, cy: y, r: 3.5, fill: css('--dev') }, g);
+  });
+});
+
+// ---- focus/highlight ----
+function focusOn(attr, val) {
+  svg.classList.add('focus');
+  svg.querySelectorAll('.fx').forEach(e => e.classList.toggle('hl', e.dataset[attr] === val));
+}
+function clearFocus() { svg.classList.remove('focus'); svg.querySelectorAll('.hl').forEach(e => e.classList.remove('hl')); }
+svg.querySelectorAll('[data-host],[data-dev]').forEach(e => {
+  e.addEventListener('mouseenter', () => e.dataset.host ? focusOn('host', e.dataset.host) : focusOn('dev', e.dataset.dev));
+  e.addEventListener('mouseleave', clearFocus);
+});
+
+// ---- tooltip ----
+const tipBox = document.getElementById('tip');
+tipEls.forEach(n => {
+  n.addEventListener('mousemove', ev => {
+    tipBox.innerHTML = n.dataset.tip; tipBox.style.display = 'block';
+    const r = tipBox.getBoundingClientRect();
+    let left = ev.clientX + 14, top = ev.clientY + 14;
+    if (left + r.width > innerWidth - 8) left = ev.clientX - r.width - 14;
+    if (top + r.height > innerHeight - 8) top = ev.clientY - r.height - 14;
+    tipBox.style.left = left + 'px'; tipBox.style.top = top + 'px';
+  });
+  n.addEventListener('mouseleave', () => tipBox.style.display = 'none');
+});
+
+// ---- legend ----
+document.getElementById('legend').innerHTML =
+  hosts.map(h => `<span><i class="sw" style="border-color:${hostColor[h]}"></i>${short(h)}</span>`).join('') +
+  `<span><i class="sw dash" style="border-color:#9fb2bd"></i>Speed mismatch</span>` +
+  `<span><i class="sw" style="border-color:${css('--dev')}"></i>Other device</span>` +
+  `<span><i class="dot" style="background:${css('--ok')}"></i>Link / full speed</span>` +
+  `<span><i class="dot" style="background:${css('--warn')}"></i>Reduced speed</span>` +
+  `<span><i class="dot" style="background:${css('--off')}"></i>No link</span>`;
+
+// ---- tables ----
+const sortedLinks = [...DATA.Links].sort((a, b) => a.Host.localeCompare(b.Host) || a.Nic.localeCompare(b.Nic));
+document.getElementById('linkHint').textContent = `${DATA.Links.length} links · sorted by host`;
+document.getElementById('linksTbl').innerHTML =
+  `<thead><tr><th>Host</th><th>vmnic</th><th>Uplink</th><th>Switch Port</th><th>NIC Speed</th><th>Port Speed</th><th>Status</th><th>VLANs</th><th>VMkernel</th><th>Source</th></tr></thead><tbody>` +
+  sortedLinks.map(l => `<tr>
+    <td><span class="hostdot" style="background:${hostColor[l.Host]}"></span>${esc(l.Host)}</td>
+    <td>${l.Nic}</td><td>${l.Uplink}</td>
+    <td><b>Port ${portNum(l.SwitchPort)}</b> <span style="color:var(--muted)">${l.SwitchPort}</span></td>
+    <td class="num">${spd(l.NicSpeedMb)}</td><td class="num">${spd(l.PortSpeedMb)}</td>
+    <td>${l.SpeedMismatch ? '<span class="badge b-warn">Speed mismatch</span>' : '<span class="badge b-ok">OK</span>'}</td>
+    <td>${l.Vlans.map(v => `<span class="chip">${v}</span>`).join('')}</td>
+    <td>${l.Vmks.map(v => `<span class="chip">${v}</span>`).join('')}</td>
+    <td><span class="badge b-info">${l.Source}</span></td></tr>`).join('') + '</tbody>';
+
+document.getElementById('unlinkedTbl').innerHTML =
+  `<thead><tr><th>Host</th><th>vmnic</th><th>MAC</th><th>Link</th><th>Speed</th><th>Reason</th></tr></thead><tbody>` +
+  DATA.UnlinkedNics.map(u => `<tr>
+    <td><span class="hostdot" style="background:${hostColor[u.Host]}"></span>${esc(short(u.Host))}</td>
+    <td>${u.Nic}</td><td style="font-family:ui-monospace,Menlo,monospace">${u.NicMac}</td>
+    <td>${u.LinkUp ? '<span class="badge b-ok">Up</span>' : '<span class="badge b-crit">Down</span>'}</td>
+    <td class="num">${spd(u.SpeedMb)}</td>
+    <td>${u.LinkUp ? `<span class="badge b-warn">${esc(u.Reason)}</span>` : `<span class="badge b-mute">${esc(u.Reason)}</span>`}</td></tr>`).join('') + '</tbody>';
+
+document.getElementById('otherTbl').innerHTML =
+  `<thead><tr><th>Port(s)</th><th>Device</th><th>Detail</th><th>VLANs</th><th>MACs</th><th>Discovery</th></tr></thead><tbody>` +
+  devs.map(d => {
+    const det = [d.DeviceType, d.ManagementIP, ...d.Interfaces.map(f => `${f.Interface} ${f.IP}`), ...d.SeenBehind.map(s => `behind: ${s.Device} ${s.Interface} ${s.IP}`), ...d.NotSeen.map(s => `not seen: ${s.Interface} ${s.IP}`)].filter(Boolean);
+    return `<tr>
+      <td><b>${d.Ports.map(p => portNum(p)).join(', ')}</b></td>
+      <td>${esc(d.Name)}</td>
+      <td style="white-space:normal;min-width:180px">${det.map(esc).join('<br>') || '<span style="color:var(--muted)">—</span>'}</td>
+      <td>${d.Vlans.map(v => `<span class="chip">${v}</span>`).join('')}</td>
+      <td class="num">${d.MacCount}</td>
+      <td><span class="badge ${d.Lldp ? 'b-info' : 'b-mute'}">${d.Lldp ? 'LLDP' : 'MAC table'}</span></td></tr>`;
+  }).join('') + '</tbody>';
+</script>
+</body>
+</html>
