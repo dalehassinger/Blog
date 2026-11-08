@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vCommunity Observability | Dashboards and Local AI for VMware - vCROCS</title>
+    <meta name="description" content="">
+    <meta name="author" content="Dale Hassinger">
+    <link rel="stylesheet" href="style.css">
+    <script>
+    (function() {
+        var chosen = null;
+
+        // Local file:// preview cannot always share localStorage between
+        // pages (Safari isolates it per file), so an override travelling
+        // in the URL takes priority. See propagateThemeToLinks().
+        var fromURL = /[#&?]theme=(light|dark)/.exec(window.location.hash + window.location.search);
+        if (fromURL) {
+            chosen = fromURL[1];
+        }
+
+        if (!chosen) {
+            try {
+                var stored = localStorage.getItem('vcrocs-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    chosen = stored;
+                }
+            } catch (error) {
+                /* storage unavailable - fall through to the OS preference */
+            }
+        }
+
+        if (chosen) {
+            document.documentElement.setAttribute('data-theme', chosen);
+        }
+    })();
+</script>
+    <script src="search-index.js" defer></script>
+    <script src="lightbox.js" defer></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KSLC6FHF36"></script>
+<script>
+  var doNotTrack = false;
+  if ( true ) {
+    var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+    var doNotTrack = (dnt == "1" || dnt == "yes");
+  }
+  if (!doNotTrack) {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KSLC6FHF36');
+  }
+</script>
+    <style>
+        /* Single column layout for individual post pages */
+        .container.single-post {
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 960px;
+        }
+        .container.single-post .content-area {
+            max-width: 100%;
+        }
+        .container.single-post .post-article {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-topbar">
+    <a class="topbar-brand" href="index.html">
+        <span class="topbar-logo" aria-hidden="true"><img src="images/avatar.png" alt=""></span>
+        <span class="topbar-titles">
+            <span class="topbar-name">vCROCS</span>
+            <span class="topbar-eyebrow">By: Dale Hassinger</span>
+        </span>
+    </a>
+
+    <div class="topbar-search">
+        <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+        </span>
+        <input type="text" id="searchInput" data-site-root="" placeholder="Search posts, tags, categories..." aria-label="Search this site">
+    </div>
+
+    <div class="topbar-actions">
+        <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark scheme" title="Switch to Ops Light">
+            <svg class="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+            </svg>
+            <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="4.5"></circle>
+                <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+    <!-- Sidebar Navigation -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <p class="sidebar-subtitle">VCF Automation, Monitoring, more...</p>
+        <div class="sidebar-social">
+                        <a href="https://github.com/dalehassinger" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dalehassinger/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+                <a href="feed.xml" title="RSS Feed">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                    </svg>
+                </a>
+            <a href="https://x.com/dalehassinger" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+
+        </div>
+        <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+            <span class="hamburger-lines" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="mobile-nav-label">Menu</span>
+        </button>
+    </div>
+    
+    <nav class="sidebar-nav" id="site-navigation">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="icon">🏠</span>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="archive.html">
+                    <span class="icon">📚</span>
+                    <span>Archives</span>
+                </a>
+            </li>
+                    <li>
+            <a href="About.html">
+                <span class="icon">👤</span>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="Links.html">
+                <span class="icon">📖</span>
+                <span>Links</span>
+            </a>
+        </li>
+        <li>
+            <a href="Pics.html">
+                <span class="icon">📷</span>
+                <span>Pics</span>
+            </a>
+        </li>
+        </ul>
+    </nav>
+</aside>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const toggle = sidebar ? sidebar.querySelector('.mobile-nav-toggle') : null;
+        const navLinks = sidebar ? sidebar.querySelectorAll('.sidebar-nav a') : [];
+
+        if (!sidebar || !toggle) {
+            return;
+        }
+
+        toggle.addEventListener('click', function() {
+            const isOpen = sidebar.classList.toggle('mobile-nav-open');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-nav-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    });
+</script>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container single-post">
+            <div class="content-area">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+                <span class="sep">/</span>
+                <a href="categories/ai.html">AI</a>
+                <span class="sep">/</span>
+                <span>vCommunity Observability | Dashboards and Local AI for VMware</span>
+    </nav>
+
+                <article class="post-article">
+                    <header>
+                        <span class="featured-eyebrow">AI · VCOMMUNITY</span>
+                        <h1>vCommunity Observability | Dashboards and Local AI for VMware</h1>
+                        <div class="post-meta">
+                            <time datetime="2026-11-08T14:38:46Z">
+                                November 8, 2026
+                            </time>
+                            <span>&middot;</span><span>Dale Hassinger</span>
+                        </div>
+                        <div class="tags"><a href="categories/ai.html" class="category">AI</a>
+            <a href="categories/vcommunity.html" class="category">vCommunity</a>
+            <a href="tags/ai.html" class="tag">#AI</a>
+            <a href="tags/vcommunity.html" class="tag">#vCommunity</a>
+            <a href="tags/vexpert.html" class="tag">#vExpert</a></div>
+                    </header>
+                    
+                    <img src="images/vco-ask-no-sources.png" alt="vCommunity Observability | Dashboards and Local AI for VMware" class="featured-image" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 12px; margin-bottom: 2rem;">
+                    
+                    <div class="content">
+                        <h3>vCommunity Observability: Custom vSphere Dashboards, an API for MP Builder, and a Local AI Chat 🚀</h3>
+<p>I kept getting asked for the same kind of thing. A dashboard that shows one specific view of vCenter data. An inventory export on a schedule. A way to get that data back into VCF Operations with Management Pack Builder. And more and more, "can I just ask a question about my environment?"</p>
+<p>Some of the customers I work with run dark sites, so the answer can't depend on the internet or a cloud service. I wanted one open-source project that covers all of that and runs in a container on a laptop or a server. So I started building <strong>vCommunity Observability</strong>.</p>
+<ul>
+<li><strong>This is a prototype (v0.1.0) and still under development. Do not use it in production.</strong></li>
+<li>The code is on GitHub: <a href="https://github.com/dalehassinger/vCommunity-Observability" target="_blank" rel="noopener noreferrer">dalehassinger/vCommunity-Observability</a></li>
+</ul>
+<hr>
+<h4>What It Is:</h4>
+<p>Two containers that share the same look:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Container</th><th>Port</th><th>What it does</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>vCommunity Observability</strong></td><td>8080</td><td>Collects vCenter data on a schedule, stores it in SQLite, and shows it in dashboards. Every dataset is also a REST endpoint for VCF Operations Management Pack Builder.</td></tr>
+<tr><td><strong>vCommunity Ask</strong></td><td>8081</td><td>A chat prompt answered by your local <strong>Ollama</strong>, only from the knowledge sources you choose.</td></tr>
+</tbody>
+</table>
+</div>
+<p>The design goals were simple:</p>
+<ul>
+<li><strong>Cross-platform.</strong> One container image for amd64 and arm64 (Apple Silicon works fine), or run it with Python 3.11+ on Windows, macOS or Linux.</li>
+<li><strong>No Grafana.</strong> The dashboards are rendered by the app itself, styled after VCF Operations, with a light and dark theme.</li>
+<li><strong>Works offline.</strong> No CDN links and no runtime downloads. A PowerShell script saves both images as tarballs for dark sites.</li>
+<li><strong>Open source.</strong> FastAPI, SQLite, pyVmomi, PowerShell 7. PowerCLI is the one exception.</li>
+<li><strong>Easy to patch.</strong> Locked dependencies, and each module is a folder you can replace on its own.</li>
+</ul>
+<hr>
+<h4>How It Works:</h4>
+<p>The core stays small. Every feature is an <strong>add-on module</strong>, and a module can be written in <strong>Python or PowerShell</strong>. I didn't want to force one language. A collector is just a script: the core passes it the connection details, the script prints one JSON object, and the core stores it.</p>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>vCenter / VCF Operations / any REST source
+        │  (pyVmomi, PowerCLI, REST)
+        ▼
+Scheduler → module collectors (.py or .ps1) → JSON → SQLite
+FastAPI   → dashboards, REST for MP Builder, exports, Swagger docs</code></pre>
+</div>
+<p>Modules can be switched on or off and reordered from the Modules page. One or many vCenters can be configured on the Settings page.</p>
+<h4>Modules (Screen Shot):</h4>
+<img src="images/vco-modules.png" alt="Image">
+<hr>
+<h4>Modules Included:</h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Module</th><th>Language</th><th>What it shows</th></tr>
+</thead>
+<tbody>
+<tr><td>DBH Insights</td><td>Python</td><td>The <a href="https://github.com/DBH-Insights/DBH-Insights" target="_blank" rel="noopener noreferrer">DBH Insights</a> inventory: 27 sheets plus Cluster Capacity, with XLSX and CSV export</td></tr>
+<tr><td>DBH Topology</td><td>Python</td><td>Hosts by cluster, datastores, and every mount between them</td></tr>
+<tr><td>DBH Impact</td><td>Python</td><td>What stops if one host or datastore fails, and whether HA could restart it</td></tr>
+<tr><td>vSphere Inventory</td><td>Python</td><td>Clusters, hosts and VMs in a vCenter-style tree with object pages</td></tr>
+<tr><td>Host Health</td><td>PowerShell (PowerCLI)</td><td>Host status, alarms, CPU and memory, uptime, version</td></tr>
+<tr><td>Datastore Capacity</td><td>Python</td><td>Capacity and free space with history for a runway estimate</td></tr>
+<tr><td>GitHub Status</td><td>Python</td><td>An example module that reads any Statuspage site</td></tr>
+</tbody>
+</table>
+</div>
+<p>Scheduled exports can write any module's data to XLSX or CSV daily, weekly or monthly.</p>
+<h4>DBH Insights (Screen Shot):</h4>
+<img src="images/vco-dbh-insights.png" alt="Image">
+<h4>Host Health (Screen Shot):</h4>
+<img src="images/vco-host-health.png" alt="Image">
+<h4>vSphere Inventory (Screen Shot):</h4>
+<img src="images/vco-inventory.png" alt="Image">
+<h4>DBH Topology (Screen Shot):</h4>
+<img src="images/vco-topology.png" alt="Image">
+<h4>DBH Impact (Screen Shot):</h4>
+<img src="images/vco-impact.png" alt="Image">
+<hr>
+<h4>An API for MP Builder:</h4>
+<p>Every module's data is also a REST endpoint, for example <code>/api/host-health/hosts/unhealthy</code> or <code>/api/dbh-impact/critical</code>. The API requires a token. That makes it easy to point VCF Operations Management Pack Builder at the container and pull the data back into VCF Operations. The full API is documented in an offline Swagger page.</p>
+<h4>API Docs (Screen Shot):</h4>
+<img src="images/vco-api-docs.png" alt="Image">
+<hr>
+<h4>vCommunity Ask 🤓:</h4>
+<p>The second container is a chat prompt in the same VCF Operations look. You ask a question and your local <strong>Ollama</strong> answers it <strong>only from the knowledge sources you pick</strong>. The model isn't trained or fine-tuned. Ask uses retrieval: it searches your sources by meaning and by keyword, sends the best matches to the model, and the answer comes back with numbered citations.</p>
+<p>Knowledge sources are plug-ins too:</p>
+<ul>
+<li><strong>Markdown repository.</strong> A GitHub repo or a local folder of markdown files.</li>
+<li><strong>Web site.</strong> The posts of a blog or site, optionally only a date range.</li>
+<li><strong>PDF documents.</strong> Scanned ones too, with OCR.</li>
+<li><strong>Spreadsheets.</strong> RVTools or the DBH Insights export. Ask can answer counting and totals questions with a read-only SQL query that it shows you.</li>
+</ul>
+<h4>Ask Chat (Screen Shot):</h4>
+<img src="images/vco-ask-chat.png" alt="Image">
+<h4>Knowledge Sources (Screen Shot):</h4>
+<img src="images/vco-ask-sources.png" alt="Image">
+<p>A few things I've added along the way:</p>
+<ul>
+<li><strong>Charts, reports and dashboards.</strong> Ask for a pie or bar chart and it draws one from the query result. Say "report" or "dashboard" and it saves an HTML report that previews right in the chat.</li>
+<li><strong>Your own MCP tools.</strong> Ask can call tools from my PowerShell MCP server on the Mac. Write tools ask before they run.</li>
+<li><strong>Optional web search.</strong> Ollama web search, Brave search, or both, with a fixed order. Your own sources are always searched first. Leave it off at a dark site.</li>
+<li><strong>No sources mode.</strong> Just the model, for rephrasing text or checking grammar.</li>
+<li><strong>Pick the model from the header.</strong> Switch the Ollama chat model without leaving the chat.</li>
+</ul>
+<h4>Ask Chart (Screen Shot):</h4>
+<img src="images/vco-ask-chart.png" alt="Image">
+<h4>HTML Report in the Chat (Screen Shot):</h4>
+<img src="images/vco-ask-report-preview.png" alt="Image">
+<h4>No Sources Mode (Screen Shot):</h4>
+<img src="images/vco-ask-no-sources.png" alt="Image">
+<h4>Model Menu (Screen Shot):</h4>
+<img src="images/vco-ask-model-menu.png" alt="Image">
+<hr>
+<h4>Performance 📊:</h4>
+<p>One Performance dashboard covers both containers. It shows the host, Ollama and the models loaded, answer speed in tokens per second, and both containers' CPU, memory, network and disk. When web search is on, it also counts this month's searches and estimates the cost.</p>
+<h4>Performance (Screen Shot):</h4>
+<img src="images/vco-performance.png" alt="Image">
+<h4>Web Search Usage (Screen Shot):</h4>
+<img src="images/vco-ask-web-usage.png" alt="Image">
+<hr>
+<h4>Thank You:</h4>
+<p>Ask is only as good as the sources behind it, and the vCommunity writes great ones. I use the blogs of <a href="https://www.brockpeterson.com/" target="_blank" rel="noopener noreferrer">Brock Peterson</a> and <a href="https://williamlam.com/" target="_blank" rel="noopener noreferrer">William Lam</a> as Ask sources, and the <a href="https://github.com/e1-rahabok/isvara-2" target="_blank" rel="noopener noreferrer">isvara-2</a> knowledge base was the first source I tested with. Thank you for sharing your work.</p>
+<hr>
+<h4>What's Next:</h4>
+<ul>
+<li>New features based on input from the vCommunity</li>
+</ul>
+<hr>
+<h4>Wrap Up:</h4>
+<p>This started as a few dashboards and turned into a small framework. It's a simple design, but it does what I needed: vCenter data in one place, an API for MP Builder, and a local AI that only answers from sources I trust. It all runs offline. Think of it as a starting point, then add a module of your own in Python or PowerShell.</p>
+<p>I always appreciate feedback. Let me know what you like, and what you would add next. See you in the vCommunity!</p>
+
+                    </div>
+                    
+                    <section class="buy-me-a-coffee-section">
+    <center><b>If you found this Blog article useful and it helped you, Buy me a coffee to start my day.</b></center>
+<center><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="dalehassinger" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script></center>
+</section>
+                    
+                    <section class="comments-section">
+    <p><center></center><script src="https://giscus.app/client.js"
+        data-repo="dalehassinger/Blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNTQ4NTU1NDE="
+        data-category="General"
+        data-category-id="DIC_kwDODzDJdc4C8thH"
+        data-mapping="url"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_high_contrast"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script></center></p>
+</section>
+                </article>
+                
+                <footer>
+                    <p><a href="index.html">← Back to vCROCS</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTopButton = document.querySelector('.back-to-top');
+        if (!backToTopButton) {
+            return;
+        }
+
+        function updateBackToTopVisibility() {
+            if (window.scrollY > 240) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        }
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        updateBackToTopVisibility();
+    });
+</script>
+</body>
+</html>
