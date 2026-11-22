@@ -359,6 +359,38 @@ The cluster container holds {Hosts=3} ESX Host icons named {HostNames=ESX01, ESX
 <h4>Wrap Up:</h4>
 <p>I can now go from a few names to a VCF design in about a minute, and it uses the same icons I use when I draw by hand. Use the shape libraries manually in draw.io, or let vCommunity Ask with the drawio source automate it. Either way it stays local, so it works in a dark site too.</p>
 <p>I always appreciate feedback. Let me know what you like, and what you would add next. See you in the vCommunity!</p>
+<hr>
+<h4>Example VCF Design Prompt:</h4>
+<div class="code-block">
+    <button class="copy-code-button" type="button" aria-label="Copy code to clipboard">Copy</button>
+    <pre><code>
+Using my shape library and the draw.io tool, draw a VMware Cloud Foundation diagram titled {Title=VCF Two Instance Design - vCROCS.info}.
+
+The outside box is a VCF Private Cloud container named {PrivateCloud=vCROC Private Cloud}.
+Inside it is a VCF Fleet container named {Fleet=vCROC Fleet}.
+The top row inside the fleet shows VCF Operations, VCF Automation and Fleet Management, left to right.
+Under them are two VCF Instance containers side by side, named {Instance1=vCROC-Instance-A} and {Instance2=vCROC-Instance-B}.
+
+Each instance holds two containers side by side.
+
+First Instance:
+On the left is a Management Domain container named {Instance1MGMT=vCROC-MGT-Domain-01}. It holds vCenter Server, NSX Manager, SDDC Manager, and VCF Management Services.
+The MgmtDomain container holds {1st-MGMT-Hosts=4} ESX Host icons, named ESXM01-ESXM04
+
+On the right is a Workload Domain container named {Instance1WKLD=vCROC-WKLD-Domain-01}. It holds a vCenter Server icon on top, and under it a vSphere Cluster container named CLST-PAIS.
+The cluster container holds {1st-WKLD-Hosts=3} ESX Host icons, named ESXW01-ESXW04, then vSAN and a {Virtual Machine=4} Virtual Machine.
+
+2nd Instance:
+On the left is a Management Domain container named {Instance2MGMT=vCROC-MGT-Domain-02}. It holds vCenter Server, NSX Manager, SDDC Manager, and VCF Management Services.
+The MgmtDomain container holds {2nd-MGMT-Hosts=4} ESX Host icons, named ESXM05-ESXM08
+
+On the right is a Workload Domain container named {Instance2WKLD=vCROC-WKLD-Domain-02}. It holds a vCenter Server icon on top, and under it a vSphere Cluster container named CLST-VKS.
+The cluster container holds {2nd-WKLD-Hosts=3} ESX Host icons, named ESXW05-ESXW08, then vSAN and a {Virtual Machine=4} Virtual Machine.
+
+Put the title above everything.
+Use only shapes from my shape library. Call create_diagram once and give me the link it returns.
+</code></pre>
+</div>
 
                     </div>
                     
